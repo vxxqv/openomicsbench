@@ -1,0 +1,50 @@
+{
+  "dataset_id": "rnaseq-001",
+  "rights_status": "AMBER",
+  "release_status": "original_link",
+  "sources": [
+    {
+      "file": "DESCRIPTION",
+      "url": "https://raw.githubusercontent.com/bioconductor-source/pasilla/3c91e8df8add3549129e46b7a7a078fda4e2755a/DESCRIPTION",
+      "sha256": "e3967a49668b99a7429a23f0419e4ad98f0339057eaca0b519b40631881280e7",
+      "bytes": 1264,
+      "commit": "3c91e8df8add3549129e46b7a7a078fda4e2755a",
+      "retrieved": "2026-09-06"
+    },
+    {
+      "file": "inst/extdata/pasilla_gene_counts.tsv",
+      "url": "https://raw.githubusercontent.com/bioconductor-source/pasilla/3c91e8df8add3549129e46b7a7a078fda4e2755a/inst/extdata/pasilla_gene_counts.tsv",
+      "sha256": "ea0dafbfcc600559644cfe7dd5cc8de809d631eb64ba3089aaa25c2fa0954dad",
+      "bytes": 498373,
+      "commit": "3c91e8df8add3549129e46b7a7a078fda4e2755a",
+      "retrieved": "2026-09-06"
+    },
+    {
+      "file": "inst/extdata/pasilla_sample_annotation.csv",
+      "url": "https://raw.githubusercontent.com/bioconductor-source/pasilla/3c91e8df8add3549129e46b7a7a078fda4e2755a/inst/extdata/pasilla_sample_annotation.csv",
+      "sha256": "1844f871ca5d750f41685c73b87bd7dda291ec0d52304c1afb46a17ae88db745",
+      "bytes": 527,
+      "commit": "3c91e8df8add3549129e46b7a7a078fda4e2755a",
+      "retrieved": "2026-09-06"
+    }
+  ],
+  "seed": 20260906,
+  "candidate_sizes": [
+    500,
+    1000,
+    2000,
+    4000,
+    8000,
+    12000
+  ],
+  "top_k": 50,
+  "minimum": {
+    "spearman_logfc": 0.9,
+    "top_k_jaccard": 0.6,
+    "distance_correlation": 0.9,
+    "sign_concordance": 0.9
+  },
+  "baseline": "diagnostic OLS on log2(CPM+1), condition plus library type; not DESeq2",
+  "publication": "Brooks et al. Conservation of an RNA regulatory map between Drosophila and mammals. Genome Research 2011. PMID 20921232.",
+  "source_license_observed": "Pasilla DESCRIPTION at the pinned source commit says License: LGPL. Version and data-specific terms need review before redistributing extracted count tables."
+}

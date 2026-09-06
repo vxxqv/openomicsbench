@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0",
+  "id": "rnaseq-001",
+  "title": "Pasilla knockdown count-matrix source recipe",
+  "release": "0.1.0.dev0",
+  "assay": "bulk_rna_seq",
+  "kind": "real",
+  "status": "original_link",
+  "archetype": "non-human mixed library types",
+  "organism": "Drosophila melanogaster",
+  "taxon_id": 7227,
+  "source": {
+    "repository": "Bioconductor pasilla and GEO",
+    "accession": "GSE18508",
+    "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508",
+    "citation": "Brooks et al. Conservation of an RNA regulatory map between Drosophila and mammals. Genome Research 2011. PMID 20921232.",
+    "retrieved": "2026-09-06",
+    "sha256": "ea0dafbfcc600559644cfe7dd5cc8de809d631eb64ba3089aaa25c2fa0954dad"
+  },
+  "rights": {
+    "status": "AMBER",
+    "license": "LGPL declared by upstream package; data-specific review pending",
+    "evidence": "Pasilla DESCRIPTION at the pinned source commit says License: LGPL. Version and data-specific terms need review before redistributing extracted count tables.",
+    "checked": "2026-09-06"
+  },
+  "reference": {
+    "genome": "unresolved for this processed representation",
+    "annotation": "unresolved",
+    "namespace": "FlyBase FBgn gene identifiers",
+    "compatibility": "unresolved"
+  },
+  "samples": [
+    {
+      "sample_id": "untreated1",
+      "condition": "untreated",
+      "replicate": 1,
+      "batch": "single-read",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "untreated2",
+      "condition": "untreated",
+      "replicate": 2,
+      "batch": "single-read",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "untreated3",
+      "condition": "untreated",
+      "replicate": 3,
+      "batch": "paired-end",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "untreated4",
+      "condition": "untreated",
+      "replicate": 4,
+      "batch": "paired-end",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "treated1",
+      "condition": "treated",
+      "replicate": 1,
+      "batch": "single-read",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "treated2",
+      "condition": "treated",
+      "replicate": 2,
+      "batch": "paired-end",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "treated3",
+      "condition": "treated",
+      "replicate": 3,
+      "batch": "paired-end",
+      "strandedness": "unknown"
+    }
+  ],
+  "derivation": {
+    "workflow": "workflows/pasilla_diagnostic.py",
+    "commit": null,
+    "seed": 20260906,
+    "algorithm": "mixture-feature-selector-v1",
+    "parameters": {
+      "candidate_sizes": [
+        500,
+        1000,
+        2000,
+        4000,
+        8000,
+        12000
+      ],
+      "top_k": 50
+    },
+    "versions": {
+      "upstream_commit": "3c91e8df8add3549129e46b7a7a078fda4e2755a"
+    }
+  },
+  "files": [
+    {
+      "path": "LICENSE-DATA.md",
+      "tier": "metadata",
+      "role": "license",
+      "media_type": "text/markdown",
+      "bytes": 537,
+      "sha256": "77118fb67dfc32fd3f015b48c98a440af796c50ddeacf3257127dca8b41036fb"
+    },
+    {
+      "path": "README.md",
+      "tier": "metadata",
+      "role": "documentation",
+      "media_type": "text/markdown",
+      "bytes": 1291,
+      "sha256": "a76a162650a322a126d4e427e127562620ca9036d5b02893dedeb6245e6f9a2e"
+    }
+  ],
+  "validation": null,
+  "limitations": [
+    "Link-only; no biological pocket is certified.",
+    "Library type is recorded as the baseline blocking covariate, not claimed to be an observed experimental batch.",
+    "The package table has seven libraries while the package description cites six GEO sample accessions; exact library-to-accession mapping needs resolution."
+  ]
+}
