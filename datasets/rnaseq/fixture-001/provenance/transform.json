@@ -30,5 +30,5 @@
     "pydantic": "2.13.5",
     "python": "3.12.14"
   },
-  "workflow_sha256": "19605ca1646a8e974a6ad3e8acecd42330b217ad02cc28013655b26bce826ca2"
+  "workflow_sha256": "a958e698ed53073165467e95dd2a44494ee05781293ee00057f9c224b4cfb51b"
 }

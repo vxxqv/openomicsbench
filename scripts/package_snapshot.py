@@ -17,7 +17,7 @@ for path in sorted(root.rglob("*")):
         "sha256": digest(path),
     })
 payload = {
-    "snapshot": "0.1.0.dev0",
+    "snapshot": "1.0.0.dev1",
     "created": "2026-09-06",
     "scope": "Project-authored development handoff; staged third-party source data excluded.",
     "self_excluded": "release/development-file-manifest.json",
