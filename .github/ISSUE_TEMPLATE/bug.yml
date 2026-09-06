@@ -1,0 +1,9 @@
+name: Report a problem
+description: Help us reproduce a failed command or unexpected dataset result.
+body:
+  - type: textarea
+    attributes:
+      label: What happened
+      description: Include the software version, dataset ID, command, expected result and the relevant error. Remove private paths or credentials from logs.
+    validations:
+      required: true

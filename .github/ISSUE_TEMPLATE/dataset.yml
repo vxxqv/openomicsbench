@@ -1,0 +1,13 @@
+name: Propose a dataset
+description: Suggest a compact transcriptomics object.
+body:
+  - type: textarea
+    attributes:
+      label: Source and task
+      description: Give an accession or source link and explain the task a small version would support.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Design and rights
+      description: Describe the biological replicates, available files and any redistribution terms you found. Say which details are still unknown.
