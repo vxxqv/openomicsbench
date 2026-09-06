@@ -1,0 +1,16 @@
+{
+  "title": "OpenOmicsBench",
+  "creators": [
+    {
+      "name": "Vivaan Patni"
+    }
+  ],
+  "description": "Compact, traceable transcriptomics objects for software testing, teaching and method development.",
+  "upload_type": "software",
+  "keywords": [
+    "transcriptomics",
+    "RNA-seq",
+    "benchmark data",
+    "reproducible research"
+  ]
+}

@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "Please cite the archived release corresponding to the version you used."
+title: "OpenOmicsBench"
+type: software
+authors:
+  - family-names: "Patni"
+    given-names: "Vivaan"
+repository-code: "https://github.com/vxxqv/openomicsbench"
