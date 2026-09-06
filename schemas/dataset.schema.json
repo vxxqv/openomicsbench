@@ -1,0 +1,537 @@
+{
+  "$defs": {
+    "Derivation": {
+      "additionalProperties": false,
+      "properties": {
+        "workflow": {
+          "minLength": 1,
+          "title": "Workflow",
+          "type": "string"
+        },
+        "commit": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{40}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Commit"
+        },
+        "seed": {
+          "minimum": 0,
+          "title": "Seed",
+          "type": "integer"
+        },
+        "algorithm": {
+          "minLength": 1,
+          "title": "Algorithm",
+          "type": "string"
+        },
+        "parameters": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              }
+            ]
+          },
+          "title": "Parameters",
+          "type": "object"
+        },
+        "versions": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "minProperties": 1,
+          "title": "Versions",
+          "type": "object"
+        }
+      },
+      "required": [
+        "workflow",
+        "commit",
+        "seed",
+        "algorithm",
+        "parameters",
+        "versions"
+      ],
+      "title": "Derivation",
+      "type": "object"
+    },
+    "File": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "tier": {
+          "enum": [
+            "nano",
+            "pocket",
+            "expected",
+            "metadata"
+          ],
+          "title": "Tier",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "raw_counts",
+            "samples",
+            "fastq_r1",
+            "fastq_r2",
+            "quantification",
+            "tx2gene",
+            "baseline",
+            "metrics",
+            "figure",
+            "provenance",
+            "documentation",
+            "license",
+            "reference"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "sample_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sample Id"
+        },
+        "media_type": {
+          "minLength": 1,
+          "title": "Media Type",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "pattern": "^https://",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        }
+      },
+      "required": [
+        "path",
+        "tier",
+        "role",
+        "media_type",
+        "bytes",
+        "sha256"
+      ],
+      "title": "File",
+      "type": "object"
+    },
+    "Metric": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "enum": [
+            "spearman_logfc",
+            "top_k_jaccard",
+            "distance_correlation",
+            "sign_concordance"
+          ],
+          "title": "Name",
+          "type": "string"
+        },
+        "minimum": {
+          "maximum": 1,
+          "minimum": -1,
+          "title": "Minimum",
+          "type": "number"
+        },
+        "definition": {
+          "minLength": 20,
+          "title": "Definition",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "minimum",
+        "definition"
+      ],
+      "title": "Metric",
+      "type": "object"
+    },
+    "Reference": {
+      "additionalProperties": false,
+      "properties": {
+        "genome": {
+          "minLength": 1,
+          "title": "Genome",
+          "type": "string"
+        },
+        "annotation": {
+          "minLength": 1,
+          "title": "Annotation",
+          "type": "string"
+        },
+        "namespace": {
+          "minLength": 1,
+          "title": "Namespace",
+          "type": "string"
+        },
+        "compatibility": {
+          "enum": [
+            "verified",
+            "unresolved",
+            "not_applicable"
+          ],
+          "title": "Compatibility",
+          "type": "string"
+        }
+      },
+      "required": [
+        "genome",
+        "annotation",
+        "namespace",
+        "compatibility"
+      ],
+      "title": "Reference",
+      "type": "object"
+    },
+    "Rights": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "GREEN",
+            "AMBER",
+            "RED",
+            "RECHECK"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "license": {
+          "minLength": 1,
+          "title": "License",
+          "type": "string"
+        },
+        "evidence": {
+          "minLength": 1,
+          "title": "Evidence",
+          "type": "string"
+        },
+        "checked": {
+          "format": "date",
+          "title": "Checked",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "license",
+        "evidence",
+        "checked"
+      ],
+      "title": "Rights",
+      "type": "object"
+    },
+    "Sample": {
+      "additionalProperties": false,
+      "properties": {
+        "sample_id": {
+          "minLength": 1,
+          "title": "Sample Id",
+          "type": "string"
+        },
+        "condition": {
+          "minLength": 1,
+          "title": "Condition",
+          "type": "string"
+        },
+        "replicate": {
+          "exclusiveMinimum": 0,
+          "title": "Replicate",
+          "type": "integer"
+        },
+        "batch": {
+          "minLength": 1,
+          "title": "Batch",
+          "type": "string"
+        },
+        "strandedness": {
+          "enum": [
+            "forward",
+            "reverse",
+            "unstranded",
+            "unknown",
+            "not_applicable"
+          ],
+          "title": "Strandedness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sample_id",
+        "condition",
+        "replicate",
+        "batch",
+        "strandedness"
+      ],
+      "title": "Sample",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "repository": {
+          "description": "Archive or synthetic generator that supplied the object.",
+          "minLength": 1,
+          "title": "Repository",
+          "type": "string"
+        },
+        "accession": {
+          "minLength": 1,
+          "title": "Accession",
+          "type": "string"
+        },
+        "url": {
+          "pattern": "^https://",
+          "title": "Url",
+          "type": "string"
+        },
+        "citation": {
+          "minLength": 1,
+          "title": "Citation",
+          "type": "string"
+        },
+        "retrieved": {
+          "format": "date",
+          "title": "Retrieved",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        }
+      },
+      "required": [
+        "repository",
+        "accession",
+        "url",
+        "citation",
+        "retrieved"
+      ],
+      "title": "Source",
+      "type": "object"
+    },
+    "Validation": {
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "title": "Profile",
+          "type": "string"
+        },
+        "baseline_version": {
+          "minLength": 1,
+          "title": "Baseline Version",
+          "type": "string"
+        },
+        "metrics": {
+          "items": {
+            "$ref": "#/$defs/Metric"
+          },
+          "minItems": 1,
+          "title": "Metrics",
+          "type": "array"
+        }
+      },
+      "required": [
+        "profile",
+        "baseline_version",
+        "metrics"
+      ],
+      "title": "Validation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "id": {
+      "pattern": "^(rnaseq|fixture)-[0-9]{3}$",
+      "title": "Id",
+      "type": "string"
+    },
+    "title": {
+      "minLength": 8,
+      "title": "Title",
+      "type": "string"
+    },
+    "release": {
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[.-][A-Za-z0-9.]+)?$",
+      "title": "Release",
+      "type": "string"
+    },
+    "assay": {
+      "const": "bulk_rna_seq",
+      "title": "Assay",
+      "type": "string"
+    },
+    "kind": {
+      "enum": [
+        "real",
+        "synthetic_fixture"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "candidate",
+        "validated",
+        "original_link"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "archetype": {
+      "minLength": 1,
+      "title": "Archetype",
+      "type": "string"
+    },
+    "organism": {
+      "minLength": 1,
+      "title": "Organism",
+      "type": "string"
+    },
+    "taxon_id": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Taxon Id"
+    },
+    "source": {
+      "$ref": "#/$defs/Source"
+    },
+    "rights": {
+      "$ref": "#/$defs/Rights"
+    },
+    "reference": {
+      "$ref": "#/$defs/Reference"
+    },
+    "samples": {
+      "items": {
+        "$ref": "#/$defs/Sample"
+      },
+      "minItems": 2,
+      "title": "Samples",
+      "type": "array"
+    },
+    "derivation": {
+      "$ref": "#/$defs/Derivation"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "validation": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Validation"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "title",
+    "release",
+    "assay",
+    "kind",
+    "status",
+    "archetype",
+    "organism",
+    "taxon_id",
+    "source",
+    "rights",
+    "reference",
+    "samples",
+    "derivation",
+    "files",
+    "validation",
+    "limitations"
+  ],
+  "title": "Dataset",
+  "type": "object"
+}
