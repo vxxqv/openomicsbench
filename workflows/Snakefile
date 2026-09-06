@@ -1,0 +1,24 @@
+import sys
+
+PYTHON = sys.executable
+
+rule all:
+    input:
+        "build/validation.json"
+
+rule fixture:
+    input:
+        "workflows/fixture-config.json",
+        "workflows/build_fixture.py"
+    output:
+        "datasets/rnaseq/fixture-001/manifest.json"
+    shell:
+        '"{PYTHON}" workflows/build_fixture.py'
+
+rule validate:
+    input:
+        "datasets/rnaseq/fixture-001/manifest.json"
+    output:
+        "build/validation.json"
+    shell:
+        '"{PYTHON}" -m omicsbench validate fixture-001 > {output}'

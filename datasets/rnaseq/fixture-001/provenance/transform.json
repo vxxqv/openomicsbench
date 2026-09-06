@@ -1,0 +1,34 @@
+{
+  "generator": "PCG64 negative binomial",
+  "parameters": {
+    "candidate_sizes": [
+      256,
+      512,
+      1024,
+      1536,
+      2000
+    ],
+    "definitions": {
+      "distance_correlation": "Pearson correlation of strict upper triangles of Euclidean sample distances on log2(CPM+1); full uses all source genes and pocket uses selected genes; higher is better.",
+      "sign_concordance": "Fraction of equal coefficient signs for shared genes with absolute full-source effect at least 0.1; pocket zero disagrees with a nonzero full effect; higher is better.",
+      "spearman_logfc": "Average-tie rank correlation of adjusted log2(CPM+1) condition coefficients on the shared selected feature universe; higher is better.",
+      "top_k_jaccard": "Jaccard overlap of top 50 absolute adjusted effects on the shared selected feature universe; ties broken by gene ID; higher is better."
+    },
+    "genes": 2000,
+    "minimum": {
+      "distance_correlation": 0.9,
+      "sign_concordance": 0.9,
+      "spearman_logfc": 0.9,
+      "top_k_jaccard": 0.6
+    },
+    "seed": 20260906,
+    "top_k": 50
+  },
+  "seed": 20260906,
+  "versions": {
+    "numpy": "2.3.5",
+    "pydantic": "2.13.5",
+    "python": "3.12.14"
+  },
+  "workflow_sha256": "901faa45b69cff285efd0356b697d5b3d628ae6879da8179b0f02d1053c0fc18"
+}

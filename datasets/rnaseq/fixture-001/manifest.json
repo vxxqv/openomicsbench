@@ -1,0 +1,216 @@
+{
+  "archetype": "balanced condition and batch",
+  "assay": "bulk_rna_seq",
+  "derivation": {
+    "algorithm": "mixture-feature-selector-v1",
+    "commit": null,
+    "parameters": {
+      "candidate_sizes": [
+        256,
+        512,
+        1024,
+        1536,
+        2000
+      ],
+      "genes": 2000,
+      "top_k": 50
+    },
+    "seed": 20260906,
+    "versions": {
+      "numpy": "2.3.5",
+      "pydantic": "2.13.5",
+      "python": "3.12.14"
+    },
+    "workflow": "workflows/build_fixture.py"
+  },
+  "files": [
+    {
+      "bytes": 1060,
+      "media_type": "application/json",
+      "path": "expected/baseline.json",
+      "role": "provenance",
+      "sha256": "c8db60aa1ae39feaae126d095d3bc37bf4147fa2aa784463055921cc92ee9b7a",
+      "tier": "expected"
+    },
+    {
+      "bytes": 1234,
+      "media_type": "application/json",
+      "path": "expected/size-fidelity.json",
+      "role": "provenance",
+      "sha256": "bbfe1d04478a72d96d1ed8bc86bb9bb0c16bacbe6927e806cfd2a86e8f3e8670",
+      "tier": "expected"
+    },
+    {
+      "bytes": 63987,
+      "media_type": "text/tab-separated-values",
+      "path": "expected/source-counts.tsv",
+      "role": "baseline",
+      "sha256": "10dd293556bc303a60e0e676b67edd79fda062c322ebf7346fcf33c086e3b9ab",
+      "tier": "expected"
+    },
+    {
+      "bytes": 343,
+      "media_type": "application/json",
+      "path": "expected/validation.json",
+      "role": "metrics",
+      "sha256": "edfdc107454042a1205f7e92aed1b3ab5334c8bb3cbe6f87af883a066f49805c",
+      "tier": "expected"
+    },
+    {
+      "bytes": 314,
+      "media_type": "text/markdown",
+      "path": "LICENSE-DATA.md",
+      "role": "license",
+      "sha256": "12dbd960973bed960672b1e327d3dc550f7699dd70f7d58560e191378674cf94",
+      "tier": "metadata"
+    },
+    {
+      "bytes": 17009,
+      "media_type": "text/tab-separated-values",
+      "path": "nano/counts.tsv",
+      "role": "raw_counts",
+      "sha256": "0c9ecebb90f05137ff42606ad4af04753c011c2fccd1ff08e9bfe2974ce5836b",
+      "tier": "nano"
+    },
+    {
+      "bytes": 17009,
+      "media_type": "text/tab-separated-values",
+      "path": "pocket/counts.tsv",
+      "role": "raw_counts",
+      "sha256": "0c9ecebb90f05137ff42606ad4af04753c011c2fccd1ff08e9bfe2974ce5836b",
+      "tier": "pocket"
+    },
+    {
+      "bytes": 1345,
+      "media_type": "application/json",
+      "path": "provenance/transform.json",
+      "role": "provenance",
+      "sha256": "6357a636afe9a9aec827fbb06cfcc2855c74af2943ea834d135d3b22ec3f0400",
+      "tier": "metadata"
+    },
+    {
+      "bytes": 928,
+      "media_type": "text/markdown",
+      "path": "README.md",
+      "role": "documentation",
+      "sha256": "7505ebe87254a0de5523abe25dc11486470e5b6a19ea55e0aa57481e6e6d88be",
+      "tier": "metadata"
+    }
+  ],
+  "id": "fixture-001",
+  "kind": "synthetic_fixture",
+  "limitations": [
+    "Synthetic fixture; excluded from curated biological collection totals.",
+    "Diagnostic effects are not inferential differential-expression results.",
+    "No reference compatibility or read mapping is demonstrated by this fixture."
+  ],
+  "organism": "Synthetic numerical model",
+  "reference": {
+    "annotation": "none",
+    "compatibility": "not_applicable",
+    "genome": "none",
+    "namespace": "SYN numerical identifiers"
+  },
+  "release": "0.1.0.dev0",
+  "rights": {
+    "checked": "2026-09-06",
+    "evidence": "Generated locally from a recorded seed without third-party observations. GREEN denotes source provenance clearance, not a public license grant.",
+    "license": "Project-authored fixture; public license pending owner decision",
+    "status": "GREEN"
+  },
+  "samples": [
+    {
+      "batch": "A",
+      "condition": "control",
+      "replicate": 1,
+      "sample_id": "control1",
+      "strandedness": "not_applicable"
+    },
+    {
+      "batch": "A",
+      "condition": "control",
+      "replicate": 2,
+      "sample_id": "control2",
+      "strandedness": "not_applicable"
+    },
+    {
+      "batch": "B",
+      "condition": "control",
+      "replicate": 3,
+      "sample_id": "control3",
+      "strandedness": "not_applicable"
+    },
+    {
+      "batch": "B",
+      "condition": "control",
+      "replicate": 4,
+      "sample_id": "control4",
+      "strandedness": "not_applicable"
+    },
+    {
+      "batch": "A",
+      "condition": "treated",
+      "replicate": 1,
+      "sample_id": "treated1",
+      "strandedness": "not_applicable"
+    },
+    {
+      "batch": "A",
+      "condition": "treated",
+      "replicate": 2,
+      "sample_id": "treated2",
+      "strandedness": "not_applicable"
+    },
+    {
+      "batch": "B",
+      "condition": "treated",
+      "replicate": 3,
+      "sample_id": "treated3",
+      "strandedness": "not_applicable"
+    },
+    {
+      "batch": "B",
+      "condition": "treated",
+      "replicate": 4,
+      "sample_id": "treated4",
+      "strandedness": "not_applicable"
+    }
+  ],
+  "schema_version": "1.0",
+  "source": {
+    "accession": "fixture-001",
+    "citation": "Project-authored numerical fixture, no biological source study.",
+    "repository": "Project generator",
+    "retrieved": "2026-09-06",
+    "url": "https://numpy.org/doc/stable/reference/random/bit_generators/pcg64.html"
+  },
+  "status": "validated",
+  "taxon_id": null,
+  "title": "Synthetic condition and batch infrastructure fixture",
+  "validation": {
+    "baseline_version": "diagnostic-ols-cpm-v1",
+    "metrics": [
+      {
+        "definition": "Average-tie rank correlation of adjusted log2(CPM+1) condition coefficients on the shared selected feature universe; higher is better.",
+        "minimum": 0.9,
+        "name": "spearman_logfc"
+      },
+      {
+        "definition": "Jaccard overlap of top 50 absolute adjusted effects on the shared selected feature universe; ties broken by gene ID; higher is better.",
+        "minimum": 0.6,
+        "name": "top_k_jaccard"
+      },
+      {
+        "definition": "Pearson correlation of strict upper triangles of Euclidean sample distances on log2(CPM+1); full uses all source genes and pocket uses selected genes; higher is better.",
+        "minimum": 0.9,
+        "name": "distance_correlation"
+      },
+      {
+        "definition": "Fraction of equal coefficient signs for shared genes with absolute full-source effect at least 0.1; pocket zero disagrees with a nonzero full effect; higher is better.",
+        "minimum": 0.9,
+        "name": "sign_concordance"
+      }
+    ],
+    "profile": "expected/validation.json"
+  }
+}

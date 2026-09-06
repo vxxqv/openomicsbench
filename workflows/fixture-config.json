@@ -1,0 +1,13 @@
+{
+  "seed": 20260906,
+  "genes": 2000,
+  "candidate_sizes": [256, 512, 1024, 1536, 2000],
+  "top_k": 50,
+  "minimum": {"spearman_logfc": 0.9, "top_k_jaccard": 0.6, "distance_correlation": 0.9, "sign_concordance": 0.9},
+  "definitions": {
+    "spearman_logfc": "Average-tie rank correlation of adjusted log2(CPM+1) condition coefficients on the shared selected feature universe; higher is better.",
+    "top_k_jaccard": "Jaccard overlap of top 50 absolute adjusted effects on the shared selected feature universe; ties broken by gene ID; higher is better.",
+    "distance_correlation": "Pearson correlation of strict upper triangles of Euclidean sample distances on log2(CPM+1); full uses all source genes and pocket uses selected genes; higher is better.",
+    "sign_concordance": "Fraction of equal coefficient signs for shared genes with absolute full-source effect at least 0.1; pocket zero disagrees with a nonzero full effect; higher is better."
+  }
+}

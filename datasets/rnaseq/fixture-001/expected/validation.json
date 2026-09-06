@@ -1,0 +1,24 @@
+{
+  "baseline_counts": "expected/source-counts.tsv",
+  "sample_ids": [
+    "control1",
+    "control2",
+    "control3",
+    "control4",
+    "treated1",
+    "treated2",
+    "treated3",
+    "treated4"
+  ],
+  "shapes": {
+    "nano": [
+      512,
+      8
+    ],
+    "pocket": [
+      512,
+      8
+    ]
+  },
+  "top_k": 50
+}
