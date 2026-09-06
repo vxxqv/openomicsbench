@@ -21,7 +21,7 @@ def get(root: Path, cache: Path, dataset_id: str, tier: str) -> Path:
         if source is None:
             raise ValueError(f"{dataset_id}/{f.path}: neither local file nor remote URL is available")
         transfer(source, contained(destination, f.path), f.sha256, f.bytes)
-    marker.write_text(json.dumps({"id":model.id,"release":model.release,"manifest_sha256":manifest_hash,"tier":tier,"files":[f.path for f in files]}, indent=2) + "\n", encoding="utf-8")
+    marker.write_text(json.dumps({"id":model.id,"release":model.release,"manifest_sha256":manifest_hash,"tier":tier,"files":[f.path for f in files]}, indent=2) + "\n", encoding="utf-8", newline="\n")
     return destination
 
 def verify_cache(root: Path, cache: Path) -> dict:

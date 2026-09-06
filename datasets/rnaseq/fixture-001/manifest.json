@@ -25,19 +25,19 @@
   },
   "files": [
     {
-      "bytes": 1060,
+      "bytes": 908,
       "media_type": "application/json",
       "path": "expected/baseline.json",
       "role": "provenance",
-      "sha256": "c8db60aa1ae39feaae126d095d3bc37bf4147fa2aa784463055921cc92ee9b7a",
+      "sha256": "c53a92151f2a5d67ce08d176859534014760f5df01467b20862f77fc2514e6c1",
       "tier": "expected"
     },
     {
-      "bytes": 1234,
+      "bytes": 1098,
       "media_type": "application/json",
       "path": "expected/size-fidelity.json",
       "role": "provenance",
-      "sha256": "bbfe1d04478a72d96d1ed8bc86bb9bb0c16bacbe6927e806cfd2a86e8f3e8670",
+      "sha256": "ea2845614d0b7734a036a34d17e93219d1e0f631e0bcbec992f6f8be641b3e8d",
       "tier": "expected"
     },
     {
@@ -49,19 +49,19 @@
       "tier": "expected"
     },
     {
-      "bytes": 343,
+      "bytes": 319,
       "media_type": "application/json",
       "path": "expected/validation.json",
       "role": "metrics",
-      "sha256": "edfdc107454042a1205f7e92aed1b3ab5334c8bb3cbe6f87af883a066f49805c",
+      "sha256": "da9d9e9faee541cb69c495c215a782053f327315b18cc8e5d762895e47768a78",
       "tier": "expected"
     },
     {
-      "bytes": 314,
+      "bytes": 311,
       "media_type": "text/markdown",
       "path": "LICENSE-DATA.md",
       "role": "license",
-      "sha256": "12dbd960973bed960672b1e327d3dc550f7699dd70f7d58560e191378674cf94",
+      "sha256": "e5ac1df35b6fe3e83547f14584a305404141e0815a96aad577fbaaabca768553",
       "tier": "metadata"
     },
     {
@@ -81,19 +81,19 @@
       "tier": "pocket"
     },
     {
-      "bytes": 1345,
+      "bytes": 1311,
       "media_type": "application/json",
       "path": "provenance/transform.json",
       "role": "provenance",
-      "sha256": "6357a636afe9a9aec827fbb06cfcc2855c74af2943ea834d135d3b22ec3f0400",
+      "sha256": "c4a43810501f60b3f69d78fbd5aa6d24be19a358d255e4b83cabeb0ee687fd78",
       "tier": "metadata"
     },
     {
-      "bytes": 928,
+      "bytes": 919,
       "media_type": "text/markdown",
       "path": "README.md",
       "role": "documentation",
-      "sha256": "7505ebe87254a0de5523abe25dc11486470e5b6a19ea55e0aa57481e6e6d88be",
+      "sha256": "96f4c8cc37154672123e3aba406ec07547360ffd776239388362f2bc3793718d",
       "tier": "metadata"
     }
   ],

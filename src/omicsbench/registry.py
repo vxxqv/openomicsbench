@@ -22,4 +22,4 @@ def lookup(root: Path, dataset_id: str):
     return records[dataset_id]
 
 def write_registry(root: Path, destination: Path):
-    destination.write_text(json.dumps([m.model_dump(mode="json") for m, _ in registry(root).values()], indent=2) + "\n", encoding="utf-8")
+    destination.write_text(json.dumps([m.model_dump(mode="json") for m, _ in registry(root).values()], indent=2) + "\n", encoding="utf-8", newline="\n")

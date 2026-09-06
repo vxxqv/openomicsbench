@@ -22,8 +22,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "bytes": 635,
-      "sha256": "ca8c3c945d166f4f869c7640acd9f4ba83db6fc366662966eb01c95f92a54386"
+      "bytes": 638,
+      "sha256": "92d0850da9486c8e99a99578141193d0d4f77ec5a68deee380d718af5f30ede3"
     },
     {
       "path": ".gitignore",
@@ -117,13 +117,13 @@
     },
     {
       "path": "datasets/rnaseq/fixture-001/expected/baseline.json",
-      "bytes": 1060,
-      "sha256": "c8db60aa1ae39feaae126d095d3bc37bf4147fa2aa784463055921cc92ee9b7a"
+      "bytes": 908,
+      "sha256": "c53a92151f2a5d67ce08d176859534014760f5df01467b20862f77fc2514e6c1"
     },
     {
       "path": "datasets/rnaseq/fixture-001/expected/size-fidelity.json",
-      "bytes": 1234,
-      "sha256": "bbfe1d04478a72d96d1ed8bc86bb9bb0c16bacbe6927e806cfd2a86e8f3e8670"
+      "bytes": 1098,
+      "sha256": "ea2845614d0b7734a036a34d17e93219d1e0f631e0bcbec992f6f8be641b3e8d"
     },
     {
       "path": "datasets/rnaseq/fixture-001/expected/source-counts.tsv",
@@ -132,18 +132,18 @@
     },
     {
       "path": "datasets/rnaseq/fixture-001/expected/validation.json",
-      "bytes": 343,
-      "sha256": "edfdc107454042a1205f7e92aed1b3ab5334c8bb3cbe6f87af883a066f49805c"
+      "bytes": 319,
+      "sha256": "da9d9e9faee541cb69c495c215a782053f327315b18cc8e5d762895e47768a78"
     },
     {
       "path": "datasets/rnaseq/fixture-001/LICENSE-DATA.md",
-      "bytes": 314,
-      "sha256": "12dbd960973bed960672b1e327d3dc550f7699dd70f7d58560e191378674cf94"
+      "bytes": 311,
+      "sha256": "e5ac1df35b6fe3e83547f14584a305404141e0815a96aad577fbaaabca768553"
     },
     {
       "path": "datasets/rnaseq/fixture-001/manifest.json",
-      "bytes": 6681,
-      "sha256": "09d7c1d76d39069325e548f22eed60f439005a73eda02e3b7d0a9e57caa7d9a3"
+      "bytes": 6464,
+      "sha256": "33ce066b964b329f72d0b07de9a187edb2315f95d00dcb0543b01672dd4d3a5f"
     },
     {
       "path": "datasets/rnaseq/fixture-001/nano/counts.tsv",
@@ -157,13 +157,13 @@
     },
     {
       "path": "datasets/rnaseq/fixture-001/provenance/transform.json",
-      "bytes": 1345,
-      "sha256": "6357a636afe9a9aec827fbb06cfcc2855c74af2943ea834d135d3b22ec3f0400"
+      "bytes": 1311,
+      "sha256": "c4a43810501f60b3f69d78fbd5aa6d24be19a358d255e4b83cabeb0ee687fd78"
     },
     {
       "path": "datasets/rnaseq/fixture-001/README.md",
-      "bytes": 928,
-      "sha256": "7505ebe87254a0de5523abe25dc11486470e5b6a19ea55e0aa57481e6e6d88be"
+      "bytes": 919,
+      "sha256": "96f4c8cc37154672123e3aba406ec07547360ffd776239388362f2bc3793718d"
     },
     {
       "path": "datasets/rnaseq/rnaseq-001/LICENSE-DATA.md",
@@ -277,18 +277,18 @@
     },
     {
       "path": "scripts/certify_release.py",
-      "bytes": 2218,
-      "sha256": "ea25cd3b5cb7128f65953762db8bcdcfb65d654151eb3218fe8323442a1f8acd"
+      "bytes": 2231,
+      "sha256": "444fb12effcdc691860fab8805bcf239c47b3f115663f969cecb97155397d787"
     },
     {
       "path": "scripts/check_repository.py",
-      "bytes": 2062,
-      "sha256": "8063d57a900fe78f1bc1beb6763ea8a06cf9a09b8370efffee5fb3bc827f3298"
+      "bytes": 2075,
+      "sha256": "be221674d2eefbcb482c676da81021dc52feacff249d1faeb3b872530685ffa3"
     },
     {
       "path": "scripts/package_snapshot.py",
-      "bytes": 1120,
-      "sha256": "ff8c81ed3ae46f4acd01413cdc7879c2da802101779d8549a0e10ae6fef3d1bd"
+      "bytes": 1134,
+      "sha256": "787a48459ee687b644ad059793cd319c0ffd02f485af111e5783f854a0732d63"
     },
     {
       "path": "src/omicsbench/__init__.py",
@@ -302,8 +302,8 @@
     },
     {
       "path": "src/omicsbench/cache.py",
-      "bytes": 2458,
-      "sha256": "01957cad16a25af9b63f15331c6ceb1125bddf597b44d79fc1dfeefe1c5f7a40"
+      "bytes": 2472,
+      "sha256": "b73247011488bada52c0e5c5b9fa690378b4c442cc7225877fb334fece6f4881"
     },
     {
       "path": "src/omicsbench/cli.py",
@@ -327,8 +327,8 @@
     },
     {
       "path": "src/omicsbench/registry.py",
-      "bytes": 1082,
-      "sha256": "600bf3ceddab2351b2ed4f8834fcf046aa618f05e7262393313b3529ec357dfc"
+      "bytes": 1096,
+      "sha256": "b628e185f4b1036aed5234fda6fa177e034af2ec9b5077d8db4f8be6a9e4159d"
     },
     {
       "path": "src/omicsbench/rnaseq.py",
@@ -347,8 +347,8 @@
     },
     {
       "path": "workflows/build_fixture.py",
-      "bytes": 7678,
-      "sha256": "901faa45b69cff285efd0356b697d5b3d628ae6879da8179b0f02d1053c0fc18"
+      "bytes": 7972,
+      "sha256": "19605ca1646a8e974a6ad3e8acecd42330b217ad02cc28013655b26bce826ca2"
     },
     {
       "path": "workflows/deseq2_baseline.R",

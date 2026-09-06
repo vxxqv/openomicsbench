@@ -33,6 +33,6 @@ for model,folder in registry(root).values():
     except ValueError as exc:failures.append(str(exc))
 if failures:raise SystemExit('\n'.join(failures))
 (root/'build').mkdir(exist_ok=True)
-(root/'build/validation.json').write_text(json.dumps(results,indent=2)+'\n',encoding='utf-8')
+(root/'build/validation.json').write_text(json.dumps(results,indent=2)+'\n',encoding='utf-8',newline='\n')
 write_registry(root,root/'build/registry.json')
 print(f'Checked {len(results)} registered objects, schema, documentation, local links and attribution metadata.')

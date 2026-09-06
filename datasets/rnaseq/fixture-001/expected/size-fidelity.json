@@ -2,40 +2,40 @@
   {
     "features": 256,
     "metrics": {
-      "distance_correlation": 0.8667927827433569,
+      "distance_correlation": 0.8667927827,
       "sign_concordance": 1.0,
-      "spearman_logfc": 0.9989249542229343,
-      "top_k_jaccard": 0.9230769230769231
+      "spearman_logfc": 0.9989249542,
+      "top_k_jaccard": 0.9230769231
     },
     "pass": false
   },
   {
     "features": 512,
     "metrics": {
-      "distance_correlation": 0.9265055623906108,
-      "sign_concordance": 0.9958932238193019,
-      "spearman_logfc": 0.9993942654867765,
-      "top_k_jaccard": 0.8181818181818182
+      "distance_correlation": 0.9265055624,
+      "sign_concordance": 0.9958932238,
+      "spearman_logfc": 0.9993942655,
+      "top_k_jaccard": 0.8181818182
     },
     "pass": true
   },
   {
     "features": 1024,
     "metrics": {
-      "distance_correlation": 0.9954390989212324,
-      "sign_concordance": 0.9906832298136646,
-      "spearman_logfc": 0.9996573921750948,
-      "top_k_jaccard": 0.8181818181818182
+      "distance_correlation": 0.9954390989,
+      "sign_concordance": 0.9906832298,
+      "spearman_logfc": 0.9996573922,
+      "top_k_jaccard": 0.8181818182
     },
     "pass": true
   },
   {
     "features": 1536,
     "metrics": {
-      "distance_correlation": 0.9975214954146867,
+      "distance_correlation": 0.9975214954,
       "sign_concordance": 1.0,
-      "spearman_logfc": 0.9999186826730792,
-      "top_k_jaccard": 0.8518518518518519
+      "spearman_logfc": 0.9999186827,
+      "top_k_jaccard": 0.8518518519
     },
     "pass": true
   },

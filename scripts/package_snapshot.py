@@ -24,5 +24,5 @@ payload = {
     "file_count": len(files),
     "files": files,
 }
-destination.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+destination.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8", newline="\n")
 print(f"Inventoried {len(files)} files.")

@@ -25,6 +25,6 @@ for field in ['authors','repository_url','code_license','metadata_license','vers
 # Positive evidence verification will be implemented with the first real release.
 blockers.append('Publication certification is not enabled: real baseline, independent trial and deposited-file evidence adapters remain unimplemented.')
 report={'target_version':metadata['target_version'],'decision':'NO-GO' if blockers else 'GO','certified_biological_objects':len(validated),'redistributable_pockets':len(pockets),'blockers':blockers}
-(root/'release/certification.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
+(root/'release/certification.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8',newline='\n')
 print(json.dumps(report,indent=2))
 raise SystemExit(1 if blockers else 0)
