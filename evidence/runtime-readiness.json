@@ -1,0 +1,25 @@
+{
+  "checked": "2026-09-06",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "pydantic": "2.13.5",
+  "Rscript": "4.5.3 in the isolated scientific environment",
+  "DESeq2": "1.50.2 loaded and executed on the pinned Pasilla count table",
+  "snakemake": "9.26.1; fixture workflow completed",
+  "docker": "not found on PATH",
+  "installation": "complete in an isolated environment outside the repository",
+  "environment_lock": "runtime/environment-lock.json",
+  "installed_packages": [
+    "R 4.5.3",
+    "Bioconductor DESeq2 1.50.2",
+    "Snakemake 9.26.1"
+  ],
+  "large_reference_downloads": "not started",
+  "test_suite": {
+    "tests": 32,
+    "passed": 32,
+    "elapsed_seconds": 5.983,
+    "scope": "local infrastructure and synthetic fixture"
+  },
+  "source_document_sha256": "4a897832c48a580b819608c8d31a761cead09a831b69080291382bb96cda60d2"
+}
