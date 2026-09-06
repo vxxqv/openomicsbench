@@ -1,0 +1,314 @@
+[
+  {
+    "section": "1. Release thesis and quality bar",
+    "requirement": "Project charter defines audience, inclusion criteria, object tiers, and exclusions.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "1. Release thesis and quality bar",
+    "requirement": "No dataset merges without provenance and rights review.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "1. Release thesis and quality bar",
+    "requirement": "v1 scope remains transcriptomics plus core infrastructure.",
+    "status": "verified",
+    "evidence": "The intake excludes single-cell data; code supports bulk count objects and infrastructure fixtures."
+  },
+  {
+    "section": "1. Release thesis and quality bar",
+    "requirement": "Documentation style rules live in CONTRIBUTING.md and are reviewed like code.",
+    "status": "verified",
+    "evidence": "CONTRIBUTING.md and documentation lint are present; no external editorial review is claimed."
+  },
+  {
+    "section": "2. Repository architecture and data-object contract",
+    "requirement": "Fresh clone can enumerate all datasets from manifests only.",
+    "status": "verified",
+    "evidence": "registry.py enumerates local manifests; CLI list passed in a temporary repository."
+  },
+  {
+    "section": "2. Repository architecture and data-object contract",
+    "requirement": "Validator catches duplicate IDs, missing files, invalid hashes, and undeclared roles.",
+    "status": "verified",
+    "evidence": "Covered by schema, inventory, duplicate-ID and corruption tests."
+  },
+  {
+    "section": "2. Repository architecture and data-object contract",
+    "requirement": "Dataset-specific logic is isolated in adapters/workflows rather than scattered through core code.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "3. Manifest schema, identifiers, and provenance",
+    "requirement": "Schema round-trip tests preserve values.",
+    "status": "verified",
+    "evidence": "test_manifest_round_trip passed."
+  },
+  {
+    "section": "3. Manifest schema, identifiers, and provenance",
+    "requirement": "Provenance report can be generated without reading Python source.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "3. Manifest schema, identifiers, and provenance",
+    "requirement": "Help text for fields is written as human guidance, not terse schema jargon.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "3. Manifest schema, identifiers, and provenance",
+    "requirement": "Schema changes require tests and migration notes.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "4. Source discovery, licensing, and intake",
+    "requirement": "Every candidate has an intake record before processing starts.",
+    "status": "verified",
+    "evidence": "Twelve intake records were written before running the Pasilla diagnostic reduction."
+  },
+  {
+    "section": "4. Source discovery, licensing, and intake",
+    "requirement": "Rights decision includes evidence and date checked.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "4. Source discovery, licensing, and intake",
+    "requirement": "Link-only status is visible in catalog and CLI.",
+    "status": "verified",
+    "evidence": "rnaseq-001 has original_link status and AMBER rights; get rejects it."
+  },
+  {
+    "section": "4. Source discovery, licensing, and intake",
+    "requirement": "No source is called open simply because a browser download exists.",
+    "status": "verified",
+    "evidence": "All GEO intake records remain AMBER."
+  },
+  {
+    "section": "5. Bulk RNA-seq collection design",
+    "requirement": "At least four distinct RNA design archetypes are represented.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "5. Bulk RNA-seq collection design",
+    "requirement": "Counts are never overwritten by normalized values.",
+    "status": "verified",
+    "evidence": "Raw-count files are preserved; diagnostic transforms are separate arrays."
+  },
+  {
+    "section": "5. Bulk RNA-seq collection design",
+    "requirement": "Strandedness and sample design metadata are explicit.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "5. Bulk RNA-seq collection design",
+    "requirement": "Reference/annotation compatibility is checked automatically.",
+    "status": "partial",
+    "evidence": "The contract blocks unresolved references for validated objects; actual biological reference-file compatibility checks are not implemented."
+  },
+  {
+    "section": "6. Deterministic pocketing algorithms",
+    "requirement": "All stochastic reducers accept and record a seed.",
+    "status": "verified",
+    "evidence": "Feature and read sampling accept seeds; fixture and Pasilla configurations record them."
+  },
+  {
+    "section": "6. Deterministic pocketing algorithms",
+    "requirement": "Paired reads and sample identity are tested.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "6. Deterministic pocketing algorithms",
+    "requirement": "Pocket size is justified quantitatively.",
+    "status": "partial",
+    "evidence": "Pasilla has six measured candidates, but the result is diagnostic-only and not a certified pocket."
+  },
+  {
+    "section": "6. Deterministic pocketing algorithms",
+    "requirement": "No spreadsheet-only/manual cleanup is required for regeneration.",
+    "status": "verified",
+    "evidence": "Both executed local workflows are scripted."
+  },
+  {
+    "section": "7. Expected outputs and quantitative validation",
+    "requirement": "Every dataset has hard and quantitative validation.",
+    "status": "partial",
+    "evidence": "The fixture passes both. The real-source record is link-only and is not scientifically certified."
+  },
+  {
+    "section": "7. Expected outputs and quantitative validation",
+    "requirement": "Metric definitions include filtering universe and direction.",
+    "status": "partial",
+    "evidence": "Current diagnostics define both. Full inferential and read-QC profiles remain open."
+  },
+  {
+    "section": "7. Expected outputs and quantitative validation",
+    "requirement": "Expected outputs rebuild from a pinned baseline.",
+    "status": "partial",
+    "evidence": "The fixture workflow and full-table Pasilla DESeq2 baseline run in the locked local environment. A clean rebuild on another machine remains open."
+  },
+  {
+    "section": "7. Expected outputs and quantitative validation",
+    "requirement": "Figures are never the only location where expected values exist.",
+    "status": "partial",
+    "evidence": "Diagnostic tables and JSON back the current plots; the full biological figure set remains open."
+  },
+  {
+    "section": "8. Python CLI and API architecture",
+    "requirement": "CLI has unit and end-to-end tests on nano objects.",
+    "status": "verified",
+    "evidence": "All seven CLI commands passed on the generated fixture."
+  },
+  {
+    "section": "8. Python CLI and API architecture",
+    "requirement": "All downloads verify hashes.",
+    "status": "verified",
+    "evidence": "transfer verifies size and SHA-256 before atomic replacement; interrupted and corrupt transfers tested."
+  },
+  {
+    "section": "8. Python CLI and API architecture",
+    "requirement": "A user can discover, retrieve, inspect, and validate without reading source code.",
+    "status": "partial",
+    "evidence": "The fixture path works. The independent-user trial has not occurred."
+  },
+  {
+    "section": "8. Python CLI and API architecture",
+    "requirement": "Help and error messages are concise and human.",
+    "status": "verified",
+    "evidence": "Command help includes examples and expected failures omit tracebacks by default."
+  },
+  {
+    "section": "9. Reproducible workflows and environments",
+    "requirement": "Several datasets regenerate end-to-end from a clean environment.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "9. Reproducible workflows and environments",
+    "requirement": "Resolved parameters and versions are preserved.",
+    "status": "partial",
+    "evidence": "Executed Python runs record versions and parameters; R, workflow-engine and container certification remain open."
+  },
+  {
+    "section": "9. Reproducible workflows and environments",
+    "requirement": "No notebook-only hidden step is needed for release artifacts.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "9. Reproducible workflows and environments",
+    "requirement": "Failures retain logs and a short human summary.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "10. CI, tests, and integrity gates",
+    "requirement": "Nano CI stays within a defined time budget.",
+    "status": "partial",
+    "evidence": "The local 28-test run completed in under ten seconds; a five-minute CI job is authored but has not run remotely."
+  },
+  {
+    "section": "10. CI, tests, and integrity gates",
+    "requirement": "Release tag is blocked by schema/hash/registry failures.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "10. CI, tests, and integrity gates",
+    "requirement": "Corruption and sample-order failures have regression tests.",
+    "status": "verified",
+    "evidence": "Both failures have passing regression tests."
+  },
+  {
+    "section": "10. CI, tests, and integrity gates",
+    "requirement": "Documentation quality is reviewed beyond spelling.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "11. Human documentation and code-comment policy",
+    "requirement": "Every public command has concise help and one example.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "11. Human documentation and code-comment policy",
+    "requirement": "Every dataset README is usable without opening YAML.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "11. Human documentation and code-comment policy",
+    "requirement": "Release notes are manually edited for flow.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "11. Human documentation and code-comment policy",
+    "requirement": "No em dash appears in docs/help/release notes.",
+    "status": "verified",
+    "evidence": "The repository checker scans documentation; help text has been reviewed."
+  },
+  {
+    "section": "11. Human documentation and code-comment policy",
+    "requirement": "Review removes long narration comments.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "12. Figures, catalog, and rendering QA",
+    "requirement": "All core figures regenerate from code and source tables.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "12. Figures, catalog, and rendering QA",
+    "requirement": "Captions are concise and units are present where applicable.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "12. Figures, catalog, and rendering QA",
+    "requirement": "Rendered documentation is manually inspected.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "12. Figures, catalog, and rendering QA",
+    "requirement": "No visual hides rights or warning status.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "13. Zenodo release engineering, CAS milestones, and final go/no-go",
+    "requirement": "One external user completes quickstart from a fresh environment.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "13. Zenodo release engineering, CAS milestones, and final go/no-go",
+    "requirement": "Final uploaded hashes match certified files.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "13. Zenodo release engineering, CAS milestones, and final go/no-go",
+    "requirement": "DOI/citation instructions point to exact version.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  },
+  {
+    "section": "13. Zenodo release engineering, CAS milestones, and final go/no-go",
+    "requirement": "v1 retrospective identifies concrete improvements for v2.",
+    "status": "open",
+    "evidence": "Not yet demonstrated for the requested v1 biological release."
+  }
+]

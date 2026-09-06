@@ -1,0 +1,18 @@
+{
+  "target_version": "1.0.0",
+  "authors": [
+    {
+      "name": "Vivaan Patni",
+      "github": "vxxqv",
+      "zenodo_name": "Vivaan Patni"
+    }
+  ],
+  "repository_url": "https://github.com/vxxqv/openomicsbench",
+  "code_license": null,
+  "metadata_license": null,
+  "version_doi": null,
+  "external_user_trial": null,
+  "scientific_environment_lock": "runtime/environment-lock.json",
+  "container_digest": null,
+  "post_upload_verification": null
+}
