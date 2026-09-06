@@ -3,8 +3,13 @@
   "created": "2026-09-06",
   "scope": "Project-authored development handoff; staged third-party source data excluded.",
   "self_excluded": "release/development-file-manifest.json",
-  "file_count": 73,
+  "file_count": 74,
   "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 58,
+      "sha256": "dbe8957a344a6bff1415c8c9b5c24c492df52226f4f14d17a3f16eba5cd01428"
+    },
     {
       "path": ".github/ISSUE_TEMPLATE/bug.yml",
       "bytes": 364,
@@ -162,18 +167,18 @@
     },
     {
       "path": "datasets/rnaseq/rnaseq-001/LICENSE-DATA.md",
-      "bytes": 537,
-      "sha256": "77118fb67dfc32fd3f015b48c98a440af796c50ddeacf3257127dca8b41036fb"
+      "bytes": 532,
+      "sha256": "713233950d50bbd0601d3275c012f26a00e7a08d7b1fda305f134daf4e909f02"
     },
     {
       "path": "datasets/rnaseq/rnaseq-001/manifest.json",
       "bytes": 3827,
-      "sha256": "95dd8ce4739e09e05c7d56709e5975d0113312a59c7684b5da3747b9166bf4e5"
+      "sha256": "00950d39f924df4df0832a63a51c58820295467d4fa4da8d0f91574b299863a2"
     },
     {
       "path": "datasets/rnaseq/rnaseq-001/README.md",
-      "bytes": 1291,
-      "sha256": "a76a162650a322a126d4e427e127562620ca9036d5b02893dedeb6245e6f9a2e"
+      "bytes": 1283,
+      "sha256": "0aa7314f16d395050f9453123c9d09f8886b9532f773fc2c8610d5644815373e"
     },
     {
       "path": "docs/acceptance-ledger.md",
