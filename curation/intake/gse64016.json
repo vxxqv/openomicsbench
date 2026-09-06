@@ -1,0 +1,39 @@
+{
+  "accession": "GSE64016",
+  "source_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE64016",
+  "checked": "2026-09-06",
+  "source_response_sha256": "d0700f25e85db7bc4c21edb6ab14eab2a885ccd0671abb4ac3bb70e6ed9478c5",
+  "title": "Single cell RNA-seq data of human hESCs to evaluate Oscope - a statistical pipeline for identifying oscillatory genes in unsynchronized single cell RNA-Seq",
+  "series_sample_count": 460,
+  "assay_types": [
+    "Expression profiling by high throughput sequencing"
+  ],
+  "publication_pmids": [
+    "26301841"
+  ],
+  "supplementary_files": [
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE64nnn/GSE64016/suppl/GSE64016_H1andFUCCI_normalized_EC.csv.gz"
+  ],
+  "review_status": "excluded",
+  "proposed_archetype": "Single-cell",
+  "decision": "The source is explicitly single-cell and falls outside the v1 bulk RNA-seq scope.",
+  "rights": {
+    "status": "AMBER",
+    "redistribution": "not cleared",
+    "evidence_url": "https://www.ncbi.nlm.nih.gov/geo/info/disclaimer.html",
+    "checked": "2026-09-06",
+    "reason": "GEO public access does not establish unrestricted redistribution permission. Source-specific review remains open."
+  },
+  "scorecard": {
+    "study_design": null,
+    "metadata": null,
+    "rights": 0,
+    "pocket_value": null,
+    "expected_outputs": null,
+    "teaching_value": null
+  },
+  "scorecard_note": "Unreviewed fields remain null. A number would imply sample-level review that has not occurred.",
+  "estimated_download_bytes": null,
+  "sample_level_review": "pending",
+  "release_eligible": false
+}

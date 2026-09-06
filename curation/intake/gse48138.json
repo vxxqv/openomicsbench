@@ -1,0 +1,44 @@
+{
+  "accession": "GSE48138",
+  "source_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE48138",
+  "checked": "2026-09-06",
+  "source_response_sha256": "c5b00b7655f577fae99ae6b90d0b9498b59edf0c02bfe4ffd62fdb240dca3dce",
+  "title": "Expression and regulation of lincRNAs during T cell development and differentiation",
+  "series_sample_count": 122,
+  "assay_types": [
+    "Expression profiling by high throughput sequencing"
+  ],
+  "publication_pmids": [
+    "24056746"
+  ],
+  "supplementary_files": [
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE48nnn/GSE48138/suppl/GSE48138_LincRNA-cluster-coordinates.gtf.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE48nnn/GSE48138/suppl/GSE48138_Pooled-cufflinks-spliced-transcripts-from-non-strand-sp-RNASeq.gtf.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE48nnn/GSE48138/suppl/GSE48138_Pooled-cufflinks-transcripts-from-non-strand-sp-RNASeq.gtf.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE48nnn/GSE48138/suppl/GSE48138_Pooled-sicer-islands-from-polyA-RNASeq.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE48nnn/GSE48138/suppl/GSE48138_Pooled-sicer-islands-from-total-RNASeq.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE48nnn/GSE48138/suppl/GSE48138_RAW.tar"
+  ],
+  "review_status": "defer",
+  "proposed_archetype": "T cell lineage and lincRNA",
+  "decision": "This is a mouse T-cell study, not a high-replicate yeast experiment. Separate total RNA and polyadenylated RNA before choosing a contrast; custom lincRNA coordinates need their own reference contract.",
+  "rights": {
+    "status": "AMBER",
+    "redistribution": "not cleared",
+    "evidence_url": "https://www.ncbi.nlm.nih.gov/geo/info/disclaimer.html",
+    "checked": "2026-09-06",
+    "reason": "GEO public access does not establish unrestricted redistribution permission. Source-specific review remains open."
+  },
+  "scorecard": {
+    "study_design": null,
+    "metadata": null,
+    "rights": 0,
+    "pocket_value": null,
+    "expected_outputs": null,
+    "teaching_value": null
+  },
+  "scorecard_note": "Unreviewed fields remain null. A number would imply sample-level review that has not occurred.",
+  "estimated_download_bytes": null,
+  "sample_level_review": "pending",
+  "release_eligible": false
+}

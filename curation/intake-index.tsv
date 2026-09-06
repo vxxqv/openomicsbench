@@ -1,0 +1,13 @@
+accession	series_samples	review_status	archetype	rights	release_eligible
+GSE18508	121	priority	Non-human mixed library types	AMBER	False
+GSE37704	18	resolve_subseries	Transcript-level candidate	AMBER	False
+GSE47774	3396	defer	Multicentre technical reproducibility	AMBER	False
+GSE48138	122	defer	T cell lineage and lincRNA	AMBER	False
+GSE49712	10	priority	Reference RNA with spike-in controls	AMBER	False
+GSE50760	54	defer	Matched tissue	AMBER	False
+GSE52778	16	priority	Paired donor treatment	AMBER	False
+GSE53960	320	defer	Tissue and developmental stage	AMBER	False
+GSE55347	116	defer	Toxicogenomics	AMBER	False
+GSE60314	851	defer	Genotype environment and sex	AMBER	False
+GSE60450	12	priority	Factorial tissue and developmental stage	AMBER	False
+GSE64016	460	excluded	Single-cell	AMBER	False

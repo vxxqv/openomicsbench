@@ -1,0 +1,41 @@
+{
+  "accession": "GSE52778",
+  "source_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778",
+  "checked": "2026-09-06",
+  "source_response_sha256": "6b1908822272fe859310ec4f8b730125506a7145fe00e28091a62993f4ebe453",
+  "title": "Human Airway Smooth Muscle Transcriptome Changes in Response to Asthma Medications",
+  "series_sample_count": 16,
+  "assay_types": [
+    "Expression profiling by high throughput sequencing"
+  ],
+  "publication_pmids": [
+    "24926665",
+    "36599824"
+  ],
+  "supplementary_files": [
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE52nnn/GSE52778/suppl/GSE52778_All_Sample_FPKM_Matrix.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE52nnn/GSE52778/suppl/GSE52778_Dex_vs_Untreated_gene_exp.diff.gz"
+  ],
+  "review_status": "priority",
+  "proposed_archetype": "Paired donor treatment",
+  "decision": "The parent study has 16 libraries. The airway dexamethasone subset has eight; retain the four cell-line pairs. GEO FPKM is not raw counts. Recover the count representation and its reference from the versioned airway package.",
+  "rights": {
+    "status": "AMBER",
+    "redistribution": "not cleared",
+    "evidence_url": "https://www.ncbi.nlm.nih.gov/geo/info/disclaimer.html",
+    "checked": "2026-09-06",
+    "reason": "GEO public access does not establish unrestricted redistribution permission. Source-specific review remains open."
+  },
+  "scorecard": {
+    "study_design": null,
+    "metadata": null,
+    "rights": 0,
+    "pocket_value": null,
+    "expected_outputs": null,
+    "teaching_value": null
+  },
+  "scorecard_note": "Unreviewed fields remain null. A number would imply sample-level review that has not occurred.",
+  "estimated_download_bytes": null,
+  "sample_level_review": "pending",
+  "release_eligible": false
+}

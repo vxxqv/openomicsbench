@@ -1,0 +1,43 @@
+{
+  "accession": "GSE49712",
+  "source_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE49712",
+  "checked": "2026-09-06",
+  "source_response_sha256": "aff1c6c510e4eac4d43d280c037342915c5a4db022cb905eedc08223cf566a71",
+  "title": "Comprehensive evaluation of differential gene expression analysis methods for RNA-seq data",
+  "series_sample_count": 10,
+  "assay_types": [
+    "Expression profiling by high throughput sequencing",
+    "Third-party reanalysis"
+  ],
+  "publication_pmids": [
+    "24020486"
+  ],
+  "supplementary_files": [
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE49nnn/GSE49712/suppl/GSE49712_ENCODE_FPKM.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE49nnn/GSE49712/suppl/GSE49712_ENCODE_HTSeq.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE49nnn/GSE49712/suppl/GSE49712_HTSeq.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE49nnn/GSE49712/suppl/GSE49712_gene_FPKM.txt.gz"
+  ],
+  "review_status": "priority",
+  "proposed_archetype": "Reference RNA with spike-in controls",
+  "decision": "Ten reference-RNA libraries support controlled comparisons. Technical replicates do not establish population-level biological inference. Preserve ERCC identities and mixture definitions.",
+  "rights": {
+    "status": "AMBER",
+    "redistribution": "not cleared",
+    "evidence_url": "https://www.ncbi.nlm.nih.gov/geo/info/disclaimer.html",
+    "checked": "2026-09-06",
+    "reason": "GEO public access does not establish unrestricted redistribution permission. Source-specific review remains open."
+  },
+  "scorecard": {
+    "study_design": null,
+    "metadata": null,
+    "rights": 0,
+    "pocket_value": null,
+    "expected_outputs": null,
+    "teaching_value": null
+  },
+  "scorecard_note": "Unreviewed fields remain null. A number would imply sample-level review that has not occurred.",
+  "estimated_download_bytes": null,
+  "sample_level_review": "pending",
+  "release_eligible": false
+}

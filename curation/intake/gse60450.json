@@ -1,0 +1,40 @@
+{
+  "accession": "GSE60450",
+  "source_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE60450",
+  "checked": "2026-09-06",
+  "source_response_sha256": "2afbdf4f736f2f87edc988df6d53831988199ba44a77262ffbd9ac577ccc2fad",
+  "title": "Transcriptome analysis of luminal and basal cell subpopulations in the lactating versus pregnant mammary gland",
+  "series_sample_count": 12,
+  "assay_types": [
+    "Expression profiling by high throughput sequencing"
+  ],
+  "publication_pmids": [
+    "25730472"
+  ],
+  "supplementary_files": [
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE60nnn/GSE60450/suppl/GSE60450_Lactation-GenewiseCounts.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE60nnn/GSE60450/suppl/GSE60450_RAW.tar"
+  ],
+  "review_status": "priority",
+  "proposed_archetype": "Factorial tissue and developmental stage",
+  "decision": "Twelve libraries cover two cell populations and three stages. Limit the first baseline to a prespecified replicated contrast, then add an interaction-aware adapter. Do not pool stages.",
+  "rights": {
+    "status": "AMBER",
+    "redistribution": "not cleared",
+    "evidence_url": "https://www.ncbi.nlm.nih.gov/geo/info/disclaimer.html",
+    "checked": "2026-09-06",
+    "reason": "GEO public access does not establish unrestricted redistribution permission. Source-specific review remains open."
+  },
+  "scorecard": {
+    "study_design": null,
+    "metadata": null,
+    "rights": 0,
+    "pocket_value": null,
+    "expected_outputs": null,
+    "teaching_value": null
+  },
+  "scorecard_note": "Unreviewed fields remain null. A number would imply sample-level review that has not occurred.",
+  "estimated_download_bytes": null,
+  "sample_level_review": "pending",
+  "release_eligible": false
+}

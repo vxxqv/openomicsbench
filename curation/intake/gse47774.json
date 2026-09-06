@@ -1,0 +1,53 @@
+{
+  "accession": "GSE47774",
+  "source_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE47774",
+  "checked": "2026-09-06",
+  "source_response_sha256": "3532928ed37cf1532c755b857ce68f9e777cc5e43bd4d07f85f2574ce6371a96",
+  "title": "A comprehensive assessment of RNA-seq accuracy, reproducibility and information content by the Sequence Quality Control consortium",
+  "series_sample_count": 3396,
+  "assay_types": [
+    "Expression profiling by high throughput sequencing"
+  ],
+  "publication_pmids": [
+    "25150838",
+    "25633159"
+  ],
+  "supplementary_files": [
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE47nnn/GSE47774/suppl/GSE47774_SEQC_ILM_AGR.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE47nnn/GSE47774/suppl/GSE47774_SEQC_ILM_BGI.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE47nnn/GSE47774/suppl/GSE47774_SEQC_ILM_CNL.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE47nnn/GSE47774/suppl/GSE47774_SEQC_ILM_COH.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE47nnn/GSE47774/suppl/GSE47774_SEQC_ILM_MAY.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE47nnn/GSE47774/suppl/GSE47774_SEQC_ILM_NVS.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE47nnn/GSE47774/suppl/GSE47774_SEQC_ILM_NYG_all_counts.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE47nnn/GSE47774/suppl/GSE47774_SEQC_LIF_LIV.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE47nnn/GSE47774/suppl/GSE47774_SEQC_LIF_NWU.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE47nnn/GSE47774/suppl/GSE47774_SEQC_LIF_PSU.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE47nnn/GSE47774/suppl/GSE47774_SEQC_LIF_SQW.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE47nnn/GSE47774/suppl/GSE47774_SEQC_ROC_MGP.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE47nnn/GSE47774/suppl/GSE47774_SEQC_ROC_NYU.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE47nnn/GSE47774/suppl/GSE47774_SEQC_ROC_SQW.txt.gz"
+  ],
+  "review_status": "defer",
+  "proposed_archetype": "Multicentre technical reproducibility",
+  "decision": "The series lists thousands of samples. Resolve platform, site and material before choosing a small subset. Do not duplicate GSE49712 as if it were independent biological evidence.",
+  "rights": {
+    "status": "AMBER",
+    "redistribution": "not cleared",
+    "evidence_url": "https://www.ncbi.nlm.nih.gov/geo/info/disclaimer.html",
+    "checked": "2026-09-06",
+    "reason": "GEO public access does not establish unrestricted redistribution permission. Source-specific review remains open."
+  },
+  "scorecard": {
+    "study_design": null,
+    "metadata": null,
+    "rights": 0,
+    "pocket_value": null,
+    "expected_outputs": null,
+    "teaching_value": null
+  },
+  "scorecard_note": "Unreviewed fields remain null. A number would imply sample-level review that has not occurred.",
+  "estimated_download_bytes": null,
+  "sample_level_review": "pending",
+  "release_eligible": false
+}

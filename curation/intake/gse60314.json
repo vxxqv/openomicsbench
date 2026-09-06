@@ -1,0 +1,44 @@
+{
+  "accession": "GSE60314",
+  "source_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE60314",
+  "checked": "2026-09-06",
+  "source_response_sha256": "152fb4f8dad4d26fbbd965cb50467763178fcb2e892ebe9675592dc4a8963909",
+  "title": "mRNA sequence data of individual Drosophila melanogaster male and female flies from 16 Drosophila Genetic Reference Panel lines reared in replicated environments",
+  "series_sample_count": 851,
+  "assay_types": [
+    "Expression profiling by high throughput sequencing"
+  ],
+  "publication_pmids": [
+    "26732976",
+    "27770026"
+  ],
+  "supplementary_files": [
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE60nnn/GSE60314/suppl/GSE60314_5_57_HTSeq_raw_read_counts.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE60nnn/GSE60314/suppl/GSE60314_6_01_HTSeq_raw_read_counts.txt.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE60nnn/GSE60314/suppl/GSE60314_ERCC_reference.fa.gz",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE60nnn/GSE60314/suppl/GSE60314_GEO_run_summary.xlsx",
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE60nnn/GSE60314/suppl/GSE60314_dme5_57_ERCC.gtf.gz"
+  ],
+  "review_status": "defer",
+  "proposed_archetype": "Genotype environment and sex",
+  "decision": "An explicit blocking and replication policy is required. Distinguish individual flies from repeated libraries. The record describes more than one FlyBase reference release; keep them separate.",
+  "rights": {
+    "status": "AMBER",
+    "redistribution": "not cleared",
+    "evidence_url": "https://www.ncbi.nlm.nih.gov/geo/info/disclaimer.html",
+    "checked": "2026-09-06",
+    "reason": "GEO public access does not establish unrestricted redistribution permission. Source-specific review remains open."
+  },
+  "scorecard": {
+    "study_design": null,
+    "metadata": null,
+    "rights": 0,
+    "pocket_value": null,
+    "expected_outputs": null,
+    "teaching_value": null
+  },
+  "scorecard_note": "Unreviewed fields remain null. A number would imply sample-level review that has not occurred.",
+  "estimated_download_bytes": null,
+  "sample_level_review": "pending",
+  "release_eligible": false
+}

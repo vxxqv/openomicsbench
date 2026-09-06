@@ -1,0 +1,40 @@
+{
+  "accession": "GSE37704",
+  "source_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37704",
+  "checked": "2026-09-06",
+  "source_response_sha256": "6f2cb4c18bf2ccc65385e60988b17324b9be9f0ccee252cf3a741ec461c01da5",
+  "title": "Differential analysis of gene regulation at transcript resolution by RNA-Seq",
+  "series_sample_count": 18,
+  "assay_types": [
+    "Expression profiling by array",
+    "Expression profiling by high throughput sequencing"
+  ],
+  "publication_pmids": [
+    "23222703"
+  ],
+  "supplementary_files": [
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE37nnn/GSE37704/suppl/GSE37704_RAW.tar"
+  ],
+  "review_status": "resolve_subseries",
+  "proposed_archetype": "Transcript-level candidate",
+  "decision": "This is a mixed microarray and RNA-seq superseries. Review GSE37690 and GSE37703 and retain the RNA-seq subseries only. No transcript adapter is certified yet.",
+  "rights": {
+    "status": "AMBER",
+    "redistribution": "not cleared",
+    "evidence_url": "https://www.ncbi.nlm.nih.gov/geo/info/disclaimer.html",
+    "checked": "2026-09-06",
+    "reason": "GEO public access does not establish unrestricted redistribution permission. Source-specific review remains open."
+  },
+  "scorecard": {
+    "study_design": null,
+    "metadata": null,
+    "rights": 0,
+    "pocket_value": null,
+    "expected_outputs": null,
+    "teaching_value": null
+  },
+  "scorecard_note": "Unreviewed fields remain null. A number would imply sample-level review that has not occurred.",
+  "estimated_download_bytes": null,
+  "sample_level_review": "pending",
+  "release_eligible": false
+}

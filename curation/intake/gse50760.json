@@ -1,0 +1,42 @@
+{
+  "accession": "GSE50760",
+  "source_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE50760",
+  "checked": "2026-09-06",
+  "source_response_sha256": "26feffb63a3bc4407664f44c65a2f9306f988f34994858cb0deb7b92b6354bf3",
+  "title": "Gene expression profiling study by RNA-seq in colorectal cancer",
+  "series_sample_count": 54,
+  "assay_types": [
+    "Expression profiling by high throughput sequencing"
+  ],
+  "publication_pmids": [
+    "25049118",
+    "27152521",
+    "31578316",
+    "38816545"
+  ],
+  "supplementary_files": [
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE50nnn/GSE50760/suppl/GSE50760_RAW.tar"
+  ],
+  "review_status": "defer",
+  "proposed_archetype": "Matched tissue",
+  "decision": "Confirm subject pairing and tissue identities at sample level. Do not treat matched tumour, normal tissue and metastasis as independent donors.",
+  "rights": {
+    "status": "AMBER",
+    "redistribution": "not cleared",
+    "evidence_url": "https://www.ncbi.nlm.nih.gov/geo/info/disclaimer.html",
+    "checked": "2026-09-06",
+    "reason": "GEO public access does not establish unrestricted redistribution permission. Source-specific review remains open."
+  },
+  "scorecard": {
+    "study_design": null,
+    "metadata": null,
+    "rights": 0,
+    "pocket_value": null,
+    "expected_outputs": null,
+    "teaching_value": null
+  },
+  "scorecard_note": "Unreviewed fields remain null. A number would imply sample-level review that has not occurred.",
+  "estimated_download_bytes": null,
+  "sample_level_review": "pending",
+  "release_eligible": false
+}

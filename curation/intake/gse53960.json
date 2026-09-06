@@ -1,0 +1,40 @@
+{
+  "accession": "GSE53960",
+  "source_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE53960",
+  "checked": "2026-09-06",
+  "source_response_sha256": "87df7a3505f77df7e0a4adc4ae4a4b83924658e812270b123da0a22e0b7ba1f5",
+  "title": "A rat RNA-Seq transcriptomic Bodymap across eleven organs and four developmental stages",
+  "series_sample_count": 320,
+  "assay_types": [
+    "Expression profiling by high throughput sequencing"
+  ],
+  "publication_pmids": [
+    "24510058",
+    "25977771"
+  ],
+  "supplementary_files": [
+    "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE53nnn/GSE53960/suppl/GSE53960_RAW.tar"
+  ],
+  "review_status": "defer",
+  "proposed_archetype": "Tissue and developmental stage",
+  "decision": "Choose one tissue and an explicit age contrast. Confirm individual animals, sex, age, and technical replicates before assigning the design.",
+  "rights": {
+    "status": "AMBER",
+    "redistribution": "not cleared",
+    "evidence_url": "https://www.ncbi.nlm.nih.gov/geo/info/disclaimer.html",
+    "checked": "2026-09-06",
+    "reason": "GEO public access does not establish unrestricted redistribution permission. Source-specific review remains open."
+  },
+  "scorecard": {
+    "study_design": null,
+    "metadata": null,
+    "rights": 0,
+    "pocket_value": null,
+    "expected_outputs": null,
+    "teaching_value": null
+  },
+  "scorecard_note": "Unreviewed fields remain null. A number would imply sample-level review that has not occurred.",
+  "estimated_download_bytes": null,
+  "sample_level_review": "pending",
+  "release_eligible": false
+}
