@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "rnaseq-001",
+  "status": "executed",
+  "release_eligible": false,
+  "reason": "The baseline ran successfully, but source rights and library-to-accession mapping remain unresolved.",
+  "source": {
+    "accession": "GSE18508",
+    "counts_sha256": "ea0dafbfcc600559644cfe7dd5cc8de809d631eb64ba3089aaa25c2fa0954dad",
+    "rights_status": "AMBER"
+  },
+  "design": {
+    "formula": "~ batch + condition",
+    "contrast": "untreated versus treated",
+    "samples": 7,
+    "features": 14599,
+    "full_rank": true
+  },
+  "runtime": {
+    "r": "4.5.3",
+    "deseq2": "1.50.2"
+  },
+  "result_summary": {
+    "tested_features": 8562,
+    "adjusted_p_lt_0_05": 1079
+  },
+  "artifacts": {
+    "contrast.log": {
+      "bytes": 26,
+      "sha256": "84cf4dbd53231a6f812e9456ca1b354db1dd3d5b9c15d66aae91c412f27de08a"
+    },
+    "differential_expression.tsv": {
+      "bytes": 1503683,
+      "sha256": "7282e6b4d3e2bf7398bb37e114d99a8587670c01b3cf3bd69a897a74cf5c5c01"
+    },
+    "normalized_counts.tsv": {
+      "bytes": 1499011,
+      "sha256": "f905f58dd5c4a85feb50c7678335a07da87905ce0162af8a7a3e8a5a0be1732d"
+    },
+    "session-info.log": {
+      "bytes": 1389,
+      "sha256": "2000ed5d4b68d7c8be4551d4bdc52383b95cc052b73c92b02e0a28867709e8b5"
+    }
+  },
+  "workflow_sha256": "02f66295046d3c91943f36fa684511e0123f2d4b02d18b3791aede144bc0da1f"
+}
