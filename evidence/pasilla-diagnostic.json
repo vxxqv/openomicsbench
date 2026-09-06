@@ -1,0 +1,102 @@
+{
+  "baseline": "diagnostic OLS on log2(CPM+1), condition plus library type; not DESeq2",
+  "candidate_curve": [
+    {
+      "bytes": 15595,
+      "features": 500,
+      "metrics": {
+        "distance_correlation": 0.6910528782838677,
+        "sign_concordance": 0.9810606060606061,
+        "spearman_logfc": 0.9185443235106325,
+        "top_k_jaccard": 0.4925373134328358
+      },
+      "pass": false,
+      "size_ratio": 0.031291823593974796
+    },
+    {
+      "bytes": 30907,
+      "features": 1000,
+      "metrics": {
+        "distance_correlation": 0.7818435157569383,
+        "sign_concordance": 0.9881188118811881,
+        "spearman_logfc": 0.9175888942673344,
+        "top_k_jaccard": 0.5384615384615384
+      },
+      "pass": false,
+      "size_ratio": 0.06201579941128432
+    },
+    {
+      "bytes": 61446,
+      "features": 2000,
+      "metrics": {
+        "distance_correlation": 0.8877265696052328,
+        "sign_concordance": 0.9629629629629629,
+        "spearman_logfc": 0.9040785955840325,
+        "top_k_jaccard": 0.3698630136986301
+      },
+      "pass": false,
+      "size_ratio": 0.12329319605997917
+    },
+    {
+      "bytes": 122621,
+      "features": 4000,
+      "metrics": {
+        "distance_correlation": 0.9348914653772823,
+        "sign_concordance": 0.9894625922023182,
+        "spearman_logfc": 0.9292498555081639,
+        "top_k_jaccard": 0.4492753623188406
+      },
+      "pass": false,
+      "size_ratio": 0.2460426226942471
+    },
+    {
+      "bytes": 245540,
+      "features": 8000,
+      "metrics": {
+        "distance_correlation": 0.9572349453674978,
+        "sign_concordance": 1.0,
+        "spearman_logfc": 0.9742669996888491,
+        "top_k_jaccard": 0.6129032258064516
+      },
+      "pass": true,
+      "size_ratio": 0.49268319110385195
+    },
+    {
+      "bytes": 386620,
+      "features": 12000,
+      "metrics": {
+        "distance_correlation": 0.995380159637088,
+        "sign_concordance": 1.0,
+        "spearman_logfc": 0.9952833230949173,
+        "top_k_jaccard": 0.8181818181818182
+      },
+      "pass": true,
+      "size_ratio": 0.7757643371530962
+    }
+  ],
+  "config_sha256": "4bb392fcaf4180e6d5412e01a60b962e1ae6de520d8f1c48472b897dfd5ee1db",
+  "contrast": "untreated - treated",
+  "dataset_id": "rnaseq-001",
+  "release_eligible": false,
+  "rights": "AMBER",
+  "sample_order": [
+    "untreated1",
+    "untreated2",
+    "untreated3",
+    "untreated4",
+    "treated1",
+    "treated2",
+    "treated3"
+  ],
+  "smallest_passing_features": 8000,
+  "source_bytes": 498373,
+  "source_features": 14599,
+  "source_samples": 7,
+  "source_sha256": "ea0dafbfcc600559644cfe7dd5cc8de809d631eb64ba3089aaa25c2fa0954dad",
+  "status": "diagnostic_only",
+  "versions": {
+    "numpy": "2.3.5",
+    "python": "3.12.14"
+  },
+  "workflow_sha256": "563c6bc3120feab83ca330e80ba14fcf627cc15b430c0838d2aa9f05bbe65fb4"
+}
