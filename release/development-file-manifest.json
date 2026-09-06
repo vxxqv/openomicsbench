@@ -27,8 +27,8 @@
     },
     {
       "path": ".zenodo.json",
-      "bytes": 350,
-      "sha256": "7cb2e9e444c00d58089f17032983026fb9dcd74f0f0decaa91881d864ed6fb5f"
+      "bytes": 963,
+      "sha256": "927eb21ca5cbbd11a902cd5af12fada60906404049a0292b73e561a44493d98e"
     },
     {
       "path": "CHANGELOG.md",
@@ -222,8 +222,8 @@
     },
     {
       "path": "pyproject.toml",
-      "bytes": 408,
-      "sha256": "393992ca038bd9999e7ce775038fd58c337b884ea49f4df1a66b99fb157ecceb"
+      "bytes": 598,
+      "sha256": "15178c9c6dc92d0fed7f59baa18e13d97ba755140475f7e43661d4a25ec7cbb2"
     },
     {
       "path": "README.md",
