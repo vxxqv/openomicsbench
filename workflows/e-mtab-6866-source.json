@@ -1,0 +1,26 @@
+{
+  "accession": "E-MTAB-6866",
+  "factor_column": "Factor Value[genotype]",
+  "seed": 20260907,
+  "effect_anchors": 100,
+  "candidate_sizes": [
+    500,
+    1000,
+    2000,
+    4000,
+    8000,
+    12000,
+    20000
+  ],
+  "top_k": 50,
+  "minimum": {
+    "spearman_logfc": 0.9,
+    "top_k_jaccard": 0.6,
+    "distance_correlation": 0.9,
+    "sign_concordance": 0.9
+  },
+  "normalization": "median_ratio",
+  "baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), genotype only; DESeq2 confirmation remains required.",
+  "rights": "GREEN: Expression Atlas material is CC BY 4.0 with attribution.",
+  "reference": "Ensembl Genomes release 44 on the TAIR10 assembly; exact FASTA and annotation file hashes still need to be pinned."
+}
