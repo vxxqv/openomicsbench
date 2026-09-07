@@ -9,6 +9,7 @@ import urllib.request
 from dataclasses import dataclass
 from pathlib import Path
 from urllib.parse import urljoin, urlsplit
+import numpy as np
 
 ORIGIN = "https://www.ebi.ac.uk"
 ROOT = f"{ORIGIN}/gxa/"
@@ -106,8 +107,9 @@ def _stage_one(resource: AtlasResource, target: Path, opener, max_bytes: int) ->
         temporary.unlink(missing_ok=True)
 
 
-def _check_counts(path: Path) -> tuple[int, list[str]]:
-    genes = 0
+def load_counts(path: Path) -> tuple[list[str], list[str], np.ndarray]:
+    genes: list[str] = []
+    matrix: list[list[int]] = []
     with path.open(encoding="utf-8", newline="") as stream:
         rows = csv.reader(stream, delimiter="\t")
         header = next(rows, None)
@@ -125,10 +127,16 @@ def _check_counts(path: Path) -> tuple[int, list[str]]:
                 raise ValueError(f"Raw-count row {number} contains a non-integer value") from exc
             if any(value < 0 for value in counts):
                 raise ValueError(f"Raw-count row {number} contains a negative value")
-            genes += 1
-    if genes == 0:
+            genes.append(row[0])
+            matrix.append(counts)
+    if not genes:
         raise ValueError("Raw-count table has no genes")
-    return genes, samples
+    if len(genes) != len(set(genes)):
+        raise ValueError("Raw-count gene identifiers must be unique")
+    values = np.asarray(matrix, dtype=np.int64)
+    if np.any(values.sum(axis=0, dtype=np.float64) <= 0):
+        raise ValueError("Raw-count table contains an empty sample library")
+    return genes, samples, values
 
 
 def _check_design(path: Path) -> tuple[int, list[str], list[str]]:
@@ -142,6 +150,23 @@ def _check_design(path: Path) -> tuple[int, list[str], list[str]]:
     return len(runs), runs, reader.fieldnames
 
 
+def load_design(path: Path, factor: str) -> dict[str, str]:
+    with path.open(encoding="utf-8", newline="") as stream:
+        reader = csv.DictReader(stream, delimiter="\t")
+        if not reader.fieldnames or factor not in reader.fieldnames or "Run" not in reader.fieldnames or "Analysed" not in reader.fieldnames:
+            raise ValueError(f"Experiment design needs Run, Analysed and {factor} columns")
+        design = {
+            row["Run"].strip(): row[factor].strip()
+            for row in reader
+            if row["Analysed"].strip().lower() == "yes"
+        }
+    if len(design) < 4 or any(not run or not condition for run, condition in design.items()):
+        raise ValueError("Experiment design needs at least four analysed runs with factor values")
+    if len(set(design.values())) != 2:
+        raise ValueError("The diagnostic requires exactly two factor values")
+    return design
+
+
 def stage(accession: str, destination: Path, opener=urllib.request.urlopen, max_bytes: int = 1_000_000_000) -> dict:
     accession = normalize_accession(accession)
     resources = discover(accession, opener)
@@ -151,13 +176,13 @@ def stage(accession: str, destination: Path, opener=urllib.request.urlopen, max_
         "experiment_design": destination / f"{accession}-experiment-design.tsv",
     }
     records = [_stage_one(resources[role], paths[role], opener, max_bytes) for role in ("raw_counts", "experiment_design")]
-    genes, count_samples = _check_counts(paths["raw_counts"])
+    genes, count_samples, _ = load_counts(paths["raw_counts"])
     analysed, design_samples, columns = _check_design(paths["experiment_design"])
     if set(count_samples) != set(design_samples):
         raise ValueError("Raw-count samples do not match analysed experiment-design runs")
     return {
         "accession": accession,
-        "genes": genes,
+        "genes": len(genes),
         "samples": len(count_samples),
         "design_columns": columns,
         "resources": records,
