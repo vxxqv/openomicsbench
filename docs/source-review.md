@@ -16,6 +16,8 @@ The airway study offers a useful paired cell-line design. Its parent GEO series 
 
 ## Candidates needing more work
 
+The preliminary Expression Atlas screen adds seven candidates without downloading their count matrices. E-MTAB-5477, E-MTAB-7126, E-GEOD-33979 and E-MTAB-6866 each have six analysed runs in balanced two-group designs. They cover subcellular fraction, drug response, mouse genotype and plant genotype. E-MTAB-567 has 28 runs split evenly between prostate tumour and adjacent tissue; its subject pairing must be verified before modelling. E-MTAB-8845 is a 2-by-2 plant genotype and infection study. E-MTAB-10322 has three mouse genotypes and needs an explicit contrast. All seven expose raw-count and design resources, and the largest count matrix is under 6 MB. The machine-readable screen records the official URLs, sizes, design hashes and factor distributions.
+
 GSE47774 is a large multicentre SEQC record. Select site, platform and material explicitly, and check overlap with other SEQC accessions before counting independent objects. GSE53960 offers rat tissue and age variation. GSE55347 offers toxicogenomics. Both need sample-level contrast and replicate review before processing.
 
 GSE60314 includes genotype, sex, environment and repeated-library structure in Drosophila. Its record mentions different FlyBase reference releases. The reference and biological unit need to be resolved before a pocket is meaningful.

@@ -1,6 +1,6 @@
 # Implementation status against the v1 plan
 
-The published prerelease establishes the tested software core and one real-source diagnostic workflow. Version 1.0.0 is in development. Its collection target is 12 to 20 curated RNA objects with at least eight redistributable pockets; the current certified biological count is zero. Thirteen screened source records and one synthetic fixture do not satisfy that target.
+The published prerelease establishes the tested software core and one real-source diagnostic workflow. Version 1.0.0 is in development. Its collection target is 12 to 20 curated RNA objects with at least eight redistributable pockets; the current certified biological count is zero. Twenty source candidates and one synthetic fixture do not satisfy that target.
 
 The [acceptance ledger](acceptance-ledger.md) preserves each acceptance item from the supplied plan. A partial entry means there is useful implementation but the stated release gate has not been demonstrated.
 
@@ -20,7 +20,7 @@ Local derivations record a workflow file hash and tested package versions. A pub
 
 ## 4 Discovery rights and intake
 
-Twelve GEO series records have dated intake records and source response hashes. Four are prioritized for deeper work; others need design resolution or are deferred. One single-cell record is excluded. E-MTAB-8572 adds verified Expression Atlas and BioStudies evidence, a balanced ten-run design and a GREEN CC BY 4.0 decision. The Pasilla source package and annotation were inspected at a pinned commit. No biological data are republished in this archive.
+Twelve GEO series records have dated intake records and source response hashes. Four are prioritized for deeper work; others need design resolution or are deferred. One single-cell record is excluded. Eight Expression Atlas candidates have official resource and design checks; E-MTAB-8572 also has full file hashes and a reduction diagnostic. The Expression Atlas licence supports GREEN decisions with attribution. The Pasilla source package and annotation were inspected at a pinned commit. No biological data are republished in this archive.
 
 ## 5 Bulk RNA collection
 
