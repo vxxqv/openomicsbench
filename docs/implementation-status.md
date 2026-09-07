@@ -1,6 +1,6 @@
 # Implementation status against the v1 plan
 
-The published prerelease establishes the tested software core and one real-source diagnostic workflow. Version 1.0.0 is in development. Its collection target is 12 to 20 curated RNA objects with at least eight redistributable pockets; the current certified biological count is zero. Twelve screened source records and one synthetic fixture do not satisfy that target.
+The published prerelease establishes the tested software core and one real-source diagnostic workflow. Version 1.0.0 is in development. Its collection target is 12 to 20 curated RNA objects with at least eight redistributable pockets; the current certified biological count is zero. Thirteen screened source records and one synthetic fixture do not satisfy that target.
 
 The [acceptance ledger](acceptance-ledger.md) preserves each acceptance item from the supplied plan. A partial entry means there is useful implementation but the stated release gate has not been demonstrated.
 
@@ -20,7 +20,7 @@ Local derivations record a workflow file hash and tested package versions. A pub
 
 ## 4 Discovery rights and intake
 
-Twelve GEO series records have dated intake records and source response hashes. Four are prioritized for deeper work; others need design resolution or are deferred. One single-cell record is excluded. The Pasilla source package and annotation were inspected at a pinned commit. No biological data are republished in this archive. Source-specific rights review remains open for every candidate.
+Twelve GEO series records have dated intake records and source response hashes. Four are prioritized for deeper work; others need design resolution or are deferred. One single-cell record is excluded. E-MTAB-8572 adds verified Expression Atlas and BioStudies evidence, a balanced ten-run design and a GREEN CC BY 4.0 decision. The Pasilla source package and annotation were inspected at a pinned commit. No biological data are republished in this archive.
 
 ## 5 Bulk RNA collection
 
@@ -28,9 +28,11 @@ The Pasilla diagnostic uses a real seven-library count table. A link-only manife
 
 ## 6 Deterministic reduction
 
-The feature selector preserves all sample columns, combines four declared feature lists, uses a seed for the background ordering, and preserves original row order. The miniature fixture rebuilds exactly in the tested environment. The paired-read helper checks synchronization and returns actual selected pair counts. It has not yet been used to certify a real read pocket.
+The general feature selector preserves all sample columns, combines four declared feature lists, uses a seed for the background ordering, and preserves original row order. The E-MTAB-8572 extension anchors 100 high-effect genes before filling the same general order. The miniature fixture rebuilds exactly in the tested environment. The paired-read helper checks synchronization and returns actual selected pair counts. It has not yet been used to certify a real read pocket.
 
 Six Pasilla candidate sizes were evaluated. The 8,000-gene candidate is the smallest tested size that met the preset diagnostic envelope. That conclusion applies to this grid and this baseline. It is not proof of the globally smallest useful object or of inferential DESeq2 fidelity.
+
+Seven E-MTAB-8572 candidates were evaluated with median-ratio normalization. The 2,000-gene candidate was the smallest tested size meeting the same four thresholds, and the complete report reproduced exactly. Its final DESeq2 baseline and exact reference-file identities remain open.
 
 ## 7 Expected outputs and quantitative validation
 
@@ -50,7 +52,7 @@ The tested Conda and R package versions are recorded in runtime/environment-lock
 
 ## 10 CI and integrity
 
-Thirty-two local tests pass. The checks cover invalid schema families, corruption, paired-read mismatches, sample order, interrupted downloads, seeded selection, fixture regeneration and every CLI command. The same integrity suite passes on GitHub Actions. Scheduled remote health checks, rotating biological regeneration and a protected release-tag policy remain future improvements.
+Thirty-nine local tests pass. The checks cover invalid schema families, corruption, paired-read mismatches, sample order, interrupted downloads, seeded and contrast-aware selection, median-ratio normalization, Expression Atlas intake, fixture regeneration and every CLI command. The integrity suite at commit 71ce874 passes on GitHub Actions; the expanded suite will run when these commits reach GitHub. Scheduled remote health checks, rotating biological regeneration and a protected release-tag policy remain future improvements.
 
 ## 11 Human documentation
 

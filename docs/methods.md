@@ -16,13 +16,17 @@ The procedure provides nested candidate sizes, deterministic tie breaking and an
 
 The Pasilla grid is 500, 1,000, 2,000, 4,000, 8,000 and 12,000 genes. The minimum requirements were saved before this diagnostic run: rank correlation 0.90, top-50 Jaccard 0.60, distance correlation 0.90 and sign agreement 0.90. They are development thresholds. They have not been independently calibrated for a biological release.
 
+E-MTAB-8572 uses a contrast-aware extension. The 100 largest absolute full-source effects are included first, then the four general feature lists fill a single deterministic order. Every candidate size is a prefix of that order before source row order is restored. This prevents a small pocket from losing the strongest source effects by chance while retaining genes from the four general selection categories.
+
+Its diagnostic uses median-ratio size factors calculated from genes with positive counts in every sample. Size factors are centered to a geometric mean of one, and the model fits log2(normalized count + 1). This is close to the normalization stage used by DESeq2, but the diagnostic remains ordinary least squares and produces no inferential statistics. The first passing size in the declared grid was 2,000 genes. The saved report was identical across two complete source retrieval and calculation runs.
+
 ## Quantitative definitions
 
 Spearman preservation uses average ranks for tied coefficients on the shared selected feature universe. Constant or non-finite input is an error, not a passing score.
 
 Top-50 Jaccard ranks the absolute condition coefficients within that same shared universe. Feature ID resolves ties. The denominator is the union size. This metric does not measure recovery of top genes omitted from the source universe. A release baseline must add full-universe top-feature recall before claiming preservation of the source's strongest findings.
 
-Distance preservation is Pearson correlation between the strict upper triangles of Euclidean sample-distance matrices on log2(CPM + 1). The source distance uses all source genes; the pocket distance uses its selected genes. This check can fail even when effect rankings remain correlated.
+Distance preservation is Pearson correlation between the strict upper triangles of Euclidean sample-distance matrices after the declared normalization and log2 transform. The source distance uses all source genes; the pocket distance uses its selected genes. This check can fail even when effect rankings remain correlated.
 
 Sign agreement considers shared genes with an absolute source coefficient of at least 0.1. A zero pocket coefficient disagrees with a nonzero source coefficient. The implementation rejects an empty eligible set. It does not assign arbitrary success to an undefined metric.
 
