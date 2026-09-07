@@ -1,4 +1,5 @@
 accession	series_samples	review_status	archetype	rights	release_eligible
+E-MTAB-8572	10	priority	Balanced genetic knockout xenograft	GREEN	False
 GSE18508	121	priority	Non-human mixed library types	AMBER	False
 GSE37704	18	resolve_subseries	Transcript-level candidate	AMBER	False
 GSE47774	3396	defer	Multicentre technical reproducibility	AMBER	False
