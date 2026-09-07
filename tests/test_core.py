@@ -6,6 +6,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from io import BytesIO
 from pathlib import Path
 from unittest.mock import patch
 import numpy as np
@@ -17,6 +18,7 @@ from omicsbench.cache import get, verify_cache
 from omicsbench.download import transfer
 from omicsbench.validate import validate
 from omicsbench.rnaseq import ranked,correlation,check_design,select_genes,paired_sample,read_counts,preservation
+from omicsbench.expression_atlas import normalize_accession,parse_catalogue,stage
 
 ROOT=Path(__file__).resolve().parents[1]
 
@@ -151,5 +153,66 @@ class CoreTests(unittest.TestCase):
         rebuilt=destination/'datasets/rnaseq/fixture-001'
         for original in self.folder.rglob('*'):
             if original.is_file():self.assertEqual(digest(original),digest(rebuilt/original.relative_to(self.folder)))
+
+    def test_atlas_accession(self):
+        self.assertEqual(normalize_accession('e-mtab-8572'),'E-MTAB-8572')
+        for value in ['E-MTAB-8572/other','8572','E-MTAB-x','E-../8572']:
+            with self.subTest(value=value),self.assertRaises(ValueError):normalize_accession(value)
+
+    def test_atlas_catalogue(self):
+        rows=[
+            {'type':'icon-raw-counts','description':'counts','url':'experiments-content/E-MTAB-8572/resources/counts'},
+            {'type':'icon-experiment-design','description':'design','url':'experiments-content/E-MTAB-8572/resources/design'},
+            {'type':'icon-tsv','description':'results','url':'experiments-content/E-MTAB-8572/resources/results'},
+        ]
+        found=parse_catalogue('E-MTAB-8572',json.dumps(rows).encode())
+        self.assertEqual(set(found),{'raw_counts','experiment_design'})
+        self.assertTrue(found['raw_counts'].url.startswith('https://www.ebi.ac.uk/gxa/'))
+
+    def test_atlas_catalogue_rejects_cross_experiment(self):
+        rows=[
+            {'type':'icon-raw-counts','description':'counts','url':'experiments-content/E-MTAB-1/resources/counts'},
+            {'type':'icon-experiment-design','description':'design','url':'experiments-content/E-MTAB-8572/resources/design'},
+        ]
+        with self.assertRaisesRegex(ValueError,'outside'):parse_catalogue('E-MTAB-8572',json.dumps(rows).encode())
+
+    def test_atlas_stage_and_validate(self):
+        accession='E-MTAB-8572'
+        catalogue=json.dumps([
+            {'type':'icon-raw-counts','description':'counts','url':f'experiments-content/{accession}/resources/counts'},
+            {'type':'icon-experiment-design','description':'design','url':f'experiments-content/{accession}/resources/design'},
+        ]).encode()
+        counts=b'Gene ID\tGene Name\tRUN1\tRUN2\ng1\tA\t1\t2\ng2\tB\t0\t4\n'
+        design=b'Run\tFactor Value[group]\tAnalysed\nRUN1\tcontrol\tYes\nRUN2\ttreated\tYes\n'
+        class Response(BytesIO):
+            def __init__(self,body,url):super().__init__(body);self.url=url
+            def geturl(self):return self.url
+            def __enter__(self):return self
+            def __exit__(self,*args):self.close()
+        def opener(request,timeout):
+            url=request.full_url if hasattr(request,'full_url') else request
+            body=catalogue if '/json/' in url else counts if url.endswith('/counts') else design
+            return Response(body,url)
+        result=stage(accession,self.root/'atlas',opener=opener)
+        self.assertEqual((result['genes'],result['samples']),(2,2))
+        self.assertEqual({r['role'] for r in result['resources']},{'raw_counts','experiment_design'})
+
+    def test_atlas_stage_rejects_sample_mismatch(self):
+        accession='E-MTAB-8572'
+        catalogue=json.dumps([
+            {'type':'icon-raw-counts','description':'counts','url':f'experiments-content/{accession}/resources/counts'},
+            {'type':'icon-experiment-design','description':'design','url':f'experiments-content/{accession}/resources/design'},
+        ]).encode()
+        payloads={'counts':b'Gene ID\tGene Name\tRUN1\tRUN2\ng1\tA\t1\t2\n','design':b'Run\tAnalysed\nRUN1\tYes\nRUN3\tYes\n'}
+        class Response(BytesIO):
+            def __init__(self,body,url):super().__init__(body);self.url=url
+            def geturl(self):return self.url
+            def __enter__(self):return self
+            def __exit__(self,*args):self.close()
+        def opener(request,timeout):
+            url=request.full_url if hasattr(request,'full_url') else request
+            body=catalogue if '/json/' in url else payloads[url.rsplit('/',1)[-1]]
+            return Response(body,url)
+        with self.assertRaisesRegex(ValueError,'do not match'):stage(accession,self.root/'atlas-bad',opener=opener)
 
 if __name__=='__main__':unittest.main()
