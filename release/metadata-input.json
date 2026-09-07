@@ -8,6 +8,13 @@
     }
   ],
   "repository_url": "https://github.com/vxxqv/openomicsbench",
+  "published_prerelease": {
+    "version": "0.1.0.dev0",
+    "git_tag": "v0.1.0.dev0",
+    "record_doi": "10.5281/zenodo.22551735",
+    "concept_doi": "10.5281/zenodo.22551734",
+    "record_url": "https://zenodo.org/records/22551735"
+  },
   "code_license": null,
   "metadata_license": null,
   "version_doi": null,

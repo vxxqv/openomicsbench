@@ -42,8 +42,8 @@
     },
     {
       "path": "CITATION.cff",
-      "bytes": 261,
-      "sha256": "6c822dedd0e94a357ff8cf521b9e73bc26147968a4804b749d6adaf4f57aa19a"
+      "bytes": 392,
+      "sha256": "cb51e8b901aab6910cde00c43b4bc31c7d517a36bbfbb1157211ea8a1854b6e1"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -232,8 +232,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 3490,
-      "sha256": "df20fead926799ad01dbbace518c6aa894640750f308b4690f229504beda7889"
+      "bytes": 3533,
+      "sha256": "3e15153a313277836af3517e06d9abde19465898e64f026241f4949dc735cd60"
     },
     {
       "path": "release/acceptance-ledger.json",
@@ -247,8 +247,8 @@
     },
     {
       "path": "release/metadata-input.json",
-      "bytes": 456,
-      "sha256": "341157e2fbfe27151b3cd9fc846d6f5497c8ebcd8882d96811fc1f5709b11d44"
+      "bytes": 695,
+      "sha256": "d1501515eb9354c7afbc10d6bd30dffbf069f9b23162e7ef7d740433ec8c9cb9"
     },
     {
       "path": "requirements-tested.txt",

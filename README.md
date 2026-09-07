@@ -2,7 +2,7 @@
 
 OpenOmicsBench is being built for people who need compact, traceable RNA-seq data for software tests, teaching and method development. Each published object must explain where its files came from, what changed during reduction, and which checks it passes.
 
-The published 0.1.0.dev0 prerelease is the working baseline. Version 1 is now in development. The repository contains the Python core, one generated infrastructure fixture, a pinned Pasilla retrieval and diagnostic workflow, twelve source-intake records, and the collection requirements. Version 1 work will add certified biological pockets as source rights and reference compatibility are resolved.
+The published [0.1.0.dev0 prerelease](https://doi.org/10.5281/zenodo.22551735) is the working baseline. Version 1 is now in development. The repository contains the Python core, one generated infrastructure fixture, a pinned Pasilla retrieval and diagnostic workflow, twelve source-intake records, and the collection requirements. Version 1 work will add certified biological pockets as source rights and reference compatibility are resolved.
 
 ## Quickstart
 
