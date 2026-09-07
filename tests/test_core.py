@@ -17,7 +17,7 @@ from omicsbench.hashing import digest, contained
 from omicsbench.cache import get, verify_cache
 from omicsbench.download import transfer
 from omicsbench.validate import validate
-from omicsbench.rnaseq import ranked,correlation,check_design,select_genes,paired_sample,read_counts,preservation
+from omicsbench.rnaseq import ranked,correlation,check_design,contrast_selection_order,median_ratio_size_factors,select_genes,paired_sample,read_counts,preservation
 from omicsbench.expression_atlas import normalize_accession,parse_catalogue,stage
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -79,6 +79,11 @@ class CoreTests(unittest.TestCase):
         self.assertAlmostEqual(correlation([1,2,3],[3,2,1]),-1)
         with self.assertRaises(ValueError):correlation([1,1,1],[1,2,3])
         with self.assertRaises(ValueError):correlation([1,2,np.nan],[1,2,3])
+    def test_median_ratio_size_factors(self):
+        counts=np.array([[10,20,40],[5,10,20],[0,3,7]])
+        factors=median_ratio_size_factors(counts)
+        self.assertTrue(np.allclose(factors,[0.5,1,2]))
+        with self.assertRaises(ValueError):median_ratio_size_factors(np.array([[0,1],[1,0]]))
     def test_known_preservation_metrics(self):
         full={'effects':np.array([4.,3.,2.,1.]),'distances':np.array([1.,2.,3.])}
         pocket={'effects':np.array([-4.,-3.,-2.,-1.]),'distances':np.array([3.,2.,1.])}
@@ -103,6 +108,12 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(select_genes(genes,counts,50,7),select_genes(genes,counts,50,7))
         self.assertNotEqual(select_genes(genes,counts,50,7),select_genes(genes,counts,50,8))
         self.assertEqual(select_genes(genes,counts,100,7),list(range(100)))
+    def test_contrast_selection_anchors_effects(self):
+        genes=[f'g{i:03}' for i in range(200)];counts=np.arange(1600).reshape(200,8);effects=np.arange(200,dtype=float)
+        order=contrast_selection_order(genes,counts,effects,7,anchors=20)
+        self.assertEqual(set(order[:20]),set(range(180,200)))
+        self.assertEqual(order,contrast_selection_order(genes,counts,effects,7,anchors=20))
+        self.assertEqual(len(set(order)),len(genes))
     def test_fractional_counts_rejected(self):
         p=self.root/'bad.tsv';p.write_text('gene_id\ta\tb\ng1\t1.5\t2\n')
         with self.assertRaisesRegex(ValueError,'integers'):read_counts(p)

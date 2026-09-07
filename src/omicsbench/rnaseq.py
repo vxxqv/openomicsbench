@@ -36,10 +36,30 @@ def check_design(samples):
         raise ValueError("Condition and batch design is confounded or has no residual degrees of freedom")
     return x, conditions
 
-def diagnostic(counts, samples):
+def median_ratio_size_factors(counts):
+    counts = np.asarray(counts, dtype=float)
+    if counts.ndim != 2 or counts.shape[1] < 2 or np.any(counts < 0):
+        raise ValueError("Size-factor input must be a non-negative feature-by-sample matrix")
+    eligible = np.all(counts > 0, axis=1)
+    if np.count_nonzero(eligible) < 2:
+        raise ValueError("Median-ratio normalization needs at least two features positive in every sample")
+    geometric = np.exp(np.mean(np.log(counts[eligible]), axis=1))
+    factors = np.median(counts[eligible] / geometric[:, None], axis=0)
+    if np.any(~np.isfinite(factors)) or np.any(factors <= 0):
+        raise ValueError("Median-ratio normalization produced invalid size factors")
+    return factors / np.exp(np.mean(np.log(factors)))
+
+
+def diagnostic(counts, samples, normalization="cpm"):
     x, conditions = check_design(samples)
     libs = counts.sum(axis=0, dtype=np.float64)
-    transformed = np.log2(counts / libs * 1e6 + 1)
+    if normalization == "cpm":
+        factors = libs / 1e6
+    elif normalization == "median_ratio":
+        factors = median_ratio_size_factors(counts)
+    else:
+        raise ValueError("Normalization must be cpm or median_ratio")
+    transformed = np.log2(counts / factors + 1)
     effects = np.linalg.lstsq(x, transformed.T, rcond=None)[0][1]
     centered = transformed.T - transformed.mean(axis=1)
     u, s, _ = np.linalg.svd(centered, full_matrices=False)
@@ -50,7 +70,7 @@ def diagnostic(counts, samples):
     total = float(np.sum(s ** 2))
     explained = s[:2] ** 2 / total if total else np.zeros(2)
     dist = np.sqrt(((transformed.T[:, None, :] - transformed.T[None, :, :]) ** 2).sum(axis=2))
-    return {"effects":effects,"distances":dist[np.triu_indices(len(samples),1)],"pca":coords,"explained":explained,"libraries":libs,"contrast":f"{conditions[1]} - {conditions[0]}"}
+    return {"effects":effects,"distances":dist[np.triu_indices(len(samples),1)],"pca":coords,"explained":explained,"libraries":libs,"size_factors":factors,"normalization":normalization,"contrast":f"{conditions[1]} - {conditions[0]}"}
 
 def ranked(values):
     values = np.asarray(values, dtype=float)
@@ -89,22 +109,41 @@ def preservation(full, pocket, full_genes, pocket_genes, k=50):
         raise ValueError("No effects satisfy the predeclared sign-concordance filter")
     return {"spearman_logfc":correlation(ranked(a),ranked(b)),"top_k_jaccard":len(aa & bb)/len(aa | bb),"distance_correlation":correlation(full["distances"],pocket["distances"]),"sign_concordance":float(np.mean(np.sign(a[eligible]) == np.sign(b[eligible])))}
 
-def select_genes(genes, counts, size, seed):
-    if not 3 <= size <= len(genes):
-        raise ValueError("Candidate size must be between three and the source feature count")
+def selection_order(genes, counts, seed):
     mean = counts.mean(axis=1)
     variance = np.var(np.log2(counts + 1),axis=1)
     priorities = [sorted(range(len(genes)), key=lambda i:(-variance[i],genes[i])), sorted(range(len(genes)),key=lambda i:(abs(mean[i]-float(np.median(mean))),genes[i])), sorted(range(len(genes)),key=lambda i:(variance[i],genes[i])), sorted(range(len(genes)),key=lambda i:hashlib.sha256(f"{seed}:{genes[i]}".encode()).digest())]
     picked = set()
+    ordered = []
     cursors = [0]*4
-    while len(picked) < size:
+    while len(picked) < len(genes):
         for group,order in enumerate(priorities):
             while order[cursors[group]] in picked:
                 cursors[group] += 1
-            picked.add(order[cursors[group]])
-            if len(picked) == size:
+            index = order[cursors[group]]
+            picked.add(index)
+            ordered.append(index)
+            if len(picked) == len(genes):
                 break
-    return sorted(picked)
+    return ordered
+
+
+def contrast_selection_order(genes, counts, effects, seed, anchors=100):
+    effects = np.asarray(effects, dtype=float)
+    if effects.shape != (len(genes),) or not np.all(np.isfinite(effects)):
+        raise ValueError("Contrast effects must match the finite feature vector")
+    if not 1 <= anchors <= len(genes):
+        raise ValueError("Anchor count must fit inside the source feature count")
+    effect_order = sorted(range(len(genes)), key=lambda i:(-abs(effects[i]),genes[i]))
+    first = effect_order[:anchors]
+    anchored = set(first)
+    return first + [index for index in selection_order(genes,counts,seed) if index not in anchored]
+
+
+def select_genes(genes, counts, size, seed):
+    if not 3 <= size <= len(genes):
+        raise ValueError("Candidate size must be between three and the source feature count")
+    return sorted(selection_order(genes,counts,seed)[:size])
 
 def fastq_records(path):
     opener = gzip.open if str(path).endswith(".gz") else open
