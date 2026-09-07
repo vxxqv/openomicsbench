@@ -1,0 +1,212 @@
+{
+  "checked": "2026-09-07",
+  "screened": [
+    {
+      "accession": "E-MTAB-567",
+      "title": "Complete transcriptomic landscape of prostate cancer in the Chinese population using RNA-seq",
+      "release_date": "2011-12-31",
+      "study_types": [
+        "RNA-seq of coding RNA"
+      ],
+      "organisms": [
+        "Homo sapiens"
+      ],
+      "analysed_runs": 28,
+      "factors": {
+        "Factor Value[sampling site]": {
+          "adjacent non-tumor tissue": 14,
+          "tumor tissue": 14
+        }
+      },
+      "raw_counts": {
+        "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-567/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+        "bytes": 5882299
+      },
+      "experiment_design": {
+        "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-567/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+        "bytes": 10415,
+        "sha256": "4529f1c3b0ae0f7c585edbee37c0c1b3c74d59cd180371bf087a8abb4b4fbb87"
+      },
+      "biostudies_url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-567"
+    },
+    {
+      "accession": "E-MTAB-5477",
+      "title": "RNA-Seq of purified P-bodies from HEK293 cells",
+      "release_date": "2017-09-01",
+      "study_types": [
+        "RNA-seq of coding RNA"
+      ],
+      "organisms": [
+        "Homo sapiens"
+      ],
+      "analysed_runs": 6,
+      "factors": {
+        "Factor Value[fraction]": {
+          "P-bodies (cytosolic RNP granules)": 3,
+          "pre-sorted fraction": 3
+        }
+      },
+      "raw_counts": {
+        "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-5477/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+        "bytes": 2178166
+      },
+      "experiment_design": {
+        "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-5477/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+        "bytes": 2873,
+        "sha256": "5f3ceb57562752bfea199542972326dd9215f02ab5e91f71ea42456a1a132ac6"
+      },
+      "biostudies_url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-5477"
+    },
+    {
+      "accession": "E-MTAB-7126",
+      "title": "RNA-seq of human melanoma cell line A375 treated with the tetracycline analogs Col-3 or doxycycline against untreated controls",
+      "release_date": "2018-09-01",
+      "study_types": [
+        "RNA-seq of coding RNA"
+      ],
+      "organisms": [
+        "Homo sapiens"
+      ],
+      "analysed_runs": 6,
+      "factors": {
+        "Factor Value[compound]": {
+          "Col-3 10 micromolar": 3,
+          "dimethyl sulfoxide 10 micromolar": 3
+        }
+      },
+      "raw_counts": {
+        "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-7126/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+        "bytes": 2712367
+      },
+      "experiment_design": {
+        "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-7126/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+        "bytes": 3607,
+        "sha256": "fee4b8a27a024791bcb736f8539340193b6bdca3165555346f7a1b9500ab4a73"
+      },
+      "biostudies_url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-7126"
+    },
+    {
+      "accession": "E-GEOD-33979",
+      "title": "Novel roles for Klf1 in regulating the erythroid transcriptome revealed by mRNA-seq",
+      "release_date": "2012-04-01",
+      "study_types": [
+        "RNA-seq of coding RNA"
+      ],
+      "organisms": [
+        "Mus musculus"
+      ],
+      "analysed_runs": 6,
+      "factors": {
+        "Factor Value[genotype]": {
+          "Klf1-/-": 3,
+          "wild type genotype": 3
+        }
+      },
+      "raw_counts": {
+        "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-GEOD-33979/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+        "bytes": 2285282
+      },
+      "experiment_design": {
+        "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-GEOD-33979/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+        "bytes": 2021,
+        "sha256": "e3752cb6441fd7cc18e526f4c28265c9a3f89bd7329548c135d50098950b7fbd"
+      },
+      "biostudies_url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-GEOD-33979"
+    },
+    {
+      "accession": "E-MTAB-8845",
+      "title": "RNA-sequence of Arabidopsis thaliana lines gsnor1 and Col-0 post infection of Phytophthora parasitica against controls",
+      "release_date": "2021-09-30",
+      "study_types": [
+        "RNA-seq of coding RNA",
+        "Plant - High-throughput sequencing"
+      ],
+      "organisms": [
+        "Arabidopsis thaliana"
+      ],
+      "analysed_runs": 12,
+      "factors": {
+        "Factor Value[genotype]": {
+          "gsnor1": 6,
+          "wild type genotype": 6
+        },
+        "Factor Value[infect]": {
+          "Phytophthora parasitica": 6,
+          "none": 6
+        }
+      },
+      "raw_counts": {
+        "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-8845/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+        "bytes": 2826671
+      },
+      "experiment_design": {
+        "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-8845/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+        "bytes": 4599,
+        "sha256": "e8b4763a1717820c2bbbefbf74dda52ec2ca260c126d135b2ed6d4b59878e2fe"
+      },
+      "biostudies_url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-8845"
+    },
+    {
+      "accession": "E-MTAB-6866",
+      "title": "RNA-seq of Arabidopsis thaliana wild-type and a putative chloroplast ribosome biogenesis mutant AtRsgA homozygous knockout",
+      "release_date": "2018-08-16",
+      "study_types": [
+        "RNA-seq of coding RNA"
+      ],
+      "organisms": [
+        "Arabidopsis thaliana"
+      ],
+      "analysed_runs": 6,
+      "factors": {
+        "Factor Value[genotype]": {
+          "AtRsgA-i -/-": 3,
+          "wild type genotype": 3
+        }
+      },
+      "raw_counts": {
+        "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-6866/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+        "bytes": 1041756
+      },
+      "experiment_design": {
+        "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-6866/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+        "bytes": 1889,
+        "sha256": "fabfbca7c7812f9df3a69bd514e4a094148e6eafc3511be1e5706242df313c13"
+      },
+      "biostudies_url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-6866"
+    },
+    {
+      "accession": "E-MTAB-10322",
+      "title": "Loss of full-length dystrophin expression causes major cell-autonomous abnormalities in proliferating myoblasts",
+      "release_date": "2022-09-14",
+      "study_types": [
+        "RNA-seq of coding RNA"
+      ],
+      "organisms": [
+        "Mus musculus"
+      ],
+      "analysed_runs": 9,
+      "factors": {
+        "Factor Value[disease]": {
+          "Duchenne muscular dystrophy": 6,
+          "normal": 3
+        },
+        "Factor Value[genotype]": {
+          "Dmd-mdx": 3,
+          "Dmd-mdx-\u03b2geo": 3,
+          "wild type genotype": 3
+        }
+      },
+      "raw_counts": {
+        "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-10322/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+        "bytes": 2828028
+      },
+      "experiment_design": {
+        "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-10322/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+        "bytes": 5002,
+        "sha256": "c6d74f40c533a5159e98ffc6324846abafd44952c9edd8093e9c2173c5d61a95"
+      },
+      "biostudies_url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-10322"
+    }
+  ],
+  "failures": []
+}
