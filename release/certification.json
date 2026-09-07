@@ -1,5 +1,6 @@
 {
-  "target_version": "1.0.0",
+  "scope": "planned_biological_collection",
+  "software_version": "1.0.0",
   "decision": "NO-GO",
   "certified_biological_objects": 0,
   "redistributable_pockets": 0,
@@ -12,6 +13,6 @@
     "Missing release evidence: version_doi.",
     "Missing release evidence: external_user_trial.",
     "Missing release evidence: post_upload_verification.",
-    "Publication certification is not enabled: real baseline, independent trial and deposited-file evidence adapters remain unimplemented."
+    "Biological collection certification is not enabled: real baseline, independent trial and deposited-file evidence adapters remain unimplemented."
   ]
 }

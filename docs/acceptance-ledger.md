@@ -1,6 +1,6 @@
 # Acceptance ledger
 
-Each acceptance item below comes from OmicsBenchPlan_v1.0.docx. Verified describes the narrow evidence stated; it does not imply that v1.0 is ready. Partial and open items remain release work.
+Each acceptance item below comes from OmicsBenchPlan_v1.0.docx. Verified describes the narrow evidence stated. Partial and open items remain version 1 development work.
 
 ## 1. Release thesis and quality bar
 

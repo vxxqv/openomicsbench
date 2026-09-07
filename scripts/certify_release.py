@@ -1,4 +1,4 @@
-"""Write the current release decision and fail closed when evidence is missing."""
+"""Write the biological collection decision and fail closed when evidence is missing."""
 import json
 from pathlib import Path
 from omicsbench.registry import registry
@@ -22,9 +22,9 @@ for model in validated:
     if model.validation.baseline_version.startswith('diagnostic'):blockers.append(f'{model.id}: diagnostic-only baseline is not biological certification.')
 for field in ['authors','repository_url','code_license','metadata_license','version_doi','external_user_trial','scientific_environment_lock','post_upload_verification']:
     if not metadata.get(field):blockers.append(f'Missing release evidence: {field}.')
-# Positive evidence verification will be implemented with the first real release.
-blockers.append('Publication certification is not enabled: real baseline, independent trial and deposited-file evidence adapters remain unimplemented.')
-report={'target_version':metadata['target_version'],'decision':'NO-GO' if blockers else 'GO','certified_biological_objects':len(validated),'redistributable_pockets':len(pockets),'blockers':blockers}
+# Positive evidence verification will be implemented with the first certified biological collection.
+blockers.append('Biological collection certification is not enabled: real baseline, independent trial and deposited-file evidence adapters remain unimplemented.')
+report={'scope':'planned_biological_collection','software_version':metadata['software_version'],'decision':'NO-GO' if blockers else 'GO','certified_biological_objects':len(validated),'redistributable_pockets':len(pockets),'blockers':blockers}
 (root/'release/certification.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8',newline='\n')
 print(json.dumps(report,indent=2))
 raise SystemExit(1 if blockers else 0)

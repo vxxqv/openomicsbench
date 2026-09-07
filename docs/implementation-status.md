@@ -1,6 +1,6 @@
 # Implementation status against the v1 plan
 
-The development snapshot establishes a tested core and one real-source diagnostic workflow. The v1.0 release is not ready. The collection requirement is 12 to 20 curated RNA objects with at least eight redistributable pockets; the current certified biological count is zero. Twelve screened source records and one synthetic fixture do not satisfy that requirement.
+The published prerelease establishes the tested software core and one real-source diagnostic workflow. Version 1.0.0 is in development. Its collection target is 12 to 20 curated RNA objects with at least eight redistributable pockets; the current certified biological count is zero. Twelve screened source records and one synthetic fixture do not satisfy that target.
 
 The [acceptance ledger](acceptance-ledger.md) preserves each acceptance item from the supplied plan. A partial entry means there is useful implementation but the stated release gate has not been demonstrated.
 
@@ -50,7 +50,7 @@ The tested Conda and R package versions are recorded in runtime/environment-lock
 
 ## 10 CI and integrity
 
-Twenty-eight local tests passed in the first complete run. The checks cover invalid schema families, corruption, paired-read mismatches, sample order, interrupted downloads, seeded selection, fixture regeneration and every CLI command. A five-minute GitHub Actions job has been authored. It has not run on GitHub. Scheduled remote health checks, rotating biological regeneration and a protected release-tag policy remain open.
+Thirty-two local tests pass. The checks cover invalid schema families, corruption, paired-read mismatches, sample order, interrupted downloads, seeded selection, fixture regeneration and every CLI command. The same integrity suite passes on GitHub Actions. Scheduled remote health checks, rotating biological regeneration and a protected release-tag policy remain future improvements.
 
 ## 11 Human documentation
 
@@ -62,6 +62,6 @@ The diagnostic review includes a size-versus-fidelity figure generated from the 
 
 ## 13 Release and CAS evidence
 
-The release checker produces a machine-readable no-go report. It distinguishes fixture tests from biological certification and requires the collection, authorship, license, environment, external trial and DOI inputs. No publication or external communication has taken place.
+The collection checker produces a machine-readable no-go report for biological certification. It distinguishes fixture tests from biological evidence and requires the collection, licensing, external trial and deposited-file checks before version 1.0.0 can claim a certified biological collection.
 
 The source intake, corrected confounding example, failed pocket sizes, code changes and test results are useful project evidence. Workshop participation, external feedback, impact metrics and reflections over time cannot be fabricated in a local build. They remain future evidence to collect through actual use.

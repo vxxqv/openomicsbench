@@ -1,5 +1,5 @@
 {
-  "snapshot": "1.0.0",
+  "snapshot": "1.0.0.dev1",
   "created": "2026-09-06",
   "scope": "Project-authored development handoff; staged third-party source data excluded.",
   "self_excluded": "release/development-file-manifest.json",
@@ -37,8 +37,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 1081,
-      "sha256": "eb65fbcb0bba6cc8d7073fc9d81a66656c984bf034d875fb18cd2ac243224fee"
+      "bytes": 1137,
+      "sha256": "f495ae9f127c9ee67bf3223193f1748f40f798f26002439965afd1ac434d4eba"
     },
     {
       "path": "CITATION.cff",
@@ -142,8 +142,8 @@
     },
     {
       "path": "datasets/rnaseq/fixture-001/manifest.json",
-      "bytes": 6459,
-      "sha256": "ac65548de54a5b4aa40fe50cb705f236116ba62bc1e6d865b1b6a53e980325f3"
+      "bytes": 6464,
+      "sha256": "41267bbaabeafa5476db0ba07984fd502a64b429fa7a6c5ef79e41d79f0586df"
     },
     {
       "path": "datasets/rnaseq/fixture-001/nano/counts.tsv",
@@ -158,7 +158,7 @@
     {
       "path": "datasets/rnaseq/fixture-001/provenance/transform.json",
       "bytes": 1311,
-      "sha256": "861b848d731cba3871a5661fb9b5b8cdc2b0ceee614dc23acd0110bc38cdffba"
+      "sha256": "d49a159bb3b16a818496cf47fbd2d19502b2188097b06dff14c6d7cfcabee480"
     },
     {
       "path": "datasets/rnaseq/fixture-001/README.md",
@@ -172,8 +172,8 @@
     },
     {
       "path": "datasets/rnaseq/rnaseq-001/manifest.json",
-      "bytes": 3821,
-      "sha256": "35bd98f9e148b672dc1be643f221c5937ba85013ee38a59058ae4904e6a0860e"
+      "bytes": 3826,
+      "sha256": "a2a442e2c8d9fefff30f4f4bf7f48f0a6fb4adfe57cfb3d4c59311b7a61ac327"
     },
     {
       "path": "datasets/rnaseq/rnaseq-001/README.md",
@@ -182,13 +182,13 @@
     },
     {
       "path": "docs/acceptance-ledger.md",
-      "bytes": 8310,
-      "sha256": "a33cc4581c3948880b99467c4d65b1b3c03394371261214664aad11e37c8d980"
+      "bytes": 8285,
+      "sha256": "1f8f0dd4a6263b8bfa754503b05a07f942daa4653696096211ceb2a5a0148417"
     },
     {
       "path": "docs/implementation-status.md",
-      "bytes": 7348,
-      "sha256": "1d66d73af9c0e04e462fb9667d2c80c2bc49f5cab12d436dd78dc8612948ddf4"
+      "bytes": 7331,
+      "sha256": "208c6e120329c83d5610483cf7bf1a4ce86d9f63ae1dc881481111a01bc6bc59"
     },
     {
       "path": "docs/methods.md",
@@ -197,8 +197,8 @@
     },
     {
       "path": "docs/release.md",
-      "bytes": 3001,
-      "sha256": "ee46d330541ff4dbc9b907667d2882e4dd43d2f4160f9007e233fb68972b9d51"
+      "bytes": 3103,
+      "sha256": "2c5592e71e1592ebee3ec665c534b51a4e8d04a78e8485c3b66540bc3ebe70d5"
     },
     {
       "path": "docs/source-review.md",
@@ -227,13 +227,13 @@
     },
     {
       "path": "pyproject.toml",
-      "bytes": 593,
-      "sha256": "b884952c10dd8e66ad8131e1e194d474a0c3370b6dcc8e2fc1b15b1b7f22f652"
+      "bytes": 598,
+      "sha256": "1828cc338cb998e152a359801f2a709cc858c3e1dbae34dc72e850894b5a82e6"
     },
     {
       "path": "README.md",
-      "bytes": 3442,
-      "sha256": "3b589ce0030d4309fe143e77e4adcdf3f2adfac89ab78a326f2e0c9901f520f5"
+      "bytes": 3490,
+      "sha256": "df20fead926799ad01dbbace518c6aa894640750f308b4690f229504beda7889"
     },
     {
       "path": "release/acceptance-ledger.json",
@@ -242,13 +242,13 @@
     },
     {
       "path": "release/certification.json",
-      "bytes": 760,
-      "sha256": "00c7d5783f5f9f3783a12e948b8c2d8978cdfdc6b6cd2d585ee10cb81374b6c8"
+      "bytes": 799,
+      "sha256": "cf6cc5767b108b938eb4fdd16c6bc3ed8302dff157a11cf8912ccc5935b47dc6"
     },
     {
       "path": "release/metadata-input.json",
-      "bytes": 454,
-      "sha256": "a2c7daa06e81f45bdae76b8d8e0b9a3aea0231e12dccae5d9a32bc03837aa8da"
+      "bytes": 456,
+      "sha256": "341157e2fbfe27151b3cd9fc846d6f5497c8ebcd8882d96811fc1f5709b11d44"
     },
     {
       "path": "requirements-tested.txt",
@@ -277,8 +277,8 @@
     },
     {
       "path": "scripts/certify_release.py",
-      "bytes": 2231,
-      "sha256": "444fb12effcdc691860fab8805bcf239c47b3f115663f969cecb97155397d787"
+      "bytes": 2310,
+      "sha256": "6ab818638b866f7026eee6b23b3eee65dd3a9f461e1eb11fa2d8c38e8a8fb80f"
     },
     {
       "path": "scripts/check_repository.py",
@@ -287,13 +287,13 @@
     },
     {
       "path": "scripts/package_snapshot.py",
-      "bytes": 1129,
-      "sha256": "1bb3e5d39c101c6a92802b98285dcf91b40f5fab5317ecedc8edae914d9fc8f0"
+      "bytes": 1134,
+      "sha256": "b88cc274ac8b6c7b03e813ff1d30598d83c2266b93dff8426e339bdc365a9ade"
     },
     {
       "path": "src/omicsbench/__init__.py",
-      "bytes": 92,
-      "sha256": "a737bdb24efc1edf86027d97196ae7d6601f58b024cbe6ecc4395d88b4ee746e"
+      "bytes": 97,
+      "sha256": "1ee0066a5f7101a0216ec5256942235a59b0dbca8f44b6896b20d0dafbf2ba21"
     },
     {
       "path": "src/omicsbench/__main__.py",
@@ -347,8 +347,8 @@
     },
     {
       "path": "workflows/build_fixture.py",
-      "bytes": 7967,
-      "sha256": "368f5ae2c325abc3886cdc33db37639d87fdd805de81eee5cfbd13242b2064cf"
+      "bytes": 7972,
+      "sha256": "a958e698ed53073165467e95dd2a44494ee05781293ee00057f9c224b4cfb51b"
     },
     {
       "path": "workflows/deseq2_baseline.R",

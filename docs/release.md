@@ -1,6 +1,6 @@
 # Release procedure
 
-The development archive is a handoff for continued work. Do not tag it v1.0 or upload it as the completed biological collection.
+The 0.1.0.dev0 prerelease establishes the package, validation contract, synthetic fixture and source-review workflow. Version 1.0.0 remains in development and will incorporate the completed biological collection.
 
 ## Establish the publication inputs
 
@@ -20,7 +20,7 @@ Ask an independent person to complete the quickstart from a fresh environment. R
 
 ## Assemble and publish
 
-Run `python scripts/certify_release.py`. The command must exit successfully before creating a v1.0 release tag. It currently exits with a no-go report. Store the final registry, release manifest, checksums, changelog and citation metadata together after all gates are satisfied.
+Run `python scripts/certify_release.py` before describing any release as the completed biological collection. It currently exits with a no-go report for that collection milestone. Store the registry, release manifest, checksums, changelog and citation metadata together for each software release.
 
 Reserve the real version DOI, insert it into the reviewed citation inputs, rebuild the metadata and freeze hashes of the final upload files. Publish only after the owner has approved that concrete bundle. Retrieve the deposited files and compare their hashes with the certification inventory. Check that the DOI resolves to the exact version and that the displayed citation names the correct authors.
 

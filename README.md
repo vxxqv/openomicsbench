@@ -2,7 +2,7 @@
 
 OpenOmicsBench is being built for people who need compact, traceable RNA-seq data for software tests, teaching and method development. Each published object must explain where its files came from, what changed during reduction, and which checks it passes.
 
-This is a tested development snapshot, version 0.1.0.dev0. It is not the v1.0 scientific release. It contains the working Python core, one generated infrastructure fixture, a pinned Pasilla retrieval and diagnostic workflow, twelve source-intake records, and the release requirements. No biological pocket has been certified for redistribution.
+The published 0.1.0.dev0 prerelease is the working baseline. Version 1 is now in development. The repository contains the Python core, one generated infrastructure fixture, a pinned Pasilla retrieval and diagnostic workflow, twelve source-intake records, and the collection requirements. Version 1 work will add certified biological pockets as source rights and reference compatibility are resolved.
 
 ## Quickstart
 
@@ -42,7 +42,7 @@ The full Pasilla table has also been fitted with DESeq2 1.50.2 under R 4.5.3. Th
 - [Source review](docs/source-review.md) explains selection decisions and links to evidence.
 - [Contributing](CONTRIBUTING.md) describes intake, review and writing standards.
 - [Release procedure](docs/release.md) identifies the remaining publication gates.
-- [Changes](CHANGELOG.md) records this snapshot without implying that v1.0 has shipped.
+- [Changes](CHANGELOG.md) records the published prerelease and current v1 development.
 
 ## Local verification
 
@@ -51,4 +51,4 @@ python -m unittest discover -s tests -v
 python scripts/check_repository.py
 ```
 
-The scientific release also requires an executed, pinned analysis environment, reference compatibility checks on real sources, independent usability feedback and post-upload hash verification. These are recorded as open requirements, not inferred from unit-test success.
+Expansion into a certified biological collection requires reference compatibility checks on real sources, independent usability feedback and post-upload hash verification. These requirements remain visible so later releases can be judged against recorded evidence.
