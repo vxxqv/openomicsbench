@@ -3,7 +3,7 @@
   "created": "2026-09-06",
   "scope": "Project-authored development handoff; staged third-party source data excluded.",
   "self_excluded": "release/development-file-manifest.json",
-  "file_count": 74,
+  "file_count": 80,
   "files": [
     {
       "path": ".gitattributes",
@@ -37,8 +37,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 1137,
-      "sha256": "f495ae9f127c9ee67bf3223193f1748f40f798f26002439965afd1ac434d4eba"
+      "bytes": 1445,
+      "sha256": "5e87c2c9ede25eeb819430c39467da4313f94fc1ffa55fbc65bf66f8d9ed3357"
     },
     {
       "path": "CITATION.cff",
@@ -49,6 +49,11 @@
       "path": "CONTRIBUTING.md",
       "bytes": 3433,
       "sha256": "b3ec2efa791f975e47a77ffa7e9ec77590c709d8751cd115a9b272c11538dbe9"
+    },
+    {
+      "path": "curation/intake/e-mtab-8572.json",
+      "bytes": 4847,
+      "sha256": "6c5a2b8a5ef0d5b1bb600d234c8d93fb814fd53c70191d8d904abb3cdaa79e54"
     },
     {
       "path": "curation/intake/gse18508.json",
@@ -112,8 +117,8 @@
     },
     {
       "path": "curation/intake-index.tsv",
-      "bytes": 793,
-      "sha256": "6a08a483cb3db2760cc7c3fe6de3c782d694cd2568242a75309825d4f524c38e"
+      "bytes": 865,
+      "sha256": "502d6c8643e27defa462fdf7bb48bdc19a014a93cd3efc5d72a4319d1238211c"
     },
     {
       "path": "datasets/rnaseq/fixture-001/expected/baseline.json",
@@ -187,13 +192,13 @@
     },
     {
       "path": "docs/implementation-status.md",
-      "bytes": 7331,
-      "sha256": "208c6e120329c83d5610483cf7bf1a4ce86d9f63ae1dc881481111a01bc6bc59"
+      "bytes": 7930,
+      "sha256": "5bf4a4d1ddbcae5d2ebef949ce3d3e4149bf977f253bd4559b17df81229e45aa"
     },
     {
       "path": "docs/methods.md",
-      "bytes": 5191,
-      "sha256": "9c0f6e8959830501a83f112fdb1a8ff0d26d57bb8b6233572e532cc5c5f3b156"
+      "bytes": 6144,
+      "sha256": "b178e31206a9f7abfa3d9f2ade6a1224905fe618503017038fca84c23c2ecf45"
     },
     {
       "path": "docs/release.md",
@@ -202,8 +207,13 @@
     },
     {
       "path": "docs/source-review.md",
-      "bytes": 4606,
-      "sha256": "f8a0ea4e5a99ed6eaff9b99fbe8d49c7c60a2e1331feb602aae02c2a51986a9a"
+      "bytes": 5784,
+      "sha256": "dc648ca07999ee83af86450c2c4d5efbb83d0ff635e910e1221814ba25e4d280"
+    },
+    {
+      "path": "evidence/e-mtab-8572-diagnostic.json",
+      "bytes": 4429,
+      "sha256": "8c33f7c327b642c2c9915a15ec332874bcde9d75e4964ced48b7b555daa0b9a3"
     },
     {
       "path": "evidence/pasilla-deseq2-baseline.json",
@@ -316,6 +326,11 @@
       "sha256": "9a95c81d8f5f8c6c9aa7beb907f8cb977da58fca879d8c1bf9fae7b900571d44"
     },
     {
+      "path": "src/omicsbench/expression_atlas.py",
+      "bytes": 8603,
+      "sha256": "66a54ae9fa872ef864c318d0fa7d5116c7ee49e20543ebad5f47b06b5b147af8"
+    },
+    {
       "path": "src/omicsbench/hashing.py",
       "bytes": 628,
       "sha256": "34c5a339e08747d6158f34ce600655b591ac02f2a45ae634eca784fd5c1aff22"
@@ -332,8 +347,8 @@
     },
     {
       "path": "src/omicsbench/rnaseq.py",
-      "bytes": 7331,
-      "sha256": "4c2a458720ac250f4a4c831b7f3e1e465508487296d0edc3e70b5bef0c17c2a1"
+      "bytes": 9248,
+      "sha256": "78c60454e892e6c30d78a1845eea2334370e35f805f3bfff983ace57ef7ab28c"
     },
     {
       "path": "src/omicsbench/validate.py",
@@ -342,8 +357,13 @@
     },
     {
       "path": "tests/test_core.py",
-      "bytes": 9654,
-      "sha256": "09ff3a936825247a0e17248895e7c2052ae08cb3ed255b411e109fe3d4c0c61c"
+      "bytes": 14353,
+      "sha256": "2dc83cd84f71eb7e2d23826eb72dfd7cc943ce17c7aa4811a9e7508069bbecca"
+    },
+    {
+      "path": "workflows/atlas_diagnostic.py",
+      "bytes": 4359,
+      "sha256": "270055994e22476edf9cde9a91c969098bb25761892af9fa16bf9e40dfeb6370"
     },
     {
       "path": "workflows/build_fixture.py",
@@ -354,6 +374,16 @@
       "path": "workflows/deseq2_baseline.R",
       "bytes": 1794,
       "sha256": "02f66295046d3c91943f36fa684511e0123f2d4b02d18b3791aede144bc0da1f"
+    },
+    {
+      "path": "workflows/expression-atlas-source.json",
+      "bytes": 720,
+      "sha256": "08ff53b035f47c7ca8f51a5105cfb2d635bdd2bf0529eeaa9b28cd91c9e5147f"
+    },
+    {
+      "path": "workflows/expression_atlas_intake.py",
+      "bytes": 600,
+      "sha256": "832ec0e6f43359bd2f37ea6c81886f388e2a4f18e9b3ad3cff964d43bbfc08dc"
     },
     {
       "path": "workflows/fixture-config.json",
