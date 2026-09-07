@@ -1,0 +1,121 @@
+{
+  "accession": "E-MTAB-6866",
+  "source_systems": [
+    {
+      "name": "Expression Atlas",
+      "url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-6866"
+    },
+    {
+      "name": "BioStudies",
+      "url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-6866"
+    },
+    {
+      "name": "European Nucleotide Archive",
+      "accession": "ERP109239",
+      "url": "https://www.ebi.ac.uk/ena/browser/view/ERP109239"
+    }
+  ],
+  "checked": "2026-09-07",
+  "title": "RNA-seq of Arabidopsis thaliana wild-type and a putative chloroplast ribosome biogenesis mutant AtRsgA homozygous knockout",
+  "publication": {
+    "title": "AtRsgA from Arabidopsis thaliana is important for maturation of the small subunit of the chloroplast ribosome",
+    "doi": "10.1111/tpj.14040",
+    "pmid": "30044525"
+  },
+  "assay": "bulk RNA-seq of coding RNA",
+  "organism": "Arabidopsis thaliana",
+  "taxon_id": 3702,
+  "study_design": {
+    "experimental_unit": "14-day-old seedling",
+    "factor": "genotype",
+    "groups": {
+      "wild type genotype": 3,
+      "AtRsgA-i -/-": 3
+    },
+    "analysed_runs": 6,
+    "balanced": true,
+    "ecotype": "Col-0",
+    "developmental_stage": "seedling development stage",
+    "library": "TruSeq",
+    "instrument": "Illumina HiSeq 2500"
+  },
+  "atlas_processing": {
+    "pipeline": "iRAP 1.0.1",
+    "alignment": "HISAT2 2.1.0",
+    "quantification": "featureCounts 1.6.2",
+    "differential_expression": "DESeq2 1.10.1",
+    "reference": "Ensembl Genomes release 44"
+  },
+  "resource_catalogue": {
+    "url": "https://www.ebi.ac.uk/gxa/json/experiments/E-MTAB-6866/resources/DATA",
+    "bytes": 1080,
+    "sha256": "85448618c1a67ffd99a36f228f50f772acd0410fcae6b44352ae903c293b678c"
+  },
+  "verified_resources": [
+    {
+      "role": "raw_counts",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-6866/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 1041756,
+      "sha256": "b1c34a1d76dccfce0ffe6d5c4c2444c877e6aa7b84c9c745b0415314c08484f7",
+      "genes": 32833,
+      "sample_columns": 6,
+      "format_check": "All count cells parsed as non-negative integers."
+    },
+    {
+      "role": "experiment_design",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-6866/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 1889,
+      "sha256": "fabfbca7c7812f9df3a69bd514e4a094148e6eafc3511be1e5706242df313c13",
+      "analysed_runs": 6,
+      "format_check": "The six analysed run identifiers match the raw-count columns exactly."
+    }
+  ],
+  "rights": {
+    "status": "GREEN",
+    "license": "Creative Commons Attribution 4.0 International",
+    "redistribution": "permitted with attribution",
+    "evidence_url": "https://www.ebi.ac.uk/gxa/licence.html",
+    "evidence_page_bytes": 15010,
+    "evidence_page_sha256": "0c35e7e1e590438decb4c44d7d42f1d69a2190eb97acb4bdca5a14cf71f26dd8",
+    "obligations": [
+      "Credit Expression Atlas and EMBL-EBI.",
+      "Cite the current Expression Atlas publication requested on the licence page.",
+      "Retain the experiment accession, primary article and originating archive links."
+    ],
+    "checked": "2026-09-07"
+  },
+  "reference_review": {
+    "status": "partially_resolved",
+    "assembly": "TAIR10",
+    "annotation": "Ensembl Genomes release 44",
+    "namespace": "Arabidopsis gene identifiers",
+    "pending": "Record exact FASTA and annotation file URLs, sizes and hashes before release certification."
+  },
+  "reduction_diagnostic": {
+    "workflow": "workflows/atlas_diagnostic.py",
+    "config": "workflows/e-mtab-6866-source.json",
+    "evidence": "evidence/e-mtab-6866-diagnostic.json",
+    "normalization": "median_ratio",
+    "candidate_sizes": [500, 1000, 2000, 4000, 8000, 12000, 20000],
+    "smallest_passing_features": 4000,
+    "smallest_passing_bytes": 105563,
+    "smallest_passing_size_ratio": 0.10133178978570798,
+    "smallest_passing_metrics": {
+      "spearman_logfc": 0.9559191959409639,
+      "top_k_jaccard": 0.8518518518518519,
+      "distance_correlation": 0.9391315809308595,
+      "sign_concordance": 0.9513449367088608
+    },
+    "repeat_report_sha256": "0bd4a8ab961a4c802cb30fc72fcae9fcba3a05497a8e3295b507d7c9a5ded253",
+    "repeat_identical": true
+  },
+  "review_status": "priority",
+  "proposed_archetype": "Balanced plant genetic knockout",
+  "release_eligible": false,
+  "remaining_work": [
+    "Pin exact reference files and validate the count identifier namespace against them.",
+    "Run the DESeq2 full-source and pocket confirmation with recorded versions.",
+    "Prepare dataset-level source attribution and license files.",
+    "Complete an independent clean-environment reproduction before release."
+  ]
+}
