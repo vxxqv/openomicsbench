@@ -87,12 +87,29 @@
     "namespace": "Ensembl gene identifiers",
     "pending": "Record the exact genome assembly, FASTA and GTF identities before converting this intake record into a release object."
   },
+  "reduction_diagnostic": {
+    "workflow": "workflows/atlas_diagnostic.py",
+    "evidence": "evidence/e-mtab-8572-diagnostic.json",
+    "normalization": "median_ratio",
+    "candidate_sizes": [500, 1000, 2000, 4000, 8000, 12000, 20000],
+    "smallest_passing_features": 2000,
+    "smallest_passing_bytes": 77433,
+    "smallest_passing_size_ratio": 0.028797138471940147,
+    "smallest_passing_metrics": {
+      "spearman_logfc": 0.9865670997001579,
+      "top_k_jaccard": 0.8867924528301887,
+      "distance_correlation": 0.9386608119661374,
+      "sign_concordance": 0.9974768713204374
+    },
+    "repeat_report_sha256": "8c33f7c327b642c2c9915a15ec332874bcde9d75e4964ced48b7b555daa0b9a3",
+    "repeat_identical": true,
+    "interpretation": "The 2,000-gene candidate is the first size in the declared grid to meet all four development thresholds. DESeq2 confirmation and reference-file pinning remain release gates."
+  },
   "review_status": "priority",
   "proposed_archetype": "Balanced genetic knockout in a human cell-line xenograft",
   "release_eligible": false,
   "remaining_work": [
     "Verify the exact Ensembl 95 genome assembly and annotation files used by the Atlas pipeline.",
-    "Choose the pocket feature set with the frozen reduction rule and seed.",
     "Fit the project baseline and record full-to-pocket preservation metrics.",
     "Prepare dataset-level source attribution and license files.",
     "Complete an independent clean-environment reproduction before release."
