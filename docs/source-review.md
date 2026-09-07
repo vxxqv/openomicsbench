@@ -1,8 +1,10 @@
 # Transcriptomics source review
 
-Twelve GEO series records were retrieved on 6 September 2026. Intake files retain the accession, response hash, series sample count, assay type, source publication identifiers and supplementary-file links. Long study abstracts are not republished. The numerical scorecard remains incomplete wherever sample-level review is still needed.
+Twelve GEO series records were retrieved on 6 September 2026. A thirteenth candidate, E-MTAB-8572, was reviewed through Expression Atlas and BioStudies on 7 September. Intake files retain the accession, source checksums, sample count, assay type, source publication identifiers and file links. Long study abstracts are not republished. The numerical scorecard remains incomplete wherever sample-level review is still needed.
 
 ## First candidates
+
+E-MTAB-8572 is the first candidate with a GREEN redistribution decision. Expression Atlas supplies a 58,735-gene integer count matrix and a ten-run design: five wild-type A549 xenografts and five SLC2A5-knockout A549 xenografts. The checked files are 2.69 MB in total, their sample identifiers agree exactly, and the Atlas methods name Ensembl release 95, HISAT2 and featureCounts. The exact assembly and annotation file identities still need to be pinned, so this candidate is not yet release eligible. See [Expression Atlas](https://www.ebi.ac.uk/gxa/experiments/E-MTAB-8572), [BioStudies](https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-8572) and the [Expression Atlas licence](https://www.ebi.ac.uk/gxa/licence.html).
 
 Pasilla is the first implemented retrieval recipe because it offers a small processed integer count table and a non-human example. The pinned package table has 14,599 genes and seven libraries. The original package sample annotation includes library preparation type, which is needed for the current diagnostic. The package description cites six GEO accessions while the table has seven libraries. Resolve that mapping before certifying provenance at library level. See [Pasilla](https://bioconductor.org/packages/release/data/experiment/html/pasilla.html) and [GSE18508](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508).
 
@@ -24,7 +26,7 @@ GSE64016 is explicitly single-cell and is excluded from bulk RNA-seq v1. Its int
 
 ## Rights decision
 
-All screened GEO sources remain AMBER. The [GEO disclaimer](https://www.ncbi.nlm.nih.gov/geo/info/disclaimer.html) does not provide blanket unrestricted copying or distribution permission. The Pasilla package declares LGPL, which is useful evidence, but the exact data obligations and historical modENCODE terms need review before extracted count tables are repackaged. No source counts or biological reductions are included in the development archive.
+All screened GEO sources remain AMBER. The [GEO disclaimer](https://www.ncbi.nlm.nih.gov/geo/info/disclaimer.html) does not provide blanket unrestricted copying or distribution permission. The Pasilla package declares LGPL, which is useful evidence, but the exact data obligations and historical modENCODE terms need review before extracted count tables are repackaged. Expression Atlas applies CC BY 4.0 to copyrightable material available on its website; E-MTAB-8572 is therefore GREEN with attribution obligations recorded in its intake file. No source counts or biological reductions are included in the development archive.
 
 ## Infrastructure evidence
 
