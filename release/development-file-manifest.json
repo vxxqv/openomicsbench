@@ -3,7 +3,7 @@
   "created": "2026-09-06",
   "scope": "Project-authored development handoff; staged third-party source data excluded.",
   "self_excluded": "release/development-file-manifest.json",
-  "file_count": 80,
+  "file_count": 85,
   "files": [
     {
       "path": ".gitattributes",
@@ -37,8 +37,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 1445,
-      "sha256": "5e87c2c9ede25eeb819430c39467da4313f94fc1ffa55fbc65bf66f8d9ed3357"
+      "bytes": 1623,
+      "sha256": "d2adce59c89931eb4ac3e63566b2a28ff3eaff7ebfbf379b380929d5f0ce37e5"
     },
     {
       "path": "CITATION.cff",
@@ -49,6 +49,16 @@
       "path": "CONTRIBUTING.md",
       "bytes": 3433,
       "sha256": "b3ec2efa791f975e47a77ffa7e9ec77590c709d8751cd115a9b272c11538dbe9"
+    },
+    {
+      "path": "curation/atlas-screen.json",
+      "bytes": 7728,
+      "sha256": "a4e8ff1d647d8a0289bab7688ac92df228eb71ee938eae02a0f63db3017888da"
+    },
+    {
+      "path": "curation/intake/e-mtab-6866.json",
+      "bytes": 4730,
+      "sha256": "7b0063b626759790f802acd850126e962026ff2b33f14bde8cb6377c996797d3"
     },
     {
       "path": "curation/intake/e-mtab-8572.json",
@@ -117,8 +127,8 @@
     },
     {
       "path": "curation/intake-index.tsv",
-      "bytes": 865,
-      "sha256": "502d6c8643e27defa462fdf7bb48bdc19a014a93cd3efc5d72a4319d1238211c"
+      "bytes": 1324,
+      "sha256": "d07b14eacbd9bd153553d8458e548ea255c610a2f807a2b09d13867d0e406ee1"
     },
     {
       "path": "datasets/rnaseq/fixture-001/expected/baseline.json",
@@ -192,13 +202,13 @@
     },
     {
       "path": "docs/implementation-status.md",
-      "bytes": 7930,
-      "sha256": "5bf4a4d1ddbcae5d2ebef949ce3d3e4149bf977f253bd4559b17df81229e45aa"
+      "bytes": 8271,
+      "sha256": "228147fbd0950f04753cb1f29366fcc987a4c551dad5471b5fdf8b5f25424b15"
     },
     {
       "path": "docs/methods.md",
-      "bytes": 6144,
-      "sha256": "b178e31206a9f7abfa3d9f2ade6a1224905fe618503017038fca84c23c2ecf45"
+      "bytes": 6437,
+      "sha256": "2bf591751de94c1da1ffe430499ec64b5596233c1d4c643e2d259f0eaaed9b6f"
     },
     {
       "path": "docs/release.md",
@@ -207,8 +217,13 @@
     },
     {
       "path": "docs/source-review.md",
-      "bytes": 5784,
-      "sha256": "dc648ca07999ee83af86450c2c4d5efbb83d0ff635e910e1221814ba25e4d280"
+      "bytes": 7074,
+      "sha256": "e66ca47b1644f6ec02d995511ab23e7c5cdc5f67c25333b623a7e0dc773dec86"
+    },
+    {
+      "path": "evidence/e-mtab-6866-diagnostic.json",
+      "bytes": 4294,
+      "sha256": "0bd4a8ab961a4c802cb30fc72fcae9fcba3a05497a8e3295b507d7c9a5ded253"
     },
     {
       "path": "evidence/e-mtab-8572-diagnostic.json",
@@ -366,6 +381,11 @@
       "sha256": "270055994e22476edf9cde9a91c969098bb25761892af9fa16bf9e40dfeb6370"
     },
     {
+      "path": "workflows/atlas_screen.py",
+      "bytes": 4073,
+      "sha256": "ad6b74d1006dabd24bcdd4844718360a53ebe16ce4f7e286c455284c8c33160a"
+    },
+    {
       "path": "workflows/build_fixture.py",
       "bytes": 7972,
       "sha256": "a958e698ed53073165467e95dd2a44494ee05781293ee00057f9c224b4cfb51b"
@@ -374,6 +394,11 @@
       "path": "workflows/deseq2_baseline.R",
       "bytes": 1794,
       "sha256": "02f66295046d3c91943f36fa684511e0123f2d4b02d18b3791aede144bc0da1f"
+    },
+    {
+      "path": "workflows/e-mtab-6866-source.json",
+      "bytes": 747,
+      "sha256": "bbda114f15646f51a7c2620a82c9c7bcfdcddca6476f1447a80c2007a143ccc6"
     },
     {
       "path": "workflows/expression-atlas-source.json",
