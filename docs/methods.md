@@ -20,6 +20,8 @@ E-MTAB-8572 uses a contrast-aware extension. The 100 largest absolute full-sourc
 
 Its diagnostic uses median-ratio size factors calculated from genes with positive counts in every sample. Size factors are centered to a geometric mean of one, and the model fits log2(normalized count + 1). This is close to the normalization stage used by DESeq2, but the diagnostic remains ordinary least squares and produces no inferential statistics. The first passing size in the declared grid was 2,000 genes. The saved report was identical across two complete source retrieval and calculation runs.
 
+The same contrast-aware method was applied to E-MTAB-6866 without changing the thresholds. Its first passing candidate contained 4,000 of 32,833 genes. Keeping separate source configuration files makes the factor column, reference statement and candidate grid reviewable for each experiment.
+
 ## Quantitative definitions
 
 Spearman preservation uses average ranks for tied coefficients on the shared selected feature universe. Constant or non-finite input is an error, not a passing score.

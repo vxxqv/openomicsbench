@@ -20,7 +20,7 @@ Local derivations record a workflow file hash and tested package versions. A pub
 
 ## 4 Discovery rights and intake
 
-Twelve GEO series records have dated intake records and source response hashes. Four are prioritized for deeper work; others need design resolution or are deferred. One single-cell record is excluded. Eight Expression Atlas candidates have official resource and design checks; E-MTAB-8572 also has full file hashes and a reduction diagnostic. The Expression Atlas licence supports GREEN decisions with attribution. The Pasilla source package and annotation were inspected at a pinned commit. No biological data are republished in this archive.
+Twelve GEO series records have dated intake records and source response hashes. Four are prioritized for deeper work; others need design resolution or are deferred. One single-cell record is excluded. Eight Expression Atlas candidates have official resource and design checks; E-MTAB-8572 and E-MTAB-6866 also have full file hashes and repeated reduction diagnostics. The Expression Atlas licence supports GREEN decisions with attribution. The Pasilla source package and annotation were inspected at a pinned commit. No biological data are republished in this archive.
 
 ## 5 Bulk RNA collection
 
@@ -33,6 +33,8 @@ The general feature selector preserves all sample columns, combines four declare
 Six Pasilla candidate sizes were evaluated. The 8,000-gene candidate is the smallest tested size that met the preset diagnostic envelope. That conclusion applies to this grid and this baseline. It is not proof of the globally smallest useful object or of inferential DESeq2 fidelity.
 
 Seven E-MTAB-8572 candidates were evaluated with median-ratio normalization. The 2,000-gene candidate was the smallest tested size meeting the same four thresholds, and the complete report reproduced exactly. Its final DESeq2 baseline and exact reference-file identities remain open.
+
+The corresponding E-MTAB-6866 grid first passed at 4,000 of 32,833 genes. This adds a plant knockout design, although it is still a diagnostic candidate until its reference files, attribution package and DESeq2 baseline are certified.
 
 ## 7 Expected outputs and quantitative validation
 
