@@ -128,28 +128,32 @@ def run(config_path: Path, staging: Path) -> dict:
         gtf_record = verify_checksum_record(profile["gtf"])
         filename = Path(urlsplit(profile["gtf"]["url"]).path).name
         target = staging / profile["id"] / filename
-        transfer = download(profile["gtf"]["url"], target)
-        checksum, blocks = bsd_sum(target)
+        checksum, blocks = bsd_sum(target) if target.is_file() else (None, None)
+        if (checksum, blocks) == (profile["gtf"]["bsd_sum"], profile["gtf"]["blocks_1024"]):
+            transfer = {"bytes": target.stat().st_size, "sha256": digest(target)}
+        else:
+            transfer = download(profile["gtf"]["url"], target)
+            checksum, blocks = bsd_sum(target)
         if (checksum, blocks) != (profile["gtf"]["bsd_sum"], profile["gtf"]["blocks_1024"]):
             raise ValueError(f"Downloaded GTF fails its official BSD checksum: {profile['id']}")
         annotation_genes = gtf_genes(target)
         checks = []
-        for accession in profile["accessions"]:
-            slug = accession.lower()
+        for object_key in profile["objects"]:
+            slug = object_key.lower()
             diagnostic_path = ROOT / f"staging/{slug}-diagnostic/diagnostic-report.json"
             diagnostic = json.loads(diagnostic_path.read_text(encoding="utf-8"))
             size = diagnostic["smallest_passing_features"]
             genes = pocket_genes(ROOT / f"staging/{slug}-diagnostic/candidates/{size}/counts.tsv")
             missing = sorted(set(genes) - annotation_genes)
             checks.append({
-                "accession": accession,
+                "object_key": object_key,
                 "pocket_features": len(genes),
                 "matched_features": len(genes) - len(missing),
                 "unmatched_features": missing,
                 "status": "pass" if not missing else "fail",
             })
             if not missing:
-                verified_accessions.append(accession)
+                verified_accessions.append(object_key)
         profiles.append({
             "id": profile["id"],
             "provider": profile["provider"],
@@ -175,12 +179,13 @@ def run(config_path: Path, staging: Path) -> dict:
             },
             "pocket_checks": checks,
         })
-    expected = sorted(accession for profile in config["profiles"] for accession in profile["accessions"])
+    expected = sorted(object_key for profile in config["profiles"] for object_key in profile["objects"])
     report = {
         "schema_version": "1.0",
         "status": "pass" if sorted(verified_accessions) == expected else "fail",
         "checked": config["checked"],
-        "verified_accessions": sorted(verified_accessions),
+        "verified_objects": sorted(verified_accessions),
+        "excluded_sources": config.get("excluded_sources", []),
         "profiles": profiles,
         "config_sha256": digest(config_path),
         "workflow_sha256": digest(Path(__file__)),
