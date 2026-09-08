@@ -1,0 +1,171 @@
+{
+  "accession": "E-MTAB-8845",
+  "source_systems": [
+    {
+      "name": "Expression Atlas",
+      "url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-8845"
+    },
+    {
+      "name": "BioStudies",
+      "url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-8845"
+    }
+  ],
+  "checked": "2026-09-08",
+  "title": "Phytophthora infection response in gsnor1 Arabidopsis",
+  "assay": "bulk RNA-seq of coding RNA",
+  "organism": "Arabidopsis thaliana",
+  "taxon_id": 3702,
+  "study_design": {
+    "factor_column": "Factor Value[infect]",
+    "groups": {
+      "Phytophthora parasitica": 3,
+      "none": 3
+    },
+    "analysed_runs": 12,
+    "selected_runs": 6,
+    "balanced": true,
+    "batch_column": null,
+    "batch_levels": {
+      "not_reported": 6
+    },
+    "subset": {
+      "Factor Value[genotype]": [
+        "gsnor1"
+      ]
+    },
+    "condition_values": null
+  },
+  "atlas_processing": {
+    "source_statement": "Expression Atlas mapped reads to Ensembl Genomes release 44 with HISAT2 2.1.0 and quantified them with FeatureCounts 1.6.2. Exact FASTA and annotation hashes remain to be pinned.",
+    "diagnostic_baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), infection with genotype adjustment; DESeq2 confirmation remains required."
+  },
+  "verified_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-8845-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-8845/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 2826671,
+      "sha256": "66f217ca72cd6936c39c5b667543468a137fa164d3db57a7b1b37facf4d47abf",
+      "genes": 32833,
+      "unique_sample_columns": 12,
+      "excluded_unanalysed_columns": [],
+      "verified_repeated_columns": {
+        "ERR3971851": 2,
+        "ERR3971852": 2,
+        "ERR3971853": 2,
+        "ERR3971854": 2,
+        "ERR3971855": 2,
+        "ERR3971856": 2,
+        "ERR3971857": 2,
+        "ERR3971858": 2,
+        "ERR3971859": 2,
+        "ERR3971860": 2,
+        "ERR3971861": 2,
+        "ERR3971862": 2
+      },
+      "format_check": "Every retained count parsed as a non-negative integer; repeated run columns, where present, were accepted only after full-vector equality checks."
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-8845-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-8845/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 4599,
+      "sha256": "e8b4763a1717820c2bbbefbf74dda52ec2ca260c126d135b2ed6d4b59878e2fe",
+      "analysed_runs": 12,
+      "format_check": "Analysed run identifiers are present, unique and represented in the retained count matrix."
+    }
+  ],
+  "rights": {
+    "status": "GREEN",
+    "license": "Creative Commons Attribution 4.0 International",
+    "redistribution": "permitted with attribution",
+    "evidence_url": "https://www.ebi.ac.uk/gxa/licence.html",
+    "evidence_page_bytes": 15010,
+    "evidence_page_sha256": "0c35e7e1e590438decb4c44d7d42f1d69a2190eb97acb4bdca5a14cf71f26dd8",
+    "obligations": [
+      "Credit Expression Atlas and EMBL-EBI.",
+      "Cite the current Expression Atlas publication requested on the licence page.",
+      "Retain the experiment accession and originating-study link."
+    ],
+    "checked": "2026-09-08"
+  },
+  "reference_review": {
+    "status": "verified",
+    "provider": "Ensembl Genomes",
+    "release": "44",
+    "assembly": "TAIR10",
+    "genome_url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-44/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz",
+    "genome_official_checksum": "52039 35609 Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz",
+    "annotation_url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-44/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.44.gtf.gz",
+    "annotation_sha256": "fb7f4d0d089546973e5a97183d4460a97a1616f44a5840fd2aaf30df0a6e44cc",
+    "namespace": "Ensembl gene identifiers",
+    "pocket_features_checked": 500,
+    "unmatched_features": [],
+    "evidence": "evidence/reference-verification.json",
+    "evidence_sha256": "7a70b2c1b010e40d7851f6c5cae7a9e8d4ffd7bef6b14757d1dcd8dce77ca5a0"
+  },
+  "reduction_diagnostic": {
+    "workflow": "workflows/atlas_diagnostic.py",
+    "config": "workflows/e-mtab-8845-infection-gsnor1-source.json",
+    "evidence": "evidence/e-mtab-8845-infection-gsnor1-diagnostic.json",
+    "normalization": "median_ratio",
+    "candidate_sizes": [
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      12000,
+      20000
+    ],
+    "smallest_passing_features": 500,
+    "smallest_passing_bytes": 13399,
+    "smallest_passing_size_ratio": 0.004740204997327245,
+    "smallest_passing_metrics": {
+      "spearman_logfc": 0.9599090586628751,
+      "top_k_jaccard": 1.0,
+      "distance_correlation": 0.9935694888918383,
+      "sign_concordance": 0.9742765273311897
+    },
+    "report_sha256": "3d50630885608ecac89eaa66b7bc5b1c6f416ab520c45a63fa73639bbdb2680f",
+    "repeat_report_sha256": "3d50630885608ecac89eaa66b7bc5b1c6f416ab520c45a63fa73639bbdb2680f",
+    "repeat_identical": true
+  },
+  "review_status": "priority",
+  "proposed_archetype": "Stratified plant infection response in mutant",
+  "release_eligible": false,
+  "remaining_work": [
+    "Prepare dataset-level source attribution and license files.",
+    "Complete an independent clean-environment reproduction before release."
+  ],
+  "deseq2_confirmation": {
+    "status": "pass",
+    "evidence": "evidence/e-mtab-8845-infection-gsnor1-deseq2.json",
+    "baseline_report_sha256": "fbc580e0e6dcac096d81d7e402d6c3d2a00820f016f123d0368956e3b57ae478",
+    "runtime": {
+      "r": "4.5.3",
+      "deseq2": "1.50.2",
+      "python": "3.12.14",
+      "numpy": "2.3.5"
+    },
+    "formula": "~ condition",
+    "contrast": "none versus Phytophthora parasitica",
+    "full_features": 32833,
+    "pocket_features": 500,
+    "finite_shared_effects": 347,
+    "metrics": {
+      "spearman_logfc": 0.9999272643773329,
+      "top_k_jaccard": 1.0,
+      "distance_correlation": 0.9935732251543249,
+      "sign_concordance": 0.9840764331210191
+    },
+    "thresholds": {
+      "spearman_logfc": 0.9,
+      "top_k_jaccard": 0.6,
+      "distance_correlation": 0.9,
+      "sign_concordance": 0.9
+    }
+  },
+  "object_key": "E-MTAB-8845-infection-gsnor1",
+  "source_intake": "curation/intake/e-mtab-8845.json"
+}
