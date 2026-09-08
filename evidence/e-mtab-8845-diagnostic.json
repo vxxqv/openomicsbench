@@ -1,0 +1,176 @@
+{
+  "accession": "E-MTAB-8845",
+  "status": "diagnostic_only",
+  "source_features": 32833,
+  "source_samples": 12,
+  "analysed_samples": 12,
+  "selected_samples": 12,
+  "excluded_count_columns": [],
+  "deduplicated_count_columns": {
+    "ERR3971851": 2,
+    "ERR3971852": 2,
+    "ERR3971853": 2,
+    "ERR3971854": 2,
+    "ERR3971855": 2,
+    "ERR3971856": 2,
+    "ERR3971857": 2,
+    "ERR3971858": 2,
+    "ERR3971859": 2,
+    "ERR3971860": 2,
+    "ERR3971861": 2,
+    "ERR3971862": 2
+  },
+  "conditions": {
+    "Phytophthora parasitica": 6,
+    "none": 6
+  },
+  "factor_column": "Factor Value[infect]",
+  "batch_column": "Factor Value[genotype]",
+  "batches": {
+    "wild type genotype": 6,
+    "gsnor1": 6
+  },
+  "sample_order": [
+    "ERR3971851",
+    "ERR3971852",
+    "ERR3971853",
+    "ERR3971854",
+    "ERR3971855",
+    "ERR3971856",
+    "ERR3971857",
+    "ERR3971858",
+    "ERR3971859",
+    "ERR3971860",
+    "ERR3971861",
+    "ERR3971862"
+  ],
+  "contrast": "none - Phytophthora parasitica",
+  "baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), infection with genotype adjustment; DESeq2 confirmation remains required.",
+  "normalization": "median_ratio",
+  "full_size_factors": [
+    1.0109826728971378,
+    0.9645001181713984,
+    1.0074159142461003,
+    1.0758386280634757,
+    0.9133990494914336,
+    0.9890142322476267,
+    0.9333482627664428,
+    1.1049343141408319,
+    1.0136615087510472,
+    1.0250513673908672,
+    0.9785712503034224,
+    0.9989039797839789
+  ],
+  "candidate_curve": [
+    {
+      "features": 500,
+      "bytes": 21744,
+      "size_ratio": 0.007692441037531428,
+      "metrics": {
+        "spearman_logfc": 0.9772708245508938,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.9741609475992995,
+        "sign_concordance": 0.9875776397515528
+      },
+      "pass": true
+    },
+    {
+      "features": 1000,
+      "bytes": 43131,
+      "size_ratio": 0.015258585098867183,
+      "metrics": {
+        "spearman_logfc": 0.9785239610890792,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.9836924649946887,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 2000,
+      "bytes": 85955,
+      "size_ratio": 0.030408561873666938,
+      "metrics": {
+        "spearman_logfc": 0.9797548633795528,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.987559970661714,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 4000,
+      "bytes": 170880,
+      "size_ratio": 0.06045273751349202,
+      "metrics": {
+        "spearman_logfc": 0.9910410132907123,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.9929433110867337,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 8000,
+      "bytes": 337235,
+      "size_ratio": 0.11930465200937782,
+      "metrics": {
+        "spearman_logfc": 0.9964162845383701,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.9955019269526455,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 12000,
+      "bytes": 502640,
+      "size_ratio": 0.17782048211482696,
+      "metrics": {
+        "spearman_logfc": 0.9906284896599867,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.997408408431666,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 20000,
+      "bytes": 834988,
+      "size_ratio": 0.29539624526519004,
+      "metrics": {
+        "spearman_logfc": 0.9995340591631646,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.9993833378793975,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    }
+  ],
+  "smallest_passing_features": 500,
+  "rights": "GREEN: Expression Atlas material is CC BY 4.0 with attribution.",
+  "reference": "Expression Atlas mapped reads to Ensembl Genomes release 44 with HISAT2 2.1.0 and quantified them with FeatureCounts 1.6.2. Exact FASTA and annotation hashes remain to be pinned.",
+  "release_eligible": false,
+  "source_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-8845-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-8845/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 2826671,
+      "sha256": "66f217ca72cd6936c39c5b667543468a137fa164d3db57a7b1b37facf4d47abf"
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-8845-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-8845/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 4599,
+      "sha256": "e8b4763a1717820c2bbbefbf74dda52ec2ca260c126d135b2ed6d4b59878e2fe"
+    }
+  ],
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5"
+  },
+  "config_sha256": "3f84e68da9107c17949c893106bce88cbbce109522d14e4f71d648e39145ba80",
+  "workflow_sha256": "43eedc5ec4f562df898baf5ea49b706cbcd6d0cc6ef53e6aa5e444ce1baa391e"
+}
