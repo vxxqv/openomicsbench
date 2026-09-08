@@ -109,8 +109,35 @@
   "release_eligible": false,
   "remaining_work": [
     "Pin exact reference files and validate the pocket identifier namespace against them.",
-    "Run the DESeq2 full-source and pocket confirmation with recorded versions.",
     "Prepare dataset-level source attribution and license files.",
     "Complete an independent clean-environment reproduction before release."
-  ]
+  ],
+  "deseq2_confirmation": {
+    "status": "pass",
+    "evidence": "evidence/e-mtab-9206-deseq2.json",
+    "baseline_report_sha256": "b8493a3824b2f147b10dbc4f9344debd341875b4085b59e3fd25c0b0b58c2674",
+    "runtime": {
+      "r": "4.5.3",
+      "deseq2": "1.50.2",
+      "python": "3.12.14",
+      "numpy": "2.3.5"
+    },
+    "formula": "~ condition",
+    "contrast": "scrambled shRNA versus ELP3 shRNA",
+    "full_features": 58735,
+    "pocket_features": 8000,
+    "finite_shared_effects": 2910,
+    "metrics": {
+      "spearman_logfc": 0.9996661149014315,
+      "top_k_jaccard": 0.7241379310344828,
+      "distance_correlation": 0.9921755562680772,
+      "sign_concordance": 0.9732948394081559
+    },
+    "thresholds": {
+      "spearman_logfc": 0.9,
+      "top_k_jaccard": 0.6,
+      "distance_correlation": 0.9,
+      "sign_concordance": 0.9
+    }
+  }
 }
