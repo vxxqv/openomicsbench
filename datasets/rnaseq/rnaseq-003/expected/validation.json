@@ -1,0 +1,26 @@
+{
+  "baseline_counts": "expected/source-counts.tsv",
+  "sample_ids": [
+    "ERR2618237",
+    "ERR2618240",
+    "ERR2618236",
+    "ERR2618238",
+    "ERR2618241",
+    "ERR2618239"
+  ],
+  "shapes": {
+    "pocket": [
+      4000,
+      6
+    ]
+  },
+  "top_k": 50,
+  "normalization": "median_ratio",
+  "contrast": {
+    "factor_column": "Factor Value[genotype]",
+    "condition_values": null,
+    "batch_column": null,
+    "subset": {}
+  },
+  "deseq2_evidence": "expected/deseq2.json"
+}

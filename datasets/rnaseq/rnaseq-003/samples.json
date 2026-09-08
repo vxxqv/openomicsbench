@@ -1,0 +1,44 @@
+[
+  {
+    "sample_id": "ERR2618237",
+    "condition": "wild type genotype",
+    "replicate": 1,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR2618240",
+    "condition": "AtRsgA-i -/-",
+    "replicate": 1,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR2618236",
+    "condition": "wild type genotype",
+    "replicate": 2,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR2618238",
+    "condition": "wild type genotype",
+    "replicate": 3,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR2618241",
+    "condition": "AtRsgA-i -/-",
+    "replicate": 2,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR2618239",
+    "condition": "AtRsgA-i -/-",
+    "replicate": 3,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  }
+]

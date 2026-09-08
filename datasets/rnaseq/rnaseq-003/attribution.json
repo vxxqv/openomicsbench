@@ -1,0 +1,12 @@
+{
+  "dataset_id": "rnaseq-003",
+  "object_key": "E-MTAB-6866",
+  "source_study": "Janowski et al. AtRsgA from Arabidopsis thaliana is important for maturation of the small subunit of the chloroplast ribosome. Plant Journal. DOI 10.1111/tpj.14040.",
+  "source_accession": "E-MTAB-6866",
+  "source_url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-6866",
+  "provider": "Expression Atlas, EMBL-EBI",
+  "provider_citation": "Expression Atlas in 2026: enabling FAIR and open expression data through community collaboration and integration. Nucleic Acids Research. DOI 10.1093/nar/gkaf1238.",
+  "curator": "Vivaan Patni",
+  "repository_account": "vxxqv",
+  "changes": "Selected a deterministic feature subset and retained the source integer counts for the declared samples and contrast."
+}

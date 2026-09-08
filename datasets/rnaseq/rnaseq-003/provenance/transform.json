@@ -1,0 +1,65 @@
+{
+  "dataset_id": "rnaseq-003",
+  "object_key": "E-MTAB-6866",
+  "algorithm": "contrast-anchored deterministic feature selection",
+  "seed": 20260907,
+  "source_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-6866-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-6866/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 1041756,
+      "sha256": "b1c34a1d76dccfce0ffe6d5c4c2444c877e6aa7b84c9c745b0415314c08484f7"
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-6866-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-6866/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 1889,
+      "sha256": "fabfbca7c7812f9df3a69bd514e4a094148e6eafc3511be1e5706242df313c13"
+    }
+  ],
+  "selection": {
+    "config": "workflows/e-mtab-6866-source.json",
+    "config_sha256": "bbda114f15646f51a7c2620a82c9c7bcfdcddca6476f1447a80c2007a143ccc6",
+    "config_commit": "53eb456e9ec14486e1adbfcb294b23fb3fdfae65",
+    "workflow": "workflows/atlas_diagnostic.py",
+    "workflow_sha256": "1e065fb87b06b029505797eefe97580cb1a2dde6b1c32724bbbe46299b7343e4",
+    "workflow_commit": "fd3697970fe986214db4b44e1e2d605519a9b7aa",
+    "candidate_sizes": [
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      12000,
+      20000
+    ],
+    "selected_features": 4000,
+    "factor_column": "Factor Value[genotype]",
+    "batch_column": null,
+    "condition_values": null,
+    "subset": {}
+  },
+  "assembly": {
+    "workflow": "workflows/build_collection.py",
+    "workflow_sha256": "0b237a00363dad610357864b04582716a0f855f1624413fa2112189d7ca14857",
+    "workflow_commit": "505807a13443df8449fe698006d619c049cb46b5"
+  },
+  "diagnostic": {
+    "path": "evidence/e-mtab-6866-diagnostic.json",
+    "sha256": "146b61b732f11a9711502d76256c93656579f77c39893b9ee074de7724910862"
+  },
+  "deseq2": {
+    "path": "evidence/e-mtab-6866-deseq2.json",
+    "sha256": "86587b6ed52dfd82eba022c1c074e8642ab066bd92500b3a532fe4b756ef6cf7"
+  },
+  "reference": {
+    "path": "evidence/reference-verification.json",
+    "sha256": "7a70b2c1b010e40d7851f6c5cae7a9e8d4ffd7bef6b14757d1dcd8dce77ca5a0"
+  },
+  "intake": {
+    "path": "curation/intake/e-mtab-6866.json",
+    "sha256": "8af375785c4ef62455bb375d31bb8e8378a4fab862e20b6ffd891c39132702b3"
+  }
+}
