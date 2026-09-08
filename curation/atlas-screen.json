@@ -1,5 +1,5 @@
 {
-  "checked": "2026-09-07",
+  "checked": "2026-09-08",
   "screened": [
     {
       "accession": "E-MTAB-567",
@@ -192,7 +192,7 @@
         },
         "Factor Value[genotype]": {
           "Dmd-mdx": 3,
-          "Dmd-mdx-\u03b2geo": 3,
+          "Dmd-mdx-βgeo": 3,
           "wild type genotype": 3
         }
       },
@@ -206,6 +206,35 @@
         "sha256": "c6d74f40c533a5159e98ffc6324846abafd44952c9edd8093e9c2173c5d61a95"
       },
       "biostudies_url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-10322"
+    },
+    {
+      "accession": "E-MTAB-9206",
+      "title": "BT549 cells depleted of ELP3 compared to control",
+      "release_date": "2020-06-20",
+      "study_types": [
+        "Cell line - High-throughput sequencing",
+        "RNA-seq of coding RNA"
+      ],
+      "organisms": [
+        "Homo sapiens"
+      ],
+      "analysed_runs": 6,
+      "factors": {
+        "Factor Value[RNA interference]": {
+          "ELP3 shRNA": 3,
+          "scrambled shRNA": 3
+        }
+      },
+      "raw_counts": {
+        "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-9206/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+        "bytes": 2137356
+      },
+      "experiment_design": {
+        "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-9206/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+        "bytes": 2700,
+        "sha256": "b8ff92b83e4b22a63a20a694509bcc374df6e64060e8baa953a54cbbe52791ff"
+      },
+      "biostudies_url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-9206"
     }
   ],
   "failures": []
