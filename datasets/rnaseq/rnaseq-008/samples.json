@@ -1,0 +1,65 @@
+[
+  {
+    "sample_id": "ERR5671402",
+    "condition": "Duchenne muscular dystrophy",
+    "replicate": 1,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR5671403",
+    "condition": "Duchenne muscular dystrophy",
+    "replicate": 2,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR5671404",
+    "condition": "Duchenne muscular dystrophy",
+    "replicate": 3,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR5671405",
+    "condition": "Duchenne muscular dystrophy",
+    "replicate": 4,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR5671406",
+    "condition": "Duchenne muscular dystrophy",
+    "replicate": 5,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR5671407",
+    "condition": "Duchenne muscular dystrophy",
+    "replicate": 6,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR5671408",
+    "condition": "normal",
+    "replicate": 1,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR5671409",
+    "condition": "normal",
+    "replicate": 2,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR5671410",
+    "condition": "normal",
+    "replicate": 3,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  }
+]

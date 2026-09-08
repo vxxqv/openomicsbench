@@ -1,0 +1,29 @@
+{
+  "baseline_counts": "expected/source-counts.tsv",
+  "sample_ids": [
+    "ERR5671402",
+    "ERR5671403",
+    "ERR5671404",
+    "ERR5671405",
+    "ERR5671406",
+    "ERR5671407",
+    "ERR5671408",
+    "ERR5671409",
+    "ERR5671410"
+  ],
+  "shapes": {
+    "pocket": [
+      8000,
+      9
+    ]
+  },
+  "top_k": 50,
+  "normalization": "median_ratio",
+  "contrast": {
+    "factor_column": "Factor Value[disease]",
+    "condition_values": null,
+    "batch_column": null,
+    "subset": {}
+  },
+  "deseq2_evidence": "expected/deseq2.json"
+}
