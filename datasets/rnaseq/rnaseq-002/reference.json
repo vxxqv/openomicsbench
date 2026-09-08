@@ -1,0 +1,41 @@
+{
+  "provider": "Ensembl",
+  "release": "95",
+  "assembly": "GRCh38",
+  "genome": {
+    "url": "https://ftp.ensembl.org/pub/release-95/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz",
+    "bytes": 881211416,
+    "official_bsd_sum": 2415,
+    "official_blocks_1024": 860559,
+    "checksums_evidence": {
+      "url": "https://ftp.ensembl.org/pub/release-95/fasta/homo_sapiens/dna/CHECKSUMS",
+      "bytes": 5010,
+      "sha256": "c6c29649a322c96d1f9f32d255606e022592342b68987d1701dbbe0e81678756",
+      "record": "02415 860559 Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz"
+    },
+    "downloaded": false
+  },
+  "annotation": {
+    "url": "https://ftp.ensembl.org/pub/release-95/gtf/homo_sapiens/Homo_sapiens.GRCh38.95.gtf.gz",
+    "bytes": 43668708,
+    "sha256": "b54faa39220ab12d62dfa9c6a529668fc56bc926bba64bb2faaa1003319b7341",
+    "official_bsd_sum": 50378,
+    "official_blocks_1024": 42646,
+    "checksums_evidence": {
+      "url": "https://ftp.ensembl.org/pub/release-95/gtf/homo_sapiens/CHECKSUMS",
+      "bytes": 221,
+      "sha256": "3320feee0e04e1085938d153dcee15853c1080b0c1aff0e1a6d97f5d8f43dea4",
+      "record": "50378 42646 Homo_sapiens.GRCh38.95.gtf.gz"
+    },
+    "gene_identifiers": 58735,
+    "gzip_test": "pass"
+  },
+  "pocket_check": {
+    "object_key": "E-MTAB-8572",
+    "pocket_features": 2000,
+    "matched_features": 2000,
+    "unmatched_features": [],
+    "status": "pass"
+  },
+  "collection_evidence_sha256": "7a70b2c1b010e40d7851f6c5cae7a9e8d4ffd7bef6b14757d1dcd8dce77ca5a0"
+}

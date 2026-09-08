@@ -1,0 +1,65 @@
+{
+  "dataset_id": "rnaseq-002",
+  "object_key": "E-MTAB-8572",
+  "algorithm": "contrast-anchored deterministic feature selection",
+  "seed": 20260907,
+  "source_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-8572-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-8572/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 2688913,
+      "sha256": "af39d311fced305c326c1739e0b12d0e9ce80fa4169c40b42dbaf671e6bc2f00"
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-8572-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-8572/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 3747,
+      "sha256": "7325a2f77782c4cae14b0bbb641dc9ed336bdb081bae68daeb351f0aed8bb3c5"
+    }
+  ],
+  "selection": {
+    "config": "workflows/expression-atlas-source.json",
+    "config_sha256": "08ff53b035f47c7ca8f51a5105cfb2d635bdd2bf0529eeaa9b28cd91c9e5147f",
+    "config_commit": "4368cfde1349d8d2f21ad46b5ca31d07351ff7cd",
+    "workflow": "workflows/atlas_diagnostic.py",
+    "workflow_sha256": "1e065fb87b06b029505797eefe97580cb1a2dde6b1c32724bbbe46299b7343e4",
+    "workflow_commit": "fd3697970fe986214db4b44e1e2d605519a9b7aa",
+    "candidate_sizes": [
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      12000,
+      20000
+    ],
+    "selected_features": 2000,
+    "factor_column": "Factor Value[genotype]",
+    "batch_column": null,
+    "condition_values": null,
+    "subset": {}
+  },
+  "assembly": {
+    "workflow": "workflows/build_collection.py",
+    "workflow_sha256": "0b237a00363dad610357864b04582716a0f855f1624413fa2112189d7ca14857",
+    "workflow_commit": "505807a13443df8449fe698006d619c049cb46b5"
+  },
+  "diagnostic": {
+    "path": "evidence/e-mtab-8572-diagnostic.json",
+    "sha256": "b4d9f69163af47a90805cc3cc1f377090d8ef26fb069f125f993d05cae45283e"
+  },
+  "deseq2": {
+    "path": "evidence/e-mtab-8572-deseq2.json",
+    "sha256": "5bcec3fd20fcfde2c4048e044d66dab4ca6e2e014bfc96615a93ebee8ded91ef"
+  },
+  "reference": {
+    "path": "evidence/reference-verification.json",
+    "sha256": "7a70b2c1b010e40d7851f6c5cae7a9e8d4ffd7bef6b14757d1dcd8dce77ca5a0"
+  },
+  "intake": {
+    "path": "curation/intake/e-mtab-8572.json",
+    "sha256": "089d991b50761d4af6ff49b495764bcd1da83d0e5bba4ca21f8c8b3edc30aa17"
+  }
+}

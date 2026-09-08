@@ -1,0 +1,72 @@
+[
+  {
+    "sample_id": "ERR3721875",
+    "condition": "SLC2A5 knockout mediated by CRISPR/Cas9",
+    "replicate": 1,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3721871",
+    "condition": "wild type genotype",
+    "replicate": 1,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3721868",
+    "condition": "wild type genotype",
+    "replicate": 2,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3721876",
+    "condition": "SLC2A5 knockout mediated by CRISPR/Cas9",
+    "replicate": 2,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3721870",
+    "condition": "wild type genotype",
+    "replicate": 3,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3721873",
+    "condition": "SLC2A5 knockout mediated by CRISPR/Cas9",
+    "replicate": 3,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3721867",
+    "condition": "wild type genotype",
+    "replicate": 4,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3721874",
+    "condition": "SLC2A5 knockout mediated by CRISPR/Cas9",
+    "replicate": 4,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3721869",
+    "condition": "wild type genotype",
+    "replicate": 5,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3721872",
+    "condition": "SLC2A5 knockout mediated by CRISPR/Cas9",
+    "replicate": 5,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  }
+]

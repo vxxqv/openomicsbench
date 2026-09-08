@@ -1,0 +1,12 @@
+{
+  "dataset_id": "rnaseq-002",
+  "object_key": "E-MTAB-8572",
+  "source_study": "RNA-seq of human lung cancer cell line A549-NC and A549-SLC2A5 knockout xenograft in BALB/c nude mice. Expression Atlas E-MTAB-8572.",
+  "source_accession": "E-MTAB-8572",
+  "source_url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-8572",
+  "provider": "Expression Atlas, EMBL-EBI",
+  "provider_citation": "Expression Atlas in 2026: enabling FAIR and open expression data through community collaboration and integration. Nucleic Acids Research. DOI 10.1093/nar/gkaf1238.",
+  "curator": "Vivaan Patni",
+  "repository_account": "vxxqv",
+  "changes": "Selected a deterministic feature subset and retained the source integer counts for the declared samples and contrast."
+}
