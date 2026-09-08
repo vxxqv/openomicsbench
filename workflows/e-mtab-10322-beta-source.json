@@ -1,0 +1,15 @@
+{
+  "accession": "E-MTAB-10322",
+  "object_key": "E-MTAB-10322-beta",
+  "factor_column": "Factor Value[genotype]",
+  "condition_values": ["Dmd-mdx-βgeo", "wild type genotype"],
+  "seed": 20260908,
+  "effect_anchors": 100,
+  "candidate_sizes": [500, 1000, 2000, 4000, 8000, 12000, 20000],
+  "top_k": 50,
+  "minimum": {"spearman_logfc": 0.9, "top_k_jaccard": 0.6, "distance_correlation": 0.9, "sign_concordance": 0.9},
+  "normalization": "median_ratio",
+  "baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), Dmd-mdx-βgeo against wild type; DESeq2 confirmation remains required.",
+  "rights": "GREEN: Expression Atlas material is CC BY 4.0 with attribution.",
+  "reference": "Expression Atlas mapped reads to Ensembl release 107 with TopHat2 2.1.1 and quantified them with HTSeq 0.11.0."
+}
