@@ -85,10 +85,19 @@
     "checked": "2026-09-08"
   },
   "reference_review": {
-    "status": "partially_resolved",
-    "reported_processing": "Expression Atlas mapped reads to Ensembl Genomes release 44 with HISAT2 2.1.0 and quantified them with FeatureCounts 1.6.2. Exact FASTA and annotation hashes remain to be pinned.",
+    "status": "verified",
+    "provider": "Ensembl Genomes",
+    "release": "44",
+    "assembly": "TAIR10",
+    "genome_url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-44/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz",
+    "genome_official_checksum": "52039 35609 Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz",
+    "annotation_url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-44/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.44.gtf.gz",
+    "annotation_sha256": "fb7f4d0d089546973e5a97183d4460a97a1616f44a5840fd2aaf30df0a6e44cc",
     "namespace": "Ensembl gene identifiers",
-    "pending": "Pin exact assembly FASTA and annotation file URLs, sizes and SHA-256 checksums, then verify every pocket identifier against the annotation."
+    "pocket_features_checked": 500,
+    "unmatched_features": [],
+    "evidence": "evidence/reference-verification.json",
+    "evidence_sha256": "7a70b2c1b010e40d7851f6c5cae7a9e8d4ffd7bef6b14757d1dcd8dce77ca5a0"
   },
   "reduction_diagnostic": {
     "workflow": "workflows/atlas_diagnostic.py",
@@ -122,7 +131,6 @@
   "proposed_archetype": "Balanced plant genotype and infection",
   "release_eligible": false,
   "remaining_work": [
-    "Pin exact reference files and validate the pocket identifier namespace against them.",
     "Prepare dataset-level source attribution and license files.",
     "Complete an independent clean-environment reproduction before release."
   ],
