@@ -82,10 +82,19 @@
     "checked": "2026-09-07"
   },
   "reference_review": {
-    "status": "partially_resolved",
-    "annotation": "Ensembl release 95",
+    "status": "verified",
+    "provider": "Ensembl",
+    "release": "95",
+    "assembly": "GRCh38",
+    "genome_url": "https://ftp.ensembl.org/pub/release-95/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz",
+    "genome_official_checksum": "02415 860559 Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz",
+    "annotation_url": "https://ftp.ensembl.org/pub/release-95/gtf/homo_sapiens/Homo_sapiens.GRCh38.95.gtf.gz",
+    "annotation_sha256": "b54faa39220ab12d62dfa9c6a529668fc56bc926bba64bb2faaa1003319b7341",
     "namespace": "Ensembl gene identifiers",
-    "pending": "Record the exact genome assembly, FASTA and GTF identities before converting this intake record into a release object."
+    "pocket_features_checked": 2000,
+    "unmatched_features": [],
+    "evidence": "evidence/reference-verification.json",
+    "evidence_sha256": "7a70b2c1b010e40d7851f6c5cae7a9e8d4ffd7bef6b14757d1dcd8dce77ca5a0"
   },
   "reduction_diagnostic": {
     "workflow": "workflows/atlas_diagnostic.py",
