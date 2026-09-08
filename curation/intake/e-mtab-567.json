@@ -122,8 +122,35 @@
   "release_eligible": false,
   "remaining_work": [
     "Pin exact reference files and validate the pocket identifier namespace against them.",
-    "Run the DESeq2 full-source and pocket confirmation with recorded versions.",
     "Prepare dataset-level source attribution and license files.",
     "Complete an independent clean-environment reproduction before release."
-  ]
+  ],
+  "deseq2_confirmation": {
+    "status": "pass",
+    "evidence": "evidence/e-mtab-567-deseq2.json",
+    "baseline_report_sha256": "e121835bf1744204f4c08a0e5e767bb58228ecdd1edc7a6a0dfeca54d241b8c1",
+    "runtime": {
+      "r": "4.5.3",
+      "deseq2": "1.50.2",
+      "python": "3.12.14",
+      "numpy": "2.3.5"
+    },
+    "formula": "~ batch + condition",
+    "contrast": "tumor tissue versus adjacent non-tumor tissue",
+    "full_features": 61860,
+    "pocket_features": 8000,
+    "finite_shared_effects": 5548,
+    "metrics": {
+      "spearman_logfc": 0.9999469137269074,
+      "top_k_jaccard": 0.9230769230769231,
+      "distance_correlation": 0.9480391749088565,
+      "sign_concordance": 1.0
+    },
+    "thresholds": {
+      "spearman_logfc": 0.9,
+      "top_k_jaccard": 0.6,
+      "distance_correlation": 0.9,
+      "sign_concordance": 0.9
+    }
+  }
 }
