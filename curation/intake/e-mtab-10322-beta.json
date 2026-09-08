@@ -1,0 +1,157 @@
+{
+  "accession": "E-MTAB-10322",
+  "source_systems": [
+    {
+      "name": "Expression Atlas",
+      "url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-10322"
+    },
+    {
+      "name": "BioStudies",
+      "url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-10322"
+    }
+  ],
+  "checked": "2026-09-08",
+  "title": "Dmd-mdx-\u03b2geo myoblasts compared with wild type",
+  "assay": "bulk RNA-seq of coding RNA",
+  "organism": "Mus musculus",
+  "taxon_id": 10090,
+  "study_design": {
+    "factor_column": "Factor Value[genotype]",
+    "groups": {
+      "Dmd-mdx-\u03b2geo": 3,
+      "wild type genotype": 3
+    },
+    "analysed_runs": 9,
+    "selected_runs": 6,
+    "balanced": true,
+    "batch_column": null,
+    "batch_levels": {
+      "not_reported": 6
+    },
+    "subset": {},
+    "condition_values": [
+      "Dmd-mdx-\u00ce\u00b2geo",
+      "wild type genotype"
+    ]
+  },
+  "atlas_processing": {
+    "source_statement": "Expression Atlas mapped reads to Ensembl release 107 with TopHat2 2.1.1 and quantified them with HTSeq 0.11.0. Exact FASTA and annotation hashes remain to be pinned.",
+    "diagnostic_baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), disease status only; DESeq2 confirmation remains required."
+  },
+  "verified_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-10322-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-10322/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 2828028,
+      "sha256": "6c0787b459d910aefbecf922797eeb224639c08acdc7959e1ce7278d90cd5892",
+      "genes": 56748,
+      "unique_sample_columns": 9,
+      "excluded_unanalysed_columns": [],
+      "verified_repeated_columns": {},
+      "format_check": "Every retained count parsed as a non-negative integer; repeated run columns, where present, were accepted only after full-vector equality checks."
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-10322-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-10322/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 5002,
+      "sha256": "c6d74f40c533a5159e98ffc6324846abafd44952c9edd8093e9c2173c5d61a95",
+      "analysed_runs": 9,
+      "format_check": "Analysed run identifiers are present, unique and represented in the retained count matrix."
+    }
+  ],
+  "rights": {
+    "status": "GREEN",
+    "license": "Creative Commons Attribution 4.0 International",
+    "redistribution": "permitted with attribution",
+    "evidence_url": "https://www.ebi.ac.uk/gxa/licence.html",
+    "evidence_page_bytes": 15010,
+    "evidence_page_sha256": "0c35e7e1e590438decb4c44d7d42f1d69a2190eb97acb4bdca5a14cf71f26dd8",
+    "obligations": [
+      "Credit Expression Atlas and EMBL-EBI.",
+      "Cite the current Expression Atlas publication requested on the licence page.",
+      "Retain the experiment accession and originating-study link."
+    ],
+    "checked": "2026-09-08"
+  },
+  "reference_review": {
+    "status": "verified",
+    "provider": "Ensembl",
+    "release": "107",
+    "assembly": "GRCm39",
+    "genome_url": "https://ftp.ensembl.org/pub/release-107/fasta/mus_musculus/dna/Mus_musculus.GRCm39.dna.primary_assembly.fa.gz",
+    "genome_official_checksum": "16996 787519 Mus_musculus.GRCm39.dna.primary_assembly.fa.gz",
+    "annotation_url": "https://ftp.ensembl.org/pub/release-107/gtf/mus_musculus/Mus_musculus.GRCm39.107.gtf.gz",
+    "annotation_sha256": "15af16b7bef88c4309a82d49579fdd967f6ac8769b7f0bf657bbf7ee73b779e3",
+    "namespace": "Ensembl gene identifiers",
+    "pocket_features_checked": 8000,
+    "unmatched_features": [],
+    "evidence": "evidence/reference-verification.json",
+    "evidence_sha256": "7a70b2c1b010e40d7851f6c5cae7a9e8d4ffd7bef6b14757d1dcd8dce77ca5a0"
+  },
+  "reduction_diagnostic": {
+    "workflow": "workflows/atlas_diagnostic.py",
+    "config": "workflows/e-mtab-10322-beta-source.json",
+    "evidence": "evidence/e-mtab-10322-beta-diagnostic.json",
+    "normalization": "median_ratio",
+    "candidate_sizes": [
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      12000,
+      20000
+    ],
+    "smallest_passing_features": 8000,
+    "smallest_passing_bytes": 261173,
+    "smallest_passing_size_ratio": 0.09235163159629255,
+    "smallest_passing_metrics": {
+      "spearman_logfc": 0.9796501944542645,
+      "top_k_jaccard": 1.0,
+      "distance_correlation": 0.9225876237452304,
+      "sign_concordance": 1.0
+    },
+    "report_sha256": "06b8bb949277a11a4b718ede944154e957971969e3afe178947ad59211cb782a",
+    "repeat_report_sha256": "06b8bb949277a11a4b718ede944154e957971969e3afe178947ad59211cb782a",
+    "repeat_identical": true
+  },
+  "review_status": "priority",
+  "proposed_archetype": "Balanced Dmd-mdx-\u03b2geo genetic comparison",
+  "release_eligible": false,
+  "remaining_work": [
+    "Prepare dataset-level source attribution and license files.",
+    "Complete an independent clean-environment reproduction before release."
+  ],
+  "deseq2_confirmation": {
+    "status": "pass",
+    "evidence": "evidence/e-mtab-10322-beta-deseq2.json",
+    "baseline_report_sha256": "a2c78902677eb39b70bc43abc2fe6510a99b006ae26223e633ffdee6846e97c7",
+    "runtime": {
+      "r": "4.5.3",
+      "deseq2": "1.50.2",
+      "python": "3.12.14",
+      "numpy": "2.3.5"
+    },
+    "formula": "~ condition",
+    "contrast": "wild type genotype versus Dmd-mdx-\u03b2geo",
+    "full_features": 56748,
+    "pocket_features": 8000,
+    "finite_shared_effects": 3011,
+    "metrics": {
+      "spearman_logfc": 0.9998355672750909,
+      "top_k_jaccard": 0.9607843137254902,
+      "distance_correlation": 0.9223940212396747,
+      "sign_concordance": 1.0
+    },
+    "thresholds": {
+      "spearman_logfc": 0.9,
+      "top_k_jaccard": 0.6,
+      "distance_correlation": 0.9,
+      "sign_concordance": 0.9
+    }
+  },
+  "object_key": "E-MTAB-10322-beta",
+  "source_intake": "curation/intake/e-mtab-10322.json"
+}
