@@ -150,18 +150,34 @@ def _check_design(path: Path) -> tuple[int, list[str], list[str]]:
     return len(runs), runs, reader.fieldnames
 
 
-def load_design(path: Path, factor: str) -> dict[str, str]:
+def load_design_fields(path: Path, fields: list[str]) -> dict[str, dict[str, str]]:
+    if not fields or len(fields) != len(set(fields)) or any(not field for field in fields):
+        raise ValueError("Design fields must be present and unique")
     with path.open(encoding="utf-8", newline="") as stream:
         reader = csv.DictReader(stream, delimiter="\t")
-        if not reader.fieldnames or factor not in reader.fieldnames or "Run" not in reader.fieldnames or "Analysed" not in reader.fieldnames:
-            raise ValueError(f"Experiment design needs Run, Analysed and {factor} columns")
-        design = {
-            row["Run"].strip(): row[factor].strip()
-            for row in reader
-            if row["Analysed"].strip().lower() == "yes"
-        }
-    if len(design) < 4 or any(not run or not condition for run, condition in design.items()):
-        raise ValueError("Experiment design needs at least four analysed runs with factor values")
+        required = ["Run", "Analysed", *fields]
+        missing = [field for field in required if not reader.fieldnames or field not in reader.fieldnames]
+        if missing:
+            raise ValueError(f"Experiment design is missing columns: {', '.join(missing)}")
+        design: dict[str, dict[str, str]] = {}
+        for row in reader:
+            if row["Analysed"].strip().lower() != "yes":
+                continue
+            run = row["Run"].strip()
+            values = {field: row[field].strip() for field in fields}
+            if not run or any(not value for value in values.values()):
+                raise ValueError("Analysed run identifiers and requested design values must be present")
+            if run in design:
+                raise ValueError("Analysed run identifiers must be unique")
+            design[run] = values
+    if len(design) < 4:
+        raise ValueError("Experiment design needs at least four analysed runs")
+    return design
+
+
+def load_design(path: Path, factor: str) -> dict[str, str]:
+    fields = load_design_fields(path, [factor])
+    design = {run: values[factor] for run, values in fields.items()}
     if len(set(design.values())) != 2:
         raise ValueError("The diagnostic requires exactly two factor values")
     return design

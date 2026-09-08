@@ -7,7 +7,7 @@ from collections import Counter
 from pathlib import Path
 import numpy as np
 
-from omicsbench.expression_atlas import load_counts, load_design, stage
+from omicsbench.expression_atlas import load_counts, load_design_fields, stage
 from omicsbench.hashing import digest
 from omicsbench.models import Sample
 from omicsbench.rnaseq import contrast_selection_order, diagnostic, preservation
@@ -27,16 +27,37 @@ def run(config_path: Path, staging: Path) -> dict:
     config = json.loads(config_path.read_text(encoding="utf-8"))
     source = staging / "source"
     transfer = stage(config["accession"], source)
-    genes, sample_ids, counts = load_counts(source / f'{config["accession"]}-raw-counts.tsv')
-    design = load_design(source / f'{config["accession"]}-experiment-design.tsv', config["factor_column"])
-    if set(sample_ids) != set(design):
+    genes, all_sample_ids, counts = load_counts(source / f'{config["accession"]}-raw-counts.tsv')
+    factor = config["factor_column"]
+    batch_column = config.get("batch_column")
+    fields = [factor] + ([batch_column] if batch_column else [])
+    design = load_design_fields(source / f'{config["accession"]}-experiment-design.tsv', fields)
+    if set(all_sample_ids) != set(design):
         raise ValueError("Count columns and analysed design runs differ")
+    condition_values = config.get("condition_values")
+    if condition_values is not None:
+        if not isinstance(condition_values, list) or len(condition_values) != 2 or len(set(condition_values)) != 2 or any(not value for value in condition_values):
+            raise ValueError("condition_values must contain two distinct non-empty values")
+        allowed = set(condition_values)
+        observed = {values[factor] for values in design.values()}
+        if not allowed <= observed:
+            raise ValueError("condition_values contains a value absent from the experiment design")
+        selected_columns = [index for index, sample_id in enumerate(all_sample_ids) if design[sample_id][factor] in allowed]
+        sample_ids = [all_sample_ids[index] for index in selected_columns]
+        counts = counts[:, selected_columns]
+    else:
+        sample_ids = all_sample_ids
+        if len({values[factor] for values in design.values()}) != 2:
+            raise ValueError("The diagnostic requires exactly two factor values or an explicit condition_values selection")
     seen: Counter[str] = Counter()
+    batches: Counter[str] = Counter()
     samples = []
     for sample_id in sample_ids:
-        condition = design[sample_id]
+        condition = design[sample_id][factor]
+        batch = design[sample_id][batch_column] if batch_column else "not_reported"
         seen[condition] += 1
-        samples.append(Sample(sample_id=sample_id, condition=condition, replicate=seen[condition], batch="not_reported", strandedness="unknown"))
+        batches[batch] += 1
+        samples.append(Sample(sample_id=sample_id, condition=condition, replicate=seen[condition], batch=batch, strandedness="unknown"))
     full = diagnostic(counts, samples, normalization=config["normalization"])
     order = contrast_selection_order(genes, counts, full["effects"], config["seed"], config["effect_anchors"])
     curve = []
@@ -62,8 +83,12 @@ def run(config_path: Path, staging: Path) -> dict:
         "accession": config["accession"],
         "status": "diagnostic_only",
         "source_features": len(genes),
-        "source_samples": len(sample_ids),
+        "source_samples": len(all_sample_ids),
+        "selected_samples": len(sample_ids),
         "conditions": dict(seen),
+        "factor_column": factor,
+        "batch_column": batch_column,
+        "batches": dict(batches),
         "sample_order": sample_ids,
         "contrast": full["contrast"],
         "baseline": config["baseline"],
