@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "accession": "E-MTAB-8845",
+  "status": "pass",
+  "release_eligible": false,
+  "release_gates_remaining": [
+    "exact reference-file checksums",
+    "dataset attribution package",
+    "independent clean-environment reproduction"
+  ],
+  "design": {
+    "formula": "~ batch + condition",
+    "factor_column": "Factor Value[infect]",
+    "batch_column": "Factor Value[genotype]",
+    "contrast": "none versus Phytophthora parasitica",
+    "samples": 12,
+    "full_features": 32833,
+    "pocket_features": 500,
+    "finite_shared_effects": 351
+  },
+  "thresholds": {
+    "spearman_logfc": 0.9,
+    "top_k_jaccard": 0.6,
+    "distance_correlation": 0.9,
+    "sign_concordance": 0.9
+  },
+  "metrics": {
+    "spearman_logfc": 0.9998606947640518,
+    "top_k_jaccard": 0.9607843137254902,
+    "distance_correlation": 0.9741879355966665,
+    "sign_concordance": 0.9875776397515528
+  },
+  "runtime": {
+    "r": "4.5.3",
+    "deseq2": "1.50.2",
+    "python": "3.12.14",
+    "numpy": "2.3.5"
+  },
+  "inputs": {
+    "diagnostic_report_sha256": "e13ab6b4bef5a27a78bb5638e198c98850c8729da2ea4e58bf4b116949a36ca7",
+    "config_sha256": "3f84e68da9107c17949c893106bce88cbbce109522d14e4f71d648e39145ba80",
+    "full_counts_sha256": "9e49d4278e37aecafe2013aaf9c86e1c1093e76ea6a69d38c6fba3ef74f0aa7e",
+    "pocket_counts_sha256": "97398ba6cdcbc2df87be9fa3bd9a4e84b1611ecbb93fc4994ed112e240928a37",
+    "samples_sha256": "1a2969f020c36afdf0c32f66a15169a267ab8912b4387b7a1d9eac9659fecb70"
+  },
+  "artifacts": {
+    "full": {
+      "contrast.log": {
+        "bytes": 37,
+        "sha256": "486aee0d9c5182cdff81d3ae76107e11c7ada08a260eb0fa0b6eaadd3b1ece35"
+      },
+      "differential_expression.tsv": {
+        "bytes": 3206237,
+        "sha256": "84b16cb7da45e2832bcf9d838d19d5af935ed486b7fa368e87593687af037572"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 5153612,
+        "sha256": "911e2bc4843a8ad479065308484021fe9c05c180b90004ae302f8129ee40e5eb"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "2000ed5d4b68d7c8be4551d4bdc52383b95cc052b73c92b02e0a28867709e8b5"
+      }
+    },
+    "pocket": {
+      "contrast.log": {
+        "bytes": 37,
+        "sha256": "486aee0d9c5182cdff81d3ae76107e11c7ada08a260eb0fa0b6eaadd3b1ece35"
+      },
+      "differential_expression.tsv": {
+        "bytes": 46612,
+        "sha256": "6ccb13b3b215fb8ecea33bd297866fc2938957746c1c98e6c1e2e4eb42123498"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 75863,
+        "sha256": "17e84c8a21352f601ca2d11bc6a744e75ffc11d8c8cbd5bd2549d16211906050"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "2000ed5d4b68d7c8be4551d4bdc52383b95cc052b73c92b02e0a28867709e8b5"
+      }
+    }
+  },
+  "workflow": {
+    "python_sha256": "287c64bfdd5b4f590ad81bb263c7dac28a2ec270f9339f3f94879b25dd368cf3",
+    "r_sha256": "b4244d58364e77f0b4771339d07110e6f89fe2fcf0727562a5fd47f0e3ce74f6"
+  }
+}
