@@ -74,10 +74,12 @@
     "checked": "2026-09-08"
   },
   "reference_review": {
-    "status": "partially_resolved",
-    "reported_processing": "Expression Atlas mapped reads to Ensembl release 95 with TopHat2 2.1.1 and quantified them with HTSeq 0.6.1p1. Exact FASTA and annotation hashes remain to be pinned.",
-    "namespace": "Ensembl gene identifiers",
-    "pending": "Pin exact assembly FASTA and annotation file URLs, sizes and SHA-256 checksums, then verify every pocket identifier against the annotation."
+    "status": "conflict",
+    "reported_reference": "Ensembl release 95",
+    "pocket_features": 2000,
+    "unmatched_features": 105,
+    "evidence": "evidence/e-mtab-7126-reference-mismatch.json",
+    "decision": "Excluded from the v1 collection until the current count-matrix annotation can be resolved from an authoritative source."
   },
   "reduction_diagnostic": {
     "workflow": "workflows/atlas_diagnostic.py",
@@ -107,13 +109,11 @@
     "repeat_identical": true,
     "interpretation": "The 2,000-gene candidate is the first declared size to meet all four development thresholds."
   },
-  "review_status": "priority",
+  "review_status": "reference_rejected",
   "proposed_archetype": "Cell-line compound response",
   "release_eligible": false,
   "remaining_work": [
-    "Pin exact reference files and validate the pocket identifier namespace against them.",
-    "Prepare dataset-level source attribution and license files.",
-    "Complete an independent clean-environment reproduction before release."
+    "Retain the reference mismatch and completed baseline as negative curation evidence; do not promote this study into the v1 collection."
   ],
   "deseq2_confirmation": {
     "status": "pass",
