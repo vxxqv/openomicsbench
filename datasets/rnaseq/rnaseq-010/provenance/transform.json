@@ -1,0 +1,69 @@
+{
+  "dataset_id": "rnaseq-010",
+  "object_key": "E-MTAB-8845-infection-wild",
+  "algorithm": "contrast-anchored deterministic feature selection",
+  "seed": 20260908,
+  "source_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-8845-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-8845/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 2826671,
+      "sha256": "66f217ca72cd6936c39c5b667543468a137fa164d3db57a7b1b37facf4d47abf"
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-8845-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-8845/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 4599,
+      "sha256": "e8b4763a1717820c2bbbefbf74dda52ec2ca260c126d135b2ed6d4b59878e2fe"
+    }
+  ],
+  "selection": {
+    "config": "workflows/e-mtab-8845-infection-wild-source.json",
+    "config_sha256": "ac71d401480b467f326200495beffde364b2f7fffa6b1ddb94892f0d53fed7b9",
+    "config_commit": "65307db3380ec10cd029043f9b8e2147f74a9195",
+    "workflow": "workflows/atlas_diagnostic.py",
+    "workflow_sha256": "1e065fb87b06b029505797eefe97580cb1a2dde6b1c32724bbbe46299b7343e4",
+    "workflow_commit": "fd3697970fe986214db4b44e1e2d605519a9b7aa",
+    "candidate_sizes": [
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      12000,
+      20000
+    ],
+    "selected_features": 500,
+    "factor_column": "Factor Value[infect]",
+    "batch_column": null,
+    "condition_values": null,
+    "subset": {
+      "Factor Value[genotype]": [
+        "wild type genotype"
+      ]
+    }
+  },
+  "assembly": {
+    "workflow": "workflows/build_collection.py",
+    "workflow_sha256": "0b237a00363dad610357864b04582716a0f855f1624413fa2112189d7ca14857",
+    "workflow_commit": "505807a13443df8449fe698006d619c049cb46b5"
+  },
+  "diagnostic": {
+    "path": "evidence/e-mtab-8845-infection-wild-diagnostic.json",
+    "sha256": "e2a5c0c89e31d8407f4bc671e91c73f95a1f7b93affbbd8987b18cd47e1acbf0"
+  },
+  "deseq2": {
+    "path": "evidence/e-mtab-8845-infection-wild-deseq2.json",
+    "sha256": "609544fce5e2fcc4c46234afe86f801ddae5627fbaadd26cd84535447e70f2bd"
+  },
+  "reference": {
+    "path": "evidence/reference-verification.json",
+    "sha256": "7a70b2c1b010e40d7851f6c5cae7a9e8d4ffd7bef6b14757d1dcd8dce77ca5a0"
+  },
+  "intake": {
+    "path": "curation/intake/e-mtab-8845-infection-wild.json",
+    "sha256": "9ff227835ee7f53758e7e5814d64f1f6d230a416dd866abdf720cf022a96f0a8"
+  }
+}

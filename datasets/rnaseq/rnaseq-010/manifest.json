@@ -1,0 +1,210 @@
+{
+  "schema_version": "1.0",
+  "id": "rnaseq-010",
+  "title": "Phytophthora response in wild-type Arabidopsis",
+  "release": "1.0.0.dev1",
+  "assay": "bulk_rna_seq",
+  "kind": "real",
+  "status": "validated",
+  "archetype": "stratified wild-type infection response",
+  "organism": "Arabidopsis thaliana",
+  "taxon_id": 3702,
+  "source": {
+    "repository": "Expression Atlas and BioStudies",
+    "accession": "E-MTAB-8845",
+    "url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-8845",
+    "citation": "RNA sequencing of Arabidopsis thaliana gsnor1 and Col-0 after Phytophthora parasitica infection. Expression Atlas E-MTAB-8845.",
+    "retrieved": "2026-09-08",
+    "sha256": "66f217ca72cd6936c39c5b667543468a137fa164d3db57a7b1b37facf4d47abf"
+  },
+  "rights": {
+    "status": "GREEN",
+    "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "evidence": "Expression Atlas applies CC BY 4.0 to copyrightable website material and requires provider citation; rights.json records the licence and attribution.",
+    "checked": "2026-09-08"
+  },
+  "reference": {
+    "genome": "Ensembl Genomes release 44 TAIR10; https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-44/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz; official checksum 52039 35609 Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz",
+    "annotation": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-44/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.44.gtf.gz; SHA-256 fb7f4d0d089546973e5a97183d4460a97a1616f44a5840fd2aaf30df0a6e44cc",
+    "namespace": "Ensembl gene identifiers",
+    "compatibility": "verified"
+  },
+  "samples": [
+    {
+      "sample_id": "ERR3971851",
+      "condition": "Phytophthora parasitica",
+      "replicate": 1,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR3971852",
+      "condition": "Phytophthora parasitica",
+      "replicate": 2,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR3971853",
+      "condition": "Phytophthora parasitica",
+      "replicate": 3,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR3971854",
+      "condition": "none",
+      "replicate": 1,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR3971855",
+      "condition": "none",
+      "replicate": 2,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR3971856",
+      "condition": "none",
+      "replicate": 3,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    }
+  ],
+  "derivation": {
+    "workflow": "workflows/atlas_diagnostic.py",
+    "commit": "fd3697970fe986214db4b44e1e2d605519a9b7aa",
+    "seed": 20260908,
+    "algorithm": "contrast-anchored deterministic feature selection",
+    "parameters": {
+      "candidate_sizes": [
+        500,
+        1000,
+        2000,
+        4000,
+        8000,
+        12000,
+        20000
+      ],
+      "selected_features": 500,
+      "top_k": 50,
+      "factor_column": "Factor Value[infect]",
+      "batch_column": "none",
+      "condition_values": "null",
+      "subset": "{\"Factor Value[genotype]\": [\"wild type genotype\"]}"
+    },
+    "versions": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "r": "4.5.3",
+      "deseq2": "1.50.2"
+    }
+  },
+  "files": [
+    {
+      "path": "attribution.json",
+      "tier": "metadata",
+      "role": "documentation",
+      "media_type": "application/json",
+      "bytes": 763,
+      "sha256": "0f48a323546f6f1c6e68a2deb6a02a8ac4e7030c6af131562ccfe49a2389abba"
+    },
+    {
+      "path": "expected/deseq2.json",
+      "tier": "expected",
+      "role": "provenance",
+      "media_type": "application/json",
+      "bytes": 3044,
+      "sha256": "609544fce5e2fcc4c46234afe86f801ddae5627fbaadd26cd84535447e70f2bd"
+    },
+    {
+      "path": "expected/source-counts.tsv",
+      "tier": "expected",
+      "role": "baseline",
+      "media_type": "text/tab-separated-values",
+      "bytes": 927557,
+      "sha256": "42487daf3f9f02284fd033ca28b5432bfd97bf3c2329f816ae64c4394570849f"
+    },
+    {
+      "path": "expected/validation.json",
+      "tier": "expected",
+      "role": "metrics",
+      "media_type": "application/json",
+      "bytes": 554,
+      "sha256": "eda95c9ce70adaa14936a5aa63595153446682ba4339bd9f0357aec5916d765d"
+    },
+    {
+      "path": "pocket/counts.tsv",
+      "tier": "pocket",
+      "role": "raw_counts",
+      "media_type": "text/tab-separated-values",
+      "bytes": 13294,
+      "sha256": "46c9c8b57130fd6fe78d00041cd73e387ce25bad66afd4b40ed0a716be9cfb1c"
+    },
+    {
+      "path": "provenance/transform.json",
+      "tier": "metadata",
+      "role": "provenance",
+      "media_type": "application/json",
+      "bytes": 2521,
+      "sha256": "4500b82d5fe03ead84d6cd5c4997ca2b7f66c44512c2fdf4d145f1690a02427c"
+    },
+    {
+      "path": "reference.json",
+      "tier": "metadata",
+      "role": "reference",
+      "media_type": "application/json",
+      "bytes": 1675,
+      "sha256": "7bc2563b339a47b9fc8771d9906278c4b409aa955dd6e5f2febaa8064c617fc9"
+    },
+    {
+      "path": "rights.json",
+      "tier": "metadata",
+      "role": "license",
+      "media_type": "application/json",
+      "bytes": 352,
+      "sha256": "2fe15e571f4be01f3e0ee8230c97307f1ac3dbc878a0ac991d3ce70ee92b9396"
+    },
+    {
+      "path": "samples.json",
+      "tier": "metadata",
+      "role": "samples",
+      "media_type": "application/json",
+      "bytes": 924,
+      "sha256": "d1922aaaf4207a14177b4a68fe04eb96be2affb9f1d3b1b794932f11297a09de"
+    }
+  ],
+  "validation": {
+    "profile": "expected/validation.json",
+    "baseline_version": "deseq2-1.50.2-and-median-ratio-envelope-v1",
+    "metrics": [
+      {
+        "name": "spearman_logfc",
+        "minimum": 0.9,
+        "definition": "Average-tie rank correlation of median-ratio-normalized contrast effects on the shared selected feature universe; higher is better."
+      },
+      {
+        "name": "top_k_jaccard",
+        "minimum": 0.6,
+        "definition": "Jaccard overlap of the top 50 absolute contrast effects on the shared selected feature universe, with ties settled by gene ID; higher is better."
+      },
+      {
+        "name": "distance_correlation",
+        "minimum": 0.9,
+        "definition": "Pearson correlation of sample-pair distances on log2 median-ratio-normalized counts for the full and pocket matrices; higher is better."
+      },
+      {
+        "name": "sign_concordance",
+        "minimum": 0.9,
+        "definition": "Fraction of matching contrast-effect signs where the absolute full-source effect is at least 0.1; higher is better."
+      }
+    ]
+  },
+  "limitations": [
+    "The object starts from an archive count matrix and does not revalidate read alignment or quantification.",
+    "The pocket is intended for workflow testing and method validation, not as a substitute for the full study.",
+    "Strandedness is recorded as unknown because it is not required for count-matrix validation."
+  ]
+}
