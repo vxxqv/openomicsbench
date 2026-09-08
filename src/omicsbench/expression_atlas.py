@@ -116,8 +116,8 @@ def load_counts(path: Path) -> tuple[list[str], list[str], np.ndarray]:
         if not header or header[:2] != ["Gene ID", "Gene Name"] or len(header) < 4:
             raise ValueError("Raw counts need Gene ID, Gene Name and at least two samples")
         samples = header[2:]
-        if len(samples) != len(set(samples)) or any(not sample for sample in samples):
-            raise ValueError("Raw-count sample identifiers must be present and unique")
+        if any(not sample for sample in samples):
+            raise ValueError("Raw-count sample identifiers must be present")
         for number, row in enumerate(rows, start=2):
             if len(row) != len(header) or not row[0]:
                 raise ValueError(f"Raw-count row {number} has the wrong shape")
@@ -136,7 +136,15 @@ def load_counts(path: Path) -> tuple[list[str], list[str], np.ndarray]:
     values = np.asarray(matrix, dtype=np.int64)
     if np.any(values.sum(axis=0, dtype=np.float64) <= 0):
         raise ValueError("Raw-count table contains an empty sample library")
-    return genes, samples, values
+    first: dict[str, int] = {}
+    keep: list[int] = []
+    for index, sample in enumerate(samples):
+        if sample not in first:
+            first[sample] = index
+            keep.append(index)
+        elif not np.array_equal(values[:, first[sample]], values[:, index]):
+            raise ValueError(f"Repeated raw-count sample {sample} has conflicting count columns")
+    return genes, [samples[index] for index in keep], values[:, keep]
 
 
 def _check_design(path: Path) -> tuple[int, list[str], list[str]]:
@@ -192,6 +200,8 @@ def stage(accession: str, destination: Path, opener=urllib.request.urlopen, max_
         "experiment_design": destination / f"{accession}-experiment-design.tsv",
     }
     records = [_stage_one(resources[role], paths[role], opener, max_bytes) for role in ("raw_counts", "experiment_design")]
+    with paths["raw_counts"].open(encoding="utf-8", newline="") as stream:
+        raw_header = next(csv.reader(stream, delimiter="\t"))[2:]
     genes, count_samples, _ = load_counts(paths["raw_counts"])
     analysed, design_samples, columns = _check_design(paths["experiment_design"])
     missing = sorted(set(design_samples) - set(count_samples))
@@ -202,7 +212,12 @@ def stage(accession: str, destination: Path, opener=urllib.request.urlopen, max_
         "accession": accession,
         "genes": len(genes),
         "samples": len(design_samples),
-        "raw_count_columns": len(count_samples),
+        "raw_count_columns": len(raw_header),
+        "deduplicated_count_columns": {
+            sample: raw_header.count(sample)
+            for sample in count_samples
+            if raw_header.count(sample) > 1
+        },
         "excluded_count_columns": excluded,
         "design_columns": columns,
         "resources": records,

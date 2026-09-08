@@ -89,6 +89,7 @@ def run(config_path: Path, staging: Path) -> dict:
         "analysed_samples": len(design),
         "selected_samples": len(sample_ids),
         "excluded_count_columns": transfer["excluded_count_columns"],
+        "deduplicated_count_columns": transfer["deduplicated_count_columns"],
         "conditions": dict(seen),
         "factor_column": factor,
         "batch_column": batch_column,
