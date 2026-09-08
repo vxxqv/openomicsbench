@@ -224,7 +224,29 @@ class CoreTests(unittest.TestCase):
             url=request.full_url if hasattr(request,'full_url') else request
             body=catalogue if '/json/' in url else payloads[url.rsplit('/',1)[-1]]
             return Response(body,url)
-        with self.assertRaisesRegex(ValueError,'do not match'):stage(accession,self.root/'atlas-bad',opener=opener)
+        with self.assertRaisesRegex(ValueError,'missing analysed'):stage(accession,self.root/'atlas-bad',opener=opener)
+
+    def test_atlas_stage_records_unanalysed_count_columns(self):
+        accession='E-MTAB-8572'
+        catalogue=json.dumps([
+            {'type':'icon-raw-counts','description':'counts','url':f'experiments-content/{accession}/resources/counts'},
+            {'type':'icon-experiment-design','description':'design','url':f'experiments-content/{accession}/resources/design'},
+        ]).encode()
+        counts=b'Gene ID\tGene Name\tRUN1\tRUN2\tEXTRA\ng1\tA\t1\t2\t3\n'
+        design=b'Run\tAnalysed\nRUN1\tYes\nRUN2\tYes\nEXTRA\tNo\n'
+        class Response(BytesIO):
+            def __init__(self,body,url):super().__init__(body);self.url=url
+            def geturl(self):return self.url
+            def __enter__(self):return self
+            def __exit__(self,*args):self.close()
+        def opener(request,timeout):
+            url=request.full_url if hasattr(request,'full_url') else request
+            body=catalogue if '/json/' in url else counts if url.endswith('/counts') else design
+            return Response(body,url)
+        result=stage(accession,self.root/'atlas-extra',opener=opener)
+        self.assertEqual(result['samples'],2)
+        self.assertEqual(result['raw_count_columns'],3)
+        self.assertEqual(result['excluded_count_columns'],['EXTRA'])
 
     def test_atlas_design_fields(self):
         path=self.root/'design.tsv'
