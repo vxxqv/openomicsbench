@@ -3,9 +3,18 @@
   "status": "diagnostic_only",
   "source_features": 58735,
   "source_samples": 10,
+  "analysed_samples": 10,
+  "selected_samples": 10,
+  "excluded_count_columns": [],
+  "deduplicated_count_columns": {},
   "conditions": {
     "SLC2A5 knockout mediated by CRISPR/Cas9": 5,
     "wild type genotype": 5
+  },
+  "factor_column": "Factor Value[genotype]",
+  "batch_column": null,
+  "batches": {
+    "not_reported": 10
   },
   "sample_order": [
     "ERR3721875",
@@ -42,7 +51,7 @@
       "metrics": {
         "spearman_logfc": 0.9640336925990667,
         "top_k_jaccard": 0.7543859649122807,
-        "distance_correlation": 0.7508083115956661,
+        "distance_correlation": 0.7508083115956619,
         "sign_concordance": 0.9808306709265175
       },
       "pass": false
@@ -54,7 +63,7 @@
       "metrics": {
         "spearman_logfc": 0.9632716089807898,
         "top_k_jaccard": 0.8518518518518519,
-        "distance_correlation": 0.8514545934213424,
+        "distance_correlation": 0.8514545934213362,
         "sign_concordance": 0.975
       },
       "pass": false
@@ -66,7 +75,7 @@
       "metrics": {
         "spearman_logfc": 0.9865670997001579,
         "top_k_jaccard": 0.8867924528301887,
-        "distance_correlation": 0.9386608119661374,
+        "distance_correlation": 0.9386608119661325,
         "sign_concordance": 0.9974768713204374
       },
       "pass": true
@@ -78,7 +87,7 @@
       "metrics": {
         "spearman_logfc": 0.9892177258993785,
         "top_k_jaccard": 0.9230769230769231,
-        "distance_correlation": 0.9842722840960898,
+        "distance_correlation": 0.9842722840960868,
         "sign_concordance": 1.0
       },
       "pass": true
@@ -90,7 +99,7 @@
       "metrics": {
         "spearman_logfc": 0.9918972590705734,
         "top_k_jaccard": 0.9230769230769231,
-        "distance_correlation": 0.9956567201862182,
+        "distance_correlation": 0.9956567201862176,
         "sign_concordance": 1.0
       },
       "pass": true
@@ -102,7 +111,7 @@
       "metrics": {
         "spearman_logfc": 0.9877527568899556,
         "top_k_jaccard": 0.9230769230769231,
-        "distance_correlation": 0.997954061578395,
+        "distance_correlation": 0.9979540615783948,
         "sign_concordance": 1.0
       },
       "pass": true
@@ -114,7 +123,7 @@
       "metrics": {
         "spearman_logfc": 0.9927303803974574,
         "top_k_jaccard": 0.9230769230769231,
-        "distance_correlation": 0.9983705247596517,
+        "distance_correlation": 0.9983705247596535,
         "sign_concordance": 1.0
       },
       "pass": true
@@ -145,5 +154,5 @@
     "numpy": "2.3.5"
   },
   "config_sha256": "08ff53b035f47c7ca8f51a5105cfb2d635bdd2bf0529eeaa9b28cd91c9e5147f",
-  "workflow_sha256": "270055994e22476edf9cde9a91c969098bb25761892af9fa16bf9e40dfeb6370"
+  "workflow_sha256": "43eedc5ec4f562df898baf5ea49b706cbcd6d0cc6ef53e6aa5e444ce1baa391e"
 }
