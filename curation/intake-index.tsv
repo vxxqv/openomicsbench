@@ -1,12 +1,17 @@
-accession	series_samples	review_status	archetype	rights	release_eligible
+object_key	series_samples	review_status	archetype	rights	release_eligible
 E-GEOD-33979	6	priority	Mouse erythroid genotype	GREEN	False
 E-MTAB-10322	9	priority	Mouse disease and three genotypes	GREEN	False
+E-MTAB-10322-beta	6	priority	Balanced Dmd-mdx-beta genetic comparison	GREEN	False
+E-MTAB-10322-mdx	6	priority	Balanced Dmd-mdx genetic comparison	GREEN	False
 E-MTAB-5477	6	diagnostic_rejected	Subcellular fraction	GREEN	False
 E-MTAB-567	28	priority	Paired tumour and adjacent tissue	GREEN	False
 E-MTAB-6866	6	priority	Plant genetic knockout	GREEN	False
-E-MTAB-7126	6	priority	Cell-line compound response	GREEN	False
+E-MTAB-7126	6	reference_rejected	Cell-line compound response	GREEN	False
 E-MTAB-8572	10	priority	Balanced genetic knockout xenograft	GREEN	False
 E-MTAB-8845	12	priority	Plant genotype and infection	GREEN	False
+E-MTAB-8845-genotype	12	priority	Plant genotype adjusted for infection	GREEN	False
+E-MTAB-8845-infection-gsnor1	6	priority	Infection response in gsnor1	GREEN	False
+E-MTAB-8845-infection-wild	6	priority	Infection response in wild type	GREEN	False
 E-MTAB-9206	6	priority	Cell-line RNA interference	GREEN	False
 GSE18508	121	priority	Non-human mixed library types	AMBER	False
 GSE37704	18	resolve_subseries	Transcript-level candidate	AMBER	False
