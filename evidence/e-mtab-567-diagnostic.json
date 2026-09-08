@@ -1,0 +1,207 @@
+{
+  "accession": "E-MTAB-567",
+  "status": "diagnostic_only",
+  "source_features": 61860,
+  "source_samples": 28,
+  "analysed_samples": 28,
+  "selected_samples": 28,
+  "excluded_count_columns": [],
+  "deduplicated_count_columns": {},
+  "conditions": {
+    "adjacent non-tumor tissue": 14,
+    "tumor tissue": 14
+  },
+  "factor_column": "Factor Value[sampling site]",
+  "batch_column": "Sample Characteristic[individual]",
+  "batches": {
+    "10": 2,
+    "11": 2,
+    "12": 2,
+    "13": 2,
+    "14": 2,
+    "1": 2,
+    "2": 2,
+    "3": 2,
+    "4": 2,
+    "5": 2,
+    "6": 2,
+    "7": 2,
+    "8": 2,
+    "9": 2
+  },
+  "sample_order": [
+    "ERR031017",
+    "ERR031018",
+    "ERR031019",
+    "ERR031022",
+    "ERR031023",
+    "ERR031024",
+    "ERR031025",
+    "ERR031026",
+    "ERR031027",
+    "ERR031028",
+    "ERR031029",
+    "ERR031030",
+    "ERR031031",
+    "ERR031032",
+    "ERR031033",
+    "ERR031035",
+    "ERR031038",
+    "ERR031039",
+    "ERR031040",
+    "ERR031041",
+    "ERR031042",
+    "ERR031043",
+    "ERR031044",
+    "ERR299295",
+    "ERR299296",
+    "ERR299297",
+    "ERR299298",
+    "ERR299299"
+  ],
+  "contrast": "tumor tissue - adjacent non-tumor tissue",
+  "baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), sampling site with individual fixed effects; DESeq2 confirmation remains required.",
+  "normalization": "median_ratio",
+  "full_size_factors": [
+    0.5050803400113822,
+    0.8111277184730247,
+    1.2097300337486783,
+    1.0362426248395078,
+    0.7915713586387162,
+    1.0073456648288306,
+    1.422976789711956,
+    1.1235143738352344,
+    0.7894197600691364,
+    0.8900454405300423,
+    0.9596512273283022,
+    1.0223757877587545,
+    1.4924568084810779,
+    1.2856727781689845,
+    1.1844023315430687,
+    1.0143980650258246,
+    0.9734679659669855,
+    0.8193674560197284,
+    1.0652092904448318,
+    1.214018127440389,
+    0.9613747223560839,
+    1.1175890486185382,
+    0.9384863062749822,
+    1.0348926510913454,
+    1.2195184549031417,
+    0.7011312402818648,
+    0.8629762942061182,
+    1.2101136623769175
+  ],
+  "candidate_curve": [
+    {
+      "features": 500,
+      "bytes": 43943,
+      "size_ratio": 0.007470378503370876,
+      "metrics": {
+        "spearman_logfc": 0.9818927194619377,
+        "top_k_jaccard": 0.639344262295082,
+        "distance_correlation": 0.6623495546384953,
+        "sign_concordance": 0.9883720930232558
+      },
+      "pass": false
+    },
+    {
+      "features": 1000,
+      "bytes": 84861,
+      "size_ratio": 0.014426502291026008,
+      "metrics": {
+        "spearman_logfc": 0.9931386510513991,
+        "top_k_jaccard": 0.8518518518518519,
+        "distance_correlation": 0.7434401973262953,
+        "sign_concordance": 1.0
+      },
+      "pass": false
+    },
+    {
+      "features": 2000,
+      "bytes": 166059,
+      "size_ratio": 0.028230288871748953,
+      "metrics": {
+        "spearman_logfc": 0.995340644269502,
+        "top_k_jaccard": 0.9230769230769231,
+        "distance_correlation": 0.8197150120200631,
+        "sign_concordance": 1.0
+      },
+      "pass": false
+    },
+    {
+      "features": 4000,
+      "bytes": 329227,
+      "size_ratio": 0.05596910323667668,
+      "metrics": {
+        "spearman_logfc": 0.9914674470745215,
+        "top_k_jaccard": 0.8518518518518519,
+        "distance_correlation": 0.8859774634665266,
+        "sign_concordance": 1.0
+      },
+      "pass": false
+    },
+    {
+      "features": 8000,
+      "bytes": 652865,
+      "size_ratio": 0.11098806776058137,
+      "metrics": {
+        "spearman_logfc": 0.9936909374870773,
+        "top_k_jaccard": 0.8867924528301887,
+        "distance_correlation": 0.9482648085457748,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 12000,
+      "bytes": 976700,
+      "size_ratio": 0.16604052259159216,
+      "metrics": {
+        "spearman_logfc": 0.9969429533005916,
+        "top_k_jaccard": 0.9230769230769231,
+        "distance_correlation": 0.9711084136812876,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 20000,
+      "bytes": 1624258,
+      "size_ratio": 0.27612639207901535,
+      "metrics": {
+        "spearman_logfc": 0.9974193871393178,
+        "top_k_jaccard": 0.9230769230769231,
+        "distance_correlation": 0.9873657724212586,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    }
+  ],
+  "smallest_passing_features": 8000,
+  "rights": "GREEN: Expression Atlas material is CC BY 4.0 with attribution.",
+  "reference": "Expression Atlas mapped reads to Ensembl release 107 with TopHat2 2.1.1 and quantified them with HTSeq 0.11.0. Exact FASTA and annotation hashes remain to be pinned.",
+  "release_eligible": false,
+  "source_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-567-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-567/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 5882299,
+      "sha256": "2d29c519baa7500e2d50883fbf5b57578b7e106f850a40e499a6e51c4af5fd0e"
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-567-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-567/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 10415,
+      "sha256": "4529f1c3b0ae0f7c585edbee37c0c1b3c74d59cd180371bf087a8abb4b4fbb87"
+    }
+  ],
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5"
+  },
+  "config_sha256": "6519d68f61fba885cf9d39f3506f6d033532645e5649e4fba21b2a63ce7ab427",
+  "workflow_sha256": "43eedc5ec4f562df898baf5ea49b706cbcd6d0cc6ef53e6aa5e444ce1baa391e"
+}
