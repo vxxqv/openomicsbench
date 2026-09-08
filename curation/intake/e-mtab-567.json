@@ -1,0 +1,129 @@
+{
+  "accession": "E-MTAB-567",
+  "source_systems": [
+    {
+      "name": "Expression Atlas",
+      "url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-567"
+    },
+    {
+      "name": "BioStudies",
+      "url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-567"
+    }
+  ],
+  "checked": "2026-09-08",
+  "title": "Complete transcriptomic landscape of prostate cancer in the Chinese population using RNA-seq",
+  "assay": "bulk RNA-seq of coding RNA",
+  "organism": "Homo sapiens",
+  "taxon_id": 9606,
+  "study_design": {
+    "factor_column": "Factor Value[sampling site]",
+    "groups": {
+      "adjacent non-tumor tissue": 14,
+      "tumor tissue": 14
+    },
+    "analysed_runs": 28,
+    "selected_runs": 28,
+    "balanced": true,
+    "batch_column": "Sample Characteristic[individual]",
+    "batch_levels": {
+      "10": 2,
+      "11": 2,
+      "12": 2,
+      "13": 2,
+      "14": 2,
+      "1": 2,
+      "2": 2,
+      "3": 2,
+      "4": 2,
+      "5": 2,
+      "6": 2,
+      "7": 2,
+      "8": 2,
+      "9": 2
+    }
+  },
+  "atlas_processing": {
+    "source_statement": "Expression Atlas mapped reads to Ensembl release 107 with TopHat2 2.1.1 and quantified them with HTSeq 0.11.0. Exact FASTA and annotation hashes remain to be pinned.",
+    "diagnostic_baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), sampling site with individual fixed effects; DESeq2 confirmation remains required."
+  },
+  "verified_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-567-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-567/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 5882299,
+      "sha256": "2d29c519baa7500e2d50883fbf5b57578b7e106f850a40e499a6e51c4af5fd0e",
+      "genes": 61860,
+      "unique_sample_columns": 28,
+      "excluded_unanalysed_columns": [],
+      "verified_repeated_columns": {},
+      "format_check": "Every retained count parsed as a non-negative integer; repeated run columns, where present, were accepted only after full-vector equality checks."
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-567-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-567/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 10415,
+      "sha256": "4529f1c3b0ae0f7c585edbee37c0c1b3c74d59cd180371bf087a8abb4b4fbb87",
+      "analysed_runs": 28,
+      "format_check": "Analysed run identifiers are present, unique and represented in the retained count matrix."
+    }
+  ],
+  "rights": {
+    "status": "GREEN",
+    "license": "Creative Commons Attribution 4.0 International",
+    "redistribution": "permitted with attribution",
+    "evidence_url": "https://www.ebi.ac.uk/gxa/licence.html",
+    "evidence_page_bytes": 15010,
+    "evidence_page_sha256": "0c35e7e1e590438decb4c44d7d42f1d69a2190eb97acb4bdca5a14cf71f26dd8",
+    "obligations": [
+      "Credit Expression Atlas and EMBL-EBI.",
+      "Cite the current Expression Atlas publication requested on the licence page.",
+      "Retain the experiment accession and originating-study link."
+    ],
+    "checked": "2026-09-08"
+  },
+  "reference_review": {
+    "status": "partially_resolved",
+    "reported_processing": "Expression Atlas mapped reads to Ensembl release 107 with TopHat2 2.1.1 and quantified them with HTSeq 0.11.0. Exact FASTA and annotation hashes remain to be pinned.",
+    "namespace": "Ensembl gene identifiers",
+    "pending": "Pin exact assembly FASTA and annotation file URLs, sizes and SHA-256 checksums, then verify every pocket identifier against the annotation."
+  },
+  "reduction_diagnostic": {
+    "workflow": "workflows/atlas_diagnostic.py",
+    "config": "workflows/e-mtab-567-source.json",
+    "evidence": "evidence/e-mtab-567-diagnostic.json",
+    "normalization": "median_ratio",
+    "candidate_sizes": [
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      12000,
+      20000
+    ],
+    "smallest_passing_features": 8000,
+    "smallest_passing_bytes": 652865,
+    "smallest_passing_size_ratio": 0.11098806776058137,
+    "smallest_passing_metrics": {
+      "spearman_logfc": 0.9936909374870773,
+      "top_k_jaccard": 0.8867924528301887,
+      "distance_correlation": 0.9482648085457748,
+      "sign_concordance": 1.0
+    },
+    "report_sha256": "5f8fb592c30606063bef0e014ed55b7fd2aca4c512dccfebb2174966d7cd7a6c",
+    "repeat_report_sha256": "5f8fb592c30606063bef0e014ed55b7fd2aca4c512dccfebb2174966d7cd7a6c",
+    "repeat_identical": true,
+    "interpretation": "The 8,000-gene candidate is the first declared size to meet all four development thresholds."
+  },
+  "review_status": "priority",
+  "proposed_archetype": "Paired tumour and adjacent tissue",
+  "release_eligible": false,
+  "remaining_work": [
+    "Pin exact reference files and validate the pocket identifier namespace against them.",
+    "Run the DESeq2 full-source and pocket confirmation with recorded versions.",
+    "Prepare dataset-level source attribution and license files.",
+    "Complete an independent clean-environment reproduction before release."
+  ]
+}
