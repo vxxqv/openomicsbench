@@ -1,0 +1,156 @@
+{
+  "accession": "E-MTAB-10322",
+  "status": "diagnostic_only",
+  "source_features": 56748,
+  "source_samples": 9,
+  "analysed_samples": 9,
+  "selected_samples": 9,
+  "excluded_count_columns": [],
+  "deduplicated_count_columns": {},
+  "conditions": {
+    "Duchenne muscular dystrophy": 6,
+    "normal": 3
+  },
+  "factor_column": "Factor Value[disease]",
+  "batch_column": null,
+  "batches": {
+    "not_reported": 9
+  },
+  "sample_order": [
+    "ERR5671402",
+    "ERR5671403",
+    "ERR5671404",
+    "ERR5671405",
+    "ERR5671406",
+    "ERR5671407",
+    "ERR5671408",
+    "ERR5671409",
+    "ERR5671410"
+  ],
+  "contrast": "normal - Duchenne muscular dystrophy",
+  "baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), disease status only; DESeq2 confirmation remains required.",
+  "normalization": "median_ratio",
+  "full_size_factors": [
+    0.9925808984421979,
+    1.016210225048671,
+    0.9413382862380533,
+    1.0945416509607808,
+    0.9896596419993566,
+    0.9318654821893405,
+    1.0070720589741438,
+    0.9536814434307664,
+    1.0863494447437958
+  ],
+  "candidate_curve": [
+    {
+      "features": 500,
+      "bytes": 20632,
+      "size_ratio": 0.007295543042713863,
+      "metrics": {
+        "spearman_logfc": 0.9758262888759877,
+        "top_k_jaccard": 0.9230769230769231,
+        "distance_correlation": 0.25651137914542493,
+        "sign_concordance": 0.9875389408099688
+      },
+      "pass": false
+    },
+    {
+      "features": 1000,
+      "bytes": 40460,
+      "size_ratio": 0.014306789041692657,
+      "metrics": {
+        "spearman_logfc": 0.9737117046575468,
+        "top_k_jaccard": 0.9230769230769231,
+        "distance_correlation": 0.38861888423101465,
+        "sign_concordance": 0.9836867862969005
+      },
+      "pass": false
+    },
+    {
+      "features": 2000,
+      "bytes": 79935,
+      "size_ratio": 0.02826527884448103,
+      "metrics": {
+        "spearman_logfc": 0.9774428732055628,
+        "top_k_jaccard": 0.9230769230769231,
+        "distance_correlation": 0.6360199448365004,
+        "sign_concordance": 0.9942004971002486
+      },
+      "pass": false
+    },
+    {
+      "features": 4000,
+      "bytes": 158509,
+      "size_ratio": 0.05604930361368417,
+      "metrics": {
+        "spearman_logfc": 0.9813058558562132,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.8084397181249249,
+        "sign_concordance": 0.997895622895623
+      },
+      "pass": false
+    },
+    {
+      "features": 8000,
+      "bytes": 315574,
+      "size_ratio": 0.11158800407916754,
+      "metrics": {
+        "spearman_logfc": 0.9917053643807695,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.9163058427319358,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 12000,
+      "bytes": 472164,
+      "size_ratio": 0.16695874298274274,
+      "metrics": {
+        "spearman_logfc": 0.9916925364967824,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.9499653010890914,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 20000,
+      "bytes": 785811,
+      "size_ratio": 0.2778653535254955,
+      "metrics": {
+        "spearman_logfc": 0.9932197732416377,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.9680440696704397,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    }
+  ],
+  "smallest_passing_features": 8000,
+  "rights": "GREEN: Expression Atlas material is CC BY 4.0 with attribution.",
+  "reference": "Expression Atlas mapped reads to Ensembl release 107 with TopHat2 2.1.1 and quantified them with HTSeq 0.11.0. Exact FASTA and annotation hashes remain to be pinned.",
+  "release_eligible": false,
+  "source_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-10322-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-10322/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 2828028,
+      "sha256": "6c0787b459d910aefbecf922797eeb224639c08acdc7959e1ce7278d90cd5892"
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-10322-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-10322/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 5002,
+      "sha256": "c6d74f40c533a5159e98ffc6324846abafd44952c9edd8093e9c2173c5d61a95"
+    }
+  ],
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5"
+  },
+  "config_sha256": "34bdd84e12ac9dfa3d052ef2141c8bce55fda478133acd6a4018f95978640940",
+  "workflow_sha256": "43eedc5ec4f562df898baf5ea49b706cbcd6d0cc6ef53e6aa5e444ce1baa391e"
+}
