@@ -1,0 +1,26 @@
+{
+  "baseline_counts": "expected/source-counts.tsv",
+  "sample_ids": [
+    "ERR4231004",
+    "ERR4231005",
+    "ERR4231006",
+    "ERR4231007",
+    "ERR4231008",
+    "ERR4231009"
+  ],
+  "shapes": {
+    "pocket": [
+      8000,
+      6
+    ]
+  },
+  "top_k": 50,
+  "normalization": "median_ratio",
+  "contrast": {
+    "factor_column": "Factor Value[RNA interference]",
+    "condition_values": null,
+    "batch_column": null,
+    "subset": {}
+  },
+  "deseq2_evidence": "expected/deseq2.json"
+}

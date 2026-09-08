@@ -1,0 +1,44 @@
+[
+  {
+    "sample_id": "ERR4231004",
+    "condition": "scrambled shRNA",
+    "replicate": 1,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR4231005",
+    "condition": "scrambled shRNA",
+    "replicate": 2,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR4231006",
+    "condition": "scrambled shRNA",
+    "replicate": 3,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR4231007",
+    "condition": "ELP3 shRNA",
+    "replicate": 1,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR4231008",
+    "condition": "ELP3 shRNA",
+    "replicate": 2,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR4231009",
+    "condition": "ELP3 shRNA",
+    "replicate": 3,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  }
+]

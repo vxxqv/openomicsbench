@@ -1,0 +1,12 @@
+{
+  "dataset_id": "rnaseq-007",
+  "object_key": "E-MTAB-9206",
+  "source_study": "BT549 cells depleted of ELP3 compared with a scrambled shRNA control. Expression Atlas E-MTAB-9206.",
+  "source_accession": "E-MTAB-9206",
+  "source_url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-9206",
+  "provider": "Expression Atlas, EMBL-EBI",
+  "provider_citation": "Expression Atlas in 2026: enabling FAIR and open expression data through community collaboration and integration. Nucleic Acids Research. DOI 10.1093/nar/gkaf1238.",
+  "curator": "Vivaan Patni",
+  "repository_account": "vxxqv",
+  "changes": "Selected a deterministic feature subset and retained the source integer counts for the declared samples and contrast."
+}
