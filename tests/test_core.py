@@ -18,7 +18,7 @@ from omicsbench.cache import get, verify_cache
 from omicsbench.download import transfer
 from omicsbench.validate import validate
 from omicsbench.rnaseq import ranked,correlation,check_design,contrast_selection_order,median_ratio_size_factors,select_genes,paired_sample,read_counts,preservation
-from omicsbench.expression_atlas import normalize_accession,parse_catalogue,stage
+from omicsbench.expression_atlas import load_design,load_design_fields,normalize_accession,parse_catalogue,stage
 
 ROOT=Path(__file__).resolve().parents[1]
 
@@ -225,5 +225,28 @@ class CoreTests(unittest.TestCase):
             body=catalogue if '/json/' in url else payloads[url.rsplit('/',1)[-1]]
             return Response(body,url)
         with self.assertRaisesRegex(ValueError,'do not match'):stage(accession,self.root/'atlas-bad',opener=opener)
+
+    def test_atlas_design_fields(self):
+        path=self.root/'design.tsv'
+        path.write_text(
+            'Run\tAnalysed\tFactor Value[group]\tSample Characteristic[individual]\n'
+            'R1\tYes\tcontrol\tP1\nR2\tYes\ttreated\tP1\n'
+            'R3\tYes\tcontrol\tP2\nR4\tYes\ttreated\tP2\n'
+            'R5\tNo\tignored\tP3\n',encoding='utf-8'
+        )
+        fields=load_design_fields(path,['Factor Value[group]','Sample Characteristic[individual]'])
+        self.assertEqual(fields['R2'],{'Factor Value[group]':'treated','Sample Characteristic[individual]':'P1'})
+        self.assertNotIn('R5',fields)
+        self.assertEqual(load_design(path,'Factor Value[group]')['R3'],'control')
+
+    def test_atlas_design_rejects_duplicate_runs(self):
+        path=self.root/'duplicate-design.tsv'
+        path.write_text(
+            'Run\tAnalysed\tFactor Value[group]\n'
+            'R1\tYes\tcontrol\nR1\tYes\ttreated\nR2\tYes\tcontrol\nR3\tYes\ttreated\n',
+            encoding='utf-8'
+        )
+        with self.assertRaisesRegex(ValueError,'unique'):
+            load_design_fields(path,['Factor Value[group]'])
 
 if __name__=='__main__':unittest.main()
