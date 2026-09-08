@@ -84,10 +84,19 @@
     "checked": "2026-09-08"
   },
   "reference_review": {
-    "status": "partially_resolved",
-    "reported_processing": "Expression Atlas mapped reads to Ensembl release 107 with TopHat2 2.1.1 and quantified them with HTSeq 0.11.0. Exact FASTA and annotation hashes remain to be pinned.",
+    "status": "verified",
+    "provider": "Ensembl",
+    "release": "107",
+    "assembly": "GRCh38",
+    "genome_url": "https://ftp.ensembl.org/pub/release-107/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz",
+    "genome_official_checksum": "02415 860559 Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz",
+    "annotation_url": "https://ftp.ensembl.org/pub/release-107/gtf/homo_sapiens/Homo_sapiens.GRCh38.107.gtf.gz",
+    "annotation_sha256": "9994f3bc8792c63803e3d91a1a8d2e613503fc59e278bcb156e55d0a7c3fb7b1",
     "namespace": "Ensembl gene identifiers",
-    "pending": "Pin exact assembly FASTA and annotation file URLs, sizes and SHA-256 checksums, then verify every pocket identifier against the annotation."
+    "pocket_features_checked": 8000,
+    "unmatched_features": [],
+    "evidence": "evidence/reference-verification.json",
+    "evidence_sha256": "7a70b2c1b010e40d7851f6c5cae7a9e8d4ffd7bef6b14757d1dcd8dce77ca5a0"
   },
   "reduction_diagnostic": {
     "workflow": "workflows/atlas_diagnostic.py",
@@ -121,7 +130,6 @@
   "proposed_archetype": "Paired tumour and adjacent tissue",
   "release_eligible": false,
   "remaining_work": [
-    "Pin exact reference files and validate the pocket identifier namespace against them.",
     "Prepare dataset-level source attribution and license files.",
     "Complete an independent clean-environment reproduction before release."
   ],
