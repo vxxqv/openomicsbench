@@ -147,6 +147,12 @@ def build(entry: dict, release: str, checked: str, references: dict, reference_h
             "shapes": {"pocket": [diagnostic["smallest_passing_features"], len(samples)]},
             "top_k": config["top_k"],
             "normalization": config["normalization"],
+            "contrast": {
+                "factor_column": factor,
+                "condition_values": config.get("condition_values"),
+                "batch_column": batch_column,
+                "subset": config.get("subset", {}),
+            },
             "deseq2_evidence": "expected/deseq2.json",
         }
         write_json(partial / "expected/validation.json", validation)
