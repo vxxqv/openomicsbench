@@ -248,6 +248,31 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(result['raw_count_columns'],3)
         self.assertEqual(result['excluded_count_columns'],['EXTRA'])
 
+    def test_atlas_stage_deduplicates_identical_count_columns(self):
+        accession='E-MTAB-8572'
+        catalogue=json.dumps([
+            {'type':'icon-raw-counts','description':'counts','url':f'experiments-content/{accession}/resources/counts'},
+            {'type':'icon-experiment-design','description':'design','url':f'experiments-content/{accession}/resources/design'},
+        ]).encode()
+        design=b'Run\tAnalysed\nRUN1\tYes\nRUN2\tYes\n'
+        class Response(BytesIO):
+            def __init__(self,body,url):super().__init__(body);self.url=url
+            def geturl(self):return self.url
+            def __enter__(self):return self
+            def __exit__(self,*args):self.close()
+        def run(counts,destination):
+            def opener(request,timeout):
+                url=request.full_url if hasattr(request,'full_url') else request
+                body=catalogue if '/json/' in url else counts if url.endswith('/counts') else design
+                return Response(body,url)
+            return stage(accession,destination,opener=opener)
+        identical=b'Gene ID\tGene Name\tRUN1\tRUN1\tRUN2\ng1\tA\t1\t1\t2\n'
+        result=run(identical,self.root/'atlas-duplicate')
+        self.assertEqual(result['deduplicated_count_columns'],{'RUN1':2})
+        conflicting=b'Gene ID\tGene Name\tRUN1\tRUN1\tRUN2\ng1\tA\t1\t9\t2\n'
+        with self.assertRaisesRegex(ValueError,'conflicting'):
+            run(conflicting,self.root/'atlas-conflict')
+
     def test_atlas_design_fields(self):
         path=self.root/'design.tsv'
         path.write_text(
