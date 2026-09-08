@@ -1,0 +1,102 @@
+{
+  "release": "1.0.0.dev1",
+  "checked": "2026-09-08",
+  "objects": [
+    {
+      "dataset_id": "rnaseq-002",
+      "object_key": "E-MTAB-8572",
+      "config": "workflows/expression-atlas-source.json",
+      "title": "SLC2A5 knockout in A549 xenografts",
+      "archetype": "balanced genetic knockout xenograft",
+      "citation": "RNA-seq of human lung cancer cell line A549-NC and A549-SLC2A5 knockout xenograft in BALB/c nude mice. Expression Atlas E-MTAB-8572."
+    },
+    {
+      "dataset_id": "rnaseq-003",
+      "object_key": "E-MTAB-6866",
+      "config": "workflows/e-mtab-6866-source.json",
+      "title": "AtRsgA knockout in Arabidopsis seedlings",
+      "archetype": "balanced plant genetic knockout",
+      "citation": "Janowski et al. AtRsgA from Arabidopsis thaliana is important for maturation of the small subunit of the chloroplast ribosome. Plant Journal. DOI 10.1111/tpj.14040."
+    },
+    {
+      "dataset_id": "rnaseq-004",
+      "object_key": "E-GEOD-33979",
+      "config": "workflows/e-geod-33979-source.json",
+      "title": "Klf1 knockout in mouse erythroid tissue",
+      "archetype": "balanced mouse genetic knockout",
+      "citation": "Tallack et al. Novel roles for Klf1 in regulating the erythroid transcriptome revealed by mRNA-seq. Genome Research. DOI 10.1101/gr.135707.111."
+    },
+    {
+      "dataset_id": "rnaseq-005",
+      "object_key": "E-MTAB-567",
+      "config": "workflows/e-mtab-567-source.json",
+      "title": "Paired prostate tumour and adjacent tissue",
+      "archetype": "paired tumour and adjacent tissue",
+      "citation": "Ren et al. RNA-seq analysis of prostate cancer in the Chinese population. Cell Research. DOI 10.1038/cr.2012.30."
+    },
+    {
+      "dataset_id": "rnaseq-006",
+      "object_key": "E-MTAB-8845",
+      "config": "workflows/e-mtab-8845-source.json",
+      "title": "Arabidopsis infection response adjusted for genotype",
+      "archetype": "factorial plant infection response",
+      "citation": "RNA sequencing of Arabidopsis thaliana gsnor1 and Col-0 after Phytophthora parasitica infection. Expression Atlas E-MTAB-8845."
+    },
+    {
+      "dataset_id": "rnaseq-007",
+      "object_key": "E-MTAB-9206",
+      "config": "workflows/e-mtab-9206-source.json",
+      "title": "ELP3 depletion in BT549 breast cancer cells",
+      "archetype": "balanced cell-line RNA interference",
+      "citation": "BT549 cells depleted of ELP3 compared with a scrambled shRNA control. Expression Atlas E-MTAB-9206."
+    },
+    {
+      "dataset_id": "rnaseq-008",
+      "object_key": "E-MTAB-10322",
+      "config": "workflows/e-mtab-10322-source.json",
+      "title": "Duchenne muscular dystrophy myoblast comparison",
+      "archetype": "imbalanced disease comparison",
+      "citation": "Gosselin et al. Loss of full-length dystrophin expression causes major cell-autonomous abnormalities in proliferating myoblasts. eLife. DOI 10.7554/eLife.75521."
+    },
+    {
+      "dataset_id": "rnaseq-009",
+      "object_key": "E-MTAB-8845-genotype",
+      "config": "workflows/e-mtab-8845-genotype-source.json",
+      "title": "Arabidopsis gsnor1 genotype adjusted for infection",
+      "archetype": "factorial plant genotype response",
+      "citation": "RNA sequencing of Arabidopsis thaliana gsnor1 and Col-0 after Phytophthora parasitica infection. Expression Atlas E-MTAB-8845."
+    },
+    {
+      "dataset_id": "rnaseq-010",
+      "object_key": "E-MTAB-8845-infection-wild",
+      "config": "workflows/e-mtab-8845-infection-wild-source.json",
+      "title": "Phytophthora response in wild-type Arabidopsis",
+      "archetype": "stratified wild-type infection response",
+      "citation": "RNA sequencing of Arabidopsis thaliana gsnor1 and Col-0 after Phytophthora parasitica infection. Expression Atlas E-MTAB-8845."
+    },
+    {
+      "dataset_id": "rnaseq-011",
+      "object_key": "E-MTAB-8845-infection-gsnor1",
+      "config": "workflows/e-mtab-8845-infection-gsnor1-source.json",
+      "title": "Phytophthora response in gsnor1 Arabidopsis",
+      "archetype": "stratified mutant infection response",
+      "citation": "RNA sequencing of Arabidopsis thaliana gsnor1 and Col-0 after Phytophthora parasitica infection. Expression Atlas E-MTAB-8845."
+    },
+    {
+      "dataset_id": "rnaseq-012",
+      "object_key": "E-MTAB-10322-mdx",
+      "config": "workflows/e-mtab-10322-mdx-source.json",
+      "title": "Dmd-mdx myoblasts compared with wild type",
+      "archetype": "balanced Dmd-mdx genetic comparison",
+      "citation": "Gosselin et al. Loss of full-length dystrophin expression causes major cell-autonomous abnormalities in proliferating myoblasts. eLife. DOI 10.7554/eLife.75521."
+    },
+    {
+      "dataset_id": "rnaseq-013",
+      "object_key": "E-MTAB-10322-beta",
+      "config": "workflows/e-mtab-10322-beta-source.json",
+      "title": "Dmd-mdx-beta-geo myoblasts compared with wild type",
+      "archetype": "balanced Dmd-mdx-beta-geo genetic comparison",
+      "citation": "Gosselin et al. Loss of full-length dystrophin expression causes major cell-autonomous abnormalities in proliferating myoblasts. eLife. DOI 10.7554/eLife.75521."
+    }
+  ]
+}
