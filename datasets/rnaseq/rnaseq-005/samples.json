@@ -1,0 +1,198 @@
+[
+  {
+    "sample_id": "ERR031017",
+    "condition": "adjacent non-tumor tissue",
+    "replicate": 1,
+    "batch": "10",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031018",
+    "condition": "tumor tissue",
+    "replicate": 1,
+    "batch": "10",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031019",
+    "condition": "adjacent non-tumor tissue",
+    "replicate": 2,
+    "batch": "11",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031022",
+    "condition": "tumor tissue",
+    "replicate": 2,
+    "batch": "12",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031023",
+    "condition": "adjacent non-tumor tissue",
+    "replicate": 3,
+    "batch": "13",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031024",
+    "condition": "tumor tissue",
+    "replicate": 3,
+    "batch": "13",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031025",
+    "condition": "adjacent non-tumor tissue",
+    "replicate": 4,
+    "batch": "14",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031026",
+    "condition": "tumor tissue",
+    "replicate": 4,
+    "batch": "14",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031027",
+    "condition": "adjacent non-tumor tissue",
+    "replicate": 5,
+    "batch": "1",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031028",
+    "condition": "tumor tissue",
+    "replicate": 5,
+    "batch": "1",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031029",
+    "condition": "adjacent non-tumor tissue",
+    "replicate": 6,
+    "batch": "2",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031030",
+    "condition": "tumor tissue",
+    "replicate": 6,
+    "batch": "2",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031031",
+    "condition": "adjacent non-tumor tissue",
+    "replicate": 7,
+    "batch": "3",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031032",
+    "condition": "tumor tissue",
+    "replicate": 7,
+    "batch": "3",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031033",
+    "condition": "adjacent non-tumor tissue",
+    "replicate": 8,
+    "batch": "4",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031035",
+    "condition": "adjacent non-tumor tissue",
+    "replicate": 9,
+    "batch": "5",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031038",
+    "condition": "tumor tissue",
+    "replicate": 8,
+    "batch": "6",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031039",
+    "condition": "adjacent non-tumor tissue",
+    "replicate": 10,
+    "batch": "7",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031040",
+    "condition": "tumor tissue",
+    "replicate": 9,
+    "batch": "7",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031041",
+    "condition": "adjacent non-tumor tissue",
+    "replicate": 11,
+    "batch": "8",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031042",
+    "condition": "tumor tissue",
+    "replicate": 10,
+    "batch": "8",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031043",
+    "condition": "adjacent non-tumor tissue",
+    "replicate": 12,
+    "batch": "9",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR031044",
+    "condition": "tumor tissue",
+    "replicate": 11,
+    "batch": "9",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR299295",
+    "condition": "tumor tissue",
+    "replicate": 12,
+    "batch": "11",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR299296",
+    "condition": "adjacent non-tumor tissue",
+    "replicate": 13,
+    "batch": "12",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR299297",
+    "condition": "tumor tissue",
+    "replicate": 13,
+    "batch": "4",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR299298",
+    "condition": "tumor tissue",
+    "replicate": 14,
+    "batch": "5",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR299299",
+    "condition": "adjacent non-tumor tissue",
+    "replicate": 14,
+    "batch": "6",
+    "strandedness": "unknown"
+  }
+]

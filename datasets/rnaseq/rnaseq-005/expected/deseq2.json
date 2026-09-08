@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "accession": "E-MTAB-567",
+  "status": "pass",
+  "release_eligible": false,
+  "release_gates_remaining": [
+    "exact reference-file checksums",
+    "dataset attribution package",
+    "independent clean-environment reproduction"
+  ],
+  "design": {
+    "formula": "~ batch + condition",
+    "factor_column": "Factor Value[sampling site]",
+    "batch_column": "Sample Characteristic[individual]",
+    "contrast": "tumor tissue versus adjacent non-tumor tissue",
+    "samples": 28,
+    "full_features": 61860,
+    "pocket_features": 8000,
+    "finite_shared_effects": 5548
+  },
+  "thresholds": {
+    "spearman_logfc": 0.9,
+    "top_k_jaccard": 0.6,
+    "distance_correlation": 0.9,
+    "sign_concordance": 0.9
+  },
+  "metrics": {
+    "spearman_logfc": 0.9999469137269074,
+    "top_k_jaccard": 0.9230769230769231,
+    "distance_correlation": 0.9480391749088565,
+    "sign_concordance": 1.0
+  },
+  "runtime": {
+    "r": "4.5.3",
+    "deseq2": "1.50.2",
+    "python": "3.12.14",
+    "numpy": "2.3.5"
+  },
+  "inputs": {
+    "diagnostic_report_sha256": "5f8fb592c30606063bef0e014ed55b7fd2aca4c512dccfebb2174966d7cd7a6c",
+    "config_sha256": "6519d68f61fba885cf9d39f3506f6d033532645e5649e4fba21b2a63ce7ab427",
+    "full_counts_sha256": "c08b18d6cb5f1c9c193f9d683b3ac5f09a1d1308a3b81c75a60249fe70eabdbb",
+    "pocket_counts_sha256": "234f79b7bc73691e452b30ebb3449668135923caeee8621fa0f334041722d635",
+    "samples_sha256": "7d9ec7f23293251ebbe3c487e54441169b9b92260249f821c56c904e3e797b85"
+  },
+  "artifacts": {
+    "full": {
+      "contrast.log": {
+        "bytes": 47,
+        "sha256": "23704d1a023e566b51cec4cd13c491b32248610bc00b0eb72d0af75ac7c923cc"
+      },
+      "differential_expression.tsv": {
+        "bytes": 6181667,
+        "sha256": "da9657b944c32dce6083b766246ed60fd5a74eb9309de6743bb06eb17b18b3ba"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 17297981,
+        "sha256": "44618f6e8123252e1169827b54e3cd7ca7afe56df7daa8a02bca8fcc99f515a7"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "2000ed5d4b68d7c8be4551d4bdc52383b95cc052b73c92b02e0a28867709e8b5"
+      }
+    },
+    "pocket": {
+      "contrast.log": {
+        "bytes": 47,
+        "sha256": "23704d1a023e566b51cec4cd13c491b32248610bc00b0eb72d0af75ac7c923cc"
+      },
+      "differential_expression.tsv": {
+        "bytes": 732873,
+        "sha256": "758a59e823a589fd3418a44c881fb450c27186ae22d998087296e7b14d079dcc"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 2052792,
+        "sha256": "11f333a508d87a285e0fcb4d4400929badb4200ad7848465998ba19c985b4063"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "2000ed5d4b68d7c8be4551d4bdc52383b95cc052b73c92b02e0a28867709e8b5"
+      }
+    }
+  },
+  "workflow": {
+    "python_sha256": "287c64bfdd5b4f590ad81bb263c7dac28a2ec270f9339f3f94879b25dd368cf3",
+    "r_sha256": "b4244d58364e77f0b4771339d07110e6f89fe2fcf0727562a5fd47f0e3ce74f6"
+  }
+}

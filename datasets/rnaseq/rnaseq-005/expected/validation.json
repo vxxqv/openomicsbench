@@ -1,0 +1,48 @@
+{
+  "baseline_counts": "expected/source-counts.tsv",
+  "sample_ids": [
+    "ERR031017",
+    "ERR031018",
+    "ERR031019",
+    "ERR031022",
+    "ERR031023",
+    "ERR031024",
+    "ERR031025",
+    "ERR031026",
+    "ERR031027",
+    "ERR031028",
+    "ERR031029",
+    "ERR031030",
+    "ERR031031",
+    "ERR031032",
+    "ERR031033",
+    "ERR031035",
+    "ERR031038",
+    "ERR031039",
+    "ERR031040",
+    "ERR031041",
+    "ERR031042",
+    "ERR031043",
+    "ERR031044",
+    "ERR299295",
+    "ERR299296",
+    "ERR299297",
+    "ERR299298",
+    "ERR299299"
+  ],
+  "shapes": {
+    "pocket": [
+      8000,
+      28
+    ]
+  },
+  "top_k": 50,
+  "normalization": "median_ratio",
+  "contrast": {
+    "factor_column": "Factor Value[sampling site]",
+    "condition_values": null,
+    "batch_column": "Sample Characteristic[individual]",
+    "subset": {}
+  },
+  "deseq2_evidence": "expected/deseq2.json"
+}
