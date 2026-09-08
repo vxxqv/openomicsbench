@@ -1,0 +1,32 @@
+{
+  "baseline_counts": "expected/source-counts.tsv",
+  "sample_ids": [
+    "ERR3971851",
+    "ERR3971852",
+    "ERR3971853",
+    "ERR3971854",
+    "ERR3971855",
+    "ERR3971856",
+    "ERR3971857",
+    "ERR3971858",
+    "ERR3971859",
+    "ERR3971860",
+    "ERR3971861",
+    "ERR3971862"
+  ],
+  "shapes": {
+    "pocket": [
+      500,
+      12
+    ]
+  },
+  "top_k": 50,
+  "normalization": "median_ratio",
+  "contrast": {
+    "factor_column": "Factor Value[genotype]",
+    "condition_values": null,
+    "batch_column": "Factor Value[infect]",
+    "subset": {}
+  },
+  "deseq2_evidence": "expected/deseq2.json"
+}

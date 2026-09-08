@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "accession": "E-MTAB-8845",
+  "object_key": "E-MTAB-8845-genotype",
+  "status": "pass",
+  "release_eligible": false,
+  "release_gates_remaining": [
+    "exact reference-file checksums",
+    "dataset attribution package",
+    "independent clean-environment reproduction"
+  ],
+  "design": {
+    "formula": "~ batch + condition",
+    "factor_column": "Factor Value[genotype]",
+    "batch_column": "Factor Value[infect]",
+    "subset": {},
+    "contrast": "wild type genotype versus gsnor1",
+    "samples": 12,
+    "full_features": 32833,
+    "pocket_features": 500,
+    "finite_shared_effects": 376
+  },
+  "thresholds": {
+    "spearman_logfc": 0.9,
+    "top_k_jaccard": 0.6,
+    "distance_correlation": 0.9,
+    "sign_concordance": 0.9
+  },
+  "metrics": {
+    "spearman_logfc": 0.9991215642736454,
+    "top_k_jaccard": 1.0,
+    "distance_correlation": 0.9837473481867061,
+    "sign_concordance": 1.0
+  },
+  "runtime": {
+    "r": "4.5.3",
+    "deseq2": "1.50.2",
+    "python": "3.12.14",
+    "numpy": "2.3.5"
+  },
+  "inputs": {
+    "diagnostic_report_sha256": "9b8a63be4c113f41c47c3a3aedf602b1bddac5dd92a47398dc851912f4f036e2",
+    "config_sha256": "b1c9b8fc7cba01030b3fe7fdd6bbefbc8bfc1b0a9d96d58f9e7c980561315a00",
+    "full_counts_sha256": "9e49d4278e37aecafe2013aaf9c86e1c1093e76ea6a69d38c6fba3ef74f0aa7e",
+    "pocket_counts_sha256": "06aa6c608edd12fba975925f4861eb21d85502544af138ae5733d12b5ae7ad51",
+    "samples_sha256": "0a0d6ebe632fc8a2d087d58e118d335a0e7673aa11aa9eadc29ddec3a2a0471e"
+  },
+  "artifacts": {
+    "full": {
+      "contrast.log": {
+        "bytes": 34,
+        "sha256": "91f2fc00550373248cd105f17deb0a25c42b24d3b8cd96ca36c216b89b81d576"
+      },
+      "differential_expression.tsv": {
+        "bytes": 3177996,
+        "sha256": "5cd70456dc77a5247ca575213e60d3ab1398718cd2b329b36b89e0477406abbe"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 5153612,
+        "sha256": "911e2bc4843a8ad479065308484021fe9c05c180b90004ae302f8129ee40e5eb"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "2000ed5d4b68d7c8be4551d4bdc52383b95cc052b73c92b02e0a28867709e8b5"
+      }
+    },
+    "pocket": {
+      "contrast.log": {
+        "bytes": 34,
+        "sha256": "91f2fc00550373248cd105f17deb0a25c42b24d3b8cd96ca36c216b89b81d576"
+      },
+      "differential_expression.tsv": {
+        "bytes": 48476,
+        "sha256": "c87684d7a9a3b956e0cb486ac1603bfb789baa859c47bd81b9a4b6ef34435be1"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 78789,
+        "sha256": "4cbff3c1fff585f3ecfc9d677116f3a15b2a39984429a583b26bd967a1ea252e"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "2000ed5d4b68d7c8be4551d4bdc52383b95cc052b73c92b02e0a28867709e8b5"
+      }
+    }
+  },
+  "workflow": {
+    "python_sha256": "27c97f5f39f414665ff5823fa3f324d208b1a7fac47dcd72cfe018a1562c5fa0",
+    "r_sha256": "b4244d58364e77f0b4771339d07110e6f89fe2fcf0727562a5fd47f0e3ce74f6"
+  }
+}

@@ -1,0 +1,86 @@
+[
+  {
+    "sample_id": "ERR3971851",
+    "condition": "wild type genotype",
+    "replicate": 1,
+    "batch": "Phytophthora parasitica",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3971852",
+    "condition": "wild type genotype",
+    "replicate": 2,
+    "batch": "Phytophthora parasitica",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3971853",
+    "condition": "wild type genotype",
+    "replicate": 3,
+    "batch": "Phytophthora parasitica",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3971854",
+    "condition": "wild type genotype",
+    "replicate": 4,
+    "batch": "none",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3971855",
+    "condition": "wild type genotype",
+    "replicate": 5,
+    "batch": "none",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3971856",
+    "condition": "wild type genotype",
+    "replicate": 6,
+    "batch": "none",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3971857",
+    "condition": "gsnor1",
+    "replicate": 1,
+    "batch": "Phytophthora parasitica",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3971858",
+    "condition": "gsnor1",
+    "replicate": 2,
+    "batch": "Phytophthora parasitica",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3971859",
+    "condition": "gsnor1",
+    "replicate": 3,
+    "batch": "Phytophthora parasitica",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3971860",
+    "condition": "gsnor1",
+    "replicate": 4,
+    "batch": "none",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3971861",
+    "condition": "gsnor1",
+    "replicate": 5,
+    "batch": "none",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3971862",
+    "condition": "gsnor1",
+    "replicate": 6,
+    "batch": "none",
+    "strandedness": "unknown"
+  }
+]
