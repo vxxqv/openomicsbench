@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "accession": "E-MTAB-7126",
+  "status": "pass",
+  "release_eligible": false,
+  "release_gates_remaining": [
+    "exact reference-file checksums",
+    "dataset attribution package",
+    "independent clean-environment reproduction"
+  ],
+  "design": {
+    "formula": "~ condition",
+    "factor_column": "Factor Value[compound]",
+    "batch_column": null,
+    "contrast": "dimethyl sulfoxide 10 micromolar versus Col-3 10 micromolar",
+    "samples": 6,
+    "full_features": 65217,
+    "pocket_features": 2000,
+    "finite_shared_effects": 1327
+  },
+  "thresholds": {
+    "spearman_logfc": 0.9,
+    "top_k_jaccard": 0.6,
+    "distance_correlation": 0.9,
+    "sign_concordance": 0.9
+  },
+  "metrics": {
+    "spearman_logfc": 0.9990887168229146,
+    "top_k_jaccard": 0.7857142857142857,
+    "distance_correlation": 0.9325019099438291,
+    "sign_concordance": 0.9859594383775351
+  },
+  "runtime": {
+    "r": "4.5.3",
+    "deseq2": "1.50.2",
+    "python": "3.12.14",
+    "numpy": "2.3.5"
+  },
+  "inputs": {
+    "diagnostic_report_sha256": "0a2b21e566dad9b4d7f9ea9505d9e60637d367bdb7b3b5017a5be0e2793c9306",
+    "config_sha256": "40281e9e6c976d089d85c6517013bea07d9fb54632339008f316576b82daa0c5",
+    "full_counts_sha256": "08a7a57f78afa1e08a14e657c8d3b9db38e0e9712ed69e6b732becc208754768",
+    "pocket_counts_sha256": "7987cec284f33ba0393465eb18c3646350c4be6271b1663dd1ada93ee86ed858",
+    "samples_sha256": "b9e4d2b16475422625843eda43d2859a2f23a620b818b2d5d6844e4fe7a8e5fc"
+  },
+  "artifacts": {
+    "full": {
+      "contrast.log": {
+        "bytes": 61,
+        "sha256": "81f9ac5fab70f75448cb3958b543a01a4205fe22d6011a1772b8a19a91b300e1"
+      },
+      "differential_expression.tsv": {
+        "bytes": 5610529,
+        "sha256": "7843caf50963c6f4bc9bdb6d40b6740d2245aea674186ec54cc853bde460024e"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 4643184,
+        "sha256": "e2c3c31bd9914c5d9762fa1ca729c6642d87fbc602e15c7e574cf3d7203dcb3a"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "2000ed5d4b68d7c8be4551d4bdc52383b95cc052b73c92b02e0a28867709e8b5"
+      }
+    },
+    "pocket": {
+      "contrast.log": {
+        "bytes": 61,
+        "sha256": "81f9ac5fab70f75448cb3958b543a01a4205fe22d6011a1772b8a19a91b300e1"
+      },
+      "differential_expression.tsv": {
+        "bytes": 175376,
+        "sha256": "cbe049d319f09b5991658ac0d3eff1758869889c72a1433b183b066310f980b4"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 130116,
+        "sha256": "d40d8a0a3247f778874d1e7ba8726cbf6b9d998d28b4c5e13a43a1df5675880c"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "2000ed5d4b68d7c8be4551d4bdc52383b95cc052b73c92b02e0a28867709e8b5"
+      }
+    }
+  },
+  "workflow": {
+    "python_sha256": "287c64bfdd5b4f590ad81bb263c7dac28a2ec270f9339f3f94879b25dd368cf3",
+    "r_sha256": "b4244d58364e77f0b4771339d07110e6f89fe2fcf0727562a5fd47f0e3ce74f6"
+  }
+}
