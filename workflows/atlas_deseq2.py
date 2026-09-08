@@ -9,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 
-from omicsbench.expression_atlas import load_counts, load_design_fields
+from omicsbench.expression_atlas import load_counts, load_design_fields, select_design_samples
 from omicsbench.hashing import digest
 from omicsbench.rnaseq import correlation, ranked
 
@@ -30,16 +30,12 @@ def design_inputs(config: dict, diagnostic_dir: Path):
     genes, count_samples, counts = load_counts(source / f"{accession}-raw-counts.tsv")
     factor = config["factor_column"]
     batch_column = config.get("batch_column")
-    fields = [factor] + ([batch_column] if batch_column else [])
+    subset = config.get("subset", {})
+    fields = list(dict.fromkeys([factor] + ([batch_column] if batch_column else []) + list(subset)))
     design = load_design_fields(source / f"{accession}-experiment-design.tsv", fields)
-    selected = [index for index, sample in enumerate(count_samples) if sample in design]
-    samples = [count_samples[index] for index in selected]
-    counts = counts[:, selected]
-    allowed = config.get("condition_values")
-    if allowed is not None:
-        keep = [index for index, sample in enumerate(samples) if design[sample][factor] in set(allowed)]
-        samples = [samples[index] for index in keep]
-        counts = counts[:, keep]
+    samples = select_design_samples(count_samples, design, factor, config.get("condition_values"), subset)
+    lookup = {sample: index for index, sample in enumerate(count_samples)}
+    counts = counts[:, [lookup[sample] for sample in samples]]
     metadata = [
         (sample, design[sample][factor], design[sample][batch_column] if batch_column else "not_reported")
         for sample in samples
@@ -134,6 +130,7 @@ def run(config_path: Path, diagnostic_dir: Path, output: Path, conda: Path, envi
     report = {
         "schema_version": "1.0",
         "accession": config["accession"],
+        "object_key": config.get("object_key", config["accession"]),
         "status": "pass" if passed else "fail",
         "release_eligible": False,
         "release_gates_remaining": ["exact reference-file checksums", "dataset attribution package", "independent clean-environment reproduction"],
@@ -141,6 +138,7 @@ def run(config_path: Path, diagnostic_dir: Path, output: Path, conda: Path, envi
             "formula": "~ batch + condition" if len({row[2] for row in metadata}) > 1 else "~ condition",
             "factor_column": config["factor_column"],
             "batch_column": config.get("batch_column"),
+            "subset": config.get("subset", {}),
             "contrast": contrast,
             "samples": len(samples),
             "full_features": len(genes),

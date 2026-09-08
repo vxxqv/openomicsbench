@@ -191,6 +191,40 @@ def load_design(path: Path, factor: str) -> dict[str, str]:
     return design
 
 
+def select_design_samples(
+    count_samples: list[str],
+    design: dict[str, dict[str, str]],
+    factor: str,
+    condition_values: list[str] | None = None,
+    subset: dict[str, list[str]] | None = None,
+) -> list[str]:
+    if not set(design) <= set(count_samples):
+        raise ValueError("Count columns are missing analysed design runs")
+    subset = subset or {}
+    for field, allowed in subset.items():
+        if not isinstance(allowed, list) or not allowed or len(allowed) != len(set(allowed)) or any(not value for value in allowed):
+            raise ValueError(f"Subset values for {field} must be a non-empty unique list")
+        if any(field not in values for values in design.values()):
+            raise ValueError(f"Subset field is absent from the loaded design: {field}")
+    selected = [
+        sample for sample in count_samples
+        if sample in design and all(design[sample][field] in set(allowed) for field, allowed in subset.items())
+    ]
+    if condition_values is not None:
+        if not isinstance(condition_values, list) or len(condition_values) != 2 or len(set(condition_values)) != 2 or any(not value for value in condition_values):
+            raise ValueError("condition_values must contain two distinct non-empty values")
+        observed = {design[sample][factor] for sample in selected}
+        if not set(condition_values) <= observed:
+            raise ValueError("condition_values contains a value absent after design subsetting")
+        selected = [sample for sample in selected if design[sample][factor] in set(condition_values)]
+    conditions = {design[sample][factor] for sample in selected}
+    if len(conditions) != 2:
+        raise ValueError("The selected diagnostic design requires exactly two factor values")
+    if any(sum(design[sample][factor] == condition for sample in selected) < 2 for condition in conditions):
+        raise ValueError("Each selected condition needs at least two analysed runs")
+    return selected
+
+
 def stage(accession: str, destination: Path, opener=urllib.request.urlopen, max_bytes: int = 1_000_000_000) -> dict:
     accession = normalize_accession(accession)
     resources = discover(accession, opener)
