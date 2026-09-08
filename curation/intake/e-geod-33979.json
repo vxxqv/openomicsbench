@@ -109,8 +109,35 @@
   "release_eligible": false,
   "remaining_work": [
     "Pin exact reference files and validate the pocket identifier namespace against them.",
-    "Run the DESeq2 full-source and pocket confirmation with recorded versions.",
     "Prepare dataset-level source attribution and license files.",
     "Complete an independent clean-environment reproduction before release."
-  ]
+  ],
+  "deseq2_confirmation": {
+    "status": "pass",
+    "evidence": "evidence/e-geod-33979-deseq2.json",
+    "baseline_report_sha256": "4f7beed84ff91eb138d2ed59304f722f97021e51252c624d20e351b5f0c21270",
+    "runtime": {
+      "r": "4.5.3",
+      "deseq2": "1.50.2",
+      "python": "3.12.14",
+      "numpy": "2.3.5"
+    },
+    "formula": "~ condition",
+    "contrast": "wild type genotype versus Klf1-/-",
+    "full_features": 55573,
+    "pocket_features": 4000,
+    "finite_shared_effects": 2481,
+    "metrics": {
+      "spearman_logfc": 0.9793186499623325,
+      "top_k_jaccard": 0.7857142857142857,
+      "distance_correlation": 0.9408752119968673,
+      "sign_concordance": 0.9600333055786844
+    },
+    "thresholds": {
+      "spearman_logfc": 0.9,
+      "top_k_jaccard": 0.6,
+      "distance_correlation": 0.9,
+      "sign_concordance": 0.9
+    }
+  }
 }
