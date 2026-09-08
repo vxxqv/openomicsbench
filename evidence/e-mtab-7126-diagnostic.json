@@ -1,0 +1,153 @@
+{
+  "accession": "E-MTAB-7126",
+  "status": "diagnostic_only",
+  "source_features": 65217,
+  "source_samples": 8,
+  "analysed_samples": 6,
+  "selected_samples": 6,
+  "excluded_count_columns": [
+    "ERR2731440",
+    "ERR2731442"
+  ],
+  "deduplicated_count_columns": {},
+  "conditions": {
+    "Col-3 10 micromolar": 3,
+    "dimethyl sulfoxide 10 micromolar": 3
+  },
+  "factor_column": "Factor Value[compound]",
+  "batch_column": null,
+  "batches": {
+    "not_reported": 6
+  },
+  "sample_order": [
+    "ERR2731437",
+    "ERR2731438",
+    "ERR2731439",
+    "ERR2731443",
+    "ERR2731444",
+    "ERR2731445"
+  ],
+  "contrast": "dimethyl sulfoxide 10 micromolar - Col-3 10 micromolar",
+  "baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), compound only; DESeq2 confirmation remains required.",
+  "normalization": "median_ratio",
+  "full_size_factors": [
+    1.037427669337248,
+    0.9544501321011695,
+    0.8283966704773966,
+    0.9565903736369666,
+    1.0471212611228904,
+    1.217103754326998
+  ],
+  "candidate_curve": [
+    {
+      "features": 500,
+      "bytes": 14992,
+      "size_ratio": 0.005527275623099677,
+      "metrics": {
+        "spearman_logfc": 0.9924739565851619,
+        "top_k_jaccard": 0.7543859649122807,
+        "distance_correlation": 0.7735361396424422,
+        "sign_concordance": 1.0
+      },
+      "pass": false
+    },
+    {
+      "features": 1000,
+      "bytes": 29653,
+      "size_ratio": 0.010932517612845164,
+      "metrics": {
+        "spearman_logfc": 0.9898332817705668,
+        "top_k_jaccard": 0.7857142857142857,
+        "distance_correlation": 0.8761863036495865,
+        "sign_concordance": 1.0
+      },
+      "pass": false
+    },
+    {
+      "features": 2000,
+      "bytes": 58666,
+      "size_ratio": 0.02162907895576078,
+      "metrics": {
+        "spearman_logfc": 0.9847086770446155,
+        "top_k_jaccard": 0.6666666666666666,
+        "distance_correlation": 0.9328361378713386,
+        "sign_concordance": 0.9913657770800628
+      },
+      "pass": true
+    },
+    {
+      "features": 4000,
+      "bytes": 116587,
+      "size_ratio": 0.042983490066056694,
+      "metrics": {
+        "spearman_logfc": 0.9876633351262484,
+        "top_k_jaccard": 0.7241379310344828,
+        "distance_correlation": 0.9712868877449183,
+        "sign_concordance": 0.9959661153691004
+      },
+      "pass": true
+    },
+    {
+      "features": 8000,
+      "bytes": 232599,
+      "size_ratio": 0.08575498817084856,
+      "metrics": {
+        "spearman_logfc": 0.9956291810018906,
+        "top_k_jaccard": 0.9230769230769231,
+        "distance_correlation": 0.9920039519062211,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 12000,
+      "bytes": 349559,
+      "size_ratio": 0.12887599650047357,
+      "metrics": {
+        "spearman_logfc": 0.9945033657727019,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.9940692418694558,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 20000,
+      "bytes": 583618,
+      "size_ratio": 0.21516925991209893,
+      "metrics": {
+        "spearman_logfc": 0.9883062654304766,
+        "top_k_jaccard": 0.9230769230769231,
+        "distance_correlation": 0.9929711713293883,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    }
+  ],
+  "smallest_passing_features": 2000,
+  "rights": "GREEN: Expression Atlas material is CC BY 4.0 with attribution.",
+  "reference": "Expression Atlas mapped reads to Ensembl release 95 with TopHat2 2.1.1 and quantified them with HTSeq 0.6.1p1. Exact FASTA and annotation hashes remain to be pinned.",
+  "release_eligible": false,
+  "source_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-7126-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-7126/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 2712367,
+      "sha256": "45cc36db42e184297728f138f770cad07a99c286edb7bd8f165cea70e1b908f8"
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-7126-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-7126/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 3607,
+      "sha256": "fee4b8a27a024791bcb736f8539340193b6bdca3165555346f7a1b9500ab4a73"
+    }
+  ],
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5"
+  },
+  "config_sha256": "40281e9e6c976d089d85c6517013bea07d9fb54632339008f316576b82daa0c5",
+  "workflow_sha256": "43eedc5ec4f562df898baf5ea49b706cbcd6d0cc6ef53e6aa5e444ce1baa391e"
+}
