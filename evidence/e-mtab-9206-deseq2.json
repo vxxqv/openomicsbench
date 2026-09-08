@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "accession": "E-MTAB-9206",
+  "status": "pass",
+  "release_eligible": false,
+  "release_gates_remaining": [
+    "exact reference-file checksums",
+    "dataset attribution package",
+    "independent clean-environment reproduction"
+  ],
+  "design": {
+    "formula": "~ condition",
+    "factor_column": "Factor Value[RNA interference]",
+    "batch_column": null,
+    "contrast": "scrambled shRNA versus ELP3 shRNA",
+    "samples": 6,
+    "full_features": 58735,
+    "pocket_features": 8000,
+    "finite_shared_effects": 2910
+  },
+  "thresholds": {
+    "spearman_logfc": 0.9,
+    "top_k_jaccard": 0.6,
+    "distance_correlation": 0.9,
+    "sign_concordance": 0.9
+  },
+  "metrics": {
+    "spearman_logfc": 0.9996661149014315,
+    "top_k_jaccard": 0.7241379310344828,
+    "distance_correlation": 0.9921755562680772,
+    "sign_concordance": 0.9732948394081559
+  },
+  "runtime": {
+    "r": "4.5.3",
+    "deseq2": "1.50.2",
+    "python": "3.12.14",
+    "numpy": "2.3.5"
+  },
+  "inputs": {
+    "diagnostic_report_sha256": "d5c7ea458b5cb491207643b4912c3059f70404979cf25c0bdf7295a8c31b1c03",
+    "config_sha256": "070a23fc74fc39f0bc78082ed73a93d93798ab6fb717327fef82691e1f555554",
+    "full_counts_sha256": "2312577541fba9580fc88862a6e40b19a40cf921f90b1d049782157083452681",
+    "pocket_counts_sha256": "8a7f8da5b3860c915c4c22a7ba8f66973c246aca2cd86b87e89c83f9ed667ceb",
+    "samples_sha256": "33fee894b86fd7b691321d880aec9031b603fb6943980e51c1166bad75739592"
+  },
+  "artifacts": {
+    "full": {
+      "contrast.log": {
+        "bytes": 35,
+        "sha256": "9f05833ad99652c92037f3efee174576b53345a5dca913f5e73da50813262f9d"
+      },
+      "differential_expression.tsv": {
+        "bytes": 4322146,
+        "sha256": "d9cf3acabef519918bcf6d51b6d37edfb818ba4da9188da800a730a2ee205466"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 3567607,
+        "sha256": "2222374c22f8ac39608e4aa57c9d02e7f8452c5cf8551502b179c99ee9300aa1"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "2000ed5d4b68d7c8be4551d4bdc52383b95cc052b73c92b02e0a28867709e8b5"
+      }
+    },
+    "pocket": {
+      "contrast.log": {
+        "bytes": 35,
+        "sha256": "9f05833ad99652c92037f3efee174576b53345a5dca913f5e73da50813262f9d"
+      },
+      "differential_expression.tsv": {
+        "bytes": 516474,
+        "sha256": "0b270a0796e76ac070a9742a11fae0805a465d70c31d5067e65742278c3d25f1"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 438372,
+        "sha256": "e431bc8223bac061f07de2ff4c943b53b2342517ed95958a8c2c8ff6ec18258e"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "2000ed5d4b68d7c8be4551d4bdc52383b95cc052b73c92b02e0a28867709e8b5"
+      }
+    }
+  },
+  "workflow": {
+    "python_sha256": "287c64bfdd5b4f590ad81bb263c7dac28a2ec270f9339f3f94879b25dd368cf3",
+    "r_sha256": "b4244d58364e77f0b4771339d07110e6f89fe2fcf0727562a5fd47f0e3ce74f6"
+  }
+}
