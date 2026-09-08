@@ -1,0 +1,18 @@
+{
+  "accession": "E-MTAB-9206",
+  "factor_column": "Factor Value[RNA interference]",
+  "seed": 20260908,
+  "effect_anchors": 100,
+  "candidate_sizes": [500, 1000, 2000, 4000, 8000, 12000, 20000],
+  "top_k": 50,
+  "minimum": {
+    "spearman_logfc": 0.9,
+    "top_k_jaccard": 0.6,
+    "distance_correlation": 0.9,
+    "sign_concordance": 0.9
+  },
+  "normalization": "median_ratio",
+  "baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), RNA interference only; DESeq2 confirmation remains required.",
+  "rights": "GREEN: Expression Atlas material is CC BY 4.0 with attribution.",
+  "reference": "Expression Atlas mapped reads to Ensembl release 95 with HISAT2 2.1.0 and quantified them with FeatureCounts 1.6.2. Exact FASTA and annotation hashes remain to be pinned."
+}
