@@ -1,0 +1,116 @@
+{
+  "accession": "E-GEOD-33979",
+  "source_systems": [
+    {
+      "name": "Expression Atlas",
+      "url": "https://www.ebi.ac.uk/gxa/experiments/E-GEOD-33979"
+    },
+    {
+      "name": "BioStudies",
+      "url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-GEOD-33979"
+    }
+  ],
+  "checked": "2026-09-08",
+  "title": "Novel roles for Klf1 in regulating the erythroid transcriptome revealed by mRNA-seq",
+  "assay": "bulk RNA-seq of coding RNA",
+  "organism": "Mus musculus",
+  "taxon_id": 10090,
+  "study_design": {
+    "factor_column": "Factor Value[genotype]",
+    "groups": {
+      "Klf1-/-": 3,
+      "wild type genotype": 3
+    },
+    "analysed_runs": 6,
+    "selected_runs": 6,
+    "balanced": true,
+    "batch_column": null,
+    "batch_levels": {
+      "not_reported": 6
+    }
+  },
+  "atlas_processing": {
+    "source_statement": "Expression Atlas mapped reads to Ensembl release 97 with HISAT2 2.1.0 and quantified them with FeatureCounts 1.6.2. Exact FASTA and annotation hashes remain to be pinned.",
+    "diagnostic_baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), genotype only; DESeq2 confirmation remains required."
+  },
+  "verified_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-GEOD-33979-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-GEOD-33979/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 2285282,
+      "sha256": "2b0d391add907937a7d72d5ae4a76d18ee446dfbf0e95d6add0ecb772b4cc08f",
+      "genes": 55573,
+      "unique_sample_columns": 6,
+      "excluded_unanalysed_columns": [],
+      "verified_repeated_columns": {},
+      "format_check": "Every retained count parsed as a non-negative integer; repeated run columns, where present, were accepted only after full-vector equality checks."
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-GEOD-33979-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-GEOD-33979/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 2021,
+      "sha256": "e3752cb6441fd7cc18e526f4c28265c9a3f89bd7329548c135d50098950b7fbd",
+      "analysed_runs": 6,
+      "format_check": "Analysed run identifiers are present, unique and represented in the retained count matrix."
+    }
+  ],
+  "rights": {
+    "status": "GREEN",
+    "license": "Creative Commons Attribution 4.0 International",
+    "redistribution": "permitted with attribution",
+    "evidence_url": "https://www.ebi.ac.uk/gxa/licence.html",
+    "evidence_page_bytes": 15010,
+    "evidence_page_sha256": "0c35e7e1e590438decb4c44d7d42f1d69a2190eb97acb4bdca5a14cf71f26dd8",
+    "obligations": [
+      "Credit Expression Atlas and EMBL-EBI.",
+      "Cite the current Expression Atlas publication requested on the licence page.",
+      "Retain the experiment accession and originating-study link."
+    ],
+    "checked": "2026-09-08"
+  },
+  "reference_review": {
+    "status": "partially_resolved",
+    "reported_processing": "Expression Atlas mapped reads to Ensembl release 97 with HISAT2 2.1.0 and quantified them with FeatureCounts 1.6.2. Exact FASTA and annotation hashes remain to be pinned.",
+    "namespace": "Ensembl gene identifiers",
+    "pending": "Pin exact assembly FASTA and annotation file URLs, sizes and SHA-256 checksums, then verify every pocket identifier against the annotation."
+  },
+  "reduction_diagnostic": {
+    "workflow": "workflows/atlas_diagnostic.py",
+    "config": "workflows/e-geod-33979-source.json",
+    "evidence": "evidence/e-geod-33979-diagnostic.json",
+    "normalization": "median_ratio",
+    "candidate_sizes": [
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      12000,
+      20000
+    ],
+    "smallest_passing_features": 4000,
+    "smallest_passing_bytes": 131652,
+    "smallest_passing_size_ratio": 0.05760864523503007,
+    "smallest_passing_metrics": {
+      "spearman_logfc": 0.9460145360628804,
+      "top_k_jaccard": 0.7543859649122807,
+      "distance_correlation": 0.942378647037107,
+      "sign_concordance": 0.9577814569536424
+    },
+    "report_sha256": "46453cbd794c0c716a4d9ad3e550080cbb8e1e359f58af76cc4b899de73487f7",
+    "repeat_report_sha256": "46453cbd794c0c716a4d9ad3e550080cbb8e1e359f58af76cc4b899de73487f7",
+    "repeat_identical": true,
+    "interpretation": "The 4,000-gene candidate is the first declared size to meet all four development thresholds."
+  },
+  "review_status": "priority",
+  "proposed_archetype": "Mouse erythroid genetic knockout",
+  "release_eligible": false,
+  "remaining_work": [
+    "Pin exact reference files and validate the pocket identifier namespace against them.",
+    "Run the DESeq2 full-source and pocket confirmation with recorded versions.",
+    "Prepare dataset-level source attribution and license files.",
+    "Complete an independent clean-environment reproduction before release."
+  ]
+}
