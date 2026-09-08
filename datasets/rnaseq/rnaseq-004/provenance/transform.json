@@ -1,0 +1,65 @@
+{
+  "dataset_id": "rnaseq-004",
+  "object_key": "E-GEOD-33979",
+  "algorithm": "contrast-anchored deterministic feature selection",
+  "seed": 20260908,
+  "source_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-GEOD-33979-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-GEOD-33979/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 2285282,
+      "sha256": "2b0d391add907937a7d72d5ae4a76d18ee446dfbf0e95d6add0ecb772b4cc08f"
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-GEOD-33979-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-GEOD-33979/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 2021,
+      "sha256": "e3752cb6441fd7cc18e526f4c28265c9a3f89bd7329548c135d50098950b7fbd"
+    }
+  ],
+  "selection": {
+    "config": "workflows/e-geod-33979-source.json",
+    "config_sha256": "8261fa5cf23257c6bb0cff1eca7e880753fe595a871c390a1025060423a92091",
+    "config_commit": "adcf6c72606fe04b574ba474e87ad056c0c12635",
+    "workflow": "workflows/atlas_diagnostic.py",
+    "workflow_sha256": "1e065fb87b06b029505797eefe97580cb1a2dde6b1c32724bbbe46299b7343e4",
+    "workflow_commit": "fd3697970fe986214db4b44e1e2d605519a9b7aa",
+    "candidate_sizes": [
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      12000,
+      20000
+    ],
+    "selected_features": 4000,
+    "factor_column": "Factor Value[genotype]",
+    "batch_column": null,
+    "condition_values": null,
+    "subset": {}
+  },
+  "assembly": {
+    "workflow": "workflows/build_collection.py",
+    "workflow_sha256": "0b237a00363dad610357864b04582716a0f855f1624413fa2112189d7ca14857",
+    "workflow_commit": "505807a13443df8449fe698006d619c049cb46b5"
+  },
+  "diagnostic": {
+    "path": "evidence/e-geod-33979-diagnostic.json",
+    "sha256": "46453cbd794c0c716a4d9ad3e550080cbb8e1e359f58af76cc4b899de73487f7"
+  },
+  "deseq2": {
+    "path": "evidence/e-geod-33979-deseq2.json",
+    "sha256": "4f7beed84ff91eb138d2ed59304f722f97021e51252c624d20e351b5f0c21270"
+  },
+  "reference": {
+    "path": "evidence/reference-verification.json",
+    "sha256": "7a70b2c1b010e40d7851f6c5cae7a9e8d4ffd7bef6b14757d1dcd8dce77ca5a0"
+  },
+  "intake": {
+    "path": "curation/intake/e-geod-33979.json",
+    "sha256": "d8bf35d40ac29d6ba86f760c338ccd0c4b8f1d80d72231562c4d1e6d67c2f79e"
+  }
+}

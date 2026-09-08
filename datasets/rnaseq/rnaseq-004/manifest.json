@@ -1,0 +1,210 @@
+{
+  "schema_version": "1.0",
+  "id": "rnaseq-004",
+  "title": "Klf1 knockout in mouse erythroid tissue",
+  "release": "1.0.0.dev1",
+  "assay": "bulk_rna_seq",
+  "kind": "real",
+  "status": "validated",
+  "archetype": "balanced mouse genetic knockout",
+  "organism": "Mus musculus",
+  "taxon_id": 10090,
+  "source": {
+    "repository": "Expression Atlas and BioStudies",
+    "accession": "E-GEOD-33979",
+    "url": "https://www.ebi.ac.uk/gxa/experiments/E-GEOD-33979",
+    "citation": "Tallack et al. Novel roles for Klf1 in regulating the erythroid transcriptome revealed by mRNA-seq. Genome Research. DOI 10.1101/gr.135707.111.",
+    "retrieved": "2026-09-08",
+    "sha256": "2b0d391add907937a7d72d5ae4a76d18ee446dfbf0e95d6add0ecb772b4cc08f"
+  },
+  "rights": {
+    "status": "GREEN",
+    "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "evidence": "Expression Atlas applies CC BY 4.0 to copyrightable website material and requires provider citation; rights.json records the licence and attribution.",
+    "checked": "2026-09-08"
+  },
+  "reference": {
+    "genome": "Ensembl release 97 GRCm38; https://ftp.ensembl.org/pub/release-97/fasta/mus_musculus/dna/Mus_musculus.GRCm38.dna.primary_assembly.fa.gz; official checksum 20889 787095 Mus_musculus.GRCm38.dna.primary_assembly.fa.gz",
+    "annotation": "https://ftp.ensembl.org/pub/release-97/gtf/mus_musculus/Mus_musculus.GRCm38.97.gtf.gz; SHA-256 ddf9e565b44b5a9f369b8d9dcce2b427ddbab0f0c6f8cbc79ef040b5dad664c4",
+    "namespace": "Ensembl gene identifiers",
+    "compatibility": "verified"
+  },
+  "samples": [
+    {
+      "sample_id": "SRR384980",
+      "condition": "Klf1-/-",
+      "replicate": 1,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "SRR384978",
+      "condition": "wild type genotype",
+      "replicate": 1,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "SRR384982",
+      "condition": "Klf1-/-",
+      "replicate": 2,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "SRR384979",
+      "condition": "wild type genotype",
+      "replicate": 2,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "SRR384981",
+      "condition": "Klf1-/-",
+      "replicate": 3,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "SRR384977",
+      "condition": "wild type genotype",
+      "replicate": 3,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    }
+  ],
+  "derivation": {
+    "workflow": "workflows/atlas_diagnostic.py",
+    "commit": "fd3697970fe986214db4b44e1e2d605519a9b7aa",
+    "seed": 20260908,
+    "algorithm": "contrast-anchored deterministic feature selection",
+    "parameters": {
+      "candidate_sizes": [
+        500,
+        1000,
+        2000,
+        4000,
+        8000,
+        12000,
+        20000
+      ],
+      "selected_features": 4000,
+      "top_k": 50,
+      "factor_column": "Factor Value[genotype]",
+      "batch_column": "none",
+      "condition_values": "null",
+      "subset": "{}"
+    },
+    "versions": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "r": "4.5.3",
+      "deseq2": "1.50.2"
+    }
+  },
+  "files": [
+    {
+      "path": "attribution.json",
+      "tier": "metadata",
+      "role": "documentation",
+      "media_type": "application/json",
+      "bytes": 768,
+      "sha256": "66eab326ad3c8b54256194e2bd07f0f7ed37450d9e5a37c76013590a4365a117"
+    },
+    {
+      "path": "expected/deseq2.json",
+      "tier": "expected",
+      "role": "provenance",
+      "media_type": "application/json",
+      "bytes": 2924,
+      "sha256": "4f7beed84ff91eb138d2ed59304f722f97021e51252c624d20e351b5f0c21270"
+    },
+    {
+      "path": "expected/source-counts.tsv",
+      "tier": "expected",
+      "role": "baseline",
+      "media_type": "text/tab-separated-values",
+      "bytes": 1875711,
+      "sha256": "17f360b963be5d894a43a3e67f85d16adc85f1bc8835afd97ac7ecc0080a678c"
+    },
+    {
+      "path": "expected/validation.json",
+      "tier": "expected",
+      "role": "metrics",
+      "media_type": "application/json",
+      "bytes": 475,
+      "sha256": "08ae0885c7caa2d5177aaea26d6b83bede2cd736fdfa26e05c79dfc1a121acd3"
+    },
+    {
+      "path": "pocket/counts.tsv",
+      "tier": "pocket",
+      "role": "raw_counts",
+      "media_type": "text/tab-separated-values",
+      "bytes": 131652,
+      "sha256": "c0af34e93c9380e73a24705ce8a9c784b0c35ad36dfbd600268ab88dd7d8ba4f"
+    },
+    {
+      "path": "provenance/transform.json",
+      "tier": "metadata",
+      "role": "provenance",
+      "media_type": "application/json",
+      "bytes": 2382,
+      "sha256": "f78a9035b4e4dc28534c848aec7e03632f1f9dc62ba10715fbc83d9eb417bb9b"
+    },
+    {
+      "path": "reference.json",
+      "tier": "metadata",
+      "role": "reference",
+      "media_type": "application/json",
+      "bytes": 1533,
+      "sha256": "95c127363c7dac1a6c326eec5da8b35198034ed61a86038677d588d1ae4c564e"
+    },
+    {
+      "path": "rights.json",
+      "tier": "metadata",
+      "role": "license",
+      "media_type": "application/json",
+      "bytes": 352,
+      "sha256": "2fe15e571f4be01f3e0ee8230c97307f1ac3dbc878a0ac991d3ce70ee92b9396"
+    },
+    {
+      "path": "samples.json",
+      "tier": "metadata",
+      "role": "samples",
+      "media_type": "application/json",
+      "bytes": 912,
+      "sha256": "c5a1fde8b9d29669b558b2564e4e208230d01738a52c49971c4886f0fb1ef682"
+    }
+  ],
+  "validation": {
+    "profile": "expected/validation.json",
+    "baseline_version": "deseq2-1.50.2-and-median-ratio-envelope-v1",
+    "metrics": [
+      {
+        "name": "spearman_logfc",
+        "minimum": 0.9,
+        "definition": "Average-tie rank correlation of median-ratio-normalized contrast effects on the shared selected feature universe; higher is better."
+      },
+      {
+        "name": "top_k_jaccard",
+        "minimum": 0.6,
+        "definition": "Jaccard overlap of the top 50 absolute contrast effects on the shared selected feature universe, with ties settled by gene ID; higher is better."
+      },
+      {
+        "name": "distance_correlation",
+        "minimum": 0.9,
+        "definition": "Pearson correlation of sample-pair distances on log2 median-ratio-normalized counts for the full and pocket matrices; higher is better."
+      },
+      {
+        "name": "sign_concordance",
+        "minimum": 0.9,
+        "definition": "Fraction of matching contrast-effect signs where the absolute full-source effect is at least 0.1; higher is better."
+      }
+    ]
+  },
+  "limitations": [
+    "The object starts from an archive count matrix and does not revalidate read alignment or quantification.",
+    "The pocket is intended for workflow testing and method validation, not as a substitute for the full study.",
+    "Strandedness is recorded as unknown because it is not required for count-matrix validation."
+  ]
+}

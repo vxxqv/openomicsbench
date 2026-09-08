@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "accession": "E-GEOD-33979",
+  "status": "pass",
+  "release_eligible": false,
+  "release_gates_remaining": [
+    "exact reference-file checksums",
+    "dataset attribution package",
+    "independent clean-environment reproduction"
+  ],
+  "design": {
+    "formula": "~ condition",
+    "factor_column": "Factor Value[genotype]",
+    "batch_column": null,
+    "contrast": "wild type genotype versus Klf1-/-",
+    "samples": 6,
+    "full_features": 55573,
+    "pocket_features": 4000,
+    "finite_shared_effects": 2481
+  },
+  "thresholds": {
+    "spearman_logfc": 0.9,
+    "top_k_jaccard": 0.6,
+    "distance_correlation": 0.9,
+    "sign_concordance": 0.9
+  },
+  "metrics": {
+    "spearman_logfc": 0.9793186499623325,
+    "top_k_jaccard": 0.7857142857142857,
+    "distance_correlation": 0.9408752119968673,
+    "sign_concordance": 0.9600333055786844
+  },
+  "runtime": {
+    "r": "4.5.3",
+    "deseq2": "1.50.2",
+    "python": "3.12.14",
+    "numpy": "2.3.5"
+  },
+  "inputs": {
+    "diagnostic_report_sha256": "46453cbd794c0c716a4d9ad3e550080cbb8e1e359f58af76cc4b899de73487f7",
+    "config_sha256": "8261fa5cf23257c6bb0cff1eca7e880753fe595a871c390a1025060423a92091",
+    "full_counts_sha256": "17f360b963be5d894a43a3e67f85d16adc85f1bc8835afd97ac7ecc0080a678c",
+    "pocket_counts_sha256": "c0af34e93c9380e73a24705ce8a9c784b0c35ad36dfbd600268ab88dd7d8ba4f",
+    "samples_sha256": "dd47c423efe6ae8b55ac838d1ef42a258942b124603a253321cbf41790000e4e"
+  },
+  "artifacts": {
+    "full": {
+      "contrast.log": {
+        "bytes": 35,
+        "sha256": "6202385f19cffdfeeca765e5aee755b142a1151fad0440e0d8d6b52fc1ecfc77"
+      },
+      "differential_expression.tsv": {
+        "bytes": 4407676,
+        "sha256": "c0025cb4257b3d36a187a1542794e8cfaa7994ab7ac37424d346ffe9b150fcc5"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 3717440,
+        "sha256": "9ba22ce2331042c22ff53ac287eb34293b19f5490fefa2506944d869ecc31e39"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "2000ed5d4b68d7c8be4551d4bdc52383b95cc052b73c92b02e0a28867709e8b5"
+      }
+    },
+    "pocket": {
+      "contrast.log": {
+        "bytes": 35,
+        "sha256": "6202385f19cffdfeeca765e5aee755b142a1151fad0440e0d8d6b52fc1ecfc77"
+      },
+      "differential_expression.tsv": {
+        "bytes": 355723,
+        "sha256": "eef874570bdee0249ecde13261e242adcd944147102d2796256e5fe204c2f8e3"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 256876,
+        "sha256": "68816c7ceaf1c1f514c694da8434bed21450b0a2b34d66dd5f70af9653b7a1eb"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "2000ed5d4b68d7c8be4551d4bdc52383b95cc052b73c92b02e0a28867709e8b5"
+      }
+    }
+  },
+  "workflow": {
+    "python_sha256": "287c64bfdd5b4f590ad81bb263c7dac28a2ec270f9339f3f94879b25dd368cf3",
+    "r_sha256": "b4244d58364e77f0b4771339d07110e6f89fe2fcf0727562a5fd47f0e3ce74f6"
+  }
+}

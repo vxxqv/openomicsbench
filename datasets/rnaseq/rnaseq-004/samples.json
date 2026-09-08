@@ -1,0 +1,44 @@
+[
+  {
+    "sample_id": "SRR384980",
+    "condition": "Klf1-/-",
+    "replicate": 1,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "SRR384978",
+    "condition": "wild type genotype",
+    "replicate": 1,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "SRR384982",
+    "condition": "Klf1-/-",
+    "replicate": 2,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "SRR384979",
+    "condition": "wild type genotype",
+    "replicate": 2,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "SRR384981",
+    "condition": "Klf1-/-",
+    "replicate": 3,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "SRR384977",
+    "condition": "wild type genotype",
+    "replicate": 3,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  }
+]

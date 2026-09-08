@@ -1,0 +1,26 @@
+{
+  "baseline_counts": "expected/source-counts.tsv",
+  "sample_ids": [
+    "SRR384980",
+    "SRR384978",
+    "SRR384982",
+    "SRR384979",
+    "SRR384981",
+    "SRR384977"
+  ],
+  "shapes": {
+    "pocket": [
+      4000,
+      6
+    ]
+  },
+  "top_k": 50,
+  "normalization": "median_ratio",
+  "contrast": {
+    "factor_column": "Factor Value[genotype]",
+    "condition_values": null,
+    "batch_column": null,
+    "subset": {}
+  },
+  "deseq2_evidence": "expected/deseq2.json"
+}
