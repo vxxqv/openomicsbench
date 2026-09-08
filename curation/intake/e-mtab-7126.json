@@ -1,0 +1,119 @@
+{
+  "accession": "E-MTAB-7126",
+  "source_systems": [
+    {
+      "name": "Expression Atlas",
+      "url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-7126"
+    },
+    {
+      "name": "BioStudies",
+      "url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-7126"
+    }
+  ],
+  "checked": "2026-09-08",
+  "title": "RNA-seq of human melanoma cell line A375 treated with the tetracycline analogs Col-3 or doxycycline against untreated controls",
+  "assay": "bulk RNA-seq of coding RNA",
+  "organism": "Homo sapiens",
+  "taxon_id": 9606,
+  "study_design": {
+    "factor_column": "Factor Value[compound]",
+    "groups": {
+      "Col-3 10 micromolar": 3,
+      "dimethyl sulfoxide 10 micromolar": 3
+    },
+    "analysed_runs": 6,
+    "selected_runs": 6,
+    "balanced": true,
+    "batch_column": null,
+    "batch_levels": {
+      "not_reported": 6
+    }
+  },
+  "atlas_processing": {
+    "source_statement": "Expression Atlas mapped reads to Ensembl release 95 with TopHat2 2.1.1 and quantified them with HTSeq 0.6.1p1. Exact FASTA and annotation hashes remain to be pinned.",
+    "diagnostic_baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), compound only; DESeq2 confirmation remains required."
+  },
+  "verified_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-7126-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-7126/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 2712367,
+      "sha256": "45cc36db42e184297728f138f770cad07a99c286edb7bd8f165cea70e1b908f8",
+      "genes": 65217,
+      "unique_sample_columns": 8,
+      "excluded_unanalysed_columns": [
+        "ERR2731440",
+        "ERR2731442"
+      ],
+      "verified_repeated_columns": {},
+      "format_check": "Every retained count parsed as a non-negative integer; repeated run columns, where present, were accepted only after full-vector equality checks."
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-7126-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-7126/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 3607,
+      "sha256": "fee4b8a27a024791bcb736f8539340193b6bdca3165555346f7a1b9500ab4a73",
+      "analysed_runs": 6,
+      "format_check": "Analysed run identifiers are present, unique and represented in the retained count matrix."
+    }
+  ],
+  "rights": {
+    "status": "GREEN",
+    "license": "Creative Commons Attribution 4.0 International",
+    "redistribution": "permitted with attribution",
+    "evidence_url": "https://www.ebi.ac.uk/gxa/licence.html",
+    "evidence_page_bytes": 15010,
+    "evidence_page_sha256": "0c35e7e1e590438decb4c44d7d42f1d69a2190eb97acb4bdca5a14cf71f26dd8",
+    "obligations": [
+      "Credit Expression Atlas and EMBL-EBI.",
+      "Cite the current Expression Atlas publication requested on the licence page.",
+      "Retain the experiment accession and originating-study link."
+    ],
+    "checked": "2026-09-08"
+  },
+  "reference_review": {
+    "status": "partially_resolved",
+    "reported_processing": "Expression Atlas mapped reads to Ensembl release 95 with TopHat2 2.1.1 and quantified them with HTSeq 0.6.1p1. Exact FASTA and annotation hashes remain to be pinned.",
+    "namespace": "Ensembl gene identifiers",
+    "pending": "Pin exact assembly FASTA and annotation file URLs, sizes and SHA-256 checksums, then verify every pocket identifier against the annotation."
+  },
+  "reduction_diagnostic": {
+    "workflow": "workflows/atlas_diagnostic.py",
+    "config": "workflows/e-mtab-7126-source.json",
+    "evidence": "evidence/e-mtab-7126-diagnostic.json",
+    "normalization": "median_ratio",
+    "candidate_sizes": [
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      12000,
+      20000
+    ],
+    "smallest_passing_features": 2000,
+    "smallest_passing_bytes": 58666,
+    "smallest_passing_size_ratio": 0.02162907895576078,
+    "smallest_passing_metrics": {
+      "spearman_logfc": 0.9847086770446155,
+      "top_k_jaccard": 0.6666666666666666,
+      "distance_correlation": 0.9328361378713386,
+      "sign_concordance": 0.9913657770800628
+    },
+    "report_sha256": "0a2b21e566dad9b4d7f9ea9505d9e60637d367bdb7b3b5017a5be0e2793c9306",
+    "repeat_report_sha256": "0a2b21e566dad9b4d7f9ea9505d9e60637d367bdb7b3b5017a5be0e2793c9306",
+    "repeat_identical": true,
+    "interpretation": "The 2,000-gene candidate is the first declared size to meet all four development thresholds."
+  },
+  "review_status": "priority",
+  "proposed_archetype": "Cell-line compound response",
+  "release_eligible": false,
+  "remaining_work": [
+    "Pin exact reference files and validate the pocket identifier namespace against them.",
+    "Run the DESeq2 full-source and pocket confirmation with recorded versions.",
+    "Prepare dataset-level source attribution and license files.",
+    "Complete an independent clean-environment reproduction before release."
+  ]
+}
