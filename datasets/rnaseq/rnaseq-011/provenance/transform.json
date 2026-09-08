@@ -1,0 +1,69 @@
+{
+  "dataset_id": "rnaseq-011",
+  "object_key": "E-MTAB-8845-infection-gsnor1",
+  "algorithm": "contrast-anchored deterministic feature selection",
+  "seed": 20260908,
+  "source_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-8845-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-8845/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 2826671,
+      "sha256": "66f217ca72cd6936c39c5b667543468a137fa164d3db57a7b1b37facf4d47abf"
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-8845-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-8845/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 4599,
+      "sha256": "e8b4763a1717820c2bbbefbf74dda52ec2ca260c126d135b2ed6d4b59878e2fe"
+    }
+  ],
+  "selection": {
+    "config": "workflows/e-mtab-8845-infection-gsnor1-source.json",
+    "config_sha256": "92894651f5fcd872348490b253269ebf05bbc3c13d87271c276909f49fc76e16",
+    "config_commit": "28615eb250a9ec541e03bd0360a941e7db017c4d",
+    "workflow": "workflows/atlas_diagnostic.py",
+    "workflow_sha256": "1e065fb87b06b029505797eefe97580cb1a2dde6b1c32724bbbe46299b7343e4",
+    "workflow_commit": "fd3697970fe986214db4b44e1e2d605519a9b7aa",
+    "candidate_sizes": [
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      12000,
+      20000
+    ],
+    "selected_features": 500,
+    "factor_column": "Factor Value[infect]",
+    "batch_column": null,
+    "condition_values": null,
+    "subset": {
+      "Factor Value[genotype]": [
+        "gsnor1"
+      ]
+    }
+  },
+  "assembly": {
+    "workflow": "workflows/build_collection.py",
+    "workflow_sha256": "0b237a00363dad610357864b04582716a0f855f1624413fa2112189d7ca14857",
+    "workflow_commit": "505807a13443df8449fe698006d619c049cb46b5"
+  },
+  "diagnostic": {
+    "path": "evidence/e-mtab-8845-infection-gsnor1-diagnostic.json",
+    "sha256": "3d50630885608ecac89eaa66b7bc5b1c6f416ab520c45a63fa73639bbdb2680f"
+  },
+  "deseq2": {
+    "path": "evidence/e-mtab-8845-infection-gsnor1-deseq2.json",
+    "sha256": "fbc580e0e6dcac096d81d7e402d6c3d2a00820f016f123d0368956e3b57ae478"
+  },
+  "reference": {
+    "path": "evidence/reference-verification.json",
+    "sha256": "7a70b2c1b010e40d7851f6c5cae7a9e8d4ffd7bef6b14757d1dcd8dce77ca5a0"
+  },
+  "intake": {
+    "path": "curation/intake/e-mtab-8845-infection-gsnor1.json",
+    "sha256": "d8c62591c9ddd4a3fa74b8d7ecc957454c5fff4639b2c6c82a131cd7e590e738"
+  }
+}
