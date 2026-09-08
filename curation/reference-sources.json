@@ -1,0 +1,105 @@
+{
+  "checked": "2026-09-08",
+  "profiles": [
+    {
+      "id": "ensembl-95-human",
+      "provider": "Ensembl",
+      "release": "95",
+      "organism": "Homo sapiens",
+      "assembly": "GRCh38",
+      "accessions": ["E-MTAB-8572", "E-MTAB-7126", "E-MTAB-9206"],
+      "fasta": {
+        "url": "https://ftp.ensembl.org/pub/release-95/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz",
+        "checksums_url": "https://ftp.ensembl.org/pub/release-95/fasta/homo_sapiens/dna/CHECKSUMS",
+        "bsd_sum": 2415,
+        "blocks_1024": 860559
+      },
+      "gtf": {
+        "url": "https://ftp.ensembl.org/pub/release-95/gtf/homo_sapiens/Homo_sapiens.GRCh38.95.gtf.gz",
+        "checksums_url": "https://ftp.ensembl.org/pub/release-95/gtf/homo_sapiens/CHECKSUMS",
+        "bsd_sum": 50378,
+        "blocks_1024": 42646
+      }
+    },
+    {
+      "id": "ensembl-97-mouse",
+      "provider": "Ensembl",
+      "release": "97",
+      "organism": "Mus musculus",
+      "assembly": "GRCm38",
+      "accessions": ["E-GEOD-33979"],
+      "fasta": {
+        "url": "https://ftp.ensembl.org/pub/release-97/fasta/mus_musculus/dna/Mus_musculus.GRCm38.dna.primary_assembly.fa.gz",
+        "checksums_url": "https://ftp.ensembl.org/pub/release-97/fasta/mus_musculus/dna/CHECKSUMS",
+        "bsd_sum": 20889,
+        "blocks_1024": 787095
+      },
+      "gtf": {
+        "url": "https://ftp.ensembl.org/pub/release-97/gtf/mus_musculus/Mus_musculus.GRCm38.97.gtf.gz",
+        "checksums_url": "https://ftp.ensembl.org/pub/release-97/gtf/mus_musculus/CHECKSUMS",
+        "bsd_sum": 37093,
+        "blocks_1024": 29461
+      }
+    },
+    {
+      "id": "ensembl-107-human",
+      "provider": "Ensembl",
+      "release": "107",
+      "organism": "Homo sapiens",
+      "assembly": "GRCh38",
+      "accessions": ["E-MTAB-567"],
+      "fasta": {
+        "url": "https://ftp.ensembl.org/pub/release-107/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz",
+        "checksums_url": "https://ftp.ensembl.org/pub/release-107/fasta/homo_sapiens/dna/CHECKSUMS",
+        "bsd_sum": 2415,
+        "blocks_1024": 860559
+      },
+      "gtf": {
+        "url": "https://ftp.ensembl.org/pub/release-107/gtf/homo_sapiens/Homo_sapiens.GRCh38.107.gtf.gz",
+        "checksums_url": "https://ftp.ensembl.org/pub/release-107/gtf/homo_sapiens/CHECKSUMS",
+        "bsd_sum": 7867,
+        "blocks_1024": 51324
+      }
+    },
+    {
+      "id": "ensembl-107-mouse",
+      "provider": "Ensembl",
+      "release": "107",
+      "organism": "Mus musculus",
+      "assembly": "GRCm39",
+      "accessions": ["E-MTAB-10322"],
+      "fasta": {
+        "url": "https://ftp.ensembl.org/pub/release-107/fasta/mus_musculus/dna/Mus_musculus.GRCm39.dna.primary_assembly.fa.gz",
+        "checksums_url": "https://ftp.ensembl.org/pub/release-107/fasta/mus_musculus/dna/CHECKSUMS",
+        "bsd_sum": 16996,
+        "blocks_1024": 787519
+      },
+      "gtf": {
+        "url": "https://ftp.ensembl.org/pub/release-107/gtf/mus_musculus/Mus_musculus.GRCm39.107.gtf.gz",
+        "checksums_url": "https://ftp.ensembl.org/pub/release-107/gtf/mus_musculus/CHECKSUMS",
+        "bsd_sum": 628,
+        "blocks_1024": 31116
+      }
+    },
+    {
+      "id": "ensembl-genomes-44-arabidopsis",
+      "provider": "Ensembl Genomes",
+      "release": "44",
+      "organism": "Arabidopsis thaliana",
+      "assembly": "TAIR10",
+      "accessions": ["E-MTAB-6866", "E-MTAB-8845"],
+      "fasta": {
+        "url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-44/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz",
+        "checksums_url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-44/fasta/arabidopsis_thaliana/dna/CHECKSUMS",
+        "bsd_sum": 52039,
+        "blocks_1024": 35609
+      },
+      "gtf": {
+        "url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-44/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.44.gtf.gz",
+        "checksums_url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-44/gtf/arabidopsis_thaliana/CHECKSUMS",
+        "bsd_sum": 34259,
+        "blocks_1024": 9766
+      }
+    }
+  ]
+}
