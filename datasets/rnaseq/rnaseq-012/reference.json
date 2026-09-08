@@ -1,0 +1,41 @@
+{
+  "provider": "Ensembl",
+  "release": "107",
+  "assembly": "GRCm39",
+  "genome": {
+    "url": "https://ftp.ensembl.org/pub/release-107/fasta/mus_musculus/dna/Mus_musculus.GRCm39.dna.primary_assembly.fa.gz",
+    "bytes": 806418890,
+    "official_bsd_sum": 16996,
+    "official_blocks_1024": 787519,
+    "checksums_evidence": {
+      "url": "https://ftp.ensembl.org/pub/release-107/fasta/mus_musculus/dna/CHECKSUMS",
+      "bytes": 4339,
+      "sha256": "4291859e76967071be5b30673b653e34f99ebb74d76fd0901f32ce885d9a68fa",
+      "record": "16996 787519 Mus_musculus.GRCm39.dna.primary_assembly.fa.gz"
+    },
+    "downloaded": false
+  },
+  "annotation": {
+    "url": "https://ftp.ensembl.org/pub/release-107/gtf/mus_musculus/Mus_musculus.GRCm39.107.gtf.gz",
+    "bytes": 31861821,
+    "sha256": "15af16b7bef88c4309a82d49579fdd967f6ac8769b7f0bf657bbf7ee73b779e3",
+    "official_bsd_sum": 628,
+    "official_blocks_1024": 31116,
+    "checksums_evidence": {
+      "url": "https://ftp.ensembl.org/pub/release-107/gtf/mus_musculus/CHECKSUMS",
+      "bytes": 161,
+      "sha256": "6572e8b44e10f1e43d774782d6fa1e191d0530d21693538c47af4c3b7febcb18",
+      "record": "00628 31116 Mus_musculus.GRCm39.107.gtf.gz"
+    },
+    "gene_identifiers": 56748,
+    "gzip_test": "pass"
+  },
+  "pocket_check": {
+    "object_key": "E-MTAB-10322-mdx",
+    "pocket_features": 8000,
+    "matched_features": 8000,
+    "unmatched_features": [],
+    "status": "pass"
+  },
+  "collection_evidence_sha256": "7a70b2c1b010e40d7851f6c5cae7a9e8d4ffd7bef6b14757d1dcd8dce77ca5a0"
+}

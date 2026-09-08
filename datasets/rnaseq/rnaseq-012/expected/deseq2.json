@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "accession": "E-MTAB-10322",
+  "object_key": "E-MTAB-10322-mdx",
+  "status": "pass",
+  "release_eligible": false,
+  "release_gates_remaining": [
+    "exact reference-file checksums",
+    "dataset attribution package",
+    "independent clean-environment reproduction"
+  ],
+  "design": {
+    "formula": "~ condition",
+    "factor_column": "Factor Value[genotype]",
+    "batch_column": null,
+    "subset": {},
+    "contrast": "wild type genotype versus Dmd-mdx",
+    "samples": 6,
+    "full_features": 56748,
+    "pocket_features": 8000,
+    "finite_shared_effects": 4705
+  },
+  "thresholds": {
+    "spearman_logfc": 0.9,
+    "top_k_jaccard": 0.6,
+    "distance_correlation": 0.9,
+    "sign_concordance": 0.9
+  },
+  "metrics": {
+    "spearman_logfc": 0.9980243330346174,
+    "top_k_jaccard": 1.0,
+    "distance_correlation": 0.9162154381438341,
+    "sign_concordance": 1.0
+  },
+  "runtime": {
+    "r": "4.5.3",
+    "deseq2": "1.50.2",
+    "python": "3.12.14",
+    "numpy": "2.3.5"
+  },
+  "inputs": {
+    "diagnostic_report_sha256": "31f0d573ac4a9eb4b7cd2fb1618dd3140aa0341097ad6179563dddb39591d84f",
+    "config_sha256": "7d88f283e4a16f1445b52185acdf654f584f20dc7fc51683e234d36652ae7cc4",
+    "full_counts_sha256": "acf6f00917915a3fdae72e2a09cb86a571760fc9648760ad1b371f1c644b8a72",
+    "pocket_counts_sha256": "a776ded2fad09c025fca9bd6d33baa7046aa19d59db856ffc34dfd3f41231cf4",
+    "samples_sha256": "781a625e33c1f49bfebcb35be37b80f128245d5fcedd62aac510bfc08c185885"
+  },
+  "artifacts": {
+    "full": {
+      "contrast.log": {
+        "bytes": 35,
+        "sha256": "f14924300e5c4957bff10a3bf800ba1bb74d98fdfe103e444ae45ecaa96bc7a5"
+      },
+      "differential_expression.tsv": {
+        "bytes": 4519943,
+        "sha256": "06b81ef4daea9421a38ad60ae6bfb90004026068e00f705948aa384e48cdc3f2"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 3811010,
+        "sha256": "92bed4564825f9a56f1ac112490de98316d3fda7b7eb62361ed8d79d5f2e4030"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "2000ed5d4b68d7c8be4551d4bdc52383b95cc052b73c92b02e0a28867709e8b5"
+      }
+    },
+    "pocket": {
+      "contrast.log": {
+        "bytes": 35,
+        "sha256": "f14924300e5c4957bff10a3bf800ba1bb74d98fdfe103e444ae45ecaa96bc7a5"
+      },
+      "differential_expression.tsv": {
+        "bytes": 682535,
+        "sha256": "ec9c0cb136b1919bd7c5825b63947954f28ca5dbcd134708e803164b417bbddb"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 485193,
+        "sha256": "4e42a056c18d088608856c8d99f5c649cab02e77e725cc47ca562e4114cbe604"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "2000ed5d4b68d7c8be4551d4bdc52383b95cc052b73c92b02e0a28867709e8b5"
+      }
+    }
+  },
+  "workflow": {
+    "python_sha256": "27c97f5f39f414665ff5823fa3f324d208b1a7fac47dcd72cfe018a1562c5fa0",
+    "r_sha256": "b4244d58364e77f0b4771339d07110e6f89fe2fcf0727562a5fd47f0e3ce74f6"
+  }
+}

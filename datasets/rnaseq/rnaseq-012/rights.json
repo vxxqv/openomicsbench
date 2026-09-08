@@ -1,0 +1,10 @@
+{
+  "status": "GREEN",
+  "license": "Creative Commons Attribution 4.0 International",
+  "license_id": "CC-BY-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "evidence_url": "https://www.ebi.ac.uk/gxa/licence.html",
+  "credit": "Expression Atlas, EMBL-EBI",
+  "attribution_file": "attribution.json",
+  "checked": "2026-09-08"
+}

@@ -1,0 +1,210 @@
+{
+  "schema_version": "1.0",
+  "id": "rnaseq-012",
+  "title": "Dmd-mdx myoblasts compared with wild type",
+  "release": "1.0.0.dev1",
+  "assay": "bulk_rna_seq",
+  "kind": "real",
+  "status": "validated",
+  "archetype": "balanced Dmd-mdx genetic comparison",
+  "organism": "Mus musculus",
+  "taxon_id": 10090,
+  "source": {
+    "repository": "Expression Atlas and BioStudies",
+    "accession": "E-MTAB-10322",
+    "url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-10322",
+    "citation": "Gosselin et al. Loss of full-length dystrophin expression causes major cell-autonomous abnormalities in proliferating myoblasts. eLife. DOI 10.7554/eLife.75521.",
+    "retrieved": "2026-09-08",
+    "sha256": "6c0787b459d910aefbecf922797eeb224639c08acdc7959e1ce7278d90cd5892"
+  },
+  "rights": {
+    "status": "GREEN",
+    "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "evidence": "Expression Atlas applies CC BY 4.0 to copyrightable website material and requires provider citation; rights.json records the licence and attribution.",
+    "checked": "2026-09-08"
+  },
+  "reference": {
+    "genome": "Ensembl release 107 GRCm39; https://ftp.ensembl.org/pub/release-107/fasta/mus_musculus/dna/Mus_musculus.GRCm39.dna.primary_assembly.fa.gz; official checksum 16996 787519 Mus_musculus.GRCm39.dna.primary_assembly.fa.gz",
+    "annotation": "https://ftp.ensembl.org/pub/release-107/gtf/mus_musculus/Mus_musculus.GRCm39.107.gtf.gz; SHA-256 15af16b7bef88c4309a82d49579fdd967f6ac8769b7f0bf657bbf7ee73b779e3",
+    "namespace": "Ensembl gene identifiers",
+    "compatibility": "verified"
+  },
+  "samples": [
+    {
+      "sample_id": "ERR5671405",
+      "condition": "Dmd-mdx",
+      "replicate": 1,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR5671406",
+      "condition": "Dmd-mdx",
+      "replicate": 2,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR5671407",
+      "condition": "Dmd-mdx",
+      "replicate": 3,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR5671408",
+      "condition": "wild type genotype",
+      "replicate": 1,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR5671409",
+      "condition": "wild type genotype",
+      "replicate": 2,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR5671410",
+      "condition": "wild type genotype",
+      "replicate": 3,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    }
+  ],
+  "derivation": {
+    "workflow": "workflows/atlas_diagnostic.py",
+    "commit": "fd3697970fe986214db4b44e1e2d605519a9b7aa",
+    "seed": 20260908,
+    "algorithm": "contrast-anchored deterministic feature selection",
+    "parameters": {
+      "candidate_sizes": [
+        500,
+        1000,
+        2000,
+        4000,
+        8000,
+        12000,
+        20000
+      ],
+      "selected_features": 8000,
+      "top_k": 50,
+      "factor_column": "Factor Value[genotype]",
+      "batch_column": "none",
+      "condition_values": "[\"Dmd-mdx\", \"wild type genotype\"]",
+      "subset": "{}"
+    },
+    "versions": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "r": "4.5.3",
+      "deseq2": "1.50.2"
+    }
+  },
+  "files": [
+    {
+      "path": "attribution.json",
+      "tier": "metadata",
+      "role": "documentation",
+      "media_type": "application/json",
+      "bytes": 789,
+      "sha256": "a9321c4c266bdd310469f16c537ae239968d10522caebf5c17a3554e1edd254a"
+    },
+    {
+      "path": "expected/deseq2.json",
+      "tier": "expected",
+      "role": "provenance",
+      "media_type": "application/json",
+      "bytes": 2948,
+      "sha256": "72bb905a07f29dd8e828a2ce79b85620318ccbb2a60b88769c39d075bac3ea10"
+    },
+    {
+      "path": "expected/source-counts.tsv",
+      "tier": "expected",
+      "role": "baseline",
+      "media_type": "text/tab-separated-values",
+      "bytes": 1965952,
+      "sha256": "acf6f00917915a3fdae72e2a09cb86a571760fc9648760ad1b371f1c644b8a72"
+    },
+    {
+      "path": "expected/validation.json",
+      "tier": "expected",
+      "role": "metrics",
+      "media_type": "application/json",
+      "bytes": 528,
+      "sha256": "bfe7c5c8f63bde2ae0c66d9f493136b6e8356a7daed559c799c6b404383b811d"
+    },
+    {
+      "path": "pocket/counts.tsv",
+      "tier": "pocket",
+      "role": "raw_counts",
+      "media_type": "text/tab-separated-values",
+      "bytes": 261288,
+      "sha256": "a776ded2fad09c025fca9bd6d33baa7046aa19d59db856ffc34dfd3f41231cf4"
+    },
+    {
+      "path": "provenance/transform.json",
+      "tier": "metadata",
+      "role": "provenance",
+      "media_type": "application/json",
+      "bytes": 2449,
+      "sha256": "9097a9653735e191f1df4eedcf35a187d926857b187fdc2de9fd67c5e8b24891"
+    },
+    {
+      "path": "reference.json",
+      "tier": "metadata",
+      "role": "reference",
+      "media_type": "application/json",
+      "bytes": 1542,
+      "sha256": "b7c3d8ee888f4ab7604693fbec591dd856294df2da95c328e721ab91cc247f99"
+    },
+    {
+      "path": "rights.json",
+      "tier": "metadata",
+      "role": "license",
+      "media_type": "application/json",
+      "bytes": 352,
+      "sha256": "2fe15e571f4be01f3e0ee8230c97307f1ac3dbc878a0ac991d3ce70ee92b9396"
+    },
+    {
+      "path": "samples.json",
+      "tier": "metadata",
+      "role": "samples",
+      "media_type": "application/json",
+      "bytes": 918,
+      "sha256": "c534d960db3785e827c3f3ed8ce57cd363385a4120f0167e000a9bb8e51e28ba"
+    }
+  ],
+  "validation": {
+    "profile": "expected/validation.json",
+    "baseline_version": "deseq2-1.50.2-and-median-ratio-envelope-v1",
+    "metrics": [
+      {
+        "name": "spearman_logfc",
+        "minimum": 0.9,
+        "definition": "Average-tie rank correlation of median-ratio-normalized contrast effects on the shared selected feature universe; higher is better."
+      },
+      {
+        "name": "top_k_jaccard",
+        "minimum": 0.6,
+        "definition": "Jaccard overlap of the top 50 absolute contrast effects on the shared selected feature universe, with ties settled by gene ID; higher is better."
+      },
+      {
+        "name": "distance_correlation",
+        "minimum": 0.9,
+        "definition": "Pearson correlation of sample-pair distances on log2 median-ratio-normalized counts for the full and pocket matrices; higher is better."
+      },
+      {
+        "name": "sign_concordance",
+        "minimum": 0.9,
+        "definition": "Fraction of matching contrast-effect signs where the absolute full-source effect is at least 0.1; higher is better."
+      }
+    ]
+  },
+  "limitations": [
+    "The object starts from an archive count matrix and does not revalidate read alignment or quantification.",
+    "The pocket is intended for workflow testing and method validation, not as a substitute for the full study.",
+    "Strandedness is recorded as unknown because it is not required for count-matrix validation."
+  ]
+}
