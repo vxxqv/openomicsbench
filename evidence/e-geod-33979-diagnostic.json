@@ -1,0 +1,150 @@
+{
+  "accession": "E-GEOD-33979",
+  "status": "diagnostic_only",
+  "source_features": 55573,
+  "source_samples": 6,
+  "analysed_samples": 6,
+  "selected_samples": 6,
+  "excluded_count_columns": [],
+  "deduplicated_count_columns": {},
+  "conditions": {
+    "Klf1-/-": 3,
+    "wild type genotype": 3
+  },
+  "factor_column": "Factor Value[genotype]",
+  "batch_column": null,
+  "batches": {
+    "not_reported": 6
+  },
+  "sample_order": [
+    "SRR384980",
+    "SRR384978",
+    "SRR384982",
+    "SRR384979",
+    "SRR384981",
+    "SRR384977"
+  ],
+  "contrast": "wild type genotype - Klf1-/-",
+  "baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), genotype only; DESeq2 confirmation remains required.",
+  "normalization": "median_ratio",
+  "full_size_factors": [
+    0.936812848457371,
+    0.5481580081897971,
+    1.0450121372711194,
+    2.1782809650359534,
+    1.4026558158059783,
+    0.6098949685211239
+  ],
+  "candidate_curve": [
+    {
+      "features": 500,
+      "bytes": 16816,
+      "size_ratio": 0.007358391655821907,
+      "metrics": {
+        "spearman_logfc": 0.8943499106023587,
+        "top_k_jaccard": 0.5151515151515151,
+        "distance_correlation": 0.6686796669202858,
+        "sign_concordance": 0.9242902208201893
+      },
+      "pass": false
+    },
+    {
+      "features": 1000,
+      "bytes": 33293,
+      "size_ratio": 0.014568442756736367,
+      "metrics": {
+        "spearman_logfc": 0.9938076478130196,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.7825777277000163,
+        "sign_concordance": 1.0
+      },
+      "pass": false
+    },
+    {
+      "features": 2000,
+      "bytes": 66026,
+      "size_ratio": 0.028891839169082854,
+      "metrics": {
+        "spearman_logfc": 0.961775444376037,
+        "top_k_jaccard": 0.8181818181818182,
+        "distance_correlation": 0.8811226675104581,
+        "sign_concordance": 0.967607973421927
+      },
+      "pass": false
+    },
+    {
+      "features": 4000,
+      "bytes": 131652,
+      "size_ratio": 0.05760864523503007,
+      "metrics": {
+        "spearman_logfc": 0.9460145360628804,
+        "top_k_jaccard": 0.7543859649122807,
+        "distance_correlation": 0.942378647037107,
+        "sign_concordance": 0.9577814569536424
+      },
+      "pass": true
+    },
+    {
+      "features": 8000,
+      "bytes": 263625,
+      "size_ratio": 0.1153577545353265,
+      "metrics": {
+        "spearman_logfc": 0.9390278831968774,
+        "top_k_jaccard": 0.7857142857142857,
+        "distance_correlation": 0.9763185928629095,
+        "sign_concordance": 0.9534303534303534
+      },
+      "pass": true
+    },
+    {
+      "features": 12000,
+      "bytes": 395633,
+      "size_ratio": 0.1731221792321473,
+      "metrics": {
+        "spearman_logfc": 0.9454167962628786,
+        "top_k_jaccard": 0.8181818181818182,
+        "distance_correlation": 0.9839145096208017,
+        "sign_concordance": 0.9575563595880879
+      },
+      "pass": true
+    },
+    {
+      "features": 20000,
+      "bytes": 661316,
+      "size_ratio": 0.2893804790831066,
+      "metrics": {
+        "spearman_logfc": 0.9405943322528825,
+        "top_k_jaccard": 0.8181818181818182,
+        "distance_correlation": 0.9899545173650152,
+        "sign_concordance": 0.9608182080092192
+      },
+      "pass": true
+    }
+  ],
+  "smallest_passing_features": 4000,
+  "rights": "GREEN: Expression Atlas material is CC BY 4.0 with attribution.",
+  "reference": "Expression Atlas mapped reads to Ensembl release 97 with HISAT2 2.1.0 and quantified them with FeatureCounts 1.6.2. Exact FASTA and annotation hashes remain to be pinned.",
+  "release_eligible": false,
+  "source_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-GEOD-33979-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-GEOD-33979/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 2285282,
+      "sha256": "2b0d391add907937a7d72d5ae4a76d18ee446dfbf0e95d6add0ecb772b4cc08f"
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-GEOD-33979-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-GEOD-33979/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 2021,
+      "sha256": "e3752cb6441fd7cc18e526f4c28265c9a3f89bd7329548c135d50098950b7fbd"
+    }
+  ],
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5"
+  },
+  "config_sha256": "8261fa5cf23257c6bb0cff1eca7e880753fe595a871c390a1025060423a92091",
+  "workflow_sha256": "43eedc5ec4f562df898baf5ea49b706cbcd6d0cc6ef53e6aa5e444ce1baa391e"
+}
