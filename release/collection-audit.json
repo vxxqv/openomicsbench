@@ -1,0 +1,154 @@
+{
+  "schema_version": "1.0",
+  "status": "pass",
+  "biological_objects": 12,
+  "source_studies": 7,
+  "unique_object_keys": 12,
+  "unique_titles": 12,
+  "shared_sample_sets": [
+    {
+      "left": "rnaseq-006",
+      "right": "rnaseq-009",
+      "source_accession": "E-MTAB-8845",
+      "shared_samples": 12,
+      "left_samples": 12,
+      "right_samples": 12,
+      "classification": "same-study contrast or declared subset"
+    },
+    {
+      "left": "rnaseq-006",
+      "right": "rnaseq-010",
+      "source_accession": "E-MTAB-8845",
+      "shared_samples": 6,
+      "left_samples": 12,
+      "right_samples": 6,
+      "classification": "same-study contrast or declared subset"
+    },
+    {
+      "left": "rnaseq-006",
+      "right": "rnaseq-011",
+      "source_accession": "E-MTAB-8845",
+      "shared_samples": 6,
+      "left_samples": 12,
+      "right_samples": 6,
+      "classification": "same-study contrast or declared subset"
+    },
+    {
+      "left": "rnaseq-008",
+      "right": "rnaseq-012",
+      "source_accession": "E-MTAB-10322",
+      "shared_samples": 6,
+      "left_samples": 9,
+      "right_samples": 6,
+      "classification": "same-study contrast or declared subset"
+    },
+    {
+      "left": "rnaseq-008",
+      "right": "rnaseq-013",
+      "source_accession": "E-MTAB-10322",
+      "shared_samples": 6,
+      "left_samples": 9,
+      "right_samples": 6,
+      "classification": "same-study contrast or declared subset"
+    },
+    {
+      "left": "rnaseq-009",
+      "right": "rnaseq-010",
+      "source_accession": "E-MTAB-8845",
+      "shared_samples": 6,
+      "left_samples": 12,
+      "right_samples": 6,
+      "classification": "same-study contrast or declared subset"
+    },
+    {
+      "left": "rnaseq-009",
+      "right": "rnaseq-011",
+      "source_accession": "E-MTAB-8845",
+      "shared_samples": 6,
+      "left_samples": 12,
+      "right_samples": 6,
+      "classification": "same-study contrast or declared subset"
+    },
+    {
+      "left": "rnaseq-012",
+      "right": "rnaseq-013",
+      "source_accession": "E-MTAB-10322",
+      "shared_samples": 3,
+      "left_samples": 6,
+      "right_samples": 6,
+      "classification": "same-study contrast or declared subset"
+    }
+  ],
+  "exact_file_reuse": [
+    {
+      "sha256": "2fe15e571f4be01f3e0ee8230c97307f1ac3dbc878a0ac991d3ce70ee92b9396",
+      "files": [
+        {
+          "dataset_id": "rnaseq-002",
+          "path": "rights.json"
+        },
+        {
+          "dataset_id": "rnaseq-003",
+          "path": "rights.json"
+        },
+        {
+          "dataset_id": "rnaseq-004",
+          "path": "rights.json"
+        },
+        {
+          "dataset_id": "rnaseq-005",
+          "path": "rights.json"
+        },
+        {
+          "dataset_id": "rnaseq-006",
+          "path": "rights.json"
+        },
+        {
+          "dataset_id": "rnaseq-007",
+          "path": "rights.json"
+        },
+        {
+          "dataset_id": "rnaseq-008",
+          "path": "rights.json"
+        },
+        {
+          "dataset_id": "rnaseq-009",
+          "path": "rights.json"
+        },
+        {
+          "dataset_id": "rnaseq-010",
+          "path": "rights.json"
+        },
+        {
+          "dataset_id": "rnaseq-011",
+          "path": "rights.json"
+        },
+        {
+          "dataset_id": "rnaseq-012",
+          "path": "rights.json"
+        },
+        {
+          "dataset_id": "rnaseq-013",
+          "path": "rights.json"
+        }
+      ],
+      "classification": "shared provider licence record"
+    },
+    {
+      "sha256": "9e49d4278e37aecafe2013aaf9c86e1c1093e76ea6a69d38c6fba3ef74f0aa7e",
+      "files": [
+        {
+          "dataset_id": "rnaseq-006",
+          "path": "expected/source-counts.tsv"
+        },
+        {
+          "dataset_id": "rnaseq-009",
+          "path": "expected/source-counts.tsv"
+        }
+      ],
+      "classification": "same-study source matrix used for distinct declared contrasts"
+    }
+  ],
+  "repeated_long_prose": [],
+  "blockers": []
+}
