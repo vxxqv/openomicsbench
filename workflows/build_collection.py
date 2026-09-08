@@ -193,6 +193,7 @@ def build(entry: dict, release: str, checked: str, references: dict, reference_h
         }
         write_json(partial / "rights.json", rights)
         workflow_path = "workflows/atlas_diagnostic.py"
+        builder_path = "workflows/build_collection.py"
         provenance = {
             "dataset_id": dataset_id,
             "object_key": object_key,
@@ -212,6 +213,11 @@ def build(entry: dict, release: str, checked: str, references: dict, reference_h
                 "batch_column": batch_column,
                 "condition_values": config.get("condition_values"),
                 "subset": config.get("subset", {}),
+            },
+            "assembly": {
+                "workflow": builder_path,
+                "workflow_sha256": digest(ROOT / builder_path),
+                "workflow_commit": git_commit(builder_path),
             },
             "diagnostic": {"path": f"evidence/{slug}-diagnostic.json", "sha256": digest(diagnostic_path)},
             "deseq2": {"path": f"evidence/{slug}-deseq2.json", "sha256": digest(baseline_path)},
