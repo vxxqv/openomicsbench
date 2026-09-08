@@ -1,0 +1,116 @@
+{
+  "accession": "E-MTAB-10322",
+  "source_systems": [
+    {
+      "name": "Expression Atlas",
+      "url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-10322"
+    },
+    {
+      "name": "BioStudies",
+      "url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-10322"
+    }
+  ],
+  "checked": "2026-09-08",
+  "title": "Loss of full-length dystrophin expression causes major cell-autonomous abnormalities in proliferating myoblasts",
+  "assay": "bulk RNA-seq of coding RNA",
+  "organism": "Mus musculus",
+  "taxon_id": 10090,
+  "study_design": {
+    "factor_column": "Factor Value[disease]",
+    "groups": {
+      "Duchenne muscular dystrophy": 6,
+      "normal": 3
+    },
+    "analysed_runs": 9,
+    "selected_runs": 9,
+    "balanced": false,
+    "batch_column": null,
+    "batch_levels": {
+      "not_reported": 9
+    }
+  },
+  "atlas_processing": {
+    "source_statement": "Expression Atlas mapped reads to Ensembl release 107 with TopHat2 2.1.1 and quantified them with HTSeq 0.11.0. Exact FASTA and annotation hashes remain to be pinned.",
+    "diagnostic_baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), disease status only; DESeq2 confirmation remains required."
+  },
+  "verified_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-10322-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-10322/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 2828028,
+      "sha256": "6c0787b459d910aefbecf922797eeb224639c08acdc7959e1ce7278d90cd5892",
+      "genes": 56748,
+      "unique_sample_columns": 9,
+      "excluded_unanalysed_columns": [],
+      "verified_repeated_columns": {},
+      "format_check": "Every retained count parsed as a non-negative integer; repeated run columns, where present, were accepted only after full-vector equality checks."
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-10322-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-10322/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 5002,
+      "sha256": "c6d74f40c533a5159e98ffc6324846abafd44952c9edd8093e9c2173c5d61a95",
+      "analysed_runs": 9,
+      "format_check": "Analysed run identifiers are present, unique and represented in the retained count matrix."
+    }
+  ],
+  "rights": {
+    "status": "GREEN",
+    "license": "Creative Commons Attribution 4.0 International",
+    "redistribution": "permitted with attribution",
+    "evidence_url": "https://www.ebi.ac.uk/gxa/licence.html",
+    "evidence_page_bytes": 15010,
+    "evidence_page_sha256": "0c35e7e1e590438decb4c44d7d42f1d69a2190eb97acb4bdca5a14cf71f26dd8",
+    "obligations": [
+      "Credit Expression Atlas and EMBL-EBI.",
+      "Cite the current Expression Atlas publication requested on the licence page.",
+      "Retain the experiment accession and originating-study link."
+    ],
+    "checked": "2026-09-08"
+  },
+  "reference_review": {
+    "status": "partially_resolved",
+    "reported_processing": "Expression Atlas mapped reads to Ensembl release 107 with TopHat2 2.1.1 and quantified them with HTSeq 0.11.0. Exact FASTA and annotation hashes remain to be pinned.",
+    "namespace": "Ensembl gene identifiers",
+    "pending": "Pin exact assembly FASTA and annotation file URLs, sizes and SHA-256 checksums, then verify every pocket identifier against the annotation."
+  },
+  "reduction_diagnostic": {
+    "workflow": "workflows/atlas_diagnostic.py",
+    "config": "workflows/e-mtab-10322-source.json",
+    "evidence": "evidence/e-mtab-10322-diagnostic.json",
+    "normalization": "median_ratio",
+    "candidate_sizes": [
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      12000,
+      20000
+    ],
+    "smallest_passing_features": 8000,
+    "smallest_passing_bytes": 315574,
+    "smallest_passing_size_ratio": 0.11158800407916754,
+    "smallest_passing_metrics": {
+      "spearman_logfc": 0.9917053643807695,
+      "top_k_jaccard": 0.9607843137254902,
+      "distance_correlation": 0.9163058427319358,
+      "sign_concordance": 1.0
+    },
+    "report_sha256": "25d4950243d8feac0cb63b65959ad0b7d3c7f5a2fae89feddf9bf6138d3df206",
+    "repeat_report_sha256": "25d4950243d8feac0cb63b65959ad0b7d3c7f5a2fae89feddf9bf6138d3df206",
+    "repeat_identical": true,
+    "interpretation": "The 8,000-gene candidate is the first declared size to meet all four development thresholds."
+  },
+  "review_status": "priority",
+  "proposed_archetype": "Imbalanced disease comparison",
+  "release_eligible": false,
+  "remaining_work": [
+    "Pin exact reference files and validate the pocket identifier namespace against them.",
+    "Run the DESeq2 full-source and pocket confirmation with recorded versions.",
+    "Prepare dataset-level source attribution and license files.",
+    "Complete an independent clean-environment reproduction before release."
+  ]
+}
