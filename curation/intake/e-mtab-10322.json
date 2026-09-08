@@ -109,8 +109,35 @@
   "release_eligible": false,
   "remaining_work": [
     "Pin exact reference files and validate the pocket identifier namespace against them.",
-    "Run the DESeq2 full-source and pocket confirmation with recorded versions.",
     "Prepare dataset-level source attribution and license files.",
     "Complete an independent clean-environment reproduction before release."
-  ]
+  ],
+  "deseq2_confirmation": {
+    "status": "pass",
+    "evidence": "evidence/e-mtab-10322-deseq2.json",
+    "baseline_report_sha256": "a082b3fbece25e9434f2fed6d73d893c636308834e2af403b50a6f6a0c3ba694",
+    "runtime": {
+      "r": "4.5.3",
+      "deseq2": "1.50.2",
+      "python": "3.12.14",
+      "numpy": "2.3.5"
+    },
+    "formula": "~ condition",
+    "contrast": "normal versus Duchenne muscular dystrophy",
+    "full_features": 56748,
+    "pocket_features": 8000,
+    "finite_shared_effects": 4704,
+    "metrics": {
+      "spearman_logfc": 0.9990674794038852,
+      "top_k_jaccard": 1.0,
+      "distance_correlation": 0.9163409306329852,
+      "sign_concordance": 1.0
+    },
+    "thresholds": {
+      "spearman_logfc": 0.9,
+      "top_k_jaccard": 0.6,
+      "distance_correlation": 0.9,
+      "sign_concordance": 0.9
+    }
+  }
 }
