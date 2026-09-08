@@ -7,6 +7,9 @@
   ],
   "description": "Compact, traceable transcriptomics objects for software testing, teaching and method development.",
   "upload_type": "software",
+  "access_right": "open",
+  "license": "Apache-2.0",
+  "language": "eng",
   "keywords": [
     "bioinformatics",
     "computational biology",

@@ -6,6 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "openomicsbench"
 version = "1.0.0.dev1"
 description = "Traceable transcriptomics test data and deterministic validation"
+license = "Apache-2.0"
 keywords = ["bioinformatics", "genomics", "transcriptomics", "rna-seq", "benchmarking", "reproducibility", "data-validation", "data-provenance", "scientific-workflows", "research-software"]
 requires-python = ">=3.11"
 dependencies = ["pydantic>=2.13,<3", "numpy>=2.3,<3"]

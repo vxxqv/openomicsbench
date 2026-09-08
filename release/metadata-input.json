@@ -15,8 +15,8 @@
     "concept_doi": "10.5281/zenodo.22551734",
     "record_url": "https://zenodo.org/records/22551735"
   },
-  "code_license": null,
-  "metadata_license": null,
+  "code_license": "Apache-2.0",
+  "metadata_license": "CC-BY-4.0",
   "version_doi": null,
   "external_user_trial": null,
   "scientific_environment_lock": "runtime/environment-lock.json",
