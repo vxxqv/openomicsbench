@@ -71,10 +71,19 @@
     "checked": "2026-09-08"
   },
   "reference_review": {
-    "status": "partially_resolved",
-    "reported_processing": "Expression Atlas mapped reads to Ensembl release 97 with HISAT2 2.1.0 and quantified them with FeatureCounts 1.6.2. Exact FASTA and annotation hashes remain to be pinned.",
+    "status": "verified",
+    "provider": "Ensembl",
+    "release": "97",
+    "assembly": "GRCm38",
+    "genome_url": "https://ftp.ensembl.org/pub/release-97/fasta/mus_musculus/dna/Mus_musculus.GRCm38.dna.primary_assembly.fa.gz",
+    "genome_official_checksum": "20889 787095 Mus_musculus.GRCm38.dna.primary_assembly.fa.gz",
+    "annotation_url": "https://ftp.ensembl.org/pub/release-97/gtf/mus_musculus/Mus_musculus.GRCm38.97.gtf.gz",
+    "annotation_sha256": "ddf9e565b44b5a9f369b8d9dcce2b427ddbab0f0c6f8cbc79ef040b5dad664c4",
     "namespace": "Ensembl gene identifiers",
-    "pending": "Pin exact assembly FASTA and annotation file URLs, sizes and SHA-256 checksums, then verify every pocket identifier against the annotation."
+    "pocket_features_checked": 4000,
+    "unmatched_features": [],
+    "evidence": "evidence/reference-verification.json",
+    "evidence_sha256": "7a70b2c1b010e40d7851f6c5cae7a9e8d4ffd7bef6b14757d1dcd8dce77ca5a0"
   },
   "reduction_diagnostic": {
     "workflow": "workflows/atlas_diagnostic.py",
@@ -108,7 +117,6 @@
   "proposed_archetype": "Mouse erythroid genetic knockout",
   "release_eligible": false,
   "remaining_work": [
-    "Pin exact reference files and validate the pocket identifier namespace against them.",
     "Prepare dataset-level source attribution and license files.",
     "Complete an independent clean-environment reproduction before release."
   ],
