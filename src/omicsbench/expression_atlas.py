@@ -194,12 +194,16 @@ def stage(accession: str, destination: Path, opener=urllib.request.urlopen, max_
     records = [_stage_one(resources[role], paths[role], opener, max_bytes) for role in ("raw_counts", "experiment_design")]
     genes, count_samples, _ = load_counts(paths["raw_counts"])
     analysed, design_samples, columns = _check_design(paths["experiment_design"])
-    if set(count_samples) != set(design_samples):
-        raise ValueError("Raw-count samples do not match analysed experiment-design runs")
+    missing = sorted(set(design_samples) - set(count_samples))
+    if missing:
+        raise ValueError("Raw-count samples are missing analysed experiment-design runs")
+    excluded = [sample for sample in count_samples if sample not in set(design_samples)]
     return {
         "accession": accession,
         "genes": len(genes),
-        "samples": len(count_samples),
+        "samples": len(design_samples),
+        "raw_count_columns": len(count_samples),
+        "excluded_count_columns": excluded,
         "design_columns": columns,
         "resources": records,
     }

@@ -32,8 +32,11 @@ def run(config_path: Path, staging: Path) -> dict:
     batch_column = config.get("batch_column")
     fields = [factor] + ([batch_column] if batch_column else [])
     design = load_design_fields(source / f'{config["accession"]}-experiment-design.tsv', fields)
-    if set(all_sample_ids) != set(design):
-        raise ValueError("Count columns and analysed design runs differ")
+    if not set(design) <= set(all_sample_ids):
+        raise ValueError("Count columns are missing analysed design runs")
+    analysed_columns = [index for index, sample_id in enumerate(all_sample_ids) if sample_id in design]
+    sample_ids = [all_sample_ids[index] for index in analysed_columns]
+    counts = counts[:, analysed_columns]
     condition_values = config.get("condition_values")
     if condition_values is not None:
         if not isinstance(condition_values, list) or len(condition_values) != 2 or len(set(condition_values)) != 2 or any(not value for value in condition_values):
@@ -42,11 +45,10 @@ def run(config_path: Path, staging: Path) -> dict:
         observed = {values[factor] for values in design.values()}
         if not allowed <= observed:
             raise ValueError("condition_values contains a value absent from the experiment design")
-        selected_columns = [index for index, sample_id in enumerate(all_sample_ids) if design[sample_id][factor] in allowed]
-        sample_ids = [all_sample_ids[index] for index in selected_columns]
+        selected_columns = [index for index, sample_id in enumerate(sample_ids) if design[sample_id][factor] in allowed]
+        sample_ids = [sample_ids[index] for index in selected_columns]
         counts = counts[:, selected_columns]
     else:
-        sample_ids = all_sample_ids
         if len({values[factor] for values in design.values()}) != 2:
             raise ValueError("The diagnostic requires exactly two factor values or an explicit condition_values selection")
     seen: Counter[str] = Counter()
@@ -84,7 +86,9 @@ def run(config_path: Path, staging: Path) -> dict:
         "status": "diagnostic_only",
         "source_features": len(genes),
         "source_samples": len(all_sample_ids),
+        "analysed_samples": len(design),
         "selected_samples": len(sample_ids),
+        "excluded_count_columns": transfer["excluded_count_columns"],
         "conditions": dict(seen),
         "factor_column": factor,
         "batch_column": batch_column,
