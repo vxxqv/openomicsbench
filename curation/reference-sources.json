@@ -1,5 +1,12 @@
 {
   "checked": "2026-09-08",
+  "excluded_sources": [
+    {
+      "accession": "E-MTAB-7126",
+      "evidence": "evidence/e-mtab-7126-reference-mismatch.json",
+      "reason": "The current count matrix does not match the Ensembl 95 annotation stated on the experiment page."
+    }
+  ],
   "profiles": [
     {
       "id": "ensembl-95-human",
@@ -7,7 +14,7 @@
       "release": "95",
       "organism": "Homo sapiens",
       "assembly": "GRCh38",
-      "accessions": ["E-MTAB-8572", "E-MTAB-7126", "E-MTAB-9206"],
+      "objects": ["E-MTAB-8572", "E-MTAB-9206"],
       "fasta": {
         "url": "https://ftp.ensembl.org/pub/release-95/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz",
         "checksums_url": "https://ftp.ensembl.org/pub/release-95/fasta/homo_sapiens/dna/CHECKSUMS",
@@ -27,7 +34,7 @@
       "release": "97",
       "organism": "Mus musculus",
       "assembly": "GRCm38",
-      "accessions": ["E-GEOD-33979"],
+      "objects": ["E-GEOD-33979"],
       "fasta": {
         "url": "https://ftp.ensembl.org/pub/release-97/fasta/mus_musculus/dna/Mus_musculus.GRCm38.dna.primary_assembly.fa.gz",
         "checksums_url": "https://ftp.ensembl.org/pub/release-97/fasta/mus_musculus/dna/CHECKSUMS",
@@ -47,7 +54,7 @@
       "release": "107",
       "organism": "Homo sapiens",
       "assembly": "GRCh38",
-      "accessions": ["E-MTAB-567"],
+      "objects": ["E-MTAB-567"],
       "fasta": {
         "url": "https://ftp.ensembl.org/pub/release-107/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz",
         "checksums_url": "https://ftp.ensembl.org/pub/release-107/fasta/homo_sapiens/dna/CHECKSUMS",
@@ -67,7 +74,7 @@
       "release": "107",
       "organism": "Mus musculus",
       "assembly": "GRCm39",
-      "accessions": ["E-MTAB-10322"],
+      "objects": ["E-MTAB-10322", "E-MTAB-10322-mdx", "E-MTAB-10322-beta"],
       "fasta": {
         "url": "https://ftp.ensembl.org/pub/release-107/fasta/mus_musculus/dna/Mus_musculus.GRCm39.dna.primary_assembly.fa.gz",
         "checksums_url": "https://ftp.ensembl.org/pub/release-107/fasta/mus_musculus/dna/CHECKSUMS",
@@ -87,7 +94,7 @@
       "release": "44",
       "organism": "Arabidopsis thaliana",
       "assembly": "TAIR10",
-      "accessions": ["E-MTAB-6866", "E-MTAB-8845"],
+      "objects": ["E-MTAB-6866", "E-MTAB-8845", "E-MTAB-8845-genotype", "E-MTAB-8845-infection-wild", "E-MTAB-8845-infection-gsnor1"],
       "fasta": {
         "url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-44/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz",
         "checksums_url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-44/fasta/arabidopsis_thaliana/dna/CHECKSUMS",
