@@ -1,0 +1,299 @@
+{
+  "schema_version": "1.0",
+  "status": "pass",
+  "checked": "2026-09-08",
+  "verified_objects": [
+    "E-GEOD-33979",
+    "E-MTAB-10322",
+    "E-MTAB-10322-beta",
+    "E-MTAB-10322-mdx",
+    "E-MTAB-567",
+    "E-MTAB-6866",
+    "E-MTAB-8572",
+    "E-MTAB-8845",
+    "E-MTAB-8845-genotype",
+    "E-MTAB-8845-infection-gsnor1",
+    "E-MTAB-8845-infection-wild",
+    "E-MTAB-9206"
+  ],
+  "excluded_sources": [
+    {
+      "accession": "E-MTAB-7126",
+      "evidence": "evidence/e-mtab-7126-reference-mismatch.json",
+      "reason": "The current count matrix does not match the Ensembl 95 annotation stated on the experiment page."
+    }
+  ],
+  "profiles": [
+    {
+      "id": "ensembl-95-human",
+      "provider": "Ensembl",
+      "release": "95",
+      "organism": "Homo sapiens",
+      "assembly": "GRCh38",
+      "fasta": {
+        "url": "https://ftp.ensembl.org/pub/release-95/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz",
+        "bytes": 881211416,
+        "official_bsd_sum": 2415,
+        "official_blocks_1024": 860559,
+        "checksums_evidence": {
+          "url": "https://ftp.ensembl.org/pub/release-95/fasta/homo_sapiens/dna/CHECKSUMS",
+          "bytes": 5010,
+          "sha256": "c6c29649a322c96d1f9f32d255606e022592342b68987d1701dbbe0e81678756",
+          "record": "02415 860559 Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz"
+        },
+        "downloaded": false
+      },
+      "gtf": {
+        "url": "https://ftp.ensembl.org/pub/release-95/gtf/homo_sapiens/Homo_sapiens.GRCh38.95.gtf.gz",
+        "bytes": 43668708,
+        "sha256": "b54faa39220ab12d62dfa9c6a529668fc56bc926bba64bb2faaa1003319b7341",
+        "official_bsd_sum": 50378,
+        "official_blocks_1024": 42646,
+        "checksums_evidence": {
+          "url": "https://ftp.ensembl.org/pub/release-95/gtf/homo_sapiens/CHECKSUMS",
+          "bytes": 221,
+          "sha256": "3320feee0e04e1085938d153dcee15853c1080b0c1aff0e1a6d97f5d8f43dea4",
+          "record": "50378 42646 Homo_sapiens.GRCh38.95.gtf.gz"
+        },
+        "gene_identifiers": 58735,
+        "gzip_test": "pass"
+      },
+      "pocket_checks": [
+        {
+          "object_key": "E-MTAB-8572",
+          "pocket_features": 2000,
+          "matched_features": 2000,
+          "unmatched_features": [],
+          "status": "pass"
+        },
+        {
+          "object_key": "E-MTAB-9206",
+          "pocket_features": 8000,
+          "matched_features": 8000,
+          "unmatched_features": [],
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "id": "ensembl-97-mouse",
+      "provider": "Ensembl",
+      "release": "97",
+      "organism": "Mus musculus",
+      "assembly": "GRCm38",
+      "fasta": {
+        "url": "https://ftp.ensembl.org/pub/release-97/fasta/mus_musculus/dna/Mus_musculus.GRCm38.dna.primary_assembly.fa.gz",
+        "bytes": 805984352,
+        "official_bsd_sum": 20889,
+        "official_blocks_1024": 787095,
+        "checksums_evidence": {
+          "url": "https://ftp.ensembl.org/pub/release-97/fasta/mus_musculus/dna/CHECKSUMS",
+          "bytes": 4483,
+          "sha256": "f7cc9bb9b2b641abb0174d8c269fbd463235acb1d29516e40dab651d27e7b785",
+          "record": "20889 787095 Mus_musculus.GRCm38.dna.primary_assembly.fa.gz"
+        },
+        "downloaded": false
+      },
+      "gtf": {
+        "url": "https://ftp.ensembl.org/pub/release-97/gtf/mus_musculus/Mus_musculus.GRCm38.97.gtf.gz",
+        "bytes": 30167232,
+        "sha256": "ddf9e565b44b5a9f369b8d9dcce2b427ddbab0f0c6f8cbc79ef040b5dad664c4",
+        "official_bsd_sum": 37093,
+        "official_blocks_1024": 29461,
+        "checksums_evidence": {
+          "url": "https://ftp.ensembl.org/pub/release-97/gtf/mus_musculus/CHECKSUMS",
+          "bytes": 221,
+          "sha256": "935bb477aa500c3f959c9e0876aa25a31e96adc988188f3c9c57942a0c86cba5",
+          "record": "37093 29461 Mus_musculus.GRCm38.97.gtf.gz"
+        },
+        "gene_identifiers": 55573,
+        "gzip_test": "pass"
+      },
+      "pocket_checks": [
+        {
+          "object_key": "E-GEOD-33979",
+          "pocket_features": 4000,
+          "matched_features": 4000,
+          "unmatched_features": [],
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "id": "ensembl-107-human",
+      "provider": "Ensembl",
+      "release": "107",
+      "organism": "Homo sapiens",
+      "assembly": "GRCh38",
+      "fasta": {
+        "url": "https://ftp.ensembl.org/pub/release-107/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz",
+        "bytes": 881211416,
+        "official_bsd_sum": 2415,
+        "official_blocks_1024": 860559,
+        "checksums_evidence": {
+          "url": "https://ftp.ensembl.org/pub/release-107/fasta/homo_sapiens/dna/CHECKSUMS",
+          "bytes": 5010,
+          "sha256": "ce636be091a62668531dc613dd479500109049afb44df82dc12dc0d9334b68d3",
+          "record": "02415 860559 Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz"
+        },
+        "downloaded": false
+      },
+      "gtf": {
+        "url": "https://ftp.ensembl.org/pub/release-107/gtf/homo_sapiens/Homo_sapiens.GRCh38.107.gtf.gz",
+        "bytes": 52555212,
+        "sha256": "9994f3bc8792c63803e3d91a1a8d2e613503fc59e278bcb156e55d0a7c3fb7b1",
+        "official_bsd_sum": 7867,
+        "official_blocks_1024": 51324,
+        "checksums_evidence": {
+          "url": "https://ftp.ensembl.org/pub/release-107/gtf/homo_sapiens/CHECKSUMS",
+          "bytes": 225,
+          "sha256": "a35c93bc7e93c4123cad6aa2275b817db29596da8787713d6108c71b0051551b",
+          "record": "07867 51324 Homo_sapiens.GRCh38.107.gtf.gz"
+        },
+        "gene_identifiers": 61860,
+        "gzip_test": "pass"
+      },
+      "pocket_checks": [
+        {
+          "object_key": "E-MTAB-567",
+          "pocket_features": 8000,
+          "matched_features": 8000,
+          "unmatched_features": [],
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "id": "ensembl-107-mouse",
+      "provider": "Ensembl",
+      "release": "107",
+      "organism": "Mus musculus",
+      "assembly": "GRCm39",
+      "fasta": {
+        "url": "https://ftp.ensembl.org/pub/release-107/fasta/mus_musculus/dna/Mus_musculus.GRCm39.dna.primary_assembly.fa.gz",
+        "bytes": 806418890,
+        "official_bsd_sum": 16996,
+        "official_blocks_1024": 787519,
+        "checksums_evidence": {
+          "url": "https://ftp.ensembl.org/pub/release-107/fasta/mus_musculus/dna/CHECKSUMS",
+          "bytes": 4339,
+          "sha256": "4291859e76967071be5b30673b653e34f99ebb74d76fd0901f32ce885d9a68fa",
+          "record": "16996 787519 Mus_musculus.GRCm39.dna.primary_assembly.fa.gz"
+        },
+        "downloaded": false
+      },
+      "gtf": {
+        "url": "https://ftp.ensembl.org/pub/release-107/gtf/mus_musculus/Mus_musculus.GRCm39.107.gtf.gz",
+        "bytes": 31861821,
+        "sha256": "15af16b7bef88c4309a82d49579fdd967f6ac8769b7f0bf657bbf7ee73b779e3",
+        "official_bsd_sum": 628,
+        "official_blocks_1024": 31116,
+        "checksums_evidence": {
+          "url": "https://ftp.ensembl.org/pub/release-107/gtf/mus_musculus/CHECKSUMS",
+          "bytes": 161,
+          "sha256": "6572e8b44e10f1e43d774782d6fa1e191d0530d21693538c47af4c3b7febcb18",
+          "record": "00628 31116 Mus_musculus.GRCm39.107.gtf.gz"
+        },
+        "gene_identifiers": 56748,
+        "gzip_test": "pass"
+      },
+      "pocket_checks": [
+        {
+          "object_key": "E-MTAB-10322",
+          "pocket_features": 8000,
+          "matched_features": 8000,
+          "unmatched_features": [],
+          "status": "pass"
+        },
+        {
+          "object_key": "E-MTAB-10322-mdx",
+          "pocket_features": 8000,
+          "matched_features": 8000,
+          "unmatched_features": [],
+          "status": "pass"
+        },
+        {
+          "object_key": "E-MTAB-10322-beta",
+          "pocket_features": 8000,
+          "matched_features": 8000,
+          "unmatched_features": [],
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "id": "ensembl-genomes-44-arabidopsis",
+      "provider": "Ensembl Genomes",
+      "release": "44",
+      "organism": "Arabidopsis thaliana",
+      "assembly": "TAIR10",
+      "fasta": {
+        "url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-44/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz",
+        "bytes": 36462703,
+        "official_bsd_sum": 52039,
+        "official_blocks_1024": 35609,
+        "checksums_evidence": {
+          "url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-44/fasta/arabidopsis_thaliana/dna/CHECKSUMS",
+          "bytes": 1573,
+          "sha256": "faf9ff898440b441f551b548f43ac3fea02c7fc42a5f991dd5c08b2bf3352740",
+          "record": "52039 35609 Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz"
+        },
+        "downloaded": false
+      },
+      "gtf": {
+        "url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-44/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.44.gtf.gz",
+        "bytes": 9999613,
+        "sha256": "fb7f4d0d089546973e5a97183d4460a97a1616f44a5840fd2aaf30df0a6e44cc",
+        "official_bsd_sum": 34259,
+        "official_blocks_1024": 9766,
+        "checksums_evidence": {
+          "url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-44/gtf/arabidopsis_thaliana/CHECKSUMS",
+          "bytes": 69,
+          "sha256": "ce58f792b9f6546bd58c3aae38987dfa295b9184b62860c4d062584c47c65571",
+          "record": "34259  9766 Arabidopsis_thaliana.TAIR10.44.gtf.gz"
+        },
+        "gene_identifiers": 32833,
+        "gzip_test": "pass"
+      },
+      "pocket_checks": [
+        {
+          "object_key": "E-MTAB-6866",
+          "pocket_features": 4000,
+          "matched_features": 4000,
+          "unmatched_features": [],
+          "status": "pass"
+        },
+        {
+          "object_key": "E-MTAB-8845",
+          "pocket_features": 500,
+          "matched_features": 500,
+          "unmatched_features": [],
+          "status": "pass"
+        },
+        {
+          "object_key": "E-MTAB-8845-genotype",
+          "pocket_features": 500,
+          "matched_features": 500,
+          "unmatched_features": [],
+          "status": "pass"
+        },
+        {
+          "object_key": "E-MTAB-8845-infection-wild",
+          "pocket_features": 500,
+          "matched_features": 500,
+          "unmatched_features": [],
+          "status": "pass"
+        },
+        {
+          "object_key": "E-MTAB-8845-infection-gsnor1",
+          "pocket_features": 500,
+          "matched_features": 500,
+          "unmatched_features": [],
+          "status": "pass"
+        }
+      ]
+    }
+  ],
+  "config_sha256": "f54cf0b81a99268690870c06ffe84e8f9e34120b6af53371d41d1b374be07112",
+  "workflow_sha256": "a49331893f7e490e598ceab5679a635053f813315de9836d7d67c7629df89804"
+}
