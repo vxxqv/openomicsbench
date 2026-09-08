@@ -12,6 +12,7 @@ if (nlevels(samples$condition) != 2 || any(table(samples$condition) < 2)) stop("
 design_formula <- if (nlevels(samples$batch) > 1) ~ batch + condition else ~ condition
 design_matrix <- model.matrix(design_formula, samples)
 if (qr(design_matrix)$rank < ncol(design_matrix)) stop("Condition and batch are confounded")
+if (nrow(design_matrix) <= ncol(design_matrix)) stop("The design has no residual degrees of freedom")
 dds <- DESeqDataSetFromMatrix(counts, samples, design_formula)
 dds <- DESeq(dds)
 groups <- levels(samples$condition)
