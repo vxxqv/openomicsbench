@@ -60,6 +60,13 @@ class CoreTests(unittest.TestCase):
         data=self.model.model_dump();data['rights']['status']='AMBER'
         with self.assertRaises(ValidationError):Dataset.model_validate(data)
     def test_validate(self):self.assertEqual(validate(self.model,self.folder)['status'],'pass')
+    def test_validate_declared_normalization(self):
+        profile_path=self.folder/self.model.validation.profile
+        profile=json.loads(profile_path.read_text());profile['normalization']='median_ratio'
+        profile_path.write_text(json.dumps(profile))
+        declared=next(file for file in self.model.files if file.path==self.model.validation.profile)
+        declared.bytes=profile_path.stat().st_size;declared.sha256=digest(profile_path)
+        self.assertEqual(validate(self.model,self.folder)['status'],'pass')
     def test_corruption(self):
         path=self.folder/'nano/counts.tsv';body=path.read_bytes();path.write_bytes(body[:-1]+b'x')
         with self.assertRaisesRegex(ValueError,'checksum'):validate(self.model,self.folder)
