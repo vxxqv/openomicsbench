@@ -96,26 +96,62 @@
     "config": "workflows/e-mtab-6866-source.json",
     "evidence": "evidence/e-mtab-6866-diagnostic.json",
     "normalization": "median_ratio",
-    "candidate_sizes": [500, 1000, 2000, 4000, 8000, 12000, 20000],
+    "candidate_sizes": [
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      12000,
+      20000
+    ],
     "smallest_passing_features": 4000,
     "smallest_passing_bytes": 105563,
     "smallest_passing_size_ratio": 0.10133178978570798,
     "smallest_passing_metrics": {
       "spearman_logfc": 0.9559191959409639,
       "top_k_jaccard": 0.8518518518518519,
-      "distance_correlation": 0.9391315809308595,
+      "distance_correlation": 0.9391315809308576,
       "sign_concordance": 0.9513449367088608
     },
-    "repeat_report_sha256": "0bd4a8ab961a4c802cb30fc72fcae9fcba3a05497a8e3295b507d7c9a5ded253",
-    "repeat_identical": true
+    "repeat_report_sha256": "146b61b732f11a9711502d76256c93656579f77c39893b9ee074de7724910862",
+    "repeat_identical": true,
+    "report_sha256": "146b61b732f11a9711502d76256c93656579f77c39893b9ee074de7724910862"
   },
   "review_status": "priority",
   "proposed_archetype": "Balanced plant genetic knockout",
   "release_eligible": false,
   "remaining_work": [
     "Pin exact reference files and validate the count identifier namespace against them.",
-    "Run the DESeq2 full-source and pocket confirmation with recorded versions.",
     "Prepare dataset-level source attribution and license files.",
     "Complete an independent clean-environment reproduction before release."
-  ]
+  ],
+  "deseq2_confirmation": {
+    "status": "pass",
+    "evidence": "evidence/e-mtab-6866-deseq2.json",
+    "baseline_report_sha256": "86587b6ed52dfd82eba022c1c074e8642ab066bd92500b3a532fe4b756ef6cf7",
+    "runtime": {
+      "r": "4.5.3",
+      "deseq2": "1.50.2",
+      "python": "3.12.14",
+      "numpy": "2.3.5"
+    },
+    "formula": "~ condition",
+    "contrast": "wild type genotype versus AtRsgA-i -/-",
+    "full_features": 32833,
+    "pocket_features": 4000,
+    "finite_shared_effects": 2748,
+    "metrics": {
+      "spearman_logfc": 0.9999495062540774,
+      "top_k_jaccard": 0.8518518518518519,
+      "distance_correlation": 0.9390399315774344,
+      "sign_concordance": 0.9475774424146147
+    },
+    "thresholds": {
+      "spearman_logfc": 0.9,
+      "top_k_jaccard": 0.6,
+      "distance_correlation": 0.9,
+      "sign_concordance": 0.9
+    }
+  }
 }
