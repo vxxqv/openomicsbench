@@ -1,0 +1,65 @@
+{
+  "dataset_id": "rnaseq-006",
+  "object_key": "E-MTAB-8845",
+  "algorithm": "contrast-anchored deterministic feature selection",
+  "seed": 20260908,
+  "source_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-8845-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-8845/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 2826671,
+      "sha256": "66f217ca72cd6936c39c5b667543468a137fa164d3db57a7b1b37facf4d47abf"
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-8845-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-8845/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 4599,
+      "sha256": "e8b4763a1717820c2bbbefbf74dda52ec2ca260c126d135b2ed6d4b59878e2fe"
+    }
+  ],
+  "selection": {
+    "config": "workflows/e-mtab-8845-source.json",
+    "config_sha256": "3f84e68da9107c17949c893106bce88cbbce109522d14e4f71d648e39145ba80",
+    "config_commit": "01c718fc6d8f3620ca2e6b434a40ba1bdfc7bb9e",
+    "workflow": "workflows/atlas_diagnostic.py",
+    "workflow_sha256": "1e065fb87b06b029505797eefe97580cb1a2dde6b1c32724bbbe46299b7343e4",
+    "workflow_commit": "fd3697970fe986214db4b44e1e2d605519a9b7aa",
+    "candidate_sizes": [
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      12000,
+      20000
+    ],
+    "selected_features": 500,
+    "factor_column": "Factor Value[infect]",
+    "batch_column": "Factor Value[genotype]",
+    "condition_values": null,
+    "subset": {}
+  },
+  "assembly": {
+    "workflow": "workflows/build_collection.py",
+    "workflow_sha256": "0b237a00363dad610357864b04582716a0f855f1624413fa2112189d7ca14857",
+    "workflow_commit": "505807a13443df8449fe698006d619c049cb46b5"
+  },
+  "diagnostic": {
+    "path": "evidence/e-mtab-8845-diagnostic.json",
+    "sha256": "e13ab6b4bef5a27a78bb5638e198c98850c8729da2ea4e58bf4b116949a36ca7"
+  },
+  "deseq2": {
+    "path": "evidence/e-mtab-8845-deseq2.json",
+    "sha256": "6c2bca7c4ae66033be69ca50ffdd4968d8f00024bdefd72458ea70df48f41ed3"
+  },
+  "reference": {
+    "path": "evidence/reference-verification.json",
+    "sha256": "7a70b2c1b010e40d7851f6c5cae7a9e8d4ffd7bef6b14757d1dcd8dce77ca5a0"
+  },
+  "intake": {
+    "path": "curation/intake/e-mtab-8845.json",
+    "sha256": "082b9c80e9af2bf501163b543787ae715a144051ab2f1dd520d8d8bb2eb39393"
+  }
+}
