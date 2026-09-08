@@ -91,27 +91,63 @@
     "workflow": "workflows/atlas_diagnostic.py",
     "evidence": "evidence/e-mtab-8572-diagnostic.json",
     "normalization": "median_ratio",
-    "candidate_sizes": [500, 1000, 2000, 4000, 8000, 12000, 20000],
+    "candidate_sizes": [
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      12000,
+      20000
+    ],
     "smallest_passing_features": 2000,
     "smallest_passing_bytes": 77433,
     "smallest_passing_size_ratio": 0.028797138471940147,
     "smallest_passing_metrics": {
       "spearman_logfc": 0.9865670997001579,
       "top_k_jaccard": 0.8867924528301887,
-      "distance_correlation": 0.9386608119661374,
+      "distance_correlation": 0.9386608119661325,
       "sign_concordance": 0.9974768713204374
     },
-    "repeat_report_sha256": "8c33f7c327b642c2c9915a15ec332874bcde9d75e4964ced48b7b555daa0b9a3",
+    "repeat_report_sha256": "b4d9f69163af47a90805cc3cc1f377090d8ef26fb069f125f993d05cae45283e",
     "repeat_identical": true,
-    "interpretation": "The 2,000-gene candidate is the first size in the declared grid to meet all four development thresholds. DESeq2 confirmation and reference-file pinning remain release gates."
+    "interpretation": "The 2,000-gene candidate is the first size in the declared grid to meet all four development thresholds. DESeq2 confirmation and reference-file pinning remain release gates.",
+    "report_sha256": "b4d9f69163af47a90805cc3cc1f377090d8ef26fb069f125f993d05cae45283e"
   },
   "review_status": "priority",
   "proposed_archetype": "Balanced genetic knockout in a human cell-line xenograft",
   "release_eligible": false,
   "remaining_work": [
     "Verify the exact Ensembl 95 genome assembly and annotation files used by the Atlas pipeline.",
-    "Fit the project baseline and record full-to-pocket preservation metrics.",
     "Prepare dataset-level source attribution and license files.",
     "Complete an independent clean-environment reproduction before release."
-  ]
+  ],
+  "deseq2_confirmation": {
+    "status": "pass",
+    "evidence": "evidence/e-mtab-8572-deseq2.json",
+    "baseline_report_sha256": "5bcec3fd20fcfde2c4048e044d66dab4ca6e2e014bfc96615a93ebee8ded91ef",
+    "runtime": {
+      "r": "4.5.3",
+      "deseq2": "1.50.2",
+      "python": "3.12.14",
+      "numpy": "2.3.5"
+    },
+    "formula": "~ condition",
+    "contrast": "wild type genotype versus SLC2A5 knockout mediated by CRISPR/Cas9",
+    "full_features": 58735,
+    "pocket_features": 2000,
+    "finite_shared_effects": 1234,
+    "metrics": {
+      "spearman_logfc": 0.9994413563998183,
+      "top_k_jaccard": 0.9607843137254902,
+      "distance_correlation": 0.9380955435041467,
+      "sign_concordance": 0.992462311557789
+    },
+    "thresholds": {
+      "spearman_logfc": 0.9,
+      "top_k_jaccard": 0.6,
+      "distance_correlation": 0.9,
+      "sign_concordance": 0.9
+    }
+  }
 }
