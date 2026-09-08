@@ -51,4 +51,8 @@ python -m unittest discover -s tests -v
 python scripts/check_repository.py
 ```
 
+## Licence
+
+The software source is licensed under Apache License 2.0. Project-written documentation and descriptive dataset metadata are licensed under Creative Commons Attribution 4.0 International. Every biological object carries its own source attribution and data-rights record; those terms control the included third-party material.
+
 Expansion into a certified biological collection requires reference compatibility checks on real sources, independent usability feedback and post-upload hash verification. These requirements remain visible so later releases can be judged against recorded evidence.
