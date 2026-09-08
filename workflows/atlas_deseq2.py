@@ -129,11 +129,10 @@ def run(config_path: Path, diagnostic_dir: Path, output: Path, conda: Path, envi
     contrast = (output / "full/contrast.log").read_text(encoding="utf-8").strip()
     report = {
         "schema_version": "1.0",
+        "scope": "DESeq2 full-source and pocket fidelity",
         "accession": config["accession"],
         "object_key": config.get("object_key", config["accession"]),
         "status": "pass" if passed else "fail",
-        "release_eligible": False,
-        "release_gates_remaining": ["exact reference-file checksums", "dataset attribution package", "independent clean-environment reproduction"],
         "design": {
             "formula": "~ batch + condition" if len({row[2] for row in metadata}) > 1 else "~ condition",
             "factor_column": config["factor_column"],
