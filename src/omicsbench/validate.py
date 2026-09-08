@@ -26,7 +26,8 @@ def validate(model, folder):
     sample_order = [s.sample_id for s in model.samples]
     if ids != sample_order or ids != profile["sample_ids"]:
         raise ValueError("Baseline sample order differs from manifest or validation profile")
-    full = diagnostic(counts,model.samples)
+    normalization = profile.get("normalization", "cpm")
+    full = diagnostic(counts,model.samples,normalization=normalization)
     results = {}
     for f in model.files:
         if f.role != "raw_counts" or f.tier not in {"nano","pocket"}:
@@ -37,7 +38,7 @@ def validate(model, folder):
         idx = {gene:i for i,gene in enumerate(genes)}
         if any(gene not in idx for gene in g) or not (c == counts[[idx[gene] for gene in g]]).all():
             raise ValueError(f"{f.path}: source counts changed during feature reduction")
-        metrics = preservation(full,diagnostic(c,model.samples),genes,g,profile["top_k"])
+        metrics = preservation(full,diagnostic(c,model.samples,normalization=normalization),genes,g,profile["top_k"])
         for metric in model.validation.metrics:
             if metrics[metric.name] < metric.minimum:
                 raise ValueError(f"{f.path}: {metric.name}={metrics[metric.name]:.5f} is below {metric.minimum}")
