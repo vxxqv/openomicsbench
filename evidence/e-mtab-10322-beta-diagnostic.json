@@ -1,0 +1,152 @@
+{
+  "accession": "E-MTAB-10322",
+  "object_key": "E-MTAB-10322-beta",
+  "status": "diagnostic_only",
+  "source_features": 56748,
+  "source_samples": 9,
+  "analysed_samples": 9,
+  "selected_samples": 6,
+  "excluded_count_columns": [],
+  "deduplicated_count_columns": {},
+  "conditions": {
+    "Dmd-mdx-\u03b2geo": 3,
+    "wild type genotype": 3
+  },
+  "factor_column": "Factor Value[genotype]",
+  "batch_column": null,
+  "subset": {},
+  "batches": {
+    "not_reported": 6
+  },
+  "sample_order": [
+    "ERR5671402",
+    "ERR5671403",
+    "ERR5671404",
+    "ERR5671408",
+    "ERR5671409",
+    "ERR5671410"
+  ],
+  "contrast": "wild type genotype - Dmd-mdx-\u03b2geo",
+  "baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), Dmd-mdx-\u03b2geo against wild type; DESeq2 confirmation remains required.",
+  "normalization": "median_ratio",
+  "full_size_factors": [
+    0.9987582694456789,
+    1.0127842859668785,
+    0.9483478337928299,
+    1.0075342246504397,
+    0.9526962954637634,
+    1.0860272362614298
+  ],
+  "candidate_curve": [
+    {
+      "features": 500,
+      "bytes": 16859,
+      "size_ratio": 0.0059613978362307585,
+      "metrics": {
+        "spearman_logfc": 0.9812873899420435,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.41196583072710724,
+        "sign_concordance": 1.0
+      },
+      "pass": false
+    },
+    {
+      "features": 1000,
+      "bytes": 33213,
+      "size_ratio": 0.01174422601190653,
+      "metrics": {
+        "spearman_logfc": 0.9706368311107024,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.5861727331889691,
+        "sign_concordance": 1.0
+      },
+      "pass": false
+    },
+    {
+      "features": 2000,
+      "bytes": 66031,
+      "size_ratio": 0.023348778724963118,
+      "metrics": {
+        "spearman_logfc": 0.9539122130086715,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.660495598570231,
+        "sign_concordance": 0.9956772334293948
+      },
+      "pass": false
+    },
+    {
+      "features": 4000,
+      "bytes": 131145,
+      "size_ratio": 0.04637330323462144,
+      "metrics": {
+        "spearman_logfc": 0.9627322751790164,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.8073060160353837,
+        "sign_concordance": 1.0
+      },
+      "pass": false
+    },
+    {
+      "features": 8000,
+      "bytes": 261173,
+      "size_ratio": 0.09235163159629255,
+      "metrics": {
+        "spearman_logfc": 0.9796501944542645,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.9225876237452304,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 12000,
+      "bytes": 390769,
+      "size_ratio": 0.1381772033374493,
+      "metrics": {
+        "spearman_logfc": 0.9811137642977442,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.9541281930732863,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 20000,
+      "bytes": 650210,
+      "size_ratio": 0.22991639403853145,
+      "metrics": {
+        "spearman_logfc": 0.9792483122387147,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.9729245232339957,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    }
+  ],
+  "smallest_passing_features": 8000,
+  "rights": "GREEN: Expression Atlas material is CC BY 4.0 with attribution.",
+  "reference": "Expression Atlas mapped reads to Ensembl release 107 with TopHat2 2.1.1 and quantified them with HTSeq 0.11.0.",
+  "release_eligible": false,
+  "source_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-10322-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-10322/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 2828028,
+      "sha256": "6c0787b459d910aefbecf922797eeb224639c08acdc7959e1ce7278d90cd5892"
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-10322-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-10322/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 5002,
+      "sha256": "c6d74f40c533a5159e98ffc6324846abafd44952c9edd8093e9c2173c5d61a95"
+    }
+  ],
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5"
+  },
+  "config_sha256": "55b8597a70c43e731ed3bad26d0f7f4d3ffda235b3a12e3db177a4860b8faad9",
+  "workflow_sha256": "1e065fb87b06b029505797eefe97580cb1a2dde6b1c32724bbbe46299b7343e4"
+}
