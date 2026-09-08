@@ -1,0 +1,150 @@
+{
+  "accession": "E-MTAB-5477",
+  "status": "diagnostic_only",
+  "source_features": 58735,
+  "source_samples": 6,
+  "analysed_samples": 6,
+  "selected_samples": 6,
+  "excluded_count_columns": [],
+  "deduplicated_count_columns": {},
+  "conditions": {
+    "P-bodies (cytosolic RNP granules)": 3,
+    "pre-sorted fraction": 3
+  },
+  "factor_column": "Factor Value[fraction]",
+  "batch_column": null,
+  "batches": {
+    "not_reported": 6
+  },
+  "sample_order": [
+    "ERR1824637",
+    "ERR1824640",
+    "ERR1824641",
+    "ERR1824639",
+    "ERR1824642",
+    "ERR1824638"
+  ],
+  "contrast": "pre-sorted fraction - P-bodies (cytosolic RNP granules)",
+  "baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), fraction only; DESeq2 confirmation remains required.",
+  "normalization": "median_ratio",
+  "full_size_factors": [
+    0.8372051404236188,
+    0.7898989555710323,
+    1.0257424807954534,
+    0.8279524746587825,
+    1.3870098275605252,
+    1.2837288022993445
+  ],
+  "candidate_curve": [
+    {
+      "features": 500,
+      "bytes": 15587,
+      "size_ratio": 0.007156020248227178,
+      "metrics": {
+        "spearman_logfc": 0.7451143249835005,
+        "top_k_jaccard": 0.041666666666666664,
+        "distance_correlation": 0.5842378148356561,
+        "sign_concordance": 0.7577639751552795
+      },
+      "pass": false
+    },
+    {
+      "features": 1000,
+      "bytes": 31026,
+      "size_ratio": 0.01424409342538631,
+      "metrics": {
+        "spearman_logfc": 0.7363771641428744,
+        "top_k_jaccard": 0.010101010101010102,
+        "distance_correlation": 0.6398005278291349,
+        "sign_concordance": 0.7519142419601837
+      },
+      "pass": false
+    },
+    {
+      "features": 2000,
+      "bytes": 61563,
+      "size_ratio": 0.02826368605514915,
+      "metrics": {
+        "spearman_logfc": 0.7413938570680222,
+        "top_k_jaccard": 0.010101010101010102,
+        "distance_correlation": 0.6516822611680751,
+        "sign_concordance": 0.7538940809968847
+      },
+      "pass": false
+    },
+    {
+      "features": 4000,
+      "bytes": 121999,
+      "size_ratio": 0.05600996434615176,
+      "metrics": {
+        "spearman_logfc": 0.7254418992640512,
+        "top_k_jaccard": 0.010101010101010102,
+        "distance_correlation": 0.6589900784731447,
+        "sign_concordance": 0.7408859270874167
+      },
+      "pass": false
+    },
+    {
+      "features": 8000,
+      "bytes": 242510,
+      "size_ratio": 0.11133678516697075,
+      "metrics": {
+        "spearman_logfc": 0.753536056667552,
+        "top_k_jaccard": 0.010101010101010102,
+        "distance_correlation": 0.7297547367783923,
+        "sign_concordance": 0.7567990608491489
+      },
+      "pass": false
+    },
+    {
+      "features": 12000,
+      "bytes": 363804,
+      "size_ratio": 0.1670230827218862,
+      "metrics": {
+        "spearman_logfc": 0.7945572412558559,
+        "top_k_jaccard": 0.010101010101010102,
+        "distance_correlation": 0.7875629477245191,
+        "sign_concordance": 0.7902070582107045
+      },
+      "pass": false
+    },
+    {
+      "features": 20000,
+      "bytes": 606864,
+      "size_ratio": 0.2786123738962044,
+      "metrics": {
+        "spearman_logfc": 0.8611255757068316,
+        "top_k_jaccard": 0.05263157894736842,
+        "distance_correlation": 0.8868811747219619,
+        "sign_concordance": 0.8499025341130604
+      },
+      "pass": false
+    }
+  ],
+  "smallest_passing_features": null,
+  "rights": "GREEN: Expression Atlas material is CC BY 4.0 with attribution.",
+  "reference": "Expression Atlas mapped reads to Ensembl release 95 with HISAT2 2.1.0 and quantified them with FeatureCounts 1.6.2. Exact FASTA and annotation hashes remain to be pinned.",
+  "release_eligible": false,
+  "source_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-5477-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-5477/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 2178166,
+      "sha256": "941bc21f4f603eab3c4ffd045297bf5e564969aa6963697d33f69fc78efd9b8a"
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-5477-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-5477/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 2873,
+      "sha256": "5f3ceb57562752bfea199542972326dd9215f02ab5e91f71ea42456a1a132ac6"
+    }
+  ],
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5"
+  },
+  "config_sha256": "1f3da22d97f3472d7ac592f7bad665ca9fc3a5b103793c735991bb241880b3ab",
+  "workflow_sha256": "43eedc5ec4f562df898baf5ea49b706cbcd6d0cc6ef53e6aa5e444ce1baa391e"
+}
