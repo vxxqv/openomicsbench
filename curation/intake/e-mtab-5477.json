@@ -1,0 +1,108 @@
+{
+  "accession": "E-MTAB-5477",
+  "source_systems": [
+    {
+      "name": "Expression Atlas",
+      "url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-5477"
+    },
+    {
+      "name": "BioStudies",
+      "url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-5477"
+    }
+  ],
+  "checked": "2026-09-08",
+  "title": "RNA-Seq of purified P-bodies from HEK293 cells",
+  "assay": "bulk RNA-seq of coding RNA",
+  "organism": "Homo sapiens",
+  "taxon_id": 9606,
+  "study_design": {
+    "factor_column": "Factor Value[fraction]",
+    "groups": {
+      "P-bodies (cytosolic RNP granules)": 3,
+      "pre-sorted fraction": 3
+    },
+    "analysed_runs": 6,
+    "selected_runs": 6,
+    "balanced": true,
+    "batch_column": null,
+    "batch_levels": {
+      "not_reported": 6
+    }
+  },
+  "atlas_processing": {
+    "source_statement": "Expression Atlas mapped reads to Ensembl release 95 with HISAT2 2.1.0 and quantified them with FeatureCounts 1.6.2. Exact FASTA and annotation hashes remain to be pinned.",
+    "diagnostic_baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), fraction only; DESeq2 confirmation remains required."
+  },
+  "verified_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-5477-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-5477/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 2178166,
+      "sha256": "941bc21f4f603eab3c4ffd045297bf5e564969aa6963697d33f69fc78efd9b8a",
+      "genes": 58735,
+      "unique_sample_columns": 6,
+      "excluded_unanalysed_columns": [],
+      "verified_repeated_columns": {},
+      "format_check": "Every retained count parsed as a non-negative integer; repeated run columns, where present, were accepted only after full-vector equality checks."
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-5477-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-5477/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 2873,
+      "sha256": "5f3ceb57562752bfea199542972326dd9215f02ab5e91f71ea42456a1a132ac6",
+      "analysed_runs": 6,
+      "format_check": "Analysed run identifiers are present, unique and represented in the retained count matrix."
+    }
+  ],
+  "rights": {
+    "status": "GREEN",
+    "license": "Creative Commons Attribution 4.0 International",
+    "redistribution": "permitted with attribution",
+    "evidence_url": "https://www.ebi.ac.uk/gxa/licence.html",
+    "evidence_page_bytes": 15010,
+    "evidence_page_sha256": "0c35e7e1e590438decb4c44d7d42f1d69a2190eb97acb4bdca5a14cf71f26dd8",
+    "obligations": [
+      "Credit Expression Atlas and EMBL-EBI.",
+      "Cite the current Expression Atlas publication requested on the licence page.",
+      "Retain the experiment accession and originating-study link."
+    ],
+    "checked": "2026-09-08"
+  },
+  "reference_review": {
+    "status": "partially_resolved",
+    "reported_processing": "Expression Atlas mapped reads to Ensembl release 95 with HISAT2 2.1.0 and quantified them with FeatureCounts 1.6.2. Exact FASTA and annotation hashes remain to be pinned.",
+    "namespace": "Ensembl gene identifiers",
+    "pending": "Pin exact assembly FASTA and annotation file URLs, sizes and SHA-256 checksums, then verify every pocket identifier against the annotation."
+  },
+  "reduction_diagnostic": {
+    "workflow": "workflows/atlas_diagnostic.py",
+    "config": "workflows/e-mtab-5477-source.json",
+    "evidence": "evidence/e-mtab-5477-diagnostic.json",
+    "normalization": "median_ratio",
+    "candidate_sizes": [
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      12000,
+      20000
+    ],
+    "smallest_passing_features": null,
+    "smallest_passing_bytes": null,
+    "smallest_passing_size_ratio": null,
+    "smallest_passing_metrics": null,
+    "report_sha256": "e98a29214d31e592bee0ebbf54f16661ed5e6c7fd15be5ff3056569e501ef53c",
+    "repeat_report_sha256": "e98a29214d31e592bee0ebbf54f16661ed5e6c7fd15be5ff3056569e501ef53c",
+    "repeat_identical": true,
+    "interpretation": "No declared candidate size met all four development thresholds; this study is rejected as a v1 pocket candidate."
+  },
+  "review_status": "diagnostic_rejected",
+  "proposed_archetype": "Subcellular fractionation",
+  "release_eligible": false,
+  "remaining_work": [
+    "Retain the failed diagnostic as negative screening evidence; do not promote this study into the v1 collection."
+  ]
+}
