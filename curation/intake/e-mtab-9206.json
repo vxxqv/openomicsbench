@@ -1,0 +1,116 @@
+{
+  "accession": "E-MTAB-9206",
+  "source_systems": [
+    {
+      "name": "Expression Atlas",
+      "url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-9206"
+    },
+    {
+      "name": "BioStudies",
+      "url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-9206"
+    }
+  ],
+  "checked": "2026-09-08",
+  "title": "BT549 cells depleted of ELP3 compared to control",
+  "assay": "bulk RNA-seq of coding RNA",
+  "organism": "Homo sapiens",
+  "taxon_id": 9606,
+  "study_design": {
+    "factor_column": "Factor Value[RNA interference]",
+    "groups": {
+      "scrambled shRNA": 3,
+      "ELP3 shRNA": 3
+    },
+    "analysed_runs": 6,
+    "selected_runs": 6,
+    "balanced": true,
+    "batch_column": null,
+    "batch_levels": {
+      "not_reported": 6
+    }
+  },
+  "atlas_processing": {
+    "source_statement": "Expression Atlas mapped reads to Ensembl release 95 with HISAT2 2.1.0 and quantified them with FeatureCounts 1.6.2. Exact FASTA and annotation hashes remain to be pinned.",
+    "diagnostic_baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), RNA interference only; DESeq2 confirmation remains required."
+  },
+  "verified_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-9206-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-9206/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 2137356,
+      "sha256": "1083ee832efa1be0440105092f36ce061af89d4def25dd36e53eb1931403a0dd",
+      "genes": 58735,
+      "unique_sample_columns": 6,
+      "excluded_unanalysed_columns": [],
+      "verified_repeated_columns": {},
+      "format_check": "Every retained count parsed as a non-negative integer; repeated run columns, where present, were accepted only after full-vector equality checks."
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-9206-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-9206/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 2700,
+      "sha256": "b8ff92b83e4b22a63a20a694509bcc374df6e64060e8baa953a54cbbe52791ff",
+      "analysed_runs": 6,
+      "format_check": "Analysed run identifiers are present, unique and represented in the retained count matrix."
+    }
+  ],
+  "rights": {
+    "status": "GREEN",
+    "license": "Creative Commons Attribution 4.0 International",
+    "redistribution": "permitted with attribution",
+    "evidence_url": "https://www.ebi.ac.uk/gxa/licence.html",
+    "evidence_page_bytes": 15010,
+    "evidence_page_sha256": "0c35e7e1e590438decb4c44d7d42f1d69a2190eb97acb4bdca5a14cf71f26dd8",
+    "obligations": [
+      "Credit Expression Atlas and EMBL-EBI.",
+      "Cite the current Expression Atlas publication requested on the licence page.",
+      "Retain the experiment accession and originating-study link."
+    ],
+    "checked": "2026-09-08"
+  },
+  "reference_review": {
+    "status": "partially_resolved",
+    "reported_processing": "Expression Atlas mapped reads to Ensembl release 95 with HISAT2 2.1.0 and quantified them with FeatureCounts 1.6.2. Exact FASTA and annotation hashes remain to be pinned.",
+    "namespace": "Ensembl gene identifiers",
+    "pending": "Pin exact assembly FASTA and annotation file URLs, sizes and SHA-256 checksums, then verify every pocket identifier against the annotation."
+  },
+  "reduction_diagnostic": {
+    "workflow": "workflows/atlas_diagnostic.py",
+    "config": "workflows/e-mtab-9206-source.json",
+    "evidence": "evidence/e-mtab-9206-diagnostic.json",
+    "normalization": "median_ratio",
+    "candidate_sizes": [
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      12000,
+      20000
+    ],
+    "smallest_passing_features": 8000,
+    "smallest_passing_bytes": 234419,
+    "smallest_passing_size_ratio": 0.10967709637514761,
+    "smallest_passing_metrics": {
+      "spearman_logfc": 0.9494720082443749,
+      "top_k_jaccard": 0.8181818181818182,
+      "distance_correlation": 0.9922599159862748,
+      "sign_concordance": 0.9847105933745904
+    },
+    "report_sha256": "d5c7ea458b5cb491207643b4912c3059f70404979cf25c0bdf7295a8c31b1c03",
+    "repeat_report_sha256": "d5c7ea458b5cb491207643b4912c3059f70404979cf25c0bdf7295a8c31b1c03",
+    "repeat_identical": true,
+    "interpretation": "The 8,000-gene candidate is the first declared size to meet all four development thresholds."
+  },
+  "review_status": "priority",
+  "proposed_archetype": "Cell-line RNA interference",
+  "release_eligible": false,
+  "remaining_work": [
+    "Pin exact reference files and validate the pocket identifier namespace against them.",
+    "Run the DESeq2 full-source and pocket confirmation with recorded versions.",
+    "Prepare dataset-level source attribution and license files.",
+    "Complete an independent clean-environment reproduction before release."
+  ]
+}
