@@ -18,7 +18,7 @@ from omicsbench.cache import get, verify_cache
 from omicsbench.download import transfer
 from omicsbench.validate import validate
 from omicsbench.rnaseq import ranked,correlation,check_design,contrast_selection_order,median_ratio_size_factors,select_genes,paired_sample,read_counts,preservation
-from omicsbench.expression_atlas import load_design,load_design_fields,normalize_accession,parse_catalogue,stage
+from omicsbench.expression_atlas import load_design,load_design_fields,normalize_accession,parse_catalogue,select_design_samples,stage
 
 ROOT=Path(__file__).resolve().parents[1]
 
@@ -295,5 +295,20 @@ class CoreTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(ValueError,'unique'):
             load_design_fields(path,['Factor Value[group]'])
+
+    def test_atlas_design_selection(self):
+        samples=['R1','R2','R3','R4','R5','R6','EXTRA']
+        design={
+            'R1':{'group':'control','genotype':'wild'},
+            'R2':{'group':'treated','genotype':'wild'},
+            'R3':{'group':'control','genotype':'wild'},
+            'R4':{'group':'treated','genotype':'wild'},
+            'R5':{'group':'control','genotype':'mutant'},
+            'R6':{'group':'treated','genotype':'mutant'},
+        }
+        self.assertEqual(select_design_samples(samples,design,'group',subset={'genotype':['wild']}),['R1','R2','R3','R4'])
+        self.assertEqual(select_design_samples(samples,design,'genotype',condition_values=['wild','mutant']),samples[:-1])
+        with self.assertRaisesRegex(ValueError,'at least two'):
+            select_design_samples(samples,design,'group',subset={'genotype':['mutant']})
 
 if __name__=='__main__':unittest.main()
