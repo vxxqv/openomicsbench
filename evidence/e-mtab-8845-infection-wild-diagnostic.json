@@ -1,0 +1,169 @@
+{
+  "accession": "E-MTAB-8845",
+  "object_key": "E-MTAB-8845-infection-wild",
+  "status": "diagnostic_only",
+  "source_features": 32833,
+  "source_samples": 12,
+  "analysed_samples": 12,
+  "selected_samples": 6,
+  "excluded_count_columns": [],
+  "deduplicated_count_columns": {
+    "ERR3971851": 2,
+    "ERR3971852": 2,
+    "ERR3971853": 2,
+    "ERR3971854": 2,
+    "ERR3971855": 2,
+    "ERR3971856": 2,
+    "ERR3971857": 2,
+    "ERR3971858": 2,
+    "ERR3971859": 2,
+    "ERR3971860": 2,
+    "ERR3971861": 2,
+    "ERR3971862": 2
+  },
+  "conditions": {
+    "Phytophthora parasitica": 3,
+    "none": 3
+  },
+  "factor_column": "Factor Value[infect]",
+  "batch_column": null,
+  "subset": {
+    "Factor Value[genotype]": [
+      "wild type genotype"
+    ]
+  },
+  "batches": {
+    "not_reported": 6
+  },
+  "sample_order": [
+    "ERR3971851",
+    "ERR3971852",
+    "ERR3971853",
+    "ERR3971854",
+    "ERR3971855",
+    "ERR3971856"
+  ],
+  "contrast": "none - Phytophthora parasitica",
+  "baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), infection within wild-type plants; DESeq2 confirmation remains required.",
+  "normalization": "median_ratio",
+  "full_size_factors": [
+    1.0141198940463307,
+    0.9696211215823637,
+    1.0099472477694964,
+    1.0856464938885821,
+    0.9277610315775145,
+    0.9997361104623526
+  ],
+  "candidate_curve": [
+    {
+      "features": 500,
+      "bytes": 13294,
+      "size_ratio": 0.004703058827857929,
+      "metrics": {
+        "spearman_logfc": 0.9804943108530264,
+        "top_k_jaccard": 0.9230769230769231,
+        "distance_correlation": 0.9960603091509409,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 1000,
+      "bytes": 26439,
+      "size_ratio": 0.009353405472373686,
+      "metrics": {
+        "spearman_logfc": 0.9884080936109856,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.9973643775366097,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 2000,
+      "bytes": 52690,
+      "size_ratio": 0.01864030161274517,
+      "metrics": {
+        "spearman_logfc": 0.9963192962339117,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.9983227704006374,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 4000,
+      "bytes": 104973,
+      "size_ratio": 0.03713661759716642,
+      "metrics": {
+        "spearman_logfc": 0.9990901428653917,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.9989521439396537,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 8000,
+      "bytes": 208029,
+      "size_ratio": 0.0735950522717359,
+      "metrics": {
+        "spearman_logfc": 0.9910188857402622,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.9993343525860137,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 12000,
+      "bytes": 310828,
+      "size_ratio": 0.10996256727436621,
+      "metrics": {
+        "spearman_logfc": 0.990636303372218,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.9996617302514368,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 20000,
+      "bytes": 517740,
+      "size_ratio": 0.1831624550575571,
+      "metrics": {
+        "spearman_logfc": 0.9959250498235424,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.9999547909712454,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    }
+  ],
+  "smallest_passing_features": 500,
+  "rights": "GREEN: Expression Atlas material is CC BY 4.0 with attribution.",
+  "reference": "Expression Atlas mapped reads to Ensembl Genomes release 44 with HISAT2 2.1.0 and quantified them with FeatureCounts 1.6.2.",
+  "release_eligible": false,
+  "source_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-8845-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-8845/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 2826671,
+      "sha256": "66f217ca72cd6936c39c5b667543468a137fa164d3db57a7b1b37facf4d47abf"
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-8845-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-8845/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 4599,
+      "sha256": "e8b4763a1717820c2bbbefbf74dda52ec2ca260c126d135b2ed6d4b59878e2fe"
+    }
+  ],
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5"
+  },
+  "config_sha256": "ac71d401480b467f326200495beffde364b2f7fffa6b1ddb94892f0d53fed7b9",
+  "workflow_sha256": "1e065fb87b06b029505797eefe97580cb1a2dde6b1c32724bbbe46299b7343e4"
+}
