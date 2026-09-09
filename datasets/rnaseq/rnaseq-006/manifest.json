@@ -158,8 +158,8 @@
       "tier": "expected",
       "role": "provenance",
       "media_type": "application/json",
-      "bytes": 2948,
-      "sha256": "6c2bca7c4ae66033be69ca50ffdd4968d8f00024bdefd72458ea70df48f41ed3"
+      "bytes": 2863,
+      "sha256": "d6abd1daab860e05fc6225faaaba9e1ffe0f0c111ac089467775af507936ada7"
     },
     {
       "path": "expected/source-counts.tsv",
@@ -191,7 +191,7 @@
       "role": "provenance",
       "media_type": "application/json",
       "bytes": 2390,
-      "sha256": "57d1392c838a474977466ac97ea5830baad26c11e318edcd5d926fc408e55323"
+      "sha256": "fe81a2fd9ae3c889dd793984503246ebf1f8b230eb6af25b622495d70f7276e3"
     },
     {
       "path": "reference.json",
