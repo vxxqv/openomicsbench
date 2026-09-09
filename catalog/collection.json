@@ -1,0 +1,332 @@
+{
+  "schema_version": "1.0",
+  "release": "1.0.0",
+  "biological_objects": 12,
+  "source_studies": 7,
+  "objects": [
+    {
+      "id": "rnaseq-002",
+      "title": "SLC2A5 knockout in A549 xenografts",
+      "object_key": "E-MTAB-8572",
+      "source_accession": "E-MTAB-8572",
+      "organism": "Homo sapiens",
+      "taxon_id": 9606,
+      "archetype": "balanced genetic knockout xenograft",
+      "samples": 10,
+      "pocket_features": 2000,
+      "contrast": "wild type genotype versus SLC2A5 knockout mediated by CRISPR/Cas9",
+      "reference": "Ensembl 95 GRCh38",
+      "rights": "GREEN",
+      "license": "CC-BY-4.0",
+      "metrics": {
+        "spearman_logfc": 0.9994413563998183,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.9380955435041467,
+        "sign_concordance": 0.992462311557789
+      },
+      "thresholds": {
+        "spearman_logfc": 0.9,
+        "top_k_jaccard": 0.6,
+        "distance_correlation": 0.9,
+        "sign_concordance": 0.9
+      }
+    },
+    {
+      "id": "rnaseq-003",
+      "title": "AtRsgA knockout in Arabidopsis seedlings",
+      "object_key": "E-MTAB-6866",
+      "source_accession": "E-MTAB-6866",
+      "organism": "Arabidopsis thaliana",
+      "taxon_id": 3702,
+      "archetype": "balanced plant genetic knockout",
+      "samples": 6,
+      "pocket_features": 4000,
+      "contrast": "wild type genotype versus AtRsgA-i -/-",
+      "reference": "Ensembl Genomes 44 TAIR10",
+      "rights": "GREEN",
+      "license": "CC-BY-4.0",
+      "metrics": {
+        "spearman_logfc": 0.9999495062540774,
+        "top_k_jaccard": 0.8518518518518519,
+        "distance_correlation": 0.9390399315774344,
+        "sign_concordance": 0.9475774424146147
+      },
+      "thresholds": {
+        "spearman_logfc": 0.9,
+        "top_k_jaccard": 0.6,
+        "distance_correlation": 0.9,
+        "sign_concordance": 0.9
+      }
+    },
+    {
+      "id": "rnaseq-004",
+      "title": "Klf1 knockout in mouse erythroid tissue",
+      "object_key": "E-GEOD-33979",
+      "source_accession": "E-GEOD-33979",
+      "organism": "Mus musculus",
+      "taxon_id": 10090,
+      "archetype": "balanced mouse genetic knockout",
+      "samples": 6,
+      "pocket_features": 4000,
+      "contrast": "wild type genotype versus Klf1-/-",
+      "reference": "Ensembl 97 GRCm38",
+      "rights": "GREEN",
+      "license": "CC-BY-4.0",
+      "metrics": {
+        "spearman_logfc": 0.9793186499623325,
+        "top_k_jaccard": 0.7857142857142857,
+        "distance_correlation": 0.9408752119968673,
+        "sign_concordance": 0.9600333055786844
+      },
+      "thresholds": {
+        "spearman_logfc": 0.9,
+        "top_k_jaccard": 0.6,
+        "distance_correlation": 0.9,
+        "sign_concordance": 0.9
+      }
+    },
+    {
+      "id": "rnaseq-005",
+      "title": "Paired prostate tumour and adjacent tissue",
+      "object_key": "E-MTAB-567",
+      "source_accession": "E-MTAB-567",
+      "organism": "Homo sapiens",
+      "taxon_id": 9606,
+      "archetype": "paired tumour and adjacent tissue",
+      "samples": 28,
+      "pocket_features": 8000,
+      "contrast": "tumor tissue versus adjacent non-tumor tissue",
+      "reference": "Ensembl 107 GRCh38",
+      "rights": "GREEN",
+      "license": "CC-BY-4.0",
+      "metrics": {
+        "spearman_logfc": 0.9999469137269074,
+        "top_k_jaccard": 0.9230769230769231,
+        "distance_correlation": 0.9480391749088565,
+        "sign_concordance": 1.0
+      },
+      "thresholds": {
+        "spearman_logfc": 0.9,
+        "top_k_jaccard": 0.6,
+        "distance_correlation": 0.9,
+        "sign_concordance": 0.9
+      }
+    },
+    {
+      "id": "rnaseq-006",
+      "title": "Arabidopsis infection response adjusted for genotype",
+      "object_key": "E-MTAB-8845",
+      "source_accession": "E-MTAB-8845",
+      "organism": "Arabidopsis thaliana",
+      "taxon_id": 3702,
+      "archetype": "factorial plant infection response",
+      "samples": 12,
+      "pocket_features": 500,
+      "contrast": "none versus Phytophthora parasitica",
+      "reference": "Ensembl Genomes 44 TAIR10",
+      "rights": "GREEN",
+      "license": "CC-BY-4.0",
+      "metrics": {
+        "spearman_logfc": 0.9998606947640518,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.9741879355966665,
+        "sign_concordance": 0.9875776397515528
+      },
+      "thresholds": {
+        "spearman_logfc": 0.9,
+        "top_k_jaccard": 0.6,
+        "distance_correlation": 0.9,
+        "sign_concordance": 0.9
+      }
+    },
+    {
+      "id": "rnaseq-007",
+      "title": "ELP3 depletion in BT549 breast cancer cells",
+      "object_key": "E-MTAB-9206",
+      "source_accession": "E-MTAB-9206",
+      "organism": "Homo sapiens",
+      "taxon_id": 9606,
+      "archetype": "balanced cell-line RNA interference",
+      "samples": 6,
+      "pocket_features": 8000,
+      "contrast": "scrambled shRNA versus ELP3 shRNA",
+      "reference": "Ensembl 95 GRCh38",
+      "rights": "GREEN",
+      "license": "CC-BY-4.0",
+      "metrics": {
+        "spearman_logfc": 0.9996661149014315,
+        "top_k_jaccard": 0.7241379310344828,
+        "distance_correlation": 0.9921755562680772,
+        "sign_concordance": 0.9732948394081559
+      },
+      "thresholds": {
+        "spearman_logfc": 0.9,
+        "top_k_jaccard": 0.6,
+        "distance_correlation": 0.9,
+        "sign_concordance": 0.9
+      }
+    },
+    {
+      "id": "rnaseq-008",
+      "title": "Duchenne muscular dystrophy myoblast comparison",
+      "object_key": "E-MTAB-10322",
+      "source_accession": "E-MTAB-10322",
+      "organism": "Mus musculus",
+      "taxon_id": 10090,
+      "archetype": "imbalanced disease comparison",
+      "samples": 9,
+      "pocket_features": 8000,
+      "contrast": "normal versus Duchenne muscular dystrophy",
+      "reference": "Ensembl 107 GRCm39",
+      "rights": "GREEN",
+      "license": "CC-BY-4.0",
+      "metrics": {
+        "spearman_logfc": 0.9990674794038852,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.9163409306329852,
+        "sign_concordance": 1.0
+      },
+      "thresholds": {
+        "spearman_logfc": 0.9,
+        "top_k_jaccard": 0.6,
+        "distance_correlation": 0.9,
+        "sign_concordance": 0.9
+      }
+    },
+    {
+      "id": "rnaseq-009",
+      "title": "Arabidopsis gsnor1 genotype adjusted for infection",
+      "object_key": "E-MTAB-8845-genotype",
+      "source_accession": "E-MTAB-8845",
+      "organism": "Arabidopsis thaliana",
+      "taxon_id": 3702,
+      "archetype": "factorial plant genotype response",
+      "samples": 12,
+      "pocket_features": 500,
+      "contrast": "wild type genotype versus gsnor1",
+      "reference": "Ensembl Genomes 44 TAIR10",
+      "rights": "GREEN",
+      "license": "CC-BY-4.0",
+      "metrics": {
+        "spearman_logfc": 0.9991215642736454,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.9837473481867061,
+        "sign_concordance": 1.0
+      },
+      "thresholds": {
+        "spearman_logfc": 0.9,
+        "top_k_jaccard": 0.6,
+        "distance_correlation": 0.9,
+        "sign_concordance": 0.9
+      }
+    },
+    {
+      "id": "rnaseq-010",
+      "title": "Phytophthora response in wild-type Arabidopsis",
+      "object_key": "E-MTAB-8845-infection-wild",
+      "source_accession": "E-MTAB-8845",
+      "organism": "Arabidopsis thaliana",
+      "taxon_id": 3702,
+      "archetype": "stratified wild-type infection response",
+      "samples": 6,
+      "pocket_features": 500,
+      "contrast": "none versus Phytophthora parasitica",
+      "reference": "Ensembl Genomes 44 TAIR10",
+      "rights": "GREEN",
+      "license": "CC-BY-4.0",
+      "metrics": {
+        "spearman_logfc": 0.9999846455920176,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.9960654681811183,
+        "sign_concordance": 1.0
+      },
+      "thresholds": {
+        "spearman_logfc": 0.9,
+        "top_k_jaccard": 0.6,
+        "distance_correlation": 0.9,
+        "sign_concordance": 0.9
+      }
+    },
+    {
+      "id": "rnaseq-011",
+      "title": "Phytophthora response in gsnor1 Arabidopsis",
+      "object_key": "E-MTAB-8845-infection-gsnor1",
+      "source_accession": "E-MTAB-8845",
+      "organism": "Arabidopsis thaliana",
+      "taxon_id": 3702,
+      "archetype": "stratified mutant infection response",
+      "samples": 6,
+      "pocket_features": 500,
+      "contrast": "none versus Phytophthora parasitica",
+      "reference": "Ensembl Genomes 44 TAIR10",
+      "rights": "GREEN",
+      "license": "CC-BY-4.0",
+      "metrics": {
+        "spearman_logfc": 0.9999272643773329,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.9935732251543249,
+        "sign_concordance": 0.9840764331210191
+      },
+      "thresholds": {
+        "spearman_logfc": 0.9,
+        "top_k_jaccard": 0.6,
+        "distance_correlation": 0.9,
+        "sign_concordance": 0.9
+      }
+    },
+    {
+      "id": "rnaseq-012",
+      "title": "Dmd-mdx myoblasts compared with wild type",
+      "object_key": "E-MTAB-10322-mdx",
+      "source_accession": "E-MTAB-10322",
+      "organism": "Mus musculus",
+      "taxon_id": 10090,
+      "archetype": "balanced Dmd-mdx genetic comparison",
+      "samples": 6,
+      "pocket_features": 8000,
+      "contrast": "wild type genotype versus Dmd-mdx",
+      "reference": "Ensembl 107 GRCm39",
+      "rights": "GREEN",
+      "license": "CC-BY-4.0",
+      "metrics": {
+        "spearman_logfc": 0.9980243330346174,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.9162154381438341,
+        "sign_concordance": 1.0
+      },
+      "thresholds": {
+        "spearman_logfc": 0.9,
+        "top_k_jaccard": 0.6,
+        "distance_correlation": 0.9,
+        "sign_concordance": 0.9
+      }
+    },
+    {
+      "id": "rnaseq-013",
+      "title": "Dmd-mdx-beta-geo myoblasts compared with wild type",
+      "object_key": "E-MTAB-10322-beta",
+      "source_accession": "E-MTAB-10322",
+      "organism": "Mus musculus",
+      "taxon_id": 10090,
+      "archetype": "balanced Dmd-mdx-beta-geo genetic comparison",
+      "samples": 6,
+      "pocket_features": 8000,
+      "contrast": "wild type genotype versus Dmd-mdx-\u03b2geo",
+      "reference": "Ensembl 107 GRCm39",
+      "rights": "GREEN",
+      "license": "CC-BY-4.0",
+      "metrics": {
+        "spearman_logfc": 0.9998355672750909,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.9223940212396747,
+        "sign_concordance": 1.0
+      },
+      "thresholds": {
+        "spearman_logfc": 0.9,
+        "top_k_jaccard": 0.6,
+        "distance_correlation": 0.9,
+        "sign_concordance": 0.9
+      }
+    }
+  ]
+}
