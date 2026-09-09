@@ -10,7 +10,6 @@
   "blockers": [],
   "deferred_publication_gates": [
     "version_doi",
-    "external_user_trial",
     "post_upload_verification"
   ]
 }

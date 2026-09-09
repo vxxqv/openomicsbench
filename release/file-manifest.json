@@ -67,8 +67,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 5278,
-      "sha256": "c588e82022d75776df6a685e3289823d01b51b8bfc0b9478d35a72b69246a57d"
+      "bytes": 5344,
+      "sha256": "3799423492f386683494300d49ba0fedc3e5852df485c0d23c25685e1b29f006"
     },
     {
       "path": "catalog/collection.json",
@@ -957,18 +957,18 @@
     },
     {
       "path": "docs/OpenOmicsBench_V1_Release_Review.pdf",
-      "bytes": 13290,
-      "sha256": "feb55e246de5f76ead931e99b7237534fbf9a1c7b6dc8d4496ff4a06830cf1b3"
+      "bytes": 13316,
+      "sha256": "e915f9ea982f3ff0bfcc823d81b172a69320861bdb3d1782205b4299d1b66b72"
     },
     {
       "path": "docs/acceptance-ledger.md",
-      "bytes": 11001,
-      "sha256": "667384fbf50a6ce031337df58f76bebddf9cde33393783dd09c8a8641f82c89b"
+      "bytes": 11165,
+      "sha256": "4c6ed45457698641cef9991401a079c5e8dcbbe4a1ff9fe1634e1e4f2b3ce19c"
     },
     {
       "path": "docs/implementation-status.md",
-      "bytes": 5186,
-      "sha256": "0e00810bf54aba50401738f6723d039818b211d0e98bbeaa3d0c85b28c651625"
+      "bytes": 5305,
+      "sha256": "a442a223934ec8e97ace27fa5f5a198bf63e09e41d77a37d25a86e41178318d4"
     },
     {
       "path": "docs/methods.md",
@@ -977,8 +977,8 @@
     },
     {
       "path": "docs/release.md",
-      "bytes": 3360,
-      "sha256": "6fff859877370c34d94a893a3da5dd48950dbdccafcf1b7e7f33875c57da2f4e"
+      "bytes": 3490,
+      "sha256": "918099a10e0560976f03a5d1a0e423bea51c53734bebef2fcc67736bc85aac2a"
     },
     {
       "path": "docs/source-review.md",
@@ -1157,13 +1157,13 @@
     },
     {
       "path": "release/acceptance-ledger.json",
-      "bytes": 16389,
-      "sha256": "5eea82da4269c1d0785ff452aeab29ff05c7a8bff67c0ae72c75d35932b0870a"
+      "bytes": 16553,
+      "sha256": "28fa702aa298498588bd7eba3d7ba8482462d6b2861d4c392e65f142252d7bbd"
     },
     {
       "path": "release/certification.json",
-      "bytes": 374,
-      "sha256": "c1f06832673dccd78601476be5d49398ec213e15e3486207529fd0ed612761a9"
+      "bytes": 347,
+      "sha256": "cebf4820bb341891e5596bb8380615cb07622d39abe58f839ca43b675ef265a4"
     },
     {
       "path": "release/collection-audit.json",
@@ -1172,8 +1172,8 @@
     },
     {
       "path": "release/metadata-input.json",
-      "bytes": 782,
-      "sha256": "a0ef1bfa817eea8ff779f1d18f75190b81f0e0d592d507688569acbdee56ae59"
+      "bytes": 1548,
+      "sha256": "4db4a7e82b8fc8a3f7a392deb25aad074fb9c444339a59a4ff67ea238ff12b51"
     },
     {
       "path": "requirements-tested.txt",
@@ -1207,8 +1207,8 @@
     },
     {
       "path": "scripts/certify_release.py",
-      "bytes": 14101,
-      "sha256": "a20ac1dde3423ae6dfad3cbae57a387e272672b550c7837adebc28c336a89446"
+      "bytes": 15833,
+      "sha256": "52a0c059199413403dcfee4dc09e72afb809380c693af8930b669965acae60fb"
     },
     {
       "path": "scripts/check_repository.py",
