@@ -11,16 +11,18 @@ destination = root / "release/file-manifest.json"
 excluded = {destination.resolve()}
 files = []
 git = os.environ.get("OPENOMICSBENCH_GIT", "git")
-listed = subprocess.run(
-    [git, "-c", f"safe.directory={root.as_posix()}", "ls-files", "-z"],
-    cwd=root, check=True, capture_output=True,
-).stdout.decode("utf-8").split("\0")
+release_commit = metadata.get("release_commit")
+command = [git, "-c", f"safe.directory={root.as_posix()}"]
+command += ["ls-tree", "-r", "--name-only", "-z", release_commit] if release_commit else ["ls-files", "-z"]
+listed = subprocess.run(command, cwd=root, check=True, capture_output=True).stdout.decode("utf-8").split("\0")
 for relative in sorted(value for value in listed if value):
     path = root / relative
-    if not path.is_file() or path.resolve() in excluded:
+    if path.resolve() in excluded:
         continue
+    reference = release_commit or ""
+    object_name = f"{reference}:{relative}" if reference else f":{relative}"
     blob = subprocess.run(
-        [git, "-c", f"safe.directory={root.as_posix()}", "show", f":{relative}"],
+        [git, "-c", f"safe.directory={root.as_posix()}", "show", object_name],
         cwd=root, check=True, capture_output=True,
     ).stdout
     files.append({
