@@ -1,29 +1,51 @@
-# Release procedure
+# Version 1 release procedure
 
-The 0.1.0.dev0 prerelease establishes the package, validation contract, synthetic fixture and source-review workflow. Version 1.0.0 remains in development and will incorporate the completed biological collection.
+## Current position
 
-## Establish the publication inputs
+The local collection preflight passes. Version 1 must stay unpublished until an independent quickstart trial is recorded and the owner approves the exact release commit. Zenodo supplies the version DOI after the connected GitHub release is published, so DOI and uploaded-file verification are completed immediately afterward.
 
-Record the project owner, credited authors and any ORCIDs they provide. Confirm the code license and the license for project-written metadata. Choose the GitHub repository and Zenodo account. Populate `release/metadata-input.json` with those reviewed values. A DOI must come from the actual deposit; do not invent one to make the citation file look complete.
+## Freeze the candidate
 
-The publication metadata generator should create `CITATION.cff` and `.zenodo.json` from the same reviewed inputs. Zenodo gives `.zenodo.json` precedence when both exist. This snapshot retains the unresolved inputs instead of supplying invalid citation files or fictional contributors.
+1. Confirm that `release/metadata-input.json` names Vivaan Patni for Zenodo and `vxxqv` for GitHub. Add the author ORCID only when it has been supplied by the owner.
+2. Run the unit tests, catalog builder, overlap audit, repository checker and release preflight.
+3. Regenerate the release file inventory after every content change.
+4. Push the candidate commits and wait for the GitHub integrity workflow to pass.
+5. Stop changing scientific data, thresholds, source configurations and workflow code unless a failed check requires a new candidate.
 
-## Complete biological certification
+## Independent quickstart trial
 
-Resolve rights, sample-to-accession mapping and compatible references before distributing each source. Build 12 to 20 meaningful objects, with at least eight GREEN pockets and at least four distinct design archetypes. Do not count multiple tiers of the same object as different datasets or count synthetic fixtures toward this requirement.
+Give a fresh checkout to a person who did not build the collection. Ask them to use Python 3.11 or newer and run:
 
-Freeze baseline versions, parameters, thresholds and candidate-size policies. Execute the scientific workflow in an isolated environment, record a complete dependency lock and container digest where used, and rebuild several objects from a clean environment. Recompute every declared metric from the certified inputs. Preserve logs for failures as well as successes.
+```sh
+python -m pip install -r requirements-tested.txt
+python -m pip install --no-deps -e .
+omicsbench list --assay bulk_rna_seq
+omicsbench info rnaseq-002
+omicsbench validate rnaseq-002
+omicsbench get rnaseq-002 --size pocket
+omicsbench verify-cache
+```
 
-## Review the user path
+Record the date, operating system, Python version, exact commit, outcome and any point where the written instructions were insufficient. Do not record the tester's name or contact details unless they agree. Fix any hidden maintainer step and repeat the trial if a fix changes the user path.
 
-Ask an independent person to complete the quickstart from a fresh environment. Record their consented feedback, environment, commands and outcome. Fix any hidden maintainer step. Review every dataset card and figure at normal reading size. Check links and narrow-width command rendering in the actual publication surfaces.
+## Publish GitHub version 1
 
-## Assemble and publish
+1. Confirm that the repository is public, the Zenodo connection is active and the release candidate workflow is green.
+2. Review the generated archive inventory, catalog, citation file, Zenodo metadata and release notes.
+3. Create the annotated tag `v1.0.0` at the approved commit and push that tag.
+4. Publish a GitHub release titled `OpenOmicsBench 1.0.0`. Do not mark it as a prerelease. State that further improvements are planned without weakening the version 1 status.
+5. Wait for the connected Zenodo deposit to appear and confirm that the creator is Vivaan Patni.
 
-Run `python scripts/certify_release.py` before describing any release as the completed biological collection. It currently exits with a no-go report for that collection milestone. Store the registry, release manifest, checksums, changelog and citation metadata together for each software release.
+Tag creation and release publication are owner-approved actions. They must use the exact reviewed commit.
 
-Reserve the real version DOI, insert it into the reviewed citation inputs, rebuild the metadata and freeze hashes of the final upload files. Publish only after the owner has approved that concrete bundle. Retrieve the deposited files and compare their hashes with the certification inventory. Check that the DOI resolves to the exact version and that the displayed citation names the correct authors.
+## Complete Zenodo verification
 
-## Preserve evidence of use
+1. Copy the exact Zenodo version DOI and record URL into the release metadata. Keep the concept DOI for the all-versions citation.
+2. Update the GitHub release notes so the recommended citation points to the exact v1 DOI.
+3. Download the files exposed by Zenodo. Compare their SHA-256 hashes and byte counts with the certified GitHub archive and release inventory.
+4. Confirm that the DOI resolves, the record says version 1.0.0, the author is Vivaan Patni, the licence is correct and the keywords are present.
+5. Record the verification result and run `python scripts/certify_release.py` without `--preflight`. A GO decision is valid only after all three publication fields are present and their evidence has been checked.
 
-Record actual requests, issues, workshops, external contributions and maintenance decisions. Aggregate usage signals without collecting personal student profiles. Views, downloads and stars can describe interest; they do not establish scientific impact. Write the retrospective from observed events and specific changes needed for v2.
+## Later corrections
+
+Do not move the `v1.0.0` tag after publication. Correct code or metadata on a new patch version. Keep the v1 Zenodo record immutable apart from permitted metadata corrections, and document any correction in the changelog.
