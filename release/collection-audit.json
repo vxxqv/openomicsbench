@@ -149,6 +149,26 @@
       "classification": "same-study source matrix used for distinct declared contrasts"
     }
   ],
-  "repeated_long_prose": [],
+  "repeated_long_prose": [
+    {
+      "files": [
+        "datasets/rnaseq/rnaseq-006/README.md",
+        "datasets/rnaseq/rnaseq-009/README.md",
+        "datasets/rnaseq/rnaseq-010/README.md",
+        "datasets/rnaseq/rnaseq-011/README.md"
+      ],
+      "text": "Source citation: RNA sequencing of Arabidopsis thaliana gsnor1 and Col-0 after Phytophthora parasitica infection. Expression Atlas E-MTAB-8845.",
+      "classification": "required citation shared by objects from one source study"
+    },
+    {
+      "files": [
+        "datasets/rnaseq/rnaseq-008/README.md",
+        "datasets/rnaseq/rnaseq-012/README.md",
+        "datasets/rnaseq/rnaseq-013/README.md"
+      ],
+      "text": "Source citation: Gosselin et al. Loss of full-length dystrophin expression causes major cell-autonomous abnormalities in proliferating myoblasts. eLife. DOI 10.7554/eLife.75521.",
+      "classification": "required citation shared by objects from one source study"
+    }
+  ],
   "blockers": []
 }
