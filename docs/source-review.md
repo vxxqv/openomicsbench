@@ -1,41 +1,43 @@
-# Transcriptomics source review
+# Source review
 
-Twelve GEO series records were retrieved on 6 September 2026. A thirteenth candidate, E-MTAB-8572, was reviewed through Expression Atlas and BioStudies on 7 September. Intake files retain the accession, source checksums, sample count, assay type, source publication identifiers and file links. Long study abstracts are not republished. The numerical scorecard remains incomplete wherever sample-level review is still needed.
+## Selection result
 
-## First candidates
+The v1 biological collection uses seven Expression Atlas studies and defines 12 benchmark objects. The difference between studies and objects is deliberate: two factorial studies support several predeclared contrasts or strata, each with its own identifier, sample design, pocket, validation and provenance.
 
-E-MTAB-8572 is the first candidate with a GREEN redistribution decision. Expression Atlas supplies a 58,735-gene integer count matrix and a ten-run design: five wild-type A549 xenografts and five SLC2A5-knockout A549 xenografts. The checked files are 2.69 MB in total, their sample identifiers agree exactly, and the Atlas methods name Ensembl release 95, HISAT2 and featureCounts. A deterministic reduction run found 2,000 genes to be the smallest tested candidate meeting all four development thresholds. Its report reproduced byte for byte on a second run. The exact assembly and annotation file identities still need to be pinned, so this candidate is not yet release eligible. See [Expression Atlas](https://www.ebi.ac.uk/gxa/experiments/E-MTAB-8572), [BioStudies](https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-8572) and the [Expression Atlas licence](https://www.ebi.ac.uk/gxa/licence.html).
+| Source | Included object | Main design |
+|---|---|---|
+| [E-MTAB-8572](https://www.ebi.ac.uk/gxa/experiments/E-MTAB-8572) | `rnaseq-002` | A549 SLC2A5 knockout xenografts |
+| [E-MTAB-6866](https://www.ebi.ac.uk/gxa/experiments/E-MTAB-6866) | `rnaseq-003` | Arabidopsis AtRsgA knockout |
+| [E-GEOD-33979](https://www.ebi.ac.uk/gxa/experiments/E-GEOD-33979) | `rnaseq-004` | Mouse Klf1 knockout |
+| [E-MTAB-567](https://www.ebi.ac.uk/gxa/experiments/E-MTAB-567) | `rnaseq-005` | Paired prostate tumour and adjacent tissue |
+| [E-MTAB-8845](https://www.ebi.ac.uk/gxa/experiments/E-MTAB-8845) | `rnaseq-006`, `rnaseq-009` to `rnaseq-011` | Arabidopsis genotype and infection factorial study |
+| [E-MTAB-9206](https://www.ebi.ac.uk/gxa/experiments/E-MTAB-9206) | `rnaseq-007` | ELP3 RNA interference in BT549 cells |
+| [E-MTAB-10322](https://www.ebi.ac.uk/gxa/experiments/E-MTAB-10322) | `rnaseq-008`, `rnaseq-012`, `rnaseq-013` | Duchenne muscular dystrophy myoblast comparisons |
 
-Pasilla is the first implemented retrieval recipe because it offers a small processed integer count table and a non-human example. The pinned package table has 14,599 genes and seven libraries. The original package sample annotation includes library preparation type, which is needed for the current diagnostic. The package description cites six GEO accessions while the table has seven libraries. Resolve that mapping before certifying provenance at library level. See [Pasilla](https://bioconductor.org/packages/release/data/experiment/html/pasilla.html) and [GSE18508](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508).
+Each included source exposes an integer gene count matrix and an experiment design. Sample identifiers were checked across both resources. Unanalysed columns were removed by rule, repeated run columns required exact equality, and all contrast or subset choices were recorded before pocket scoring.
 
-The airway study offers a useful paired cell-line design. Its parent GEO series has 16 samples; the commonly used dexamethasone subset has eight. GEO's supplementary expression matrix is FPKM, so it must not be relabelled as raw counts. Obtain a versioned count representation with its own processing and reference metadata. See [airway](https://bioconductor.org/packages/release/data/experiment/html/airway.html) and [GSE52778](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778).
+## Scientific review
 
-[GSE60450](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE60450) offers a twelve-library mammary-gland design with cell population and developmental stage. It is suitable for a carefully selected replicated contrast; the entire factorial design needs a more explicit adapter than the current two-condition baseline.
+The collection spans three organisms and five annotation profiles. It includes balanced two-group studies, a paired subject design, a blocked factorial analysis, an imbalanced disease comparison and stratified contrasts. Each selected comparison has enough replication and residual degrees of freedom for its declared model.
 
-[GSE49712](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE49712) provides ten libraries from reference RNA materials with ERCC controls. This could support technical evaluation. Replicate libraries of reference material should not be presented as independent human donors.
+Candidate pockets were tested in a fixed feature-count grid. The smallest passing sizes range from 500 to 8,000 genes. Every selected pocket passed the diagnostic envelope in two complete retrieval and calculation runs, then passed a full-source versus pocket comparison with DESeq2 1.50.2. Exact results are stored in the object and summarized in `catalog/collection.tsv`.
 
-## Candidates needing more work
+The paired E-MTAB-567 object retains 14 tumour and 14 adjacent-tissue samples and uses the individual as a blocking factor. E-MTAB-8845 produces two blocked 12-sample contrasts and two six-sample infection strata. E-MTAB-10322 produces one nine-sample disease comparison and two six-sample genotype comparisons. The overlap audit records the shared samples and confirms that no sample identifiers cross source accessions.
 
-The preliminary Expression Atlas screen adds seven candidates without downloading their count matrices. E-MTAB-5477, E-MTAB-7126, E-GEOD-33979 and E-MTAB-6866 each have six analysed runs in balanced two-group designs. They cover subcellular fraction, drug response, mouse genotype and plant genotype. E-MTAB-567 has 28 runs split evenly between prostate tumour and adjacent tissue; its subject pairing must be verified before modelling. E-MTAB-8845 is a 2-by-2 plant genotype and infection study. E-MTAB-10322 has three mouse genotypes and needs an explicit contrast. All seven expose raw-count and design resources, and the largest count matrix is under 6 MB. The machine-readable screen records the official URLs, sizes, design hashes and factor distributions.
+## Reference review
 
-E-MTAB-6866 has now advanced beyond the preliminary screen. Its six libraries compare three wild-type and three AtRsgA knockdown Arabidopsis seedling samples. The checked Atlas matrix has 32,833 genes and uses Ensembl Genomes release 44 on TAIR10. A 4,000-gene candidate is the first tested size meeting the four development thresholds, and its complete diagnostic report reproduced exactly. The primary article is linked by DOI and PMID in the intake record. Exact reference-file hashes and DESeq2 confirmation remain open.
+The reference check uses the genome and annotation releases named by Expression Atlas processing metadata. Official Ensembl checksum records were pinned for each genome and GTF. Downloaded GTF files passed gzip testing and SHA-256 hashing, and every selected gene identifier was found in its matching annotation.
 
-GSE47774 is a large multicentre SEQC record. Select site, platform and material explicitly, and check overlap with other SEQC accessions before counting independent objects. GSE53960 offers rat tissue and age variation. GSE55347 offers toxicogenomics. Both need sample-level contrast and replicate review before processing.
+E-MTAB-7126 was rejected at this stage. Its current count matrix contains identifiers absent from the Ensembl 95 annotation stated on the experiment page, including after checking the corresponding patch and haplotype GTF. The mismatch record is preserved in `evidence/e-mtab-7126-reference-mismatch.json`.
 
-GSE60314 includes genotype, sex, environment and repeated-library structure in Drosophila. Its record mentions different FlyBase reference releases. The reference and biological unit need to be resolved before a pocket is meaningful.
+E-MTAB-5477 was rejected earlier because none of the tested pockets up to 20,000 genes met every predeclared threshold. Keeping the failed diagnostic prevents the study from being reconsidered as if it had passed.
 
-GSE37704 is a mixed-assay superseries. Resolve the RNA-seq subseries before selecting a transcript-level object. GSE50760 needs subject and tissue pairing review. GSE48138 is a T-cell lineage study with RNA-fraction and custom lincRNA annotation issues; it is not the high-replicate yeast benchmark sometimes sought for this collection.
+## Rights and attribution
 
-GSE64016 is explicitly single-cell and is excluded from bulk RNA-seq v1. Its intake record is retained so the same unsuitable source is not reconsidered without that context.
+The [Expression Atlas licence](https://www.ebi.ac.uk/gxa/licence.html) applies CC BY 4.0 to copyrightable material on the service and requires appropriate credit. Every distributed object carries a GREEN rights record with the evidence URL and review date, plus an attribution record naming the study, accession, provider and changes made.
 
-## Rights decision
+The earlier GEO shortlist remains in the intake history. Those records are not part of the v1 distributed collection because the GEO disclaimer does not grant blanket redistribution rights. Pasilla remains a link-only object for the same reason. A downloadable source is not treated as an unrestricted licence.
 
-All screened GEO sources remain AMBER. The [GEO disclaimer](https://www.ncbi.nlm.nih.gov/geo/info/disclaimer.html) does not provide blanket unrestricted copying or distribution permission. The Pasilla package declares LGPL, which is useful evidence, but the exact data obligations and historical modENCODE terms need review before extracted count tables are repackaged. Expression Atlas applies CC BY 4.0 to copyrightable material available on its website; E-MTAB-8572 is therefore GREEN with attribution obligations recorded in its intake file. No source counts or biological reductions are included in the development archive.
+## Scope limits
 
-## Infrastructure evidence
-
-[Pydantic models](https://docs.pydantic.dev/latest/concepts/models/) provide the typed contract and generated JSON Schema. JSON is the canonical editable manifest in this snapshot; general YAML parsing is not implemented. This avoids silently supporting only part of YAML while claiming full support.
-
-[nf-core test datasets](https://github.com/nf-core/test-datasets) and [nf-core RNA-seq](https://nf-co.re/rnaseq) informed the separation between miniature software fixtures and scientific workflow data. This project has not executed the nf-core RNA-seq pipeline.
-
-[Zenodo's software metadata guidance](https://help.zenodo.org/docs/github/describe-software/) confirms that `.zenodo.json` takes precedence over `CITATION.cff` when both are present. Publication metadata therefore needs one reviewed source of truth. Authors, license and DOI remain explicit release inputs.
+These objects begin at archive count matrices. They do not independently verify read alignment, feature counting, strandedness or every biological conclusion in the source publication. A user needing read-level quality control, another contrast or the complete study should use the cited archive record.
