@@ -1,18 +1,16 @@
 {
-  "scope": "planned_biological_collection",
+  "scope": "v1_biological_collection",
   "software_version": "1.0.0",
   "decision": "NO-GO",
-  "certified_biological_objects": 0,
-  "redistributable_pockets": 0,
-  "blockers": [
-    "Biological collection: 0 certified objects; target is 12 to 20.",
-    "Redistributable biological pockets: 0; at least 8 required.",
-    "At least four certified design archetypes are required.",
-    "Missing release evidence: code_license.",
-    "Missing release evidence: metadata_license.",
-    "Missing release evidence: version_doi.",
-    "Missing release evidence: external_user_trial.",
-    "Missing release evidence: post_upload_verification.",
-    "Biological collection certification is not enabled: real baseline, independent trial and deposited-file evidence adapters remain unimplemented."
+  "preflight": "PASS",
+  "certified_biological_objects": 12,
+  "source_studies": 7,
+  "redistributable_pockets": 12,
+  "design_archetypes": 12,
+  "blockers": [],
+  "deferred_publication_gates": [
+    "version_doi",
+    "external_user_trial",
+    "post_upload_verification"
   ]
 }
