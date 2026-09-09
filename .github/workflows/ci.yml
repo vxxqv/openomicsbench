@@ -8,10 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12.14'
       - run: pip install -r requirements-tested.txt
@@ -23,7 +23,7 @@ jobs:
       - run: python scripts/audit_collection.py
       - run: python scripts/check_repository.py
       - run: python scripts/certify_release.py --preflight
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: core-validation
