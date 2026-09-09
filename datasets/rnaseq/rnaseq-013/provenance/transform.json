@@ -55,7 +55,7 @@
   },
   "deseq2": {
     "path": "evidence/e-mtab-10322-beta-deseq2.json",
-    "sha256": "a2c78902677eb39b70bc43abc2fe6510a99b006ae26223e633ffdee6846e97c7"
+    "sha256": "cf5cf4ed39a22d95418c30a5f2440908c4eb588d6b709da1092dc58aa62e290f"
   },
   "reference": {
     "path": "evidence/reference-verification.json",
