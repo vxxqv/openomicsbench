@@ -189,7 +189,7 @@
     "section": "9. Reproducible workflows and environments",
     "requirement": "Several datasets regenerate end-to-end from a clean environment.",
     "status": "partial",
-    "evidence": "The collection rebuilds locally from declared inputs. The pushed candidate still needs a clean hosted run or independent-machine record."
+    "evidence": "A clean Ubuntu workflow validates all 14 registered records and regenerates the fixture, catalog and figure. It does not redownload and rebuild several biological sources, so this remains partial."
   },
   {
     "section": "9. Reproducible workflows and environments",
@@ -212,8 +212,8 @@
   {
     "section": "10. CI, tests, and integrity gates",
     "requirement": "Nano CI stays within a defined time budget.",
-    "status": "partial",
-    "evidence": "The workflow has a five-minute limit and the local 45-test suite completes in about 15 seconds. Hosted runtime remains to be confirmed after push."
+    "status": "verified",
+    "evidence": "GitHub Actions run 34308797805 completed the five-minute job in 35 seconds, including all 45 tests and the full preflight."
   },
   {
     "section": "10. CI, tests, and integrity gates",

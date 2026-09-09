@@ -59,14 +59,14 @@ This ledger maps the version 1 acceptance tests in OmicsBenchPlan_v1.0.docx to c
 
 ## 9. Reproducible workflows and environments
 
-- **PARTIAL** Several datasets regenerate end-to-end from a clean environment. The collection rebuilds locally from declared inputs. The pushed candidate still needs a clean hosted run or independent-machine record.
+- **PARTIAL** Several datasets regenerate end-to-end from a clean environment. A clean Ubuntu workflow validates all 14 registered records and regenerates the fixture, catalog and figure. It does not redownload and rebuild several biological sources, so this remains partial.
 - **VERIFIED** Resolved parameters and versions are preserved. Manifests, transformation records, DESeq2 evidence and runtime/environment-lock.json preserve inputs, parameters, code hashes and software versions.
 - **VERIFIED** No notebook-only hidden step is needed for release artifacts. The repository contains scripted workflows for every generated object, catalog, figure, audit and certification output.
 - **PARTIAL** Failures retain logs and a short human summary. Rejected pocket and reference candidates retain structured evidence and explanations. A general failure-log contract is not enforced for every workflow.
 
 ## 10. CI, tests, and integrity gates
 
-- **PARTIAL** Nano CI stays within a defined time budget. The workflow has a five-minute limit and the local 45-test suite completes in about 15 seconds. Hosted runtime remains to be confirmed after push.
+- **VERIFIED** Nano CI stays within a defined time budget. GitHub Actions run 34308797805 completed the five-minute job in 35 seconds, including all 45 tests and the full preflight.
 - **VERIFIED** Release tag is blocked by schema/hash/registry failures. The integrity workflow runs on every push and tag and includes schema drift, manifest hashes, registry validation, overlap audit and preflight.
 - **VERIFIED** Corruption and sample-order failures have regression tests. Dedicated corruption, missing-file, duplicate, sample-order and design-mismatch tests pass.
 - **VERIFIED** Documentation quality is reviewed beyond spelling. The repository checker covers links and unfinished text; the collection audit detects repeated long prose; the fidelity figure received a rendered layout review.
