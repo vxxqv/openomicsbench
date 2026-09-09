@@ -1212,8 +1212,8 @@
     },
     {
       "path": "scripts/check_repository.py",
-      "bytes": 2075,
-      "sha256": "be221674d2eefbcb482c676da81021dc52feacff249d1faeb3b872530685ffa3"
+      "bytes": 2369,
+      "sha256": "de7b9096d1eb8e185817335f9136ffbced02839388610278489675d4eb9b27e0"
     },
     {
       "path": "scripts/package_snapshot.py",
