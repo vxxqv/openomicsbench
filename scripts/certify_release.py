@@ -1,5 +1,6 @@
 """Verify the v1 collection and write a fail-closed release decision."""
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -59,6 +60,14 @@ def tracked_files() -> set[str]:
     return {value for value in output.split("\0") if value}
 
 
+def tracked_blob(relative: str) -> bytes:
+    git = os.environ.get("OPENOMICSBENCH_GIT", "git")
+    return subprocess.run(
+        [git, "-c", f"safe.directory={ROOT.as_posix()}", "show", f":{relative}"],
+        cwd=ROOT, check=True, capture_output=True,
+    ).stdout
+
+
 def check_release_inventory(metadata: dict, blockers: list[str]) -> None:
     path = ROOT / INVENTORY_PATH
     if not path.is_file():
@@ -82,11 +91,8 @@ def check_release_inventory(metadata: dict, blockers: list[str]) -> None:
         return
     for record in records:
         relative = record["path"]
-        file_path = ROOT / relative
-        if not file_path.is_file():
-            blockers.append(f"Release inventory file is missing: {relative}.")
-            continue
-        if file_path.stat().st_size != record.get("bytes") or digest(file_path) != record.get("sha256"):
+        blob = tracked_blob(relative)
+        if len(blob) != record.get("bytes") or hashlib.sha256(blob).hexdigest() != record.get("sha256"):
             blockers.append(f"Release inventory hash or byte count differs: {relative}.")
 
 

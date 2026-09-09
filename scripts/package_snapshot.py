@@ -1,9 +1,9 @@
 """Write the deterministic file inventory for a release candidate."""
 import json
+import hashlib
 import os
 import subprocess
 from pathlib import Path
-from omicsbench.hashing import digest
 
 root = Path(__file__).resolve().parents[1]
 metadata = json.loads((root / "release/metadata-input.json").read_text(encoding="utf-8"))
@@ -19,10 +19,14 @@ for relative in sorted(value for value in listed if value):
     path = root / relative
     if not path.is_file() or path.resolve() in excluded:
         continue
+    blob = subprocess.run(
+        [git, "-c", f"safe.directory={root.as_posix()}", "show", f":{relative}"],
+        cwd=root, check=True, capture_output=True,
+    ).stdout
     files.append({
         "path": path.relative_to(root).as_posix(),
-        "bytes": path.stat().st_size,
-        "sha256": digest(path),
+        "bytes": len(blob),
+        "sha256": hashlib.sha256(blob).hexdigest(),
     })
 payload = {
     "version": metadata["software_version"],
