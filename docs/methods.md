@@ -1,49 +1,73 @@
-# Reduction and validation methods
+# Methods
 
-## Scope of the current baseline
+## Collection scope
 
-The working Python baseline is a diagnostic for preservation of count-matrix structure. It converts each sample to counts per million, applies log2(CPM + 1), and fits an ordinary least-squares model with an intercept, a two-level condition and categorical batch indicators. It reports the condition coefficient. It does not estimate negative-binomial dispersion, report p-values or replace DESeq2.
+Version 1 contains 12 bulk RNA-seq benchmark objects derived from seven Expression Atlas experiments. The source organisms are human, mouse and Arabidopsis thaliana. Each object represents one declared two-level contrast, with an optional blocking factor or predeclared sample subset. Several contrasts may come from one study when they exercise different valid designs. They keep separate identifiers, sample metadata, validation profiles and provenance.
 
-Condition levels are sorted lexically. The reported contrast is the second level minus the first. For the Pasilla labels, that means untreated minus treated. Every output records this direction. Library preparation type is the blocking covariate for this diagnostic; it is not asserted to be the experimental batch.
+The collection starts from archive-supplied gene count matrices. It does not repeat read alignment or quantify transcripts from FASTQ. The objects are intended for software tests, tutorials and method checks at the count-matrix stage.
 
-The model rejects rank-deficient designs and designs with no residual degrees of freedom. At least two samples per condition are required. The supplied plan's example places controls only in batch A and treated samples only in batch B; it therefore cannot identify a treatment effect adjusted for batch. The implementation tests this failure explicitly.
+## Source intake
+
+The Expression Atlas adapter retrieves the raw-count and experiment-design resources named by the official experiment page. Downloads use temporary files and are moved into place only after completion. The workflow records the resource URL, byte count and SHA-256 hash.
+
+Count columns must agree with analysed run identifiers in the experiment design. A column marked unanalysed is excluded. Repeated run columns are accepted only when their complete integer count vectors are identical. The parser rejects missing or duplicate gene identifiers, non-integer values, negative counts, inconsistent row widths and empty sample libraries.
+
+Each source configuration names the experimental factor, the two retained factor values, an optional blocking column and any sample subset. These choices are made before candidate pockets are scored. The workflow rejects a two-condition design with fewer than two samples per condition, rank deficiency or no residual degrees of freedom.
 
 ## Feature selection
 
-All sample columns are retained. The selector alternates among four ordered feature lists: high variance of log2(count + 1), expression near the median feature mean, low variance, and a seeded SHA-256 ordering of feature IDs. Already selected genes are skipped. Source row order is restored in the final matrix. This uses no condition labels to rank features.
+All selected sample columns are retained. No library is downsampled and no count is normalized in the distributed matrices.
 
-The procedure provides nested candidate sizes, deterministic tie breaking and an exact seed. It does not claim that low-variance genes are biological housekeeping genes. Zeros and low-expression features are allowed. A future biological profile may require a different documented mixture; changing the algorithm creates a new baseline version.
+The feature order begins with the 100 genes having the largest absolute source contrast effects. Gene identifier settles ties. The remaining positions alternate among four deterministic lists:
 
-The Pasilla grid is 500, 1,000, 2,000, 4,000, 8,000 and 12,000 genes. The minimum requirements were saved before this diagnostic run: rank correlation 0.90, top-50 Jaccard 0.60, distance correlation 0.90 and sign agreement 0.90. They are development thresholds. They have not been independently calibrated for a biological release.
+1. high variance of `log2(count + 1)`;
+2. mean expression closest to the median feature mean;
+3. low variance; and
+4. a SHA-256 ordering of the seed and gene identifier.
 
-E-MTAB-8572 uses a contrast-aware extension. The 100 largest absolute full-source effects are included first, then the four general feature lists fill a single deterministic order. Every candidate size is a prefix of that order before source row order is restored. This prevents a small pocket from losing the strongest source effects by chance while retaining genes from the four general selection categories.
+A gene already selected from one list is skipped in the others. Each candidate size is a prefix of this order, then rows are restored to source order. The configuration records the seed, candidate grid, contrast, subset and top-k value. The saved diagnostic report includes passing and failing sizes, so the chosen pocket is the smallest tested candidate that met every threshold rather than an undocumented manual choice.
 
-Its diagnostic uses median-ratio size factors calculated from genes with positive counts in every sample. Size factors are centered to a geometric mean of one, and the model fits log2(normalized count + 1). This is close to the normalization stage used by DESeq2, but the diagnostic remains ordinary least squares and produces no inferential statistics. The first passing size in the declared grid was 2,000 genes. The saved report was identical across two complete source retrieval and calculation runs.
+## Diagnostic envelope
 
-The same contrast-aware method was applied to E-MTAB-6866 without changing the thresholds. Its first passing candidate contained 4,000 of 32,833 genes. Keeping separate source configuration files makes the factor column, reference statement and candidate grid reviewable for each experiment.
+The first validation layer uses median-ratio size factors calculated from genes with positive counts in every sample. Size factors are centred to a geometric mean of one. The diagnostic fits ordinary least squares to `log2(normalized count + 1)`, using condition and the declared blocking factor when present. It is used to screen the candidate grid efficiently. It does not report p-values or claim to reproduce negative-binomial inference.
 
-## Quantitative definitions
+The four predeclared minimums are:
 
-Spearman preservation uses average ranks for tied coefficients on the shared selected feature universe. Constant or non-finite input is an error, not a passing score.
+| Metric | Minimum |
+|---|---:|
+| Spearman effect correlation | 0.90 |
+| Top-50 effect Jaccard overlap | 0.60 |
+| Sample-distance correlation | 0.90 |
+| Effect-sign agreement | 0.90 |
 
-Top-50 Jaccard ranks the absolute condition coefficients within that same shared universe. Feature ID resolves ties. The denominator is the union size. This metric does not measure recovery of top genes omitted from the source universe. A release baseline must add full-universe top-feature recall before claiming preservation of the source's strongest findings.
+Spearman preservation is the average-tie rank correlation between full-source and pocket condition effects for genes retained in the pocket. Non-finite or constant inputs are errors.
 
-Distance preservation is Pearson correlation between the strict upper triangles of Euclidean sample-distance matrices after the declared normalization and log2 transform. The source distance uses all source genes; the pocket distance uses its selected genes. This check can fail even when effect rankings remain correlated.
+Top-50 overlap ranks absolute condition effects within the retained feature universe. Gene identifier settles ties. The score is the intersection divided by the union of the two top-50 sets.
 
-Sign agreement considers shared genes with an absolute source coefficient of at least 0.1. A zero pocket coefficient disagrees with a nonzero source coefficient. The implementation rejects an empty eligible set. It does not assign arbitrary success to an undefined metric.
+Sample-distance preservation is the Pearson correlation between the upper triangles of the full and pocket Euclidean distance matrices after the declared normalization and log transform.
 
-PCA uses singular-value decomposition after centering each transformed feature across samples. For repeatable plotting, each component is oriented so its largest absolute sample coordinate is positive. Distances, rather than exact PCA axis signs, are the validation target. Nearly equal singular values may rotate components between environments.
+Sign agreement is the fraction of retained genes with matching effect signs when the absolute full-source effect is at least 0.1. An empty eligible set is an error.
 
-## Hard invariants
+## DESeq2 confirmation
 
-The validator checks declared paths, byte sizes and SHA-256 hashes before scientific calculations. The baseline sample order must agree with both the manifest and profile. The pocket shape must match the declared shape. Every retained gene must occur in the source and every retained count must equal the corresponding source value.
+Every selected pocket is then compared with its full source matrix using DESeq2 1.50.2 under R 4.5.3. The model is `~ condition` for unblocked designs and `~ batch + condition` where a blocking factor is declared. The baseline script checks sample order, integer counts, model rank and residual degrees of freedom before fitting.
 
-Count input rejects empty or duplicate IDs, inconsistent row widths, fractional counts, negative values and empty sample libraries. It uses signed 64-bit integer storage. This is a count-matrix contract, not a quantification-estimate contract; fractional Salmon counts need a separate adapter.
+The DESeq2 comparison calculates the same four preservation measures from fitted log2 fold changes and DESeq2 normalized counts. All 12 objects pass all four minimums. Each `expected/deseq2.json` records the formula, contrast direction, feature counts, exact metric values, runtime versions, input hashes, output hashes and hashes of the Python and R workflows. Gene-level DESeq2 tables remain build evidence rather than release files; the compact report contains enough information to verify the certified input and result identity.
 
-## Read sampling
+## Reference verification
 
-The paired-read helper validates FASTQ structure, equal mate counts and matching IDs. It hashes the seed, sample ID, record ordinal and pair ID to select both mates together at the requested fraction. This samples an expected fraction, not an exact number of pairs. It writes plain FASTQ and returns actual input and selected pair counts. It is tested on miniature records; a real read-level pocket and its QC profile remain to be built.
+Expression Atlas processing metadata names the genome and gene-model release used for each experiment. The v1 objects resolve to five reference profiles: Ensembl 95 GRCh38, Ensembl 97 GRCm38, Ensembl 107 GRCh38, Ensembl 107 GRCm39 and Ensembl Genomes 44 TAIR10.
 
-## Reproducibility record
+For each profile, the workflow pins the official genome and GTF URLs and their checksum records. The GTF is downloaded, checked as a gzip stream, hashed with SHA-256 and parsed for gene identifiers. Every pocket identifier must occur in the matching GTF. The release evidence records matched and unmatched counts for each object. All 12 included objects have complete matches. E-MTAB-7126 is excluded because its current count matrix does not agree with the Ensembl 95 annotation stated by the experiment page.
 
-The exact fixture rebuild was checked with Python 3.12.14 and NumPy 2.3.5. Snakemake 9.26.1 ran the fixture workflow from generation through validation. The full Pasilla table was fitted with DESeq2 1.50.2 under R 4.5.3. The Conda and R package versions are recorded in runtime/environment-lock.json. A clean rebuild on another machine and a container digest remain to be completed.
+## Object validation
+
+Before scientific metrics are calculated, the validator compares the actual files with the manifest inventory. It checks every byte count and SHA-256 hash, then checks sample order, count-matrix shape and exact equality of each retained integer count with the source matrix. Normalized values never replace the source counts.
+
+The scientific calculation runs only after these hard checks pass. The result is accepted only if every declared metric meets its minimum. The release preflight separately checks the DESeq2 report, reference record, rights decision, attribution, workflow commits and collection overlap audit.
+
+## Reproducibility and limits
+
+The tested scientific environment uses Python 3.12.14, NumPy 2.3.5, R 4.5.3 and DESeq2 1.50.2. `runtime/environment-lock.json` records the complete Conda and R package set. Source configurations and transformation scripts are versioned, and each biological object names the commits and hashes used to select and assemble it.
+
+The release does not claim that a chosen pocket is the globally smallest possible representation. It is the smallest passing member of its declared grid. Preservation of a count-level contrast does not show that every downstream method, pathway result or biological conclusion is unchanged. Users who need the complete study, alternative contrasts or read-level quality control should return to the cited source archive.
