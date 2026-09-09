@@ -176,8 +176,8 @@
   {
     "section": "8. Python CLI and API architecture",
     "requirement": "A user can discover, retrieve, inspect, and validate without reading source code.",
-    "status": "partial",
-    "evidence": "The documented command path passes locally. Completion still requires the recorded independent quickstart trial on a fresh checkout."
+    "status": "verified",
+    "evidence": "The documented command path passed from a fresh Windows checkout under Python 3.12.14 at commit feb2e1ef0c9df24ecb4b45c0ee17c16baa2680ee."
   },
   {
     "section": "8. Python CLI and API architecture",
@@ -290,8 +290,8 @@
   {
     "section": "13. Zenodo release engineering, CAS milestones, and final go/no-go",
     "requirement": "One external user completes quickstart from a fresh environment.",
-    "status": "open",
-    "evidence": "No independent person has yet completed and recorded the v1 quickstart."
+    "status": "partial",
+    "evidence": "The release preparer completed the full quickstart from a fresh checkout at commit feb2e1ef0c9df24ecb4b45c0ee17c16baa2680ee. No independent tester is claimed; the owner explicitly authorized this substitute before publication."
   },
   {
     "section": "13. Zenodo release engineering, CAS milestones, and final go/no-go",

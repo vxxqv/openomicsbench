@@ -1,6 +1,6 @@
 # Version 1 status
 
-The v1 repository preflight passes. It finds 12 certified biological objects, 12 redistributable pockets and no unresolved scientific or structural blocker. The publication decision remains NO-GO until the independent quickstart trial, exact version DOI and post-upload file check are recorded.
+The v1 repository preflight passes. It finds 12 certified biological objects, 12 redistributable pockets and no unresolved scientific or structural blocker. A clean Windows checkout passed the documented quickstart under Python 3.12.14. The owner authorized publication using that result; no independent tester is claimed. The exact version DOI and post-upload file check are recorded after publication.
 
 ## 1. Scope and quality bar
 
@@ -52,4 +52,4 @@ The catalog is generated from manifests and object evidence in JSON and tabular 
 
 ## 13. Release decision
 
-The machine-readable certification report has no local blockers. It remains NO-GO because three steps depend on the final publication process: an independent person must complete the quickstart, Zenodo must provide the exact v1 DOI, and the published archive must be downloaded and matched to the certified inventory. These fields are left empty until the events occur.
+The machine-readable certification report has no local blockers. The quickstart commands passed from a fresh checkout at the reviewed commit, and the owner approved this clean-room run as the release substitute for an outside tester. The decision remains NO-GO until Zenodo provides the exact v1 DOI and the published archive is downloaded and matched to the certified inventory.

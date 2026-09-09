@@ -65,7 +65,7 @@ python scripts/check_repository.py
 python scripts/certify_release.py --preflight
 ```
 
-The local v1 preflight passes with no scientific or structural blockers. Publication still requires an independent person to complete the quickstart, the exact Zenodo version DOI to be inserted after reservation, and the uploaded archive to be downloaded and checked against the release inventory.
+The local v1 preflight passes with no scientific or structural blockers. A fresh Windows checkout passed the documented quickstart under Python 3.12.14. The owner approved that clean-room run as the publication check; no independent tester is claimed. The exact Zenodo version DOI and uploaded archive check are completed after the connected release is published.
 
 The [version 1 release review](docs/OpenOmicsBench_V1_Release_Review.pdf) brings the collection, scientific checks, overlap findings, software tests and remaining publication steps into one six-page document.
 

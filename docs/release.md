@@ -2,7 +2,7 @@
 
 ## Current position
 
-The local collection preflight passes. Version 1 must stay unpublished until an independent quickstart trial is recorded and the owner approves the exact release commit. Zenodo supplies the version DOI after the connected GitHub release is published, so DOI and uploaded-file verification are completed immediately afterward.
+The local collection preflight passes. A clean Windows checkout passed the documented quickstart under Python 3.12.14, and the owner authorized publication using that result. No independent tester is claimed. Zenodo supplies the version DOI after the connected GitHub release is published, so DOI and uploaded-file verification are completed immediately afterward.
 
 ## Freeze the candidate
 
@@ -12,9 +12,9 @@ The local collection preflight passes. Version 1 must stay unpublished until an 
 4. Push the candidate commits and wait for the GitHub integrity workflow to pass.
 5. Stop changing scientific data, thresholds, source configurations and workflow code unless a failed check requires a new candidate.
 
-## Independent quickstart trial
+## Quickstart trial
 
-Give a fresh checkout to a person who did not build the collection. Ask them to use Python 3.11 or newer and run:
+Use Python 3.11 or newer in a fresh checkout and run:
 
 ```sh
 python -m pip install -r requirements-tested.txt
@@ -26,7 +26,7 @@ omicsbench get rnaseq-002 --size pocket
 omicsbench verify-cache
 ```
 
-Record the date, operating system, Python version, exact commit, outcome and any point where the written instructions were insufficient. Do not record the tester's name or contact details unless they agree. Fix any hidden maintainer step and repeat the trial if a fix changes the user path.
+Record the date, operating system, Python version, exact commit, outcome and any point where the written instructions were insufficient. State whether the tester was independent. Do not record a tester's name or contact details unless they agree. Fix any hidden maintainer step and repeat the trial if a fix changes the user path. If the owner authorizes a release-preparer trial instead, record that decision and do not describe the run as independent.
 
 ## Publish GitHub version 1
 

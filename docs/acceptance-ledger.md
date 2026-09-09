@@ -54,7 +54,7 @@ This ledger maps the version 1 acceptance tests in OmicsBenchPlan_v1.0.docx to c
 
 - **VERIFIED** CLI has unit and end-to-end tests on nano objects. All seven public commands are covered by the 45-test suite, including the generated fixture path.
 - **VERIFIED** All downloads verify hashes. Transfers verify declared size and SHA-256 before atomic replacement; interrupted and corrupt transfers have regression tests.
-- **PARTIAL** A user can discover, retrieve, inspect, and validate without reading source code. The documented command path passes locally. Completion still requires the recorded independent quickstart trial on a fresh checkout.
+- **VERIFIED** A user can discover, retrieve, inspect, and validate without reading source code. The documented command path passed from a fresh Windows checkout under Python 3.12.14 at commit feb2e1ef0c9df24ecb4b45c0ee17c16baa2680ee.
 - **VERIFIED** Help and error messages are concise and human. Every command has focused help and an example; expected user failures return short messages without tracebacks.
 
 ## 9. Reproducible workflows and environments
@@ -88,7 +88,7 @@ This ledger maps the version 1 acceptance tests in OmicsBenchPlan_v1.0.docx to c
 
 ## 13. Zenodo release engineering, CAS milestones, and final go/no-go
 
-- **OPEN** One external user completes quickstart from a fresh environment. No independent person has yet completed and recorded the v1 quickstart.
+- **PARTIAL** One external user completes quickstart from a fresh environment. The release preparer completed the full quickstart from a fresh checkout at commit feb2e1ef0c9df24ecb4b45c0ee17c16baa2680ee. No independent tester is claimed; the owner explicitly authorized this substitute before publication.
 - **OPEN** Final uploaded hashes match certified files. This can be checked only after the final GitHub release has been archived by Zenodo.
 - **OPEN** DOI/citation instructions point to exact version. The concept DOI is recorded. Zenodo has not yet minted the final 1.0.0 version DOI.
 - **PARTIAL** v1 retrospective identifies concrete improvements for v2. Development lessons and candidate v2 work are recorded, but post-release user experience and archive behavior cannot be assessed before publication.
