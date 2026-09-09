@@ -56,7 +56,7 @@
   },
   "deseq2": {
     "path": "evidence/e-mtab-8845-infection-gsnor1-deseq2.json",
-    "sha256": "fbc580e0e6dcac096d81d7e402d6c3d2a00820f016f123d0368956e3b57ae478"
+    "sha256": "de3179c8507c6383c5dc711e036ae9ec5242840b56e74688127664e7566ddef4"
   },
   "reference": {
     "path": "evidence/reference-verification.json",
