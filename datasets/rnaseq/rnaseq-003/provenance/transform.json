@@ -43,8 +43,8 @@
   },
   "assembly": {
     "workflow": "workflows/build_collection.py",
-    "workflow_sha256": "0b237a00363dad610357864b04582716a0f855f1624413fa2112189d7ca14857",
-    "workflow_commit": "505807a13443df8449fe698006d619c049cb46b5"
+    "workflow_sha256": "fc4e54cddcb99a0a2699ae53fa1f591de07ad19c90122cbb17672cee7f3f7087",
+    "workflow_commit": "e33a23ecb67d6ca0db88e98b02140f8189be1507"
   },
   "diagnostic": {
     "path": "evidence/e-mtab-6866-diagnostic.json",
