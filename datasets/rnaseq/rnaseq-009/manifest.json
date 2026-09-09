@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "id": "rnaseq-009",
   "title": "Arabidopsis gsnor1 genotype adjusted for infection",
-  "release": "1.0.0.dev1",
+  "release": "1.0.0",
   "assay": "bulk_rna_seq",
   "kind": "real",
   "status": "validated",
