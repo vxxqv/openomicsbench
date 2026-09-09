@@ -89,6 +89,6 @@ This ledger maps the version 1 acceptance tests in OmicsBenchPlan_v1.0.docx to c
 ## 13. Zenodo release engineering, CAS milestones, and final go/no-go
 
 - **PARTIAL** One external user completes quickstart from a fresh environment. The release preparer completed the full quickstart from a fresh checkout at commit feb2e1ef0c9df24ecb4b45c0ee17c16baa2680ee. No independent tester is claimed; the owner explicitly authorized this substitute before publication.
-- **OPEN** Final uploaded hashes match certified files. This can be checked only after the final GitHub release has been archived by Zenodo.
-- **OPEN** DOI/citation instructions point to exact version. The concept DOI is recorded. Zenodo has not yet minted the final 1.0.0 version DOI.
+- **VERIFIED** Final uploaded hashes match certified files. The GitHub and Zenodo archives contain the same 282 files; all 281 inventory-controlled files match byte counts and SHA-256 values, with no missing, extra or changed files.
+- **VERIFIED** DOI/citation instructions point to exact version. OpenOmicsBench 1.0.0 is archived at DOI 10.5281/zenodo.22679414; the concept DOI remains 10.5281/zenodo.22551734.
 - **PARTIAL** v1 retrospective identifies concrete improvements for v2. Development lessons and candidate v2 work are recorded, but post-release user experience and archive behavior cannot be assessed before publication.

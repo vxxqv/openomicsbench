@@ -296,14 +296,14 @@
   {
     "section": "13. Zenodo release engineering, CAS milestones, and final go/no-go",
     "requirement": "Final uploaded hashes match certified files.",
-    "status": "open",
-    "evidence": "This can be checked only after the final GitHub release has been archived by Zenodo."
+    "status": "verified",
+    "evidence": "The GitHub and Zenodo archives contain the same 282 files; all 281 inventory-controlled files match byte counts and SHA-256 values, with no missing, extra or changed files."
   },
   {
     "section": "13. Zenodo release engineering, CAS milestones, and final go/no-go",
     "requirement": "DOI/citation instructions point to exact version.",
-    "status": "open",
-    "evidence": "The concept DOI is recorded. Zenodo has not yet minted the final 1.0.0 version DOI."
+    "status": "verified",
+    "evidence": "OpenOmicsBench 1.0.0 is archived at DOI 10.5281/zenodo.22679414; the concept DOI remains 10.5281/zenodo.22551734."
   },
   {
     "section": "13. Zenodo release engineering, CAS milestones, and final go/no-go",

@@ -1,6 +1,6 @@
 # Version 1 status
 
-The v1 repository preflight passes. It finds 12 certified biological objects, 12 redistributable pockets and no unresolved scientific or structural blocker. A clean Windows checkout passed the documented quickstart under Python 3.12.14. The owner authorized publication using that result; no independent tester is claimed. The exact version DOI and post-upload file check are recorded after publication.
+The final v1 certification passes. It finds 12 certified biological objects, 12 redistributable pockets and no scientific, structural or publication blocker. A clean Windows checkout passed the documented quickstart under Python 3.12.14. The owner authorized publication using that result; no independent tester is claimed. GitHub release v1.0.0 and Zenodo DOI 10.5281/zenodo.22679414 identify the frozen commit.
 
 ## 1. Scope and quality bar
 
@@ -52,4 +52,4 @@ The catalog is generated from manifests and object evidence in JSON and tabular 
 
 ## 13. Release decision
 
-The machine-readable certification report has no local blockers. The quickstart commands passed from a fresh checkout at the reviewed commit, and the owner approved this clean-room run as the release substitute for an outside tester. The decision remains NO-GO until Zenodo provides the exact v1 DOI and the published archive is downloaded and matched to the certified inventory.
+The machine-readable certification decision is GO. The quickstart commands passed from a fresh checkout at the reviewed commit, and the owner approved this clean-room run as the release substitute for an outside tester. The GitHub and Zenodo archives contain the same 282 files. All 281 inventory-controlled files match their certified byte counts and SHA-256 values, with no missing, extra or changed files.

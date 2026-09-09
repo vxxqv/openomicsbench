@@ -2,7 +2,7 @@
 
 ## Current position
 
-The local collection preflight passes. A clean Windows checkout passed the documented quickstart under Python 3.12.14, and the owner authorized publication using that result. No independent tester is claimed. Zenodo supplies the version DOI after the connected GitHub release is published, so DOI and uploaded-file verification are completed immediately afterward.
+OpenOmicsBench 1.0.0 is published from commit 5ce08c6bf57e2886b667b77e8c33b238390c2e6e. The GitHub release is normal rather than prerelease, and the tag-triggered integrity workflow passed. Zenodo archived the release at DOI 10.5281/zenodo.22679414 with Vivaan Patni and ORCID 0009-0005-1859-5107. The GitHub and Zenodo archives contain the same files, and the certified inventory comparison passes.
 
 ## Freeze the candidate
 
