@@ -2,10 +2,12 @@ cff-version: 1.2.0
 message: "Please cite the archived release corresponding to the version you used."
 title: "OpenOmicsBench"
 type: software
+version: "1.0.0"
 license: Apache-2.0
 authors:
   - family-names: "Patni"
     given-names: "Vivaan"
+    orcid: "https://orcid.org/0009-0005-1859-5107"
 repository-code: "https://github.com/vxxqv/openomicsbench"
 identifiers:
   - type: doi

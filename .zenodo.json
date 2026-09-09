@@ -2,7 +2,8 @@
   "title": "OpenOmicsBench",
   "creators": [
     {
-      "name": "Vivaan Patni"
+      "name": "Vivaan Patni",
+      "orcid": "0009-0005-1859-5107"
     }
   ],
   "description": "Compact, traceable transcriptomics objects for software testing, teaching and method development.",
