@@ -16,7 +16,11 @@ jobs:
       - run: pip install --no-deps -e .
       - run: python workflows/build_fixture.py
       - run: python -m unittest discover -s tests -v
+      - run: python scripts/build_catalog.py
+      - run: git diff --exit-code -- catalog figures/v1-fidelity.svg
+      - run: python scripts/audit_collection.py
       - run: python scripts/check_repository.py
+      - run: python scripts/certify_release.py --preflight
       - uses: actions/upload-artifact@v4
         if: always()
         with:
