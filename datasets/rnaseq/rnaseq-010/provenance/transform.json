@@ -56,7 +56,7 @@
   },
   "deseq2": {
     "path": "evidence/e-mtab-8845-infection-wild-deseq2.json",
-    "sha256": "609544fce5e2fcc4c46234afe86f801ddae5627fbaadd26cd84535447e70f2bd"
+    "sha256": "ea7874683f6b68a6c22ebfa2f672cb277c685394302f99ead05e6ff1ab2c6766"
   },
   "reference": {
     "path": "evidence/reference-verification.json",
