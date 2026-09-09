@@ -1,95 +1,94 @@
 # Acceptance ledger
 
-Each acceptance item below comes from OmicsBenchPlan_v1.0.docx. Verified describes the narrow evidence stated. Partial and open items remain version 1 development work.
+This ledger maps the version 1 acceptance tests in OmicsBenchPlan_v1.0.docx to current evidence. Verified means the named evidence exists and passes. Partial marks a bounded result with a remaining condition. Open marks work that depends on an event that has not happened.
 
 ## 1. Release thesis and quality bar
 
-- **OPEN** Project charter defines audience, inclusion criteria, object tiers, and exclusions. Not yet demonstrated for the requested v1 biological release.
-- **OPEN** No dataset merges without provenance and rights review. Not yet demonstrated for the requested v1 biological release.
-- **VERIFIED** v1 scope remains transcriptomics plus core infrastructure. The intake excludes single-cell data; code supports bulk count objects and infrastructure fixtures.
-- **VERIFIED** Documentation style rules live in CONTRIBUTING.md and are reviewed like code. CONTRIBUTING.md and documentation lint are present; no external editorial review is claimed.
+- **VERIFIED** Project charter defines audience, inclusion criteria, object tiers, and exclusions. README.md and docs/methods.md define the user, bulk RNA-seq scope, object tiers, admission tests and exclusions.
+- **VERIFIED** No dataset merges without provenance and rights review. The collection plan links every biological object to dated intake, rights, reference and transformation records; the overlap audit passes.
+- **VERIFIED** v1 scope remains transcriptomics plus core infrastructure. The registry contains bulk RNA-seq objects and two infrastructure fixtures; no other assay is represented.
+- **VERIFIED** Documentation style rules live in CONTRIBUTING.md and are reviewed like code. CONTRIBUTING.md states the writing rules; CI checks local links, unfinished text, punctuation and attribution traces.
 
 ## 2. Repository architecture and data-object contract
 
-- **VERIFIED** Fresh clone can enumerate all datasets from manifests only. registry.py enumerates local manifests; CLI list passed in a temporary repository.
-- **VERIFIED** Validator catches duplicate IDs, missing files, invalid hashes, and undeclared roles. Covered by schema, inventory, duplicate-ID and corruption tests.
-- **OPEN** Dataset-specific logic is isolated in adapters/workflows rather than scattered through core code. Not yet demonstrated for the requested v1 biological release.
+- **VERIFIED** Fresh clone can enumerate all datasets from manifests only. registry.py discovers manifests without a hand-maintained dataset list; the clean temporary-repository test passes.
+- **VERIFIED** Validator catches duplicate IDs, missing files, invalid hashes, and undeclared roles. Regression tests cover duplicate identifiers and roles, missing and changed files, bad hashes and undeclared paths.
+- **VERIFIED** Dataset-specific logic is isolated in adapters/workflows rather than scattered through core code. Source retrieval and biological selection live under workflows; src/omicsbench contains source-neutral models, registry, transfer, count and validation code.
 
 ## 3. Manifest schema, identifiers, and provenance
 
-- **VERIFIED** Schema round-trip tests preserve values. test_manifest_round_trip passed.
-- **OPEN** Provenance report can be generated without reading Python source. Not yet demonstrated for the requested v1 biological release.
-- **OPEN** Help text for fields is written as human guidance, not terse schema jargon. Not yet demonstrated for the requested v1 biological release.
-- **OPEN** Schema changes require tests and migration notes. Not yet demonstrated for the requested v1 biological release.
+- **VERIFIED** Schema round-trip tests preserve values. test_manifest_round_trip passes against the current strict Pydantic contract.
+- **VERIFIED** Provenance report can be generated without reading Python source. The provenance command reads the manifest and transformation record and is exercised by the command-line test.
+- **VERIFIED** Help text for fields is written as human guidance, not terse schema jargon. Every public manifest field has a plain-language description in the generated JSON Schema.
+- **VERIFIED** Schema changes require tests and migration notes. CONTRIBUTING.md requires both; schema drift and manifest round trips are checked automatically.
 
 ## 4. Source discovery, licensing, and intake
 
-- **VERIFIED** Every candidate has an intake record before processing starts. Twelve intake records were written before running the Pasilla diagnostic reduction.
-- **OPEN** Rights decision includes evidence and date checked. Not yet demonstrated for the requested v1 biological release.
-- **VERIFIED** Link-only status is visible in catalog and CLI. rnaseq-001 has original_link status and AMBER rights; get rejects it.
-- **VERIFIED** No source is called open simply because a browser download exists. All GEO intake records remain AMBER.
+- **VERIFIED** Every candidate has an intake record before processing starts. The curation intake directory records every evaluated archive candidate, including excluded and deferred sources.
+- **VERIFIED** Rights decision includes evidence and date checked. Every biological object carries rights.json and manifest rights fields with the licence, evidence URL, decision and review date.
+- **VERIFIED** Link-only status is visible in catalog and CLI. rnaseq-001 is marked original_link in its manifest and command output; retrieval refuses to package it.
+- **VERIFIED** No source is called open simply because a browser download exists. GEO records remain AMBER without a specific redistribution grant; downloadable material is not packaged on access alone.
 
 ## 5. Bulk RNA-seq collection design
 
-- **OPEN** At least four distinct RNA design archetypes are represented. Not yet demonstrated for the requested v1 biological release.
-- **VERIFIED** Counts are never overwritten by normalized values. Raw-count files are preserved; diagnostic transforms are separate arrays.
-- **OPEN** Strandedness and sample design metadata are explicit. Not yet demonstrated for the requested v1 biological release.
-- **PARTIAL** Reference/annotation compatibility is checked automatically. The contract blocks unresolved references for validated objects; actual biological reference-file compatibility checks are not implemented.
+- **VERIFIED** At least four distinct RNA design archetypes are represented. The 12 certified objects declare 12 design descriptions spanning balanced, paired, blocked factorial, imbalanced and stratified comparisons.
+- **VERIFIED** Counts are never overwritten by normalized values. Source integer counts and pocket integer counts remain separate; normalization is computed only during validation.
+- **VERIFIED** Strandedness and sample design metadata are explicit. Every sample record declares condition, replicate, batch or blocking value and strandedness; unavailable strandedness is stated as unknown.
+- **VERIFIED** Reference/annotation compatibility is checked automatically. verify_references.py checks official annotation files and pocket identifiers; certification rejects missing or unresolved evidence.
 
 ## 6. Deterministic pocketing algorithms
 
-- **VERIFIED** All stochastic reducers accept and record a seed. Feature and read sampling accept seeds; fixture and Pasilla configurations record them.
-- **OPEN** Paired reads and sample identity are tested. Not yet demonstrated for the requested v1 biological release.
-- **PARTIAL** Pocket size is justified quantitatively. Pasilla has six measured candidates, but the result is diagnostic-only and not a certified pocket.
-- **VERIFIED** No spreadsheet-only/manual cleanup is required for regeneration. Both executed local workflows are scripted.
+- **VERIFIED** All stochastic reducers accept and record a seed. Reducers accept a seed and every manifest derivation records it, including zero for deterministic feature selection.
+- **VERIFIED** Paired reads and sample identity are tested. Regression tests cover paired-mate identity, duplicate runs, sample order and design-to-matrix agreement.
+- **VERIFIED** Pocket size is justified quantitatively. Each object retains its candidate curve and selects the smallest feature count that meets all four predeclared preservation thresholds.
+- **VERIFIED** No spreadsheet-only/manual cleanup is required for regeneration. Intake, selection, DESeq2 comparison, reference checking, assembly, catalog and certification are scripted.
 
 ## 7. Expected outputs and quantitative validation
 
-- **PARTIAL** Every dataset has hard and quantitative validation. The fixture passes both. The real-source record is link-only and is not scientifically certified.
-- **PARTIAL** Metric definitions include filtering universe and direction. Current diagnostics define both. Full inferential and read-QC profiles remain open.
-- **PARTIAL** Expected outputs rebuild from a pinned baseline. The fixture workflow and full-table Pasilla DESeq2 baseline run in the locked local environment. A clean rebuild on another machine remains open.
-- **PARTIAL** Figures are never the only location where expected values exist. Diagnostic tables and JSON back the current plots; the full biological figure set remains open.
+- **PARTIAL** Every dataset has hard and quantitative validation. All 12 distributed biological objects and the synthetic fixture have integrity and metric checks. The deliberately link-only rnaseq-001 record carries no redistributed matrix to score.
+- **VERIFIED** Metric definitions include filtering universe and direction. Every validation profile states the feature universe, calculation and inclusive minimum for all four metrics.
+- **VERIFIED** Expected outputs rebuild from a pinned baseline. All 12 DESeq2 evidence records were rebuilt under R 4.5.3 and DESeq2 1.50.2 with pinned inputs, hashes and one workflow revision.
+- **VERIFIED** Figures are never the only location where expected values exist. Exact results and thresholds live in expected JSON, the catalog JSON and catalog TSV; the SVG is generated from those records.
 
 ## 8. Python CLI and API architecture
 
-- **VERIFIED** CLI has unit and end-to-end tests on nano objects. All seven CLI commands passed on the generated fixture.
-- **VERIFIED** All downloads verify hashes. transfer verifies size and SHA-256 before atomic replacement; interrupted and corrupt transfers tested.
-- **PARTIAL** A user can discover, retrieve, inspect, and validate without reading source code. The fixture path works. The independent-user trial has not occurred.
-- **VERIFIED** Help and error messages are concise and human. Command help includes examples and expected failures omit tracebacks by default.
+- **VERIFIED** CLI has unit and end-to-end tests on nano objects. All seven public commands are covered by the 45-test suite, including the generated fixture path.
+- **VERIFIED** All downloads verify hashes. Transfers verify declared size and SHA-256 before atomic replacement; interrupted and corrupt transfers have regression tests.
+- **PARTIAL** A user can discover, retrieve, inspect, and validate without reading source code. The documented command path passes locally. Completion still requires the recorded independent quickstart trial on a fresh checkout.
+- **VERIFIED** Help and error messages are concise and human. Every command has focused help and an example; expected user failures return short messages without tracebacks.
 
 ## 9. Reproducible workflows and environments
 
-- **OPEN** Several datasets regenerate end-to-end from a clean environment. Not yet demonstrated for the requested v1 biological release.
-- **PARTIAL** Resolved parameters and versions are preserved. Executed Python runs record versions and parameters; R, workflow-engine and container certification remain open.
-- **OPEN** No notebook-only hidden step is needed for release artifacts. Not yet demonstrated for the requested v1 biological release.
-- **OPEN** Failures retain logs and a short human summary. Not yet demonstrated for the requested v1 biological release.
+- **PARTIAL** Several datasets regenerate end-to-end from a clean environment. The collection rebuilds locally from declared inputs. The pushed candidate still needs a clean hosted run or independent-machine record.
+- **VERIFIED** Resolved parameters and versions are preserved. Manifests, transformation records, DESeq2 evidence and runtime/environment-lock.json preserve inputs, parameters, code hashes and software versions.
+- **VERIFIED** No notebook-only hidden step is needed for release artifacts. The repository contains scripted workflows for every generated object, catalog, figure, audit and certification output.
+- **PARTIAL** Failures retain logs and a short human summary. Rejected pocket and reference candidates retain structured evidence and explanations. A general failure-log contract is not enforced for every workflow.
 
 ## 10. CI, tests, and integrity gates
 
-- **PARTIAL** Nano CI stays within a defined time budget. The local 28-test run completed in under ten seconds; a five-minute CI job is authored but has not run remotely.
-- **OPEN** Release tag is blocked by schema/hash/registry failures. Not yet demonstrated for the requested v1 biological release.
-- **VERIFIED** Corruption and sample-order failures have regression tests. Both failures have passing regression tests.
-- **OPEN** Documentation quality is reviewed beyond spelling. Not yet demonstrated for the requested v1 biological release.
+- **PARTIAL** Nano CI stays within a defined time budget. The workflow has a five-minute limit and the local 45-test suite completes in about 15 seconds. Hosted runtime remains to be confirmed after push.
+- **VERIFIED** Release tag is blocked by schema/hash/registry failures. The integrity workflow runs on every push and tag and includes schema drift, manifest hashes, registry validation, overlap audit and preflight.
+- **VERIFIED** Corruption and sample-order failures have regression tests. Dedicated corruption, missing-file, duplicate, sample-order and design-mismatch tests pass.
+- **VERIFIED** Documentation quality is reviewed beyond spelling. The repository checker covers links and unfinished text; the collection audit detects repeated long prose; the fidelity figure received a rendered layout review.
 
 ## 11. Human documentation and code-comment policy
 
-- **OPEN** Every public command has concise help and one example. Not yet demonstrated for the requested v1 biological release.
-- **OPEN** Every dataset README is usable without opening YAML. Not yet demonstrated for the requested v1 biological release.
-- **OPEN** Release notes are manually edited for flow. Not yet demonstrated for the requested v1 biological release.
-- **VERIFIED** No em dash appears in docs/help/release notes. The repository checker scans documentation; help text has been reviewed.
-- **OPEN** Review removes long narration comments. Not yet demonstrated for the requested v1 biological release.
+- **VERIFIED** Every public command has concise help and one example. list, info, get, validate, provenance, verify-cache and doctor each expose an example in command help.
+- **VERIFIED** Every dataset README is usable without opening YAML. Each of the 12 biological cards states its design, file contents, commands, measured result, limits, citation and rights location.
+- **VERIFIED** Release notes are manually edited for flow. CHANGELOG.md describes the finished v1 collection by user impact, scientific scope and validation evidence.
+- **VERIFIED** No em dash appears in docs/help/release notes. The repository checker scans every Markdown file and the current documentation passes.
+- **VERIFIED** Review removes long narration comments. A source-wide comment and docstring review found only concise module descriptions and constraint explanations.
 
 ## 12. Figures, catalog, and rendering QA
 
-- **OPEN** All core figures regenerate from code and source tables. Not yet demonstrated for the requested v1 biological release.
-- **OPEN** Captions are concise and units are present where applicable. Not yet demonstrated for the requested v1 biological release.
-- **OPEN** Rendered documentation is manually inspected. Not yet demonstrated for the requested v1 biological release.
-- **OPEN** No visual hides rights or warning status. Not yet demonstrated for the requested v1 biological release.
+- **VERIFIED** All core figures regenerate from code and source tables. scripts/build_catalog.py regenerates figures/v1-fidelity.svg directly from manifests and expected-result records; CI checks drift.
+- **VERIFIED** Captions are concise and units are present where applicable. The fidelity figure labels each unitless preservation metric, threshold and object; its README caption states the comparison.
+- **PARTIAL** Rendered documentation is manually inspected. The full-resolution fidelity preview has been checked for clipping, collisions, labels and value placement. GitHub and Zenodo rendering remain part of publication verification.
+- **VERIFIED** No visual hides rights or warning status. The figure is explicitly scoped to the 12 certified biological objects; the adjacent catalog and README state rights and release status.
 
 ## 13. Zenodo release engineering, CAS milestones, and final go/no-go
 
-- **OPEN** One external user completes quickstart from a fresh environment. Not yet demonstrated for the requested v1 biological release.
-- **OPEN** Final uploaded hashes match certified files. Not yet demonstrated for the requested v1 biological release.
-- **OPEN** DOI/citation instructions point to exact version. Not yet demonstrated for the requested v1 biological release.
-- **OPEN** v1 retrospective identifies concrete improvements for v2. Not yet demonstrated for the requested v1 biological release.
-
+- **OPEN** One external user completes quickstart from a fresh environment. No independent person has yet completed and recorded the v1 quickstart.
+- **OPEN** Final uploaded hashes match certified files. This can be checked only after the final GitHub release has been archived by Zenodo.
+- **OPEN** DOI/citation instructions point to exact version. The concept DOI is recorded. Zenodo has not yet minted the final 1.0.0 version DOI.
+- **PARTIAL** v1 retrospective identifies concrete improvements for v2. Development lessons and candidate v2 work are recorded, but post-release user experience and archive behavior cannot be assessed before publication.
