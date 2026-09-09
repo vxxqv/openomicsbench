@@ -82,8 +82,8 @@
     },
     {
       "path": "curation/atlas-screen.json",
-      "bytes": 9009,
-      "sha256": "6878c4ee6053623a27c6c0b7584f43a74537352cdbb74d1af21b9f462093c313"
+      "bytes": 8768,
+      "sha256": "aca83596e9734e82cf6f198508880a1b2509eb1cd251945388e04ae6acd6f85f"
     },
     {
       "path": "curation/collection-plan.json",
@@ -167,63 +167,63 @@
     },
     {
       "path": "curation/intake/gse18508.json",
-      "bytes": 1646,
-      "sha256": "d985b15bd722ffc1c3a6b2070d2e9808c90e622cf83113a67748d6286d1419a3"
+      "bytes": 1606,
+      "sha256": "8c842f83cb58f78f9fa182c1694cf82dc72b75a9f55b3296f860200a69b423ad"
     },
     {
       "path": "curation/intake/gse37704.json",
-      "bytes": 1647,
-      "sha256": "4ac462761ffa89d7839fa078e543e3ad521062af3273cf46230f77c80897c4e9"
+      "bytes": 1607,
+      "sha256": "e3a0d98c0464f974ed23f9a8b8a65e996cb3d274d60453ee9a1a1a5b5498642e"
     },
     {
       "path": "curation/intake/gse47774.json",
-      "bytes": 3011,
-      "sha256": "7ec7820724ca3bf251a020e4b60c5ddf9616a899050c50012fcc1cb4d9c199f1"
+      "bytes": 2958,
+      "sha256": "bf1232fedc684c55c7a057352eeca8abbe30f30641a9c704e2dddd577ae4ebed"
     },
     {
       "path": "curation/intake/gse48138.json",
-      "bytes": 2300,
-      "sha256": "30f7ee7ed12d7cfd7127140197923a4a06ab7911a010de8c400a3f63bc18e7ee"
+      "bytes": 2256,
+      "sha256": "3ab312f020c1d531e07a2414b60252153cf2ef10adada72f22b25169a289b505"
     },
     {
       "path": "curation/intake/gse49712.json",
-      "bytes": 1980,
-      "sha256": "8cab5ab8851430d65811a3df6f5a63f56ee6d342f7e02b1ca5a423b5406029cd"
+      "bytes": 1937,
+      "sha256": "a917c91ecd4699ad5fc41682f5f03fce4363c940a4a0d5a1165d9614c230767f"
     },
     {
       "path": "curation/intake/gse50760.json",
-      "bytes": 1607,
-      "sha256": "d5b8532173b4356d6a5f9ca3ca1c1ac57f52126b2ea85cf6f5802181d66cf9aa"
+      "bytes": 1565,
+      "sha256": "5638029088edf7bcf28ff40bf31ba96c4921bd118dd8f9392657c1441d0fdac0"
     },
     {
       "path": "curation/intake/gse52778.json",
-      "bytes": 1819,
-      "sha256": "036a269c105f8a4305eff96fe1351753fbab6a9d5688c08c23316fc0f21619c0"
+      "bytes": 1778,
+      "sha256": "c8e81f11348b7a454e499864de2bc976e65a64c0b6b9cb37720ed8bb87640283"
     },
     {
       "path": "curation/intake/gse53960.json",
-      "bytes": 1610,
-      "sha256": "bac37e9b3dcd75aa9bc5746eaccf0433a8b42208f304cb48cfa9a1850b40c643"
+      "bytes": 1570,
+      "sha256": "994cfbe83b2c696e935f2a58c66ed709bd4d41aca336c753031399473c7ca92f"
     },
     {
       "path": "curation/intake/gse55347.json",
-      "bytes": 1715,
-      "sha256": "77bcd8a9f6db78c7d1c86e9b1f0712ff7d60c4647e962114a5d577891903ba53"
+      "bytes": 1673,
+      "sha256": "cd7969e2f4a6bade0442d466248ed3a6c6a8d62634dd82e38d279d70b29264db"
     },
     {
       "path": "curation/intake/gse60314.json",
-      "bytes": 2173,
-      "sha256": "90abca18abd23c4529677b1b0a04246b0df093f10d822145350e2f88783f507f"
+      "bytes": 2129,
+      "sha256": "6b9c1fb11275150998fc7f482fc3ee811a8bcad50a59c6c418930fb455d77200"
     },
     {
       "path": "curation/intake/gse60450.json",
-      "bytes": 1784,
-      "sha256": "2ea7f16aa62d94dddbf4278d560ac898ecc825b28c350f26c600c14b3c5f72a6"
+      "bytes": 1744,
+      "sha256": "2376e3022349d90e8e851be9125c649c7ee7b96df07fbd98fa653885ffc4b586"
     },
     {
       "path": "curation/intake/gse64016.json",
-      "bytes": 1611,
-      "sha256": "41a095f37cd85231a22ee65e8ab0c8986ec2e11bf37ac0034d1bad81ea7a7fe8"
+      "bytes": 1572,
+      "sha256": "fb8722764620479715ac6ad54db7a956b19c64846e6d75bc76374dbf6e5836bc"
     },
     {
       "path": "curation/reference-sources.json",
@@ -292,8 +292,8 @@
     },
     {
       "path": "datasets/rnaseq/rnaseq-001/manifest.json",
-      "bytes": 3821,
-      "sha256": "35bd98f9e148b672dc1be643f221c5937ba85013ee38a59058ae4904e6a0860e"
+      "bytes": 3695,
+      "sha256": "67a9e3c7cb59cd0670e243c9968b286f541e17ad16bb72b9d9956385a5740065"
     },
     {
       "path": "datasets/rnaseq/rnaseq-002/README.md",
@@ -1132,18 +1132,18 @@
     },
     {
       "path": "evidence/pasilla-deseq2-baseline.json",
-      "bytes": 1427,
-      "sha256": "1cc2c983dfbca57cdecfbde5f72824260aa4699178bf26a8ba42655d1e594264"
+      "bytes": 1381,
+      "sha256": "5366f19deb70957ea1a6feb11fd6dae801d22af2c7462447e7bdcbe844e46cff"
     },
     {
       "path": "evidence/pasilla-diagnostic.json",
-      "bytes": 2953,
-      "sha256": "c463989881cfd162f2cb72ded46e88e51af40e0338ee1743f63aad40b68f6f7d"
+      "bytes": 2851,
+      "sha256": "fd6ea990ab912c1facc5aee3654417765f5c1999ed94435c44aacc7e766500b0"
     },
     {
       "path": "evidence/pasilla-plot-data.json",
-      "bytes": 511031,
-      "sha256": "f61629e0543cb375738a0cab3a78500de661c316e12cc3dc760762c5235d8fda"
+      "bytes": 486937,
+      "sha256": "98c6e52bf16625334e8e570ad7918dcd9e116789e8bceb33d2e573fa0c076e79"
     },
     {
       "path": "evidence/reference-verification.json",
@@ -1152,8 +1152,8 @@
     },
     {
       "path": "evidence/runtime-readiness.json",
-      "bytes": 858,
-      "sha256": "b35062aa131b578e2a9e7af1648b93fdda9b7ff4a71453c36e174f99414ef342"
+      "bytes": 846,
+      "sha256": "a42c73d23f795476056f648f3fea6aa381459732618d93b0743a6a568bb2e749"
     },
     {
       "path": "figures/v1-fidelity.svg",
@@ -1192,8 +1192,8 @@
     },
     {
       "path": "runtime/environment-lock.json",
-      "bytes": 24788,
-      "sha256": "7bc48bf47887474a63606e06336b5ae1706f048fa15fbe6c2250bc66fa6b1a5c"
+      "bytes": 23654,
+      "sha256": "8692db75b2f21614f779d2985e0f30c8d0fcd234cff910a0610134bc333d3e9a"
     },
     {
       "path": "runtime/environment.yml",
@@ -1222,8 +1222,8 @@
     },
     {
       "path": "scripts/certify_release.py",
-      "bytes": 12079,
-      "sha256": "60effa2bbf83f25ef4db2813ee56840c22b033dd3076e75893ac7e9d96383d99"
+      "bytes": 12231,
+      "sha256": "d47138163d6896eb57cf0f2aee68ca85c8f72db46bb4adbd834899f3d5d1a7f5"
     },
     {
       "path": "scripts/check_repository.py",
@@ -1232,8 +1232,8 @@
     },
     {
       "path": "scripts/package_snapshot.py",
-      "bytes": 1406,
-      "sha256": "9cdf1031e0c4fec3d3efa07310f745eba0f81ed8d32eb5ad49307eab7086d580"
+      "bytes": 1566,
+      "sha256": "5154ea22e9f19c10294cb2992f5540d167a0dc500b5f54790aea493eb7a86c46"
     },
     {
       "path": "src/omicsbench/__init__.py",
@@ -1412,8 +1412,8 @@
     },
     {
       "path": "workflows/pasilla-source.json",
-      "bytes": 2065,
-      "sha256": "4bb392fcaf4180e6d5412e01a60b962e1ae6de520d8f1c48472b897dfd5ee1db"
+      "bytes": 2015,
+      "sha256": "2c84868d6845d2126bb2322602367f6e51cf1ad4d30739f7e13ae5a4017a0862"
     },
     {
       "path": "workflows/pasilla_diagnostic.py",
