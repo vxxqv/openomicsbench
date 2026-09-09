@@ -15,12 +15,55 @@ from omicsbench.validate import validate
 ROOT = Path(__file__).resolve().parents[1]
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 COMMIT = re.compile(r"^[0-9a-f]{40}$")
+ORCID = re.compile(r"^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$")
 PUBLICATION_FIELDS = ("version_doi", "external_user_trial", "post_upload_verification")
 INVENTORY_PATH = "release/file-manifest.json"
 
 
 def read_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def valid_orcid(value: str) -> bool:
+    if not ORCID.fullmatch(value):
+        return False
+    compact = value.replace("-", "")
+    total = 0
+    for digit in compact[:-1]:
+        total = (total + int(digit)) * 2
+    check = (12 - total % 11) % 11
+    expected = "X" if check == 10 else str(check)
+    return compact[-1] == expected
+
+
+def check_author_metadata(metadata: dict, blockers: list[str]) -> None:
+    authors = metadata.get("authors", [])
+    expected_orcid = "0009-0005-1859-5107"
+    if len(authors) != 1:
+        blockers.append("Release metadata must contain exactly one author.")
+        return
+    author = authors[0]
+    if author.get("name") != "Vivaan Patni" or author.get("zenodo_name") != "Vivaan Patni":
+        blockers.append("Release and Zenodo author names must be Vivaan Patni.")
+    if author.get("github") != "vxxqv":
+        blockers.append("The GitHub account must be vxxqv.")
+    if author.get("orcid") != expected_orcid or not valid_orcid(author.get("orcid", "")):
+        blockers.append("The release ORCID is missing or invalid.")
+
+    zenodo = read_json(ROOT / ".zenodo.json")
+    creators = zenodo.get("creators", [])
+    if len(creators) != 1 or creators[0].get("name") != "Vivaan Patni" or creators[0].get("orcid") != expected_orcid:
+        blockers.append("Zenodo creator metadata differs from the approved author record.")
+
+    citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
+    required_lines = (
+        'version: "1.0.0"',
+        'family-names: "Patni"',
+        'given-names: "Vivaan"',
+        f'orcid: "https://orcid.org/{expected_orcid}"',
+    )
+    if any(line not in citation for line in required_lines):
+        blockers.append("CITATION.cff differs from the approved version or author record.")
 
 
 def declared_path(model, folder: Path, relative: str, blockers: list[str]) -> Path | None:
@@ -238,6 +281,7 @@ def main() -> None:
     for field in required_metadata:
         if not metadata.get(field):
             blockers.append(f"Missing release evidence: {field}.")
+    check_author_metadata(metadata, blockers)
     lock = ROOT / metadata.get("scientific_environment_lock", "")
     if not lock.is_file():
         blockers.append("The scientific environment lock is missing.")
