@@ -1,15 +1,17 @@
 # Changes
 
-## 1.0.0.dev1
+## 1.0.0
 
-Version 1 development begins from the published 0.1.0.dev0 baseline. The current code provides local discovery, typed manifests, hash-checked tier retrieval, cache verification and count-based diagnostics. File inventories are explicit, and validation rejects changed counts, mismatched sample order and confounded condition and batch designs.
+Version 1 introduces 12 compact bulk RNA-seq benchmark objects from seven Expression Atlas studies. The collection covers human, mouse and Arabidopsis data across balanced knockouts, RNA interference, paired tumour samples, blocked factorial comparisons, an imbalanced disease design and genotype-specific strata.
 
-A generated fixture now exercises the full local path from construction to retrieval and validation. A separate Pasilla workflow retrieves a pinned source table and records the outcome of six feature-reduction sizes. Source counts remain outside the distributable repository while rights and reference review continue.
+Each object includes an integer pocket matrix, the matching full selected-sample matrix, ordered sample metadata, reference and rights records, a transformation record and exact expected results. Pocket sizes were selected from fixed candidate grids as the smallest size meeting four predeclared preservation thresholds. A second DESeq2 comparison under R 4.5.3 and DESeq2 1.50.2 confirms every selected pocket against its full source matrix.
 
-Twelve GEO records have been screened. One is excluded because it is single-cell, and a mixed-assay superseries requires subseries resolution. These records are candidates, not twelve completed datasets.
+Reference checks use official Ensembl annotation files and require every selected gene identifier to resolve. E-MTAB-7126 is excluded because its current matrix does not match the annotation stated by the source, and E-MTAB-5477 is excluded because no tested pocket met all thresholds. Their rejection evidence remains in the repository.
 
-Expression Atlas intake now checks official resource paths, atomic downloads, integer counts and design agreement. E-MTAB-8572 is the first GREEN-rights candidate. Its 2,000-gene reduction is the smallest tested size meeting the four development thresholds, with an identical report from two complete runs.
+The command line can list, inspect, retrieve, validate and report provenance without requiring users to read source code. Validation checks declared files and hashes, exact counts, sample order, design structure, reference status and the four quantitative metrics. Forty-five tests cover normal use and failures such as corrupt transfers, duplicate identifiers, mismatched sample order, confounding and paired-read errors.
 
-The same workflow now covers E-MTAB-6866, a balanced Arabidopsis genotype study. Its first passing candidate has 4,000 genes, and its diagnostic report also reproduced exactly.
+A generated JSON and TSV catalog provides the complete machine-readable collection summary. The black-and-white fidelity figure reads the same evidence and shows all objects against their thresholds. Continuous integration rebuilds the fixture, catalog and figure, checks generated drift, validates every registered object, audits sample and prose overlap, and runs the v1 preflight.
 
-The Pasilla DESeq2 baseline and the Snakemake fixture workflow run in the recorded isolated environment. Work toward 1.0.0 will expand the biological collection as source rights, reference compatibility and independent review are completed.
+Source licences, provider credit and project ownership are separate. Redistributed Expression Atlas material remains under CC BY 4.0 with provider attribution. OpenOmicsBench code is Apache-2.0. Vivaan Patni is the release author on Zenodo, and GitHub development is attributed to `vxxqv`.
+
+Further releases can add read-level objects, more assay types and broader external platform testing without changing the v1 evidence or tag.
