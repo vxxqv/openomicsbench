@@ -67,6 +67,8 @@ python scripts/certify_release.py --preflight
 
 The local v1 preflight passes with no scientific or structural blockers. Publication still requires an independent person to complete the quickstart, the exact Zenodo version DOI to be inserted after reservation, and the uploaded archive to be downloaded and checked against the release inventory.
 
+The [version 1 release review](docs/OpenOmicsBench_V1_Release_Review.pdf) brings the collection, scientific checks, overlap findings, software tests and remaining publication steps into one six-page document.
+
 ## Citation
 
 Zenodo should display the author as Vivaan Patni. GitHub development and commits use the account `vxxqv`. Cite the archived version used in an analysis; the concept DOI for all releases is [10.5281/zenodo.22551734](https://doi.org/10.5281/zenodo.22551734).
