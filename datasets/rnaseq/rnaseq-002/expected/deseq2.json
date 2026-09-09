@@ -1,17 +1,14 @@
 {
   "schema_version": "1.0",
+  "scope": "DESeq2 full-source and pocket fidelity",
   "accession": "E-MTAB-8572",
+  "object_key": "E-MTAB-8572",
   "status": "pass",
-  "release_eligible": false,
-  "release_gates_remaining": [
-    "exact reference-file checksums",
-    "dataset attribution package",
-    "independent clean-environment reproduction"
-  ],
   "design": {
     "formula": "~ condition",
     "factor_column": "Factor Value[genotype]",
     "batch_column": null,
+    "subset": {},
     "contrast": "wild type genotype versus SLC2A5 knockout mediated by CRISPR/Cas9",
     "samples": 10,
     "full_features": 58735,
@@ -82,7 +79,7 @@
     }
   },
   "workflow": {
-    "python_sha256": "287c64bfdd5b4f590ad81bb263c7dac28a2ec270f9339f3f94879b25dd368cf3",
+    "python_sha256": "100f013005de5703772773ce89e58ba04ee4b24055223f781875a2a1a28428e6",
     "r_sha256": "b4244d58364e77f0b4771339d07110e6f89fe2fcf0727562a5fd47f0e3ce74f6"
   }
 }
