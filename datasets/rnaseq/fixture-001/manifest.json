@@ -85,7 +85,7 @@
       "media_type": "application/json",
       "path": "provenance/transform.json",
       "role": "provenance",
-      "sha256": "d49a159bb3b16a818496cf47fbd2d19502b2188097b06dff14c6d7cfcabee480",
+      "sha256": "4fac74520ab50d629a5889d0ded0ce5702c97a383b8126db657e845080310b88",
       "tier": "metadata"
     },
     {
@@ -111,11 +111,11 @@
     "genome": "none",
     "namespace": "SYN numerical identifiers"
   },
-  "release": "1.0.0.dev1",
+  "release": "1.0.0",
   "rights": {
-    "checked": "2026-09-06",
-    "evidence": "Generated locally from a recorded seed without third-party observations. GREEN denotes source provenance clearance, not a public license grant.",
-    "license": "Project-authored fixture; public license pending owner decision",
+    "checked": "2026-09-09",
+    "evidence": "Generated locally from a recorded seed without third-party observations and distributed with the project under Apache-2.0.",
+    "license": "Apache-2.0",
     "status": "GREEN"
   },
   "samples": [
