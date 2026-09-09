@@ -957,13 +957,13 @@
     },
     {
       "path": "docs/OpenOmicsBench_V1_Release_Review.pdf",
-      "bytes": 13287,
-      "sha256": "bb1c83d99cff901caad62cdd34ec59011509293db13c32278cb36254bc5ef747"
+      "bytes": 13290,
+      "sha256": "dece825890d6c5d484d350eb566e79867b3fc165578c516d53cfc574d22756c1"
     },
     {
       "path": "docs/acceptance-ledger.md",
-      "bytes": 10964,
-      "sha256": "b68647efb30893580e3dfd71fb5d7815f69faf6be2059f19d24ae68a42793643"
+      "bytes": 11001,
+      "sha256": "667384fbf50a6ce031337df58f76bebddf9cde33393783dd09c8a8641f82c89b"
     },
     {
       "path": "docs/implementation-status.md",
@@ -1167,8 +1167,8 @@
     },
     {
       "path": "release/acceptance-ledger.json",
-      "bytes": 16352,
-      "sha256": "ff4f8b8f8a3b86d72ebe55140c003c4c5215d85831533f6d284a814a09dfbfa3"
+      "bytes": 16389,
+      "sha256": "5eea82da4269c1d0785ff452aeab29ff05c7a8bff67c0ae72c75d35932b0870a"
     },
     {
       "path": "release/certification.json",
