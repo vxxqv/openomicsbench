@@ -4,6 +4,7 @@
       "additionalProperties": false,
       "properties": {
         "workflow": {
+          "description": "Repository path of the workflow that produced the object.",
           "minLength": 1,
           "title": "Workflow",
           "type": "string"
@@ -18,14 +19,17 @@
               "type": "null"
             }
           ],
+          "description": "Exact source-control commit used for the derivation when available.",
           "title": "Commit"
         },
         "seed": {
+          "description": "Recorded random seed, including zero for deterministic methods that do not draw random values.",
           "minimum": 0,
           "title": "Seed",
           "type": "integer"
         },
         "algorithm": {
+          "description": "Short name of the selection or generation method.",
           "minLength": 1,
           "title": "Algorithm",
           "type": "string"
@@ -53,6 +57,7 @@
               }
             ]
           },
+          "description": "Resolved inputs that affect the generated files.",
           "title": "Parameters",
           "type": "object"
         },
@@ -60,6 +65,7 @@
           "additionalProperties": {
             "type": "string"
           },
+          "description": "Software and data versions needed to interpret the derivation.",
           "minProperties": 1,
           "title": "Versions",
           "type": "object"
@@ -80,10 +86,12 @@
       "additionalProperties": false,
       "properties": {
         "path": {
+          "description": "Normalized path inside the dataset directory.",
           "title": "Path",
           "type": "string"
         },
         "tier": {
+          "description": "Size or function class used for retrieval and validation.",
           "enum": [
             "nano",
             "pocket",
@@ -94,6 +102,7 @@
           "type": "string"
         },
         "role": {
+          "description": "File purpose used by the validator and command line tools.",
           "enum": [
             "raw_counts",
             "samples",
@@ -122,19 +131,23 @@
             }
           ],
           "default": null,
+          "description": "Sample linked to this file when the file is sample-specific.",
           "title": "Sample Id"
         },
         "media_type": {
+          "description": "Internet media type for the file content.",
           "minLength": 1,
           "title": "Media Type",
           "type": "string"
         },
         "bytes": {
+          "description": "Expected file size in bytes.",
           "minimum": 0,
           "title": "Bytes",
           "type": "integer"
         },
         "sha256": {
+          "description": "Expected lowercase SHA-256 digest.",
           "pattern": "^[0-9a-f]{64}$",
           "title": "Sha256",
           "type": "string"
@@ -150,6 +163,7 @@
             }
           ],
           "default": null,
+          "description": "Optional public download URL for remotely retrieved content.",
           "title": "Url"
         }
       },
@@ -168,6 +182,7 @@
       "additionalProperties": false,
       "properties": {
         "name": {
+          "description": "Supported preservation measure recomputed by validation.",
           "enum": [
             "spearman_logfc",
             "top_k_jaccard",
@@ -178,12 +193,14 @@
           "type": "string"
         },
         "minimum": {
+          "description": "Inclusive pass threshold for the metric.",
           "maximum": 1,
           "minimum": -1,
           "title": "Minimum",
           "type": "number"
         },
         "definition": {
+          "description": "Human-readable feature universe, calculation and preferred direction.",
           "minLength": 20,
           "title": "Definition",
           "type": "string"
@@ -201,21 +218,25 @@
       "additionalProperties": false,
       "properties": {
         "genome": {
+          "description": "Genome assembly used for the source quantification.",
           "minLength": 1,
           "title": "Genome",
           "type": "string"
         },
         "annotation": {
+          "description": "Gene annotation release used for the source quantification.",
           "minLength": 1,
           "title": "Annotation",
           "type": "string"
         },
         "namespace": {
+          "description": "Identifier system used in the count matrix.",
           "minLength": 1,
           "title": "Namespace",
           "type": "string"
         },
         "compatibility": {
+          "description": "Result of checking matrix identifiers against the declared annotation.",
           "enum": [
             "verified",
             "unresolved",
@@ -238,6 +259,7 @@
       "additionalProperties": false,
       "properties": {
         "status": {
+          "description": "Redistribution decision under the documented intake policy.",
           "enum": [
             "GREEN",
             "AMBER",
@@ -248,16 +270,19 @@
           "type": "string"
         },
         "license": {
+          "description": "Licence name or the reason redistribution remains restricted.",
           "minLength": 1,
           "title": "License",
           "type": "string"
         },
         "evidence": {
+          "description": "Source and reasoning that support the rights decision.",
           "minLength": 1,
           "title": "Evidence",
           "type": "string"
         },
         "checked": {
+          "description": "Date when the rights evidence was reviewed.",
           "format": "date",
           "title": "Checked",
           "type": "string"
@@ -276,26 +301,31 @@
       "additionalProperties": false,
       "properties": {
         "sample_id": {
+          "description": "Stable sample or run label in the order used by the count matrix.",
           "minLength": 1,
           "title": "Sample Id",
           "type": "string"
         },
         "condition": {
+          "description": "Biological group used by the declared comparison.",
           "minLength": 1,
           "title": "Condition",
           "type": "string"
         },
         "replicate": {
+          "description": "One-based replicate number within the relevant design group.",
           "exclusiveMinimum": 0,
           "title": "Replicate",
           "type": "integer"
         },
         "batch": {
+          "description": "Blocking or batch value used by the declared model.",
           "minLength": 1,
           "title": "Batch",
           "type": "string"
         },
         "strandedness": {
+          "description": "Library strandedness reported by the source, or unknown when the archive does not state it.",
           "enum": [
             "forward",
             "reverse",
@@ -327,21 +357,25 @@
           "type": "string"
         },
         "accession": {
+          "description": "Stable source accession or fixture identifier.",
           "minLength": 1,
           "title": "Accession",
           "type": "string"
         },
         "url": {
+          "description": "Public HTTPS page for the source record or generator.",
           "pattern": "^https://",
           "title": "Url",
           "type": "string"
         },
         "citation": {
+          "description": "Citation that a user should retain when reusing this object.",
           "minLength": 1,
           "title": "Citation",
           "type": "string"
         },
         "retrieved": {
+          "description": "Date when the source material was retrieved or generated.",
           "format": "date",
           "title": "Retrieved",
           "type": "string"
@@ -357,6 +391,7 @@
             }
           ],
           "default": null,
+          "description": "SHA-256 of the original source file when that file can be redistributed.",
           "title": "Sha256"
         }
       },
@@ -374,15 +409,18 @@
       "additionalProperties": false,
       "properties": {
         "profile": {
+          "description": "Path to the expected validation profile inside the dataset directory.",
           "title": "Profile",
           "type": "string"
         },
         "baseline_version": {
+          "description": "Version label for the expected values and calculation rules.",
           "minLength": 1,
           "title": "Baseline Version",
           "type": "string"
         },
         "metrics": {
+          "description": "Quantitative minimums that every validated object must meet.",
           "items": {
             "$ref": "#/$defs/Metric"
           },
@@ -404,30 +442,36 @@
   "properties": {
     "schema_version": {
       "const": "1.0",
+      "description": "Version of the OpenOmicsBench dataset contract.",
       "title": "Schema Version",
       "type": "string"
     },
     "id": {
+      "description": "Stable collection identifier used by the command line interface.",
       "pattern": "^(rnaseq|fixture)-[0-9]{3}$",
       "title": "Id",
       "type": "string"
     },
     "title": {
+      "description": "Specific title that distinguishes this comparison from other objects.",
       "minLength": 8,
       "title": "Title",
       "type": "string"
     },
     "release": {
+      "description": "First project release that carries this manifest state.",
       "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[.-][A-Za-z0-9.]+)?$",
       "title": "Release",
       "type": "string"
     },
     "assay": {
       "const": "bulk_rna_seq",
+      "description": "Assay family represented by the object.",
       "title": "Assay",
       "type": "string"
     },
     "kind": {
+      "description": "Whether the object comes from a biological source or a software fixture.",
       "enum": [
         "real",
         "synthetic_fixture"
@@ -436,6 +480,7 @@
       "type": "string"
     },
     "status": {
+      "description": "Current review and distribution state.",
       "enum": [
         "candidate",
         "validated",
@@ -445,11 +490,13 @@
       "type": "string"
     },
     "archetype": {
+      "description": "Short description of the experimental design exercised by the object.",
       "minLength": 1,
       "title": "Archetype",
       "type": "string"
     },
     "organism": {
+      "description": "Scientific organism name, or synthetic for a generated fixture.",
       "minLength": 1,
       "title": "Organism",
       "type": "string"
@@ -464,18 +511,23 @@
           "type": "null"
         }
       ],
+      "description": "NCBI taxonomy identifier for a biological object.",
       "title": "Taxon Id"
     },
     "source": {
-      "$ref": "#/$defs/Source"
+      "$ref": "#/$defs/Source",
+      "description": "Origin, citation and retrieval record."
     },
     "rights": {
-      "$ref": "#/$defs/Rights"
+      "$ref": "#/$defs/Rights",
+      "description": "Dated redistribution decision and supporting evidence."
     },
     "reference": {
-      "$ref": "#/$defs/Reference"
+      "$ref": "#/$defs/Reference",
+      "description": "Genome, annotation and identifier compatibility record."
     },
     "samples": {
+      "description": "Ordered experimental design matching the matrix columns or read files.",
       "items": {
         "$ref": "#/$defs/Sample"
       },
@@ -484,9 +536,11 @@
       "type": "array"
     },
     "derivation": {
-      "$ref": "#/$defs/Derivation"
+      "$ref": "#/$defs/Derivation",
+      "description": "Workflow, code revision and resolved parameters used to create the object."
     },
     "files": {
+      "description": "Complete declared inventory for the dataset directory.",
       "items": {
         "$ref": "#/$defs/File"
       },
@@ -501,9 +555,11 @@
         {
           "type": "null"
         }
-      ]
+      ],
+      "description": "Expected-result profile for a validated object, or null when validation does not apply."
     },
     "limitations": {
+      "description": "Known constraints that affect interpretation or reuse.",
       "items": {
         "type": "string"
       },
