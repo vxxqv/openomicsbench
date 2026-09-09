@@ -133,13 +133,26 @@ def main() -> None:
             {"sha256": digest_value, "files": group, "classification": classification}
         )
 
-    repeated_paragraphs = [
-        {"files": sorted(set(paths)), "text": paragraph}
-        for paragraph, paths in markdown_paragraphs().items()
-        if len(set(paths)) > 1
-    ]
-    if repeated_paragraphs:
-        blockers.append(f"Repeated long prose paragraphs: {len(repeated_paragraphs)}.")
+    repeated_paragraphs = []
+    for paragraph, paths in markdown_paragraphs().items():
+        unique_paths = sorted(set(paths))
+        if len(unique_paths) < 2:
+            continue
+        classification = "conflict"
+        dataset_ids = []
+        for relative in unique_paths:
+            parts = Path(relative).parts
+            if len(parts) == 4 and parts[:2] == ("datasets", "rnaseq") and parts[3] == "README.md":
+                dataset_ids.append(parts[2])
+        if len(dataset_ids) == len(unique_paths) and paragraph.startswith("Source citation:"):
+            accessions = {by_id[dataset_id][0].source.accession for dataset_id in dataset_ids}
+            if len(accessions) == 1:
+                classification = "required citation shared by objects from one source study"
+        if classification == "conflict":
+            blockers.append("Unclassified repeated long prose: " + ", ".join(unique_paths))
+        repeated_paragraphs.append(
+            {"files": unique_paths, "text": paragraph, "classification": classification}
+        )
 
     report = {
         "schema_version": "1.0",
