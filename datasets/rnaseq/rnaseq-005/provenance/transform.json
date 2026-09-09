@@ -52,7 +52,7 @@
   },
   "deseq2": {
     "path": "evidence/e-mtab-567-deseq2.json",
-    "sha256": "e121835bf1744204f4c08a0e5e767bb58228ecdd1edc7a6a0dfeca54d241b8c1"
+    "sha256": "9313275f96439f2a2cb33665cc0394fa394713dc222993fcc6a0d908934212e6"
   },
   "reference": {
     "path": "evidence/reference-verification.json",
