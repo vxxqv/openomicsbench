@@ -1,7 +1,9 @@
 """Verify the v1 collection and write a fail-closed release decision."""
 import argparse
 import json
+import os
 import re
+import subprocess
 from pathlib import Path
 
 from omicsbench.hashing import digest
@@ -13,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 COMMIT = re.compile(r"^[0-9a-f]{40}$")
 PUBLICATION_FIELDS = ("version_doi", "external_user_trial", "post_upload_verification")
+INVENTORY_PATH = "release/file-manifest.json"
 
 
 def read_json(path: Path):
@@ -45,6 +48,46 @@ def check_recorded_file(record: dict, label: str, blockers: list[str]) -> None:
     commit = record.get("workflow_commit")
     if commit is not None and not COMMIT.fullmatch(commit):
         blockers.append(f"{label}: transformation commit is invalid.")
+
+
+def tracked_files() -> set[str]:
+    git = os.environ.get("OPENOMICSBENCH_GIT", "git")
+    output = subprocess.run(
+        [git, "-c", f"safe.directory={ROOT.as_posix()}", "ls-files", "-z"],
+        cwd=ROOT, check=True, capture_output=True,
+    ).stdout.decode("utf-8")
+    return {value for value in output.split("\0") if value}
+
+
+def check_release_inventory(metadata: dict, blockers: list[str]) -> None:
+    path = ROOT / INVENTORY_PATH
+    if not path.is_file():
+        blockers.append("The release file inventory is missing.")
+        return
+    inventory = read_json(path)
+    if inventory.get("version") != metadata.get("software_version"):
+        blockers.append("The release inventory version differs from the software version.")
+    if inventory.get("created") != metadata.get("candidate_date"):
+        blockers.append("The release inventory date differs from the candidate date.")
+    records = inventory.get("files", [])
+    declared = [record.get("path") for record in records]
+    if inventory.get("file_count") != len(records) or len(declared) != len(set(declared)):
+        blockers.append("The release inventory count is wrong or contains duplicate paths.")
+        return
+    expected = tracked_files() - {INVENTORY_PATH}
+    if set(declared) != expected:
+        missing = sorted(expected - set(declared))
+        extra = sorted(set(declared) - expected)
+        blockers.append(f"The release inventory path set differs: missing={missing}, extra={extra}.")
+        return
+    for record in records:
+        relative = record["path"]
+        file_path = ROOT / relative
+        if not file_path.is_file():
+            blockers.append(f"Release inventory file is missing: {relative}.")
+            continue
+        if file_path.stat().st_size != record.get("bytes") or digest(file_path) != record.get("sha256"):
+            blockers.append(f"Release inventory hash or byte count differs: {relative}.")
 
 
 def check_biological_object(model, folder: Path, reference_evidence: dict, blockers: list[str]) -> None:
@@ -180,6 +223,7 @@ def main() -> None:
 
     required_metadata = (
         "authors",
+        "candidate_date",
         "repository_url",
         "code_license",
         "metadata_license",
@@ -191,6 +235,7 @@ def main() -> None:
     lock = ROOT / metadata.get("scientific_environment_lock", "")
     if not lock.is_file():
         blockers.append("The scientific environment lock is missing.")
+    check_release_inventory(metadata, blockers)
 
     deferred = [field for field in PUBLICATION_FIELDS if not metadata.get(field)]
     report = {

@@ -1,5 +1,7 @@
 """Write the deterministic file inventory for a release candidate."""
 import json
+import os
+import subprocess
 from pathlib import Path
 from omicsbench.hashing import digest
 
@@ -7,10 +9,15 @@ root = Path(__file__).resolve().parents[1]
 metadata = json.loads((root / "release/metadata-input.json").read_text(encoding="utf-8"))
 destination = root / "release/file-manifest.json"
 excluded = {destination.resolve()}
-excluded_directories = {".git", ".snakemake", "__pycache__", "build", "staging"}
 files = []
-for path in sorted(root.rglob("*")):
-    if not path.is_file() or path.resolve() in excluded or any(part in excluded_directories for part in path.parts) or path.suffix == ".pyc":
+git = os.environ.get("OPENOMICSBENCH_GIT", "git")
+listed = subprocess.run(
+    [git, "-c", f"safe.directory={root.as_posix()}", "ls-files", "-z"],
+    cwd=root, check=True, capture_output=True,
+).stdout.decode("utf-8").split("\0")
+for relative in sorted(value for value in listed if value):
+    path = root / relative
+    if not path.is_file() or path.resolve() in excluded:
         continue
     files.append({
         "path": path.relative_to(root).as_posix(),
