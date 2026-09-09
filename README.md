@@ -4,7 +4,7 @@ OpenOmicsBench provides compact bulk RNA-seq count matrices for testing analysis
 
 The version 1 collection contains 12 benchmark objects drawn from seven Expression Atlas studies. It covers human, mouse and Arabidopsis data, with balanced knockouts, paired tumour samples, factorial infection experiments, RNA interference and disease comparisons. The objects are tests of software and methods. They are not clinical reference data and do not replace the full source studies.
 
-The published [0.1.0.dev0 prerelease](https://doi.org/10.5281/zenodo.22551735) records the earlier infrastructure baseline. Version 1.0.0 is in final review.
+The published [0.1.0.dev0 prerelease](https://doi.org/10.5281/zenodo.22551735) records the earlier infrastructure baseline. [Version 1.0.0](https://doi.org/10.5281/zenodo.22679414) is the first complete collection release.
 
 ## Quickstart
 
@@ -65,7 +65,7 @@ python scripts/check_repository.py
 python scripts/certify_release.py --preflight
 ```
 
-The local v1 preflight passes with no scientific or structural blockers. A fresh Windows checkout passed the documented quickstart under Python 3.12.14. The owner approved that clean-room run as the publication check; no independent tester is claimed. The exact Zenodo version DOI and uploaded archive check are completed after the connected release is published.
+The final v1 certification passes with no scientific, structural or publication blocker. A fresh Windows checkout passed the documented quickstart under Python 3.12.14. The owner approved that clean-room run as the publication check; no independent tester is claimed. The GitHub and Zenodo archives contain the same files, and every inventory-controlled file matches its certified byte count and SHA-256 value.
 
 The [version 1 release review](docs/OpenOmicsBench_V1_Release_Review.pdf) brings the collection, scientific checks, overlap findings, software tests and remaining publication steps into one six-page document.
 

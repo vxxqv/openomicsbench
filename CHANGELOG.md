@@ -15,3 +15,5 @@ A generated JSON and TSV catalog provides the complete machine-readable collecti
 Source licences, provider credit and project ownership are separate. Redistributed Expression Atlas material remains under CC BY 4.0 with provider attribution. OpenOmicsBench code is Apache-2.0. Vivaan Patni is the release author on Zenodo, and GitHub development is attributed to `vxxqv`.
 
 Further releases can add read-level objects, more assay types and broader external platform testing without changing the v1 evidence or tag.
+
+The archived version 1.0.0 release is available at https://doi.org/10.5281/zenodo.22679414.

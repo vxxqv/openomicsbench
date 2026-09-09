@@ -4,12 +4,16 @@ title: "OpenOmicsBench"
 type: software
 version: "1.0.0"
 license: Apache-2.0
+doi: "10.5281/zenodo.22679414"
 authors:
   - family-names: "Patni"
     given-names: "Vivaan"
     orcid: "https://orcid.org/0009-0005-1859-5107"
 repository-code: "https://github.com/vxxqv/openomicsbench"
 identifiers:
+  - type: doi
+    value: "10.5281/zenodo.22679414"
+    description: "OpenOmicsBench version 1.0.0"
   - type: doi
     value: "10.5281/zenodo.22551734"
     description: "Zenodo archive containing all released versions"

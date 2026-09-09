@@ -19,7 +19,8 @@
   },
   "code_license": "Apache-2.0",
   "metadata_license": "CC-BY-4.0",
-  "version_doi": null,
+  "release_commit": "5ce08c6bf57e2886b667b77e8c33b238390c2e6e",
+  "version_doi": "10.5281/zenodo.22679414",
   "external_user_trial": {
     "status": "owner-authorized clean-room substitute",
     "date": "2026-09-09",
@@ -42,5 +43,25 @@
   },
   "scientific_environment_lock": "runtime/environment-lock.json",
   "container_digest": null,
-  "post_upload_verification": null
+  "post_upload_verification": {
+    "status": "pass",
+    "version_doi": "10.5281/zenodo.22679414",
+    "record_url": "https://zenodo.org/records/22679414",
+    "verified_at": "2026-09-09T20:18:00+04:00",
+    "git_tag": "v1.0.0",
+    "git_commit": "5ce08c6bf57e2886b667b77e8c33b238390c2e6e",
+    "zenodo_file": "vxxqv/openomicsbench-v1.0.0.zip",
+    "zenodo_bytes": 7063477,
+    "zenodo_md5": "c3cbccd5690ad035ef06d9b8035491b4",
+    "zenodo_sha256": "5b284ace7536aca9f102f4b61dbf8299e31edb72a601be141dcd9cdd0fc3fd75",
+    "github_bytes": 7057781,
+    "github_md5": "095e36d6fbf5a3b9f7adaa612b837ae8",
+    "github_sha256": "48602a90ac3d3919cba8b36ec430ed9b91a791622a7e039550e0bf9c81f41f16",
+    "archived_files": 282,
+    "inventory_files_verified": 281,
+    "archive_content_match": true,
+    "missing_files": [],
+    "extra_files": [],
+    "changed_files": []
+  }
 }
