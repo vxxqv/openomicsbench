@@ -65,6 +65,64 @@ def write_json(path: Path, value) -> None:
     path.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
+def write_card(
+    path: Path,
+    entry: dict,
+    config: dict,
+    intake: dict,
+    baseline: dict,
+    profile: dict,
+    sample_count: int,
+    pocket_features: int,
+) -> None:
+    source_features = baseline["design"]["full_features"]
+    lines = [
+        f"# {entry['title']}",
+        "",
+        f"`{entry['dataset_id']}` is a compact test object derived from "
+        f"[{config['accession']}](https://www.ebi.ac.uk/gxa/experiments/{config['accession']}).",
+        "",
+        "## Design",
+        "",
+        f"- Organism: {intake['organism']} (NCBI taxonomy {intake['taxon_id']})",
+        f"- Contrast: {baseline['design']['contrast']}",
+        f"- Samples: {sample_count}",
+        f"- Pocket: {pocket_features:,} of {source_features:,} source genes",
+        f"- Reference: {profile['provider']} {profile['release']} on {profile['assembly']}",
+        "",
+        "## Files",
+        "",
+        "- `pocket/counts.tsv` contains the selected integer counts.",
+        "- `expected/source-counts.tsv` contains the full source matrix for the declared samples.",
+        "- `samples.json` fixes sample order, condition, replicate and blocking values.",
+        "- `expected/validation.json` and `expected/deseq2.json` define the checks and results.",
+        "- `reference.json`, `rights.json`, `attribution.json` and `provenance/transform.json` record origin and use.",
+        "",
+        "## Check it",
+        "",
+        "```sh",
+        f"omicsbench info {entry['dataset_id']}",
+        f"omicsbench validate {entry['dataset_id']}",
+        f"omicsbench get {entry['dataset_id']} --size pocket",
+        "```",
+        "",
+        "The object passed all four predeclared preservation minimums with DESeq2 1.50.2. "
+        "Its gene identifiers were matched to the stated annotation release.",
+        "",
+        "## Limits",
+        "",
+        "- Validation begins with the archive count matrix and does not repeat alignment or feature counting.",
+        "- Use the cited source study for the complete experiment or a different contrast.",
+        "- Strandedness is unknown because count-matrix validation does not require it.",
+        "",
+        f"Source citation: {entry['citation']}",
+        "",
+        "Expression Atlas material is included under CC BY 4.0 with provider credit. "
+        "See `rights.json` and `attribution.json` for the dated record.",
+    ]
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
+
+
 def file_record(folder: Path, relative: str, tier: str, role: str, media_type: str) -> dict:
     path = folder / relative
     return {"path": relative, "tier": tier, "role": role, "media_type": media_type, "bytes": path.stat().st_size, "sha256": digest(path)}
@@ -192,6 +250,16 @@ def build(entry: dict, release: str, checked: str, references: dict, reference_h
             "checked": checked,
         }
         write_json(partial / "rights.json", rights)
+        write_card(
+            partial / "README.md",
+            entry,
+            config,
+            intake,
+            baseline,
+            profile,
+            len(samples),
+            diagnostic["smallest_passing_features"],
+        )
         workflow_path = "workflows/atlas_diagnostic.py"
         builder_path = "workflows/build_collection.py"
         provenance = {
@@ -226,6 +294,7 @@ def build(entry: dict, release: str, checked: str, references: dict, reference_h
         }
         write_json(partial / "provenance/transform.json", provenance)
         files = [
+            file_record(partial, "README.md", "metadata", "documentation", "text/markdown"),
             file_record(partial, "attribution.json", "metadata", "documentation", "application/json"),
             file_record(partial, "expected/deseq2.json", "expected", "provenance", "application/json"),
             file_record(partial, "expected/source-counts.tsv", "expected", "baseline", "text/tab-separated-values"),
