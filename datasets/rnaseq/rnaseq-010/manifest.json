@@ -104,6 +104,14 @@
   },
   "files": [
     {
+      "path": "README.md",
+      "tier": "metadata",
+      "role": "documentation",
+      "media_type": "text/markdown",
+      "bytes": 1634,
+      "sha256": "976c651df25318001c92d8c2fed515a2d51aa2d13cc2dc7f70d374476810e9b1"
+    },
+    {
       "path": "attribution.json",
       "tier": "metadata",
       "role": "documentation",
@@ -149,7 +157,7 @@
       "role": "provenance",
       "media_type": "application/json",
       "bytes": 2521,
-      "sha256": "2af00451cce6da1eeb1266c1f4b0c25c8237125d0cc4a84c40bc9bb131e2305b"
+      "sha256": "295f767c977d4b61c3a048b5f394602c18534be5d0ebde4931d6d6d69debba4e"
     },
     {
       "path": "reference.json",
