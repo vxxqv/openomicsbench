@@ -1,10 +1,11 @@
-"""Write a deterministic inventory for the development handoff."""
+"""Write the deterministic file inventory for a release candidate."""
 import json
 from pathlib import Path
 from omicsbench.hashing import digest
 
 root = Path(__file__).resolve().parents[1]
-destination = root / "release/development-file-manifest.json"
+metadata = json.loads((root / "release/metadata-input.json").read_text(encoding="utf-8"))
+destination = root / "release/file-manifest.json"
 excluded = {destination.resolve()}
 excluded_directories = {".git", ".snakemake", "__pycache__", "build", "staging"}
 files = []
@@ -17,10 +18,10 @@ for path in sorted(root.rglob("*")):
         "sha256": digest(path),
     })
 payload = {
-    "snapshot": "1.0.0.dev1",
-    "created": "2026-09-06",
-    "scope": "Project-authored development handoff; staged third-party source data excluded.",
-    "self_excluded": "release/development-file-manifest.json",
+    "version": metadata["software_version"],
+    "created": metadata["candidate_date"],
+    "scope": "Files in the reviewed version 1 release candidate; generated caches and staged source downloads are excluded.",
+    "self_excluded": "release/file-manifest.json",
     "file_count": len(files),
     "files": files,
 }
