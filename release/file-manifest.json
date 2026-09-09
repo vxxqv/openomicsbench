@@ -3,7 +3,7 @@
   "created": "2026-09-09",
   "scope": "Files in the reviewed version 1 release candidate; generated caches and staged source downloads are excluded.",
   "self_excluded": "release/file-manifest.json",
-  "file_count": 284,
+  "file_count": 281,
   "files": [
     {
       "path": ".gitattributes",
@@ -32,8 +32,8 @@
     },
     {
       "path": ".zenodo.json",
-      "bytes": 1307,
-      "sha256": "e530835a41f665564fb9144030ce3d2406fef24f46716c02f08866ebe8a77d3a"
+      "bytes": 1345,
+      "sha256": "719584c9736c986e19259550de0bda8d38b62acdd7e190d39efd5100b3b5e720"
     },
     {
       "path": "CHANGELOG.md",
@@ -42,8 +42,8 @@
     },
     {
       "path": "CITATION.cff",
-      "bytes": 412,
-      "sha256": "d30f4f7d22d329c57828b411c65c00caeae309507d6dc9cec2fbd8e6bd88b03e"
+      "bytes": 480,
+      "sha256": "527a2071e5c9d6797a952889b676d8c9615f2ae4b5a79e657b676f2718c71b43"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -958,7 +958,7 @@
     {
       "path": "docs/OpenOmicsBench_V1_Release_Review.pdf",
       "bytes": 13290,
-      "sha256": "dece825890d6c5d484d350eb566e79867b3fc165578c516d53cfc574d22756c1"
+      "sha256": "feb55e246de5f76ead931e99b7237534fbf9a1c7b6dc8d4496ff4a06830cf1b3"
     },
     {
       "path": "docs/acceptance-ledger.md",
@@ -1141,19 +1141,9 @@
       "sha256": "fd6ea990ab912c1facc5aee3654417765f5c1999ed94435c44aacc7e766500b0"
     },
     {
-      "path": "evidence/pasilla-plot-data.json",
-      "bytes": 486937,
-      "sha256": "98c6e52bf16625334e8e570ad7918dcd9e116789e8bceb33d2e573fa0c076e79"
-    },
-    {
       "path": "evidence/reference-verification.json",
       "bytes": 10814,
       "sha256": "7a70b2c1b010e40d7851f6c5cae7a9e8d4ffd7bef6b14757d1dcd8dce77ca5a0"
-    },
-    {
-      "path": "evidence/runtime-readiness.json",
-      "bytes": 846,
-      "sha256": "a42c73d23f795476056f648f3fea6aa381459732618d93b0743a6a568bb2e749"
     },
     {
       "path": "figures/v1-fidelity.svg",
@@ -1182,8 +1172,8 @@
     },
     {
       "path": "release/metadata-input.json",
-      "bytes": 744,
-      "sha256": "88d6ef372b9c33180b6680c5de42c850b38497594c8f5d82534b0b2394d28722"
+      "bytes": 782,
+      "sha256": "a0ef1bfa817eea8ff779f1d18f75190b81f0e0d592d507688569acbdee56ae59"
     },
     {
       "path": "requirements-tested.txt",
@@ -1199,11 +1189,6 @@
       "path": "runtime/environment.yml",
       "bytes": 153,
       "sha256": "90b7a93f20a415d30f97ac0e133659df6143b23fc020f6403d1c638afc67bba2"
-    },
-    {
-      "path": "runtime/install-plan.json",
-      "bytes": 703,
-      "sha256": "9cbe2d419de19d2e9f85d2c0f111c4abc1f4e9e09bfd00d0d0b94ea771d0b6ca"
     },
     {
       "path": "schemas/dataset.schema.json",
@@ -1222,8 +1207,8 @@
     },
     {
       "path": "scripts/certify_release.py",
-      "bytes": 12231,
-      "sha256": "d47138163d6896eb57cf0f2aee68ca85c8f72db46bb4adbd834899f3d5d1a7f5"
+      "bytes": 14101,
+      "sha256": "a20ac1dde3423ae6dfad3cbae57a387e272672b550c7837adebc28c336a89446"
     },
     {
       "path": "scripts/check_repository.py",
