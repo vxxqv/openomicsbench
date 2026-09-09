@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 COMMIT = re.compile(r"^[0-9a-f]{40}$")
 ORCID = re.compile(r"^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$")
+ZENODO_DOI = re.compile(r"^10\.5281/zenodo\.\d+$")
 PUBLICATION_FIELDS = ("version_doi", "external_user_trial", "post_upload_verification")
 INVENTORY_PATH = "release/file-manifest.json"
 
@@ -64,6 +65,33 @@ def check_author_metadata(metadata: dict, blockers: list[str]) -> None:
     )
     if any(line not in citation for line in required_lines):
         blockers.append("CITATION.cff differs from the approved version or author record.")
+
+
+def check_publication_metadata(metadata: dict, blockers: list[str]) -> None:
+    trial = metadata.get("external_user_trial")
+    if trial:
+        valid_statuses = {"independent trial", "owner-authorized clean-room substitute"}
+        if trial.get("status") not in valid_statuses:
+            blockers.append("The quickstart trial status is not recognized.")
+        if trial.get("outcome") != "pass" or not COMMIT.fullmatch(trial.get("commit", "")):
+            blockers.append("The quickstart trial outcome or commit is invalid.")
+        if not trial.get("date") or not trial.get("operating_system") or not trial.get("python"):
+            blockers.append("The quickstart trial environment is incomplete.")
+        if len(trial.get("commands", [])) != 7:
+            blockers.append("The quickstart trial does not record all seven commands.")
+        if trial.get("status") == "owner-authorized clean-room substitute" and not trial.get("limitation"):
+            blockers.append("The clean-room substitute must state its independence limitation.")
+
+    version_doi = metadata.get("version_doi")
+    if version_doi and not ZENODO_DOI.fullmatch(version_doi):
+        blockers.append("The Zenodo version DOI is invalid.")
+
+    upload = metadata.get("post_upload_verification")
+    if upload:
+        if upload.get("status") != "pass" or upload.get("version_doi") != version_doi:
+            blockers.append("The post-upload verification does not match the version DOI.")
+        if not upload.get("record_url") or not upload.get("verified_at"):
+            blockers.append("The post-upload verification record is incomplete.")
 
 
 def declared_path(model, folder: Path, relative: str, blockers: list[str]) -> Path | None:
@@ -282,6 +310,7 @@ def main() -> None:
         if not metadata.get(field):
             blockers.append(f"Missing release evidence: {field}.")
     check_author_metadata(metadata, blockers)
+    check_publication_metadata(metadata, blockers)
     lock = ROOT / metadata.get("scientific_environment_lock", "")
     if not lock.is_file():
         blockers.append("The scientific environment lock is missing.")

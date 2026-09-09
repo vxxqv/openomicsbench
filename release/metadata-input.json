@@ -20,7 +20,26 @@
   "code_license": "Apache-2.0",
   "metadata_license": "CC-BY-4.0",
   "version_doi": null,
-  "external_user_trial": null,
+  "external_user_trial": {
+    "status": "owner-authorized clean-room substitute",
+    "date": "2026-09-09",
+    "operating_system": "Windows",
+    "python": "3.12.14",
+    "commit": "feb2e1ef0c9df24ecb4b45c0ee17c16baa2680ee",
+    "commands": [
+      "python -m pip install -r requirements-tested.txt",
+      "python -m pip install --no-deps -e .",
+      "omicsbench list --assay bulk_rna_seq",
+      "omicsbench info rnaseq-002",
+      "omicsbench validate rnaseq-002",
+      "omicsbench get rnaseq-002 --size pocket",
+      "omicsbench verify-cache"
+    ],
+    "outcome": "pass",
+    "verified_files": 1,
+    "partial_files": 0,
+    "limitation": "The release preparer ran the clean-room trial. No independent tester is claimed; the owner approved publication after this substitute check."
+  },
   "scientific_environment_lock": "runtime/environment-lock.json",
   "container_digest": null,
   "post_upload_verification": null
