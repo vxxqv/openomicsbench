@@ -14,6 +14,7 @@ from omicsbench.validate import validate
 
 ROOT = Path(__file__).resolve().parents[1]
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
+MD5 = re.compile(r"^[0-9a-f]{32}$")
 COMMIT = re.compile(r"^[0-9a-f]{40}$")
 ORCID = re.compile(r"^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$")
 ZENODO_DOI = re.compile(r"^10\.5281/zenodo\.\d+$")
@@ -86,12 +87,39 @@ def check_publication_metadata(metadata: dict, blockers: list[str]) -> None:
     if version_doi and not ZENODO_DOI.fullmatch(version_doi):
         blockers.append("The Zenodo version DOI is invalid.")
 
+    release_commit = metadata.get("release_commit")
+    if release_commit:
+        git = os.environ.get("OPENOMICSBENCH_GIT", "git")
+        if not COMMIT.fullmatch(release_commit):
+            blockers.append("The release commit is invalid.")
+        else:
+            tagged_commit = subprocess.run(
+                [git, "-c", f"safe.directory={ROOT.as_posix()}", "rev-list", "-n", "1", "v1.0.0"],
+                cwd=ROOT, check=True, capture_output=True, text=True,
+            ).stdout.strip()
+            if tagged_commit != release_commit:
+                blockers.append("The v1.0.0 tag does not identify the recorded release commit.")
+
     upload = metadata.get("post_upload_verification")
     if upload:
         if upload.get("status") != "pass" or upload.get("version_doi") != version_doi:
             blockers.append("The post-upload verification does not match the version DOI.")
         if not upload.get("record_url") or not upload.get("verified_at"):
             blockers.append("The post-upload verification record is incomplete.")
+        if upload.get("git_commit") != release_commit or upload.get("git_tag") != "v1.0.0":
+            blockers.append("The post-upload verification does not identify the frozen v1 tag.")
+        if upload.get("archive_content_match") is not True:
+            blockers.append("The GitHub and Zenodo archive contents have not been matched.")
+        if upload.get("missing_files") or upload.get("extra_files") or upload.get("changed_files"):
+            blockers.append("The post-upload comparison contains file differences.")
+        if upload.get("archived_files") != upload.get("inventory_files_verified", 0) + 1:
+            blockers.append("The post-upload file counts differ from the self-excluding inventory.")
+        for field in ("zenodo_sha256", "github_sha256"):
+            if not SHA256.fullmatch(upload.get(field, "")):
+                blockers.append(f"The recorded {field} is invalid.")
+        for field in ("zenodo_md5", "github_md5"):
+            if not MD5.fullmatch(upload.get(field, "")):
+                blockers.append(f"The recorded {field} is invalid.")
 
 
 def declared_path(model, folder: Path, relative: str, blockers: list[str]) -> Path | None:
@@ -122,19 +150,24 @@ def check_recorded_file(record: dict, label: str, blockers: list[str]) -> None:
         blockers.append(f"{label}: transformation commit is invalid.")
 
 
-def tracked_files() -> set[str]:
+def release_files(metadata: dict) -> set[str]:
     git = os.environ.get("OPENOMICSBENCH_GIT", "git")
+    commit = metadata.get("release_commit")
+    command = [git, "-c", f"safe.directory={ROOT.as_posix()}"]
+    command += ["ls-tree", "-r", "--name-only", "-z", commit] if commit else ["ls-files", "-z"]
     output = subprocess.run(
-        [git, "-c", f"safe.directory={ROOT.as_posix()}", "ls-files", "-z"],
+        command,
         cwd=ROOT, check=True, capture_output=True,
     ).stdout.decode("utf-8")
     return {value for value in output.split("\0") if value}
 
 
-def tracked_blob(relative: str) -> bytes:
+def release_blob(relative: str, metadata: dict) -> bytes:
     git = os.environ.get("OPENOMICSBENCH_GIT", "git")
+    reference = metadata.get("release_commit") or ""
+    object_name = f"{reference}:{relative}" if reference else f":{relative}"
     return subprocess.run(
-        [git, "-c", f"safe.directory={ROOT.as_posix()}", "show", f":{relative}"],
+        [git, "-c", f"safe.directory={ROOT.as_posix()}", "show", object_name],
         cwd=ROOT, check=True, capture_output=True,
     ).stdout
 
@@ -154,7 +187,7 @@ def check_release_inventory(metadata: dict, blockers: list[str]) -> None:
     if inventory.get("file_count") != len(records) or len(declared) != len(set(declared)):
         blockers.append("The release inventory count is wrong or contains duplicate paths.")
         return
-    expected = tracked_files() - {INVENTORY_PATH}
+    expected = release_files(metadata) - {INVENTORY_PATH}
     if set(declared) != expected:
         missing = sorted(expected - set(declared))
         extra = sorted(set(declared) - expected)
@@ -162,7 +195,7 @@ def check_release_inventory(metadata: dict, blockers: list[str]) -> None:
         return
     for record in records:
         relative = record["path"]
-        blob = tracked_blob(relative)
+        blob = release_blob(relative, metadata)
         if len(blob) != record.get("bytes") or hashlib.sha256(blob).hexdigest() != record.get("sha256"):
             blockers.append(f"Release inventory hash or byte count differs: {relative}.")
 
