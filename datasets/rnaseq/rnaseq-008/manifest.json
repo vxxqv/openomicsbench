@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "id": "rnaseq-008",
   "title": "Duchenne muscular dystrophy myoblast comparison",
-  "release": "1.0.0.dev1",
+  "release": "1.0.0",
   "assay": "bulk_rna_seq",
   "kind": "real",
   "status": "validated",
