@@ -117,7 +117,7 @@ def write_card(
         "",
         f"Source citation: {entry['citation']}",
         "",
-        f"Material from {config['accession']} is included under CC BY 4.0 with provider credit. "
+        f"{entry['dataset_id']} includes material from {config['accession']} under CC BY 4.0 with provider credit. "
         "See `rights.json` and `attribution.json` for the dated record.",
     ]
     path.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
