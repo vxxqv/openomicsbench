@@ -106,8 +106,8 @@ def write_card(
         f"omicsbench get {entry['dataset_id']} --size pocket",
         "```",
         "",
-        "The object passed all four predeclared preservation minimums with DESeq2 1.50.2. "
-        "Its gene identifiers were matched to the stated annotation release.",
+        f"{entry['dataset_id']} passed all four predeclared preservation minimums with DESeq2 1.50.2. "
+        f"All {pocket_features:,} pocket identifiers matched {profile['provider']} {profile['release']}.",
         "",
         "## Limits",
         "",
@@ -117,7 +117,7 @@ def write_card(
         "",
         f"Source citation: {entry['citation']}",
         "",
-        "Expression Atlas material is included under CC BY 4.0 with provider credit. "
+        f"Material from {config['accession']} is included under CC BY 4.0 with provider credit. "
         "See `rights.json` and `attribution.json` for the dated record.",
     ]
     path.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
