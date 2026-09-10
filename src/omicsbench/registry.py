@@ -4,18 +4,21 @@ import os
 from pathlib import Path
 from .models import Dataset
 
+def _contains_collection(root: Path) -> bool:
+    return next((root / "datasets").glob("**/manifest.json"), None) is not None
+
 def default_root() -> Path:
     configured = os.environ.get("OMICSBENCH_ROOT")
     if configured:
         return Path(configured)
     current = Path.cwd()
-    if (current / "datasets").is_dir():
+    if _contains_collection(current):
         return current
     packaged = Path(__file__).resolve().parent / "_collection"
-    if (packaged / "datasets").is_dir():
+    if _contains_collection(packaged):
         return packaged
     checkout = Path(__file__).resolve().parents[2]
-    if (checkout / "datasets").is_dir():
+    if _contains_collection(checkout):
         return checkout
     return packaged
 

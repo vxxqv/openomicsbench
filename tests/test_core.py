@@ -60,6 +60,10 @@ class CoreTests(unittest.TestCase):
         configured=self.root/'chosen'
         with patch.dict(os.environ,{'OMICSBENCH_ROOT':str(configured)},clear=True):
             self.assertEqual(default_root(),configured)
+    def test_default_root_ignores_unrelated_dataset_folder(self):
+        unrelated=self.root/'unrelated';(unrelated/'datasets').mkdir(parents=True)
+        with patch.dict(os.environ,{},clear=True),patch('pathlib.Path.cwd',return_value=unrelated):
+            self.assertEqual(default_root(),ROOT)
     def test_path_traversal(self):
         for path in ['../outside','/absolute','C:/file','a\\b','a/../b','./a','a//b']:
             with self.subTest(path=path),self.assertRaises(ValueError):safe_relative(path)
