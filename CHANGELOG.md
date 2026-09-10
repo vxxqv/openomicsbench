@@ -1,5 +1,9 @@
 # Changes
 
+## 1.0.1
+
+OpenOmicsBench can now be installed directly from PyPI. The wheel contains the complete version 1 collection, so discovery, inspection, retrieval and validation work from any directory without a repository checkout. The command still accepts `--root` and `OMICSBENCH_ROOT` for local or extended collections.
+
 ## 1.0.0
 
 Version 1 introduces 12 compact bulk RNA-seq benchmark objects from seven Expression Atlas studies. The collection covers human, mouse and Arabidopsis data across balanced knockouts, RNA interference, paired tumour samples, blocked factorial comparisons, an imbalanced disease design and genotype-specific strata.

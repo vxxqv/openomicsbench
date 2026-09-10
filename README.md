@@ -8,17 +8,16 @@ The published [0.1.0.dev0 prerelease](https://doi.org/10.5281/zenodo.22551735) r
 
 ## Quickstart
 
-Use Python 3.11 or newer in an isolated environment. From the repository root:
+Use Python 3.11 or newer in an isolated environment:
 
 ```sh
-python -m pip install -r requirements-tested.txt
-python -m pip install --no-deps -e .
+python -m pip install openomicsbench
 omicsbench list --assay bulk_rna_seq
 omicsbench info rnaseq-002
 omicsbench validate rnaseq-002
 ```
 
-`omicsbench validate` checks the manifest, file inventory, byte counts, SHA-256 hashes, sample order, matrix shape and unchanged integer counts. It then recomputes the four declared preservation metrics. The command works without a network connection because each v1 object is self-contained.
+`omicsbench validate` checks the manifest, file inventory, byte counts, SHA-256 hashes, sample order, matrix shape and unchanged integer counts. It then recomputes the four declared preservation metrics. The installed package includes the complete collection, so these commands work without a repository checkout or network connection.
 
 Use `omicsbench get rnaseq-002 --size pocket` to copy a verified tier into the local cache. Use `omicsbench provenance rnaseq-002` to inspect its source and transformation record. Every public command includes an example in its help text.
 
@@ -39,13 +38,13 @@ Use `omicsbench get rnaseq-002 --size pocket` to copy a verified tier into the l
 | `rnaseq-012` | Dmd-mdx myoblasts against wild type | 6 | 8,000 |
 | `rnaseq-013` | Dmd-mdx-beta-geo myoblasts against wild type | 6 | 8,000 |
 
-The [catalog](catalog/collection.json) contains the complete object index. The tabular form is in [catalog/collection.tsv](catalog/collection.tsv).
+The [catalog](https://github.com/vxxqv/openomicsbench/blob/main/catalog/collection.json) contains the complete object index. The [tabular form](https://github.com/vxxqv/openomicsbench/blob/main/catalog/collection.tsv) is also available.
 
-![Four DESeq2 fidelity metrics for each version 1 object](figures/v1-fidelity.svg)
+![Four DESeq2 fidelity metrics for each version 1 object](https://raw.githubusercontent.com/vxxqv/openomicsbench/main/figures/v1-fidelity.svg)
 
 All 12 pockets pass the predeclared thresholds when compared with the corresponding full source matrix using DESeq2 1.50.2. The evidence files retain exact values, input hashes, workflow hashes, model designs and runtime versions. A separate reference check confirms that every pocket gene identifier occurs in the matching Ensembl or Ensembl Genomes annotation release.
 
-Some objects share samples because they test different declared contrasts or strata from the same factorial study. The [collection audit](release/collection-audit.json) records those relationships and checks for conflicting IDs, cross-study sample collisions, unclassified duplicate files and repeated long prose.
+Some objects share samples because they test different declared contrasts or strata from the same factorial study. The [collection audit](https://github.com/vxxqv/openomicsbench/blob/main/release/collection-audit.json) records those relationships and checks for conflicting IDs, cross-study sample collisions, unclassified duplicate files and repeated long prose.
 
 ## Source data and licences
 
@@ -67,7 +66,7 @@ python scripts/certify_release.py --preflight
 
 The final v1 certification passes with no scientific, structural or publication blocker. A fresh Windows checkout passed the documented quickstart under Python 3.12.14. The owner approved that clean-room run as the publication check; no independent tester is claimed. The GitHub and Zenodo archives contain the same files, and every inventory-controlled file matches its certified byte count and SHA-256 value.
 
-The [version 1 release review](docs/OpenOmicsBench_V1_Release_Review.pdf) brings the collection, scientific checks, overlap findings, software tests and remaining publication steps into one six-page document.
+The [version 1 release review](https://github.com/vxxqv/openomicsbench/blob/main/docs/OpenOmicsBench_V1_Release_Review.pdf) brings the collection, scientific checks, overlap findings, software tests and remaining publication steps into one six-page document.
 
 ## Citation
 
