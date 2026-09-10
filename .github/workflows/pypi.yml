@@ -1,0 +1,60 @@
+name: Publish Python package
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Install build tools
+        run: python -m pip install --upgrade build twine
+      - name: Install tested dependencies
+        run: |
+          python -m pip install -r requirements-tested.txt
+          python -m pip install --no-deps -e .
+      - name: Check tag and package version
+        run: test "v$(python -c 'import omicsbench; print(omicsbench.__version__)')" = "$GITHUB_REF_NAME"
+      - name: Test source tree
+        run: |
+          python -m unittest discover -s tests -v
+          python scripts/check_repository.py
+          python scripts/certify_release.py --preflight
+      - name: Build distributions
+        working-directory: /tmp
+        run: python -m build --outdir "$GITHUB_WORKSPACE/dist" "$GITHUB_WORKSPACE"
+      - name: Check distributions
+        run: python -m twine check dist/*
+      - name: Test installed wheel
+        run: |
+          python -m venv --system-site-packages /tmp/openomicsbench-smoke
+          /tmp/openomicsbench-smoke/bin/python -m pip install --no-deps dist/*.whl
+          cd /tmp
+          /tmp/openomicsbench-smoke/bin/omicsbench list --assay bulk_rna_seq
+          /tmp/openomicsbench-smoke/bin/omicsbench validate rnaseq-002
+      - uses: actions/upload-artifact@v7
+        with:
+          name: python-package
+          path: dist/
+          if-no-files-found: error
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: python-package
+          path: dist/
+      - name: Publish distributions
+        uses: pypa/gh-action-pypi-publish@release/v1
