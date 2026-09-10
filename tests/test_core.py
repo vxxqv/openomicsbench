@@ -12,7 +12,7 @@ from unittest.mock import patch
 import numpy as np
 from pydantic import ValidationError
 from omicsbench.models import Dataset, File, safe_relative
-from omicsbench.registry import registry, lookup
+from omicsbench.registry import default_root, registry, lookup
 from omicsbench.hashing import digest, contained
 from omicsbench.cache import get, verify_cache
 from omicsbench.download import transfer
@@ -53,6 +53,13 @@ class CoreTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'Duplicate'):registry(self.root)
     def test_unknown_id(self):
         with self.assertRaisesRegex(ValueError,'fixture-001'):lookup(self.root,'fixture-002')
+    def test_default_root_uses_current_collection(self):
+        with patch.dict(os.environ,{},clear=True),patch('pathlib.Path.cwd',return_value=self.root):
+            self.assertEqual(default_root(),self.root)
+    def test_default_root_honours_environment(self):
+        configured=self.root/'chosen'
+        with patch.dict(os.environ,{'OMICSBENCH_ROOT':str(configured)},clear=True):
+            self.assertEqual(default_root(),configured)
     def test_path_traversal(self):
         for path in ['../outside','/absolute','C:/file','a\\b','a/../b','./a','a//b']:
             with self.subTest(path=path),self.assertRaises(ValueError):safe_relative(path)
