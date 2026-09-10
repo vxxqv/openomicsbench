@@ -4,15 +4,37 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "openomicsbench"
-version = "1.0.0"
+version = "1.0.1"
 description = "Curated bulk RNA-seq benchmarks with traceable data and deterministic validation"
+readme = {file = "README.md", content-type = "text/markdown"}
 license = "Apache-2.0"
+authors = [{name = "Vivaan Patni"}]
+maintainers = [{name = "Vivaan Patni"}]
 keywords = ["bioinformatics", "computational-biology", "genomics", "transcriptomics", "bulk-rna-seq", "gene-expression", "differential-expression", "benchmarking", "benchmark-data", "test-data", "data-validation", "data-provenance", "data-integrity", "reproducibility", "scientific-workflows", "research-software", "expression-atlas", "ensembl", "deseq2"]
 requires-python = ">=3.11"
 dependencies = ["pydantic>=2.13,<3", "numpy>=2.3,<3"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Console",
+  "Intended Audience :: Science/Research",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
 
 [project.scripts]
 omicsbench = "omicsbench.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/vxxqv/openomicsbench"
+Repository = "https://github.com/vxxqv/openomicsbench"
+Issues = "https://github.com/vxxqv/openomicsbench/issues"
+Changelog = "https://github.com/vxxqv/openomicsbench/blob/main/CHANGELOG.md"
+Archive = "https://doi.org/10.5281/zenodo.22551734"
 
 [tool.setuptools.packages.find]
 where = ["src"]
