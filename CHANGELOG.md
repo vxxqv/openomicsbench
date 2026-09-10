@@ -1,8 +1,12 @@
 # Changes
 
+## 1.0.2
+
+Version 1.0.2 is the first PyPI release. It retains the complete bundled collection from 1.0.1 and makes the synthetic fixture rebuild test portable across supported operating systems and Python environments.
+
 ## 1.0.1
 
-OpenOmicsBench can now be installed directly from PyPI. The wheel contains the complete version 1 collection, so discovery, inspection, retrieval and validation work from any directory without a repository checkout. The command still accepts `--root` and `OMICSBENCH_ROOT` for local or extended collections.
+OpenOmicsBench gained standard Python source and wheel distributions. The wheel contains the complete version 1 collection, so discovery, inspection, retrieval and validation work from any directory without a repository checkout. The command still accepts `--root` and `OMICSBENCH_ROOT` for local or extended collections.
 
 ## 1.0.0
 
