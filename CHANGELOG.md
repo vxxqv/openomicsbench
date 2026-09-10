@@ -1,8 +1,12 @@
 # Changes
 
+## 1.0.3
+
+Version 1.0.3 is the first PyPI release. The publishing workflow now fetches the complete tag history needed to certify the frozen version 1 release before upload.
+
 ## 1.0.2
 
-Version 1.0.2 is the first PyPI release. It retains the complete bundled collection from 1.0.1 and makes the synthetic fixture rebuild test portable across supported operating systems and Python environments.
+Version 1.0.2 retains the complete bundled collection from 1.0.1 and makes the synthetic fixture rebuild test portable across supported operating systems and Python environments. Its release tag was not uploaded to PyPI because the publishing checkout lacked the historical v1.0.0 tag required by certification.
 
 ## 1.0.1
 
