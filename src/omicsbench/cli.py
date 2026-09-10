@@ -6,13 +6,13 @@ import shutil
 import sys
 from pathlib import Path
 from . import __version__
-from .registry import registry, lookup
+from .registry import default_root, registry, lookup
 from .cache import get, verify_cache
 from .validate import validate
 
 def main():
-    p = argparse.ArgumentParser(description="Find and verify transcriptomics objects.",epilog="Example: omicsbench --root . info fixture-001")
-    p.add_argument("--root",type=Path,default=Path(os.environ.get("OMICSBENCH_ROOT",".")),help="Repository containing datasets (default: current directory).")
+    p = argparse.ArgumentParser(description="Find and verify transcriptomics objects.",epilog="Example: omicsbench info rnaseq-002")
+    p.add_argument("--root",type=Path,default=default_root(),help="Collection directory. Defaults to OMICSBENCH_ROOT, the current checkout or the installed collection.")
     p.add_argument("--cache",type=Path,default=Path(os.environ.get("OMICSBENCH_CACHE",".omicsbench-cache")),help="Local cache directory.")
     p.add_argument("--debug",action="store_true",help="Show a traceback when a command fails.")
     p.add_argument("--version",action="version",version=__version__)

@@ -5,4 +5,5 @@ __pycache__/
 .omicsbench-cache/
 .snakemake/
 build/
+dist/
 staging/
