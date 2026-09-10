@@ -34,7 +34,8 @@ Homepage = "https://github.com/vxxqv/openomicsbench"
 Repository = "https://github.com/vxxqv/openomicsbench"
 Issues = "https://github.com/vxxqv/openomicsbench/issues"
 Changelog = "https://github.com/vxxqv/openomicsbench/blob/main/CHANGELOG.md"
-Archive = "https://doi.org/10.5281/zenodo.22551734"
+Zenodo = "https://doi.org/10.5281/zenodo.22551734"
+ORCID = "https://orcid.org/0009-0005-1859-5107"
 
 [tool.setuptools.packages.find]
 where = ["src"]
