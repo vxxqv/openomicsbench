@@ -180,8 +180,15 @@ class CoreTests(unittest.TestCase):
         result=subprocess.run([sys.executable,str(ROOT/'workflows/build_fixture.py'),str(destination)],capture_output=True,text=True)
         self.assertEqual(result.returncode,0,result.stderr)
         rebuilt=destination/'datasets/rnaseq/fixture-001'
+        runtime_records={'manifest.json','provenance/transform.json'}
         for original in self.folder.rglob('*'):
-            if original.is_file():self.assertEqual(digest(original),digest(rebuilt/original.relative_to(self.folder)))
+            relative=original.relative_to(self.folder).as_posix()
+            if original.is_file() and relative not in runtime_records:
+                self.assertEqual(digest(original),digest(rebuilt/relative),relative)
+        rebuilt_model,rebuilt_folder=lookup(destination,'fixture-001')
+        self.assertEqual(validate(rebuilt_model,rebuilt_folder)['status'],'pass')
+        self.assertEqual(rebuilt_model.derivation.seed,self.model.derivation.seed)
+        self.assertEqual(rebuilt_model.derivation.parameters,self.model.derivation.parameters)
 
     def test_atlas_accession(self):
         self.assertEqual(normalize_accession('e-mtab-8572'),'E-MTAB-8572')
