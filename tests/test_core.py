@@ -141,6 +141,14 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(verify_cache(self.root,self.root/'cache')['verified_files'],1)
         (path/'nano/counts.tsv').write_text('bad')
         with self.assertRaisesRegex(ValueError,'corrupt'):verify_cache(self.root,self.root/'cache')
+    def test_cache_rejects_unavailable_tier(self):
+        path=get(self.root,self.root/'cache','fixture-001','nano')
+        marker=path/'nano.complete.json'
+        receipt=json.loads(marker.read_text())
+        receipt['tier']='missing'
+        receipt['files']=[]
+        marker.write_text(json.dumps(receipt))
+        with self.assertRaisesRegex(ValueError,'unavailable tier'):verify_cache(self.root,self.root/'cache')
     def test_failed_download_atomic(self):
         target=self.root/'cache/file.tsv'
         with self.assertRaises(ValueError):transfer(self.folder/'nano/counts.tsv',target,'0'*64,10)

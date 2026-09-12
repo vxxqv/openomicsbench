@@ -1,5 +1,9 @@
 # Changes
 
+## 1.0.4
+
+Cache verification now rejects completion receipts that name a dataset tier which is not declared by the current manifest. This keeps verification fail-closed when local cache metadata is altered or stale.
+
 ## 1.0.3
 
 Version 1.0.3 is the first PyPI release. The publishing workflow now fetches the complete tag history needed to certify the frozen version 1 release before upload.

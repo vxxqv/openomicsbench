@@ -28,12 +28,22 @@ def verify_cache(root: Path, cache: Path) -> dict:
     records = registry(root)
     checked = 0
     for marker in cache.glob("*/*/*/*.complete.json"):
-        receipt = json.loads(marker.read_text(encoding="utf-8"))
-        model, folder = records[receipt["id"]]
+        try:
+            receipt = json.loads(marker.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            raise ValueError(f"{marker}: cache receipt is not valid JSON") from exc
+        dataset_id = receipt.get("id")
+        if dataset_id not in records:
+            raise ValueError(f"{marker}: cache receipt names an unknown dataset")
+        tier = receipt.get("tier")
+        model, folder = records[dataset_id]
+        expected = {f.path:f for f in model.files if f.tier == tier}
+        if not expected:
+            raise ValueError(f"{marker}: cache receipt names an unavailable tier")
         if receipt["release"] != model.release or receipt["manifest_sha256"] != digest(folder / "manifest.json"):
             raise ValueError(f"{marker}: cache receipt does not match the current manifest")
-        expected = {f.path:f for f in model.files if f.tier == receipt["tier"]}
-        if set(receipt["files"]) != set(expected) or len(receipt["files"]) != len(expected):
+        files = receipt.get("files")
+        if not isinstance(files, list) or set(files) != set(expected) or len(files) != len(expected):
             raise ValueError(f"{marker}: incomplete cache receipt")
         for name, f in expected.items():
             p = contained(marker.parent, name)
