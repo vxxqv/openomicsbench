@@ -4,7 +4,7 @@ OpenOmicsBench provides compact bulk RNA-seq count matrices for testing analysis
 
 The version 1 collection contains 12 benchmark objects drawn from seven Expression Atlas studies. It covers human, mouse and Arabidopsis data, with balanced knockouts, paired tumour samples, factorial infection experiments, RNA interference and disease comparisons. The objects are tests of software and methods. They are not clinical reference data and do not replace the full source studies.
 
-The published [0.1.0.dev0 prerelease](https://doi.org/10.5281/zenodo.22551735) records the earlier infrastructure baseline. [Version 1.0.0](https://doi.org/10.5281/zenodo.22679414) is the first complete collection release.
+The published [0.1.0.dev0 prerelease](https://doi.org/10.5281/zenodo.22551735) records the earlier infrastructure baseline. [Version 1.0.0](https://doi.org/10.5281/zenodo.22679414) is the first complete collection release. The [concept DOI](https://doi.org/10.5281/zenodo.22551734) always resolves to the latest archived version.
 
 ## Quickstart
 
@@ -20,6 +20,18 @@ omicsbench validate rnaseq-002
 `omicsbench validate` checks the manifest, file inventory, byte counts, SHA-256 hashes, sample order, matrix shape and unchanged integer counts. It then recomputes the four declared preservation metrics. The installed package includes the complete collection, so these commands work without a repository checkout or network connection.
 
 Use `omicsbench get rnaseq-002 --size pocket` to copy a verified tier into the local cache. Use `omicsbench provenance rnaseq-002` to inspect its source and transformation record. Every public command includes an example in its help text.
+
+## Compare analysis results
+
+Version 1.1 can compare results from another differential-expression tool with the full-source DESeq2 reference for a biological object:
+
+```sh
+omicsbench compare rnaseq-002 results.csv
+```
+
+The input may be comma-separated or tab-separated and must contain `gene_id` and `log2_fold_change` columns. Gene identifiers must be unique and effects must be finite. The JSON report gives rank correlation, top-50 overlap, sign agreement, coverage, missing and unexpected identifiers, and the threshold decision for each metric. A passing comparison exits with status 0. A completed comparison below the thresholds exits with status 2, allowing test pipelines to distinguish a scientific mismatch from invalid input.
+
+The reference effects come from the same full-source DESeq2 1.50.2 runs used to certify the pocket matrices. The synthetic fixture has no DESeq2 reference and cannot be used with this command.
 
 ## Version 1 collection
 

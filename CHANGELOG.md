@@ -1,5 +1,11 @@
 # Changes
 
+## 1.1.0
+
+OpenOmicsBench can now compare a CSV or TSV table of gene-level log2 fold changes with the full-source DESeq2 reference for any biological object. The report records effect-rank correlation, top-gene overlap, sign agreement, gene coverage, missing and unexpected identifiers, the declared thresholds and a pass or fail decision suitable for automated tests.
+
+Finite DESeq2 reference effects are bundled as deterministic compressed tables. Their source outputs are checked against the existing evidence hashes before packaging. The synthetic fixture remains available for infrastructure tests but is not presented as a DESeq2 comparison reference.
+
 ## 1.0.4
 
 Cache verification now rejects completion receipts that name a dataset tier which is not declared by the current manifest. This keeps verification fail-closed when local cache metadata is altered or stale.
