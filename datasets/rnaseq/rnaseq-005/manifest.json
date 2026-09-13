@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "id": "rnaseq-005",
   "title": "Paired prostate tumour and adjacent tissue",
-  "release": "1.0.0",
+  "release": "1.1.0",
   "assay": "bulk_rna_seq",
   "kind": "real",
   "status": "validated",
@@ -282,6 +282,14 @@
       "sha256": "9313275f96439f2a2cb33665cc0394fa394713dc222993fcc6a0d908934212e6"
     },
     {
+      "path": "expected/reference-effects.tsv.gz",
+      "tier": "expected",
+      "role": "effects",
+      "media_type": "application/gzip",
+      "bytes": 565251,
+      "sha256": "cac666bd78cbb8962e75ea82f4f15f9da4c5aa4cfbd568583462f54f2cd9a853"
+    },
+    {
       "path": "expected/source-counts.tsv",
       "tier": "expected",
       "role": "baseline",
@@ -294,8 +302,8 @@
       "tier": "expected",
       "role": "metrics",
       "media_type": "application/json",
-      "bytes": 886,
-      "sha256": "b65951d90b70e399e95d8f462cb9a6bb1df28a6aef2d67e49566014a27d3bd00"
+      "bytes": 946,
+      "sha256": "0edd2be398ed2b9296eb31500b3f85b57e4e95a5fddcf4951d5fcbba07358983"
     },
     {
       "path": "pocket/counts.tsv",

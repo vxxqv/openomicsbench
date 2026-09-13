@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "id": "rnaseq-007",
   "title": "ELP3 depletion in BT549 breast cancer cells",
-  "release": "1.0.0",
+  "release": "1.1.0",
   "assay": "bulk_rna_seq",
   "kind": "real",
   "status": "validated",
@@ -128,6 +128,14 @@
       "sha256": "c7dbcd84177bdc5fdcf4b6c38b85b3bfc987bf257fe721061e9674cbecf9f0c0"
     },
     {
+      "path": "expected/reference-effects.tsv.gz",
+      "tier": "expected",
+      "role": "effects",
+      "media_type": "application/gzip",
+      "bytes": 299728,
+      "sha256": "d77d2151175ba95ddd3b9645cdf2ae15d06bb2c556b5451e2359f51d553bca6e"
+    },
+    {
       "path": "expected/source-counts.tsv",
       "tier": "expected",
       "role": "baseline",
@@ -140,8 +148,8 @@
       "tier": "expected",
       "role": "metrics",
       "media_type": "application/json",
-      "bytes": 489,
-      "sha256": "a008fd99ad7b45870e2dd1b474b70aaa11e2063f3433d41a76203f55c6252690"
+      "bytes": 549,
+      "sha256": "afe33d2000598a816c20b7b413f6bc5fa6d3f295c966c99985da7bb8caf4f1dc"
     },
     {
       "path": "pocket/counts.tsv",

@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "id": "rnaseq-011",
   "title": "Phytophthora response in gsnor1 Arabidopsis",
-  "release": "1.0.0",
+  "release": "1.1.0",
   "assay": "bulk_rna_seq",
   "kind": "real",
   "status": "validated",
@@ -128,6 +128,14 @@
       "sha256": "de3179c8507c6383c5dc711e036ae9ec5242840b56e74688127664e7566ddef4"
     },
     {
+      "path": "expected/reference-effects.tsv.gz",
+      "tier": "expected",
+      "role": "effects",
+      "media_type": "application/gzip",
+      "bytes": 284555,
+      "sha256": "9ca8ddc08e31ace0131439c5ba6e137d1747f32ce0339cab93ea201b1a3a8c79"
+    },
+    {
       "path": "expected/source-counts.tsv",
       "tier": "expected",
       "role": "baseline",
@@ -140,8 +148,8 @@
       "tier": "expected",
       "role": "metrics",
       "media_type": "application/json",
-      "bytes": 542,
-      "sha256": "2a3290d9a70bc5869f057a0612108c45a42a992495ad98aaa2340d8317974d80"
+      "bytes": 602,
+      "sha256": "56d8f9042fe9cffeb3777c7c39072aa53608d4a3b778a4035ee67eb19982e36d"
     },
     {
       "path": "pocket/counts.tsv",

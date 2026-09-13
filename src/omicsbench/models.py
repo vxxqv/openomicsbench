@@ -51,7 +51,7 @@ def safe_relative(value: str) -> str:
 class File(StrictModel):
     path: str = Field(description="Normalized path inside the dataset directory.")
     tier: Literal["nano", "pocket", "expected", "metadata"] = Field(description="Size or function class used for retrieval and validation.")
-    role: Literal["raw_counts", "samples", "fastq_r1", "fastq_r2", "quantification", "tx2gene", "baseline", "metrics", "figure", "provenance", "documentation", "license", "reference"] = Field(description="File purpose used by the validator and command line tools.")
+    role: Literal["raw_counts", "samples", "fastq_r1", "fastq_r2", "quantification", "tx2gene", "baseline", "effects", "metrics", "figure", "provenance", "documentation", "license", "reference"] = Field(description="File purpose used by the validator and command line tools.")
     sample_id: str | None = Field(default=None, description="Sample linked to this file when the file is sample-specific.")
     media_type: str = Field(min_length=1, description="Internet media type for the file content.")
     bytes: int = Field(ge=0, strict=True, description="Expected file size in bytes.")

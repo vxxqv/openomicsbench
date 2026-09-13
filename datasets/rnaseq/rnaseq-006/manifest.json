@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "id": "rnaseq-006",
   "title": "Arabidopsis infection response adjusted for genotype",
-  "release": "1.0.0",
+  "release": "1.1.0",
   "assay": "bulk_rna_seq",
   "kind": "real",
   "status": "validated",
@@ -170,6 +170,14 @@
       "sha256": "d6abd1daab860e05fc6225faaaba9e1ffe0f0c111ac089467775af507936ada7"
     },
     {
+      "path": "expected/reference-effects.tsv.gz",
+      "tier": "expected",
+      "role": "effects",
+      "media_type": "application/gzip",
+      "bytes": 295095,
+      "sha256": "519646ca1d29750b955a3245e530765d3f7ef7a041910c58596a00e9f1788dba"
+    },
+    {
       "path": "expected/source-counts.tsv",
       "tier": "expected",
       "role": "baseline",
@@ -182,8 +190,8 @@
       "tier": "expected",
       "role": "metrics",
       "media_type": "application/json",
-      "bytes": 607,
-      "sha256": "cc989d7ef1e80163a5b99402f7b7c7acf38fafe8eb7f6d720414bd8c6af66da5"
+      "bytes": 667,
+      "sha256": "76cb32cc5268853f88b90f6828870b78dd65c18f2280ff545a266ee689970835"
     },
     {
       "path": "pocket/counts.tsv",

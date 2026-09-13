@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "id": "rnaseq-012",
   "title": "Dmd-mdx myoblasts compared with wild type",
-  "release": "1.0.0",
+  "release": "1.1.0",
   "assay": "bulk_rna_seq",
   "kind": "real",
   "status": "validated",
@@ -128,6 +128,14 @@
       "sha256": "b915e1c6a626cb0d2a5b34a4d4c423aa8410b31cae747c7dc058dc29b53fd5a3"
     },
     {
+      "path": "expected/reference-effects.tsv.gz",
+      "tier": "expected",
+      "role": "effects",
+      "media_type": "application/gzip",
+      "bytes": 324362,
+      "sha256": "d3b79cb96b1d6b1adf799a1d91dff24e07c859f78bc47a5df21af84c0eaeafa1"
+    },
+    {
       "path": "expected/source-counts.tsv",
       "tier": "expected",
       "role": "baseline",
@@ -140,8 +148,8 @@
       "tier": "expected",
       "role": "metrics",
       "media_type": "application/json",
-      "bytes": 528,
-      "sha256": "bfe7c5c8f63bde2ae0c66d9f493136b6e8356a7daed559c799c6b404383b811d"
+      "bytes": 588,
+      "sha256": "552b86b44003087e66f1d9ffcf17bd3a04a7ae6b9e0bddb8cacdece80954cc0a"
     },
     {
       "path": "pocket/counts.tsv",

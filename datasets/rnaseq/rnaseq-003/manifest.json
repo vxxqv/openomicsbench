@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "id": "rnaseq-003",
   "title": "AtRsgA knockout in Arabidopsis seedlings",
-  "release": "1.0.0",
+  "release": "1.1.0",
   "assay": "bulk_rna_seq",
   "kind": "real",
   "status": "validated",
@@ -128,6 +128,14 @@
       "sha256": "8b82add318a21cac1d1d381144fb40fdd62eec9154f0f3875e4fb40dc40a219f"
     },
     {
+      "path": "expected/reference-effects.tsv.gz",
+      "tier": "expected",
+      "role": "effects",
+      "media_type": "application/gzip",
+      "bytes": 285355,
+      "sha256": "d390689ca4251123f1aed2f637ec65199bc05162e9f9c8ed04c15f6a1c67d437"
+    },
+    {
       "path": "expected/source-counts.tsv",
       "tier": "expected",
       "role": "baseline",
@@ -140,8 +148,8 @@
       "tier": "expected",
       "role": "metrics",
       "media_type": "application/json",
-      "bytes": 481,
-      "sha256": "38d332b98802ac71a1679abc6fbbd6f17011a09b7690402494c5ec4e91958ac6"
+      "bytes": 541,
+      "sha256": "eb62d83dbf551e956dcdc5164a58f31cd34b0962b2b67397ef748a84d009acd0"
     },
     {
       "path": "pocket/counts.tsv",

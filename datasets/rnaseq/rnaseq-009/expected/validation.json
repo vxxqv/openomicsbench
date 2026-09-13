@@ -28,5 +28,6 @@
     "batch_column": "Factor Value[infect]",
     "subset": {}
   },
-  "deseq2_evidence": "expected/deseq2.json"
+  "deseq2_evidence": "expected/deseq2.json",
+  "reference_effects": "expected/reference-effects.tsv.gz"
 }

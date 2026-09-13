@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "id": "rnaseq-013",
   "title": "Dmd-mdx-beta-geo myoblasts compared with wild type",
-  "release": "1.0.0",
+  "release": "1.1.0",
   "assay": "bulk_rna_seq",
   "kind": "real",
   "status": "validated",
@@ -128,6 +128,14 @@
       "sha256": "cf5cf4ed39a22d95418c30a5f2440908c4eb588d6b709da1092dc58aa62e290f"
     },
     {
+      "path": "expected/reference-effects.tsv.gz",
+      "tier": "expected",
+      "role": "effects",
+      "media_type": "application/gzip",
+      "bytes": 319853,
+      "sha256": "b28b89098db3e77cf8bd9cc7d4dddb097fec484e26c2d80c6042d66fa976ebac"
+    },
+    {
       "path": "expected/source-counts.tsv",
       "tier": "expected",
       "role": "baseline",
@@ -140,8 +148,8 @@
       "tier": "expected",
       "role": "metrics",
       "media_type": "application/json",
-      "bytes": 538,
-      "sha256": "0e80b819158d54ba6b582e606104bb497c470fc3af02288383f33ecaaf456d59"
+      "bytes": 598,
+      "sha256": "82a487e98d29902fcf24c8b38ffdf540e50add7bea796d5e0c537ebb5d33e69e"
     },
     {
       "path": "pocket/counts.tsv",

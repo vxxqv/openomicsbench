@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "id": "rnaseq-010",
   "title": "Phytophthora response in wild-type Arabidopsis",
-  "release": "1.0.0",
+  "release": "1.1.0",
   "assay": "bulk_rna_seq",
   "kind": "real",
   "status": "validated",
@@ -128,6 +128,14 @@
       "sha256": "ea7874683f6b68a6c22ebfa2f672cb277c685394302f99ead05e6ff1ab2c6766"
     },
     {
+      "path": "expected/reference-effects.tsv.gz",
+      "tier": "expected",
+      "role": "effects",
+      "media_type": "application/gzip",
+      "bytes": 284864,
+      "sha256": "ab224ad619aeb712d3e8cd8064d78c7729901cb6c5d3060497a42f3d5d724dad"
+    },
+    {
       "path": "expected/source-counts.tsv",
       "tier": "expected",
       "role": "baseline",
@@ -140,8 +148,8 @@
       "tier": "expected",
       "role": "metrics",
       "media_type": "application/json",
-      "bytes": 554,
-      "sha256": "eda95c9ce70adaa14936a5aa63595153446682ba4339bd9f0357aec5916d765d"
+      "bytes": 614,
+      "sha256": "6e030fb2e58a37ffa7b7a75a0c99c01d68c77801ed86c1ea2b51a8e7832d9dad"
     },
     {
       "path": "pocket/counts.tsv",

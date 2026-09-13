@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "id": "rnaseq-002",
   "title": "SLC2A5 knockout in A549 xenografts",
-  "release": "1.0.0",
+  "release": "1.1.0",
   "assay": "bulk_rna_seq",
   "kind": "real",
   "status": "validated",
@@ -156,6 +156,14 @@
       "sha256": "2b1dcbc2be03db1165155212e1c9685ae2f027ec112ac18ab3f9f7b0fba1a151"
     },
     {
+      "path": "expected/reference-effects.tsv.gz",
+      "tier": "expected",
+      "role": "effects",
+      "media_type": "application/gzip",
+      "bytes": 328599,
+      "sha256": "b8ce3a3fc15a9ea601e7babd7cc9432c03715018773feeb827430d576a82e5a7"
+    },
+    {
       "path": "expected/source-counts.tsv",
       "tier": "expected",
       "role": "baseline",
@@ -168,8 +176,8 @@
       "tier": "expected",
       "role": "metrics",
       "media_type": "application/json",
-      "bytes": 554,
-      "sha256": "c99f451861ae209c23c99f1ee05f5b5b9c64a48f44ad3ef83271d1c15ad1f139"
+      "bytes": 614,
+      "sha256": "9215f67ec95cd4635b4b8d3776308f351b711ffe57f44b2b439d9bc66eb2e789"
     },
     {
       "path": "pocket/counts.tsv",

@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "id": "rnaseq-004",
   "title": "Klf1 knockout in mouse erythroid tissue",
-  "release": "1.0.0",
+  "release": "1.1.0",
   "assay": "bulk_rna_seq",
   "kind": "real",
   "status": "validated",
@@ -128,6 +128,14 @@
       "sha256": "15e1af3b622e9d3958be39ab70b4c05a11dcecb8de858e4b439f740810617e2f"
     },
     {
+      "path": "expected/reference-effects.tsv.gz",
+      "tier": "expected",
+      "role": "effects",
+      "media_type": "application/gzip",
+      "bytes": 306357,
+      "sha256": "b60846ad8bccac1f0f2a1dd621abb72f1156d85e306c47f858af8d9dea7ef37b"
+    },
+    {
       "path": "expected/source-counts.tsv",
       "tier": "expected",
       "role": "baseline",
@@ -140,8 +148,8 @@
       "tier": "expected",
       "role": "metrics",
       "media_type": "application/json",
-      "bytes": 475,
-      "sha256": "08ae0885c7caa2d5177aaea26d6b83bede2cd736fdfa26e05c79dfc1a121acd3"
+      "bytes": 535,
+      "sha256": "cc20d09557ab92200383fce8687596a80c9074698b360bf084f45134695cd929"
     },
     {
       "path": "pocket/counts.tsv",
