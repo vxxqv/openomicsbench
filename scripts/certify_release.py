@@ -57,7 +57,12 @@ def check_author_metadata(metadata: dict, blockers: list[str]) -> None:
     if len(creators) != 1 or creators[0].get("name") != "Vivaan Patni" or creators[0].get("orcid") != expected_orcid:
         blockers.append("Zenodo creator metadata differs from the approved author record.")
 
-    citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
+    release_commit = metadata.get("release_commit")
+    git = os.environ.get("OPENOMICSBENCH_GIT", "git")
+    citation = subprocess.run(
+        [git, "-c", f"safe.directory={ROOT.as_posix()}", "show", f"{release_commit}:CITATION.cff"],
+        cwd=ROOT, check=True, capture_output=True, text=True,
+    ).stdout
     required_lines = (
         'version: "1.0.0"',
         'family-names: "Patni"',

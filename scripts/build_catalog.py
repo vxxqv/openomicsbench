@@ -57,7 +57,7 @@ def write_catalog(rows: list[dict]) -> None:
     catalog.mkdir(exist_ok=True)
     payload = {
         "schema_version": "1.0",
-        "release": "1.0.0",
+        "release": "1.1.0",
         "biological_objects": len(rows),
         "source_studies": len({row["source_accession"] for row in rows}),
         "objects": rows,
