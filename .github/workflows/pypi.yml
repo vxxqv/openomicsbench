@@ -41,6 +41,8 @@ jobs:
           cd /tmp
           /tmp/openomicsbench-smoke/bin/omicsbench list --assay bulk_rna_seq
           /tmp/openomicsbench-smoke/bin/omicsbench validate rnaseq-002
+          reference=$(/tmp/openomicsbench-smoke/bin/python -c 'from omicsbench.registry import default_root; print(default_root() / "datasets/rnaseq/rnaseq-002/expected/reference-effects.tsv.gz")')
+          /tmp/openomicsbench-smoke/bin/omicsbench compare rnaseq-002 "$reference"
       - uses: actions/upload-artifact@v7
         with:
           name: python-package
