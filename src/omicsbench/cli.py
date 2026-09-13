@@ -8,6 +8,7 @@ from pathlib import Path
 from . import __version__
 from .registry import default_root, registry, lookup
 from .cache import get, verify_cache
+from .compare import compare
 from .validate import validate
 
 def main():
@@ -17,15 +18,18 @@ def main():
     p.add_argument("--debug",action="store_true",help="Show a traceback when a command fails.")
     p.add_argument("--version",action="version",version=__version__)
     sub = p.add_subparsers(dest="command",required=True)
-    examples = {"list":"list --assay bulk_rna_seq","info":"info fixture-001","get":"get fixture-001 --size nano","validate":"validate fixture-001","provenance":"provenance fixture-001","verify-cache":"verify-cache","doctor":"doctor"}
+    examples = {"list":"list --assay bulk_rna_seq","info":"info fixture-001","get":"get fixture-001 --size nano","validate":"validate fixture-001","compare":"compare rnaseq-002 results.csv","provenance":"provenance fixture-001","verify-cache":"verify-cache","doctor":"doctor"}
     for name,example in examples.items():
-        command = sub.add_parser(name,help={"list":"List local manifests.","info":"Show files, rights and limitations.","get":"Cache an exact tier after checking hashes.","validate":"Check declared files and recompute metrics.","provenance":"Show source and transformations.","verify-cache":"Verify completed cache entries.","doctor":"Check local runtime and optional tools."}[name],epilog=f"Example: omicsbench {example}")
-        if name in {"info","get","validate","provenance"}:
+        command = sub.add_parser(name,help={"list":"List local manifests.","info":"Show files, rights and limitations.","get":"Cache an exact tier after checking hashes.","validate":"Check declared files and recompute metrics.","compare":"Compare differential-expression effects with the full reference.","provenance":"Show source and transformations.","verify-cache":"Verify completed cache entries.","doctor":"Check local runtime and optional tools."}[name],epilog=f"Example: omicsbench {example}")
+        if name in {"info","get","validate","compare","provenance"}:
             command.add_argument("id",help="Stable dataset identifier.")
         if name == "get":
             command.add_argument("--size",choices=["nano","pocket","expected"],default="nano")
         if name == "list":
             command.add_argument("--assay",choices=["bulk_rna_seq"])
+        if name == "compare":
+            command.add_argument("results",type=Path,help="CSV or TSV file with gene_id and log2_fold_change columns.")
+            command.add_argument("--detail-limit",type=int,default=20,help="Maximum missing and unexpected gene examples to return.")
     args = p.parse_args()
     try:
         if args.command == "list":
@@ -42,9 +46,13 @@ def main():
                 out = {"id":model.id,"source":model.source.model_dump(mode="json"),"rights":model.rights.model_dump(mode="json"),"derivation":model.derivation.model_dump(mode="json")}
             elif args.command == "get":
                 out = {"cache_directory":str(get(args.root,args.cache,args.id,args.size).resolve())}
+            elif args.command == "compare":
+                out = compare(model,folder,args.results,args.detail_limit)
             else:
                 out = validate(model,folder)
         print(json.dumps(out,indent=2,allow_nan=False))
+        if args.command == "compare" and out["status"] == "fail":
+            sys.exit(2)
     except (ValueError,OSError,KeyError) as exc:
         if args.debug:
             raise

@@ -221,6 +221,23 @@ class CoreTests(unittest.TestCase):
     def test_cli_invalid_exit(self):
         result=subprocess.run([sys.executable,'-m','omicsbench','--root',str(self.root),'info','missing'],capture_output=True,text=True)
         self.assertEqual(result.returncode,1);self.assertNotIn('Traceback',result.stderr)
+
+    def test_cli_compare_exit_codes(self):
+        model,folder=lookup(self.root,'rnaseq-002')
+        reference=read_effects(folder/'expected/reference-effects.tsv.gz')
+        result_path=self.root/'results.csv'
+        def run(multiplier):
+            result_path.write_text('gene_id,log2_fold_change\n'+''.join(f'{gene},{value*multiplier}\n' for gene,value in reference.items()),encoding='utf-8')
+            return subprocess.run(
+                [sys.executable,'-m','omicsbench','--root',str(self.root),'compare',model.id,str(result_path)],
+                capture_output=True,text=True,
+            )
+        passed=run(1)
+        self.assertEqual(passed.returncode,0,passed.stderr)
+        self.assertEqual(json.loads(passed.stdout)['status'],'pass')
+        failed=run(-1)
+        self.assertEqual(failed.returncode,2,failed.stderr)
+        self.assertEqual(json.loads(failed.stdout)['status'],'fail')
     def test_fixture_rebuild(self):
         destination=self.root/'rebuilt'
         result=subprocess.run([sys.executable,str(ROOT/'workflows/build_fixture.py'),str(destination)],capture_output=True,text=True)
