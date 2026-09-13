@@ -17,6 +17,7 @@ from omicsbench.hashing import digest, contained
 from omicsbench.cache import get, verify_cache
 from omicsbench.download import transfer
 from omicsbench.validate import validate
+from omicsbench.compare import compare,read_effects
 from omicsbench.rnaseq import ranked,correlation,check_design,contrast_selection_order,median_ratio_size_factors,select_genes,paired_sample,read_counts,preservation
 from omicsbench.expression_atlas import load_design,load_design_fields,normalize_accession,parse_catalogue,select_design_samples,stage
 
@@ -78,6 +79,43 @@ class CoreTests(unittest.TestCase):
         declared=next(file for file in self.model.files if file.path==self.model.validation.profile)
         declared.bytes=profile_path.stat().st_size;declared.sha256=digest(profile_path)
         self.assertEqual(validate(self.model,self.folder)['status'],'pass')
+
+    def test_compare_reference_effects(self):
+        model,folder=lookup(self.root,'rnaseq-002')
+        reference=read_effects(folder/'expected/reference-effects.tsv.gz')
+        result=self.root/'results.csv'
+        result.write_text('gene_id,log2_fold_change\n'+''.join(f'{gene},{value}\n' for gene,value in reference.items()),encoding='utf-8')
+        report=compare(model,folder,result)
+        self.assertEqual(report['status'],'pass')
+        self.assertEqual(report['genes']['missing'],0)
+        self.assertEqual(report['genes']['unexpected'],0)
+        self.assertTrue(all(report['checks'].values()))
+
+    def test_compare_reports_bad_effects_and_gene_universe(self):
+        model,folder=lookup(self.root,'rnaseq-002')
+        reference=read_effects(folder/'expected/reference-effects.tsv.gz')
+        result=self.root/'results.tsv'
+        rows=[f'{gene}\t{-value}\n' for gene,value in reference.items()]
+        rows.append('not-in-reference\t1\n')
+        result.write_text('gene_id\tlog2_fold_change\n'+''.join(rows),encoding='utf-8')
+        report=compare(model,folder,result,detail_limit=3)
+        self.assertEqual(report['status'],'fail')
+        self.assertFalse(report['checks']['spearman_logfc'])
+        self.assertFalse(report['checks']['sign_concordance'])
+        self.assertEqual(report['genes']['unexpected_examples'],['not-in-reference'])
+
+    def test_compare_rejects_invalid_input(self):
+        model,folder=lookup(self.root,'rnaseq-002')
+        for body,message in [
+            ('gene_id,wrong\ng1,1\n','required columns'),
+            ('gene_id,log2_fold_change\ng1,1\ng1,2\n','duplicate gene_id'),
+            ('gene_id,log2_fold_change\ng1,NaN\n','must be finite'),
+        ]:
+            result=self.root/'bad.csv';result.write_text(body,encoding='utf-8')
+            with self.subTest(message=message),self.assertRaisesRegex(ValueError,message):
+                compare(model,folder,result)
+        with self.assertRaisesRegex(ValueError,'no differential-expression'):
+            compare(self.model,self.folder,self.root/'bad.csv')
     def test_corruption(self):
         path=self.folder/'nano/counts.tsv';body=path.read_bytes();path.write_bytes(body[:-1]+b'x')
         with self.assertRaisesRegex(ValueError,'checksum'):validate(self.model,self.folder)
