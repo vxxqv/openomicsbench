@@ -26,19 +26,19 @@
     "date": "2026-09-20",
     "operating_system": "Windows",
     "python": "3.12.14",
-    "commit": "81fd4f43afff9ed7d2929ba9242a5e1ebcd41c7f",
+    "commit": "1c4e0aa8d9ea22415243c0023c80452825deabbe",
     "commands": [
       "python -m pip install -r requirements-tested.txt",
       "python -m pip install --no-deps openomicsbench-2.0.0-py3-none-any.whl",
       "omicsbench --version",
-      "omicsbench list --assay sequence_dna",
-      "omicsbench validate sequence-004",
-      "omicsbench assay info whole-genome",
-      "omicsbench seq qc <packaged sequence-001 FASTA> --molecule dna"
+      "omicsbench list --assay whole_genome_dna_seq",
+      "omicsbench validate sequence-005",
+      "omicsbench seq protein-stats <packaged sequence-003 FASTA> --ph 7.4",
+      "omicsbench seq digest <packaged sequence-003 FASTA> --enzyme trypsin --missed-cleavages 1"
     ],
     "outcome": "pass",
-    "wheel_bytes": 10792096,
-    "sdist_bytes": 10664248,
+    "wheel_bytes": 10800626,
+    "sdist_bytes": 10671091,
     "packaged_collection": true,
     "limitation": "The release preparer ran the clean-room trial. No independent tester is claimed."
   },
