@@ -23,22 +23,46 @@ class SequenceFixtureTests(unittest.TestCase):
     def test_registered_sequence_fixtures(self):
         records = registry(ROOT)
         identifiers = [identifier for identifier in records if identifier.startswith("sequence-")]
-        self.assertEqual(identifiers, ["sequence-001", "sequence-002", "sequence-003", "sequence-004"])
+        self.assertEqual(identifiers, ["sequence-001", "sequence-002", "sequence-003", "sequence-004", "sequence-005"])
         expected = {
             "sequence-001": ("sequence_dna", "dna", "fasta", False),
             "sequence-002": ("sequence_rna", "rna", "fasta", False),
             "sequence-003": ("sequence_protein", "protein", "fasta", False),
             "sequence-004": ("short_read_dna", "dna", "fastq", True),
+            "sequence-005": ("whole_genome_dna_seq", "dna", "fastq", True),
         }
         for identifier in identifiers:
             model, _ = records[identifier]
             self.assertEqual((model.assay, model.sequence.molecule, model.sequence.format, model.sequence.paired), expected[identifier])
 
     def test_all_sequence_fixtures_validate(self):
-        for identifier in ["sequence-001", "sequence-002", "sequence-003", "sequence-004"]:
+        for identifier in ["sequence-001", "sequence-002", "sequence-003", "sequence-004", "sequence-005"]:
             model, folder = lookup(ROOT, identifier)
             with self.subTest(identifier=identifier):
                 self.assertEqual(validate(model, folder)["status"], "pass")
+
+    def test_dnaseq_truth_is_reference_checked_and_read_supported(self):
+        model, folder = lookup(ROOT, "sequence-005")
+        report = validate(model, folder)
+        self.assertEqual(report["variant_truth"]["variants"], 3)
+        self.assertEqual(report["variant_truth"]["read_supported"], 3)
+
+    def test_dnaseq_truth_drift_is_detected(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary)
+            shutil.copytree(ROOT / "datasets", target / "datasets")
+            model, folder = lookup(target, "sequence-005")
+            path = folder / "expected/variants.tsv"
+            lines = path.read_text(encoding="utf-8").splitlines()
+            fields = lines[1].split("\t")
+            fields[1] = next(base for base in "ACGT" if base != fields[1])
+            lines[1] = "\t".join(fields)
+            path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+            record = next(item for item in model.files if item.path == "expected/variants.tsv")
+            record.bytes = path.stat().st_size
+            record.sha256 = digest(path)
+            with self.assertRaisesRegex(ValueError, "truth disagrees"):
+                validate(model, folder)
 
     def test_sequence_summary_drift_is_detected(self):
         with tempfile.TemporaryDirectory() as temporary:

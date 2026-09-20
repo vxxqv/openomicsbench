@@ -1,0 +1,78 @@
+{
+  "profile": "sequence-summary-v1",
+  "files": [
+    {
+      "path": "nano/reads_R1.fastq",
+      "expected": {
+        "format": "fastq",
+        "molecule": "dna",
+        "records": 20,
+        "letters": 2000,
+        "length": {
+          "minimum": 100,
+          "maximum": 100,
+          "mean": 100.0,
+          "median": 100.0,
+          "n50": 100,
+          "l50": 10
+        },
+        "composition": {
+          "A": 437,
+          "C": 491,
+          "G": 529,
+          "T": 543
+        },
+        "gc_fraction": 0.51,
+        "ambiguity_fraction": 0.0,
+        "duplicate_sequences": 0,
+        "quality": {
+          "encoding": "phred33",
+          "minimum": 40,
+          "maximum": 40,
+          "mean": 40.0,
+          "q20_fraction": 1.0,
+          "q30_fraction": 1.0
+        }
+      }
+    },
+    {
+      "path": "nano/reads_R2.fastq",
+      "expected": {
+        "format": "fastq",
+        "molecule": "dna",
+        "records": 20,
+        "letters": 2000,
+        "length": {
+          "minimum": 100,
+          "maximum": 100,
+          "mean": 100.0,
+          "median": 100.0,
+          "n50": 100,
+          "l50": 10
+        },
+        "composition": {
+          "A": 504,
+          "C": 502,
+          "G": 559,
+          "T": 435
+        },
+        "gc_fraction": 0.5305,
+        "ambiguity_fraction": 0.0,
+        "duplicate_sequences": 0,
+        "quality": {
+          "encoding": "phred33",
+          "minimum": 40,
+          "maximum": 40,
+          "mean": 40.0,
+          "q20_fraction": 1.0,
+          "q30_fraction": 1.0
+        }
+      }
+    }
+  ],
+  "pairs": 20,
+  "reference": "nano/reference.fasta",
+  "variant_truth": "expected/variants.tsv",
+  "variant_count": 3,
+  "context_bases": 10
+}
