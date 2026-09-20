@@ -1,12 +1,16 @@
 {
-  "scope": "v1_biological_collection",
-  "software_version": "1.0.0",
-  "decision": "GO",
+  "scope": "v2_collection",
+  "software_version": "2.0.0",
+  "decision": "NO-GO",
   "preflight": "PASS",
   "certified_biological_objects": 12,
+  "certified_sequence_objects": 5,
   "source_studies": 7,
   "redistributable_pockets": 12,
   "design_archetypes": 12,
   "blockers": [],
-  "deferred_publication_gates": []
+  "deferred_publication_gates": [
+    "version_doi",
+    "post_upload_verification"
+  ]
 }
