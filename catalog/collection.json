@@ -2,7 +2,7 @@
   "schema_version": "2.0",
   "release": "2.0.0",
   "biological_objects": 12,
-  "sequence_objects": 4,
+  "sequence_objects": 5,
   "source_studies": 7,
   "objects": [
     {
@@ -380,6 +380,19 @@
       "files": 2,
       "records": 8,
       "letters": 96,
+      "rights": "GREEN",
+      "license": "Apache-2.0"
+    },
+    {
+      "id": "sequence-005",
+      "title": "Synthetic paired DNA-seq variant benchmark",
+      "assay": "whole_genome_dna_seq",
+      "molecule": "dna",
+      "format": "fastq",
+      "paired": true,
+      "files": 2,
+      "records": 40,
+      "letters": 4000,
       "rights": "GREEN",
       "license": "Apache-2.0"
     }
