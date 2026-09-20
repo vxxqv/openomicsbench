@@ -1,5 +1,7 @@
 import gzip
 import json
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -18,6 +20,14 @@ from omicsbench.sequences import (
     translate,
     trim_record,
     write_records,
+)
+from omicsbench.sequence_tools import (
+    convert_file,
+    deduplicate_file,
+    filter_file,
+    sample_file,
+    transform_file,
+    trim_file,
 )
 
 
@@ -147,6 +157,101 @@ class SequenceTests(unittest.TestCase):
         right = sketch([SequenceRecord("x", "", "ACGT")], k=3)
         with self.assertRaisesRegex(ValueError, "differ in k"):
             compare_sketches(left, right)
+
+    def test_convert_fastq_to_fasta(self):
+        source = self.write("reads.fq", "@a\nACGT\n+\nIIII\n")
+        output = self.root / "reads.fa"
+        report = convert_file(source, output, "fasta", 80, False)
+        self.assertEqual(report["records"], 1)
+        self.assertEqual(output.read_text(), ">a\nACGT\n")
+
+    def test_convert_does_not_invent_qualities(self):
+        source = self.write("input.fa", ">a\nACGT\n")
+        with self.assertRaisesRegex(ValueError, "invented"):
+            convert_file(source, self.root / "output.fq", "fastq", 80, False)
+
+    def test_atomic_output_requires_force(self):
+        source = self.write("input.fa", ">a\nACGT\n")
+        output = self.write("output.fa", "existing\n")
+        with self.assertRaisesRegex(ValueError, "--force"):
+            convert_file(source, output, "fasta", 80, False)
+        convert_file(source, output, "fasta", 80, True)
+        self.assertEqual(output.read_text(), ">a\nACGT\n")
+
+    def test_transform_reverse_complement_preserves_fastq(self):
+        source = self.write("reads.fq", "@a\nACGTN\n+\n!5I?+\n")
+        output = self.root / "reverse.fq"
+        transform_file(source, output, "reverse-complement", "dna", 1, False, False)
+        record = list(read_records(output))[0]
+        self.assertEqual(record.sequence, "NACGT")
+        self.assertEqual(record.quality, "+?I5!")
+
+    def test_transform_translation_drops_quality(self):
+        source = self.write("reads.fq", "@a\nATGGCC\n+\nIIIIII\n")
+        output = self.root / "protein.fa"
+        transform_file(source, output, "translate", "dna", 1, False, False)
+        self.assertEqual(list(read_records(output))[0].sequence, "MA")
+
+    def test_filter_reports_first_reason(self):
+        source = self.write("reads.fq", "@short\nAC\n+\nII\n@lowq\nACGT\n+\n!!!!\n@keep\nGCGC\n+\nIIII\n")
+        output = self.root / "filtered.fq"
+        report = filter_file(source, output, "dna", 4, None, 0.5, None, 0, 30, False)
+        self.assertEqual(report["kept_records"], 1)
+        self.assertEqual(report["removed_by_first_reason"]["short"], 1)
+        self.assertEqual(report["removed_by_first_reason"]["low_quality"], 1)
+
+    def test_trim_discards_short_records(self):
+        source = self.write("reads.fq", "@a\nAACCGG\n+\nIIIIII\n@b\nAA\n+\nII\n")
+        output = self.root / "trimmed.fq"
+        report = trim_file(source, output, 1, 1, None, None, 3, False)
+        self.assertEqual(report["kept_records"], 1)
+        self.assertEqual(report["discarded_short"], 1)
+
+    def test_sampling_is_reproducible_and_ordered(self):
+        source = self.write("input.fa", "".join(f">r{i}\nACGT{'A' if i % 2 == 0 else 'C'}\n" for i in range(10)))
+        first, second = self.root / "one.fa", self.root / "two.fa"
+        sample_file(source, first, 4, None, 17, False)
+        sample_file(source, second, 4, None, 17, False)
+        self.assertEqual(first.read_bytes(), second.read_bytes())
+        identifiers = [record.identifier for record in read_records(first)]
+        self.assertEqual(identifiers, sorted(identifiers, key=lambda value: int(value[1:])))
+
+    def test_deduplicate_keeps_first_record(self):
+        source = self.write("input.fa", ">a\nACGT\n>b\nACGT\n>c\nGGGG\n")
+        output = self.root / "unique.fa"
+        report = deduplicate_file(source, output, "sequence", False)
+        self.assertEqual(report["removed_records"], 1)
+        self.assertEqual([record.identifier for record in read_records(output)], ["a", "c"])
+
+    def test_sequence_cli_commands(self):
+        source = self.write("input.fa", ">a\nACGTACGT\n>b\nACGTTCGT\n")
+        commands = [
+            ["stats", str(source)],
+            ["validate", str(source), "--molecule", "dna"],
+            ["kmers", str(source), "--k", "3", "--canonical"],
+            ["motif", str(source), "ACG", "--both-strands"],
+            ["sketch", str(source), "--k", "3", "--size", "10"],
+            ["compare", str(source), str(source), "--k", "3", "--size", "10"],
+        ]
+        for command in commands:
+            with self.subTest(command=command):
+                result = subprocess.run([sys.executable, "-m", "omicsbench", "seq", *command], capture_output=True, text=True)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                json.loads(result.stdout)
+
+    def test_sequence_cli_file_pipeline(self):
+        source = self.write("reads.fq", "@a\nAACCGG\n+\nIIIIII\n@b\nAACCGT\n+\nIIIIII\n")
+        trimmed = self.root / "trimmed.fq"
+        sampled = self.root / "sampled.fq"
+        commands = [
+            ["trim", str(source), str(trimmed), "--left", "1", "--min-length", "4"],
+            ["sample", str(trimmed), str(sampled), "--count", "1", "--seed", "9"],
+        ]
+        for command in commands:
+            result = subprocess.run([sys.executable, "-m", "omicsbench", "seq", *command], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            json.loads(result.stdout)
+        self.assertEqual(len(list(read_records(sampled))), 1)
 
 
 if __name__ == "__main__":

@@ -9,6 +9,7 @@ from . import __version__
 from .registry import default_root, registry, lookup
 from .cache import get, verify_cache
 from .compare import compare
+from .sequence_cli import add_sequence_parser, run_sequence_command
 from .validate import validate
 
 def main():
@@ -30,9 +31,12 @@ def main():
         if name == "compare":
             command.add_argument("results",type=Path,help="CSV or TSV file with gene_id and log2_fold_change columns.")
             command.add_argument("--detail-limit",type=int,default=20,help="Maximum missing and unexpected gene examples to return.")
+    add_sequence_parser(sub)
     args = p.parse_args()
     try:
-        if args.command == "list":
+        if args.command == "seq":
+            out = run_sequence_command(args)
+        elif args.command == "list":
             out = [{"id":m.id,"title":m.title,"kind":m.kind,"status":m.status,"rights":m.rights.status,"tiers":sorted({f.tier for f in m.files})} for m,_ in registry(args.root).values() if not args.assay or m.assay==args.assay]
         elif args.command == "doctor":
             out = {"python":sys.version.split()[0],"version":__version__,"root_exists":(args.root/"datasets").is_dir(),"cache":str(args.cache.resolve()),"optional_tools":{x:shutil.which(x) for x in ["Rscript","snakemake","docker"]},"network":"not probed; discovery works offline"}
