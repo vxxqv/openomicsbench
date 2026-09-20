@@ -1,7 +1,7 @@
 import json
 from .hashing import digest, contained
 from .rnaseq import read_counts, diagnostic, preservation
-from .sequences import summarize
+from .sequences import read_records, reverse_complement, summarize
 from .sequence_analysis import pair_report
 
 
@@ -9,6 +9,57 @@ def _sequence_summary(path, molecule):
     report = summarize(path, molecule)
     report.pop("path", None)
     return report
+
+
+def _variant_truth(model, folder, profile):
+    reference_name = profile.get("reference")
+    truth_name = profile.get("variant_truth")
+    if not reference_name and not truth_name:
+        return None
+    declared = {item.path for item in model.files}
+    if not reference_name or not truth_name or reference_name not in declared or truth_name not in declared:
+        raise ValueError(f"{model.id}: DNA-seq truth paths are incomplete or undeclared")
+    references = list(read_records(contained(folder, reference_name)))
+    if len(references) != 1:
+        raise ValueError(f"{model.id}: DNA-seq truth requires one reference sequence")
+    reference = references[0].sequence
+    lines = contained(folder, truth_name).read_text(encoding="utf-8").splitlines()
+    if not lines or lines[0] != "position\tref\talt":
+        raise ValueError(f"{model.id}: variant truth header is invalid")
+    variants = []
+    seen = set()
+    for line in lines[1:]:
+        fields = line.split("\t")
+        if len(fields) != 3:
+            raise ValueError(f"{model.id}: variant truth row is invalid")
+        position_text, ref, alt = fields
+        try:
+            position = int(position_text)
+        except ValueError as error:
+            raise ValueError(f"{model.id}: variant position is not an integer") from error
+        if position in seen or position < 1 or position > len(reference):
+            raise ValueError(f"{model.id}: variant position is duplicated or outside the reference")
+        if ref not in "ACGT" or alt not in "ACGT" or ref == alt or reference[position - 1] != ref:
+            raise ValueError(f"{model.id}: variant truth disagrees with the reference")
+        seen.add(position)
+        variants.append((position, ref, alt))
+    if len(variants) != profile.get("variant_count"):
+        raise ValueError(f"{model.id}: variant count differs from the expected profile")
+    reads = []
+    for item in profile["files"]:
+        for record in read_records(contained(folder, item["path"])):
+            reads.extend((record.sequence, reverse_complement(record.sequence, "dna")))
+    flank = profile.get("context_bases", 10)
+    supported = 0
+    for position, _, alt in variants:
+        center = position - 1
+        left = max(0, center - flank)
+        right = min(len(reference), center + flank + 1)
+        context = reference[left:center] + alt + reference[center + 1:right]
+        if not any(context in read for read in reads):
+            raise ValueError(f"{model.id}: variant at position {position} is absent from the reads")
+        supported += 1
+    return {"reference": reference_name, "truth": truth_name, "variants": len(variants), "read_supported": supported}
 
 
 def validate_sequence(model, folder, profile):
@@ -31,7 +82,8 @@ def validate_sequence(model, folder, profile):
         pairing = pair_report(contained(folder, records[0]["path"]), contained(folder, records[1]["path"]))
         if pairing["status"] != "pass" or pairing["pairs"] != profile.get("pairs"):
             raise ValueError(f"{model.id}: paired-read validation differs from the expected profile")
-    return {"id": model.id, "status": "pass", "kind": model.kind, "sequence": model.sequence.model_dump(mode="json"), "files": observed, "pairing": pairing}
+    truth = _variant_truth(model, folder, profile)
+    return {"id": model.id, "status": "pass", "kind": model.kind, "sequence": model.sequence.model_dump(mode="json"), "files": observed, "pairing": pairing, "variant_truth": truth}
 
 def validate(model, folder):
     errors = []
