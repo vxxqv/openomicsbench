@@ -38,6 +38,12 @@ All sequence commands begin with `omicsbench seq`. Inputs may be plain text or g
 
 `orfs INPUT` searches all six DNA or RNA frames. Complete ORFs begin with `ATG` and end at `TAA`, `TAG` or `TGA`. Use `--include-partial` to retain starts that reach the end without a stop. Coordinates refer to the original input sequence and use zero-based, half-open intervals.
 
+## Protein analysis
+
+`protein-stats INPUT` reports amino-acid composition, average molecular weight, Kyte-Doolittle mean hydropathy, net charge at a chosen pH, estimated isoelectric point, aromatic fraction and the reduced-protein extinction coefficient at 280 nm. Molecular weight is left unset when a sequence contains an ambiguous residue rather than assigning an invented mass.
+
+`digest INPUT` supports trypsin, Lys-C, Arg-C and chymotrypsin. It records zero-based, half-open peptide coordinates and accepts missed-cleavage and peptide-length limits. Trypsin, Lys-C and Arg-C respect the proline exception used by the command.
+
 ## Motifs, k-mers and similarity
 
 `motif INPUT MOTIF` finds overlapping IUPAC nucleotide motifs. `--both-strands` also scans the reverse complement. Each result contains the record, interval and strand.
@@ -45,6 +51,10 @@ All sequence commands begin with `omicsbench seq`. Inputs may be plain text or g
 `kmers INPUT --k K` counts unambiguous nucleotide k-mers. `--canonical` merges each DNA k-mer with its reverse complement. Ambiguous windows are skipped. `--max-distinct` is a deliberate memory guard.
 
 `sketch INPUT` hashes canonical k-mers with BLAKE2b and retains the smallest values. `compare LEFT RIGHT` builds compatible sketches and reports intersection size, Jaccard similarity, containment and Mash-style distance. This is a lightweight similarity screen, not an alignment or taxonomic classification.
+
+## DNA-seq truth object
+
+`sequence-005` contains a 1,000-base synthetic reference, 20 deterministic paired reads and three declared single-nucleotide variants. Collection validation checks pair order, exact sequence summaries, truth-table structure, reference alleles and read support for the alternate-allele context. It is intended for regression tests around DNA-seq file handling and truth-set plumbing. It does not measure performance on repeats, indels, structural variants or realistic instrument errors.
 
 ## Output rules
 

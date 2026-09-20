@@ -4,7 +4,9 @@
 
 OpenOmicsBench now handles DNA, RNA and protein sequences in FASTA and FASTQ files, including gzip-compressed input and output. The new command suite provides strict validation, combined QC, length and composition statistics, positional quality, adapter scans, trimming, filtering, deterministic sampling, deduplication, paired-read checks, interleaving, extraction, reverse complements, transcription, translation, ORF discovery, IUPAC motif searches, k-mer counts and deterministic sequence sketches.
 
-Four synthetic sequence benchmarks cover DNA FASTA, RNA FASTA, protein FASTA and paired FASTQ. Each object has a version 2 manifest, exact hashes, an expected summary profile and a deterministic rebuild. The 12 biological bulk RNA-seq objects and their version 1 evidence remain unchanged.
+Five synthetic sequence benchmarks cover DNA FASTA, RNA FASTA, protein FASTA, paired FASTQ and a miniature DNA-seq truth set. The DNA-seq object includes a reference, 20 read pairs and three known SNVs; validation checks the truth alleles against the reference and confirms alternate-allele support in the reads. Each object has a version 2 manifest, exact hashes, an expected summary profile and a deterministic rebuild. The 12 biological bulk RNA-seq objects and their version 1 evidence remain unchanged.
+
+Protein FASTA inputs can now be summarized by amino-acid composition, average molecular weight, hydropathy, charge, estimated isoelectric point, aromatic fraction and extinction coefficient. Deterministic digestion supports trypsin, Lys-C, Arg-C and chymotrypsin with missed-cleavage and peptide-length controls.
 
 Fourteen assay profiles cover short-read, long-read, reference and protein inputs. Each profile states the expected inputs, the checks available locally and the point where a reference-aware or database-backed workflow becomes necessary. The plan command returns executable local validation and preprocessing steps.
 

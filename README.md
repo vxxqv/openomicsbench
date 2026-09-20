@@ -1,6 +1,6 @@
 # OpenOmicsBench
 
-OpenOmicsBench is a compact benchmark collection and local sequence toolkit for bioinformatics software testing, method checks and teaching. Version 2 keeps the 12 certified bulk RNA-seq objects from version 1 and adds strict FASTA and FASTQ handling, DNA, RNA and protein support, paired-read checks, preprocessing, sequence QC and four deterministic sequence benchmarks.
+OpenOmicsBench is a compact benchmark collection and local sequence toolkit for bioinformatics software testing, method checks and teaching. Version 2 keeps the 12 certified bulk RNA-seq objects from version 1 and adds strict FASTA and FASTQ handling, DNA, RNA and protein support, paired-read checks, preprocessing, sequence QC and five deterministic sequence benchmarks.
 
 The package runs offline after installation. Sequence files stay on the local computer. The built-in tools cover inspection and lightweight preprocessing; they do not claim to replace aligners, variant callers, taxonomic classifiers or assay-specific statistical workflows.
 
@@ -41,6 +41,8 @@ omicsbench seq trim reads.fastq.gz trimmed.fastq.gz --quality 20 --min-length 30
 omicsbench seq filter trimmed.fastq.gz clean.fastq.gz --min-length 30 --max-ambiguity 0.05 --min-mean-quality 25
 omicsbench seq sample clean.fastq.gz subset.fastq.gz --count 10000 --seed 7
 omicsbench seq transform transcripts.fasta proteins.fasta --operation translate --frame 1
+omicsbench seq protein-stats proteins.fasta --ph 7.4
+omicsbench seq digest proteins.fasta --enzyme trypsin --missed-cleavages 1
 omicsbench seq motif reference.fasta ACGTRG --both-strands
 omicsbench seq kmers reads.fastq.gz --k 21 --canonical --top 50
 omicsbench seq compare sample-a.fasta sample-b.fasta --k 21 --size 5000
@@ -59,6 +61,8 @@ The command suite supports:
 - reverse complements, transcription, back-transcription and six translation frames;
 - overlapping IUPAC motif searches and six-frame ORF discovery;
 - canonical k-mer counts and deterministic bottom-k similarity sketches;
+- amino-acid composition, molecular weight, hydropathy, charge, estimated pI, aromaticity and extinction estimates;
+- trypsin, Lys-C, Arg-C and chymotrypsin digestion with missed-cleavage and peptide-length controls;
 - record extraction with zero-based, half-open slices.
 
 Commands that write files refuse to replace an existing output unless `--force` is supplied. Outputs are written through a temporary file and moved into place only after the operation succeeds. JSON reports go to standard output so they can be stored or checked in automated workflows.
@@ -87,8 +91,9 @@ Profiles are available for whole-genome, exome, targeted-panel, bulk RNA-seq, si
 | `sequence-002` | coding, ambiguous and short RNA records | FASTA | 3 |
 | `sequence-003` | standard, ambiguous and terminating protein records | FASTA | 3 |
 | `sequence-004` | paired DNA reads with mixed qualities and duplication | FASTQ | 4 pairs |
+| `sequence-005` | paired DNA-seq reads, reference and three known SNVs | FASTQ | 20 pairs |
 
-These four objects are project-authored synthetic fixtures. Each has an exact file inventory, checksums, format and molecule declarations, expected summary metrics and a deterministic rebuild workflow. They test software behavior and do not represent a biological cohort or sequencing instrument.
+These five objects are project-authored synthetic fixtures. Each has an exact file inventory, checksums, format and molecule declarations, expected summary metrics and a deterministic rebuild workflow. `sequence-005` also verifies that every truth-set reference allele matches the bundled reference and that every alternate allele is supported by the paired reads. The objects test software behavior and do not represent a biological cohort or sequencing instrument.
 
 ## Bulk RNA-seq benchmarks
 
