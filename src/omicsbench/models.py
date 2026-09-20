@@ -51,7 +51,7 @@ def safe_relative(value: str) -> str:
 class File(StrictModel):
     path: str = Field(description="Normalized path inside the dataset directory.")
     tier: Literal["nano", "pocket", "expected", "metadata"] = Field(description="Size or function class used for retrieval and validation.")
-    role: Literal["raw_counts", "samples", "fastq_r1", "fastq_r2", "quantification", "tx2gene", "baseline", "effects", "metrics", "figure", "provenance", "documentation", "license", "reference"] = Field(description="File purpose used by the validator and command line tools.")
+    role: Literal["raw_counts", "samples", "fastq_r1", "fastq_r2", "sequence", "reads", "quantification", "tx2gene", "baseline", "effects", "metrics", "figure", "provenance", "documentation", "license", "reference"] = Field(description="File purpose used by the validator and command line tools.")
     sample_id: str | None = Field(default=None, description="Sample linked to this file when the file is sample-specific.")
     media_type: str = Field(min_length=1, description="Internet media type for the file content.")
     bytes: int = Field(ge=0, strict=True, description="Expected file size in bytes.")
@@ -67,15 +67,32 @@ class Metric(StrictModel):
 class Validation(StrictModel):
     profile: str = Field(description="Path to the expected validation profile inside the dataset directory.")
     baseline_version: str = Field(min_length=1, description="Version label for the expected values and calculation rules.")
-    metrics: list[Metric] = Field(min_length=1, description="Quantitative minimums that every validated object must meet.")
+    metrics: list[Metric] = Field(default_factory=list, description="Quantitative minimums for count-matrix objects; sequence objects use exact expected summaries in their profile.")
     _path = field_validator("profile")(safe_relative)
 
+class SequenceSpec(StrictModel):
+    format: Literal["fasta", "fastq"] = Field(description="Sequence container format distributed by the object.")
+    molecule: Literal["dna", "rna", "protein"] = Field(description="Alphabet expected in every sequence record.")
+    paired: bool = Field(description="Whether two files form ordered read pairs.")
+    quality_encoding: Literal["phred33", "not_applicable"] = Field(description="Quality encoding for FASTQ or not_applicable for FASTA.")
+
+    @model_validator(mode="after")
+    def compatible(self):
+        if self.format == "fastq" and self.quality_encoding != "phred33":
+            raise ValueError("FASTQ objects require Phred+33 qualities")
+        if self.format == "fasta" and self.quality_encoding != "not_applicable":
+            raise ValueError("FASTA objects cannot declare quality scores")
+        if self.paired and self.format != "fastq":
+            raise ValueError("Paired sequence objects require FASTQ")
+        return self
+
+
 class Dataset(StrictModel):
-    schema_version: Literal["1.0"] = Field(description="Version of the OpenOmicsBench dataset contract.")
-    id: str = Field(pattern=r"^(rnaseq|fixture)-[0-9]{3}$", description="Stable collection identifier used by the command line interface.")
+    schema_version: Literal["1.0", "2.0"] = Field(description="Version of the OpenOmicsBench dataset contract.")
+    id: str = Field(pattern=r"^(rnaseq|fixture|sequence)-[0-9]{3}$", description="Stable collection identifier used by the command line interface.")
     title: str = Field(min_length=8, description="Specific title that distinguishes this comparison from other objects.")
     release: str = Field(pattern=r"^[0-9]+\.[0-9]+\.[0-9]+(?:[.-][A-Za-z0-9.]+)?$", description="First project release that carries this manifest state.")
-    assay: Literal["bulk_rna_seq"] = Field(description="Assay family represented by the object.")
+    assay: Literal["bulk_rna_seq", "sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna"] = Field(description="Assay or sequence family represented by the object.")
     kind: Literal["real", "synthetic_fixture"] = Field(description="Whether the object comes from a biological source or a software fixture.")
     status: Literal["candidate", "validated", "original_link"] = Field(description="Current review and distribution state.")
     archetype: str = Field(min_length=1, description="Short description of the experimental design exercised by the object.")
@@ -84,14 +101,22 @@ class Dataset(StrictModel):
     source: Source = Field(description="Origin, citation and retrieval record.")
     rights: Rights = Field(description="Dated redistribution decision and supporting evidence.")
     reference: Reference = Field(description="Genome, annotation and identifier compatibility record.")
-    samples: list[Sample] = Field(min_length=2, description="Ordered experimental design matching the matrix columns or read files.")
+    samples: list[Sample] = Field(min_length=1, description="Ordered experimental design matching the matrix columns or sequence files.")
     derivation: Derivation = Field(description="Workflow, code revision and resolved parameters used to create the object.")
     files: list[File] = Field(description="Complete declared inventory for the dataset directory.")
     validation: Validation | None = Field(description="Expected-result profile for a validated object, or null when validation does not apply.")
+    sequence: SequenceSpec | None = Field(default=None, description="Sequence format and alphabet contract for version 2 sequence objects.")
     limitations: list[str] = Field(min_length=1, description="Known constraints that affect interpretation or reuse.")
 
     @model_validator(mode="after")
     def consistent(self):
+        is_sequence = self.assay != "bulk_rna_seq"
+        if is_sequence and (self.schema_version != "2.0" or self.sequence is None):
+            raise ValueError("Sequence objects require schema version 2.0 and a sequence contract")
+        if not is_sequence and self.sequence is not None:
+            raise ValueError("Count-matrix objects cannot declare a sequence contract")
+        if not is_sequence and len(self.samples) < 2:
+            raise ValueError("Bulk RNA-seq objects require at least two samples")
         if self.kind == "real" and self.taxon_id is None:
             raise ValueError("Biological objects require an NCBI taxonomy identifier")
         ids = [s.sample_id for s in self.samples]
@@ -112,6 +137,13 @@ class Dataset(StrictModel):
         if self.status == "validated":
             if not self.validation or not self.files or self.reference.compatibility == "unresolved":
                 raise ValueError("Validated objects need files, validation and resolved references")
+            if not is_sequence and not self.validation.metrics:
+                raise ValueError("Validated count-matrix objects require preservation metrics")
+        if is_sequence:
+            data_roles = [record for record in self.files if record.role in {"sequence", "reads", "fastq_r1", "fastq_r2"}]
+            expected = 2 if self.sequence and self.sequence.paired else 1
+            if len(data_roles) != expected:
+                raise ValueError(f"Sequence object requires exactly {expected} declared sequence data file(s)")
         if self.validation and self.validation.profile not in paths:
             raise ValueError("Validation profile must be a declared file")
         return self

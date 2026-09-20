@@ -108,6 +108,8 @@
             "samples",
             "fastq_r1",
             "fastq_r2",
+            "sequence",
+            "reads",
             "quantification",
             "tx2gene",
             "baseline",
@@ -348,6 +350,52 @@
       "title": "Sample",
       "type": "object"
     },
+    "SequenceSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "format": {
+          "description": "Sequence container format distributed by the object.",
+          "enum": [
+            "fasta",
+            "fastq"
+          ],
+          "title": "Format",
+          "type": "string"
+        },
+        "molecule": {
+          "description": "Alphabet expected in every sequence record.",
+          "enum": [
+            "dna",
+            "rna",
+            "protein"
+          ],
+          "title": "Molecule",
+          "type": "string"
+        },
+        "paired": {
+          "description": "Whether two files form ordered read pairs.",
+          "title": "Paired",
+          "type": "boolean"
+        },
+        "quality_encoding": {
+          "description": "Quality encoding for FASTQ or not_applicable for FASTA.",
+          "enum": [
+            "phred33",
+            "not_applicable"
+          ],
+          "title": "Quality Encoding",
+          "type": "string"
+        }
+      },
+      "required": [
+        "format",
+        "molecule",
+        "paired",
+        "quality_encoding"
+      ],
+      "title": "SequenceSpec",
+      "type": "object"
+    },
     "Source": {
       "additionalProperties": false,
       "properties": {
@@ -421,19 +469,17 @@
           "type": "string"
         },
         "metrics": {
-          "description": "Quantitative minimums that every validated object must meet.",
+          "description": "Quantitative minimums for count-matrix objects; sequence objects use exact expected summaries in their profile.",
           "items": {
             "$ref": "#/$defs/Metric"
           },
-          "minItems": 1,
           "title": "Metrics",
           "type": "array"
         }
       },
       "required": [
         "profile",
-        "baseline_version",
-        "metrics"
+        "baseline_version"
       ],
       "title": "Validation",
       "type": "object"
@@ -442,14 +488,17 @@
   "additionalProperties": false,
   "properties": {
     "schema_version": {
-      "const": "1.0",
       "description": "Version of the OpenOmicsBench dataset contract.",
+      "enum": [
+        "1.0",
+        "2.0"
+      ],
       "title": "Schema Version",
       "type": "string"
     },
     "id": {
       "description": "Stable collection identifier used by the command line interface.",
-      "pattern": "^(rnaseq|fixture)-[0-9]{3}$",
+      "pattern": "^(rnaseq|fixture|sequence)-[0-9]{3}$",
       "title": "Id",
       "type": "string"
     },
@@ -466,8 +515,14 @@
       "type": "string"
     },
     "assay": {
-      "const": "bulk_rna_seq",
-      "description": "Assay family represented by the object.",
+      "description": "Assay or sequence family represented by the object.",
+      "enum": [
+        "bulk_rna_seq",
+        "sequence_dna",
+        "sequence_rna",
+        "sequence_protein",
+        "short_read_dna"
+      ],
       "title": "Assay",
       "type": "string"
     },
@@ -528,11 +583,11 @@
       "description": "Genome, annotation and identifier compatibility record."
     },
     "samples": {
-      "description": "Ordered experimental design matching the matrix columns or read files.",
+      "description": "Ordered experimental design matching the matrix columns or sequence files.",
       "items": {
         "$ref": "#/$defs/Sample"
       },
-      "minItems": 2,
+      "minItems": 1,
       "title": "Samples",
       "type": "array"
     },
@@ -558,6 +613,18 @@
         }
       ],
       "description": "Expected-result profile for a validated object, or null when validation does not apply."
+    },
+    "sequence": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SequenceSpec"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Sequence format and alphabet contract for version 2 sequence objects."
     },
     "limitations": {
       "description": "Known constraints that affect interpretation or reuse.",

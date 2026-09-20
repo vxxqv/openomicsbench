@@ -14,7 +14,7 @@ from .assays import build_plan, get_profile, list_profiles
 from .validate import validate
 
 def main():
-    p = argparse.ArgumentParser(description="Find and verify transcriptomics objects.",epilog="Example: omicsbench info rnaseq-002")
+    p = argparse.ArgumentParser(description="Find, verify and process compact omics benchmarks.",epilog="Example: omicsbench info rnaseq-002")
     p.add_argument("--root",type=Path,default=default_root(),help="Collection directory. Defaults to OMICSBENCH_ROOT, the current checkout or the installed collection.")
     p.add_argument("--cache",type=Path,default=Path(os.environ.get("OMICSBENCH_CACHE",".omicsbench-cache")),help="Local cache directory.")
     p.add_argument("--debug",action="store_true",help="Show a traceback when a command fails.")
@@ -28,7 +28,7 @@ def main():
         if name == "get":
             command.add_argument("--size",choices=["nano","pocket","expected"],default="nano")
         if name == "list":
-            command.add_argument("--assay",choices=["bulk_rna_seq"])
+            command.add_argument("--assay",choices=["bulk_rna_seq","sequence_dna","sequence_rna","sequence_protein","short_read_dna"])
         if name == "compare":
             command.add_argument("results",type=Path,help="CSV or TSV file with gene_id and log2_fold_change columns.")
             command.add_argument("--detail-limit",type=int,default=20,help="Maximum missing and unexpected gene examples to return.")

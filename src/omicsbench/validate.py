@@ -1,6 +1,37 @@
 import json
 from .hashing import digest, contained
 from .rnaseq import read_counts, diagnostic, preservation
+from .sequences import summarize
+from .sequence_analysis import pair_report
+
+
+def _sequence_summary(path, molecule):
+    report = summarize(path, molecule)
+    report.pop("path", None)
+    return report
+
+
+def validate_sequence(model, folder, profile):
+    records = profile.get("files")
+    if not isinstance(records, list) or not records:
+        raise ValueError(f"{model.id}: sequence validation profile has no files")
+    observed = []
+    for record in records:
+        relative = record.get("path")
+        if not relative or relative not in {item.path for item in model.files}:
+            raise ValueError(f"{model.id}: sequence validation file is undeclared")
+        report = _sequence_summary(contained(folder, relative), model.sequence.molecule)
+        if report != record.get("expected"):
+            raise ValueError(f"{model.id}/{relative}: sequence summary differs from the expected profile")
+        observed.append({"path": relative, "summary": report})
+    pairing = None
+    if model.sequence.paired:
+        if len(records) != 2:
+            raise ValueError(f"{model.id}: paired sequence profile requires two files")
+        pairing = pair_report(contained(folder, records[0]["path"]), contained(folder, records[1]["path"]))
+        if pairing["status"] != "pass" or pairing["pairs"] != profile.get("pairs"):
+            raise ValueError(f"{model.id}: paired-read validation differs from the expected profile")
+    return {"id": model.id, "status": "pass", "kind": model.kind, "sequence": model.sequence.model_dump(mode="json"), "files": observed, "pairing": pairing}
 
 def validate(model, folder):
     errors = []
@@ -19,6 +50,8 @@ def validate(model, folder):
     if model.validation is None:
         raise ValueError(f"{model.id}: no scientific validation profile")
     profile = json.loads(contained(folder, model.validation.profile).read_text(encoding="utf-8"))
+    if model.sequence is not None:
+        return validate_sequence(model, folder, profile)
     baseline_path = profile["baseline_counts"]
     if baseline_path not in declared:
         raise ValueError("Baseline counts must be declared in the manifest")

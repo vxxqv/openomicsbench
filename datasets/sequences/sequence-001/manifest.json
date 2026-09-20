@@ -1,0 +1,87 @@
+{
+  "schema_version": "2.0",
+  "id": "sequence-001",
+  "title": "Synthetic nucleotide sequence validation set",
+  "release": "2.0.0",
+  "assay": "sequence_dna",
+  "kind": "synthetic_fixture",
+  "status": "validated",
+  "archetype": "DNA FASTA with IUPAC ambiguity and an exact duplicate",
+  "organism": "Synthetic sequence model",
+  "taxon_id": null,
+  "source": {
+    "repository": "Project generator",
+    "accession": "sequence-001",
+    "url": "https://github.com/vxxqv/openomicsbench",
+    "citation": "OpenOmicsBench sequence-001, project-authored deterministic sequence fixture.",
+    "retrieved": "2026-09-20",
+    "sha256": null
+  },
+  "rights": {
+    "status": "GREEN",
+    "license": "Apache-2.0",
+    "evidence": "Generated from literals in the project workflow without third-party sequence observations.",
+    "checked": "2026-09-20"
+  },
+  "reference": {
+    "genome": "none",
+    "annotation": "none",
+    "namespace": "project synthetic identifiers",
+    "compatibility": "not_applicable"
+  },
+  "samples": [
+    {
+      "sample_id": "sequence-001-sample",
+      "condition": "synthetic validation",
+      "replicate": 1,
+      "batch": "not_applicable",
+      "strandedness": "not_applicable"
+    }
+  ],
+  "derivation": {
+    "workflow": "workflows/build_sequence_fixtures.py",
+    "commit": null,
+    "seed": 0,
+    "algorithm": "literal deterministic sequence fixtures",
+    "parameters": {
+      "records": 4,
+      "paired": false
+    },
+    "versions": {
+      "python": "3.12",
+      "openomicsbench_contract": "2.0"
+    }
+  },
+  "files": [
+    {
+      "path": "nano/sequences.fasta",
+      "tier": "nano",
+      "role": "sequence",
+      "media_type": "text/x-fasta",
+      "bytes": 251,
+      "sha256": "2369035bf1f8f536a2878997285c584e4bc8fc41d436ffc84d847c126181896d"
+    },
+    {
+      "path": "expected/validation.json",
+      "tier": "expected",
+      "role": "metrics",
+      "media_type": "application/json",
+      "bytes": 841,
+      "sha256": "0d2c0d5f14003aefa0453a6ea77c68f3257bb90ae3aef38c2c74df7b2d532cd2"
+    }
+  ],
+  "validation": {
+    "profile": "expected/validation.json",
+    "baseline_version": "sequence-summary-v1",
+    "metrics": []
+  },
+  "sequence": {
+    "format": "fasta",
+    "molecule": "dna",
+    "paired": false,
+    "quality_encoding": "not_applicable"
+  },
+  "limitations": [
+    "Synthetic sequences exercise file handling and deterministic metrics; they do not represent a biological cohort."
+  ]
+}

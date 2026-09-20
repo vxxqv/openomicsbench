@@ -1,0 +1,95 @@
+{
+  "schema_version": "2.0",
+  "id": "sequence-004",
+  "title": "Synthetic paired FASTQ validation set",
+  "release": "2.0.0",
+  "assay": "short_read_dna",
+  "kind": "synthetic_fixture",
+  "status": "validated",
+  "archetype": "paired-end reads with variable quality and exact read duplication",
+  "organism": "Synthetic sequence model",
+  "taxon_id": null,
+  "source": {
+    "repository": "Project generator",
+    "accession": "sequence-004",
+    "url": "https://github.com/vxxqv/openomicsbench",
+    "citation": "OpenOmicsBench sequence-004, project-authored deterministic sequence fixture.",
+    "retrieved": "2026-09-20",
+    "sha256": null
+  },
+  "rights": {
+    "status": "GREEN",
+    "license": "Apache-2.0",
+    "evidence": "Generated from literals in the project workflow without third-party sequence observations.",
+    "checked": "2026-09-20"
+  },
+  "reference": {
+    "genome": "none",
+    "annotation": "none",
+    "namespace": "project synthetic identifiers",
+    "compatibility": "not_applicable"
+  },
+  "samples": [
+    {
+      "sample_id": "sequence-004-sample",
+      "condition": "synthetic validation",
+      "replicate": 1,
+      "batch": "not_applicable",
+      "strandedness": "not_applicable"
+    }
+  ],
+  "derivation": {
+    "workflow": "workflows/build_sequence_fixtures.py",
+    "commit": null,
+    "seed": 0,
+    "algorithm": "literal deterministic sequence fixtures",
+    "parameters": {
+      "records": 8,
+      "paired": true
+    },
+    "versions": {
+      "python": "3.12",
+      "openomicsbench_contract": "2.0"
+    }
+  },
+  "files": [
+    {
+      "path": "nano/reads_R1.fastq",
+      "tier": "nano",
+      "role": "fastq_r1",
+      "media_type": "application/fastq",
+      "bytes": 217,
+      "sha256": "17ae82466db67772027f9d34337bf326ac4843e39d53e8f1e516fe6d99f32b08"
+    },
+    {
+      "path": "nano/reads_R2.fastq",
+      "tier": "nano",
+      "role": "fastq_r2",
+      "media_type": "application/fastq",
+      "bytes": 217,
+      "sha256": "be8ff586118cdaf1e3ef2a55532165068c07493a225ebf44e96ff44066b19a61"
+    },
+    {
+      "path": "expected/validation.json",
+      "tier": "expected",
+      "role": "metrics",
+      "media_type": "application/json",
+      "bytes": 1690,
+      "sha256": "0d808ca05a370aeaaf9dfee5911ab7416b35d86c0155f5befd7db7d89dce16c8"
+    }
+  ],
+  "validation": {
+    "profile": "expected/validation.json",
+    "baseline_version": "sequence-summary-v1",
+    "metrics": []
+  },
+  "sequence": {
+    "format": "fastq",
+    "molecule": "dna",
+    "paired": true,
+    "quality_encoding": "phred33"
+  },
+  "limitations": [
+    "Synthetic reads test structural QC and pair handling; they are not derived from an instrument or organism."
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": "2.0",
+  "id": "sequence-002",
+  "title": "Synthetic RNA sequence validation set",
+  "release": "2.0.0",
+  "assay": "sequence_rna",
+  "kind": "synthetic_fixture",
+  "status": "validated",
+  "archetype": "RNA FASTA with coding, ambiguous and short records",
+  "organism": "Synthetic sequence model",
+  "taxon_id": null,
+  "source": {
+    "repository": "Project generator",
+    "accession": "sequence-002",
+    "url": "https://github.com/vxxqv/openomicsbench",
+    "citation": "OpenOmicsBench sequence-002, project-authored deterministic sequence fixture.",
+    "retrieved": "2026-09-20",
+    "sha256": null
+  },
+  "rights": {
+    "status": "GREEN",
+    "license": "Apache-2.0",
+    "evidence": "Generated from literals in the project workflow without third-party sequence observations.",
+    "checked": "2026-09-20"
+  },
+  "reference": {
+    "genome": "none",
+    "annotation": "none",
+    "namespace": "project synthetic identifiers",
+    "compatibility": "not_applicable"
+  },
+  "samples": [
+    {
+      "sample_id": "sequence-002-sample",
+      "condition": "synthetic validation",
+      "replicate": 1,
+      "batch": "not_applicable",
+      "strandedness": "not_applicable"
+    }
+  ],
+  "derivation": {
+    "workflow": "workflows/build_sequence_fixtures.py",
+    "commit": null,
+    "seed": 0,
+    "algorithm": "literal deterministic sequence fixtures",
+    "parameters": {
+      "records": 3,
+      "paired": false
+    },
+    "versions": {
+      "python": "3.12",
+      "openomicsbench_contract": "2.0"
+    }
+  },
+  "files": [
+    {
+      "path": "nano/sequences.fasta",
+      "tier": "nano",
+      "role": "sequence",
+      "media_type": "text/x-fasta",
+      "bytes": 169,
+      "sha256": "4192ed4f93a0ac6aebcbdef8e5a44c0c8f4b28a17645885d199daa492f2ffac0"
+    },
+    {
+      "path": "expected/validation.json",
+      "tier": "expected",
+      "role": "metrics",
+      "media_type": "application/json",
+      "bytes": 853,
+      "sha256": "24e971fbe419dd1e9f1be1cf5365259069ae092c8a1ce87ec3fbe28c37d267d1"
+    }
+  ],
+  "validation": {
+    "profile": "expected/validation.json",
+    "baseline_version": "sequence-summary-v1",
+    "metrics": []
+  },
+  "sequence": {
+    "format": "fasta",
+    "molecule": "rna",
+    "paired": false,
+    "quality_encoding": "not_applicable"
+  },
+  "limitations": [
+    "Synthetic RNA records validate alphabet-aware operations and are not evidence for expression or structure."
+  ]
+}

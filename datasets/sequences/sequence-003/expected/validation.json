@@ -1,0 +1,54 @@
+{
+  "profile": "sequence-summary-v1",
+  "files": [
+    {
+      "path": "nano/sequences.fasta",
+      "expected": {
+        "format": "fasta",
+        "molecule": "protein",
+        "records": 3,
+        "letters": 79,
+        "length": {
+          "minimum": 12,
+          "maximum": 40,
+          "mean": 26.333333333333332,
+          "median": 27,
+          "n50": 40,
+          "l50": 1
+        },
+        "composition": {
+          "*": 1,
+          "A": 5,
+          "B": 1,
+          "C": 1,
+          "D": 3,
+          "E": 3,
+          "F": 6,
+          "G": 5,
+          "H": 3,
+          "I": 4,
+          "J": 1,
+          "K": 5,
+          "L": 5,
+          "M": 4,
+          "N": 1,
+          "O": 1,
+          "P": 1,
+          "Q": 1,
+          "R": 7,
+          "S": 6,
+          "T": 3,
+          "U": 1,
+          "V": 4,
+          "W": 2,
+          "X": 2,
+          "Y": 2,
+          "Z": 1
+        },
+        "gc_fraction": null,
+        "ambiguity_fraction": 0.10126582278481013,
+        "duplicate_sequences": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": "2.0",
+  "id": "sequence-003",
+  "title": "Synthetic protein sequence validation set",
+  "release": "2.0.0",
+  "assay": "sequence_protein",
+  "kind": "synthetic_fixture",
+  "status": "validated",
+  "archetype": "protein FASTA with standard, ambiguous and termination symbols",
+  "organism": "Synthetic sequence model",
+  "taxon_id": null,
+  "source": {
+    "repository": "Project generator",
+    "accession": "sequence-003",
+    "url": "https://github.com/vxxqv/openomicsbench",
+    "citation": "OpenOmicsBench sequence-003, project-authored deterministic sequence fixture.",
+    "retrieved": "2026-09-20",
+    "sha256": null
+  },
+  "rights": {
+    "status": "GREEN",
+    "license": "Apache-2.0",
+    "evidence": "Generated from literals in the project workflow without third-party sequence observations.",
+    "checked": "2026-09-20"
+  },
+  "reference": {
+    "genome": "none",
+    "annotation": "none",
+    "namespace": "project synthetic identifiers",
+    "compatibility": "not_applicable"
+  },
+  "samples": [
+    {
+      "sample_id": "sequence-003-sample",
+      "condition": "synthetic validation",
+      "replicate": 1,
+      "batch": "not_applicable",
+      "strandedness": "not_applicable"
+    }
+  ],
+  "derivation": {
+    "workflow": "workflows/build_sequence_fixtures.py",
+    "commit": null,
+    "seed": 0,
+    "algorithm": "literal deterministic sequence fixtures",
+    "parameters": {
+      "records": 3,
+      "paired": false
+    },
+    "versions": {
+      "python": "3.12",
+      "openomicsbench_contract": "2.0"
+    }
+  },
+  "files": [
+    {
+      "path": "nano/sequences.fasta",
+      "tier": "nano",
+      "role": "sequence",
+      "media_type": "text/x-fasta",
+      "bytes": 192,
+      "sha256": "3c562063ecbdc4c558797861f402a296cb367b45ff7fdb9a1c465362dc17f06b"
+    },
+    {
+      "path": "expected/validation.json",
+      "tier": "expected",
+      "role": "metrics",
+      "media_type": "application/json",
+      "bytes": 1055,
+      "sha256": "31b840f0404a7149f774cb77cb9a50de3e0ffbcfb1a3a2462949cd4428156101"
+    }
+  ],
+  "validation": {
+    "profile": "expected/validation.json",
+    "baseline_version": "sequence-summary-v1",
+    "metrics": []
+  },
+  "sequence": {
+    "format": "fasta",
+    "molecule": "protein",
+    "paired": false,
+    "quality_encoding": "not_applicable"
+  },
+  "limitations": [
+    "Synthetic proteins validate parsing and filtering only; no homology, structure or function is implied."
+  ]
+}

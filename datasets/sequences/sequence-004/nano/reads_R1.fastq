@@ -1,0 +1,16 @@
+@pair001/1 high quality
+ACGTACGTACGT
++
+IIIIIIIIIIII
+@pair002/1 mixed quality
+GGGGCCCCAAAA
++
+IIIII5555!!!
+@pair003/1 ambiguous read
+ACGTNNNNACGT
++
+????????????
+@pair004/1 duplicate sequence
+ACGTACGTACGT
++
+IIIIIIIIIIII

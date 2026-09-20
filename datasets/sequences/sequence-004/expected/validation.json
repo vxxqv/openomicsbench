@@ -1,0 +1,75 @@
+{
+  "profile": "sequence-summary-v1",
+  "files": [
+    {
+      "path": "nano/reads_R1.fastq",
+      "expected": {
+        "format": "fastq",
+        "molecule": "dna",
+        "records": 4,
+        "letters": 48,
+        "length": {
+          "minimum": 12,
+          "maximum": 12,
+          "mean": 12.0,
+          "median": 12.0,
+          "n50": 12,
+          "l50": 2
+        },
+        "composition": {
+          "A": 12,
+          "C": 12,
+          "G": 12,
+          "N": 4,
+          "T": 8
+        },
+        "gc_fraction": 0.5454545454545454,
+        "ambiguity_fraction": 0.08333333333333333,
+        "duplicate_sequences": 1,
+        "quality": {
+          "encoding": "phred33",
+          "minimum": 0,
+          "maximum": 40,
+          "mean": 33.333333333333336,
+          "q20_fraction": 0.9375,
+          "q30_fraction": 0.8541666666666666
+        }
+      }
+    },
+    {
+      "path": "nano/reads_R2.fastq",
+      "expected": {
+        "format": "fastq",
+        "molecule": "dna",
+        "records": 4,
+        "letters": 48,
+        "length": {
+          "minimum": 12,
+          "maximum": 12,
+          "mean": 12.0,
+          "median": 12.0,
+          "n50": 12,
+          "l50": 2
+        },
+        "composition": {
+          "A": 12,
+          "C": 12,
+          "G": 12,
+          "T": 12
+        },
+        "gc_fraction": 0.5,
+        "ambiguity_fraction": 0.0,
+        "duplicate_sequences": 1,
+        "quality": {
+          "encoding": "phred33",
+          "minimum": 0,
+          "maximum": 40,
+          "mean": 33.333333333333336,
+          "q20_fraction": 0.9375,
+          "q30_fraction": 0.8541666666666666
+        }
+      }
+    }
+  ],
+  "pairs": 4
+}
