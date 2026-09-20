@@ -23,6 +23,7 @@ from .sequence_analysis import (
     pair_report,
     qc_report,
 )
+from .proteins import digest_report, protein_report
 
 
 MOLECULES = ["auto", "dna", "rna", "protein"]
@@ -160,6 +161,17 @@ def add_sequence_parser(subparsers):
     extract.add_argument("--start", type=int)
     extract.add_argument("--end", type=int)
     extract.add_argument("--force", action="store_true")
+
+    protein = actions.add_parser("protein-stats", help="Report amino-acid composition and physicochemical estimates.")
+    protein.add_argument("input", type=Path)
+    protein.add_argument("--ph", type=float, default=7.0)
+
+    digest = actions.add_parser("digest", help="Perform deterministic in-silico protein digestion.")
+    digest.add_argument("input", type=Path)
+    digest.add_argument("--enzyme", choices=["trypsin", "lys-c", "arg-c", "chymotrypsin"], default="trypsin")
+    digest.add_argument("--missed-cleavages", type=int, default=0)
+    digest.add_argument("--min-length", type=int, default=1)
+    digest.add_argument("--max-length", type=int)
     return parser
 
 
@@ -203,4 +215,8 @@ def run_sequence_command(args):
         if args.ids_file:
             identifiers.update(line.strip() for line in args.ids_file.read_text(encoding="utf-8").splitlines() if line.strip())
         return extract_records(args.input, args.output, identifiers, args.start, args.end, args.force)
+    if args.seq_command == "protein-stats":
+        return protein_report(args.input, args.ph)
+    if args.seq_command == "digest":
+        return digest_report(args.input, args.enzyme, args.missed_cleavages, args.min_length, args.max_length)
     raise ValueError(f"unknown sequence command: {args.seq_command}")
