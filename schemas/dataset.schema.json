@@ -521,7 +521,8 @@
         "sequence_dna",
         "sequence_rna",
         "sequence_protein",
-        "short_read_dna"
+        "short_read_dna",
+        "whole_genome_dna_seq"
       ],
       "title": "Assay",
       "type": "string"

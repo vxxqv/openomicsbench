@@ -92,7 +92,7 @@ class Dataset(StrictModel):
     id: str = Field(pattern=r"^(rnaseq|fixture|sequence)-[0-9]{3}$", description="Stable collection identifier used by the command line interface.")
     title: str = Field(min_length=8, description="Specific title that distinguishes this comparison from other objects.")
     release: str = Field(pattern=r"^[0-9]+\.[0-9]+\.[0-9]+(?:[.-][A-Za-z0-9.]+)?$", description="First project release that carries this manifest state.")
-    assay: Literal["bulk_rna_seq", "sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna"] = Field(description="Assay or sequence family represented by the object.")
+    assay: Literal["bulk_rna_seq", "sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq"] = Field(description="Assay or sequence family represented by the object.")
     kind: Literal["real", "synthetic_fixture"] = Field(description="Whether the object comes from a biological source or a software fixture.")
     status: Literal["candidate", "validated", "original_link"] = Field(description="Current review and distribution state.")
     archetype: str = Field(min_length=1, description="Short description of the experimental design exercised by the object.")

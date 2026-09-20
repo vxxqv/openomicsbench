@@ -28,7 +28,7 @@ def main():
         if name == "get":
             command.add_argument("--size",choices=["nano","pocket","expected"],default="nano")
         if name == "list":
-            command.add_argument("--assay",choices=["bulk_rna_seq","sequence_dna","sequence_rna","sequence_protein","short_read_dna"])
+            command.add_argument("--assay",choices=["bulk_rna_seq","sequence_dna","sequence_rna","sequence_protein","short_read_dna","whole_genome_dna_seq"])
         if name == "compare":
             command.add_argument("results",type=Path,help="CSV or TSV file with gene_id and log2_fold_change columns.")
             command.add_argument("--detail-limit",type=int,default=20,help="Maximum missing and unexpected gene examples to return.")

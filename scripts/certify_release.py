@@ -339,9 +339,9 @@ def main() -> None:
         blockers.append("At least four certified design archetypes are required.")
     if len(sequence_validated) < 4:
         blockers.append("Version 2 requires at least four validated sequence objects.")
-    expected_sequence_families = {"sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna"}
-    if {model.assay for model in sequence_validated} != expected_sequence_families:
-        blockers.append("The version 2 DNA, RNA, protein and paired-read sequence families are incomplete.")
+    expected_sequence_families = {"sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq"}
+    if not expected_sequence_families.issubset({model.assay for model in sequence_validated}):
+        blockers.append("The version 2 DNA, RNA, protein, paired-read and DNA-seq sequence families are incomplete.")
     for model in validated:
         if model.derivation.commit is None or not COMMIT.fullmatch(model.derivation.commit):
             blockers.append(f"{model.id}: transformation commit is missing or invalid.")
