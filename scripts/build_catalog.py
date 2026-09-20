@@ -1,4 +1,4 @@
-"""Build the v1 catalog and its black-and-white fidelity figure."""
+"""Build the collection catalogs and the v1 biological fidelity figure."""
 import argparse
 import csv
 import html
@@ -52,15 +52,40 @@ def collect() -> list[dict]:
     return rows
 
 
-def write_catalog(rows: list[dict]) -> None:
+def collect_sequences() -> list[dict]:
+    rows = []
+    for model, folder in registry(ROOT).values():
+        if model.sequence is None or model.status != "validated":
+            continue
+        profile = read_json(folder / model.validation.profile)
+        summaries = [record["expected"] for record in profile["files"]]
+        rows.append({
+            "id": model.id,
+            "title": model.title,
+            "assay": model.assay,
+            "molecule": model.sequence.molecule,
+            "format": model.sequence.format,
+            "paired": model.sequence.paired,
+            "files": len(summaries),
+            "records": sum(summary["records"] for summary in summaries),
+            "letters": sum(summary["letters"] for summary in summaries),
+            "rights": model.rights.status,
+            "license": model.rights.license,
+        })
+    return rows
+
+
+def write_catalog(rows: list[dict], sequences: list[dict]) -> None:
     catalog = ROOT / "catalog"
     catalog.mkdir(exist_ok=True)
     payload = {
-        "schema_version": "1.0",
-        "release": "1.1.0",
+        "schema_version": "2.0",
+        "release": "2.0.0",
         "biological_objects": len(rows),
+        "sequence_objects": len(sequences),
         "source_studies": len({row["source_accession"] for row in rows}),
         "objects": rows,
+        "sequences": sequences,
     }
     (catalog / "collection.json").write_text(
         json.dumps(payload, indent=2) + "\n", encoding="utf-8", newline="\n"
@@ -91,6 +116,11 @@ def write_catalog(rows: list[dict]) -> None:
             flat = {key: row.get(key) for key in fields}
             flat.update(row["metrics"])
             writer.writerow(flat)
+    sequence_fields = ("id", "title", "assay", "molecule", "format", "paired", "files", "records", "letters", "rights", "license")
+    with (catalog / "sequences.tsv").open("w", encoding="utf-8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=sequence_fields, delimiter="\t", lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(sequences)
 
 
 def write_figure(rows: list[dict]) -> None:
@@ -216,8 +246,9 @@ if __name__ == "__main__":
     parser.add_argument("--preview-png", action="store_true", help="Render a local PNG for visual inspection.")
     args = parser.parse_args()
     collection = collect()
-    write_catalog(collection)
+    sequences = collect_sequences()
+    write_catalog(collection, sequences)
     write_figure(collection)
     if args.preview_png:
         print(f"Preview: {write_preview(collection)}")
-    print(f"Wrote {len(collection)} catalog records and the v1 fidelity figure.")
+    print(f"Wrote {len(collection)} biological and {len(sequences)} sequence catalog records plus the v1 fidelity figure.")

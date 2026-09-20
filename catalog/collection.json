@@ -1,7 +1,8 @@
 {
-  "schema_version": "1.0",
-  "release": "1.1.0",
+  "schema_version": "2.0",
+  "release": "2.0.0",
   "biological_objects": 12,
+  "sequence_objects": 4,
   "source_studies": 7,
   "objects": [
     {
@@ -327,6 +328,60 @@
         "distance_correlation": 0.9,
         "sign_concordance": 0.9
       }
+    }
+  ],
+  "sequences": [
+    {
+      "id": "sequence-001",
+      "title": "Synthetic nucleotide sequence validation set",
+      "assay": "sequence_dna",
+      "molecule": "dna",
+      "format": "fasta",
+      "paired": false,
+      "files": 1,
+      "records": 4,
+      "letters": 94,
+      "rights": "GREEN",
+      "license": "Apache-2.0"
+    },
+    {
+      "id": "sequence-002",
+      "title": "Synthetic RNA sequence validation set",
+      "assay": "sequence_rna",
+      "molecule": "rna",
+      "format": "fasta",
+      "paired": false,
+      "files": 1,
+      "records": 3,
+      "letters": 74,
+      "rights": "GREEN",
+      "license": "Apache-2.0"
+    },
+    {
+      "id": "sequence-003",
+      "title": "Synthetic protein sequence validation set",
+      "assay": "sequence_protein",
+      "molecule": "protein",
+      "format": "fasta",
+      "paired": false,
+      "files": 1,
+      "records": 3,
+      "letters": 79,
+      "rights": "GREEN",
+      "license": "Apache-2.0"
+    },
+    {
+      "id": "sequence-004",
+      "title": "Synthetic paired FASTQ validation set",
+      "assay": "short_read_dna",
+      "molecule": "dna",
+      "format": "fastq",
+      "paired": true,
+      "files": 2,
+      "records": 8,
+      "letters": 96,
+      "rights": "GREEN",
+      "license": "Apache-2.0"
     }
   ]
 }
