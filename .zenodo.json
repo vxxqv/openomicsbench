@@ -76,6 +76,14 @@
     "k-mer analysis",
     "motif search",
     "open reading frame",
-    "Phred quality score"
+    "Phred quality score",
+    "DNA sequencing",
+    "single-nucleotide variant",
+    "variant truth set",
+    "amino acid composition",
+    "molecular weight",
+    "isoelectric point",
+    "protein digestion",
+    "trypsin"
   ]
 }

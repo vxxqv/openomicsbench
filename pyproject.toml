@@ -10,7 +10,7 @@ readme = {file = "README.md", content-type = "text/markdown"}
 license = "Apache-2.0"
 authors = [{name = "Vivaan Patni"}]
 maintainers = [{name = "Vivaan Patni"}]
-keywords = ["bioinformatics", "computational-biology", "genomics", "transcriptomics", "proteomics", "bulk-rna-seq", "fasta", "fastq", "dna", "rna", "protein-sequence", "sequence-analysis", "quality-control", "kmer", "benchmarking", "benchmark-data", "test-data", "data-validation", "data-provenance", "data-integrity", "reproducibility", "scientific-workflows", "research-software", "expression-atlas", "ensembl", "deseq2"]
+keywords = ["bioinformatics", "computational-biology", "genomics", "transcriptomics", "proteomics", "bulk-rna-seq", "dna-seq", "fasta", "fastq", "dna", "rna", "protein-sequence", "amino-acid-analysis", "sequence-analysis", "quality-control", "kmer", "variant-truth", "benchmarking", "benchmark-data", "test-data", "data-validation", "data-provenance", "data-integrity", "reproducibility", "scientific-workflows", "research-software", "expression-atlas", "ensembl", "deseq2"]
 requires-python = ">=3.11"
 dependencies = ["pydantic>=2.13,<3", "numpy>=2.3,<3"]
 classifiers = [
