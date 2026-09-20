@@ -1,5 +1,15 @@
 # Changes
 
+## 2.0.0
+
+OpenOmicsBench now handles DNA, RNA and protein sequences in FASTA and FASTQ files, including gzip-compressed input and output. The new command suite provides strict validation, combined QC, length and composition statistics, positional quality, adapter scans, trimming, filtering, deterministic sampling, deduplication, paired-read checks, interleaving, extraction, reverse complements, transcription, translation, ORF discovery, IUPAC motif searches, k-mer counts and deterministic sequence sketches.
+
+Four synthetic sequence benchmarks cover DNA FASTA, RNA FASTA, protein FASTA and paired FASTQ. Each object has a version 2 manifest, exact hashes, an expected summary profile and a deterministic rebuild. The 12 biological bulk RNA-seq objects and their version 1 evidence remain unchanged.
+
+Fourteen assay profiles cover short-read, long-read, reference and protein inputs. Each profile states the expected inputs, the checks available locally and the point where a reference-aware or database-backed workflow becomes necessary. The plan command returns executable local validation and preprocessing steps.
+
+All file-writing sequence commands protect existing outputs unless replacement is explicitly requested. Reports use stable JSON, sampling is seed-controlled and similarity sketches record their algorithm and parameters.
+
 ## 1.1.0
 
 OpenOmicsBench can now compare a CSV or TSV table of gene-level log2 fold changes with the full-source DESeq2 reference for any biological object. The report records effect-rank correlation, top-gene overlap, sign agreement, gene coverage, missing and unexpected identifiers, the declared thresholds and a pass or fail decision suitable for automated tests.

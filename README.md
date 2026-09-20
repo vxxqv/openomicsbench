@@ -1,39 +1,98 @@
 # OpenOmicsBench
 
-OpenOmicsBench provides compact bulk RNA-seq count matrices for testing analysis software, teaching reproducible workflows and checking method behavior. Each biological object includes the source counts for its selected samples, a smaller pocket matrix, the sample design, source attribution, rights evidence, reference details and quantitative validation.
+OpenOmicsBench is a compact benchmark collection and local sequence toolkit for bioinformatics software testing, method checks and teaching. Version 2 keeps the 12 certified bulk RNA-seq objects from version 1 and adds strict FASTA and FASTQ handling, DNA, RNA and protein support, paired-read checks, preprocessing, sequence QC and four deterministic sequence benchmarks.
 
-The version 1 collection contains 12 benchmark objects drawn from seven Expression Atlas studies. It covers human, mouse and Arabidopsis data, with balanced knockouts, paired tumour samples, factorial infection experiments, RNA interference and disease comparisons. The objects are tests of software and methods. They are not clinical reference data and do not replace the full source studies.
+The package runs offline after installation. Sequence files stay on the local computer. The built-in tools cover inspection and lightweight preprocessing; they do not claim to replace aligners, variant callers, taxonomic classifiers or assay-specific statistical workflows.
 
-The published [0.1.0.dev0 prerelease](https://doi.org/10.5281/zenodo.22551735) records the earlier infrastructure baseline. [Version 1.0.0](https://doi.org/10.5281/zenodo.22679414) is the first complete collection release. The [concept DOI](https://doi.org/10.5281/zenodo.22551734) always resolves to the latest archived version.
+## Install
 
-## Quickstart
-
-Use Python 3.11 or newer in an isolated environment:
+OpenOmicsBench requires Python 3.11 or newer.
 
 ```sh
 python -m pip install openomicsbench
-omicsbench list --assay bulk_rna_seq
-omicsbench info rnaseq-002
-omicsbench validate rnaseq-002
+omicsbench --version
 ```
 
-`omicsbench validate` checks the manifest, file inventory, byte counts, SHA-256 hashes, sample order, matrix shape and unchanged integer counts. It then recomputes the four declared preservation metrics. The installed package includes the complete collection, so these commands work without a repository checkout or network connection.
-
-Use `omicsbench get rnaseq-002 --size pocket` to copy a verified tier into the local cache. Use `omicsbench provenance rnaseq-002` to inspect its source and transformation record. Every public command includes an example in its help text.
-
-## Compare analysis results
-
-Version 1.1 can compare results from another differential-expression tool with the full-source DESeq2 reference for a biological object:
+List and validate the bundled benchmarks:
 
 ```sh
-omicsbench compare rnaseq-002 results.csv
+omicsbench list
+omicsbench validate rnaseq-002
+omicsbench validate sequence-004
 ```
 
-The input may be comma-separated or tab-separated and must contain `gene_id` and `log2_fold_change` columns. Gene identifiers must be unique and effects must be finite. The JSON report gives rank correlation, top-50 overlap, sign agreement, coverage, missing and unexpected identifiers, and the threshold decision for each metric. A passing comparison exits with status 0. A completed comparison below the thresholds exits with status 2, allowing test pipelines to distinguish a scientific mismatch from invalid input.
+The wheel contains the complete collection. A repository checkout and network connection are not required.
 
-The reference effects come from the same full-source DESeq2 1.50.2 runs used to certify the pocket matrices. The synthetic fixture has no DESeq2 reference and cannot be used with this command.
+## Sequence tools
 
-## Version 1 collection
+Run a strict combined QC report on FASTA, FASTQ or gzip-compressed input:
+
+```sh
+omicsbench seq qc reads.fastq.gz --molecule dna --adapter AGATCGGAAGAGC
+```
+
+Common operations include:
+
+```sh
+omicsbench seq stats reference.fasta.gz
+omicsbench seq validate proteins.fasta --molecule protein
+omicsbench seq pair-check sample_R1.fastq.gz sample_R2.fastq.gz
+omicsbench seq trim reads.fastq.gz trimmed.fastq.gz --quality 20 --min-length 30
+omicsbench seq filter trimmed.fastq.gz clean.fastq.gz --min-length 30 --max-ambiguity 0.05 --min-mean-quality 25
+omicsbench seq sample clean.fastq.gz subset.fastq.gz --count 10000 --seed 7
+omicsbench seq transform transcripts.fasta proteins.fasta --operation translate --frame 1
+omicsbench seq motif reference.fasta ACGTRG --both-strands
+omicsbench seq kmers reads.fastq.gz --k 21 --canonical --top 50
+omicsbench seq compare sample-a.fasta sample-b.fasta --k 21 --size 5000
+```
+
+The command suite supports:
+
+- multiline FASTA and FASTQ, including `.gz` input and output;
+- DNA, RNA and protein alphabets with IUPAC ambiguity symbols;
+- sequence length, N50/L50, composition, GC, ambiguity and exact duplication statistics;
+- FASTQ Phred+33 range checks, Q20/Q30 summaries and per-position quality;
+- paired-read identity checks, interleaving and deinterleaving;
+- fixed, adapter and end-quality trimming;
+- filtering by length, GC, ambiguity and mean quality;
+- deterministic sampling and deduplication;
+- reverse complements, transcription, back-transcription and six translation frames;
+- overlapping IUPAC motif searches and six-frame ORF discovery;
+- canonical k-mer counts and deterministic bottom-k similarity sketches;
+- record extraction with zero-based, half-open slices.
+
+Commands that write files refuse to replace an existing output unless `--force` is supplied. Outputs are written through a temporary file and moved into place only after the operation succeeds. JSON reports go to standard output so they can be stored or checked in automated workflows.
+
+The FASTA validator follows the nucleotide symbol expectations described by [NCBI](https://www.ncbi.nlm.nih.gov/genbank/fastaformat). FASTQ has no single formal specification; OpenOmicsBench accepts conventional multiline records with printable Phred+33 quality characters and requires the sequence and quality lengths to match. The [GA4GH-maintained HTS specifications](https://samtools.github.io/hts-specs/) describe the surrounding SAM, BAM, CRAM and VCF ecosystem.
+
+The full command reference is in [docs/sequence-tools.md](docs/sequence-tools.md).
+
+## Assay profiles
+
+The assay profiles explain what the local tools can check and where a dedicated workflow becomes necessary:
+
+```sh
+omicsbench assay list
+omicsbench assay info whole-genome
+omicsbench assay plan whole-genome sample_R1.fastq.gz sample_R2.fastq.gz --adapter AGATCGGAAGAGC
+```
+
+Profiles are available for whole-genome, exome, targeted-panel, bulk RNA-seq, single-cell RNA-seq, ATAC-seq, ChIP-seq and related assays, amplicon sequencing, shotgun metagenomics, long-read DNA and RNA, genome or transcriptome references, RNA FASTA and protein FASTA. A plan contains executable validation and preprocessing commands plus a clear boundary for the downstream tools that still need a reference, database or assay-specific model.
+
+## Bundled sequence benchmarks
+
+| ID | Content | Format | Records |
+|---|---|---|---:|
+| `sequence-001` | DNA with IUPAC ambiguity and an exact duplicate | FASTA | 4 |
+| `sequence-002` | coding, ambiguous and short RNA records | FASTA | 3 |
+| `sequence-003` | standard, ambiguous and terminating protein records | FASTA | 3 |
+| `sequence-004` | paired DNA reads with mixed qualities and duplication | FASTQ | 4 pairs |
+
+These four objects are project-authored synthetic fixtures. Each has an exact file inventory, checksums, format and molecule declarations, expected summary metrics and a deterministic rebuild workflow. They test software behavior and do not represent a biological cohort or sequencing instrument.
+
+## Bulk RNA-seq benchmarks
+
+Version 2 retains the complete version 1 biological collection unchanged.
 
 | ID | Design | Samples | Pocket genes |
 |---|---|---:|---:|
@@ -50,36 +109,39 @@ The reference effects come from the same full-source DESeq2 1.50.2 runs used to 
 | `rnaseq-012` | Dmd-mdx myoblasts against wild type | 6 | 8,000 |
 | `rnaseq-013` | Dmd-mdx-beta-geo myoblasts against wild type | 6 | 8,000 |
 
-The [catalog](https://github.com/vxxqv/openomicsbench/blob/main/catalog/collection.json) contains the complete object index. The [tabular form](https://github.com/vxxqv/openomicsbench/blob/main/catalog/collection.tsv) is also available.
+Each biological object includes the source counts for its selected samples, a smaller pocket matrix, ordered sample metadata, the declared design, source attribution, rights evidence, reference details, transformations and quantitative validation. All 12 pockets pass their predeclared DESeq2 fidelity thresholds.
+
+Compare another tool's gene-level effects with a bundled full-source DESeq2 reference:
+
+```sh
+omicsbench compare rnaseq-002 results.csv
+```
+
+The input must contain unique `gene_id` and finite `log2_fold_change` columns. The report includes rank correlation, top-50 overlap, sign agreement, coverage and identifier differences. Status 0 means the declared checks passed, status 2 means a completed comparison missed a scientific threshold and status 1 means the input was invalid.
 
 ![Four DESeq2 fidelity metrics for each version 1 object](https://raw.githubusercontent.com/vxxqv/openomicsbench/main/figures/v1-fidelity.svg)
 
-All 12 pockets pass the predeclared thresholds when compared with the corresponding full source matrix using DESeq2 1.50.2. The evidence files retain exact values, input hashes, workflow hashes, model designs and runtime versions. A separate reference check confirms that every pocket gene identifier occurs in the matching Ensembl or Ensembl Genomes annotation release.
+## Collection records
 
-Some objects share samples because they test different declared contrasts or strata from the same factorial study. The [collection audit](https://github.com/vxxqv/openomicsbench/blob/main/release/collection-audit.json) records those relationships and checks for conflicting IDs, cross-study sample collisions, unclassified duplicate files and repeated long prose.
+The [JSON catalog](catalog/collection.json) contains both benchmark families. [catalog/collection.tsv](catalog/collection.tsv) lists the biological objects and [catalog/sequences.tsv](catalog/sequences.tsv) lists the sequence fixtures.
 
-## Source data and licences
+Expression Atlas and BioStudies supplied the biological count matrices. Their bundled material is recorded as CC BY 4.0 with provider attribution. The sequence fixtures and software are project-authored and distributed under Apache-2.0. Project-written descriptive metadata is CC BY 4.0.
 
-Expression Atlas and BioStudies supplied the biological source matrices. Each object includes `attribution.json` and `rights.json`. The distributed biological material is recorded as CC BY 4.0 with provider credit and a dated evidence link. Exact source, reference and transformation records sit beside the data rather than in a separate spreadsheet.
+The objects are research and software-test material. They are not clinical references and do not replace the complete source studies.
 
-The software is licensed under Apache License 2.0. Project-written documentation and descriptive metadata are licensed under Creative Commons Attribution 4.0 International. Third-party material keeps the terms stated in its object record.
-
-## Project checks
-
-Run the same checks used by continuous integration:
+## Development checks
 
 ```sh
 python -m unittest discover -s tests -v
+python workflows/build_sequence_fixtures.py
 python scripts/build_catalog.py
 python scripts/audit_collection.py
 python scripts/check_repository.py
 python scripts/certify_release.py --preflight
 ```
 
-The final v1 certification passes with no scientific, structural or publication blocker. A fresh Windows checkout passed the documented quickstart under Python 3.12.14. The owner approved that clean-room run as the publication check; no independent tester is claimed. The GitHub and Zenodo archives contain the same files, and every inventory-controlled file matches its certified byte count and SHA-256 value.
-
-The [version 1 release review](https://github.com/vxxqv/openomicsbench/blob/main/docs/OpenOmicsBench_V1_Release_Review.pdf) brings the collection, scientific checks, overlap findings, software tests and remaining publication steps into one six-page document.
+The repository checker validates every manifest, file inventory, byte count, SHA-256 digest and expected result. It also rejects undeclared files, schema drift, unsupported metadata and prohibited attribution traces.
 
 ## Citation
 
-Zenodo should display the author as Vivaan Patni. GitHub development and commits use the account `vxxqv`. Cite the archived version used in an analysis; the concept DOI for all releases is [10.5281/zenodo.22551734](https://doi.org/10.5281/zenodo.22551734).
+Zenodo releases list Vivaan Patni as the author. GitHub development and commits use the account `vxxqv`. Cite the exact archived release used in an analysis. The concept DOI [10.5281/zenodo.22551734](https://doi.org/10.5281/zenodo.22551734) resolves to the latest archived version.
