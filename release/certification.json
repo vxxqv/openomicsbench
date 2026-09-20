@@ -1,7 +1,7 @@
 {
   "scope": "v2_collection",
   "software_version": "2.0.0",
-  "decision": "NO-GO",
+  "decision": "GO",
   "preflight": "PASS",
   "certified_biological_objects": 12,
   "certified_sequence_objects": 5,
@@ -9,8 +9,5 @@
   "redistributable_pockets": 12,
   "design_archetypes": 12,
   "blockers": [],
-  "deferred_publication_gates": [
-    "version_doi",
-    "post_upload_verification"
-  ]
+  "deferred_publication_gates": []
 }
