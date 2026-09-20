@@ -10,6 +10,7 @@ from .registry import default_root, registry, lookup
 from .cache import get, verify_cache
 from .compare import compare
 from .sequence_cli import add_sequence_parser, run_sequence_command
+from .assays import build_plan, get_profile, list_profiles
 from .validate import validate
 
 def main():
@@ -32,10 +33,27 @@ def main():
             command.add_argument("results",type=Path,help="CSV or TSV file with gene_id and log2_fold_change columns.")
             command.add_argument("--detail-limit",type=int,default=20,help="Maximum missing and unexpected gene examples to return.")
     add_sequence_parser(sub)
+    assay = sub.add_parser("assay", help="Inspect sequencing assay profiles and build local command plans.")
+    assay_sub = assay.add_subparsers(dest="assay_command", required=True)
+    assay_sub.add_parser("list", help="List supported assay profiles.")
+    assay_info = assay_sub.add_parser("info", help="Show the inputs, checks and scope for one profile.")
+    assay_info.add_argument("profile")
+    assay_plan = assay_sub.add_parser("plan", help="Build an executable local validation and preprocessing plan.")
+    assay_plan.add_argument("profile")
+    assay_plan.add_argument("input", type=Path, nargs="+")
+    assay_plan.add_argument("--output-directory", type=Path, default=Path("omicsbench-output"))
+    assay_plan.add_argument("--adapter", action="append", default=[])
     args = p.parse_args()
     try:
         if args.command == "seq":
             out = run_sequence_command(args)
+        elif args.command == "assay":
+            if args.assay_command == "list":
+                out = list_profiles()
+            elif args.assay_command == "info":
+                out = get_profile(args.profile)
+            else:
+                out = build_plan(args.profile, args.input, args.output_directory, args.adapter)
         elif args.command == "list":
             out = [{"id":m.id,"title":m.title,"kind":m.kind,"status":m.status,"rights":m.rights.status,"tiers":sorted({f.tier for f in m.files})} for m,_ in registry(args.root).values() if not args.assay or m.assay==args.assay]
         elif args.command == "doctor":
