@@ -29,6 +29,16 @@ from omicsbench.sequence_tools import (
     transform_file,
     trim_file,
 )
+from omicsbench.sequence_analysis import (
+    deinterleave_pairs,
+    extract_records,
+    find_orfs,
+    interleave_pairs,
+    pair_report,
+    positional_quality,
+    qc_report,
+    shannon_complexity,
+)
 
 
 class SequenceTests(unittest.TestCase):
@@ -252,6 +262,90 @@ class SequenceTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             json.loads(result.stdout)
         self.assertEqual(len(list(read_records(sampled))), 1)
+
+    def test_pair_check_accepts_common_suffixes(self):
+        left = self.write("r1.fq", "@a/1\nAC\n+\nII\n@b/1\nGT\n+\nII\n")
+        right = self.write("r2.fq", "@a/2\nTG\n+\nII\n@b/2\nCA\n+\nII\n")
+        report = pair_report(left, right)
+        self.assertEqual(report["status"], "pass")
+        self.assertEqual(report["pairs"], 2)
+
+    def test_pair_check_reports_mismatch(self):
+        left = self.write("r1.fq", "@a/1\nAC\n+\nII\n")
+        right = self.write("r2.fq", "@b/2\nTG\n+\nII\n")
+        report = pair_report(left, right)
+        self.assertEqual(report["status"], "fail")
+        self.assertEqual(report["mismatches"], 1)
+
+    def test_interleave_round_trip(self):
+        left = self.write("r1.fq", "@a/1\nAC\n+\nII\n@b/1\nGT\n+\nII\n")
+        right = self.write("r2.fq", "@a/2\nTG\n+\nII\n@b/2\nCA\n+\nII\n")
+        merged = self.root / "merged.fq"
+        output_left, output_right = self.root / "left.fq", self.root / "right.fq"
+        interleave_pairs(left, right, merged, False)
+        deinterleave_pairs(merged, output_left, output_right, False)
+        self.assertEqual(left.read_bytes(), output_left.read_bytes())
+        self.assertEqual(right.read_bytes(), output_right.read_bytes())
+
+    def test_positional_quality_handles_variable_lengths(self):
+        records = [SequenceRecord("a", "", "AC", "I!"), SequenceRecord("b", "", "A", "5")]
+        report = positional_quality(records)
+        self.assertEqual(report[0]["observations"], 2)
+        self.assertEqual(report[1]["observations"], 1)
+        self.assertEqual(report[1]["mean_quality"], 0)
+
+    def test_shannon_complexity(self):
+        self.assertEqual(shannon_complexity("AAAAAAAA"), 0)
+        self.assertGreater(shannon_complexity("ACGTACGT"), 0.6)
+
+    def test_qc_report(self):
+        source = self.write("reads.fq", "@a\nACGTAC\n+\nIIIIII\n@b\nACGTAC\n+\nIIIIII\n")
+        report = qc_report(source, "dna", adapters=["GTAC"])
+        self.assertEqual(report["summary"]["records"], 2)
+        self.assertEqual(report["adapter_hits"]["GTAC"], 2)
+        self.assertEqual(report["overrepresented_sequences"][0]["count"], 2)
+        self.assertEqual(len(report["per_position"]), 6)
+
+    def test_complete_orfs_on_both_strands(self):
+        source = self.write("orfs.fa", ">forward\nCCCATGAAATAACCC\n>reverse\nCCCTTATTTCATCCC\n")
+        report = find_orfs(source, minimum_amino_acids=2)
+        self.assertEqual(report["count"], 2)
+        self.assertEqual({item["strand"] for item in report["orfs"]}, {"+", "-"})
+        self.assertEqual({item["protein"] for item in report["orfs"]}, {"MK*"})
+
+    def test_partial_orf_option(self):
+        source = self.write("partial.fa", ">x\nATGAAAAAA\n")
+        self.assertEqual(find_orfs(source, 2)["count"], 0)
+        self.assertEqual(find_orfs(source, 2, include_partial=True)["count"], 1)
+
+    def test_extract_ids_and_slice(self):
+        source = self.write("input.fa", ">a\nAACCGG\n>b\nTTGGCC\n")
+        output = self.root / "extract.fa"
+        report = extract_records(source, output, {"b"}, 1, 5, False)
+        self.assertEqual(report["records"], 1)
+        self.assertEqual(list(read_records(output))[0].sequence, "TGGC")
+
+    def test_extract_missing_id_rejected_without_output(self):
+        source = self.write("input.fa", ">a\nAACCGG\n")
+        output = self.root / "extract.fa"
+        with self.assertRaisesRegex(ValueError, "not found"):
+            extract_records(source, output, {"missing"}, None, None, False)
+        self.assertFalse(output.exists())
+
+    def test_extended_sequence_cli(self):
+        fasta = self.write("input.fa", ">a\nCCCATGAAATAACCC\n")
+        left = self.write("r1.fq", "@a/1\nACGT\n+\nIIII\n")
+        right = self.write("r2.fq", "@a/2\nTGCA\n+\nIIII\n")
+        commands = [
+            ["qc", str(left), "--molecule", "dna", "--adapter", "ACG"],
+            ["pair-check", str(left), str(right)],
+            ["orfs", str(fasta), "--min-aa", "2"],
+        ]
+        for command in commands:
+            with self.subTest(command=command):
+                result = subprocess.run([sys.executable, "-m", "omicsbench", "seq", *command], capture_output=True, text=True)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                json.loads(result.stdout)
 
 
 if __name__ == "__main__":
