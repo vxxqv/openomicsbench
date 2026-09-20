@@ -33,7 +33,7 @@ for relative in sorted(value for value in listed if value):
 payload = {
     "version": metadata["software_version"],
     "created": metadata["candidate_date"],
-    "scope": "Files in the reviewed version 1 release candidate; generated caches and staged source downloads are excluded.",
+    "scope": "Files in the reviewed version 2 release candidate; generated caches and staged source downloads are excluded.",
     "self_excluded": "release/file-manifest.json",
     "file_count": len(files),
     "files": files,

@@ -1,4 +1,4 @@
-"""Verify the v1 collection and write a fail-closed release decision."""
+"""Verify the complete collection and write a fail-closed release decision."""
 import argparse
 import hashlib
 import json
@@ -59,12 +59,15 @@ def check_author_metadata(metadata: dict, blockers: list[str]) -> None:
 
     release_commit = metadata.get("release_commit")
     git = os.environ.get("OPENOMICSBENCH_GIT", "git")
-    citation = subprocess.run(
-        [git, "-c", f"safe.directory={ROOT.as_posix()}", "show", f"{release_commit}:CITATION.cff"],
-        cwd=ROOT, check=True, capture_output=True, text=True,
-    ).stdout
+    citation = (
+        subprocess.run(
+            [git, "-c", f"safe.directory={ROOT.as_posix()}", "show", f"{release_commit}:CITATION.cff"],
+            cwd=ROOT, check=True, capture_output=True, text=True,
+        ).stdout
+        if release_commit else (ROOT / "CITATION.cff").read_text(encoding="utf-8")
+    )
     required_lines = (
-        'version: "1.0.0"',
+        f'version: "{metadata["software_version"]}"',
         'family-names: "Patni"',
         'given-names: "Vivaan"',
         f'orcid: "https://orcid.org/{expected_orcid}"',
@@ -98,12 +101,13 @@ def check_publication_metadata(metadata: dict, blockers: list[str]) -> None:
         if not COMMIT.fullmatch(release_commit):
             blockers.append("The release commit is invalid.")
         else:
+            tag = f"v{metadata['software_version']}"
             tagged_commit = subprocess.run(
-                [git, "-c", f"safe.directory={ROOT.as_posix()}", "rev-list", "-n", "1", "v1.0.0"],
+                [git, "-c", f"safe.directory={ROOT.as_posix()}", "rev-list", "-n", "1", tag],
                 cwd=ROOT, check=True, capture_output=True, text=True,
             ).stdout.strip()
             if tagged_commit != release_commit:
-                blockers.append("The v1.0.0 tag does not identify the recorded release commit.")
+                blockers.append(f"The {tag} tag does not identify the recorded release commit.")
 
     upload = metadata.get("post_upload_verification")
     if upload:
@@ -111,8 +115,8 @@ def check_publication_metadata(metadata: dict, blockers: list[str]) -> None:
             blockers.append("The post-upload verification does not match the version DOI.")
         if not upload.get("record_url") or not upload.get("verified_at"):
             blockers.append("The post-upload verification record is incomplete.")
-        if upload.get("git_commit") != release_commit or upload.get("git_tag") != "v1.0.0":
-            blockers.append("The post-upload verification does not identify the frozen v1 tag.")
+        if upload.get("git_commit") != release_commit or upload.get("git_tag") != f"v{metadata['software_version']}":
+            blockers.append("The post-upload verification does not identify the recorded release tag.")
         if upload.get("archive_content_match") is not True:
             blockers.append("The GitHub and Zenodo archive contents have not been matched.")
         if upload.get("missing_files") or upload.get("extra_files") or upload.get("changed_files"):
@@ -285,7 +289,7 @@ def check_biological_object(model, folder: Path, reference_evidence: dict, block
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Verify the v1 collection and write its release decision.")
+    parser = argparse.ArgumentParser(description="Verify the collection and write its release decision.")
     parser.add_argument(
         "--preflight",
         action="store_true",
@@ -298,6 +302,7 @@ def main() -> None:
     audit = read_json(ROOT / "release/collection-audit.json")
     blockers = []
     validated = []
+    sequence_validated = []
 
     if reference_evidence.get("status") != "pass":
         blockers.append("Collection reference verification has not passed.")
@@ -318,6 +323,8 @@ def main() -> None:
         if model.kind == "real" and model.status == "validated" and result["status"] == "pass":
             validated.append(model)
             check_biological_object(model, folder, reference_evidence, blockers)
+        if model.sequence is not None and model.status == "validated" and result["status"] == "pass":
+            sequence_validated.append(model)
 
     pockets = [
         model
@@ -330,6 +337,11 @@ def main() -> None:
         blockers.append(f"Collection has {len(pockets)} redistributable pockets; at least 8 are required.")
     if len({model.archetype for model in validated}) < 4:
         blockers.append("At least four certified design archetypes are required.")
+    if len(sequence_validated) < 4:
+        blockers.append("Version 2 requires at least four validated sequence objects.")
+    expected_sequence_families = {"sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna"}
+    if {model.assay for model in sequence_validated} != expected_sequence_families:
+        blockers.append("The version 2 DNA, RNA, protein and paired-read sequence families are incomplete.")
     for model in validated:
         if model.derivation.commit is None or not COMMIT.fullmatch(model.derivation.commit):
             blockers.append(f"{model.id}: transformation commit is missing or invalid.")
@@ -356,11 +368,12 @@ def main() -> None:
 
     deferred = [field for field in PUBLICATION_FIELDS if not metadata.get(field)]
     report = {
-        "scope": "v1_biological_collection",
+        "scope": "v2_collection",
         "software_version": metadata["software_version"],
         "decision": "GO" if not blockers and not deferred else "NO-GO",
         "preflight": "PASS" if not blockers else "FAIL",
         "certified_biological_objects": len(validated),
+        "certified_sequence_objects": len(sequence_validated),
         "source_studies": len({model.source.accession for model in validated}),
         "redistributable_pockets": len(pockets),
         "design_archetypes": len({model.archetype for model in validated}),
