@@ -28,7 +28,7 @@ def contrast(folder: Path) -> dict:
 def markdown_paragraphs() -> dict[str, list[str]]:
     locations = defaultdict(list)
     for path in sorted(ROOT.rglob("*.md")):
-        if any(part in {".git", ".snakemake", "build", "staging"} for part in path.parts):
+        if any(part in {".git", ".venv", ".snakemake", "build", "dist", "staging"} for part in path.parts):
             continue
         in_code = False
         current = []
