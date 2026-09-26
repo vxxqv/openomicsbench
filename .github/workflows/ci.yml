@@ -23,6 +23,7 @@ jobs:
       - run: git diff --exit-code -- datasets/sequences catalog figures/v1-fidelity.svg
       - run: python scripts/audit_collection.py
       - run: python scripts/check_repository.py
+      - run: omicsbench suite validate --junit build/benchmark-suite.xml --force
       - run: python scripts/certify_release.py --preflight
       - uses: actions/upload-artifact@v7
         if: always()

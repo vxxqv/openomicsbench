@@ -43,11 +43,15 @@ jobs:
           /tmp/openomicsbench-smoke/bin/omicsbench list --assay sequence_dna
           /tmp/openomicsbench-smoke/bin/omicsbench validate rnaseq-002
           /tmp/openomicsbench-smoke/bin/omicsbench validate sequence-004
+          /tmp/openomicsbench-smoke/bin/omicsbench suite validate --id rnaseq-002 --id sequence-004 --junit /tmp/openomicsbench-suite.xml
           /tmp/openomicsbench-smoke/bin/omicsbench assay info whole-genome
           sequence=$(/tmp/openomicsbench-smoke/bin/python -c 'from omicsbench.registry import default_root; print(default_root() / "datasets/sequences/sequence-001/nano/sequences.fasta")')
           /tmp/openomicsbench-smoke/bin/omicsbench seq qc "$sequence" --molecule dna
           reference=$(/tmp/openomicsbench-smoke/bin/python -c 'from omicsbench.registry import default_root; print(default_root() / "datasets/rnaseq/rnaseq-002/expected/reference-effects.tsv.gz")')
           /tmp/openomicsbench-smoke/bin/omicsbench compare rnaseq-002 "$reference"
+          mkdir /tmp/openomicsbench-results
+          cp "$reference" /tmp/openomicsbench-results/rnaseq-002.tsv.gz
+          /tmp/openomicsbench-smoke/bin/omicsbench suite compare /tmp/openomicsbench-results --id rnaseq-002 --junit /tmp/openomicsbench-comparison.xml
       - uses: actions/upload-artifact@v7
         with:
           name: python-package
