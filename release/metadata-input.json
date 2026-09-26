@@ -1,6 +1,6 @@
 {
-  "software_version": "2.0.0",
-  "candidate_date": "2026-09-20",
+  "software_version": "2.1.0",
+  "candidate_date": "2026-09-26",
   "authors": [
     {
       "name": "Vivaan Patni",
@@ -12,54 +12,17 @@
   "repository_url": "https://github.com/vxxqv/openomicsbench",
   "concept_doi": "10.5281/zenodo.22551734",
   "previous_release": {
-    "version": "1.1.0",
-    "git_tag": "v1.1.0",
-    "record_doi": "10.5281/zenodo.22755005",
-    "record_url": "https://zenodo.org/records/22755005"
+    "version": "2.0.0",
+    "git_tag": "v2.0.0",
+    "record_doi": "10.5281/zenodo.22863652",
+    "record_url": "https://zenodo.org/records/22863652"
   },
   "code_license": "Apache-2.0",
   "metadata_license": "CC-BY-4.0",
-  "release_commit": "08582b7e61828e88ece88a44ae2dd49dfbecd558",
-  "version_doi": "10.5281/zenodo.22863652",
-  "external_user_trial": {
-    "status": "owner-authorized clean-room substitute",
-    "date": "2026-09-20",
-    "operating_system": "Windows",
-    "python": "3.12.14",
-    "commit": "1c4e0aa8d9ea22415243c0023c80452825deabbe",
-    "commands": [
-      "python -m pip install -r requirements-tested.txt",
-      "python -m pip install --no-deps openomicsbench-2.0.0-py3-none-any.whl",
-      "omicsbench --version",
-      "omicsbench list --assay whole_genome_dna_seq",
-      "omicsbench validate sequence-005",
-      "omicsbench seq protein-stats <packaged sequence-003 FASTA> --ph 7.4",
-      "omicsbench seq digest <packaged sequence-003 FASTA> --enzyme trypsin --missed-cleavages 1"
-    ],
-    "outcome": "pass",
-    "wheel_bytes": 10800626,
-    "sdist_bytes": 10671091,
-    "packaged_collection": true,
-    "limitation": "The release preparer ran the clean-room trial. No independent tester is claimed."
-  },
+  "release_commit": null,
+  "version_doi": null,
+  "external_user_trial": null,
   "scientific_environment_lock": "runtime/environment-lock.json",
   "container_digest": null,
-  "post_upload_verification": {
-    "status": "pass",
-    "verified_at": "2026-09-20T19:51:00Z",
-    "record_url": "https://zenodo.org/records/22863652",
-    "version_doi": "10.5281/zenodo.22863652",
-    "git_commit": "08582b7e61828e88ece88a44ae2dd49dfbecd558",
-    "git_tag": "v2.0.0",
-    "archive_content_match": true,
-    "archived_files": 331,
-    "inventory_files_verified": 330,
-    "missing_files": [],
-    "extra_files": [],
-    "changed_files": [],
-    "zenodo_sha256": "7ee54d1adf1d087d28c858819fcb5e1b6777cd3584597a77ca70785cea49074c",
-    "github_sha256": "be3c3faebd16a96cf855321eb29481f0ce55c3af14ba643b36cd63ff07d5dfa5",
-    "zenodo_md5": "9e8a37b6455fd5acf6ac7cfd7a9e465b",
-    "github_md5": "4c3eedf82dbf7c3031619c002ce09c01"
-  }
+  "post_upload_verification": null
 }

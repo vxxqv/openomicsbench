@@ -5,6 +5,7 @@ import html
 import json
 from pathlib import Path
 
+from omicsbench import __version__
 from omicsbench.registry import registry
 
 
@@ -80,7 +81,7 @@ def write_catalog(rows: list[dict], sequences: list[dict]) -> None:
     catalog.mkdir(exist_ok=True)
     payload = {
         "schema_version": "2.0",
-        "release": "2.0.0",
+        "release": __version__,
         "biological_objects": len(rows),
         "sequence_objects": len(sequences),
         "source_studies": len({row["source_accession"] for row in rows}),
