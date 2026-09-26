@@ -2,6 +2,8 @@
 
 OpenOmicsBench is a compact benchmark collection and local sequence toolkit for bioinformatics software testing, method checks and teaching. Version 2 keeps the 12 certified bulk RNA-seq objects from version 1 and adds strict FASTA and FASTQ handling, DNA, RNA and protein support, paired-read checks, preprocessing, sequence QC and five deterministic sequence benchmarks.
 
+Version 2.1 adds benchmark suites for continuous integration. A suite can validate many bundled objects in one run or compare a directory of differential-expression results across the RNA-seq collection. Reports can be written as JSON, Markdown and JUnit XML.
+
 The package runs offline after installation. Sequence files stay on the local computer. The built-in tools cover inspection and lightweight preprocessing; they do not claim to replace aligners, variant callers, taxonomic classifiers or assay-specific statistical workflows.
 
 ## Install
@@ -70,6 +72,37 @@ Commands that write files refuse to replace an existing output unless `--force` 
 The FASTA validator follows the nucleotide symbol expectations described by [NCBI](https://www.ncbi.nlm.nih.gov/genbank/fastaformat). FASTQ has no single formal specification; OpenOmicsBench accepts conventional multiline records with printable Phred+33 quality characters and requires the sequence and quality lengths to match. The [GA4GH-maintained HTS specifications](https://samtools.github.io/hts-specs/) describe the surrounding SAM, BAM, CRAM and VCF ecosystem.
 
 The full command reference is in [docs/sequence-tools.md](docs/sequence-tools.md).
+
+## Benchmark suites
+
+Validate the complete installed collection and save reports that can be attached to a CI run:
+
+```sh
+omicsbench suite validate --json reports/validation.json --markdown reports/validation.md --junit reports/validation.xml
+```
+
+The selection can be narrowed by assay or by repeating `--id`:
+
+```sh
+omicsbench suite validate --assay bulk_rna_seq
+omicsbench suite validate --id rnaseq-002 --id sequence-005
+```
+
+To test a differential-expression pipeline across several biological objects, place each result in a directory under its benchmark ID. CSV and TSV are accepted, with optional gzip compression:
+
+```text
+results/
+  rnaseq-002.tsv.gz
+  rnaseq-003.csv
+```
+
+Then run:
+
+```sh
+omicsbench suite compare results --id rnaseq-002 --id rnaseq-003 --junit reports/comparison.xml
+```
+
+Omit `--id` to require results for all 12 comparable RNA-seq objects. A completed suite exits with status 0 when every check passes, status 2 when a benchmark fails or an expected result file is missing, and status 1 for invalid input. Existing report files are protected unless `--force` is supplied. The [suite reference](docs/benchmark-suites.md) describes the file convention and report fields.
 
 ## Assay profiles
 

@@ -1,5 +1,11 @@
 # Changes
 
+## 2.1.0
+
+Benchmark suites can now validate several objects in one run or compare a directory of differential-expression outputs across the biological collection. Exact IDs and assay filters make the selection explicit, missing comparison files fail closed, and a problem in one object does not prevent the remaining cases from running.
+
+Suite results are printed as JSON and can also be written as full JSON, a compact Markdown table or JUnit XML for continuous integration. Reports are written atomically, existing files are protected by default, and exit status 2 distinguishes completed benchmark failures from invalid command input.
+
 ## 2.0.0
 
 OpenOmicsBench now handles DNA, RNA and protein sequences in FASTA and FASTQ files, including gzip-compressed input and output. The new command suite provides strict validation, combined QC, length and composition statistics, positional quality, adapter scans, trimming, filtering, deterministic sampling, deduplication, paired-read checks, interleaving, extraction, reverse complements, transcription, translation, ORF discovery, IUPAC motif searches, k-mer counts and deterministic sequence sketches.
