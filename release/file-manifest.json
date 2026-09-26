@@ -1342,8 +1342,8 @@
     },
     {
       "path": "release/certification.json",
-      "bytes": 315,
-      "sha256": "f9afae7c4fab6462e25337613de44c6c9076e30a257f9d63856b09cda8cb15e3"
+      "bytes": 371,
+      "sha256": "1cd9ffc0d8b370e9620fbc7852d125370ee8b16a1fa333f2711b0855a4cc0f06"
     },
     {
       "path": "release/collection-audit.json",
