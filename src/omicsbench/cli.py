@@ -11,6 +11,7 @@ from .cache import get, verify_cache
 from .compare import compare
 from .sequence_cli import add_sequence_parser, run_sequence_command
 from .assays import build_plan, get_profile, list_profiles
+from .suite import compare_suite, validate_suite, write_reports
 from .validate import validate
 
 def main():
@@ -43,6 +44,19 @@ def main():
     assay_plan.add_argument("input", type=Path, nargs="+")
     assay_plan.add_argument("--output-directory", type=Path, default=Path("omicsbench-output"))
     assay_plan.add_argument("--adapter", action="append", default=[])
+    suite = sub.add_parser("suite", help="Run collection-wide checks and write CI reports.")
+    suite_sub = suite.add_subparsers(dest="suite_command", required=True)
+    suite_validate = suite_sub.add_parser("validate", help="Validate several bundled benchmarks in one run.")
+    suite_validate.add_argument("--assay", choices=["bulk_rna_seq", "sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq"])
+    suite_compare = suite_sub.add_parser("compare", help="Compare a directory of differential-expression results.")
+    suite_compare.add_argument("results", type=Path, help="Directory containing files named <dataset-id>.csv or .tsv, optionally gzip-compressed.")
+    suite_compare.add_argument("--detail-limit", type=int, default=20, help="Maximum missing and unexpected gene examples per benchmark.")
+    for command in (suite_validate, suite_compare):
+        command.add_argument("--id", action="append", default=[], help="Benchmark ID to include. Repeat to select several; omit to run all eligible benchmarks.")
+        command.add_argument("--json", type=Path, help="Write the complete report as JSON.")
+        command.add_argument("--markdown", type=Path, help="Write a concise Markdown report.")
+        command.add_argument("--junit", type=Path, help="Write a JUnit XML report for CI systems.")
+        command.add_argument("--force", action="store_true", help="Replace existing report files.")
     args = p.parse_args()
     try:
         if args.command == "seq":
@@ -54,6 +68,12 @@ def main():
                 out = get_profile(args.profile)
             else:
                 out = build_plan(args.profile, args.input, args.output_directory, args.adapter)
+        elif args.command == "suite":
+            if args.suite_command == "validate":
+                out = validate_suite(args.root, args.assay, args.id)
+            else:
+                out = compare_suite(args.root, args.results, args.id, args.detail_limit)
+            out["reports"] = write_reports(out, args.json, args.markdown, args.junit, args.force)
         elif args.command == "list":
             out = [{"id":m.id,"title":m.title,"kind":m.kind,"status":m.status,"rights":m.rights.status,"tiers":sorted({f.tier for f in m.files})} for m,_ in registry(args.root).values() if not args.assay or m.assay==args.assay]
         elif args.command == "doctor":
@@ -74,6 +94,8 @@ def main():
                 out = validate(model,folder)
         print(json.dumps(out,indent=2,allow_nan=False))
         if args.command == "compare" and out["status"] == "fail":
+            sys.exit(2)
+        if args.command == "suite" and out["summary"]["status"] == "fail":
             sys.exit(2)
     except (ValueError,OSError,KeyError) as exc:
         if args.debug:
