@@ -6,7 +6,7 @@
       "orcid": "0009-0005-1859-5107"
     }
   ],
-  "description": "Compact, traceable omics benchmarks with deterministic FASTA and FASTQ validation, QC and sequence tools.",
+  "description": "Compact, traceable omics benchmarks with deterministic sequence tools and CI-ready validation and comparison reports.",
   "upload_type": "software",
   "access_right": "open",
   "license": "Apache-2.0",
@@ -84,6 +84,9 @@
     "molecular weight",
     "isoelectric point",
     "protein digestion",
-    "trypsin"
+    "trypsin",
+    "continuous integration",
+    "JUnit XML",
+    "benchmark suite"
   ]
 }
