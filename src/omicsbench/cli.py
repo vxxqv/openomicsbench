@@ -13,6 +13,7 @@ from .sequence_cli import add_sequence_parser, run_sequence_command
 from .assays import build_plan, get_profile, list_profiles
 from .suite import compare_suite, validate_suite, write_reports
 from .matrix import compare_matrix, parse_method
+from .regression import compare_reports
 from .validate import validate
 
 def main():
@@ -55,8 +56,14 @@ def main():
     suite_matrix = suite_sub.add_parser("matrix", help="Compare several analysis methods across the same benchmarks.")
     suite_matrix.add_argument("--method", action="append", required=True, help="Method and result directory as NAME=PATH. Repeat for every method.")
     suite_matrix.add_argument("--detail-limit", type=int, default=20, help="Maximum missing and unexpected gene examples per benchmark.")
+    suite_regress = suite_sub.add_parser("regress", help="Fail when a candidate suite report regresses from a baseline report.")
+    suite_regress.add_argument("baseline", type=Path, help="Previously accepted JSON suite report.")
+    suite_regress.add_argument("candidate", type=Path, help="Candidate JSON suite report to check.")
+    suite_regress.add_argument("--absolute-tolerance", type=float, default=0.0, help="Largest permitted absolute decrease in a tracked metric.")
+    suite_regress.add_argument("--allow-missing", action="store_true", help="Do not fail when a baseline case is absent from the candidate.")
     for command in (suite_validate, suite_compare, suite_matrix):
         command.add_argument("--id", action="append", default=[], help="Benchmark ID to include. Repeat to select several; omit to run all eligible benchmarks.")
+    for command in (suite_validate, suite_compare, suite_matrix, suite_regress):
         command.add_argument("--json", type=Path, help="Write the complete report as JSON.")
         command.add_argument("--markdown", type=Path, help="Write a concise Markdown report.")
         command.add_argument("--junit", type=Path, help="Write a JUnit XML report for CI systems.")
@@ -77,8 +84,10 @@ def main():
                 out = validate_suite(args.root, args.assay, args.id)
             elif args.suite_command == "compare":
                 out = compare_suite(args.root, args.results, args.id, args.detail_limit)
-            else:
+            elif args.suite_command == "matrix":
                 out = compare_matrix(args.root, [parse_method(value) for value in args.method], args.id, args.detail_limit)
+            else:
+                out = compare_reports(args.baseline, args.candidate, args.absolute_tolerance, args.allow_missing)
             out["reports"] = write_reports(out, args.json, args.markdown, args.junit, args.force)
         elif args.command == "list":
             out = [{"id":m.id,"title":m.title,"kind":m.kind,"status":m.status,"rights":m.rights.status,"tiers":sorted({f.tier for f in m.files})} for m,_ in registry(args.root).values() if not args.assay or m.assay==args.assay]
