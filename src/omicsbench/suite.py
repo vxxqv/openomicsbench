@@ -3,6 +3,9 @@ from __future__ import annotations
 
 import json
 import os
+import csv
+import html
+import io
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -141,6 +144,82 @@ def junit_report(report: dict) -> str:
     return ET.tostring(suite, encoding="unicode", xml_declaration=True) + "\n"
 
 
+def csv_report(report: dict) -> str:
+    fields = (
+        "method", "benchmark", "status", "reason", "baseline_status", "candidate_status",
+        "spearman_logfc", "top_k_jaccard", "sign_concordance", "coverage",
+        "delta_spearman_logfc", "delta_top_k_jaccard", "delta_sign_concordance", "delta_coverage",
+    )
+    stream = io.StringIO(newline="")
+    writer = csv.DictWriter(stream, fieldnames=fields, lineterminator="\n")
+    writer.writeheader()
+    for item in report["results"]:
+        details = item.get("details", {})
+        metrics = details.get("metrics", {})
+        genes = details.get("genes", {})
+        deltas = item.get("metric_deltas", {})
+        writer.writerow({
+            "method": item.get("method", ""),
+            "benchmark": item["id"],
+            "status": item["status"],
+            "reason": item.get("reason", ""),
+            "baseline_status": item.get("baseline_status", ""),
+            "candidate_status": item.get("candidate_status", ""),
+            "spearman_logfc": metrics.get("spearman_logfc", ""),
+            "top_k_jaccard": metrics.get("top_k_jaccard", ""),
+            "sign_concordance": metrics.get("sign_concordance", ""),
+            "coverage": genes.get("coverage", ""),
+            "delta_spearman_logfc": deltas.get("spearman_logfc", ""),
+            "delta_top_k_jaccard": deltas.get("top_k_jaccard", ""),
+            "delta_sign_concordance": deltas.get("sign_concordance", ""),
+            "delta_coverage": deltas.get("coverage", ""),
+        })
+    return stream.getvalue()
+
+
+def html_report(report: dict) -> str:
+    summary = report["summary"]
+    rows = []
+    for item in report["results"]:
+        details = item.get("details", {})
+        metrics = details.get("metrics", {})
+        values = []
+        for name in ("spearman_logfc", "top_k_jaccard", "sign_concordance"):
+            value = metrics.get(name)
+            if value is not None:
+                values.append(f"{name.replace('_', ' ')} {value:.3f}")
+        detail = item.get("reason") or "; ".join(values)
+        benchmark = f"{item.get('method')}/{item['id']}" if item.get("method") else item["id"]
+        rows.append(
+            f"<tr><td><code>{html.escape(benchmark)}</code></td>"
+            f"<td class=\"{html.escape(item['status'])}\">{html.escape(item['status'])}</td>"
+            f"<td>{html.escape(detail or '')}</td></tr>"
+        )
+    leaderboard = ""
+    if report.get("leaderboard"):
+        leaders = "".join(
+            f"<tr><td>{index}</td><td><code>{html.escape(row['name'])}</code></td>"
+            f"<td>{row['passed']}/{row['total']}</td><td>{row['pass_rate']:.1%}</td></tr>"
+            for index, row in enumerate(report["leaderboard"], start=1)
+        )
+        leaderboard = f"<h2>Methods</h2><table><thead><tr><th>Rank</th><th>Method</th><th>Passed</th><th>Pass rate</th></tr></thead><tbody>{leaders}</tbody></table>"
+    return """<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OpenOmicsBench report</title><style>
+body{font:16px system-ui,sans-serif;max-width:1100px;margin:2rem auto;padding:0 1rem;color:#111;background:#fff}
+table{border-collapse:collapse;width:100%;margin:1rem 0 2rem}th,td{border:1px solid #bbb;padding:.55rem;text-align:left;vertical-align:top}
+th{background:#eee}.pass{color:#126b2e;font-weight:700}.fail{color:#a01414;font-weight:700}.skipped{color:#555;font-weight:700}
+code{font-family:ui-monospace,monospace}dl{display:grid;grid-template-columns:max-content auto;gap:.35rem 1rem}dt{font-weight:700}dd{margin:0}
+</style></head><body>""" + (
+        f"<h1>OpenOmicsBench suite report</h1><dl><dt>Operation</dt><dd><code>{html.escape(report['operation'])}</code></dd>"
+        f"<dt>Status</dt><dd class=\"{html.escape(summary['status'])}\">{html.escape(summary['status'].upper())}</dd>"
+        f"<dt>Passed</dt><dd>{summary['passed']}</dd><dt>Failed</dt><dd>{summary['failed']}</dd>"
+        f"<dt>Skipped</dt><dd>{summary['skipped']}</dd></dl>{leaderboard}"
+        f"<h2>Cases</h2><table><thead><tr><th>Benchmark</th><th>Status</th><th>Detail</th></tr></thead><tbody>{''.join(rows)}</tbody></table>"
+        "</body></html>\n"
+    )
+
+
 def _atomic_text(path: Path, text: str, force: bool) -> None:
     path = Path(path)
     if path.exists() and not force:
@@ -154,8 +233,16 @@ def _atomic_text(path: Path, text: str, force: bool) -> None:
         temporary.unlink(missing_ok=True)
 
 
-def write_reports(report: dict, json_path: Path | None = None, markdown_path: Path | None = None, junit_path: Path | None = None, force: bool = False) -> dict:
-    destinations = [Path(path) for path in (json_path, markdown_path, junit_path) if path is not None]
+def write_reports(
+    report: dict,
+    json_path: Path | None = None,
+    markdown_path: Path | None = None,
+    junit_path: Path | None = None,
+    force: bool = False,
+    csv_path: Path | None = None,
+    html_path: Path | None = None,
+) -> dict:
+    destinations = [Path(path) for path in (json_path, markdown_path, junit_path, csv_path, html_path) if path is not None]
     duplicates = {path for path in destinations if destinations.count(path) > 1}
     if duplicates:
         raise ValueError(f"report paths must be distinct: {', '.join(str(path) for path in sorted(duplicates))}")
@@ -168,8 +255,14 @@ def write_reports(report: dict, json_path: Path | None = None, markdown_path: Pa
         _atomic_text(Path(markdown_path), markdown_report(report), force)
     if junit_path is not None:
         _atomic_text(Path(junit_path), junit_report(report), force)
+    if csv_path is not None:
+        _atomic_text(Path(csv_path), csv_report(report), force)
+    if html_path is not None:
+        _atomic_text(Path(html_path), html_report(report), force)
     return {
         "json": str(Path(json_path)) if json_path is not None else None,
         "markdown": str(Path(markdown_path)) if markdown_path is not None else None,
         "junit": str(Path(junit_path)) if junit_path is not None else None,
+        "csv": str(Path(csv_path)) if csv_path is not None else None,
+        "html": str(Path(html_path)) if html_path is not None else None,
     }

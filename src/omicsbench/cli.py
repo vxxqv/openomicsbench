@@ -68,6 +68,8 @@ def main():
         command.add_argument("--json", type=Path, help="Write the complete report as JSON.")
         command.add_argument("--markdown", type=Path, help="Write a concise Markdown report.")
         command.add_argument("--junit", type=Path, help="Write a JUnit XML report for CI systems.")
+        command.add_argument("--csv", type=Path, help="Write a flat CSV report for analysis or plotting.")
+        command.add_argument("--html", type=Path, help="Write a self-contained HTML report.")
         command.add_argument("--force", action="store_true", help="Replace existing report files.")
     bundle = sub.add_parser("bundle", help="Create or verify a portable benchmark bundle.")
     bundle_sub = bundle.add_subparsers(dest="bundle_command", required=True)
@@ -103,7 +105,15 @@ def main():
                 out = compare_matrix(args.root, [parse_method(value) for value in args.method], args.id, args.detail_limit)
             else:
                 out = compare_reports(args.baseline, args.candidate, args.absolute_tolerance, args.allow_missing)
-            out["reports"] = write_reports(out, args.json, args.markdown, args.junit, args.force)
+            out["reports"] = write_reports(
+                out,
+                json_path=args.json,
+                markdown_path=args.markdown,
+                junit_path=args.junit,
+                force=args.force,
+                csv_path=args.csv,
+                html_path=args.html,
+            )
         elif args.command == "list":
             out = [{"id":m.id,"title":m.title,"kind":m.kind,"status":m.status,"rights":m.rights.status,"tiers":sorted({f.tier for f in m.files})} for m,_ in registry(args.root).values() if not args.assay or m.assay==args.assay]
         elif args.command == "doctor":

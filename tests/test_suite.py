@@ -6,7 +6,7 @@ import unittest
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-from omicsbench.suite import compare_suite, junit_report, markdown_report, validate_suite, write_reports
+from omicsbench.suite import compare_suite, csv_report, html_report, junit_report, markdown_report, validate_suite, write_reports
 
 
 class SuiteTests(unittest.TestCase):
@@ -53,10 +53,16 @@ class SuiteTests(unittest.TestCase):
         json_path = self.root / "reports" / "suite.json"
         markdown_path = self.root / "reports" / "suite.md"
         junit_path = self.root / "reports" / "suite.xml"
-        paths = write_reports(report, json_path, markdown_path, junit_path)
+        csv_path = self.root / "reports" / "suite.csv"
+        html_path = self.root / "reports" / "suite.html"
+        paths = write_reports(report, json_path, markdown_path, junit_path, csv_path=csv_path, html_path=html_path)
         self.assertEqual(json.loads(json_path.read_text())["summary"]["status"], "pass")
         self.assertTrue(markdown_path.is_file())
         self.assertTrue(junit_path.is_file())
+        self.assertIn("sequence-001", csv_report(report))
+        self.assertIn("<!doctype html>", html_report(report))
+        self.assertTrue(csv_path.is_file())
+        self.assertTrue(html_path.is_file())
         self.assertEqual(paths["junit"], str(junit_path))
         with self.assertRaisesRegex(ValueError, "--force"):
             write_reports(report, json_path=json_path)
