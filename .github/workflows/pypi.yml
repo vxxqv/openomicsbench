@@ -52,6 +52,12 @@ jobs:
           mkdir /tmp/openomicsbench-results
           cp "$reference" /tmp/openomicsbench-results/rnaseq-002.tsv.gz
           /tmp/openomicsbench-smoke/bin/omicsbench suite compare /tmp/openomicsbench-results --id rnaseq-002 --junit /tmp/openomicsbench-comparison.xml
+          mkdir /tmp/openomicsbench-results-copy
+          cp "$reference" /tmp/openomicsbench-results-copy/rnaseq-002.tsv.gz
+          /tmp/openomicsbench-smoke/bin/omicsbench suite matrix --method first=/tmp/openomicsbench-results --method second=/tmp/openomicsbench-results-copy --id rnaseq-002 --json /tmp/openomicsbench-matrix.json --html /tmp/openomicsbench-matrix.html
+          /tmp/openomicsbench-smoke/bin/omicsbench suite regress /tmp/openomicsbench-matrix.json /tmp/openomicsbench-matrix.json --junit /tmp/openomicsbench-regression.xml
+          /tmp/openomicsbench-smoke/bin/omicsbench bundle create /tmp/openomicsbench-selected.zip --id rnaseq-002 --id sequence-005
+          /tmp/openomicsbench-smoke/bin/omicsbench bundle verify /tmp/openomicsbench-selected.zip
       - uses: actions/upload-artifact@v7
         with:
           name: python-package

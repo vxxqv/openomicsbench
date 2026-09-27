@@ -24,6 +24,15 @@ jobs:
       - run: python scripts/audit_collection.py
       - run: python scripts/check_repository.py
       - run: omicsbench suite validate --junit build/benchmark-suite.xml --force
+      - name: Exercise matrix, regression and bundle workflows
+        run: |
+          mkdir -p build/method-a build/method-b
+          cp datasets/rnaseq/rnaseq-002/expected/reference-effects.tsv.gz build/method-a/rnaseq-002.tsv.gz
+          cp datasets/rnaseq/rnaseq-002/expected/reference-effects.tsv.gz build/method-b/rnaseq-002.tsv.gz
+          omicsbench suite matrix --method first=build/method-a --method second=build/method-b --id rnaseq-002 --json build/matrix.json --csv build/matrix.csv --html build/matrix.html
+          omicsbench suite regress build/matrix.json build/matrix.json --junit build/regression.xml
+          omicsbench bundle create build/selected.zip --id rnaseq-002 --id sequence-005
+          omicsbench bundle verify build/selected.zip
       - run: python scripts/certify_release.py --preflight
       - uses: actions/upload-artifact@v7
         if: always()
