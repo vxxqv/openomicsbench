@@ -1,9 +1,9 @@
 {
-  "version": "2.1.0",
-  "created": "2026-09-26",
+  "version": "2.2.0",
+  "created": "2026-09-27",
   "scope": "Files in the reviewed version 2 release candidate; generated caches and staged source downloads are excluded.",
   "self_excluded": "release/file-manifest.json",
-  "file_count": 333,
+  "file_count": 340,
   "files": [
     {
       "path": ".gitattributes",
@@ -22,13 +22,13 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "bytes": 1055,
-      "sha256": "28f11cb4dd07c289064bc34a2d205cfa06387cf23f3c0103ac16595094304d63"
+      "bytes": 1822,
+      "sha256": "07a3b1f7650a5368d88da03ebc4ec30f34597e16364b4a2e246cb4598047fcae"
     },
     {
       "path": ".github/workflows/pypi.yml",
-      "bytes": 3156,
-      "sha256": "2cc1460db741d24c369a6b1129d8851ad4705f27b8c64e62ffeba22912428eb7"
+      "bytes": 3934,
+      "sha256": "2762ac1446ed37e8194e651fd093044fe53ba7def39c13dc50b9166ec0b28f18"
     },
     {
       "path": ".gitignore",
@@ -37,18 +37,18 @@
     },
     {
       "path": ".zenodo.json",
-      "bytes": 2121,
-      "sha256": "dba9fd2873d0d27d5152593b5e5ebc0aac4fa3f6c5309d0923e88763a5ede74c"
+      "bytes": 2231,
+      "sha256": "b53dfe4a63b6b92fbf3ab1450d8a7ab8cd52abf5962d57f22a948971ae5a2168"
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 6673,
-      "sha256": "0283261cf2e012e32ef5b967c6c88992ead71746b9e97afbda7c0cb115d7fa30"
+      "bytes": 7694,
+      "sha256": "941524427131a8420576bea731e75d0fc6d613ea4eed06e382eb206c5fd15eb6"
     },
     {
       "path": "CITATION.cff",
       "bytes": 511,
-      "sha256": "c2738e577262652be93e86bf19ca9e9c5341e58f9d414b1e65d8dbeb2bb5d5ee"
+      "sha256": "b5542eea4379510a03035e5e6c04ee504816aba3cdfcf227b71706d08d5ae2ce"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -67,8 +67,8 @@
     },
     {
       "path": "MANIFEST.in",
-      "bytes": 78,
-      "sha256": "21701d36114f0bf78ed2ada08980cdc0540f842461c7098692b6ace0ec720d9f"
+      "bytes": 139,
+      "sha256": "4405131064ae79e40b2283e42d10830c88dbe68bbfd06a5eea8e80b858986676"
     },
     {
       "path": "NOTICE",
@@ -77,13 +77,13 @@
     },
     {
       "path": "README.md",
-      "bytes": 10557,
-      "sha256": "fe535985dc36d547989b9784cce8154f1f3da966c0494f552535b48cd5c3581f"
+      "bytes": 11494,
+      "sha256": "c7346222fabdeb9375a7799c2ced5283f4e750b1081524ad5de0eb9eca90e1ce"
     },
     {
       "path": "catalog/collection.json",
       "bytes": 12313,
-      "sha256": "09d353477d0bdb845dcb2267c8644d3c6bd372335dd4fe7f1015dcc28bffdbc8"
+      "sha256": "c26017be5f55d749ee7efde91c5688c1e5eae8d432a829a04a95fdf074df8557"
     },
     {
       "path": "catalog/collection.tsv",
@@ -1137,8 +1137,8 @@
     },
     {
       "path": "docs/benchmark-suites.md",
-      "bytes": 2538,
-      "sha256": "8c87d9b6ef9f10172502c9c3f2260dddb3fe38515c9152cbcbb862e891f3c46c"
+      "bytes": 3839,
+      "sha256": "f5d8a55e6076dd52df7067ae3914709973d13d5e6258b7bc257d4ec47ec3e0d9"
     },
     {
       "path": "docs/implementation-status.md",
@@ -1149,6 +1149,11 @@
       "path": "docs/methods.md",
       "bytes": 7185,
       "sha256": "970cc743c9e2aa5b8cc4245a7bbb3c4f6b10f4d7d86bd5fb68c9c79e6c70ff0d"
+    },
+    {
+      "path": "docs/portable-bundles.md",
+      "bytes": 1416,
+      "sha256": "875d0d5bb40bc980f3ea4dd8f718350738f3706cf1155fbefa3daab7cec36634"
     },
     {
       "path": "docs/release.md",
@@ -1333,7 +1338,7 @@
     {
       "path": "pyproject.toml",
       "bytes": 1850,
-      "sha256": "1124965cadfcda3367ca931a96d05a673a0d268e1dfcacf424361766c03bca06"
+      "sha256": "87f39ac87dca06c1a1ddb3eea6b3dd676fe465e1497adbb1beb0f46730d872e0"
     },
     {
       "path": "release/acceptance-ledger.json",
@@ -1343,7 +1348,7 @@
     {
       "path": "release/certification.json",
       "bytes": 371,
-      "sha256": "1cd9ffc0d8b370e9620fbc7852d125370ee8b16a1fa333f2711b0855a4cc0f06"
+      "sha256": "932479000170c2fc8edbd5e6dd8c07c0595f613262a92db76b66fb86c420db4b"
     },
     {
       "path": "release/collection-audit.json",
@@ -1352,8 +1357,8 @@
     },
     {
       "path": "release/metadata-input.json",
-      "bytes": 1752,
-      "sha256": "2ed267050968ac0f982219309cee82650a9be72f5f5ef52a75373929cf6ad357"
+      "bytes": 1794,
+      "sha256": "f5667f9433dc9901734a8d36bef2dffd55414157c0db9abaaf266783f5bd24d4"
     },
     {
       "path": "requirements-tested.txt",
@@ -1407,13 +1412,13 @@
     },
     {
       "path": "setup.py",
-      "bytes": 473,
-      "sha256": "983d5ebaeacf10a0ad7b01444dbc9b5d7275ca9d3a6c17a5b23b62325003b6b2"
+      "bytes": 712,
+      "sha256": "a453fbe6fcd8030efcc5cf59fa0ddeb51df238c5156141869601fed19d4c1080"
     },
     {
       "path": "src/omicsbench/__init__.py",
       "bytes": 98,
-      "sha256": "9894135b9cc8d80ac276f61be2944c73c8fb54119c09ec491dabfecff02adc1e"
+      "sha256": "d32accb0800ab3a7649250410f22da1f47391732b476c04d2d014a2befbc2b52"
     },
     {
       "path": "src/omicsbench/__main__.py",
@@ -1426,14 +1431,19 @@
       "sha256": "ed472b0ac2eab148f3099b50e856e1f3bf6cd0b6cdfcfc889278f28dc38ddc47"
     },
     {
+      "path": "src/omicsbench/bundle.py",
+      "bytes": 8936,
+      "sha256": "1117b0d5f96fe8d24991a9f744d51c46ac9640c894dc799362e5b0603baa6653"
+    },
+    {
       "path": "src/omicsbench/cache.py",
       "bytes": 2951,
       "sha256": "efa3403ef213cbca3f653657cfa659ddac99e2ab19b30a8a3e3b517f9229e435"
     },
     {
       "path": "src/omicsbench/cli.py",
-      "bytes": 7627,
-      "sha256": "a31f74eb19a1e97cff086a51e1472e1d231c903cde1bea121c15c8542b27bf68"
+      "bytes": 10776,
+      "sha256": "aff1360a779ab672a3d13f29f0aab0bdeaa67998e85f17192121f62e5747dc2c"
     },
     {
       "path": "src/omicsbench/compare.py",
@@ -1456,6 +1466,11 @@
       "sha256": "34c5a339e08747d6158f34ce600655b591ac02f2a45ae634eca784fd5c1aff22"
     },
     {
+      "path": "src/omicsbench/matrix.py",
+      "bytes": 3319,
+      "sha256": "24fde954fefe246bcfab749c017d4d8ceb83d66e021f4442b77a87b0eacc51d1"
+    },
+    {
       "path": "src/omicsbench/models.py",
       "bytes": 12170,
       "sha256": "adb62db8366727bd155dbf2be15aa56a0da49ce43cfd3477970c6927755a8cbc"
@@ -1469,6 +1484,11 @@
       "path": "src/omicsbench/registry.py",
       "bytes": 1710,
       "sha256": "cc3ee0e82de2b96ba9198b6a71cb5a060cfdcf50e7c4eb2e36adcdedebb9315a"
+    },
+    {
+      "path": "src/omicsbench/regression.py",
+      "bytes": 4815,
+      "sha256": "54b5aaad1aad4b8092fab2654f0b9b92ab4e25a0590750e5baeb2df86488a255"
     },
     {
       "path": "src/omicsbench/rnaseq.py",
@@ -1497,8 +1517,8 @@
     },
     {
       "path": "src/omicsbench/suite.py",
-      "bytes": 8135,
-      "sha256": "e88584187bbd791f0c57acf524b66c7fc212d3c8f40de5b7af19bbf718355bcb"
+      "bytes": 12852,
+      "sha256": "cfd1766df46e1d8bd1d4da4ef3f260705ac1ac5a3b74bf835bb82499341ff825"
     },
     {
       "path": "src/omicsbench/validate.py",
@@ -1511,14 +1531,29 @@
       "sha256": "a85690eed2f45b63331d0121851498b9be0592329ef5bced7bce8a3ae4fa55f5"
     },
     {
+      "path": "tests/test_bundle.py",
+      "bytes": 2851,
+      "sha256": "effad9b2b9c549050efbc5a563448a9cb97c4e77a21e31fe10775d53f320c6a1"
+    },
+    {
       "path": "tests/test_core.py",
       "bytes": 24408,
       "sha256": "bf007ac322e02ae97ed7d89d7362503305a211de02a8490cd7d5c8a5027f8bb6"
     },
     {
+      "path": "tests/test_matrix.py",
+      "bytes": 2619,
+      "sha256": "b5d7b524e802d64362abaa53bfd722720a8abcea22e3c5d2ddb922d8f2d2d5e1"
+    },
+    {
       "path": "tests/test_proteins.py",
       "bytes": 2736,
       "sha256": "63c9c1a40c99affc8ab6447487f09cbbb3a9a705bc3ca259baf9c1ac34419e09"
+    },
+    {
+      "path": "tests/test_regression.py",
+      "bytes": 3100,
+      "sha256": "514b85723b59926e496a0d3d2c56d685ad5c084645c7ad65bbed9aa424d0b908"
     },
     {
       "path": "tests/test_sequence_fixtures.py",
@@ -1532,8 +1567,8 @@
     },
     {
       "path": "tests/test_suite.py",
-      "bytes": 3737,
-      "sha256": "4f033e11248dc84fc59983f13100ba1bd85cce5a0e9c64e6939b115d969a396b"
+      "bytes": 4123,
+      "sha256": "96bdfa90aca3a249230025f8d8ff683c17d32c9055c2411b173a58d9f4ca9e3f"
     },
     {
       "path": "workflows/Snakefile",
