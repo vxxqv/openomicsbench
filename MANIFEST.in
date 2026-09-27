@@ -1,4 +1,7 @@
 include LICENSE
+include LICENSE-METADATA
+include NOTICE
+include CITATION.cff
 include NOTICE
 include README.md
 recursive-include datasets *

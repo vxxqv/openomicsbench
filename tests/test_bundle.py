@@ -30,6 +30,8 @@ class BundleTests(unittest.TestCase):
         self.assertEqual(first.read_bytes(), second.read_bytes())
         self.assertEqual(one["datasets"], ["sequence-001"])
         self.assertEqual(verify_bundle(first)["status"], "pass")
+        with zipfile.ZipFile(first) as archive:
+            self.assertTrue({"CITATION.cff", "LICENSE", "LICENSE-METADATA", "NOTICE"}.issubset(archive.namelist()))
 
     def test_bundle_rejects_changed_content(self):
         source = self.root / "source.zip"

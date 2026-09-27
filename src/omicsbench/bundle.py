@@ -71,11 +71,13 @@ def create_bundle(
     files: dict[str, bytes] = {}
     for relative in SUPPORT_FILES:
         path = root / relative
-        if path.is_file():
-            files[relative] = path.read_bytes()
+        if not path.is_file():
+            raise ValueError(f"{path}: required bundle support file is missing")
+        files[relative] = path.read_bytes()
     for model, folder in selected:
         prefix = folder.resolve().relative_to(root).as_posix()
-        included = [folder / "manifest.json", *(folder / record.path for record in model.files)]
+        manifest_path = (folder / "manifest.json").resolve()
+        included = [manifest_path, *(folder / record.path for record in model.files)]
         for path in included:
             resolved = path.resolve()
             try:
@@ -85,7 +87,7 @@ def create_bundle(
             if not resolved.is_file():
                 raise ValueError(f"{relative}: declared bundle file is missing")
             data = resolved.read_bytes()
-            if path.name != "manifest.json":
+            if resolved != manifest_path:
                 record = next(item for item in model.files if (folder / item.path).resolve() == resolved)
                 if len(data) != record.bytes or _sha256(data) != record.sha256:
                     raise ValueError(f"{relative}: declared size or SHA-256 does not match")
@@ -100,7 +102,7 @@ def create_bundle(
     manifest = {
         "format": BUNDLE_FORMAT,
         "software_version": __version__,
-        "selection": {"assay": assay, "ids": dataset_ids or []},
+        "selection": {"assay": assay, "ids": [model.id for model, _ in selected] if dataset_ids else []},
         "datasets": [model.id for model, _ in selected],
         "files": file_records,
     }
