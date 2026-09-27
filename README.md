@@ -2,7 +2,7 @@
 
 OpenOmicsBench is a compact benchmark collection and local sequence toolkit for bioinformatics software testing, method checks and teaching. Version 2 keeps the 12 certified bulk RNA-seq objects from version 1 and adds strict FASTA and FASTQ handling, DNA, RNA and protein support, paired-read checks, preprocessing, sequence QC and five deterministic sequence benchmarks.
 
-Version 2.1 adds benchmark suites for continuous integration. A suite can validate many bundled objects in one run or compare a directory of differential-expression results across the RNA-seq collection. Reports can be written as JSON, Markdown and JUnit XML.
+Version 2.2 adds multi-method benchmark matrices, report-to-report regression gates and portable benchmark bundles. Suite reports can be written as JSON, Markdown, JUnit XML, CSV or a self-contained HTML page.
 
 The package runs offline after installation. Sequence files stay on the local computer. The built-in tools cover inspection and lightweight preprocessing; they do not claim to replace aligners, variant callers, taxonomic classifiers or assay-specific statistical workflows.
 
@@ -102,7 +102,35 @@ Then run:
 omicsbench suite compare results --id rnaseq-002 --id rnaseq-003 --junit reports/comparison.xml
 ```
 
-Omit `--id` to require results for all 12 comparable RNA-seq objects. A completed suite exits with status 0 when every check passes, status 2 when a benchmark fails or an expected result file is missing, and status 1 for invalid input. Existing report files are protected unless `--force` is supplied. The [suite reference](docs/benchmark-suites.md) describes the file convention and report fields.
+Compare several tools or parameter sets in one matrix:
+
+```sh
+omicsbench suite matrix \
+  --method deseq2=results/deseq2 \
+  --method edger=results/edger \
+  --json reports/matrix.json \
+  --csv reports/matrix.csv \
+  --html reports/matrix.html
+```
+
+Use a previously accepted report as a regression baseline:
+
+```sh
+omicsbench suite regress accepted.json candidate.json --absolute-tolerance 0.01 --junit reports/regression.xml
+```
+
+Omit `--id` to require results for all 12 comparable RNA-seq objects. A completed suite exits with status 0 when every check passes, status 2 when a benchmark or regression gate fails, and status 1 for invalid input. Existing report files are protected unless `--force` is supplied. The [suite reference](docs/benchmark-suites.md) describes the file convention and report fields.
+
+## Portable bundles
+
+Create a deterministic ZIP containing selected benchmarks, their manifests, declared files and the project licence material:
+
+```sh
+omicsbench bundle create rna-and-dna.zip --id rnaseq-002 --id sequence-005
+omicsbench bundle verify rna-and-dna.zip
+```
+
+Bundle verification checks the complete file inventory, byte counts, SHA-256 digests and embedded dataset manifests without extracting the archive. Recreating the same selection with the same package version produces the same archive bytes. See [docs/portable-bundles.md](docs/portable-bundles.md).
 
 ## Assay profiles
 

@@ -1,5 +1,15 @@
 # Changes
 
+## 2.2.0
+
+Benchmark matrices compare two or more analysis methods or parameter sets against the same RNA-seq selection. Results include every method and benchmark case, per-method pass rates and mean preservation metrics, and a deterministic leaderboard without hiding failed or missing inputs.
+
+Regression gates compare an accepted JSON suite report with a candidate report. They fail on new benchmark failures, missing baseline cases or decreases in effect-rank correlation, top-gene overlap, sign agreement and gene coverage beyond a declared tolerance.
+
+Suite commands can now write flat CSV and self-contained HTML alongside JSON, Markdown and JUnit XML. HTML reports contain no external scripts or network dependencies.
+
+Portable bundles package selected benchmarks, their complete declared file inventories and licence material into deterministic ZIP archives. Verification checks safe paths, exact inventory membership, byte counts, SHA-256 digests and embedded dataset manifests without extracting the archive.
+
 ## 2.1.0
 
 Benchmark suites can now validate several objects in one run or compare a directory of differential-expression outputs across the biological collection. Exact IDs and assay filters make the selection explicit, missing comparison files fail closed, and a problem in one object does not prevent the remaining cases from running.
