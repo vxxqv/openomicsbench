@@ -14,6 +14,7 @@ from .assays import build_plan, get_profile, list_profiles
 from .suite import compare_suite, validate_suite, write_reports
 from .matrix import compare_matrix, parse_method
 from .regression import compare_reports
+from .bundle import create_bundle, verify_bundle
 from .validate import validate
 
 def main():
@@ -68,10 +69,24 @@ def main():
         command.add_argument("--markdown", type=Path, help="Write a concise Markdown report.")
         command.add_argument("--junit", type=Path, help="Write a JUnit XML report for CI systems.")
         command.add_argument("--force", action="store_true", help="Replace existing report files.")
+    bundle = sub.add_parser("bundle", help="Create or verify a portable benchmark bundle.")
+    bundle_sub = bundle.add_subparsers(dest="bundle_command", required=True)
+    bundle_create = bundle_sub.add_parser("create", help="Create a deterministic ZIP containing selected benchmarks.")
+    bundle_create.add_argument("output", type=Path)
+    bundle_create.add_argument("--id", action="append", default=[], help="Benchmark ID to include. Repeat to select several.")
+    bundle_create.add_argument("--assay", choices=["bulk_rna_seq", "sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq"])
+    bundle_create.add_argument("--force", action="store_true", help="Replace an existing bundle.")
+    bundle_verify = bundle_sub.add_parser("verify", help="Verify a bundle inventory, hashes and dataset manifests.")
+    bundle_verify.add_argument("archive", type=Path)
     args = p.parse_args()
     try:
         if args.command == "seq":
             out = run_sequence_command(args)
+        elif args.command == "bundle":
+            if args.bundle_command == "create":
+                out = create_bundle(args.root, args.output, args.id, args.assay, args.force)
+            else:
+                out = verify_bundle(args.archive)
         elif args.command == "assay":
             if args.assay_command == "list":
                 out = list_profiles()
