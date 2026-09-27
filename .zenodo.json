@@ -6,7 +6,7 @@
       "orcid": "0009-0005-1859-5107"
     }
   ],
-  "description": "Compact, traceable omics benchmarks with deterministic sequence tools and CI-ready validation and comparison reports.",
+  "description": "Compact, traceable omics benchmarks with multi-method comparison, regression gates, portable verified bundles and deterministic sequence tools.",
   "upload_type": "software",
   "access_right": "open",
   "license": "Apache-2.0",
@@ -87,6 +87,10 @@
     "trypsin",
     "continuous integration",
     "JUnit XML",
-    "benchmark suite"
+    "benchmark suite",
+    "benchmark matrix",
+    "portable benchmark",
+    "SHA-256",
+    "HTML report"
   ]
 }
