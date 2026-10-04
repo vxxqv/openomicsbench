@@ -146,6 +146,12 @@ def build_dnaseq(destination: Path) -> Path:
         "variant_truth": "expected/variants.tsv",
         "variant_count": len(variants),
         "context_bases": 10,
+        "variant_comparison": {
+            "mode": "exact_allele",
+            "scope": "single_nucleotide_substitutions",
+            "minimum_precision": 1.0,
+            "minimum_recall": 1.0,
+        },
     }
     write_json(folder / "expected/validation.json", profile)
     inventory = [
@@ -159,7 +165,7 @@ def build_dnaseq(destination: Path) -> Path:
         "schema_version": "2.0",
         "id": fixture_id,
         "title": "Synthetic paired DNA-seq variant benchmark",
-        "release": "2.0.0",
+        "release": "3.0.0",
         "assay": "whole_genome_dna_seq",
         "kind": "synthetic_fixture",
         "status": "validated",
@@ -191,7 +197,7 @@ def build_dnaseq(destination: Path) -> Path:
             "versions": {"python": "3.12", "openomicsbench_contract": "2.0"},
         },
         "files": inventory,
-        "validation": {"profile": "expected/validation.json", "baseline_version": "dnaseq-truth-v1", "metrics": []},
+        "validation": {"profile": "expected/validation.json", "baseline_version": "dnaseq-truth-v2", "metrics": []},
         "sequence": {"format": "fastq", "molecule": "dna", "paired": True, "quality_encoding": "phred33"},
         "limitations": [
             "This compact synthetic object tests deterministic variant truth and pair integrity, not aligner sensitivity on a complete genome.",

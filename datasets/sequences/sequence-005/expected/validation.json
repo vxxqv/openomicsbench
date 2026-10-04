@@ -74,5 +74,11 @@
   "reference": "nano/reference.fasta",
   "variant_truth": "expected/variants.tsv",
   "variant_count": 3,
-  "context_bases": 10
+  "context_bases": 10,
+  "variant_comparison": {
+    "mode": "exact_allele",
+    "scope": "single_nucleotide_substitutions",
+    "minimum_precision": 1.0,
+    "minimum_recall": 1.0
+  }
 }

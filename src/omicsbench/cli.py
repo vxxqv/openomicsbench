@@ -16,6 +16,7 @@ from .matrix import compare_matrix, parse_method
 from .regression import compare_reports
 from .bundle import create_bundle, verify_bundle
 from .validate import validate
+from .variants import compare_variants
 
 def main():
     p = argparse.ArgumentParser(description="Find, verify and process compact omics benchmarks.",epilog="Example: omicsbench info rnaseq-002")
@@ -37,6 +38,12 @@ def main():
             command.add_argument("results",type=Path,help="CSV or TSV file with gene_id and log2_fold_change columns.")
             command.add_argument("--detail-limit",type=int,default=20,help="Maximum missing and unexpected gene examples to return.")
     add_sequence_parser(sub)
+    variant = sub.add_parser("variant", help="Compare VCF calls with a bundled small-variant truth set.")
+    variant_sub = variant.add_subparsers(dest="variant_command", required=True)
+    variant_compare = variant_sub.add_parser("compare", help="Score exact SNV alleles in a VCF or VCF.GZ file.")
+    variant_compare.add_argument("id", help="Benchmark ID with a declared variant truth set.")
+    variant_compare.add_argument("results", type=Path, help="VCF or VCF.GZ call set.")
+    variant_compare.add_argument("--detail-limit", type=int, default=20, help="Maximum false-positive and false-negative examples to return.")
     assay = sub.add_parser("assay", help="Inspect sequencing assay profiles and build local command plans.")
     assay_sub = assay.add_subparsers(dest="assay_command", required=True)
     assay_sub.add_parser("list", help="List supported assay profiles.")
@@ -84,6 +91,9 @@ def main():
     try:
         if args.command == "seq":
             out = run_sequence_command(args)
+        elif args.command == "variant":
+            model, folder = lookup(args.root, args.id)
+            out = compare_variants(model, folder, args.results, args.detail_limit)
         elif args.command == "bundle":
             if args.bundle_command == "create":
                 out = create_bundle(args.root, args.output, args.id, args.assay, args.force)
@@ -134,6 +144,8 @@ def main():
                 out = validate(model,folder)
         print(json.dumps(out,indent=2,allow_nan=False))
         if args.command == "compare" and out["status"] == "fail":
+            sys.exit(2)
+        if args.command == "variant" and out["status"] == "fail":
             sys.exit(2)
         if args.command == "suite" and out["summary"]["status"] == "fail":
             sys.exit(2)

@@ -2,7 +2,7 @@
   "schema_version": "2.0",
   "id": "sequence-005",
   "title": "Synthetic paired DNA-seq variant benchmark",
-  "release": "2.0.0",
+  "release": "3.0.0",
   "assay": "whole_genome_dna_seq",
   "kind": "synthetic_fixture",
   "status": "validated",
@@ -93,13 +93,13 @@
       "tier": "expected",
       "role": "metrics",
       "media_type": "application/json",
-      "bytes": 1739,
-      "sha256": "9b21fb89fe782b9e7ced92f0bebba8e84f4d3e50188e7af18ad2a429ba87b9bb"
+      "bytes": 1902,
+      "sha256": "da0813bf715df2a455a7c0eb86dc804dbb8cf582c9aa09119e8d976e3548cd88"
     }
   ],
   "validation": {
     "profile": "expected/validation.json",
-    "baseline_version": "dnaseq-truth-v1",
+    "baseline_version": "dnaseq-truth-v2",
     "metrics": []
   },
   "sequence": {
