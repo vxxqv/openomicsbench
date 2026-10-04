@@ -191,8 +191,11 @@ def verify_evidence_crate(path: Path) -> dict:
         names = archive.namelist()
         if len(names) != len(set(names)):
             raise ValueError(f"{path}: duplicate ZIP members")
-        for name in names:
-            _safe_name(name)
+        for info in archive.infolist():
+            _safe_name(info.filename)
+            mode = (info.external_attr >> 16) & 0o170000
+            if info.is_dir() or mode == 0o120000:
+                raise ValueError(f"{path}: directories and symbolic links are not allowed: {info.filename}")
         missing = sorted(REQUIRED - set(names))
         if missing:
             raise ValueError(f"{path}: missing required evidence files: {', '.join(missing)}")

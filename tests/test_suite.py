@@ -50,6 +50,7 @@ class SuiteTests(unittest.TestCase):
         xml = junit_report(report)
         root = ET.fromstring(xml)
         self.assertEqual(root.attrib["tests"], "1")
+        self.assertEqual(root.find("testcase").attrib["name"], "sequence-001")
         json_path = self.root / "reports" / "suite.json"
         markdown_path = self.root / "reports" / "suite.md"
         junit_path = self.root / "reports" / "suite.xml"

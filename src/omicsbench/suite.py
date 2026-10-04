@@ -130,7 +130,9 @@ def junit_report(report: dict) -> str:
         skipped=str(summary["skipped"]),
     )
     for item in report["results"]:
-        case = ET.SubElement(suite, "testcase", classname="openomicsbench", name=item["id"])
+        name = f"{item.get('method')}/{item['id']}" if item.get("method") else item["id"]
+        classname = ".".join(value for value in ("openomicsbench", item.get("assay"), item.get("comparator")) if value)
+        case = ET.SubElement(suite, "testcase", classname=classname, name=name)
         if item["status"] == "fail":
             failure = ET.SubElement(case, "failure", message=item.get("reason", "benchmark failed"))
             failure.text = item.get("reason", "benchmark failed")
@@ -256,6 +258,24 @@ def _leaderboard(report: dict) -> str:
     )
 
 
+def _method_receipt(report: dict) -> str:
+    receipt = report.get("method")
+    if not receipt:
+        return ""
+    rows = []
+    for label, key in (
+        ("Name", "name"), ("Version", "version"), ("Container", "container"),
+        ("Source revision", "source_revision"), ("Runtime", "runtime_seconds"),
+        ("Peak memory", "peak_memory_mb"), ("Threads", "threads"),
+    ):
+        value = receipt.get(key)
+        if value is None:
+            continue
+        suffix = " s" if key == "runtime_seconds" else " MB" if key == "peak_memory_mb" else ""
+        rows.append(f"<tr><th>{label}</th><td><code>{html.escape(str(value))}</code>{suffix}</td></tr>")
+    return "<section><h2>Method receipt</h2><div class=\"table-wrap\"><table><tbody>" + "".join(rows) + "</tbody></table></div></section>"
+
+
 def _matrix(report: dict) -> str:
     if not report.get("leaderboard") or not any(item.get("method") for item in report["results"]):
         return ""
@@ -308,7 +328,7 @@ h1{font-size:2rem;margin:.2rem 0}h2{margin:2rem 0 .5rem}header,section{backgroun
         f"<div class=\"cards\"><div class=\"card\"><span>Status</span><strong class=\"{html.escape(summary['status'])}\">{html.escape(summary['status'].upper())}</strong></div>"
         f"<div class=\"card\"><span>Passed</span><strong>{summary['passed']}</strong></div><div class=\"card\"><span>Failed</span><strong>{summary['failed']}</strong></div>"
         f"<div class=\"card\"><span>Total</span><strong>{summary['total']}</strong></div></div>{_status_chart(summary)}</header>"
-        f"{_leaderboard(report)}{_matrix(report)}"
+        f"{_method_receipt(report)}{_leaderboard(report)}{_matrix(report)}"
         f"<section><h2>Benchmark cases</h2><div class=\"table-wrap\"><table><thead><tr><th>Benchmark</th><th>Assay</th><th>Status</th><th>Metrics or reason</th></tr></thead><tbody>{''.join(rows)}</tbody></table></div></section>"
         "</body></html>\n"
     )
