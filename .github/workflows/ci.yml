@@ -33,6 +33,19 @@ jobs:
           omicsbench suite regress build/matrix.json build/matrix.json --junit build/regression.xml
           omicsbench bundle create build/selected.zip --id rnaseq-002 --id sequence-005
           omicsbench bundle verify build/selected.zip
+      - name: Exercise multi-assay evaluation and evidence
+        run: |
+          mkdir -p build/mixed-a build/mixed-b
+          cp datasets/rnaseq/rnaseq-002/expected/reference-effects.tsv.gz build/mixed-a/rnaseq-002.tsv.gz
+          cp datasets/rnaseq/rnaseq-002/expected/reference-effects.tsv.gz build/mixed-b/rnaseq-002.tsv.gz
+          printf '##fileformat=VCFv4.3\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\nsynthetic_reference\t150\t.\tC\tA\t60\tPASS\t.\nsynthetic_reference\t500\t.\tA\tC\t60\tPASS\t.\nsynthetic_reference\t850\t.\tC\tA\t60\tPASS\t.\n' > build/mixed-a/sequence-005.vcf
+          cp build/mixed-a/sequence-005.vcf build/mixed-b/sequence-005.vcf
+          printf '%s\n' '{"schema_version":"1.0","name":"reference","version":"1","runtime_seconds":1.0,"peak_memory_mb":64.0,"threads":1}' > build/mixed-a/method.json
+          cp build/mixed-a/method.json build/mixed-b/method.json
+          omicsbench suite evaluate build/mixed-a --id rnaseq-002 --id sequence-005 --json build/evaluate.json --html build/evaluate.html --evidence build/evidence.zip
+          omicsbench suite evaluate-matrix --method first=build/mixed-a --method second=build/mixed-b --id rnaseq-002 --id sequence-005 --json build/evaluate-matrix.json --csv build/evaluate-matrix.csv --html build/evaluate-matrix.html
+          omicsbench suite regress build/evaluate.json build/evaluate.json --junit build/evaluate-regression.xml
+          omicsbench evidence verify build/evidence.zip
       - run: python scripts/certify_release.py --preflight
       - uses: actions/upload-artifact@v7
         if: always()

@@ -1,5 +1,17 @@
 # Changes
 
+## 3.0.0
+
+Version 3 introduces a unified evaluator for bulk RNA-seq effects and small-variant calls. One run can apply the correct comparator to each selected benchmark, require every expected result, preserve assay-specific metrics and return one CI-ready status. Multi-assay matrices compare several methods without combining RNA and DNA measurements into an artificial score.
+
+The synthetic DNA-seq object now has a user-facing VCF comparator. It accepts VCF 4.x and gzip-compressed VCF, expands multi-allelic records, accounts for filtered alleles, verifies submitted reference alleles and reports exact-allele precision, recall, F1, true positives, false positives and false negatives. Its stated scope is single-nucleotide substitutions; it does not claim haplotype-aware or genotype-aware comparison.
+
+An optional `method.json` receipt records a tool name and version together with its command, container, source revision, parameters, runtime, memory and thread count. These details stay attached to evaluation and leaderboard reports.
+
+HTML reports have been rebuilt as responsive, self-contained dashboards with summary cards, status charts, method rankings, assay breakdowns, a method-by-benchmark coverage matrix and compact case metrics. CSV, Markdown, JUnit and regression reports now carry the DNA metrics as well as the existing RNA measures.
+
+Evaluation evidence can be written as a deterministic ZIP. Each crate contains normalized JSON, CSV and HTML reports, the exact submitted result files, optional method receipts, SHA-256 checksums and RO-Crate 1.3 metadata. Verification checks safe paths, the complete checksum inventory, every member digest, the report contract and the RO-Crate root entities without extracting the archive.
+
 ## 2.2.0
 
 Benchmark matrices compare two or more analysis methods or parameter sets against the same RNA-seq selection. Results include every method and benchmark case, per-method pass rates and mean preservation metrics, and a deterministic leaderboard without hiding failed or missing inputs.

@@ -6,7 +6,7 @@
       "orcid": "0009-0005-1859-5107"
     }
   ],
-  "description": "Compact, traceable omics benchmarks with multi-method comparison, regression gates, portable verified bundles and deterministic sequence tools.",
+  "description": "Compact, traceable omics benchmarks with unified RNA and DNA evaluation, exact-SNV VCF scoring, multi-method comparison, regression gates, offline dashboards, verifiable evidence crates and deterministic sequence tools.",
   "upload_type": "software",
   "access_right": "open",
   "license": "Apache-2.0",
@@ -91,6 +91,16 @@
     "benchmark matrix",
     "portable benchmark",
     "SHA-256",
-    "HTML report"
+    "HTML report",
+    "VCF",
+    "variant benchmarking",
+    "precision and recall",
+    "multi-assay benchmark",
+    "method comparison",
+    "performance metadata",
+    "RO-Crate",
+    "research object",
+    "evidence package",
+    "checksum verification"
   ]
 }

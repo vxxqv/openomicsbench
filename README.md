@@ -1,8 +1,8 @@
 # OpenOmicsBench
 
-OpenOmicsBench is a compact benchmark collection and local sequence toolkit for bioinformatics software testing, method checks and teaching. Version 2 keeps the 12 certified bulk RNA-seq objects from version 1 and adds strict FASTA and FASTQ handling, DNA, RNA and protein support, paired-read checks, preprocessing, sequence QC and five deterministic sequence benchmarks.
+OpenOmicsBench is a compact benchmark collection and local sequence toolkit for bioinformatics software testing, method checks and teaching. It contains 12 certified bulk RNA-seq objects, five deterministic DNA, RNA and protein sequence fixtures, strict FASTA and FASTQ tools, and a CI-ready evaluation system.
 
-Version 2.2 adds multi-method benchmark matrices, report-to-report regression gates and portable benchmark bundles. Suite reports can be written as JSON, Markdown, JUnit XML, CSV or a self-contained HTML page.
+Version 3 evaluates RNA differential-expression results and DNA variant calls in the same run. It adds exact-SNV VCF scoring, method and resource receipts, cross-method multi-assay matrices, richer offline dashboards, and deterministic evidence crates with RO-Crate metadata and checksums.
 
 The package runs offline after installation. Sequence files stay on the local computer. The built-in tools cover inspection and lightweight preprocessing; they do not claim to replace aligners, variant callers, taxonomic classifiers or assay-specific statistical workflows.
 
@@ -21,6 +21,7 @@ List and validate the bundled benchmarks:
 omicsbench list
 omicsbench validate rnaseq-002
 omicsbench validate sequence-004
+omicsbench variant compare sequence-005 calls.vcf.gz
 ```
 
 The wheel contains the complete collection. A repository checkout and network connection are not required.
@@ -102,6 +103,26 @@ Then run:
 omicsbench suite compare results --id rnaseq-002 --id rnaseq-003 --junit reports/comparison.xml
 ```
 
+For a mixed RNA and DNA run, add benchmark-named VCF output alongside the expression tables:
+
+```text
+results/
+  method.json
+  rnaseq-002.tsv.gz
+  sequence-005.vcf.gz
+```
+
+```sh
+omicsbench suite evaluate results \
+  --id rnaseq-002 \
+  --id sequence-005 \
+  --json reports/evaluation.json \
+  --html reports/evaluation.html \
+  --evidence reports/evaluation-evidence.zip
+```
+
+`method.json` is optional. When supplied, it records the exact method version, command, container or source revision, parameters, runtime, peak memory and thread count. Missing selected outputs fail as benchmark cases.
+
 Compare several tools or parameter sets in one matrix:
 
 ```sh
@@ -113,13 +134,32 @@ omicsbench suite matrix \
   --html reports/matrix.html
 ```
 
+Use `evaluate-matrix` when each method directory contains a mixture of RNA tables and VCF calls:
+
+```sh
+omicsbench suite evaluate-matrix \
+  --method current=results/current \
+  --method candidate=results/candidate \
+  --id rnaseq-002 \
+  --id sequence-005 \
+  --html reports/multi-assay.html
+```
+
+The leaderboard uses pass counts and keeps assay metrics separate. It does not average unlike measurements into a single score.
+
 Use a previously accepted report as a regression baseline:
 
 ```sh
 omicsbench suite regress accepted.json candidate.json --absolute-tolerance 0.01 --junit reports/regression.xml
 ```
 
-Omit `--id` to require results for all 12 comparable RNA-seq objects. A completed suite exits with status 0 when every check passes, status 2 when a benchmark or regression gate fails, and status 1 for invalid input. Existing report files are protected unless `--force` is supplied. The [suite reference](docs/benchmark-suites.md) describes the file convention and report fields.
+Omit `--id` from `suite compare` to require results for all 12 comparable RNA-seq objects. Omit it from `suite evaluate` to require every benchmark with a supported comparator. A completed suite exits with status 0 when every check passes, status 2 when a benchmark or regression gate fails, and status 1 for invalid input. Existing report files are protected unless `--force` is supplied. The [suite reference](docs/benchmark-suites.md) describes the file convention and report fields.
+
+Verify an evaluation evidence crate without extracting it:
+
+```sh
+omicsbench evidence verify reports/evaluation-evidence.zip
+```
 
 ## Portable bundles
 
@@ -156,9 +196,11 @@ Profiles are available for whole-genome, exome, targeted-panel, bulk RNA-seq, si
 
 These five objects are project-authored synthetic fixtures. Each has an exact file inventory, checksums, format and molecule declarations, expected summary metrics and a deterministic rebuild workflow. `sequence-005` also verifies that every truth-set reference allele matches the bundled reference and that every alternate allele is supported by the paired reads. The objects test software behavior and do not represent a biological cohort or sequencing instrument.
 
+The version 3 VCF comparator for `sequence-005` matches contig, one-based position, REF and ALT exactly. It reports precision, recall and F1 for A/C/G/T substitutions and verifies REF against the packaged synthetic reference. Genotypes, indels, complex representations and confident-region stratification are outside this fixture. Use a haplotype-aware benchmarking engine such as [hap.py](https://github.com/Illumina/hap.py) or vcfeval with an appropriate truth set and confident regions for real germline benchmarking; the [GA4GH benchmarking project](https://github.com/ga4gh/benchmarking-tools) documents that broader problem.
+
 ## Bulk RNA-seq benchmarks
 
-Version 2 retains the complete version 1 biological collection unchanged.
+Version 3 retains the complete version 1 biological collection unchanged.
 
 | ID | Design | Samples | Pocket genes |
 |---|---|---:|---:|

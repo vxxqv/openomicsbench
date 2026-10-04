@@ -54,7 +54,7 @@ All sequence commands begin with `omicsbench seq`. Inputs may be plain text or g
 
 ## DNA-seq truth object
 
-`sequence-005` contains a 1,000-base synthetic reference, 20 deterministic paired reads and three declared single-nucleotide variants. Collection validation checks pair order, exact sequence summaries, truth-table structure, reference alleles and read support for the alternate-allele context. It is intended for regression tests around DNA-seq file handling and truth-set plumbing. It does not measure performance on repeats, indels, structural variants or realistic instrument errors.
+`sequence-005` contains a 1,000-base synthetic reference, 20 deterministic paired reads and three declared single-nucleotide variants. Collection validation checks pair order, exact sequence summaries, truth-table structure, reference alleles and read support for the alternate-allele context. `omicsbench variant compare sequence-005 calls.vcf.gz` adds exact SNV precision, recall and F1 scoring for user-supplied VCF output. It is intended for regression tests around DNA-seq file handling and truth-set plumbing. It does not measure performance on repeats, indels, structural variants, complex haplotypes or realistic instrument errors.
 
 ## Output rules
 
