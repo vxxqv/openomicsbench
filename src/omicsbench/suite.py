@@ -109,16 +109,14 @@ def markdown_report(report: dict) -> str:
         f"Failed: {summary['failed']}  ",
         f"Skipped: {summary['skipped']}",
         "",
-        "| Benchmark | Status | Detail |",
-        "|---|---|---|",
+        "| Benchmark | Assay | Status | Detail |",
+        "|---|---|---|---|",
     ]
     for item in report["results"]:
-        detail = item.get("reason", "")
-        if not detail and report["operation"] == "compare":
-            metrics = item["details"]["metrics"]
-            detail = f"Spearman {metrics['spearman_logfc']:.3f}; top-k Jaccard {metrics['top_k_jaccard']:.3f}; sign agreement {metrics['sign_concordance']:.3f}"
+        detail = _case_detail(item)
         detail = detail.replace("|", "\\|").replace("\n", " ")
-        lines.append(f"| `{item['id']}` | {item['status']} | {detail} |")
+        benchmark = f"{item.get('method')}/{item['id']}" if item.get("method") else item["id"]
+        lines.append(f"| `{benchmark}` | {item.get('assay', '')} | {item['status']} | {detail} |")
     return "\n".join(lines) + "\n"
 
 
@@ -146,9 +144,11 @@ def junit_report(report: dict) -> str:
 
 def csv_report(report: dict) -> str:
     fields = (
-        "method", "benchmark", "status", "reason", "baseline_status", "candidate_status",
-        "spearman_logfc", "top_k_jaccard", "sign_concordance", "coverage",
+        "method", "benchmark", "assay", "comparator", "status", "reason", "baseline_status", "candidate_status",
+        "spearman_logfc", "top_k_jaccard", "sign_concordance", "coverage", "precision", "recall", "f1",
+        "true_positive", "false_positive", "false_negative",
         "delta_spearman_logfc", "delta_top_k_jaccard", "delta_sign_concordance", "delta_coverage",
+        "delta_precision", "delta_recall", "delta_f1",
     )
     stream = io.StringIO(newline="")
     writer = csv.DictWriter(stream, fieldnames=fields, lineterminator="\n")
@@ -157,10 +157,13 @@ def csv_report(report: dict) -> str:
         details = item.get("details", {})
         metrics = details.get("metrics", {})
         genes = details.get("genes", {})
+        counts = details.get("counts", {})
         deltas = item.get("metric_deltas", {})
         writer.writerow({
             "method": item.get("method", ""),
             "benchmark": item["id"],
+            "assay": item.get("assay", ""),
+            "comparator": item.get("comparator", ""),
             "status": item["status"],
             "reason": item.get("reason", ""),
             "baseline_status": item.get("baseline_status", ""),
@@ -169,53 +172,144 @@ def csv_report(report: dict) -> str:
             "top_k_jaccard": metrics.get("top_k_jaccard", ""),
             "sign_concordance": metrics.get("sign_concordance", ""),
             "coverage": genes.get("coverage", ""),
+            "precision": metrics.get("precision", ""),
+            "recall": metrics.get("recall", ""),
+            "f1": metrics.get("f1", ""),
+            "true_positive": counts.get("true_positive", ""),
+            "false_positive": counts.get("false_positive", ""),
+            "false_negative": counts.get("false_negative", ""),
             "delta_spearman_logfc": deltas.get("spearman_logfc", ""),
             "delta_top_k_jaccard": deltas.get("top_k_jaccard", ""),
             "delta_sign_concordance": deltas.get("sign_concordance", ""),
             "delta_coverage": deltas.get("coverage", ""),
+            "delta_precision": deltas.get("precision", ""),
+            "delta_recall": deltas.get("recall", ""),
+            "delta_f1": deltas.get("f1", ""),
         })
     return stream.getvalue()
+
+
+METRIC_LABELS = {
+    "spearman_logfc": "Spearman",
+    "top_k_jaccard": "top-k Jaccard",
+    "sign_concordance": "sign agreement",
+    "precision": "precision",
+    "recall": "recall",
+    "f1": "F1",
+}
+
+
+def _case_metrics(item: dict) -> list[tuple[str, float]]:
+    metrics = item.get("details", {}).get("metrics", {})
+    return [(METRIC_LABELS[name], metrics[name]) for name in METRIC_LABELS if metrics.get(name) is not None]
+
+
+def _case_detail(item: dict) -> str:
+    if item.get("reason"):
+        return item["reason"]
+    values = [f"{label} {value:.3f}" for label, value in _case_metrics(item)]
+    coverage = item.get("details", {}).get("genes", {}).get("coverage")
+    if coverage is not None:
+        values.append(f"coverage {coverage:.3f}")
+    return "; ".join(values)
+
+
+def _status_chart(summary: dict) -> str:
+    total = summary.get("total", 0) or 1
+    passed = 100 * summary.get("passed", 0) / total
+    failed = 100 * summary.get("failed", 0) / total
+    return (
+        '<svg class="status-chart" viewBox="0 0 100 12" role="img" aria-label="case status distribution">'
+        f'<rect x="0" y="0" width="{passed:.6f}" height="12" class="bar-pass"/>'
+        f'<rect x="{passed:.6f}" y="0" width="{failed:.6f}" height="12" class="bar-fail"/>'
+        f'<rect x="{passed + failed:.6f}" y="0" width="{100 - passed - failed:.6f}" height="12" class="bar-skip"/>'
+        "</svg>"
+    )
+
+
+def _leaderboard(report: dict) -> str:
+    if not report.get("leaderboard"):
+        return ""
+    rows = []
+    for index, row in enumerate(report["leaderboard"], start=1):
+        receipt = row.get("receipt") or {}
+        runtime = receipt.get("runtime_seconds")
+        memory = receipt.get("peak_memory_mb")
+        assays = row.get("assays", {})
+        assay_text = ", ".join(
+            f"{name}: {values['passed']}/{values['total']}" for name, values in assays.items()
+        )
+        rows.append(
+            f"<tr><td>{index}</td><td><code>{html.escape(row['name'])}</code></td>"
+            f"<td>{row['passed']}/{row['total']}</td><td>{row['pass_rate']:.1%}</td>"
+            f"<td>{html.escape(assay_text)}</td>"
+            f"<td>{html.escape(f'{runtime:.3f} s' if runtime is not None else '')}</td>"
+            f"<td>{html.escape(f'{memory:.3f} MB' if memory is not None else '')}</td></tr>"
+        )
+    ranking = html.escape(report.get("ranking", ""))
+    note = f"<p class=\"note\">{ranking}</p>" if ranking else ""
+    return (
+        "<section><h2>Method leaderboard</h2>" + note
+        + "<div class=\"table-wrap\"><table><thead><tr><th>Rank</th><th>Method</th><th>Passed</th><th>Pass rate</th>"
+        + "<th>Assays</th><th>Runtime</th><th>Peak memory</th></tr></thead><tbody>"
+        + "".join(rows) + "</tbody></table></div></section>"
+    )
+
+
+def _matrix(report: dict) -> str:
+    if not report.get("leaderboard") or not any(item.get("method") for item in report["results"]):
+        return ""
+    methods = [row["name"] for row in report["leaderboard"]]
+    benchmarks = list(dict.fromkeys(item["id"] for item in report["results"]))
+    cases = {(item["method"], item["id"]): item for item in report["results"]}
+    rows = []
+    for method in methods:
+        cells = []
+        for benchmark in benchmarks:
+            item = cases.get((method, benchmark))
+            status = item.get("status", "missing") if item else "missing"
+            detail = _case_detail(item) if item else "case absent"
+            cells.append(f'<td class="cell-{html.escape(status)}" title="{html.escape(detail)}">{html.escape(status)}</td>')
+        rows.append(f"<tr><th><code>{html.escape(method)}</code></th>{''.join(cells)}</tr>")
+    headers = "".join(f"<th><code>{html.escape(benchmark)}</code></th>" for benchmark in benchmarks)
+    return (
+        "<section><h2>Coverage matrix</h2><div class=\"table-wrap\"><table class=\"matrix\"><thead><tr><th>Method</th>"
+        + headers + "</tr></thead><tbody>" + "".join(rows) + "</tbody></table></div></section>"
+    )
 
 
 def html_report(report: dict) -> str:
     summary = report["summary"]
     rows = []
     for item in report["results"]:
-        details = item.get("details", {})
-        metrics = details.get("metrics", {})
-        values = []
-        for name in ("spearman_logfc", "top_k_jaccard", "sign_concordance"):
-            value = metrics.get(name)
-            if value is not None:
-                values.append(f"{name.replace('_', ' ')} {value:.3f}")
-        detail = item.get("reason") or "; ".join(values)
+        detail = _case_detail(item)
         benchmark = f"{item.get('method')}/{item['id']}" if item.get("method") else item["id"]
+        metrics = "".join(f'<span class="metric">{html.escape(label)} <strong>{value:.3f}</strong></span>' for label, value in _case_metrics(item))
         rows.append(
             f"<tr><td><code>{html.escape(benchmark)}</code></td>"
-            f"<td class=\"{html.escape(item['status'])}\">{html.escape(item['status'])}</td>"
-            f"<td>{html.escape(detail or '')}</td></tr>"
+            f"<td>{html.escape(item.get('assay', ''))}</td>"
+            f"<td><span class=\"status {html.escape(item['status'])}\">{html.escape(item['status'])}</span></td>"
+            f"<td>{metrics or html.escape(detail or '')}</td></tr>"
         )
-    leaderboard = ""
-    if report.get("leaderboard"):
-        leaders = "".join(
-            f"<tr><td>{index}</td><td><code>{html.escape(row['name'])}</code></td>"
-            f"<td>{row['passed']}/{row['total']}</td><td>{row['pass_rate']:.1%}</td></tr>"
-            for index, row in enumerate(report["leaderboard"], start=1)
-        )
-        leaderboard = f"<h2>Methods</h2><table><thead><tr><th>Rank</th><th>Method</th><th>Passed</th><th>Pass rate</th></tr></thead><tbody>{leaders}</tbody></table>"
     return """<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>OpenOmicsBench report</title><style>
-body{font:16px system-ui,sans-serif;max-width:1100px;margin:2rem auto;padding:0 1rem;color:#111;background:#fff}
-table{border-collapse:collapse;width:100%;margin:1rem 0 2rem}th,td{border:1px solid #bbb;padding:.55rem;text-align:left;vertical-align:top}
-th{background:#eee}.pass{color:#126b2e;font-weight:700}.fail{color:#a01414;font-weight:700}.skipped{color:#555;font-weight:700}
-code{font-family:ui-monospace,monospace}dl{display:grid;grid-template-columns:max-content auto;gap:.35rem 1rem}dt{font-weight:700}dd{margin:0}
+*{box-sizing:border-box}body{font:15px/1.5 system-ui,sans-serif;max-width:1240px;margin:0 auto;padding:2rem;color:#171717;background:#f5f5f3}
+h1{font-size:2rem;margin:.2rem 0}h2{margin:2rem 0 .5rem}header,section{background:#fff;border:1px solid #d3d3cf;border-radius:10px;padding:1.25rem;margin-bottom:1rem}
+.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:.75rem;font-weight:700;color:#555}.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.75rem;margin:1.25rem 0}
+.card{border:1px solid #d8d8d3;border-radius:8px;padding:.8rem}.card strong{display:block;font-size:1.65rem}.status-chart{width:100%;height:12px;border-radius:6px;overflow:hidden;background:#ddd}
+.bar-pass{fill:#267a45}.bar-fail{fill:#b33a3a}.bar-skip{fill:#888}table{border-collapse:collapse;width:100%}th,td{border-bottom:1px solid #ddd;padding:.65rem;text-align:left;vertical-align:top}th{background:#f0f0ed;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
+.table-wrap{overflow:auto}.status{display:inline-block;border-radius:999px;padding:.15rem .55rem;font-weight:700}.pass,.cell-pass{color:#145b30;background:#e5f4e9}.fail,.cell-fail{color:#8b1f1f;background:#fae6e6}.skipped,.cell-skipped,.cell-missing{color:#444;background:#e9e9e6}
+.metric{display:inline-block;margin:0 .35rem .25rem 0;padding:.2rem .5rem;border:1px solid #ccc;border-radius:4px;white-space:nowrap}.matrix td{text-align:center;font-weight:700}.note{color:#555;max-width:80ch}code{font-family:ui-monospace,monospace}
+@media(max-width:720px){body{padding:.75rem}.cards{grid-template-columns:repeat(2,1fr)}header,section{padding:.85rem}}
+@media(prefers-color-scheme:dark){body{color:#eee;background:#151515}header,section{background:#1e1e1e;border-color:#444}.card{border-color:#555}th{background:#2b2b2b}th,td{border-color:#444}.note,.eyebrow{color:#bbb}.metric{border-color:#666}.pass,.cell-pass{color:#b9efc9;background:#173d26}.fail,.cell-fail{color:#ffc4c4;background:#4a1d1d}.skipped,.cell-skipped,.cell-missing{color:#ddd;background:#333}}
 </style></head><body>""" + (
-        f"<h1>OpenOmicsBench suite report</h1><dl><dt>Operation</dt><dd><code>{html.escape(report['operation'])}</code></dd>"
-        f"<dt>Status</dt><dd class=\"{html.escape(summary['status'])}\">{html.escape(summary['status'].upper())}</dd>"
-        f"<dt>Passed</dt><dd>{summary['passed']}</dd><dt>Failed</dt><dd>{summary['failed']}</dd>"
-        f"<dt>Skipped</dt><dd>{summary['skipped']}</dd></dl>{leaderboard}"
-        f"<h2>Cases</h2><table><thead><tr><th>Benchmark</th><th>Status</th><th>Detail</th></tr></thead><tbody>{''.join(rows)}</tbody></table>"
+        f"<header><div class=\"eyebrow\">OpenOmicsBench</div><h1>Benchmark report</h1><p>Operation <code>{html.escape(report['operation'])}</code></p>"
+        f"<div class=\"cards\"><div class=\"card\"><span>Status</span><strong class=\"{html.escape(summary['status'])}\">{html.escape(summary['status'].upper())}</strong></div>"
+        f"<div class=\"card\"><span>Passed</span><strong>{summary['passed']}</strong></div><div class=\"card\"><span>Failed</span><strong>{summary['failed']}</strong></div>"
+        f"<div class=\"card\"><span>Total</span><strong>{summary['total']}</strong></div></div>{_status_chart(summary)}</header>"
+        f"{_leaderboard(report)}{_matrix(report)}"
+        f"<section><h2>Benchmark cases</h2><div class=\"table-wrap\"><table><thead><tr><th>Benchmark</th><th>Assay</th><th>Status</th><th>Metrics or reason</th></tr></thead><tbody>{''.join(rows)}</tbody></table></div></section>"
         "</body></html>\n"
     )
 

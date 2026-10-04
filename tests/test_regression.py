@@ -62,6 +62,19 @@ class RegressionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "unsupported"):
             read_report(self.candidate)
 
+    def test_detects_variant_metric_regression(self):
+        baseline = comparison()
+        candidate = comparison()
+        baseline["operation"] = "evaluate"
+        candidate["operation"] = "evaluate"
+        baseline["results"][0]["details"] = {"metrics": {"precision": 1.0, "recall": 1.0, "f1": 1.0}}
+        candidate["results"][0]["details"] = {"metrics": {"precision": 1.0, "recall": 0.5, "f1": 2 / 3}}
+        self.write(self.baseline, baseline)
+        self.write(self.candidate, candidate)
+        report = compare_reports(self.baseline, self.candidate)
+        self.assertEqual(report["summary"]["status"], "fail")
+        self.assertIn("recall decreased", report["results"][0]["reason"])
+
     def test_cli_exit_status_and_junit(self):
         self.write(self.baseline, comparison())
         self.write(self.candidate, comparison(0.8))

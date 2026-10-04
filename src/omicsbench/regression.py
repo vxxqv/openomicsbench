@@ -8,7 +8,7 @@ from pathlib import Path
 from .suite import _summary
 
 
-TRACKED_METRICS = ("spearman_logfc", "top_k_jaccard", "sign_concordance")
+TRACKED_METRICS = ("spearman_logfc", "top_k_jaccard", "sign_concordance", "precision", "recall", "f1")
 
 
 def _reject_constant(value: str):
@@ -20,7 +20,7 @@ def read_report(path: Path) -> dict:
         report = json.loads(Path(path).read_text(encoding="utf-8"), parse_constant=_reject_constant)
     except (json.JSONDecodeError, UnicodeDecodeError) as error:
         raise ValueError(f"{path}: invalid JSON report: {error}") from None
-    if not isinstance(report, dict) or report.get("operation") not in {"validate", "compare", "matrix"}:
+    if not isinstance(report, dict) or report.get("operation") not in {"validate", "compare", "matrix", "evaluate", "evaluate_matrix"}:
         raise ValueError(f"{path}: unsupported OpenOmicsBench report")
     if not isinstance(report.get("results"), list):
         raise ValueError(f"{path}: report results must be a list")
@@ -31,7 +31,7 @@ def _case_key(operation: str, item: dict) -> str:
     dataset_id = item.get("id")
     if not isinstance(dataset_id, str) or not dataset_id:
         raise ValueError("report result is missing a benchmark ID")
-    if operation == "matrix":
+    if operation in {"matrix", "evaluate_matrix"}:
         method = item.get("method")
         if not isinstance(method, str) or not method:
             raise ValueError(f"{dataset_id}: matrix result is missing its method")
