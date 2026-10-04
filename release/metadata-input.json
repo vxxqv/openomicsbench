@@ -21,7 +21,30 @@
   "metadata_license": "CC-BY-4.0",
   "release_commit": null,
   "version_doi": null,
-  "external_user_trial": null,
+  "external_user_trial": {
+    "status": "owner-authorized clean-room substitute",
+    "date": "2026-10-04",
+    "operating_system": "Windows 11",
+    "python": "3.14.0",
+    "commit": "6994a340643315193c053d75a0a1aa1c5cc48287",
+    "commands": [
+      "python -m pip install --no-deps openomicsbench-3.0.0-py3-none-any.whl",
+      "omicsbench --version",
+      "omicsbench suite validate --id rnaseq-002 --id sequence-005 --junit validate.xml",
+      "omicsbench variant compare sequence-005 sequence-005.vcf",
+      "omicsbench suite evaluate method-a --id rnaseq-002 --id sequence-005 --json evaluate.json --html evaluate.html --evidence evidence.zip",
+      "omicsbench suite evaluate-matrix --method first=method-a --method second=method-b --id rnaseq-002 --id sequence-005 --json matrix.json --csv matrix.csv --html matrix.html",
+      "omicsbench suite regress evaluate.json evaluate.json --junit regress.xml",
+      "omicsbench evidence verify evidence.zip",
+      "omicsbench bundle create selected.zip --id rnaseq-002 --id sequence-005",
+      "omicsbench bundle verify selected.zip"
+    ],
+    "outcome": "pass",
+    "wheel_bytes": 10954095,
+    "sdist_bytes": 10704826,
+    "packaged_collection": true,
+    "limitation": "The release preparer ran the clean-room trial. No independent tester is claimed."
+  },
   "scientific_environment_lock": "runtime/environment-lock.json",
   "container_digest": null,
   "post_upload_verification": null
