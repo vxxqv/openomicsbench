@@ -18,6 +18,7 @@ from .bundle import create_bundle, verify_bundle
 from .validate import validate
 from .variants import compare_variants
 from .evaluate import evaluate_matrix, evaluate_suite
+from .evidence import create_evidence_crate, verify_evidence_crate
 
 def main():
     p = argparse.ArgumentParser(description="Find, verify and process compact omics benchmarks.",epilog="Example: omicsbench info rnaseq-002")
@@ -94,6 +95,12 @@ def main():
     bundle_create.add_argument("--force", action="store_true", help="Replace an existing bundle.")
     bundle_verify = bundle_sub.add_parser("verify", help="Verify a bundle inventory, hashes and dataset manifests.")
     bundle_verify.add_argument("archive", type=Path)
+    evidence = sub.add_parser("evidence", help="Verify a portable evaluation evidence crate.")
+    evidence_sub = evidence.add_subparsers(dest="evidence_command", required=True)
+    evidence_verify = evidence_sub.add_parser("verify", help="Verify checksums, inventory, report and RO-Crate metadata.")
+    evidence_verify.add_argument("archive", type=Path)
+    for command in (suite_evaluate, suite_evaluate_matrix):
+        command.add_argument("--evidence", type=Path, help="Write a deterministic ZIP with the reports, submitted results and RO-Crate metadata.")
     args = p.parse_args()
     try:
         if args.command == "seq":
@@ -101,6 +108,8 @@ def main():
         elif args.command == "variant":
             model, folder = lookup(args.root, args.id)
             out = compare_variants(model, folder, args.results, args.detail_limit)
+        elif args.command == "evidence":
+            out = verify_evidence_crate(args.archive)
         elif args.command == "bundle":
             if args.bundle_command == "create":
                 out = create_bundle(args.root, args.output, args.id, args.assay, args.force)
@@ -126,7 +135,7 @@ def main():
                 out = evaluate_matrix(args.root, [parse_method(value) for value in args.method], args.id, args.detail_limit)
             else:
                 out = compare_reports(args.baseline, args.candidate, args.absolute_tolerance, args.allow_missing)
-            out["reports"] = write_reports(
+            reports = write_reports(
                 out,
                 json_path=args.json,
                 markdown_path=args.markdown,
@@ -135,6 +144,9 @@ def main():
                 csv_path=args.csv,
                 html_path=args.html,
             )
+            if getattr(args, "evidence", None) is not None:
+                reports["evidence"] = create_evidence_crate(out, args.evidence, args.force)
+            out["reports"] = reports
         elif args.command == "list":
             out = [{"id":m.id,"title":m.title,"kind":m.kind,"status":m.status,"rights":m.rights.status,"tiers":sorted({f.tier for f in m.files})} for m,_ in registry(args.root).values() if not args.assay or m.assay==args.assay]
         elif args.command == "doctor":
