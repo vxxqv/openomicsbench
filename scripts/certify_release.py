@@ -86,8 +86,8 @@ def check_publication_metadata(metadata: dict, blockers: list[str]) -> None:
             blockers.append("The quickstart trial outcome or commit is invalid.")
         if not trial.get("date") or not trial.get("operating_system") or not trial.get("python"):
             blockers.append("The quickstart trial environment is incomplete.")
-        if len(trial.get("commands", [])) != 7:
-            blockers.append("The quickstart trial does not record all seven commands.")
+        if len(trial.get("commands", [])) < 7:
+            blockers.append("The quickstart trial does not record enough release commands.")
         if trial.get("status") == "owner-authorized clean-room substitute" and not trial.get("limitation"):
             blockers.append("The clean-room substitute must state its independence limitation.")
 
@@ -338,10 +338,10 @@ def main() -> None:
     if len({model.archetype for model in validated}) < 4:
         blockers.append("At least four certified design archetypes are required.")
     if len(sequence_validated) < 4:
-        blockers.append("Version 2 requires at least four validated sequence objects.")
+        blockers.append("The release requires at least four validated sequence objects.")
     expected_sequence_families = {"sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq"}
     if not expected_sequence_families.issubset({model.assay for model in sequence_validated}):
-        blockers.append("The version 2 DNA, RNA, protein, paired-read and DNA-seq sequence families are incomplete.")
+        blockers.append("The DNA, RNA, protein, paired-read and DNA-seq sequence families are incomplete.")
     for model in validated:
         if model.derivation.commit is None or not COMMIT.fullmatch(model.derivation.commit):
             blockers.append(f"{model.id}: transformation commit is missing or invalid.")
@@ -368,7 +368,7 @@ def main() -> None:
 
     deferred = [field for field in PUBLICATION_FIELDS if not metadata.get(field)]
     report = {
-        "scope": "v2_collection",
+        "scope": "v3_collection",
         "software_version": metadata["software_version"],
         "decision": "GO" if not blockers and not deferred else "NO-GO",
         "preflight": "PASS" if not blockers else "FAIL",

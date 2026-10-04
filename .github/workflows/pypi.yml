@@ -58,6 +58,13 @@ jobs:
           /tmp/openomicsbench-smoke/bin/omicsbench suite regress /tmp/openomicsbench-matrix.json /tmp/openomicsbench-matrix.json --junit /tmp/openomicsbench-regression.xml
           /tmp/openomicsbench-smoke/bin/omicsbench bundle create /tmp/openomicsbench-selected.zip --id rnaseq-002 --id sequence-005
           /tmp/openomicsbench-smoke/bin/omicsbench bundle verify /tmp/openomicsbench-selected.zip
+          mkdir /tmp/openomicsbench-mixed
+          cp "$reference" /tmp/openomicsbench-mixed/rnaseq-002.tsv.gz
+          printf '##fileformat=VCFv4.3\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\nsynthetic_reference\t150\t.\tC\tA\t60\tPASS\t.\nsynthetic_reference\t500\t.\tA\tC\t60\tPASS\t.\nsynthetic_reference\t850\t.\tC\tA\t60\tPASS\t.\n' > /tmp/openomicsbench-mixed/sequence-005.vcf
+          printf '%s\n' '{"schema_version":"1.0","name":"wheel smoke","version":"3.0.0","runtime_seconds":1.0,"peak_memory_mb":64.0,"threads":1}' > /tmp/openomicsbench-mixed/method.json
+          /tmp/openomicsbench-smoke/bin/omicsbench variant compare sequence-005 /tmp/openomicsbench-mixed/sequence-005.vcf
+          /tmp/openomicsbench-smoke/bin/omicsbench suite evaluate /tmp/openomicsbench-mixed --id rnaseq-002 --id sequence-005 --json /tmp/openomicsbench-evaluate.json --html /tmp/openomicsbench-evaluate.html --evidence /tmp/openomicsbench-evidence.zip
+          /tmp/openomicsbench-smoke/bin/omicsbench evidence verify /tmp/openomicsbench-evidence.zip
       - uses: actions/upload-artifact@v7
         with:
           name: python-package

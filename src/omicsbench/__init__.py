@@ -1,2 +1,2 @@
 """Discovery, validation and local analysis of compact omics benchmarks."""
-__version__ = "2.2.0"
+__version__ = "3.0.0"
