@@ -48,6 +48,7 @@ jobs:
           sequence=$(/tmp/openomicsbench-smoke/bin/python -c 'from omicsbench.registry import default_root; print(default_root() / "datasets/sequences/sequence-001/nano/sequences.fasta")')
           /tmp/openomicsbench-smoke/bin/omicsbench seq qc "$sequence" --molecule dna
           reference=$(/tmp/openomicsbench-smoke/bin/python -c 'from omicsbench.registry import default_root; print(default_root() / "datasets/rnaseq/rnaseq-002/expected/reference-effects.tsv.gz")')
+          peptides=$(/tmp/openomicsbench-smoke/bin/python -c 'from omicsbench.registry import default_root; print(default_root() / "datasets/sequences/sequence-006/expected/peptides.tsv")')
           /tmp/openomicsbench-smoke/bin/omicsbench compare rnaseq-002 "$reference"
           mkdir /tmp/openomicsbench-results
           cp "$reference" /tmp/openomicsbench-results/rnaseq-002.tsv.gz
@@ -60,10 +61,15 @@ jobs:
           /tmp/openomicsbench-smoke/bin/omicsbench bundle verify /tmp/openomicsbench-selected.zip
           mkdir /tmp/openomicsbench-mixed
           cp "$reference" /tmp/openomicsbench-mixed/rnaseq-002.tsv.gz
+          cp "$peptides" /tmp/openomicsbench-mixed/sequence-006.peptides.tsv
           printf '##fileformat=VCFv4.3\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\nsynthetic_reference\t150\t.\tC\tA\t60\tPASS\t.\nsynthetic_reference\t500\t.\tA\tC\t60\tPASS\t.\nsynthetic_reference\t850\t.\tC\tA\t60\tPASS\t.\n' > /tmp/openomicsbench-mixed/sequence-005.vcf
           printf '%s\n' '{"schema_version":"1.0","name":"wheel smoke","version":"3.0.0","runtime_seconds":1.0,"peak_memory_mb":64.0,"threads":1}' > /tmp/openomicsbench-mixed/method.json
           /tmp/openomicsbench-smoke/bin/omicsbench variant compare sequence-005 /tmp/openomicsbench-mixed/sequence-005.vcf
-          /tmp/openomicsbench-smoke/bin/omicsbench suite evaluate /tmp/openomicsbench-mixed --id rnaseq-002 --id sequence-005 --json /tmp/openomicsbench-evaluate.json --html /tmp/openomicsbench-evaluate.html --evidence /tmp/openomicsbench-evidence.zip
+          /tmp/openomicsbench-smoke/bin/omicsbench peptide compare sequence-006 /tmp/openomicsbench-mixed/sequence-006.peptides.tsv
+          /tmp/openomicsbench-smoke/bin/omicsbench suite evaluate /tmp/openomicsbench-mixed --id rnaseq-002 --id sequence-005 --id sequence-006 --json /tmp/openomicsbench-evaluate.json --html /tmp/openomicsbench-evaluate.html --evidence /tmp/openomicsbench-evidence.zip
+          printf '%s\n' '{"schema_version":"1.0","name":"wheel gate","required_benchmarks":["rnaseq-002","sequence-005","sequence-006"],"minimum_pass_rate":1.0,"require_method_receipt":true,"maximum_runtime_seconds":2.0,"maximum_peak_memory_mb":128.0}' > /tmp/openomicsbench-policy.json
+          /tmp/openomicsbench-smoke/bin/omicsbench suite gate /tmp/openomicsbench-evaluate.json /tmp/openomicsbench-policy.json --json /tmp/openomicsbench-gate.json
+          /tmp/openomicsbench-smoke/bin/omicsbench suite trend --run first=/tmp/openomicsbench-evaluate.json --run second=/tmp/openomicsbench-evaluate.json --html /tmp/openomicsbench-trend.html
           /tmp/openomicsbench-smoke/bin/omicsbench evidence verify /tmp/openomicsbench-evidence.zip
       - uses: actions/upload-artifact@v7
         with:
