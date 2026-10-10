@@ -21,7 +21,30 @@
   "metadata_license": "CC-BY-4.0",
   "release_commit": null,
   "version_doi": null,
-  "external_user_trial": null,
+  "external_user_trial": {
+    "status": "owner-authorized clean-room substitute",
+    "date": "2026-10-10",
+    "operating_system": "Windows 11",
+    "python": "3.12.14",
+    "commit": "34c33ae3280fc753e95a60b60816b25940530a31",
+    "commands": [
+      "python -m pip install --no-deps openomicsbench-4.0.0-py3-none-any.whl",
+      "omicsbench --version",
+      "omicsbench list --assay sequence_protein",
+      "omicsbench validate sequence-006",
+      "omicsbench peptide compare sequence-006 sequence-006.peptides.tsv",
+      "omicsbench suite evaluate results --id rnaseq-002 --id sequence-005 --id sequence-006 --json evaluation.json --html evaluation.html --evidence evidence.zip",
+      "omicsbench suite gate evaluation.json policy.json --json gate.json",
+      "omicsbench suite trend --run first=evaluation.json --run second=evaluation.json --html trend.html",
+      "omicsbench evidence verify evidence.zip",
+      "python -m twine check openomicsbench-4.0.0-py3-none-any.whl openomicsbench-4.0.0.tar.gz"
+    ],
+    "outcome": "pass",
+    "wheel_bytes": 10848797,
+    "sdist_bytes": 10710003,
+    "packaged_collection": true,
+    "limitation": "The release preparer ran the clean-room trial. No independent tester is claimed."
+  },
   "scientific_environment_lock": "runtime/environment-lock.json",
   "container_digest": null,
   "post_upload_verification": null
