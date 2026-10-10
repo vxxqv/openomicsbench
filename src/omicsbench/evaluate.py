@@ -2,13 +2,16 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import math
 import re
 from pathlib import Path
 
 from pydantic import Field, field_validator
 
+from . import __version__
 from .compare import compare
+from .hashing import digest
 from .matrix import METHOD_NAME
 from .models import StrictModel
 from .peptides import compare_peptides
@@ -52,7 +55,18 @@ def read_method_receipt(directory: Path) -> dict | None:
         receipt = MethodReceipt.model_validate_json(path.read_text(encoding="utf-8"))
     except (ValueError, UnicodeDecodeError) as error:
         raise ValueError(f"{path}: invalid method receipt: {error}") from None
-    return {"path": str(path), **receipt.model_dump(mode="json")}
+    return {"path": str(path), "sha256": digest(path), **receipt.model_dump(mode="json")}
+
+
+def _content_fingerprint(value: dict) -> str:
+    payload = json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False).encode("utf-8")
+    return "sha256:" + hashlib.sha256(payload).hexdigest()
+
+
+def _receipt_identity(receipt: dict | None) -> dict | None:
+    if receipt is None:
+        return None
+    return {key: value for key, value in receipt.items() if key not in {"path", "sha256"}}
 
 
 def _candidate_files(directory: Path, dataset_id: str, suffixes: tuple[str, ...]) -> list[Path]:
@@ -115,6 +129,7 @@ def evaluate_suite(
     results = []
     for model, folder in _selection(Path(root), dataset_ids):
         comparator, suffixes = _evaluator(model)  # type: ignore[misc]
+        manifest_sha256 = digest(folder / "manifest.json")
         try:
             path = _result_file(directory, model.id, suffixes)
             if path is None:
@@ -125,6 +140,7 @@ def evaluate_suite(
                     "comparator": comparator,
                     "status": "fail",
                     "reason": f"missing result file; expected {expected}",
+                    "benchmark_manifest_sha256": manifest_sha256,
                 })
                 continue
             if comparator == "differential_expression":
@@ -139,6 +155,8 @@ def evaluate_suite(
                 "comparator": comparator,
                 "status": details["status"],
                 "input": str(path),
+                "input_sha256": digest(path),
+                "benchmark_manifest_sha256": manifest_sha256,
                 "details": details,
             }
             if details["status"] == "fail":
@@ -151,11 +169,30 @@ def evaluate_suite(
                 "comparator": comparator,
                 "status": "fail",
                 "reason": str(error),
+                "benchmark_manifest_sha256": manifest_sha256,
             })
     summary = _summary(results)
     summary["assays"] = _assay_summary(results)
+    fingerprint = _content_fingerprint({
+        "contract": "openomicsbench-evaluation-v1",
+        "package_version": __version__,
+        "method": _receipt_identity(receipt),
+        "benchmarks": [
+            {
+                "id": item["id"],
+                "assay": item["assay"],
+                "comparator": item["comparator"],
+                "benchmark_manifest_sha256": item["benchmark_manifest_sha256"],
+                "input_sha256": item.get("input_sha256"),
+            }
+            for item in results
+        ],
+    })
     return {
         "operation": "evaluate",
+        "package_version": __version__,
+        "run_fingerprint": fingerprint,
+        "fingerprint_contract": "openomicsbench-evaluation-v1",
         "selection": {"ids": dataset_ids or [], "default": "all comparable benchmarks"},
         "results_directory": str(directory),
         "method": receipt,
@@ -171,6 +208,7 @@ def _leader(name: str, directory: Path, report: dict) -> dict:
         "name": name,
         "results_directory": str(directory),
         "receipt": receipt,
+        "run_fingerprint": report["run_fingerprint"],
         "status": summary["status"],
         "total": summary["total"],
         "passed": summary["passed"],
@@ -210,8 +248,16 @@ def evaluate_matrix(
     leaderboard = sorted(leaders, key=lambda item: (-item["passed"], item["failed"], item["name"]))
     summary = _summary(cells)
     summary.update({"methods": len(methods), "benchmarks": len(benchmark_ids or []), "assays": _assay_summary(cells)})
+    fingerprint = _content_fingerprint({
+        "contract": "openomicsbench-evaluation-matrix-v1",
+        "package_version": __version__,
+        "methods": [{"name": item["name"], "run_fingerprint": item["run_fingerprint"]} for item in leaders],
+    })
     return {
         "operation": "evaluate_matrix",
+        "package_version": __version__,
+        "run_fingerprint": fingerprint,
+        "fingerprint_contract": "openomicsbench-evaluation-matrix-v1",
         "selection": {"ids": dataset_ids or [], "default": "all comparable benchmarks"},
         "ranking": "passed cases descending, failed cases ascending, then method name; assay metrics are not pooled",
         "summary": summary,

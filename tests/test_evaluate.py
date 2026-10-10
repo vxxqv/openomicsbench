@@ -73,6 +73,22 @@ class EvaluateTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "invalid method receipt"):
             read_method_receipt(self.a)
 
+    def test_run_fingerprint_tracks_content_not_directory_paths(self):
+        self.add_truth(self.a)
+        self.add_truth(self.b)
+        receipt = {"schema_version": "1.0", "name": "caller", "version": "1.2", "parameters": {"mode": "strict"}}
+        (self.a / "method.json").write_text(json.dumps(receipt, separators=(",", ":")), encoding="utf-8")
+        (self.b / "method.json").write_text(json.dumps(receipt, indent=2), encoding="utf-8")
+        first = evaluate_suite(self.collection, self.a, ["rnaseq-002", "sequence-005"])
+        second = evaluate_suite(self.collection, self.b, ["rnaseq-002", "sequence-005"])
+        self.assertEqual(first["run_fingerprint"], second["run_fingerprint"])
+        self.assertRegex(first["run_fingerprint"], r"^sha256:[0-9a-f]{64}$")
+        self.assertRegex(first["results"][0]["input_sha256"], r"^[0-9a-f]{64}$")
+        path = self.b / "sequence-005.vcf"
+        path.write_text(path.read_text(encoding="utf-8").replace("\t60\t", "\t61\t", 1), encoding="utf-8")
+        changed = evaluate_suite(self.collection, self.b, ["rnaseq-002", "sequence-005"])
+        self.assertNotEqual(first["run_fingerprint"], changed["run_fingerprint"])
+
     def test_multi_assay_matrix_ranks_complete_method_first(self):
         self.add_truth(self.a)
         shutil.copyfile(self.effects, self.b / "rnaseq-002.tsv.gz")
