@@ -21,6 +21,7 @@ from .peptides import compare_peptides
 from .evaluate import evaluate_matrix, evaluate_suite
 from .evidence import create_evidence_crate, verify_evidence_crate
 from .policy import evaluate_policy
+from .trends import parse_run, trend_reports
 
 def main():
     p = argparse.ArgumentParser(description="Find, verify and process compact omics benchmarks.",epilog="Example: omicsbench info rnaseq-002")
@@ -88,9 +89,11 @@ def main():
     suite_gate = suite_sub.add_parser("gate", help="Apply a versioned quality and resource policy to an evaluation report.")
     suite_gate.add_argument("report", type=Path, help="JSON report produced by suite evaluate.")
     suite_gate.add_argument("policy", type=Path, help="JSON gate policy with coverage, metric and resource requirements.")
+    suite_trend = suite_sub.add_parser("trend", help="Combine fingerprinted evaluation reports into a run history.")
+    suite_trend.add_argument("--run", action="append", required=True, help="Run label and evaluation report as NAME=PATH. Repeat in chronological order.")
     for command in (suite_validate, suite_compare, suite_evaluate, suite_matrix, suite_evaluate_matrix):
         command.add_argument("--id", action="append", default=[], help="Benchmark ID to include. Repeat to select several; omit to run all eligible benchmarks.")
-    for command in (suite_validate, suite_compare, suite_evaluate, suite_matrix, suite_evaluate_matrix, suite_regress, suite_gate):
+    for command in (suite_validate, suite_compare, suite_evaluate, suite_matrix, suite_evaluate_matrix, suite_regress, suite_gate, suite_trend):
         command.add_argument("--json", type=Path, help="Write the complete report as JSON.")
         command.add_argument("--markdown", type=Path, help="Write a concise Markdown report.")
         command.add_argument("--junit", type=Path, help="Write a JUnit XML report for CI systems.")
@@ -149,8 +152,10 @@ def main():
                 out = evaluate_matrix(args.root, [parse_method(value) for value in args.method], args.id, args.detail_limit)
             elif args.suite_command == "regress":
                 out = compare_reports(args.baseline, args.candidate, args.absolute_tolerance, args.allow_missing)
-            else:
+            elif args.suite_command == "gate":
                 out = evaluate_policy(args.report, args.policy)
+            else:
+                out = trend_reports([parse_run(value) for value in args.run])
             reports = write_reports(
                 out,
                 json_path=args.json,

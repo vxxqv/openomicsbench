@@ -150,7 +150,7 @@ def csv_report(report: dict) -> str:
         "spearman_logfc", "top_k_jaccard", "sign_concordance", "coverage", "precision", "recall", "f1", "protein_recall", "residue_coverage",
         "true_positive", "false_positive", "false_negative",
         "delta_spearman_logfc", "delta_top_k_jaccard", "delta_sign_concordance", "delta_coverage",
-        "delta_precision", "delta_recall", "delta_f1",
+        "delta_precision", "delta_recall", "delta_f1", "delta_protein_recall", "delta_residue_coverage",
     )
     stream = io.StringIO(newline="")
     writer = csv.DictWriter(stream, fieldnames=fields, lineterminator="\n")
@@ -189,6 +189,8 @@ def csv_report(report: dict) -> str:
             "delta_precision": deltas.get("precision", ""),
             "delta_recall": deltas.get("recall", ""),
             "delta_f1": deltas.get("f1", ""),
+            "delta_protein_recall": deltas.get("protein_recall", ""),
+            "delta_residue_coverage": deltas.get("residue_coverage", ""),
         })
     return stream.getvalue()
 
@@ -302,6 +304,39 @@ def _matrix(report: dict) -> str:
     )
 
 
+def _trend(report: dict) -> str:
+    if report.get("operation") != "trend":
+        return ""
+    run_rows = []
+    for run in report.get("runs", []):
+        method = run.get("method") or {}
+        runtime = method.get("runtime_seconds", "")
+        memory = method.get("peak_memory_mb", "")
+        run_rows.append(
+            f"<tr><td><code>{html.escape(str(run['name']))}</code></td>"
+            f"<td><span class=\"status {html.escape(str(run['status']))}\">{html.escape(str(run['status']))}</span></td>"
+            f"<td>{run['passed']}/{run['total']} ({100 * run['pass_rate']:.1f}%)</td>"
+            f"<td>{html.escape(str(runtime))}</td><td>{html.escape(str(memory))}</td>"
+            f"<td><code>{html.escape(str(run['run_fingerprint']))}</code></td></tr>"
+        )
+    names = [run["name"] for run in report.get("runs", [])]
+    headers = "".join(f"<th><code>{html.escape(str(name))}</code></th>" for name in names)
+    history_rows = []
+    for item in report.get("results", []):
+        cells = []
+        for point in item.get("history", []):
+            status = point.get("status", "missing")
+            values = ", ".join(f"{key}={value:.3f}" for key, value in point.get("metrics", {}).items())
+            cells.append(f'<td class="cell-{html.escape(str(status))}" title="{html.escape(values)}">{html.escape(str(status))}</td>')
+        history_rows.append(f"<tr><th><code>{html.escape(str(item['id']))}</code></th>{''.join(cells)}</tr>")
+    return (
+        "<section><h2>Run history</h2><div class=\"table-wrap\"><table><thead><tr><th>Run</th><th>Status</th><th>Pass rate</th><th>Runtime (s)</th><th>Peak memory (MB)</th><th>Fingerprint</th></tr></thead><tbody>"
+        + "".join(run_rows) + "</tbody></table></div></section>"
+        + "<section><h2>Benchmark history</h2><p class=\"note\">Hover over a cell to see the recorded metrics for that run.</p><div class=\"table-wrap\"><table class=\"matrix\"><thead><tr><th>Benchmark</th>"
+        + headers + "</tr></thead><tbody>" + "".join(history_rows) + "</tbody></table></div></section>"
+    )
+
+
 def html_report(report: dict) -> str:
     summary = report["summary"]
     rows = []
@@ -332,7 +367,7 @@ h1{font-size:2rem;margin:.2rem 0}h2{margin:2rem 0 .5rem}header,section{backgroun
         f"<div class=\"cards\"><div class=\"card\"><span>Status</span><strong class=\"{html.escape(summary['status'])}\">{html.escape(summary['status'].upper())}</strong></div>"
         f"<div class=\"card\"><span>Passed</span><strong>{summary['passed']}</strong></div><div class=\"card\"><span>Failed</span><strong>{summary['failed']}</strong></div>"
         f"<div class=\"card\"><span>Total</span><strong>{summary['total']}</strong></div></div>{_status_chart(summary)}</header>"
-        f"{_method_receipt(report)}{_leaderboard(report)}{_matrix(report)}"
+        f"{_method_receipt(report)}{_leaderboard(report)}{_matrix(report)}{_trend(report)}"
         f"<section><h2>Benchmark cases</h2><div class=\"table-wrap\"><table><thead><tr><th>Benchmark</th><th>Assay</th><th>Status</th><th>Metrics or reason</th></tr></thead><tbody>{''.join(rows)}</tbody></table></div></section>"
         "</body></html>\n"
     )
