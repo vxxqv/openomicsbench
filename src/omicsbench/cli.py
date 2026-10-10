@@ -17,6 +17,7 @@ from .regression import compare_reports
 from .bundle import create_bundle, verify_bundle
 from .validate import validate
 from .variants import compare_variants
+from .peptides import compare_peptides
 from .evaluate import evaluate_matrix, evaluate_suite
 from .evidence import create_evidence_crate, verify_evidence_crate
 
@@ -46,6 +47,12 @@ def main():
     variant_compare.add_argument("id", help="Benchmark ID with a declared variant truth set.")
     variant_compare.add_argument("results", type=Path, help="VCF or VCF.GZ call set.")
     variant_compare.add_argument("--detail-limit", type=int, default=20, help="Maximum false-positive and false-negative examples to return.")
+    peptide = sub.add_parser("peptide", help="Compare protein-peptide identifications with a bundled digest truth set.")
+    peptide_sub = peptide.add_subparsers(dest="peptide_command", required=True)
+    peptide_compare = peptide_sub.add_parser("compare", help="Score exact protein-peptide pairs from a TSV table.")
+    peptide_compare.add_argument("id", help="Benchmark ID with a declared peptide truth set.")
+    peptide_compare.add_argument("results", type=Path, help="TSV or TSV.GZ table with protein_id and peptide columns.")
+    peptide_compare.add_argument("--detail-limit", type=int, default=20, help="Maximum false-positive and false-negative examples to return.")
     assay = sub.add_parser("assay", help="Inspect sequencing assay profiles and build local command plans.")
     assay_sub = assay.add_subparsers(dest="assay_command", required=True)
     assay_sub.add_parser("list", help="List supported assay profiles.")
@@ -63,13 +70,13 @@ def main():
     suite_compare = suite_sub.add_parser("compare", help="Compare a directory of differential-expression results.")
     suite_compare.add_argument("results", type=Path, help="Directory containing files named <dataset-id>.csv or .tsv, optionally gzip-compressed.")
     suite_compare.add_argument("--detail-limit", type=int, default=20, help="Maximum missing and unexpected gene examples per benchmark.")
-    suite_evaluate = suite_sub.add_parser("evaluate", help="Evaluate one result directory across RNA and DNA benchmarks.")
-    suite_evaluate.add_argument("results", type=Path, help="Directory containing benchmark-named RNA tables and VCF files.")
+    suite_evaluate = suite_sub.add_parser("evaluate", help="Evaluate one result directory across RNA, DNA and protein benchmarks.")
+    suite_evaluate.add_argument("results", type=Path, help="Directory containing benchmark-named RNA tables, VCF files and peptide tables.")
     suite_evaluate.add_argument("--detail-limit", type=int, default=20, help="Maximum mismatch examples per benchmark.")
     suite_matrix = suite_sub.add_parser("matrix", help="Compare several analysis methods across the same benchmarks.")
     suite_matrix.add_argument("--method", action="append", required=True, help="Method and result directory as NAME=PATH. Repeat for every method.")
     suite_matrix.add_argument("--detail-limit", type=int, default=20, help="Maximum missing and unexpected gene examples per benchmark.")
-    suite_evaluate_matrix = suite_sub.add_parser("evaluate-matrix", help="Compare several methods across RNA and DNA benchmarks.")
+    suite_evaluate_matrix = suite_sub.add_parser("evaluate-matrix", help="Compare several methods across RNA, DNA and protein benchmarks.")
     suite_evaluate_matrix.add_argument("--method", action="append", required=True, help="Method and result directory as NAME=PATH. Repeat for every method.")
     suite_evaluate_matrix.add_argument("--detail-limit", type=int, default=20, help="Maximum mismatch examples per benchmark.")
     suite_regress = suite_sub.add_parser("regress", help="Fail when a candidate suite report regresses from a baseline report.")
@@ -108,6 +115,9 @@ def main():
         elif args.command == "variant":
             model, folder = lookup(args.root, args.id)
             out = compare_variants(model, folder, args.results, args.detail_limit)
+        elif args.command == "peptide":
+            model, folder = lookup(args.root, args.id)
+            out = compare_peptides(model, folder, args.results, args.detail_limit)
         elif args.command == "evidence":
             out = verify_evidence_crate(args.archive)
         elif args.command == "bundle":
@@ -169,6 +179,8 @@ def main():
         if args.command == "compare" and out["status"] == "fail":
             sys.exit(2)
         if args.command == "variant" and out["status"] == "fail":
+            sys.exit(2)
+        if args.command == "peptide" and out["status"] == "fail":
             sys.exit(2)
         if args.command == "suite" and out["summary"]["status"] == "fail":
             sys.exit(2)

@@ -1,0 +1,61 @@
+{
+  "profile": "sequence-summary-v1",
+  "files": [
+    {
+      "path": "nano/proteins.fasta",
+      "expected": {
+        "format": "fasta",
+        "molecule": "protein",
+        "records": 3,
+        "letters": 82,
+        "length": {
+          "minimum": 22,
+          "maximum": 34,
+          "mean": 27.333333333333332,
+          "median": 26,
+          "n50": 26,
+          "l50": 2
+        },
+        "composition": {
+          "A": 4,
+          "C": 1,
+          "D": 3,
+          "E": 5,
+          "F": 3,
+          "G": 4,
+          "H": 2,
+          "I": 4,
+          "K": 8,
+          "L": 4,
+          "M": 4,
+          "N": 2,
+          "P": 7,
+          "Q": 4,
+          "R": 5,
+          "S": 3,
+          "T": 6,
+          "V": 8,
+          "W": 3,
+          "Y": 2
+        },
+        "gc_fraction": null,
+        "ambiguity_fraction": 0.0,
+        "duplicate_sequences": 0
+      }
+    }
+  ],
+  "protein_reference": "nano/proteins.fasta",
+  "peptide_truth": "expected/peptides.tsv",
+  "peptide_count": 15,
+  "peptide_comparison": {
+    "enzyme": "trypsin",
+    "missed_cleavages": 1,
+    "minimum_length": 7,
+    "maximum_length": 30,
+    "maximum_q_value": 0.01,
+    "minimum_precision": 1.0,
+    "minimum_recall": 1.0,
+    "minimum_protein_recall": 1.0,
+    "minimum_residue_coverage": 1.0
+  }
+}

@@ -1,0 +1,16 @@
+protein_id	peptide	start	end	missed_cleavages
+proteome_alpha	MPEPTIDER	0	9	0
+proteome_alpha	MPEPTIDERK	0	10	1
+proteome_alpha	KAAAGMSTNPK	9	20	1
+proteome_alpha	AAAGMSTNPK	10	20	0
+proteome_alpha	AAAGMSTNPKVVVVK	10	25	1
+proteome_alpha	VVVVKQWER	20	29	1
+proteome_alpha	QWERTYIPK	25	34	1
+proteome_beta	GILGFVFTLTVPSER	0	15	0
+proteome_beta	GILGFVFTLTVPSERDVLK	0	19	1
+proteome_beta	DVLKQHPMWQK	15	26	1
+proteome_beta	QHPMWQK	19	26	0
+proteome_gamma	ACDEFGHIK	0	9	0
+proteome_gamma	ACDEFGHIKLMNPQR	0	15	1
+proteome_gamma	LMNPQRSTVWYK	9	21	1
+proteome_gamma	STVWYKR	15	22	1

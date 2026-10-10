@@ -11,12 +11,14 @@ from pydantic import Field, field_validator
 from .compare import compare
 from .matrix import METHOD_NAME
 from .models import StrictModel
+from .peptides import compare_peptides
 from .registry import registry
 from .suite import RESULT_SUFFIXES, _summary
 from .variants import compare_variants
 
 
 VCF_SUFFIXES = (".vcf", ".vcf.gz")
+PEPTIDE_SUFFIXES = (".peptides.tsv", ".peptides.tsv.gz")
 
 
 class MethodReceipt(StrictModel):
@@ -69,6 +71,8 @@ def _evaluator(model) -> tuple[str, tuple[str, ...]] | None:
         return "differential_expression", RESULT_SUFFIXES
     if model.assay == "whole_genome_dna_seq" and model.validation is not None:
         return "exact_snv", VCF_SUFFIXES
+    if model.assay == "sequence_protein" and model.validation is not None and model.validation.baseline_version == "peptide-identification-v1":
+        return "peptide_identification", PEPTIDE_SUFFIXES
     return None
 
 
@@ -123,7 +127,12 @@ def evaluate_suite(
                     "reason": f"missing result file; expected {expected}",
                 })
                 continue
-            details = compare(model, folder, path, detail_limit) if comparator == "differential_expression" else compare_variants(model, folder, path, detail_limit)
+            if comparator == "differential_expression":
+                details = compare(model, folder, path, detail_limit)
+            elif comparator == "exact_snv":
+                details = compare_variants(model, folder, path, detail_limit)
+            else:
+                details = compare_peptides(model, folder, path, detail_limit)
             item = {
                 "id": model.id,
                 "assay": model.assay,

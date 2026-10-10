@@ -147,7 +147,7 @@ def junit_report(report: dict) -> str:
 def csv_report(report: dict) -> str:
     fields = (
         "method", "benchmark", "assay", "comparator", "status", "reason", "baseline_status", "candidate_status",
-        "spearman_logfc", "top_k_jaccard", "sign_concordance", "coverage", "precision", "recall", "f1",
+        "spearman_logfc", "top_k_jaccard", "sign_concordance", "coverage", "precision", "recall", "f1", "protein_recall", "residue_coverage",
         "true_positive", "false_positive", "false_negative",
         "delta_spearman_logfc", "delta_top_k_jaccard", "delta_sign_concordance", "delta_coverage",
         "delta_precision", "delta_recall", "delta_f1",
@@ -177,6 +177,8 @@ def csv_report(report: dict) -> str:
             "precision": metrics.get("precision", ""),
             "recall": metrics.get("recall", ""),
             "f1": metrics.get("f1", ""),
+            "protein_recall": metrics.get("protein_recall", ""),
+            "residue_coverage": metrics.get("residue_coverage", ""),
             "true_positive": counts.get("true_positive", ""),
             "false_positive": counts.get("false_positive", ""),
             "false_negative": counts.get("false_negative", ""),
@@ -198,6 +200,8 @@ METRIC_LABELS = {
     "precision": "precision",
     "recall": "recall",
     "f1": "F1",
+    "protein_recall": "protein recall",
+    "residue_coverage": "residue coverage",
 }
 
 

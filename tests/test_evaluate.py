@@ -39,11 +39,16 @@ class EvaluateTests(unittest.TestCase):
 
     def test_mixed_assay_evaluation(self):
         self.add_truth(self.a)
-        report = evaluate_suite(self.collection, self.a, ["rnaseq-002", "sequence-005"])
+        shutil.copyfile(
+            self.collection / "datasets/sequences/sequence-006/expected/peptides.tsv",
+            self.a / "sequence-006.peptides.tsv",
+        )
+        report = evaluate_suite(self.collection, self.a, ["rnaseq-002", "sequence-005", "sequence-006"])
         self.assertEqual(report["summary"]["status"], "pass")
         self.assertEqual(report["summary"]["assays"]["bulk_rna_seq"]["passed"], 1)
         self.assertEqual(report["summary"]["assays"]["whole_genome_dna_seq"]["passed"], 1)
-        self.assertEqual([item["comparator"] for item in report["results"]], ["differential_expression", "exact_snv"])
+        self.assertEqual(report["summary"]["assays"]["sequence_protein"]["passed"], 1)
+        self.assertEqual([item["comparator"] for item in report["results"]], ["differential_expression", "exact_snv", "peptide_identification"])
 
     def test_missing_results_fail_closed(self):
         report = evaluate_suite(self.collection, self.a, ["rnaseq-002", "sequence-005"])

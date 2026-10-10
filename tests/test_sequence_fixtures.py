@@ -23,20 +23,21 @@ class SequenceFixtureTests(unittest.TestCase):
     def test_registered_sequence_fixtures(self):
         records = registry(ROOT)
         identifiers = [identifier for identifier in records if identifier.startswith("sequence-")]
-        self.assertEqual(identifiers, ["sequence-001", "sequence-002", "sequence-003", "sequence-004", "sequence-005"])
+        self.assertEqual(identifiers, ["sequence-001", "sequence-002", "sequence-003", "sequence-004", "sequence-005", "sequence-006"])
         expected = {
             "sequence-001": ("sequence_dna", "dna", "fasta", False),
             "sequence-002": ("sequence_rna", "rna", "fasta", False),
             "sequence-003": ("sequence_protein", "protein", "fasta", False),
             "sequence-004": ("short_read_dna", "dna", "fastq", True),
             "sequence-005": ("whole_genome_dna_seq", "dna", "fastq", True),
+            "sequence-006": ("sequence_protein", "protein", "fasta", False),
         }
         for identifier in identifiers:
             model, _ = records[identifier]
             self.assertEqual((model.assay, model.sequence.molecule, model.sequence.format, model.sequence.paired), expected[identifier])
 
     def test_all_sequence_fixtures_validate(self):
-        for identifier in ["sequence-001", "sequence-002", "sequence-003", "sequence-004", "sequence-005"]:
+        for identifier in ["sequence-001", "sequence-002", "sequence-003", "sequence-004", "sequence-005", "sequence-006"]:
             model, folder = lookup(ROOT, identifier)
             with self.subTest(identifier=identifier):
                 self.assertEqual(validate(model, folder)["status"], "pass")
