@@ -29,17 +29,19 @@ When no IDs are supplied, all comparable bulk RNA-seq objects are required. A mi
 
 Each comparison reports shared and missing genes, effect-rank correlation, top-gene overlap, sign agreement and the thresholds declared by that benchmark. An unexpected gene universe or a missed threshold fails the case.
 
-## Evaluate RNA and DNA results together
+## Evaluate RNA, DNA and protein results together
 
 ```sh
 omicsbench suite evaluate RESULTS_DIRECTORY
 ```
 
-The unified evaluator chooses a comparator from the benchmark contract. Biological bulk RNA-seq objects accept the same CSV or TSV effects as `suite compare`. The synthetic whole-genome DNA object accepts `<id>.vcf` or `<id>.vcf.gz` and reports exact-allele precision, recall, F1 and TP, FP and FN counts.
+The unified evaluator chooses a comparator from the benchmark contract. Biological bulk RNA-seq objects accept the same CSV or TSV effects as `suite compare`. The synthetic whole-genome DNA object accepts `<id>.vcf` or `<id>.vcf.gz` and reports exact-allele precision, recall, F1 and TP, FP and FN counts. The synthetic protein-identification object accepts `<id>.peptides.tsv` or `<id>.peptides.tsv.gz` with `protein_id` and `peptide` columns.
 
 A selected output is required. The suite fails a missing file, more than one accepted file for the same benchmark, malformed input, reference disagreement or a missed scientific threshold. Without `--id`, all objects with a result comparator are required.
 
 The VCF path accepts VCF 4.x, expands comma-separated ALT alleles and assesses records whose FILTER value is `PASS` or `.`. The current truth object contains A/C/G/T substitutions. It compares contig, one-based position, REF and ALT; it does not compare genotypes or reconcile equivalent haplotype representations. The report states this boundary directly.
+
+Peptide tables may include `q_value`. When present, rows above the benchmark's declared maximum are excluded before scoring. The comparator reports peptide precision, recall and F1, protein recall and the fraction of truth-peptide residues recovered. It assesses exact unmodified protein-peptide pairs from the packaged digest. Spectra, modifications, charge states, protein inference and FDR calibration are outside its scope.
 
 An optional `method.json` in the result directory uses this contract:
 
@@ -72,15 +74,59 @@ omicsbench suite matrix \
 
 Supply at least two unique method names. Each directory follows the same filename rules as `suite compare`, and every method is checked against the same benchmark selection. The matrix contains one case per method and benchmark, per-method mean metrics and a deterministic leaderboard. The leaderboard favours passed cases first; its metric values are descriptive and do not replace the declared pass thresholds.
 
-For mixed RNA and DNA outputs, use:
+For mixed RNA, DNA and protein outputs, use:
 
 ```sh
 omicsbench suite evaluate-matrix \
   --method current=results/current \
   --method candidate=results/candidate \
   --id rnaseq-002 \
-  --id sequence-005
+  --id sequence-005 \
+  --id sequence-006
 ```
+
+Every unified evaluation records SHA-256 hashes for its benchmark manifests and submitted files. A `run_fingerprint` binds those hashes to the package version and validated method receipt while excluding local paths. Identical content therefore has the same fingerprint in different directories or on different machines.
+
+## Apply an acceptance policy
+
+```sh
+omicsbench suite gate evaluation.json policy.json
+```
+
+Gate policies are strict JSON documents. They can require exact benchmark IDs, overall and per-assay pass rates, a method receipt, runtime and peak-memory ceilings, and metric floors limited to an assay or comparator. Required evidence that is absent fails the gate.
+
+```json
+{
+  "schema_version": "1.0",
+  "name": "release gate",
+  "required_benchmarks": ["rnaseq-002", "sequence-005", "sequence-006"],
+  "minimum_pass_rate": 1.0,
+  "minimum_assay_pass_rate": {
+    "bulk_rna_seq": 1.0,
+    "whole_genome_dna_seq": 1.0,
+    "sequence_protein": 1.0
+  },
+  "require_method_receipt": true,
+  "maximum_runtime_seconds": 3600,
+  "maximum_peak_memory_mb": 4096,
+  "metric_floors": [
+    {"metric": "precision", "minimum": 0.99, "comparator": "exact_snv"},
+    {"metric": "protein_recall", "minimum": 1.0, "comparator": "peptide_identification"}
+  ]
+}
+```
+
+## Compare a run history
+
+```sh
+omicsbench suite trend \
+  --run accepted=evaluation-accepted.json \
+  --run candidate=evaluation-candidate.json \
+  --json trend.json \
+  --html trend.html
+```
+
+Run entries are ordered from earliest to latest. Each input must be a fingerprinted `suite evaluate` report. The result preserves method and resource receipts, pass rates, source fingerprints, benchmark status history, current metrics and first-to-latest metric deltas.
 
 The multi-assay leaderboard ranks methods by passed cases, failed cases and method name. Assay summaries, runtime and peak memory remain visible, but metrics from different assays are not pooled.
 

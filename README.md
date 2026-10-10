@@ -1,8 +1,8 @@
 # OpenOmicsBench
 
-OpenOmicsBench is a compact benchmark collection and local sequence toolkit for bioinformatics software testing, method checks and teaching. It contains 12 certified bulk RNA-seq objects, five deterministic DNA, RNA and protein sequence fixtures, strict FASTA and FASTQ tools, and a CI-ready evaluation system.
+OpenOmicsBench is a compact benchmark collection and local sequence toolkit for bioinformatics software testing, method checks and teaching. It contains 12 certified bulk RNA-seq objects, six deterministic DNA, RNA, protein and proteomics fixtures, strict FASTA and FASTQ tools, and a CI-ready evaluation system.
 
-Version 3 evaluates RNA differential-expression results and DNA variant calls in the same run. It adds exact-SNV VCF scoring, method and resource receipts, cross-method multi-assay matrices, richer offline dashboards, and deterministic evidence crates with RO-Crate metadata and checksums.
+Version 4 evaluates RNA differential-expression results, DNA variant calls and protein-peptide identifications in the same run. It adds a deterministic tryptic-peptide benchmark, portable run fingerprints, versioned quality and resource policies, and multi-run trend reports. The version 3 VCF scoring, multi-method matrices, offline dashboards and RO-Crate evidence remain available.
 
 The package runs offline after installation. Sequence files stay on the local computer. The built-in tools cover inspection and lightweight preprocessing; they do not claim to replace aligners, variant callers, taxonomic classifiers or assay-specific statistical workflows.
 
@@ -22,6 +22,7 @@ omicsbench list
 omicsbench validate rnaseq-002
 omicsbench validate sequence-004
 omicsbench variant compare sequence-005 calls.vcf.gz
+omicsbench peptide compare sequence-006 identifications.peptides.tsv
 ```
 
 The wheel contains the complete collection. A repository checkout and network connection are not required.
@@ -103,19 +104,21 @@ Then run:
 omicsbench suite compare results --id rnaseq-002 --id rnaseq-003 --junit reports/comparison.xml
 ```
 
-For a mixed RNA and DNA run, add benchmark-named VCF output alongside the expression tables:
+For a mixed RNA, DNA and protein run, add benchmark-named VCF and peptide output alongside the expression tables:
 
 ```text
 results/
   method.json
   rnaseq-002.tsv.gz
   sequence-005.vcf.gz
+  sequence-006.peptides.tsv
 ```
 
 ```sh
 omicsbench suite evaluate results \
   --id rnaseq-002 \
   --id sequence-005 \
+  --id sequence-006 \
   --json reports/evaluation.json \
   --html reports/evaluation.html \
   --evidence reports/evaluation-evidence.zip
@@ -134,7 +137,7 @@ omicsbench suite matrix \
   --html reports/matrix.html
 ```
 
-Use `evaluate-matrix` when each method directory contains a mixture of RNA tables and VCF calls:
+Use `evaluate-matrix` when each method directory contains a mixture of RNA tables, VCF calls and peptide tables:
 
 ```sh
 omicsbench suite evaluate-matrix \
@@ -142,10 +145,35 @@ omicsbench suite evaluate-matrix \
   --method candidate=results/candidate \
   --id rnaseq-002 \
   --id sequence-005 \
+  --id sequence-006 \
   --html reports/multi-assay.html
 ```
 
 The leaderboard uses pass counts and keeps assay metrics separate. It does not average unlike measurements into a single score.
+
+Each evaluation records SHA-256 hashes for the submitted results and benchmark manifests, then builds a `run_fingerprint` from those hashes and the validated method receipt. Local directory names do not affect this identity.
+
+Apply a checked-in policy to an evaluation before accepting a run:
+
+```sh
+omicsbench suite gate reports/evaluation.json policy.json \
+  --json reports/gate.json \
+  --junit reports/gate.xml
+```
+
+A policy can require named benchmarks, overall and per-assay pass rates, a method receipt, runtime and memory ceilings, and metric floors scoped to an assay or comparator. Missing required evidence fails the gate.
+
+Track several accepted or candidate runs in chronological order:
+
+```sh
+omicsbench suite trend \
+  --run v4.0=reports/v4.0.json \
+  --run candidate=reports/candidate.json \
+  --json reports/trend.json \
+  --html reports/trend.html
+```
+
+Trend reports preserve each source fingerprint, method receipt, resource measurements, pass rate and per-benchmark metric history.
 
 Use a previously accepted report as a regression baseline:
 
@@ -153,7 +181,7 @@ Use a previously accepted report as a regression baseline:
 omicsbench suite regress accepted.json candidate.json --absolute-tolerance 0.01 --junit reports/regression.xml
 ```
 
-Omit `--id` from `suite compare` to require results for all 12 comparable RNA-seq objects. Omit it from `suite evaluate` to require every benchmark with a supported comparator. A completed suite exits with status 0 when every check passes, status 2 when a benchmark or regression gate fails, and status 1 for invalid input. Existing report files are protected unless `--force` is supplied. The [suite reference](docs/benchmark-suites.md) describes the file convention and report fields.
+Omit `--id` from `suite compare` to require results for all 12 comparable RNA-seq objects. Omit it from `suite evaluate` to require every benchmark with a supported comparator. A completed suite exits with status 0 when every check passes, status 2 when a benchmark, policy or regression gate fails, and status 1 for invalid input. Existing report files are protected unless `--force` is supplied. The [suite reference](docs/benchmark-suites.md) describes the file convention and report fields.
 
 Verify an evaluation evidence crate without extracting it:
 
@@ -193,14 +221,17 @@ Profiles are available for whole-genome, exome, targeted-panel, bulk RNA-seq, si
 | `sequence-003` | standard, ambiguous and terminating protein records | FASTA | 3 |
 | `sequence-004` | paired DNA reads with mixed qualities and duplication | FASTQ | 4 pairs |
 | `sequence-005` | paired DNA-seq reads, reference and three known SNVs | FASTQ | 20 pairs |
+| `sequence-006` | protein FASTA and exact in-silico tryptic peptide truth | FASTA/TSV | 3 proteins |
 
-These five objects are project-authored synthetic fixtures. Each has an exact file inventory, checksums, format and molecule declarations, expected summary metrics and a deterministic rebuild workflow. `sequence-005` also verifies that every truth-set reference allele matches the bundled reference and that every alternate allele is supported by the paired reads. The objects test software behavior and do not represent a biological cohort or sequencing instrument.
+These six objects are project-authored synthetic fixtures. Each has an exact file inventory, checksums, format and molecule declarations, expected summary metrics and a deterministic rebuild workflow. `sequence-005` also verifies that every truth-set reference allele matches the bundled reference and that every alternate allele is supported by the paired reads. `sequence-006` verifies exact protein-peptide pairs from a declared tryptic digest. The objects test software behavior and do not represent a biological cohort or sequencing instrument.
 
 The version 3 VCF comparator for `sequence-005` matches contig, one-based position, REF and ALT exactly. It reports precision, recall and F1 for A/C/G/T substitutions and verifies REF against the packaged synthetic reference. Genotypes, indels, complex representations and confident-region stratification are outside this fixture. Use a haplotype-aware benchmarking engine such as [hap.py](https://github.com/Illumina/hap.py) or vcfeval with an appropriate truth set and confident regions for real germline benchmarking; the [GA4GH benchmarking project](https://github.com/ga4gh/benchmarking-tools) documents that broader problem.
 
+The version 4 peptide comparator accepts `protein_id` and `peptide` columns, with an optional `q_value` column. It scores unmodified pairs after the declared q-value filter and reports peptide precision, recall and F1, protein recall and covered truth residues. It does not parse spectra or claim to replace a full identification standard. The [HUPO-PSI mzIdentML specification](https://github.com/HUPO-PSI/mzIdentML) is the appropriate interchange model for complete mass-spectrometry identification results.
+
 ## Bulk RNA-seq benchmarks
 
-Version 3 retains the complete version 1 biological collection unchanged.
+Version 4 retains the complete version 1 biological collection unchanged.
 
 | ID | Design | Samples | Pocket genes |
 |---|---|---:|---:|

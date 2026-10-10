@@ -1,5 +1,15 @@
 # Changes
 
+## 4.0.0
+
+Version 4 extends unified evaluation to protein-peptide identifications. The new `sequence-006` benchmark contains three project-authored proteins, a deterministic tryptic digest and exact peptide truth. The comparator accepts TSV or compressed TSV, optionally filters an explicit q-value column, and reports peptide precision, recall and F1 alongside protein recall and covered truth residues. Its scope is deliberately limited to unmodified protein-peptide pairs; spectra, modifications, charge states, protein inference and FDR calibration remain outside the fixture.
+
+Every unified evaluation now receives a portable SHA-256 fingerprint derived from the package version, validated method receipt, benchmark manifests and submitted result bytes. The fingerprint excludes local directory names, so identical content produces the same identity on another machine. Individual cases expose the submitted-file and benchmark-manifest hashes used to build it.
+
+Versioned JSON gate policies can require exact benchmarks, overall and per-assay pass rates, method receipts, runtime and peak-memory ceilings, and assay- or comparator-scoped metric floors. Missing evidence fails closed. Gate results use the same JSON, Markdown, JUnit, CSV and offline HTML outputs as the other suite commands.
+
+Trend reports combine two or more fingerprinted evaluations in chronological order. They retain each run's method receipt, resource measurements, pass rate and content identity, then show benchmark status and metric changes from the first run to the latest. The HTML report includes a script-free run and benchmark history.
+
 ## 3.0.0
 
 Version 3 introduces a unified evaluator for bulk RNA-seq effects and small-variant calls. One run can apply the correct comparator to each selected benchmark, require every expected result, preserve assay-specific metrics and return one CI-ready status. Multi-assay matrices compare several methods without combining RNA and DNA measurements into an artificial score.
