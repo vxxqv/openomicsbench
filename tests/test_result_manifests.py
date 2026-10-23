@@ -9,7 +9,7 @@ import unittest
 import zipfile
 from pathlib import Path
 
-from omicsbench.evaluate import evaluate_suite
+from omicsbench.evaluate import evaluate_matrix, evaluate_suite
 from omicsbench.evidence import create_evidence_crate, verify_evidence_crate
 from omicsbench.results import ResultManifest, create_result_manifest, read_result_manifest
 
@@ -142,6 +142,23 @@ class ResultManifestTests(unittest.TestCase):
             self.assertIn("inputs/rnaseq-002.csv", value.namelist())
             self.assertIn("inputs/sequence-005.vcf", value.namelist())
             self.assertIn("inputs/sequence-006.tsv", value.namelist())
+
+    def test_matrix_evidence_preserves_each_method_manifest(self):
+        methods = []
+        for name in ("first", "second"):
+            directory = self.root / name
+            directory.mkdir()
+            shutil.copyfile(self.effects, directory / "native.tsv.gz")
+            create_result_manifest(self.collection, directory, ["rnaseq-002=native.tsv.gz"], [])
+            methods.append((name, directory))
+        report = evaluate_matrix(self.collection, methods, ["rnaseq-002"])
+        archive = self.root / "matrix-evidence.zip"
+        create_evidence_crate(report, archive)
+        with zipfile.ZipFile(archive) as value:
+            self.assertIn("methods/first/results.json", value.namelist())
+            self.assertIn("methods/second/results.json", value.namelist())
+            self.assertIn("inputs/first/rnaseq-002.tsv.gz", value.namelist())
+            self.assertIn("inputs/second/rnaseq-002.tsv.gz", value.namelist())
 
     def test_cli_indexes_and_evaluates_native_output(self):
         self.write_native_outputs()
