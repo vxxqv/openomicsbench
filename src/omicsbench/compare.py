@@ -14,27 +14,30 @@ from .rnaseq import correlation, ranked
 METRICS = ("spearman_logfc", "top_k_jaccard", "sign_concordance")
 
 
-def read_effects(path: Path) -> dict[str, float]:
+def read_effects(path: Path, columns: dict[str, str] | None = None) -> dict[str, float]:
     suffixes = path.suffixes
     data_suffix = suffixes[-2] if suffixes and suffixes[-1] == ".gz" and len(suffixes) > 1 else path.suffix
     if data_suffix not in {".csv", ".tsv"}:
         raise ValueError(f"{path}: expected a .csv or .tsv result file")
     delimiter = "," if data_suffix == ".csv" else "\t"
     opener = gzip.open if path.suffix == ".gz" else open
+    names = {"gene_id": "gene_id", "log2_fold_change": "log2_fold_change", **(columns or {})}
+    if set(names) != {"gene_id", "log2_fold_change"} or names["gene_id"] == names["log2_fold_change"]:
+        raise ValueError("effect columns must map gene_id and log2_fold_change to different source columns")
     effects = {}
     with opener(path, "rt", encoding="utf-8", newline="") as stream:
         reader = csv.DictReader(stream, delimiter=delimiter)
-        required = {"gene_id", "log2_fold_change"}
+        required = set(names.values())
         if not reader.fieldnames or not required.issubset(reader.fieldnames):
-            raise ValueError(f"{path}: required columns are gene_id and log2_fold_change")
+            raise ValueError(f"{path}: required columns are {names['gene_id']} and {names['log2_fold_change']}")
         for line, row in enumerate(reader, start=2):
-            gene = (row.get("gene_id") or "").strip()
+            gene = (row.get(names["gene_id"]) or "").strip()
             if not gene:
                 raise ValueError(f"{path}:{line}: gene_id is empty")
             if gene in effects:
                 raise ValueError(f"{path}:{line}: duplicate gene_id {gene}")
             try:
-                value = float(row["log2_fold_change"])
+                value = float(row[names["log2_fold_change"]])
             except (TypeError, ValueError):
                 raise ValueError(f"{path}:{line}: log2_fold_change is not numeric") from None
             if not math.isfinite(value):
@@ -49,7 +52,7 @@ def top_genes(effects: dict[str, float], k: int) -> set[str]:
     return set(sorted(effects, key=lambda gene: (-abs(effects[gene]), gene))[:k])
 
 
-def compare(model, folder: Path, result_path: Path, detail_limit: int = 20) -> dict:
+def compare(model, folder: Path, result_path: Path, detail_limit: int = 20, columns: dict[str, str] | None = None) -> dict:
     if detail_limit < 0:
         raise ValueError("detail limit must be zero or greater")
     if model.kind != "real" or model.validation is None:
@@ -64,7 +67,7 @@ def compare(model, folder: Path, result_path: Path, detail_limit: int = 20) -> d
         raise ValueError(f"{model.id}: comparison reference is missing or corrupt")
 
     reference = read_effects(reference_path)
-    submitted = read_effects(Path(result_path))
+    submitted = read_effects(Path(result_path), columns)
     reference_genes = set(reference)
     submitted_genes = set(submitted)
     shared = sorted(reference_genes & submitted_genes)
@@ -102,6 +105,7 @@ def compare(model, folder: Path, result_path: Path, detail_limit: int = 20) -> d
             "contrast": evidence["design"]["contrast"],
         },
         "input": str(Path(result_path)),
+        "input_columns": {"gene_id": "gene_id", "log2_fold_change": "log2_fold_change", **(columns or {})},
         "genes": {
             "reference": len(reference),
             "submitted": len(submitted),

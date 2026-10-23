@@ -16,6 +16,7 @@ from .matrix import METHOD_NAME
 from .models import StrictModel
 from .peptides import compare_peptides
 from .registry import registry
+from .results import comparator_for, effective_columns, read_result_manifest
 from .suite import RESULT_SUFFIXES, _summary
 from .variants import compare_variants
 
@@ -81,17 +82,18 @@ def _result_file(directory: Path, dataset_id: str, suffixes: tuple[str, ...]) ->
 
 
 def _evaluator(model) -> tuple[str, tuple[str, ...]] | None:
-    if model.assay == "bulk_rna_seq" and model.kind == "real" and model.validation is not None:
-        return "differential_expression", RESULT_SUFFIXES
-    if model.assay == "whole_genome_dna_seq" and model.validation is not None:
-        return "exact_snv", VCF_SUFFIXES
-    if model.assay == "sequence_protein" and model.validation is not None and model.validation.baseline_version == "peptide-identification-v1":
-        return "peptide_identification", PEPTIDE_SUFFIXES
-    return None
+    comparator = comparator_for(model)
+    if comparator is None:
+        return None
+    conventional = {
+        "differential_expression": RESULT_SUFFIXES,
+        "exact_snv": VCF_SUFFIXES,
+        "peptide_identification": PEPTIDE_SUFFIXES,
+    }
+    return comparator, conventional[comparator]
 
 
-def _selection(root: Path, dataset_ids: list[str] | None) -> list[tuple]:
-    records = registry(Path(root))
+def _selection_from_records(records: dict, dataset_ids: list[str] | None) -> list[tuple]:
     requested = list(dict.fromkeys(dataset_ids or []))
     unknown = [dataset_id for dataset_id in requested if dataset_id not in records]
     if unknown:
@@ -105,6 +107,10 @@ def _selection(root: Path, dataset_ids: list[str] | None) -> list[tuple]:
     if not selected:
         raise ValueError("the collection has no comparable benchmarks")
     return selected
+
+
+def _selection(root: Path, dataset_ids: list[str] | None) -> list[tuple]:
+    return _selection_from_records(registry(Path(root)), dataset_ids)
 
 
 def _assay_summary(results: list[dict]) -> dict:
@@ -126,14 +132,23 @@ def evaluate_suite(
     if detail_limit < 0:
         raise ValueError("detail limit must be zero or greater")
     receipt = read_method_receipt(directory)
+    records = registry(Path(root))
+    selected = _selection_from_records(records, dataset_ids)
+    manifest = read_result_manifest(directory, records)
+    manifest_info, indexed = manifest if manifest is not None else (None, {})
     results = []
-    for model, folder in _selection(Path(root), dataset_ids):
+    for model, folder in selected:
         comparator, suffixes = _evaluator(model)  # type: ignore[misc]
         manifest_sha256 = digest(folder / "manifest.json")
         try:
-            path = _result_file(directory, model.id, suffixes)
+            indexed_result = indexed.get(model.id) if manifest_info is not None else None
+            path = indexed_result["path"] if indexed_result is not None else _result_file(directory, model.id, suffixes)
             if path is None:
-                expected = " or ".join(f"{model.id}{suffix}" for suffix in suffixes)
+                expected = (
+                    f"an entry for {model.id} in {manifest_info['path']}"
+                    if manifest_info is not None
+                    else " or ".join(f"{model.id}{suffix}" for suffix in suffixes)
+                )
                 results.append({
                     "id": model.id,
                     "assay": model.assay,
@@ -143,12 +158,13 @@ def evaluate_suite(
                     "benchmark_manifest_sha256": manifest_sha256,
                 })
                 continue
+            columns = indexed_result["columns"] if indexed_result is not None else effective_columns(comparator)
             if comparator == "differential_expression":
-                details = compare(model, folder, path, detail_limit)
+                details = compare(model, folder, path, detail_limit, columns)
             elif comparator == "exact_snv":
                 details = compare_variants(model, folder, path, detail_limit)
             else:
-                details = compare_peptides(model, folder, path, detail_limit)
+                details = compare_peptides(model, folder, path, detail_limit, columns)
             item = {
                 "id": model.id,
                 "assay": model.assay,
@@ -156,6 +172,7 @@ def evaluate_suite(
                 "status": details["status"],
                 "input": str(path),
                 "input_sha256": digest(path),
+                "input_contract": {"columns": columns},
                 "benchmark_manifest_sha256": manifest_sha256,
                 "details": details,
             }
@@ -174,7 +191,7 @@ def evaluate_suite(
     summary = _summary(results)
     summary["assays"] = _assay_summary(results)
     fingerprint = _content_fingerprint({
-        "contract": "openomicsbench-evaluation-v1",
+        "contract": "openomicsbench-evaluation-v2",
         "package_version": __version__,
         "method": _receipt_identity(receipt),
         "benchmarks": [
@@ -184,6 +201,7 @@ def evaluate_suite(
                 "comparator": item["comparator"],
                 "benchmark_manifest_sha256": item["benchmark_manifest_sha256"],
                 "input_sha256": item.get("input_sha256"),
+                "input_contract": item.get("input_contract"),
             }
             for item in results
         ],
@@ -192,9 +210,10 @@ def evaluate_suite(
         "operation": "evaluate",
         "package_version": __version__,
         "run_fingerprint": fingerprint,
-        "fingerprint_contract": "openomicsbench-evaluation-v1",
+        "fingerprint_contract": "openomicsbench-evaluation-v2",
         "selection": {"ids": dataset_ids or [], "default": "all comparable benchmarks"},
         "results_directory": str(directory),
+        "result_manifest": manifest_info,
         "method": receipt,
         "summary": summary,
         "results": results,
@@ -208,6 +227,7 @@ def _leader(name: str, directory: Path, report: dict) -> dict:
         "name": name,
         "results_directory": str(directory),
         "receipt": receipt,
+        "result_manifest": report.get("result_manifest"),
         "run_fingerprint": report["run_fingerprint"],
         "status": summary["status"],
         "total": summary["total"],

@@ -37,31 +37,34 @@ def _suffix(path: Path) -> str:
     raise ValueError(f"{path}: expected a .tsv or .tsv.gz peptide table")
 
 
-def read_peptides(path: Path, maximum_q_value: float) -> tuple[set[Peptide], dict]:
+def read_peptides(path: Path, maximum_q_value: float, columns: dict[str, str] | None = None) -> tuple[set[Peptide], dict]:
     """Read unique protein-peptide pairs, optionally filtering by q-value."""
     path = Path(path)
     _suffix(path)
     if not math.isfinite(maximum_q_value) or not 0 <= maximum_q_value <= 1:
         raise ValueError("maximum q-value must be between zero and one")
+    names = {"protein_id": "protein_id", "peptide": "peptide", "q_value": "q_value", **(columns or {})}
+    if set(names) != {"protein_id", "peptide", "q_value"} or names["protein_id"] == names["peptide"]:
+        raise ValueError("peptide columns must map protein_id, peptide and q_value")
     peptides: set[Peptide] = set()
     rows = filtered = 0
     with _open_text(path) as stream:
         reader = csv.DictReader(stream, delimiter="\t")
         fields = reader.fieldnames or []
-        if "protein_id" not in fields or "peptide" not in fields:
-            raise ValueError(f"{path}: peptide table requires protein_id and peptide columns")
-        q_values = "q_value" in fields
+        if names["protein_id"] not in fields or names["peptide"] not in fields:
+            raise ValueError(f"{path}: peptide table requires {names['protein_id']} and {names['peptide']} columns")
+        q_values = names["q_value"] in fields
         for line_number, row in enumerate(reader, start=2):
             rows += 1
-            protein_id = (row.get("protein_id") or "").strip()
-            sequence = (row.get("peptide") or "").strip().upper()
+            protein_id = (row.get(names["protein_id"]) or "").strip()
+            sequence = (row.get(names["peptide"]) or "").strip().upper()
             if not protein_id or any(character.isspace() for character in protein_id):
                 raise ValueError(f"{path}:{line_number}: protein_id must be a non-empty token")
             if not sequence or set(sequence) - CANONICAL_AMINO_ACIDS:
                 raise ValueError(f"{path}:{line_number}: peptide must contain canonical amino-acid letters only")
             if q_values:
                 try:
-                    q_value = float(row.get("q_value") or "")
+                    q_value = float(row.get(names["q_value"]) or "")
                 except ValueError:
                     raise ValueError(f"{path}:{line_number}: q_value must be numeric") from None
                 if not math.isfinite(q_value) or not 0 <= q_value <= 1:
@@ -78,6 +81,7 @@ def read_peptides(path: Path, maximum_q_value: float) -> tuple[set[Peptide], dic
         "assessed_identifications": len(peptides),
         "filtered_identifications": filtered,
         "q_value_column": q_values,
+        "columns": names,
         "maximum_q_value": maximum_q_value,
     }
 
@@ -146,12 +150,12 @@ def _covered_residues(peptides: set[Peptide], coordinates: dict[Peptide, tuple[i
     return covered
 
 
-def compare_peptides(model, folder: Path, result_path: Path, detail_limit: int = 20) -> dict:
+def compare_peptides(model, folder: Path, result_path: Path, detail_limit: int = 20, columns: dict[str, str] | None = None) -> dict:
     if detail_limit < 0:
         raise ValueError("detail limit must be zero or greater")
     truth, coordinates, proteins, comparison = _truth(model, folder)
     maximum_q_value = float(comparison.get("maximum_q_value", 0.01))
-    submitted, input_summary = read_peptides(Path(result_path), maximum_q_value)
+    submitted, input_summary = read_peptides(Path(result_path), maximum_q_value, columns)
     true_positive = truth & submitted
     false_positive = submitted - truth
     false_negative = truth - submitted

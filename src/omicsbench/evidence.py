@@ -10,6 +10,7 @@ import zipfile
 from pathlib import Path, PurePosixPath
 
 from . import __version__
+from .results import result_suffix
 from .suite import csv_report, html_report
 
 
@@ -54,7 +55,10 @@ def _portable_report(report: dict) -> tuple[dict, dict[str, bytes]]:
         prefix = f"inputs/{method}" if method else "inputs"
         if method and not SAFE_METHOD.fullmatch(method):
             raise ValueError(f"invalid method name in report: {method}")
-        archive_name = f"{prefix}/{source.name}"
+        identifier = item.get("id")
+        if not isinstance(identifier, str) or not SAFE_METHOD.fullmatch(identifier):
+            raise ValueError("evaluation result has an invalid benchmark ID")
+        archive_name = f"{prefix}/{identifier}{result_suffix(source)}"
         if archive_name not in files:
             _add_source(files, archive_name, source)
         item["input"] = archive_name
@@ -64,6 +68,10 @@ def _portable_report(report: dict) -> tuple[dict, dict[str, bytes]]:
 
     if portable.get("operation") == "evaluate":
         portable["results_directory"] = "inputs"
+        manifest = portable.get("result_manifest")
+        if manifest:
+            _add_source(files, "results.json", Path(manifest["path"]))
+            manifest["path"] = "results.json"
         receipt = portable.get("method")
         if receipt:
             source = Path(receipt["path"])
@@ -79,6 +87,11 @@ def _portable_report(report: dict) -> tuple[dict, dict[str, bytes]]:
                 archive_name = f"methods/{name}/method.json"
                 _add_source(files, archive_name, Path(receipt["path"]))
                 receipt["path"] = archive_name
+            manifest = leader.get("result_manifest")
+            if manifest:
+                archive_name = f"methods/{name}/results.json"
+                _add_source(files, archive_name, Path(manifest["path"]))
+                manifest["path"] = archive_name
     return portable, files
 
 

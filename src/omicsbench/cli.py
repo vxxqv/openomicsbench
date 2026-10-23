@@ -22,6 +22,7 @@ from .evaluate import evaluate_matrix, evaluate_suite
 from .evidence import create_evidence_crate, verify_evidence_crate
 from .policy import evaluate_policy
 from .trends import parse_run, trend_reports
+from .results import create_result_manifest
 
 def main():
     p = argparse.ArgumentParser(description="Find, verify and process compact omics benchmarks.",epilog="Example: omicsbench info rnaseq-002")
@@ -75,6 +76,10 @@ def main():
     suite_evaluate = suite_sub.add_parser("evaluate", help="Evaluate one result directory across RNA, DNA and protein benchmarks.")
     suite_evaluate.add_argument("results", type=Path, help="Directory containing benchmark-named RNA tables, VCF files and peptide tables.")
     suite_evaluate.add_argument("--detail-limit", type=int, default=20, help="Maximum mismatch examples per benchmark.")
+    suite_index = suite_sub.add_parser("index", help="Write a hash-locked manifest for pipeline result files.")
+    suite_index.add_argument("results", type=Path, help="Directory containing the result files and the new manifest.")
+    suite_index.add_argument("--result", action="append", required=True, help="Benchmark and relative file path as ID=PATH. Repeat for every result.")
+    suite_index.add_argument("--column", action="append", default=[], help="Source column mapping as ID:FIELD=HEADER. Repeat when native headers differ.")
     suite_matrix = suite_sub.add_parser("matrix", help="Compare several analysis methods across the same benchmarks.")
     suite_matrix.add_argument("--method", action="append", required=True, help="Method and result directory as NAME=PATH. Repeat for every method.")
     suite_matrix.add_argument("--detail-limit", type=int, default=20, help="Maximum missing and unexpected gene examples per benchmark.")
@@ -93,7 +98,7 @@ def main():
     suite_trend.add_argument("--run", action="append", required=True, help="Run label and evaluation report as NAME=PATH. Repeat in chronological order.")
     for command in (suite_validate, suite_compare, suite_evaluate, suite_matrix, suite_evaluate_matrix):
         command.add_argument("--id", action="append", default=[], help="Benchmark ID to include. Repeat to select several; omit to run all eligible benchmarks.")
-    for command in (suite_validate, suite_compare, suite_evaluate, suite_matrix, suite_evaluate_matrix, suite_regress, suite_gate, suite_trend):
+    for command in (suite_validate, suite_compare, suite_evaluate, suite_index, suite_matrix, suite_evaluate_matrix, suite_regress, suite_gate, suite_trend):
         command.add_argument("--json", type=Path, help="Write the complete report as JSON.")
         command.add_argument("--markdown", type=Path, help="Write a concise Markdown report.")
         command.add_argument("--junit", type=Path, help="Write a JUnit XML report for CI systems.")
@@ -140,7 +145,9 @@ def main():
             else:
                 out = build_plan(args.profile, args.input, args.output_directory, args.adapter)
         elif args.command == "suite":
-            if args.suite_command == "validate":
+            if args.suite_command == "index":
+                out = create_result_manifest(args.root, args.results, args.result, args.column, args.force)
+            elif args.suite_command == "validate":
                 out = validate_suite(args.root, args.assay, args.id)
             elif args.suite_command == "compare":
                 out = compare_suite(args.root, args.results, args.id, args.detail_limit)
