@@ -2,7 +2,7 @@
 
 OpenOmicsBench is a compact benchmark collection and local sequence toolkit for bioinformatics software testing, method checks and teaching. It contains 12 certified bulk RNA-seq objects, six deterministic DNA, RNA, protein and proteomics fixtures, strict FASTA and FASTQ tools, and a CI-ready evaluation system.
 
-Version 4 evaluates RNA differential-expression results, DNA variant calls and protein-peptide identifications in the same run. It adds a deterministic tryptic-peptide benchmark, portable run fingerprints, versioned quality and resource policies, and multi-run trend reports. The version 3 VCF scoring, multi-method matrices, offline dashboards and RO-Crate evidence remain available.
+Version 4.1 adds hash-locked result manifests for real pipeline layouts. Nested outputs can keep their original names and native RNA or peptide headers while the manifest records their benchmark mapping, interpretation and SHA-256 digest. Version 4's unified RNA, DNA and protein evaluation, policy gates, trend reports, offline dashboards and RO-Crate evidence remain available.
 
 The package runs offline after installation. Sequence files stay on the local computer. The built-in tools cover inspection and lightweight preprocessing; they do not claim to replace aligners, variant callers, taxonomic classifiers or assay-specific statistical workflows.
 
@@ -124,6 +124,22 @@ omicsbench suite evaluate results \
   --evidence reports/evaluation-evidence.zip
 ```
 
+Pipeline outputs do not need to be renamed or moved into one flat directory. Index their existing relative paths and native headers:
+
+```sh
+omicsbench suite index results \
+  --result rnaseq-002=rna/deseq2.csv \
+  --result sequence-005=dna/final.vcf.gz \
+  --result sequence-006=protein/identifications.tsv \
+  --column rnaseq-002:gene_id=Geneid \
+  --column rnaseq-002:log2_fold_change=log2FoldChange \
+  --column sequence-006:protein_id=Protein \
+  --column sequence-006:peptide=Sequence \
+  --column sequence-006:q_value=QValue
+```
+
+This writes `results/results.json`. Evaluation detects it automatically, verifies every recorded hash and applies the declared column mappings. A changed file, unsafe path, duplicate benchmark, unknown field or incompatible file type stops the run before scoring. Existing benchmark-named files continue to work when no manifest is present.
+
 `method.json` is optional. When supplied, it records the exact method version, command, container or source revision, parameters, runtime, peak memory and thread count. Missing selected outputs fail as benchmark cases.
 
 Compare several tools or parameter sets in one matrix:
@@ -151,7 +167,7 @@ omicsbench suite evaluate-matrix \
 
 The leaderboard uses pass counts and keeps assay metrics separate. It does not average unlike measurements into a single score.
 
-Each evaluation records SHA-256 hashes for the submitted results and benchmark manifests, then builds a `run_fingerprint` from those hashes and the validated method receipt. Local directory names do not affect this identity.
+Each evaluation records SHA-256 hashes for the submitted results and benchmark manifests, then builds a `run_fingerprint` from those hashes, the effective input contract and the validated method receipt. Local directory names and manifest formatting do not affect this identity.
 
 Apply a checked-in policy to an evaluation before accepting a run:
 

@@ -6,7 +6,7 @@
       "orcid": "0009-0005-1859-5107"
     }
   ],
-  "description": "Compact, traceable omics benchmarks with unified RNA, DNA and protein evaluation, exact-SNV and peptide scoring, content fingerprints, policy gates, run histories, offline dashboards, verifiable evidence crates and deterministic sequence tools.",
+  "description": "Compact, traceable omics benchmarks with hash-locked result manifests, native column mapping, unified RNA, DNA and protein evaluation, policy gates, run histories, offline dashboards and verifiable evidence crates.",
   "upload_type": "software",
   "access_right": "open",
   "license": "Apache-2.0",
@@ -107,6 +107,9 @@
     "checksum verification",
     "quality policy",
     "run fingerprint",
-    "trend report"
+    "trend report",
+    "result manifest",
+    "column mapping",
+    "pipeline interoperability"
   ]
 }

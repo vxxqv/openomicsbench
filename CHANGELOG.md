@@ -1,5 +1,13 @@
 # Changes
 
+## 4.1.0
+
+Result manifests let an evaluation use the files produced by an existing pipeline without renaming or flattening them. `omicsbench suite index` maps benchmark IDs to relative paths, records each SHA-256 digest and writes a strict `results.json` contract. Evaluation rejects an altered, missing, duplicated, unsafe or incompatible input before scientific scoring begins.
+
+Manifest entries can map native differential-expression headers to `gene_id` and `log2_fold_change`, or native peptide headers to `protein_id`, `peptide` and the optional `q_value`. VCF fields remain governed by the VCF specification and cannot be remapped. Existing benchmark-named files continue to work without a manifest.
+
+The effective column contract is preserved in each case and in the version 2 run fingerprint. File locations and manifest formatting do not affect identity, so the same bytes and interpretation retain the same fingerprint across directories. Evidence crates now include `results.json` and store inputs under stable benchmark-based names.
+
 ## 4.0.0
 
 Version 4 extends unified evaluation to protein-peptide identifications. The new `sequence-006` benchmark contains three project-authored proteins, a deterministic tryptic digest and exact peptide truth. The comparator accepts TSV or compressed TSV, optionally filters an explicit q-value column, and reports peptide precision, recall and F1 alongside protein recall and covered truth residues. Its scope is deliberately limited to unmodified protein-peptide pairs; spectra, modifications, charge states, protein inference and FDR calibration remain outside the fixture.

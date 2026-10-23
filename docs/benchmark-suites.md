@@ -43,6 +43,30 @@ The VCF path accepts VCF 4.x, expands comma-separated ALT alleles and assesses r
 
 Peptide tables may include `q_value`. When present, rows above the benchmark's declared maximum are excluded before scoring. The comparator reports peptide precision, recall and F1, protein recall and the fraction of truth-peptide residues recovered. It assesses exact unmodified protein-peptide pairs from the packaged digest. Spectra, modifications, charge states, protein inference and FDR calibration are outside its scope.
 
+## Index pipeline outputs
+
+Benchmark-named files are convenient for small tests, but production workflows often place outputs in nested directories and use tool-specific headers. A result manifest connects those existing files to benchmark IDs without copying or renaming them.
+
+```sh
+omicsbench suite index results \
+  --result rnaseq-002=rna/deseq2.csv \
+  --result sequence-005=dna/final.vcf.gz \
+  --result sequence-006=protein/identifications.tsv \
+  --column rnaseq-002:gene_id=Geneid \
+  --column rnaseq-002:log2_fold_change=log2FoldChange \
+  --column sequence-006:protein_id=Protein \
+  --column sequence-006:peptide=Sequence \
+  --column sequence-006:q_value=QValue
+```
+
+The command writes `results.json` inside the result directory. Each entry contains one benchmark ID, a normalized relative path, the observed SHA-256 digest and any nondefault column mappings. The contract is published as [result-manifest.schema.json](../schemas/result-manifest.schema.json).
+
+When `results.json` is present, `suite evaluate` and `suite evaluate-matrix` use it instead of the filename convention. They verify the complete manifest before scoring. Absolute paths, parent traversal, duplicate benchmark IDs, unknown fields, missing files, changed hashes, unsupported suffixes and invalid mappings are rejected as input errors.
+
+RNA tables can map `gene_id` and `log2_fold_change`. Peptide tables can map `protein_id`, `peptide` and `q_value`. VCF columns cannot be remapped because their meaning comes from the VCF contract. Omitted mappings retain the standard OpenOmicsBench headers.
+
+The effective mapping is part of the run fingerprint because it changes how bytes are interpreted. Directory names and JSON formatting are excluded. A conventional layout and a manifest layout therefore receive the same fingerprint when their file bytes, benchmark selection, method receipt and effective columns are identical.
+
 An optional `method.json` in the result directory uses this contract:
 
 ```json
@@ -85,7 +109,7 @@ omicsbench suite evaluate-matrix \
   --id sequence-006
 ```
 
-Every unified evaluation records SHA-256 hashes for its benchmark manifests and submitted files. A `run_fingerprint` binds those hashes to the package version and validated method receipt while excluding local paths. Identical content therefore has the same fingerprint in different directories or on different machines.
+Every unified evaluation records SHA-256 hashes for its benchmark manifests and submitted files. A `run_fingerprint` binds those hashes to the package version, effective input contract and validated method receipt while excluding local paths. Identical content therefore has the same fingerprint in different directories or on different machines.
 
 ## Apply an acceptance policy
 
@@ -162,6 +186,6 @@ omicsbench suite evaluate results --id rnaseq-002 --evidence evidence.zip
 omicsbench evidence verify evidence.zip
 ```
 
-The deterministic ZIP contains normalized JSON, CSV and HTML reports, the exact submitted result files, optional method receipts, `checksums.sha256` and an `ro-crate-metadata.json` document using the [RO-Crate 1.3 context](https://www.researchobject.org/ro-crate/specification). Verification checks the complete member inventory, every SHA-256 digest, the evaluation report contract and the required RO-Crate root entities without extracting files.
+The deterministic ZIP contains normalized JSON, CSV and HTML reports, the exact submitted result files, an optional result manifest and method receipt, `checksums.sha256` and an `ro-crate-metadata.json` document using the [RO-Crate 1.3 context](https://www.researchobject.org/ro-crate/specification). Submitted files use stable benchmark-based names inside the crate. Verification checks the complete member inventory, every SHA-256 digest, the evaluation report contract and the required RO-Crate root entities without extracting files.
 
 Exit status 0 means the suite completed and every required case passed. Status 2 means the suite completed with at least one failed case. Status 1 means the request itself was invalid, such as an unknown benchmark ID, an absent results directory or a protected output path.
