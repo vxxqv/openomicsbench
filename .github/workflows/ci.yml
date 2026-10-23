@@ -44,6 +44,8 @@ jobs:
           cp build/mixed-a/sequence-005.vcf build/mixed-b/sequence-005.vcf
           printf '%s\n' '{"schema_version":"1.0","name":"reference","version":"1","runtime_seconds":1.0,"peak_memory_mb":64.0,"threads":1}' > build/mixed-a/method.json
           cp build/mixed-a/method.json build/mixed-b/method.json
+          omicsbench suite index build/mixed-a --result rnaseq-002=rnaseq-002.tsv.gz --result sequence-005=sequence-005.vcf --result sequence-006=sequence-006.peptides.tsv
+          omicsbench suite index build/mixed-b --result rnaseq-002=rnaseq-002.tsv.gz --result sequence-005=sequence-005.vcf --result sequence-006=sequence-006.peptides.tsv
           omicsbench suite evaluate build/mixed-a --id rnaseq-002 --id sequence-005 --id sequence-006 --json build/evaluate.json --html build/evaluate.html --evidence build/evidence.zip
           omicsbench suite evaluate build/mixed-b --id rnaseq-002 --id sequence-005 --id sequence-006 --json build/evaluate-copy.json
           omicsbench suite evaluate-matrix --method first=build/mixed-a --method second=build/mixed-b --id rnaseq-002 --id sequence-005 --id sequence-006 --json build/evaluate-matrix.json --csv build/evaluate-matrix.csv --html build/evaluate-matrix.html
