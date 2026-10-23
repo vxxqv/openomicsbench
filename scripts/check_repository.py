@@ -4,6 +4,7 @@ import re
 import subprocess
 from pathlib import Path
 from omicsbench.models import Dataset
+from omicsbench.results import ResultManifest
 from omicsbench.registry import registry,write_registry
 from omicsbench.validate import validate
 
@@ -35,6 +36,9 @@ for path in tracked:
 schema=Dataset.model_json_schema()
 schema_path=root/'schemas/dataset.schema.json'
 if schema_path.exists() and json.loads(schema_path.read_text())!=schema:failures.append('Generated schema has drifted')
+result_schema=ResultManifest.model_json_schema()
+result_schema_path=root/'schemas/result-manifest.schema.json'
+if not result_schema_path.exists() or json.loads(result_schema_path.read_text())!=result_schema:failures.append('Generated result manifest schema has drifted')
 results=[]
 for model,folder in registry(root).values():
     try:results.append(validate(model,folder))
