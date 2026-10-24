@@ -1,0 +1,12 @@
+chrSynthetic1	500	700	peak-01	420	.	21.0	10.0	8.0	100
+chrSynthetic1	1400	1650	peak-02	440	.	22.0	10.0	8.0	125
+chrSynthetic1	2500	3300	peak-03	460	.	23.0	10.0	8.0	400
+chrSynthetic1	4100	4300	peak-04	480	.	24.0	10.0	8.0	100
+chrSynthetic1	4380	4600	peak-05	500	.	25.0	10.0	8.0	110
+chrSynthetic1	6000	6250	peak-06	520	.	26.0	10.0	8.0	125
+chrSynthetic1	8200	8450	peak-07	540	.	27.0	10.0	8.0	125
+chrSynthetic1	10500	10800	peak-08	560	.	28.0	10.0	8.0	150
+chrSynthetic2	300	550	peak-09	580	.	29.0	10.0	8.0	125
+chrSynthetic2	1800	2050	peak-10	600	.	30.0	10.0	8.0	125
+chrSynthetic2	3900	4300	peak-11	620	.	31.0	10.0	8.0	200
+chrSynthetic2	6900	7200	peak-12	640	.	32.0	10.0	8.0	150

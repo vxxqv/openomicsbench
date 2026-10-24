@@ -1,0 +1,28 @@
+{
+  "profile": "synthetic-peak-recovery-v1",
+  "signal": "nano/coverage.bedgraph",
+  "chrom_sizes": "nano/chrom.sizes",
+  "interval_truth": "expected/truth-peaks.narrowPeak",
+  "expected_summary": {
+    "format": "narrowPeak",
+    "intervals": 12,
+    "contigs": 2,
+    "span_bp": 3670,
+    "union_bp": 3670,
+    "overlapping_intervals": 0,
+    "width_bp": {
+      "minimum": 200,
+      "median": 250.0,
+      "maximum": 800
+    },
+    "sorted": true
+  },
+  "peak_comparison": {
+    "minimum_interval_precision": 0.9,
+    "minimum_interval_recall": 0.9,
+    "minimum_interval_f1": 0.9,
+    "minimum_base_precision": 0.85,
+    "minimum_base_recall": 0.85,
+    "minimum_base_f1": 0.85
+  }
+}

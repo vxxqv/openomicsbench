@@ -4,6 +4,7 @@ from .rnaseq import read_counts, diagnostic, preservation
 from .sequences import read_records, reverse_complement, summarize
 from .sequence_analysis import pair_report
 from .singlecell import summarize_matrix
+from .intervals import read_chrom_sizes, read_intervals, summarize_intervals
 
 
 def _sequence_summary(path, molecule):
@@ -113,6 +114,23 @@ def validate_single_cell(model, folder, profile):
         "truth": profile["label_truth"],
     }
 
+
+def validate_intervals(model, folder, profile):
+    required = ("signal", "chrom_sizes", "interval_truth", "expected_summary", "peak_comparison")
+    if any(key not in profile for key in required):
+        raise ValueError(f"{model.id}: interval validation profile is incomplete")
+    declared = {item.path for item in model.files}
+    for key in ("signal", "chrom_sizes", "interval_truth"):
+        if profile[key] not in declared:
+            raise ValueError(f"{model.id}: {key} path is undeclared")
+    sizes_path = contained(folder, profile["chrom_sizes"])
+    read_chrom_sizes(sizes_path)
+    read_intervals(contained(folder, profile["interval_truth"]), read_chrom_sizes(sizes_path))
+    observed = summarize_intervals(contained(folder, profile["interval_truth"]), sizes_path)
+    if observed != profile["expected_summary"]:
+        raise ValueError(f"{model.id}: interval truth summary differs from the expected profile")
+    return {"id": model.id, "status": "pass", "kind": model.kind, "intervals": model.intervals.model_dump(mode="json"), "summary": observed, "truth": profile["interval_truth"]}
+
 def validate(model, folder):
     errors = []
     declared = {f.path for f in model.files}
@@ -134,6 +152,8 @@ def validate(model, folder):
         return validate_sequence(model, folder, profile)
     if model.single_cell is not None:
         return validate_single_cell(model, folder, profile)
+    if model.intervals is not None:
+        return validate_intervals(model, folder, profile)
     baseline_path = profile["baseline_counts"]
     if baseline_path not in declared:
         raise ValueError("Baseline counts must be declared in the manifest")
