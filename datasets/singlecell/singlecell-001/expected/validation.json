@@ -1,0 +1,31 @@
+{
+  "profile": "single-cell-matrix-v1",
+  "matrix": "nano/matrix.mtx",
+  "barcodes": "nano/barcodes.tsv",
+  "features": "nano/features.tsv",
+  "label_truth": "expected/cell-labels.tsv",
+  "expected_summary": {
+    "cells": 90,
+    "features": 60,
+    "nonzero": 3996,
+    "total_counts": 21330,
+    "counts_per_cell": {
+      "minimum": 223,
+      "median": 237.0,
+      "maximum": 251
+    },
+    "features_per_cell": {
+      "minimum": 42,
+      "median": 44.5,
+      "maximum": 47
+    },
+    "mitochondrial_fraction": 0.04050632911392405,
+    "zero_count_cells": 0
+  },
+  "clustering_comparison": {
+    "minimum_adjusted_rand_index": 0.9,
+    "minimum_normalized_mutual_information": 0.9,
+    "minimum_purity": 0.9,
+    "minimum_coverage": 1.0
+  }
+}

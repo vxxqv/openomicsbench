@@ -51,7 +51,7 @@ def safe_relative(value: str) -> str:
 class File(StrictModel):
     path: str = Field(description="Normalized path inside the dataset directory.")
     tier: Literal["nano", "pocket", "expected", "metadata"] = Field(description="Size or function class used for retrieval and validation.")
-    role: Literal["raw_counts", "samples", "fastq_r1", "fastq_r2", "sequence", "reads", "quantification", "tx2gene", "baseline", "effects", "metrics", "figure", "provenance", "documentation", "license", "reference"] = Field(description="File purpose used by the validator and command line tools.")
+    role: Literal["raw_counts", "samples", "fastq_r1", "fastq_r2", "sequence", "reads", "matrix", "barcodes", "features", "cell_metadata", "quantification", "tx2gene", "baseline", "effects", "metrics", "figure", "provenance", "documentation", "license", "reference"] = Field(description="File purpose used by the validator and command line tools.")
     sample_id: str | None = Field(default=None, description="Sample linked to this file when the file is sample-specific.")
     media_type: str = Field(min_length=1, description="Internet media type for the file content.")
     bytes: int = Field(ge=0, strict=True, description="Expected file size in bytes.")
@@ -87,12 +87,19 @@ class SequenceSpec(StrictModel):
         return self
 
 
+class SingleCellSpec(StrictModel):
+    format: Literal["matrix_market"] = Field(description="Sparse count-matrix container used by the object.")
+    orientation: Literal["features_by_cells"] = Field(description="Matrix orientation, matching the 10x feature-barcode convention.")
+    feature_columns: Literal[2, 3] = Field(description="Number of tab-separated fields in features.tsv.")
+    mitochondrial_prefix: str = Field(min_length=1, max_length=32, description="Feature-name prefix used for the reported mitochondrial fraction.")
+
+
 class Dataset(StrictModel):
-    schema_version: Literal["1.0", "2.0"] = Field(description="Version of the OpenOmicsBench dataset contract.")
-    id: str = Field(pattern=r"^(rnaseq|fixture|sequence)-[0-9]{3}$", description="Stable collection identifier used by the command line interface.")
+    schema_version: Literal["1.0", "2.0", "3.0"] = Field(description="Version of the OpenOmicsBench dataset contract.")
+    id: str = Field(pattern=r"^(rnaseq|fixture|sequence|singlecell)-[0-9]{3}$", description="Stable collection identifier used by the command line interface.")
     title: str = Field(min_length=8, description="Specific title that distinguishes this comparison from other objects.")
     release: str = Field(pattern=r"^[0-9]+\.[0-9]+\.[0-9]+(?:[.-][A-Za-z0-9.]+)?$", description="First project release that carries this manifest state.")
-    assay: Literal["bulk_rna_seq", "sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq"] = Field(description="Assay or sequence family represented by the object.")
+    assay: Literal["bulk_rna_seq", "single_cell_rna_seq", "sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq"] = Field(description="Assay or sequence family represented by the object.")
     kind: Literal["real", "synthetic_fixture"] = Field(description="Whether the object comes from a biological source or a software fixture.")
     status: Literal["candidate", "validated", "original_link"] = Field(description="Current review and distribution state.")
     archetype: str = Field(min_length=1, description="Short description of the experimental design exercised by the object.")
@@ -106,16 +113,23 @@ class Dataset(StrictModel):
     files: list[File] = Field(description="Complete declared inventory for the dataset directory.")
     validation: Validation | None = Field(description="Expected-result profile for a validated object, or null when validation does not apply.")
     sequence: SequenceSpec | None = Field(default=None, description="Sequence format and alphabet contract for version 2 sequence objects.")
+    single_cell: SingleCellSpec | None = Field(default=None, description="Sparse matrix contract for version 3 single-cell objects.")
     limitations: list[str] = Field(min_length=1, description="Known constraints that affect interpretation or reuse.")
 
     @model_validator(mode="after")
     def consistent(self):
-        is_sequence = self.assay != "bulk_rna_seq"
+        is_bulk = self.assay == "bulk_rna_seq"
+        is_single_cell = self.assay == "single_cell_rna_seq"
+        is_sequence = not is_bulk and not is_single_cell
         if is_sequence and (self.schema_version != "2.0" or self.sequence is None):
             raise ValueError("Sequence objects require schema version 2.0 and a sequence contract")
         if not is_sequence and self.sequence is not None:
-            raise ValueError("Count-matrix objects cannot declare a sequence contract")
-        if not is_sequence and len(self.samples) < 2:
+            raise ValueError("Matrix objects cannot declare a sequence contract")
+        if is_single_cell and (self.schema_version != "3.0" or self.single_cell is None):
+            raise ValueError("Single-cell objects require schema version 3.0 and a single-cell contract")
+        if not is_single_cell and self.single_cell is not None:
+            raise ValueError("Only single-cell objects can declare a single-cell contract")
+        if is_bulk and len(self.samples) < 2:
             raise ValueError("Bulk RNA-seq objects require at least two samples")
         if self.kind == "real" and self.taxon_id is None:
             raise ValueError("Biological objects require an NCBI taxonomy identifier")
@@ -137,13 +151,18 @@ class Dataset(StrictModel):
         if self.status == "validated":
             if not self.validation or not self.files or self.reference.compatibility == "unresolved":
                 raise ValueError("Validated objects need files, validation and resolved references")
-            if not is_sequence and not self.validation.metrics:
+            if is_bulk and not self.validation.metrics:
                 raise ValueError("Validated count-matrix objects require preservation metrics")
         if is_sequence:
             data_roles = [record for record in self.files if record.role in {"sequence", "reads", "fastq_r1", "fastq_r2"}]
             expected = 2 if self.sequence and self.sequence.paired else 1
             if len(data_roles) != expected:
                 raise ValueError(f"Sequence object requires exactly {expected} declared sequence data file(s)")
+        if is_single_cell:
+            roles = [record.role for record in self.files]
+            for role in ("matrix", "barcodes", "features", "cell_metadata"):
+                if roles.count(role) != 1:
+                    raise ValueError(f"Single-cell object requires exactly one declared {role} file")
         if self.validation and self.validation.profile not in paths:
             raise ValueError("Validation profile must be a declared file")
         return self

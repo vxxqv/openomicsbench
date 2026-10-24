@@ -3,6 +3,7 @@ from .hashing import digest, contained
 from .rnaseq import read_counts, diagnostic, preservation
 from .sequences import read_records, reverse_complement, summarize
 from .sequence_analysis import pair_report
+from .singlecell import summarize_matrix
 
 
 def _sequence_summary(path, molecule):
@@ -85,6 +86,33 @@ def validate_sequence(model, folder, profile):
     truth = _variant_truth(model, folder, profile)
     return {"id": model.id, "status": "pass", "kind": model.kind, "sequence": model.sequence.model_dump(mode="json"), "files": observed, "pairing": pairing, "variant_truth": truth}
 
+
+def validate_single_cell(model, folder, profile):
+    required = ("matrix", "barcodes", "features", "label_truth", "expected_summary")
+    if any(key not in profile for key in required):
+        raise ValueError(f"{model.id}: single-cell validation profile is incomplete")
+    declared = {item.path for item in model.files}
+    for key in ("matrix", "barcodes", "features", "label_truth"):
+        if profile[key] not in declared:
+            raise ValueError(f"{model.id}: {key} path is undeclared")
+    observed = summarize_matrix(
+        contained(folder, profile["matrix"]),
+        contained(folder, profile["barcodes"]),
+        contained(folder, profile["features"]),
+        model.single_cell.mitochondrial_prefix,
+        model.single_cell.feature_columns,
+    )
+    if observed != profile["expected_summary"]:
+        raise ValueError(f"{model.id}: single-cell matrix summary differs from the expected profile")
+    return {
+        "id": model.id,
+        "status": "pass",
+        "kind": model.kind,
+        "single_cell": model.single_cell.model_dump(mode="json"),
+        "summary": observed,
+        "truth": profile["label_truth"],
+    }
+
 def validate(model, folder):
     errors = []
     declared = {f.path for f in model.files}
@@ -104,6 +132,8 @@ def validate(model, folder):
     profile = json.loads(contained(folder, model.validation.profile).read_text(encoding="utf-8"))
     if model.sequence is not None:
         return validate_sequence(model, folder, profile)
+    if model.single_cell is not None:
+        return validate_single_cell(model, folder, profile)
     baseline_path = profile["baseline_counts"]
     if baseline_path not in declared:
         raise ValueError("Baseline counts must be declared in the manifest")
