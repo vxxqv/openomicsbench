@@ -24,8 +24,9 @@ from .policy import evaluate_policy
 from .trends import parse_run, trend_reports
 from .results import create_result_manifest
 from .singlecell import compare_labels, summarize_matrix
+from .intervals import compare_intervals, summarize_intervals
 
-ASSAYS = ["bulk_rna_seq", "single_cell_rna_seq", "sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq"]
+ASSAYS = ["bulk_rna_seq", "single_cell_rna_seq", "chromatin_accessibility", "sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq"]
 
 def main():
     p = argparse.ArgumentParser(description="Find, verify and process compact omics benchmarks.",epilog="Example: omicsbench info rnaseq-002")
@@ -71,6 +72,14 @@ def main():
     cell_compare.add_argument("id", help="Single-cell benchmark ID.")
     cell_compare.add_argument("results", type=Path, help="TSV, CSV, or gzip-compressed table with cell_id and label columns.")
     cell_compare.add_argument("--detail-limit", type=int, default=20)
+    interval = sub.add_parser("interval", help="Inspect BED-family peaks or score them against bundled truth.")
+    interval_sub = interval.add_subparsers(dest="interval_command", required=True)
+    interval_qc = interval_sub.add_parser("qc", help="Validate and summarize a BED or narrowPeak file.")
+    interval_qc.add_argument("peaks", type=Path)
+    interval_qc.add_argument("--chrom-sizes", type=Path)
+    interval_compare = interval_sub.add_parser("compare", help="Score peaks using reciprocal interval and base-pair overlap.")
+    interval_compare.add_argument("id", help="Benchmark ID with declared genomic interval truth.")
+    interval_compare.add_argument("results", type=Path, help="BED, BED.GZ, narrowPeak or narrowPeak.GZ call set.")
     assay = sub.add_parser("assay", help="Inspect sequencing assay profiles and build local command plans.")
     assay_sub = assay.add_subparsers(dest="assay_command", required=True)
     assay_sub.add_parser("list", help="List supported assay profiles.")
@@ -151,6 +160,12 @@ def main():
             else:
                 model, folder = lookup(args.root, args.id)
                 out = compare_labels(model, folder, args.results, args.detail_limit)
+        elif args.command == "interval":
+            if args.interval_command == "qc":
+                out = summarize_intervals(args.peaks, args.chrom_sizes)
+            else:
+                model, folder = lookup(args.root, args.id)
+                out = compare_intervals(model, folder, args.results)
         elif args.command == "evidence":
             out = verify_evidence_crate(args.archive)
         elif args.command == "bundle":
@@ -222,6 +237,8 @@ def main():
         if args.command == "peptide" and out["status"] == "fail":
             sys.exit(2)
         if args.command == "cell" and args.cell_command == "compare" and out["status"] == "fail":
+            sys.exit(2)
+        if args.command == "interval" and args.interval_command == "compare" and out["status"] == "fail":
             sys.exit(2)
         if args.command == "suite" and out["summary"]["status"] == "fail":
             sys.exit(2)

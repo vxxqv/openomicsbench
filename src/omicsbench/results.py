@@ -22,18 +22,21 @@ RESULT_SUFFIXES = {
     "exact_snv": (".vcf", ".vcf.gz"),
     "peptide_identification": (".tsv", ".tsv.gz", ".peptides.tsv", ".peptides.tsv.gz"),
     "single_cell_clustering": (".tsv", ".tsv.gz", ".csv", ".csv.gz"),
+    "genomic_intervals": (".bed", ".bed.gz", ".narrowpeak", ".narrowpeak.gz"),
 }
 DEFAULT_COLUMNS = {
     "differential_expression": {"gene_id": "gene_id", "log2_fold_change": "log2_fold_change"},
     "exact_snv": {},
     "peptide_identification": {"protein_id": "protein_id", "peptide": "peptide", "q_value": "q_value"},
     "single_cell_clustering": {"cell_id": "cell_id", "label": "label"},
+    "genomic_intervals": {},
 }
 REQUIRED_COLUMNS = {
     "differential_expression": {"gene_id", "log2_fold_change"},
     "exact_snv": set(),
     "peptide_identification": {"protein_id", "peptide"},
     "single_cell_clustering": {"cell_id", "label"},
+    "genomic_intervals": set(),
 }
 
 
@@ -46,6 +49,8 @@ def comparator_for(model) -> str | None:
         return "peptide_identification"
     if model.assay == "single_cell_rna_seq" and model.validation is not None and model.validation.baseline_version == "single-cell-clustering-v1":
         return "single_cell_clustering"
+    if model.assay == "chromatin_accessibility" and model.validation is not None and model.validation.baseline_version == "genomic-interval-comparison-v1":
+        return "genomic_intervals"
     return None
 
 
@@ -62,8 +67,8 @@ def effective_columns(comparator: str, overrides: dict[str, str] | None = None) 
     unknown = sorted(set(overrides) - allowed)
     if unknown:
         raise ValueError(f"{comparator}: unsupported column mappings: {', '.join(unknown)}")
-    if comparator == "exact_snv" and overrides:
-        raise ValueError("exact_snv: VCF columns cannot be remapped")
+    if comparator in {"exact_snv", "genomic_intervals"} and overrides:
+        raise ValueError(f"{comparator}: format columns cannot be remapped")
     columns = {**DEFAULT_COLUMNS[comparator], **overrides}
     required = REQUIRED_COLUMNS[comparator]
     if not required.issubset(columns):

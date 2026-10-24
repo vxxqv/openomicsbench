@@ -8,7 +8,7 @@ from pathlib import Path
 from .suite import _summary
 
 
-TRACKED_METRICS = ("spearman_logfc", "top_k_jaccard", "sign_concordance", "precision", "recall", "f1", "protein_recall", "residue_coverage", "adjusted_rand_index", "normalized_mutual_information", "purity", "coverage")
+TRACKED_METRICS = ("spearman_logfc", "top_k_jaccard", "sign_concordance", "precision", "recall", "f1", "protein_recall", "residue_coverage", "adjusted_rand_index", "normalized_mutual_information", "purity", "coverage", "interval_precision", "interval_recall", "interval_f1", "base_precision", "base_recall", "base_f1")
 
 
 def _reject_constant(value: str):

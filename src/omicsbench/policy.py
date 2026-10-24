@@ -18,6 +18,8 @@ class MetricFloor(StrictModel):
         "spearman_logfc", "top_k_jaccard", "sign_concordance", "coverage",
         "precision", "recall", "f1", "protein_recall", "residue_coverage",
         "adjusted_rand_index", "normalized_mutual_information", "purity",
+        "interval_precision", "interval_recall", "interval_f1",
+        "base_precision", "base_recall", "base_f1",
     ]
     minimum: float = Field(ge=0, le=1)
     assay: str | None = Field(default=None, min_length=1)

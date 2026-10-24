@@ -43,20 +43,26 @@ class EvaluateTests(unittest.TestCase):
             directory / "singlecell-001.cells.tsv",
         )
 
+    def add_interval_truth(self, directory: Path):
+        source = self.collection / "datasets/intervals/interval-001/expected/truth-peaks.narrowPeak"
+        shutil.copyfile(source, directory / "interval-001.narrowPeak")
+
     def test_mixed_assay_evaluation(self):
         self.add_truth(self.a)
         self.add_single_cell_truth(self.a)
+        self.add_interval_truth(self.a)
         shutil.copyfile(
             self.collection / "datasets/sequences/sequence-006/expected/peptides.tsv",
             self.a / "sequence-006.peptides.tsv",
         )
-        report = evaluate_suite(self.collection, self.a, ["rnaseq-002", "singlecell-001", "sequence-005", "sequence-006"])
+        report = evaluate_suite(self.collection, self.a, ["rnaseq-002", "singlecell-001", "interval-001", "sequence-005", "sequence-006"])
         self.assertEqual(report["summary"]["status"], "pass")
         self.assertEqual(report["summary"]["assays"]["bulk_rna_seq"]["passed"], 1)
         self.assertEqual(report["summary"]["assays"]["whole_genome_dna_seq"]["passed"], 1)
         self.assertEqual(report["summary"]["assays"]["sequence_protein"]["passed"], 1)
         self.assertEqual(report["summary"]["assays"]["single_cell_rna_seq"]["passed"], 1)
-        self.assertEqual([item["comparator"] for item in report["results"]], ["differential_expression", "single_cell_clustering", "exact_snv", "peptide_identification"])
+        self.assertEqual(report["summary"]["assays"]["chromatin_accessibility"]["passed"], 1)
+        self.assertEqual([item["comparator"] for item in report["results"]], ["differential_expression", "single_cell_clustering", "genomic_intervals", "exact_snv", "peptide_identification"])
 
     def test_missing_results_fail_closed(self):
         report = evaluate_suite(self.collection, self.a, ["rnaseq-002", "sequence-005"])
