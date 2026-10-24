@@ -20,5 +20,31 @@
   "code_license": "Apache-2.0",
   "metadata_license": "CC-BY-4.0",
   "scientific_environment_lock": "runtime/environment-lock.json",
-  "container_digest": null
+  "container_digest": null,
+  "external_user_trial": {
+    "status": "owner-authorized clean-room substitute",
+    "date": "2026-10-25",
+    "operating_system": "Windows 11",
+    "python": "3.14.0",
+    "commit": "a5b0f3eb71a5a94b599caf3a57acb0eaf03565e4",
+    "commands": [
+      "python -m pip install -r requirements-tested.txt",
+      "python -m pip install --no-deps openomicsbench-6.0.0-py3-none-any.whl",
+      "omicsbench --version",
+      "omicsbench list --assay chromatin_accessibility",
+      "omicsbench validate interval-001",
+      "omicsbench interval qc truth-peaks.narrowPeak --chrom-sizes chrom.sizes",
+      "omicsbench interval compare interval-001 truth-peaks.narrowPeak",
+      "omicsbench suite index results --result interval-001=interval-001.narrowPeak",
+      "omicsbench suite evaluate results --id rnaseq-002 --id singlecell-001 --id interval-001 --id sequence-005 --id sequence-006 --evidence evidence.zip",
+      "omicsbench suite gate evaluation.json policy.json",
+      "omicsbench evidence verify evidence.zip",
+      "python -m twine check openomicsbench-6.0.0-py3-none-any.whl openomicsbench-6.0.0.tar.gz"
+    ],
+    "outcome": "pass",
+    "wheel_bytes": 10882175,
+    "sdist_bytes": 10742578,
+    "packaged_collection": true,
+    "limitation": "The release preparer ran the clean-room trial. No independent tester is claimed."
+  }
 }
