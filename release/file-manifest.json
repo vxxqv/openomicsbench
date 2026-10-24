@@ -1,9 +1,9 @@
 {
-  "version": "4.1.0",
+  "version": "5.0.0",
   "created": "2026-10-24",
-  "scope": "Files in the reviewed version 4.1 release candidate; generated caches and staged source downloads are excluded.",
+  "scope": "Files in the reviewed version 5 release candidate; generated caches and staged source downloads are excluded.",
   "self_excluded": "release/file-manifest.json",
-  "file_count": 359,
+  "file_count": 369,
   "files": [
     {
       "path": ".gitattributes",
@@ -22,13 +22,13 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "bytes": 4826,
-      "sha256": "5c4d815e4abad36bc242f27b0a85b762a666cf7f4dd6d92442030bb37429adfc"
+      "bytes": 5414,
+      "sha256": "567c15f875914caf1ebe4ad1757a0257d8916e18d2071f7732a9b794155e5af4"
     },
     {
       "path": ".github/workflows/pypi.yml",
-      "bytes": 6262,
-      "sha256": "c35ecc37469d3bf4fecb9a1c7dd96a0c47c1563853c67ef557c96976ae7e9803"
+      "bytes": 6840,
+      "sha256": "9a6486beb3b99ccf56855ee8ae8c6a8e9dd34bd3a9b90ae7f9e801f5634e25dd"
     },
     {
       "path": ".gitignore",
@@ -37,18 +37,18 @@
     },
     {
       "path": ".zenodo.json",
-      "bytes": 2761,
-      "sha256": "ba96e88bf61f323fecd2225e40c425475f37b90b6bab84fa9b99e13412fbb94d"
+      "bytes": 2955,
+      "sha256": "1ab4c84d1422193611786293129ed8932038b6f00a74bceec71bdb55ae22093c"
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 12115,
-      "sha256": "9a17616eca311ecf09aa22e677c23449525a1b0ecd03b3923a7795df7d8c60e9"
+      "bytes": 13404,
+      "sha256": "6ced25e13aaa4ac207f8a10ae6addb5dc6102ee417f712cf11211b9806ff178c"
     },
     {
       "path": "CITATION.cff",
       "bytes": 511,
-      "sha256": "16555769aa82349c4230d1bdf56312d4ca1e4410cd806e54d6dc051e57e518e4"
+      "sha256": "76938883685b9842aa02e31b1d6a5f4e6171b4603f5760cfdfb33c72d9f61615"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -77,13 +77,13 @@
     },
     {
       "path": "README.md",
-      "bytes": 16367,
-      "sha256": "f44e0c4530bbac315908dc5d187460ab83b5baa202691ec18d337937b76c1dd3"
+      "bytes": 17878,
+      "sha256": "bf9efaddcafd26861483d521ab0c83139eaa78f85ff3fbdbeb86d725e49f6402"
     },
     {
       "path": "catalog/collection.json",
-      "bytes": 12652,
-      "sha256": "f89c3fc1032224847347cb85bb7bc25755b7f3f9ff8ac5591ce19e1816ed2ed0"
+      "bytes": 13024,
+      "sha256": "bc8175fe64745d6f6aa94cd888297982d8d6590a2edf23cdd066a8ecab385a62"
     },
     {
       "path": "catalog/collection.tsv",
@@ -94,6 +94,11 @@
       "path": "catalog/sequences.tsv",
       "bytes": 758,
       "sha256": "a0f6d57cc800837c780e0bc64035e6fa48a9e1d50bc31e9b1da26683f44da125"
+    },
+    {
+      "path": "catalog/single-cell.tsv",
+      "bytes": 197,
+      "sha256": "4051669fd58577e00e8e167766f2ebd485d5653870b5ebb22ef8ac09ba9e8af0"
     },
     {
       "path": "curation/atlas-screen.json",
@@ -1146,6 +1151,36 @@
       "sha256": "b9a02f2e1a62751b96b3287214f3b7120a7ac4337cbb0b7797742316d56e4fdc"
     },
     {
+      "path": "datasets/singlecell/singlecell-001/expected/cell-labels.tsv",
+      "bytes": 2270,
+      "sha256": "fd80fb98911d867322818f9fb0998f9c55e73d77b3c497dbe3b77fc777dc5ef9"
+    },
+    {
+      "path": "datasets/singlecell/singlecell-001/expected/validation.json",
+      "bytes": 752,
+      "sha256": "297fb730a2908bafce8656468adbd6c6844f0d06cd404c5d7108f950c2558279"
+    },
+    {
+      "path": "datasets/singlecell/singlecell-001/manifest.json",
+      "bytes": 3557,
+      "sha256": "e959f3f7f88ea681fb146fd0f3739041399f1becb37739a5ef67de0b071e65e4"
+    },
+    {
+      "path": "datasets/singlecell/singlecell-001/nano/barcodes.tsv",
+      "bytes": 810,
+      "sha256": "b60d4ee167f0e4c30c8ddc655ff910f5dd834dcc6b89d0a2bd316d1ac0f3975f"
+    },
+    {
+      "path": "datasets/singlecell/singlecell-001/nano/features.tsv",
+      "bytes": 1971,
+      "sha256": "44ead984a0de867d2191792ea1036413fb8fc39ad21e71bcd44723582e94e49b"
+    },
+    {
+      "path": "datasets/singlecell/singlecell-001/nano/matrix.mtx",
+      "bytes": 31944,
+      "sha256": "62fbbb75cf947ee0045a58fee0d44ad8dec5b37b5c73acb47ad69b22415867fe"
+    },
+    {
       "path": "docs/OpenOmicsBench_V1_Release_Review.pdf",
       "bytes": 13271,
       "sha256": "622a2f8b46cf7f3d0f239267afc777ebf5c91627060f16f2b72f3598ba845547"
@@ -1157,8 +1192,8 @@
     },
     {
       "path": "docs/benchmark-suites.md",
-      "bytes": 10947,
-      "sha256": "b9f8c35a97f77f32fcff37729207186ce8f42aa1a73b9eb209c7dfba2f7b5ef9"
+      "bytes": 11705,
+      "sha256": "e1255f5dec9de938e834f5094a4b4f52dbae9960bdd346024cab08fd7651f92d"
     },
     {
       "path": "docs/implementation-status.md",
@@ -1357,8 +1392,8 @@
     },
     {
       "path": "pyproject.toml",
-      "bytes": 2050,
-      "sha256": "0f69b2a0554ed33ec737993eb4431dd43dba65ac0f235a17c4ca7668922a0a38"
+      "bytes": 2164,
+      "sha256": "adaf69d66e8a413361424954391f741295f0f2b141054b5a5793ccb252c1b612"
     },
     {
       "path": "release/acceptance-ledger.json",
@@ -1367,8 +1402,8 @@
     },
     {
       "path": "release/certification.json",
-      "bytes": 373,
-      "sha256": "26fcf98cb8a15efb3d286acdd82907fbdf1725b74c58d3a5984529fdb8621b64"
+      "bytes": 409,
+      "sha256": "c015ae458b367cc5d4b5080c8e2e0703ccd2b561166321d4419c4bdaef2e55fa"
     },
     {
       "path": "release/collection-audit.json",
@@ -1377,8 +1412,8 @@
     },
     {
       "path": "release/metadata-input.json",
-      "bytes": 2371,
-      "sha256": "142752ae70abe7d20b86d4e649c2c724311b3d4065ba1f4ff7b4d571ee6503a0"
+      "bytes": 2278,
+      "sha256": "6219fd08e78dc51d7cfa421eba192a0f46b7a8475f47c7603ee04e0ab6ccd5fa"
     },
     {
       "path": "requirements-tested.txt",
@@ -1397,8 +1432,8 @@
     },
     {
       "path": "schemas/dataset.schema.json",
-      "bytes": 17748,
-      "sha256": "7b6b3dd6d21444f92b0d6575a380a3b80579f82a56296650f4bad413cf47a313"
+      "bytes": 19390,
+      "sha256": "95397b36ba1aa4727ce1f6ab3fd3f751cbb7e5e9315b043242ebe48312602bdb"
     },
     {
       "path": "schemas/result-manifest.schema.json",
@@ -1412,8 +1447,8 @@
     },
     {
       "path": "scripts/build_catalog.py",
-      "bytes": 11731,
-      "sha256": "3a0fe51a365f42383f554d03b0299c22e71d2d3dc497b96879756f8a0d9adaee"
+      "bytes": 13227,
+      "sha256": "ba1daf9249f4557d4dee23eecf8cfa1a8a9760422f902f37de639b485791acb5"
     },
     {
       "path": "scripts/build_reference_effects.py",
@@ -1422,8 +1457,8 @@
     },
     {
       "path": "scripts/certify_release.py",
-      "bytes": 19071,
-      "sha256": "372c9aafd216dff35d81307a774292bbb7a83d07ce42a89f901ddf0da9a178ab"
+      "bytes": 19436,
+      "sha256": "821597d839c8cd33351da3f0f143e24b8af492be96b371e17ff79dad557ff594"
     },
     {
       "path": "scripts/check_repository.py",
@@ -1432,8 +1467,8 @@
     },
     {
       "path": "scripts/package_snapshot.py",
-      "bytes": 1802,
-      "sha256": "9c87278d1f43fc4029b2f893acbc18727276f9fd5ce4b1f1bde60a2b974a29df"
+      "bytes": 1800,
+      "sha256": "e361313d06eeaac45c89495406dfc93d84817f74681e94e389d6c9c98b480a7e"
     },
     {
       "path": "setup.py",
@@ -1443,7 +1478,7 @@
     {
       "path": "src/omicsbench/__init__.py",
       "bytes": 98,
-      "sha256": "b0d515f1425fbfd74c3f77ea50622c34644673a2aa467ccdd81d692f97e3a9c7"
+      "sha256": "38ebc3dc1c48b80703ab2d03b4ab0ae83b71b13444792739cdd5831562080281"
     },
     {
       "path": "src/omicsbench/__main__.py",
@@ -1467,8 +1502,8 @@
     },
     {
       "path": "src/omicsbench/cli.py",
-      "bytes": 16584,
-      "sha256": "40678df8498cb6d97f203d01707ca368a9e2a11902980437559bcb020473d267"
+      "bytes": 17924,
+      "sha256": "da4f54423a2f49683a7d5de64b82a73b3fd5a2e0c053baf35e2aca3462f2485e"
     },
     {
       "path": "src/omicsbench/compare.py",
@@ -1482,8 +1517,8 @@
     },
     {
       "path": "src/omicsbench/evaluate.py",
-      "bytes": 11841,
-      "sha256": "994c33cab6f375f6274b8a2bd25b5bef5aea8206b8d7433ba0a4bcd82d1f053c"
+      "bytes": 12164,
+      "sha256": "840f07c71779650eb51935ccc76b838d64aa94fb37a77e1e7a5f3babddc04032"
     },
     {
       "path": "src/omicsbench/evidence.py",
@@ -1507,8 +1542,8 @@
     },
     {
       "path": "src/omicsbench/models.py",
-      "bytes": 12170,
-      "sha256": "adb62db8366727bd155dbf2be15aa56a0da49ce43cfd3477970c6927755a8cbc"
+      "bytes": 13683,
+      "sha256": "015531917ee14ddf132d71f79cd52c46344e51d225460a67ca8530bacd9d3ae1"
     },
     {
       "path": "src/omicsbench/peptides.py",
@@ -1517,8 +1552,8 @@
     },
     {
       "path": "src/omicsbench/policy.py",
-      "bytes": 8093,
-      "sha256": "743aee152c3b182a48a94a3424ebbcd0819af7cf5ae1d7c8ff680fab8f3a0b2b"
+      "bytes": 8211,
+      "sha256": "9808abbc16e704c97f73999e6e20dd29d0be87ca9f81693600ee9890830f76dd"
     },
     {
       "path": "src/omicsbench/proteins.py",
@@ -1532,13 +1567,13 @@
     },
     {
       "path": "src/omicsbench/regression.py",
-      "bytes": 4934,
-      "sha256": "99d72e9552a43b9668edcbb372c9ac9ce9831fd90bc46d8df4e5e8e339e5e1fc"
+      "bytes": 5037,
+      "sha256": "7306a1b11a7bbf26c0f44ee42980b0be657f1b5d42f1decd9671e19905d077b1"
     },
     {
       "path": "src/omicsbench/results.py",
-      "bytes": 10566,
-      "sha256": "d71753400d8c95210f21e660c1a695f2c62e708d435968013f3c1430eda513cd"
+      "bytes": 10947,
+      "sha256": "a43f6b4ac820331559195245917004ce6d1cfd2438bd087934020dd6f02c1e97"
     },
     {
       "path": "src/omicsbench/rnaseq.py",
@@ -1566,6 +1601,11 @@
       "sha256": "e12d83927a0c9071f03bb7cee5d1b14ea1621926b2082007e9ee7864edd12374"
     },
     {
+      "path": "src/omicsbench/singlecell.py",
+      "bytes": 10865,
+      "sha256": "0c0a8bbd91b118cc28d186655afd7429c2b572922bcbb3ad4e20c7126b0c7a3b"
+    },
+    {
       "path": "src/omicsbench/suite.py",
       "bytes": 22337,
       "sha256": "53a2d0f065f8852b96611392eb2a23813c614deaa559f759860f14cfad020ea6"
@@ -1577,8 +1617,8 @@
     },
     {
       "path": "src/omicsbench/validate.py",
-      "bytes": 7302,
-      "sha256": "8b1c79876182713742483be531a32be443c7e5f17bfac66a26f2be562a9d6847"
+      "bytes": 8599,
+      "sha256": "f18f9bc171fd73588a21902a8e27ca3a67e585fad197d2f5650f3750a8ecbfd3"
     },
     {
       "path": "src/omicsbench/variants.py",
@@ -1602,8 +1642,8 @@
     },
     {
       "path": "tests/test_evaluate.py",
-      "bytes": 5853,
-      "sha256": "3eef51e8faca43dbb50362b074166cf35a6235fc96e434413e59d7b0feec3932"
+      "bytes": 6265,
+      "sha256": "d348b41fb437468fb545ccfa4528fa557a6feacd7bb48e1c872a41050409cb12"
     },
     {
       "path": "tests/test_evidence.py",
@@ -1622,8 +1662,8 @@
     },
     {
       "path": "tests/test_policy.py",
-      "bytes": 4319,
-      "sha256": "9ffc56e38288feb51d4496092e34a7bffb0123c61aef7b586e805ae9cfc8e4d7"
+      "bytes": 5393,
+      "sha256": "d9bd5aa637aa9b83c13ebfbc84d56baa57eec31b17be0f4ce9f4f5d6d2d356a6"
     },
     {
       "path": "tests/test_proteins.py",
@@ -1637,8 +1677,8 @@
     },
     {
       "path": "tests/test_result_manifests.py",
-      "bytes": 9541,
-      "sha256": "39ff2dc412fff69a6ccf23adcf7241f8145a3a12a94b581da94c15625cd21c52"
+      "bytes": 10408,
+      "sha256": "13e740b1890a8b4ac4e36e1d49c5eb02252fd09309d361f0d1d01748e953a5b7"
     },
     {
       "path": "tests/test_sequence_fixtures.py",
@@ -1649,6 +1689,11 @@
       "path": "tests/test_sequences.py",
       "bytes": 16016,
       "sha256": "fb88f12ce2f5efcf08a95c277986f60587b9caaeaf9587d06b9d18605241c898"
+    },
+    {
+      "path": "tests/test_singlecell.py",
+      "bytes": 4821,
+      "sha256": "17143c4262cd504cc3f95114275a1471ba7c56f0799fd1ec2043ced773186147"
     },
     {
       "path": "tests/test_suite.py",
@@ -1699,6 +1744,11 @@
       "path": "workflows/build_sequence_fixtures.py",
       "bytes": 19003,
       "sha256": "0e514fbfa3f760e3bc489d91e483b43af9236a48edd39976404d6bd456bbad2f"
+    },
+    {
+      "path": "workflows/build_singlecell_fixture.py",
+      "bytes": 6485,
+      "sha256": "cff4bdc432928334dfc670f283811c64640530d335c34a7c95e8dcda39c5e5a3"
     },
     {
       "path": "workflows/deseq2_baseline.R",
