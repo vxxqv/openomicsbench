@@ -29,13 +29,13 @@ When no IDs are supplied, all comparable bulk RNA-seq objects are required. A mi
 
 Each comparison reports shared and missing genes, effect-rank correlation, top-gene overlap, sign agreement and the thresholds declared by that benchmark. An unexpected gene universe or a missed threshold fails the case.
 
-## Evaluate bulk RNA, single-cell, DNA and protein results together
+## Evaluate bulk RNA, single-cell, chromatin, DNA and protein results together
 
 ```sh
 omicsbench suite evaluate RESULTS_DIRECTORY
 ```
 
-The unified evaluator chooses a comparator from the benchmark contract. Biological bulk RNA-seq objects accept the same CSV or TSV effects as `suite compare`. The single-cell object accepts `<id>.cells.tsv`, `<id>.cells.csv` or a gzip-compressed equivalent. The synthetic whole-genome DNA object accepts `<id>.vcf` or `<id>.vcf.gz` and reports exact-allele precision, recall, F1 and TP, FP and FN counts. The synthetic protein-identification object accepts `<id>.peptides.tsv` or `<id>.peptides.tsv.gz` with `protein_id` and `peptide` columns.
+The unified evaluator chooses a comparator from the benchmark contract. Biological bulk RNA-seq objects accept the same CSV or TSV effects as `suite compare`. The single-cell object accepts `<id>.cells.tsv`, `<id>.cells.csv` or a gzip-compressed equivalent. The chromatin object accepts `<id>.peaks.bed`, `<id>.narrowPeak` or a gzip-compressed equivalent. The synthetic whole-genome DNA object accepts `<id>.vcf` or `<id>.vcf.gz` and reports exact-allele precision, recall, F1 and TP, FP and FN counts. The synthetic protein-identification object accepts `<id>.peptides.tsv` or `<id>.peptides.tsv.gz` with `protein_id` and `peptide` columns.
 
 A selected output is required. The suite fails a missing file, more than one accepted file for the same benchmark, malformed input, reference disagreement or a missed scientific threshold. Without `--id`, all objects with a result comparator are required.
 
@@ -45,6 +45,8 @@ Peptide tables may include `q_value`. When present, rows above the benchmark's d
 
 Single-cell tables use `cell_id` and `label` by default. Cluster names do not need to match the truth labels. The comparator reports adjusted Rand index, normalized mutual information, purity and cell coverage. It fails on unexpected cells or missed thresholds. These measurements describe recovery of a synthetic partition, not biological cell-type annotation.
 
+Chromatin peak files use zero-based, half-open coordinates and are checked against the fixture chromosome sizes. The comparator reports interval and unioned base-pair precision, recall and F1 under the benchmark's reciprocal-overlap rule. These measurements describe coordinate recovery against synthetic truth, not biological peak validity.
+
 ## Index pipeline outputs
 
 Benchmark-named files are convenient for small tests, but production workflows often place outputs in nested directories and use tool-specific headers. A result manifest connects those existing files to benchmark IDs without copying or renaming them.
@@ -53,6 +55,7 @@ Benchmark-named files are convenient for small tests, but production workflows o
 omicsbench suite index results \
   --result rnaseq-002=rna/deseq2.csv \
   --result singlecell-001=single-cell/clusters.csv \
+  --result interval-001=chromatin/peaks.narrowPeak \
   --result sequence-005=dna/final.vcf.gz \
   --result sequence-006=protein/identifications.tsv \
   --column rnaseq-002:gene_id=Geneid \
@@ -68,7 +71,7 @@ The command writes `results.json` inside the result directory. Each entry contai
 
 When `results.json` is present, `suite evaluate` and `suite evaluate-matrix` use it instead of the filename convention. They verify the complete manifest before scoring. Absolute paths, parent traversal, duplicate benchmark IDs, unknown fields, missing files, changed hashes, unsupported suffixes and invalid mappings are rejected as input errors.
 
-RNA tables can map `gene_id` and `log2_fold_change`. Single-cell tables can map `cell_id` and `label`. Peptide tables can map `protein_id`, `peptide` and `q_value`. VCF columns cannot be remapped because their meaning comes from the VCF contract. Omitted mappings retain the standard OpenOmicsBench headers.
+RNA tables can map `gene_id` and `log2_fold_change`. Single-cell tables can map `cell_id` and `label`. Peptide tables can map `protein_id`, `peptide` and `q_value`. VCF and BED-family fields cannot be remapped because their meaning comes from their format contracts. Omitted mappings retain the standard OpenOmicsBench headers.
 
 The effective mapping is part of the run fingerprint because it changes how bytes are interpreted. Directory names and JSON formatting are excluded. A conventional layout and a manifest layout therefore receive the same fingerprint when their file bytes, benchmark selection, method receipt and effective columns are identical.
 
@@ -103,7 +106,7 @@ omicsbench suite matrix \
 
 Supply at least two unique method names. Each directory follows the same filename rules as `suite compare`, and every method is checked against the same benchmark selection. The matrix contains one case per method and benchmark, per-method mean metrics and a deterministic leaderboard. The leaderboard favours passed cases first; its metric values are descriptive and do not replace the declared pass thresholds.
 
-For mixed bulk RNA, single-cell, DNA and protein outputs, use:
+For mixed bulk RNA, single-cell, chromatin, DNA and protein outputs, use:
 
 ```sh
 omicsbench suite evaluate-matrix \
@@ -111,6 +114,7 @@ omicsbench suite evaluate-matrix \
   --method candidate=results/candidate \
   --id rnaseq-002 \
   --id singlecell-001 \
+  --id interval-001 \
   --id sequence-005 \
   --id sequence-006
 ```
@@ -129,10 +133,11 @@ Gate policies are strict JSON documents. They can require exact benchmark IDs, o
 {
   "schema_version": "1.0",
   "name": "release gate",
-  "required_benchmarks": ["rnaseq-002", "sequence-005", "sequence-006"],
+  "required_benchmarks": ["rnaseq-002", "interval-001", "sequence-005", "sequence-006"],
   "minimum_pass_rate": 1.0,
   "minimum_assay_pass_rate": {
     "bulk_rna_seq": 1.0,
+    "chromatin_accessibility": 1.0,
     "whole_genome_dna_seq": 1.0,
     "sequence_protein": 1.0
   },
@@ -141,6 +146,7 @@ Gate policies are strict JSON documents. They can require exact benchmark IDs, o
   "maximum_peak_memory_mb": 4096,
   "metric_floors": [
     {"metric": "precision", "minimum": 0.99, "comparator": "exact_snv"},
+    {"metric": "interval_f1", "minimum": 0.90, "comparator": "genomic_intervals"},
     {"metric": "protein_recall", "minimum": 1.0, "comparator": "peptide_identification"}
   ]
 }
@@ -166,7 +172,7 @@ The multi-assay leaderboard ranks methods by passed cases, failed cases and meth
 omicsbench suite regress accepted.json candidate.json --absolute-tolerance 0.01
 ```
 
-Regression checks accept validation, comparison, matrix, evaluation and multi-assay matrix JSON reports. A baseline case that changes from pass or skipped to fail is a regression. Decreases in effect-rank correlation, top-gene overlap, sign agreement, coverage, variant precision, recall, F1, ARI, NMI, purity, protein recall or residue coverage also fail when they exceed the absolute tolerance. Missing baseline cases fail unless `--allow-missing` is supplied. New candidate cases are recorded without failing the check.
+Regression checks accept validation, comparison, matrix, evaluation and multi-assay matrix JSON reports. A baseline case that changes from pass or skipped to fail is a regression. Decreases in effect-rank correlation, top-gene overlap, sign agreement, coverage, variant metrics, clustering metrics, protein recovery, interval overlap or base-pair overlap also fail when they exceed the absolute tolerance. Missing baseline cases fail unless `--allow-missing` is supplied. New candidate cases are recorded without failing the check.
 
 ## Report formats
 

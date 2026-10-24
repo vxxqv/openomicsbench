@@ -1,5 +1,15 @@
 # Changes
 
+## 6.0.0
+
+Version 6 adds a deterministic genomic peak-calling benchmark for ATAC-seq, ChIP-seq, CUT&RUN and CUT&Tag software. `interval-001` contains a compact bedGraph signal track, two declared synthetic chromosome sizes and 12 narrowPeak truth intervals spanning narrow, broad, close-doublet and chromosome-edge cases. The closed-form builder reproduces every byte.
+
+The `interval qc` command validates BED3, BED6 and narrowPeak files, including gzip-compressed input. It enforces a consistent field count, zero-based half-open positive intervals, chromosome bounds, BED scores and strands, and narrowPeak summit and signal fields. Its report includes peak count, contigs, raw and union span, overlap count, width distribution and input order.
+
+The `interval compare` command applies a declared 50% reciprocal-overlap rule and reports interval precision, recall and F1. It separately measures unioned base-pair precision, recall and F1 so broad calls cannot hide behind a single interval match. Summit distance is reported when both truth and submitted narrowPeak records provide summits.
+
+Genomic interval results now participate in unified evaluation, method matrices, hash-locked result manifests, policy gates, regression checks, offline reports and RO-Crate evidence packages. Continuous integration rebuilds the fixture and exercises the complete five-assay evaluation path from the installed wheel.
+
 ## 5.0.0
 
 Version 5 adds a deterministic single-cell RNA-seq benchmark. `singlecell-001` uses the standard feature-barcode layout: an integer coordinate Matrix Market file, ordered barcodes, three-column features and cell-level truth. Its 90 cells cross three synthetic states with two batches. The generator uses a closed-form count model, and a rebuild reproduces every byte.

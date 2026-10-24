@@ -6,7 +6,7 @@
       "orcid": "0009-0005-1859-5107"
     }
   ],
-  "description": "Compact, traceable bulk and single-cell RNA, DNA and protein benchmarks with strict local validation, label-invariant clustering scores, hash-locked result manifests, policy gates, offline dashboards and verifiable evidence crates.",
+  "description": "Compact, traceable RNA, DNA, protein, single-cell and genomic interval benchmarks with strict local validation, peak-overlap scoring, hash-locked result manifests, policy gates, offline dashboards and verifiable evidence crates.",
   "upload_type": "software",
   "access_right": "open",
   "license": "Apache-2.0",
@@ -78,6 +78,14 @@
     "cluster purity",
     "ATAC-seq",
     "ChIP-seq",
+    "CUT&RUN",
+    "CUT&Tag",
+    "peak calling",
+    "genomic intervals",
+    "BED format",
+    "narrowPeak",
+    "reciprocal overlap",
+    "base-pair overlap",
     "amplicon sequencing",
     "metagenomics",
     "k-mer analysis",

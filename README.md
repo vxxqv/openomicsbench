@@ -1,8 +1,8 @@
 # OpenOmicsBench
 
-OpenOmicsBench is a compact benchmark collection and local sequence toolkit for bioinformatics software testing, method checks and teaching. It contains 12 certified bulk RNA-seq objects, six deterministic DNA, RNA, protein and proteomics fixtures, a 10x-style single-cell RNA-seq benchmark, strict local tools, and a CI-ready evaluation system.
+OpenOmicsBench is a compact benchmark collection and local toolkit for bioinformatics software testing, method checks and teaching. It contains 12 certified bulk RNA-seq objects, six deterministic DNA, RNA, protein and proteomics fixtures, a 10x-style single-cell RNA-seq benchmark, a genomic peak-calling benchmark, strict local tools, and a CI-ready evaluation system.
 
-Version 5 adds a deterministic single-cell RNA-seq track. It validates sparse Matrix Market data, reports cell-level QC, and scores cluster assignments with adjusted Rand index, normalized mutual information, purity and cell coverage. The unified evaluator, result manifests, policy gates, regression reports, dashboards and evidence crates all understand the new assay.
+Version 6 adds a deterministic chromatin peak benchmark for ATAC-seq, ChIP-seq, CUT&RUN and CUT&Tag software. It validates BED and narrowPeak coordinates, reports interval QC, and scores called peaks with reciprocal-overlap and base-pair precision, recall and F1. The unified evaluator, result manifests, policy gates, regression reports, dashboards and evidence crates all understand the new assay.
 
 The package runs offline after installation. Sequence files stay on the local computer. The built-in tools cover inspection and lightweight preprocessing; they do not claim to replace aligners, variant callers, taxonomic classifiers or assay-specific statistical workflows.
 
@@ -25,6 +25,8 @@ omicsbench variant compare sequence-005 calls.vcf.gz
 omicsbench peptide compare sequence-006 identifications.peptides.tsv
 omicsbench validate singlecell-001
 omicsbench cell compare singlecell-001 clusters.tsv
+omicsbench validate interval-001
+omicsbench interval compare interval-001 calls.narrowPeak
 ```
 
 The wheel contains the complete collection. A repository checkout and network connection are not required.
@@ -95,6 +97,22 @@ omicsbench cell compare singlecell-001 clusters.tsv
 
 Cluster names may differ from the truth labels. The comparator uses label-invariant ARI and NMI, alongside purity and complete cell coverage. The object tests file handling, QC and recovery of a known synthetic partition. It does not validate biological cell-type annotation, normalization, integration, trajectory inference or batch correction.
 
+## Genomic interval tools
+
+Validate a BED or narrowPeak file and summarize its coordinates:
+
+```sh
+omicsbench interval qc calls.narrowPeak --chrom-sizes chrom.sizes
+```
+
+`interval-001` contains 12 deterministic peaks across two synthetic contigs. The fixture covers narrow peaks, one broad peak, a close doublet and positions near chromosome boundaries. Its binned bedGraph signal is small enough for unit tests and teaching while preserving a declared truth set.
+
+```sh
+omicsbench interval compare interval-001 calls.narrowPeak
+```
+
+Peak matches require at least 50% reciprocal overlap. The report separates interval-level precision, recall and F1 from base-pair precision, recall and F1, so extra calls and over-wide calls remain visible. Parsing follows the UCSC zero-based, half-open BED convention, checks chromosome bounds, and accepts BED3, BED6, narrowPeak and gzip-compressed files. The benchmark measures coordinate and overlap recovery. It does not assess alignment, blacklist filtering, replicate concordance or biological peak validity. See [the genomic interval guide](docs/genomic-intervals.md) for the exact contract.
+
 ## Benchmark suites
 
 Validate the complete installed collection and save reports that can be attached to a CI run:
@@ -124,13 +142,14 @@ Then run:
 omicsbench suite compare results --id rnaseq-002 --id rnaseq-003 --junit reports/comparison.xml
 ```
 
-For a mixed bulk RNA, single-cell, DNA and protein run, add benchmark-named cluster, VCF and peptide output alongside the expression tables:
+For a mixed bulk RNA, single-cell, chromatin, DNA and protein run, add benchmark-named cluster, peak, VCF and peptide output alongside the expression tables:
 
 ```text
 results/
   method.json
   rnaseq-002.tsv.gz
   singlecell-001.cells.tsv
+  interval-001.narrowPeak
   sequence-005.vcf.gz
   sequence-006.peptides.tsv
 ```
@@ -139,6 +158,7 @@ results/
 omicsbench suite evaluate results \
   --id rnaseq-002 \
   --id singlecell-001 \
+  --id interval-001 \
   --id sequence-005 \
   --id sequence-006 \
   --json reports/evaluation.json \
@@ -152,6 +172,7 @@ Pipeline outputs do not need to be renamed or moved into one flat directory. Ind
 omicsbench suite index results \
   --result rnaseq-002=rna/deseq2.csv \
   --result singlecell-001=single-cell/clusters.csv \
+  --result interval-001=chromatin/peaks.narrowPeak \
   --result sequence-005=dna/final.vcf.gz \
   --result sequence-006=protein/identifications.tsv \
   --column rnaseq-002:gene_id=Geneid \
@@ -303,7 +324,7 @@ The input must contain unique `gene_id` and finite `log2_fold_change` columns. T
 
 ## Collection records
 
-The [JSON catalog](catalog/collection.json) contains every benchmark family. [catalog/collection.tsv](catalog/collection.tsv) lists the biological objects, [catalog/sequences.tsv](catalog/sequences.tsv) lists the sequence fixtures, and [catalog/single-cell.tsv](catalog/single-cell.tsv) lists the single-cell objects.
+The [JSON catalog](catalog/collection.json) contains every benchmark family. [catalog/collection.tsv](catalog/collection.tsv) lists the biological objects, [catalog/sequences.tsv](catalog/sequences.tsv) lists the sequence fixtures, [catalog/single-cell.tsv](catalog/single-cell.tsv) lists the single-cell objects, and [catalog/intervals.tsv](catalog/intervals.tsv) lists genomic interval benchmarks.
 
 Expression Atlas and BioStudies supplied the biological count matrices. Their bundled material is recorded as CC BY 4.0 with provider attribution. The sequence fixtures and software are project-authored and distributed under Apache-2.0. Project-written descriptive metadata is CC BY 4.0.
 
@@ -315,6 +336,7 @@ The objects are research and software-test material. They are not clinical refer
 python -m unittest discover -s tests -v
 python workflows/build_sequence_fixtures.py
 python workflows/build_singlecell_fixture.py
+python workflows/build_interval_fixture.py
 python scripts/build_catalog.py
 python scripts/audit_collection.py
 python scripts/check_repository.py
