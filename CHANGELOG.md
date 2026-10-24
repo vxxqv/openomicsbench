@@ -1,5 +1,15 @@
 # Changes
 
+## 5.0.0
+
+Version 5 adds a deterministic single-cell RNA-seq benchmark. `singlecell-001` uses the standard feature-barcode layout: an integer coordinate Matrix Market file, ordered barcodes, three-column features and cell-level truth. Its 90 cells cross three synthetic states with two batches. The generator uses a closed-form count model, and a rebuild reproduces every byte.
+
+The `cell qc` command validates sparse coordinates and companion dimensions before reporting library totals, detected features per cell, zero-count cells and mitochondrial count fraction. It reads plain or gzip-compressed files without converting the matrix to a dense array.
+
+The `cell compare` command scores cluster assignments using adjusted Rand index, normalized mutual information, purity and cell coverage. Cluster names are label-invariant. Missing cells, unexpected cells and missed thresholds fail explicitly. The benchmark is scoped to recovery of a known synthetic partition and makes no claim about biological annotation, integration or trajectory inference.
+
+Single-cell results now participate in unified evaluation, multi-method matrices, hash-locked result manifests, native column mappings, policy gates, regression checks, run fingerprints, offline reports and RO-Crate evidence packages.
+
 ## 4.1.0
 
 Result manifests let an evaluation use the files produced by an existing pipeline without renaming or flattening them. `omicsbench suite index` maps benchmark IDs to relative paths, records each SHA-256 digest and writes a strict `results.json` contract. Evaluation rejects an altered, missing, duplicated, unsafe or incompatible input before scientific scoring begins.

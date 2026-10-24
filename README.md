@@ -1,8 +1,8 @@
 # OpenOmicsBench
 
-OpenOmicsBench is a compact benchmark collection and local sequence toolkit for bioinformatics software testing, method checks and teaching. It contains 12 certified bulk RNA-seq objects, six deterministic DNA, RNA, protein and proteomics fixtures, strict FASTA and FASTQ tools, and a CI-ready evaluation system.
+OpenOmicsBench is a compact benchmark collection and local sequence toolkit for bioinformatics software testing, method checks and teaching. It contains 12 certified bulk RNA-seq objects, six deterministic DNA, RNA, protein and proteomics fixtures, a 10x-style single-cell RNA-seq benchmark, strict local tools, and a CI-ready evaluation system.
 
-Version 4.1 adds hash-locked result manifests for real pipeline layouts. Nested outputs can keep their original names and native RNA or peptide headers while the manifest records their benchmark mapping, interpretation and SHA-256 digest. Version 4's unified RNA, DNA and protein evaluation, policy gates, trend reports, offline dashboards and RO-Crate evidence remain available.
+Version 5 adds a deterministic single-cell RNA-seq track. It validates sparse Matrix Market data, reports cell-level QC, and scores cluster assignments with adjusted Rand index, normalized mutual information, purity and cell coverage. The unified evaluator, result manifests, policy gates, regression reports, dashboards and evidence crates all understand the new assay.
 
 The package runs offline after installation. Sequence files stay on the local computer. The built-in tools cover inspection and lightweight preprocessing; they do not claim to replace aligners, variant callers, taxonomic classifiers or assay-specific statistical workflows.
 
@@ -23,6 +23,8 @@ omicsbench validate rnaseq-002
 omicsbench validate sequence-004
 omicsbench variant compare sequence-005 calls.vcf.gz
 omicsbench peptide compare sequence-006 identifications.peptides.tsv
+omicsbench validate singlecell-001
+omicsbench cell compare singlecell-001 clusters.tsv
 ```
 
 The wheel contains the complete collection. A repository checkout and network connection are not required.
@@ -75,6 +77,24 @@ The FASTA validator follows the nucleotide symbol expectations described by [NCB
 
 The full command reference is in [docs/sequence-tools.md](docs/sequence-tools.md).
 
+## Single-cell tools
+
+Inspect a 10x-style feature-barcode matrix without loading a dense array:
+
+```sh
+omicsbench cell qc matrix.mtx barcodes.tsv features.tsv --feature-columns 3
+```
+
+The report includes matrix dimensions, nonzero entries, library totals, detected features per cell, zero-count cells and the mitochondrial count fraction. Plain and gzip-compressed inputs are accepted. Coordinates, counts and companion table dimensions are checked before statistics are returned.
+
+`singlecell-001` contains 90 synthetic cells, 60 features, three cell states and two crossed batches. Score a clustering table with `cell_id` and `label` columns:
+
+```sh
+omicsbench cell compare singlecell-001 clusters.tsv
+```
+
+Cluster names may differ from the truth labels. The comparator uses label-invariant ARI and NMI, alongside purity and complete cell coverage. The object tests file handling, QC and recovery of a known synthetic partition. It does not validate biological cell-type annotation, normalization, integration, trajectory inference or batch correction.
+
 ## Benchmark suites
 
 Validate the complete installed collection and save reports that can be attached to a CI run:
@@ -104,12 +124,13 @@ Then run:
 omicsbench suite compare results --id rnaseq-002 --id rnaseq-003 --junit reports/comparison.xml
 ```
 
-For a mixed RNA, DNA and protein run, add benchmark-named VCF and peptide output alongside the expression tables:
+For a mixed bulk RNA, single-cell, DNA and protein run, add benchmark-named cluster, VCF and peptide output alongside the expression tables:
 
 ```text
 results/
   method.json
   rnaseq-002.tsv.gz
+  singlecell-001.cells.tsv
   sequence-005.vcf.gz
   sequence-006.peptides.tsv
 ```
@@ -117,6 +138,7 @@ results/
 ```sh
 omicsbench suite evaluate results \
   --id rnaseq-002 \
+  --id singlecell-001 \
   --id sequence-005 \
   --id sequence-006 \
   --json reports/evaluation.json \
@@ -129,10 +151,13 @@ Pipeline outputs do not need to be renamed or moved into one flat directory. Ind
 ```sh
 omicsbench suite index results \
   --result rnaseq-002=rna/deseq2.csv \
+  --result singlecell-001=single-cell/clusters.csv \
   --result sequence-005=dna/final.vcf.gz \
   --result sequence-006=protein/identifications.tsv \
   --column rnaseq-002:gene_id=Geneid \
   --column rnaseq-002:log2_fold_change=log2FoldChange \
+  --column singlecell-001:cell_id=Barcode \
+  --column singlecell-001:label=Cluster \
   --column sequence-006:protein_id=Protein \
   --column sequence-006:peptide=Sequence \
   --column sequence-006:q_value=QValue
@@ -278,7 +303,7 @@ The input must contain unique `gene_id` and finite `log2_fold_change` columns. T
 
 ## Collection records
 
-The [JSON catalog](catalog/collection.json) contains both benchmark families. [catalog/collection.tsv](catalog/collection.tsv) lists the biological objects and [catalog/sequences.tsv](catalog/sequences.tsv) lists the sequence fixtures.
+The [JSON catalog](catalog/collection.json) contains every benchmark family. [catalog/collection.tsv](catalog/collection.tsv) lists the biological objects, [catalog/sequences.tsv](catalog/sequences.tsv) lists the sequence fixtures, and [catalog/single-cell.tsv](catalog/single-cell.tsv) lists the single-cell objects.
 
 Expression Atlas and BioStudies supplied the biological count matrices. Their bundled material is recorded as CC BY 4.0 with provider attribution. The sequence fixtures and software are project-authored and distributed under Apache-2.0. Project-written descriptive metadata is CC BY 4.0.
 
@@ -289,6 +314,7 @@ The objects are research and software-test material. They are not clinical refer
 ```sh
 python -m unittest discover -s tests -v
 python workflows/build_sequence_fixtures.py
+python workflows/build_singlecell_fixture.py
 python scripts/build_catalog.py
 python scripts/audit_collection.py
 python scripts/check_repository.py
