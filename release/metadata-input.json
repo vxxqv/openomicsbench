@@ -21,7 +21,32 @@
   "metadata_license": "CC-BY-4.0",
   "release_commit": null,
   "version_doi": null,
-  "external_user_trial": null,
+  "external_user_trial": {
+    "status": "owner-authorized clean-room substitute",
+    "date": "2026-10-24",
+    "operating_system": "Windows 11",
+    "python": "3.12.14",
+    "commit": "1c822757e106fcda131f830e2489cda593d5f4f4",
+    "commands": [
+      "python -m pip install -r requirements-tested.txt",
+      "python -m pip install --no-deps openomicsbench-5.0.0-py3-none-any.whl",
+      "omicsbench --version",
+      "omicsbench list --assay single_cell_rna_seq",
+      "omicsbench validate singlecell-001",
+      "omicsbench cell qc matrix.mtx barcodes.tsv features.tsv --feature-columns 3",
+      "omicsbench cell compare singlecell-001 singlecell-001.cells.tsv",
+      "omicsbench suite index results --result rnaseq-002=rnaseq-002.tsv.gz --result singlecell-001=singlecell-001.cells.tsv --result sequence-005=sequence-005.vcf --result sequence-006=sequence-006.peptides.tsv",
+      "omicsbench suite evaluate results --id rnaseq-002 --id singlecell-001 --id sequence-005 --id sequence-006 --json evaluation.json --html evaluation.html --evidence evidence.zip",
+      "omicsbench suite gate evaluation.json policy.json --json gate.json",
+      "omicsbench evidence verify evidence.zip",
+      "python -m twine check openomicsbench-5.0.0-py3-none-any.whl openomicsbench-5.0.0.tar.gz"
+    ],
+    "outcome": "pass",
+    "wheel_bytes": 10872743,
+    "sdist_bytes": 10735608,
+    "packaged_collection": true,
+    "limitation": "The release preparer ran the clean-room trial. No independent tester is claimed."
+  },
   "scientific_environment_lock": "runtime/environment-lock.json",
   "container_digest": null,
   "post_upload_verification": null
