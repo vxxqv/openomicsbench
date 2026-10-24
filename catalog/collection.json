@@ -1,9 +1,10 @@
 {
-  "schema_version": "3.0",
+  "schema_version": "4.0",
   "release": "5.0.0",
   "biological_objects": 12,
   "sequence_objects": 6,
   "single_cell_objects": 1,
+  "interval_objects": 1,
   "source_studies": 7,
   "objects": [
     {
@@ -421,6 +422,21 @@
       "features": 60,
       "nonzero": 3996,
       "states": 3,
+      "rights": "GREEN",
+      "license": "Apache-2.0"
+    }
+  ],
+  "intervals": [
+    {
+      "id": "interval-001",
+      "title": "Synthetic chromatin peak-calling benchmark",
+      "assay": "chromatin_accessibility",
+      "format": "narrowPeak",
+      "coordinate_system": "zero_based_half_open",
+      "intervals": 12,
+      "contigs": 2,
+      "union_bp": 3670,
+      "reciprocal_overlap": 0.5,
       "rights": "GREEN",
       "license": "Apache-2.0"
     }

@@ -19,9 +19,10 @@ jobs:
       - run: python workflows/build_fixture.py
       - run: python workflows/build_sequence_fixtures.py
       - run: python workflows/build_singlecell_fixture.py
+      - run: python workflows/build_interval_fixture.py
       - run: python -m unittest discover -s tests -v
       - run: python scripts/build_catalog.py
-      - run: git diff --exit-code -- datasets/sequences datasets/singlecell catalog figures/v1-fidelity.svg
+      - run: git diff --exit-code -- datasets/sequences datasets/singlecell datasets/intervals catalog figures/v1-fidelity.svg
       - run: python scripts/audit_collection.py
       - run: python scripts/check_repository.py
       - run: omicsbench suite validate --junit build/benchmark-suite.xml --force
@@ -41,19 +42,21 @@ jobs:
           cp datasets/rnaseq/rnaseq-002/expected/reference-effects.tsv.gz build/mixed-b/rnaseq-002.tsv.gz
           cp datasets/singlecell/singlecell-001/expected/cell-labels.tsv build/mixed-a/singlecell-001.cells.tsv
           cp datasets/singlecell/singlecell-001/expected/cell-labels.tsv build/mixed-b/singlecell-001.cells.tsv
+          cp datasets/intervals/interval-001/expected/truth-peaks.narrowPeak build/mixed-a/interval-001.narrowPeak
+          cp datasets/intervals/interval-001/expected/truth-peaks.narrowPeak build/mixed-b/interval-001.narrowPeak
           cp datasets/sequences/sequence-006/expected/peptides.tsv build/mixed-a/sequence-006.peptides.tsv
           cp datasets/sequences/sequence-006/expected/peptides.tsv build/mixed-b/sequence-006.peptides.tsv
           printf '##fileformat=VCFv4.3\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\nsynthetic_reference\t150\t.\tC\tA\t60\tPASS\t.\nsynthetic_reference\t500\t.\tA\tC\t60\tPASS\t.\nsynthetic_reference\t850\t.\tC\tA\t60\tPASS\t.\n' > build/mixed-a/sequence-005.vcf
           cp build/mixed-a/sequence-005.vcf build/mixed-b/sequence-005.vcf
           printf '%s\n' '{"schema_version":"1.0","name":"reference","version":"1","runtime_seconds":1.0,"peak_memory_mb":64.0,"threads":1}' > build/mixed-a/method.json
           cp build/mixed-a/method.json build/mixed-b/method.json
-          omicsbench suite index build/mixed-a --result rnaseq-002=rnaseq-002.tsv.gz --result singlecell-001=singlecell-001.cells.tsv --result sequence-005=sequence-005.vcf --result sequence-006=sequence-006.peptides.tsv
-          omicsbench suite index build/mixed-b --result rnaseq-002=rnaseq-002.tsv.gz --result singlecell-001=singlecell-001.cells.tsv --result sequence-005=sequence-005.vcf --result sequence-006=sequence-006.peptides.tsv
-          omicsbench suite evaluate build/mixed-a --id rnaseq-002 --id singlecell-001 --id sequence-005 --id sequence-006 --json build/evaluate.json --html build/evaluate.html --evidence build/evidence.zip
-          omicsbench suite evaluate build/mixed-b --id rnaseq-002 --id singlecell-001 --id sequence-005 --id sequence-006 --json build/evaluate-copy.json
-          omicsbench suite evaluate-matrix --method first=build/mixed-a --method second=build/mixed-b --id rnaseq-002 --id singlecell-001 --id sequence-005 --id sequence-006 --json build/evaluate-matrix.json --csv build/evaluate-matrix.csv --html build/evaluate-matrix.html
+          omicsbench suite index build/mixed-a --result rnaseq-002=rnaseq-002.tsv.gz --result singlecell-001=singlecell-001.cells.tsv --result interval-001=interval-001.narrowPeak --result sequence-005=sequence-005.vcf --result sequence-006=sequence-006.peptides.tsv
+          omicsbench suite index build/mixed-b --result rnaseq-002=rnaseq-002.tsv.gz --result singlecell-001=singlecell-001.cells.tsv --result interval-001=interval-001.narrowPeak --result sequence-005=sequence-005.vcf --result sequence-006=sequence-006.peptides.tsv
+          omicsbench suite evaluate build/mixed-a --id rnaseq-002 --id singlecell-001 --id interval-001 --id sequence-005 --id sequence-006 --json build/evaluate.json --html build/evaluate.html --evidence build/evidence.zip
+          omicsbench suite evaluate build/mixed-b --id rnaseq-002 --id singlecell-001 --id interval-001 --id sequence-005 --id sequence-006 --json build/evaluate-copy.json
+          omicsbench suite evaluate-matrix --method first=build/mixed-a --method second=build/mixed-b --id rnaseq-002 --id singlecell-001 --id interval-001 --id sequence-005 --id sequence-006 --json build/evaluate-matrix.json --csv build/evaluate-matrix.csv --html build/evaluate-matrix.html
           omicsbench suite regress build/evaluate.json build/evaluate.json --junit build/evaluate-regression.xml
-          printf '%s\n' '{"schema_version":"1.0","name":"core gate","required_benchmarks":["rnaseq-002","singlecell-001","sequence-005","sequence-006"],"minimum_pass_rate":1.0,"minimum_assay_pass_rate":{"bulk_rna_seq":1.0,"single_cell_rna_seq":1.0,"whole_genome_dna_seq":1.0,"sequence_protein":1.0},"require_method_receipt":true,"maximum_runtime_seconds":2.0,"maximum_peak_memory_mb":128.0,"metric_floors":[{"metric":"adjusted_rand_index","minimum":0.9,"comparator":"single_cell_clustering"},{"metric":"precision","minimum":1.0,"comparator":"exact_snv"},{"metric":"protein_recall","minimum":1.0,"comparator":"peptide_identification"}]}' > build/policy.json
+          printf '%s\n' '{"schema_version":"1.0","name":"core gate","required_benchmarks":["rnaseq-002","singlecell-001","interval-001","sequence-005","sequence-006"],"minimum_pass_rate":1.0,"minimum_assay_pass_rate":{"bulk_rna_seq":1.0,"single_cell_rna_seq":1.0,"chromatin_accessibility":1.0,"whole_genome_dna_seq":1.0,"sequence_protein":1.0},"require_method_receipt":true,"maximum_runtime_seconds":2.0,"maximum_peak_memory_mb":128.0,"metric_floors":[{"metric":"adjusted_rand_index","minimum":0.9,"comparator":"single_cell_clustering"},{"metric":"interval_f1","minimum":0.9,"comparator":"genomic_intervals"},{"metric":"precision","minimum":1.0,"comparator":"exact_snv"},{"metric":"protein_recall","minimum":1.0,"comparator":"peptide_identification"}]}' > build/policy.json
           omicsbench suite gate build/evaluate.json build/policy.json --json build/gate.json --junit build/gate.xml
           omicsbench suite trend --run first=build/evaluate.json --run second=build/evaluate-copy.json --json build/trend.json --html build/trend.html
           omicsbench evidence verify build/evidence.zip

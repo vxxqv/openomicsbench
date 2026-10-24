@@ -102,19 +102,44 @@ def collect_single_cell() -> list[dict]:
     return rows
 
 
-def write_catalog(rows: list[dict], sequences: list[dict], single_cell: list[dict]) -> None:
+def collect_intervals() -> list[dict]:
+    rows = []
+    for model, folder in registry(ROOT).values():
+        if model.intervals is None or model.status != "validated":
+            continue
+        profile = read_json(folder / model.validation.profile)
+        summary = profile["expected_summary"]
+        rows.append({
+            "id": model.id,
+            "title": model.title,
+            "assay": model.assay,
+            "format": model.intervals.format,
+            "coordinate_system": model.intervals.coordinate_system,
+            "intervals": summary["intervals"],
+            "contigs": summary["contigs"],
+            "union_bp": summary["union_bp"],
+            "reciprocal_overlap": model.intervals.reciprocal_overlap,
+            "rights": model.rights.status,
+            "license": model.rights.license,
+        })
+    return rows
+
+
+def write_catalog(rows: list[dict], sequences: list[dict], single_cell: list[dict], intervals: list[dict]) -> None:
     catalog = ROOT / "catalog"
     catalog.mkdir(exist_ok=True)
     payload = {
-        "schema_version": "3.0",
+        "schema_version": "4.0",
         "release": __version__,
         "biological_objects": len(rows),
         "sequence_objects": len(sequences),
         "single_cell_objects": len(single_cell),
+        "interval_objects": len(intervals),
         "source_studies": len({row["source_accession"] for row in rows}),
         "objects": rows,
         "sequences": sequences,
         "single_cell": single_cell,
+        "intervals": intervals,
     }
     (catalog / "collection.json").write_text(
         json.dumps(payload, indent=2) + "\n", encoding="utf-8", newline="\n"
@@ -155,6 +180,11 @@ def write_catalog(rows: list[dict], sequences: list[dict], single_cell: list[dic
         writer = csv.DictWriter(stream, fieldnames=single_cell_fields, delimiter="\t", lineterminator="\n")
         writer.writeheader()
         writer.writerows(single_cell)
+    interval_fields = ("id", "title", "assay", "format", "coordinate_system", "intervals", "contigs", "union_bp", "reciprocal_overlap", "rights", "license")
+    with (catalog / "intervals.tsv").open("w", encoding="utf-8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=interval_fields, delimiter="\t", lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(intervals)
 
 
 def write_figure(rows: list[dict]) -> None:
@@ -282,8 +312,9 @@ if __name__ == "__main__":
     collection = collect()
     sequences = collect_sequences()
     single_cell = collect_single_cell()
-    write_catalog(collection, sequences, single_cell)
+    intervals = collect_intervals()
+    write_catalog(collection, sequences, single_cell, intervals)
     write_figure(collection)
     if args.preview_png:
         print(f"Preview: {write_preview(collection)}")
-    print(f"Wrote {len(collection)} biological, {len(sequences)} sequence and {len(single_cell)} single-cell catalog records plus the v1 fidelity figure.")
+    print(f"Wrote {len(collection)} biological, {len(sequences)} sequence, {len(single_cell)} single-cell and {len(intervals)} interval catalog records plus the v1 fidelity figure.")

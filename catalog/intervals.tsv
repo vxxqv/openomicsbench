@@ -1,0 +1,2 @@
+id	title	assay	format	coordinate_system	intervals	contigs	union_bp	reciprocal_overlap	rights	license
+interval-001	Synthetic chromatin peak-calling benchmark	chromatin_accessibility	narrowPeak	zero_based_half_open	12	2	3670	0.5	GREEN	Apache-2.0

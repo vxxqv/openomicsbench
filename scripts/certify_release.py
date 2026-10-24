@@ -304,6 +304,7 @@ def main() -> None:
     validated = []
     sequence_validated = []
     single_cell_validated = []
+    interval_validated = []
 
     if reference_evidence.get("status") != "pass":
         blockers.append("Collection reference verification has not passed.")
@@ -328,6 +329,8 @@ def main() -> None:
             sequence_validated.append(model)
         if model.single_cell is not None and model.status == "validated" and result["status"] == "pass":
             single_cell_validated.append(model)
+        if model.intervals is not None and model.status == "validated" and result["status"] == "pass":
+            interval_validated.append(model)
 
     pockets = [
         model
@@ -347,6 +350,8 @@ def main() -> None:
         blockers.append("The DNA, RNA, protein, paired-read and DNA-seq sequence families are incomplete.")
     if not single_cell_validated:
         blockers.append("The release requires a validated single-cell object.")
+    if not interval_validated:
+        blockers.append("The release requires a validated genomic interval object.")
     for model in validated:
         if model.derivation.commit is None or not COMMIT.fullmatch(model.derivation.commit):
             blockers.append(f"{model.id}: transformation commit is missing or invalid.")
@@ -373,13 +378,14 @@ def main() -> None:
 
     deferred = [field for field in PUBLICATION_FIELDS if not metadata.get(field)]
     report = {
-        "scope": "v5_collection",
+        "scope": "v6_collection",
         "software_version": metadata["software_version"],
         "decision": "GO" if not blockers and not deferred else "NO-GO",
         "preflight": "PASS" if not blockers else "FAIL",
         "certified_biological_objects": len(validated),
         "certified_sequence_objects": len(sequence_validated),
         "certified_single_cell_objects": len(single_cell_validated),
+        "certified_interval_objects": len(interval_validated),
         "source_studies": len({model.source.accession for model in validated}),
         "redistributable_pockets": len(pockets),
         "design_archetypes": len({model.archetype for model in validated}),
