@@ -101,6 +101,27 @@ class GatePolicyTests(unittest.TestCase):
         self.assertEqual(completed.returncode, 2, completed.stderr)
         self.assertEqual(json.loads(output.read_text())["summary"]["status"], "fail")
 
+    def test_single_cell_metrics_can_be_required(self):
+        shutil.copyfile(
+            ROOT / "datasets/singlecell/singlecell-001/expected/cell-labels.tsv",
+            self.results / "singlecell-001.cells.tsv",
+        )
+        report = evaluate_suite(ROOT, self.results, ["singlecell-001"])
+        self.report.write_text(json.dumps(report), encoding="utf-8")
+        gate = evaluate_policy(self.report, self.write_policy(
+            required_benchmarks=["singlecell-001"],
+            minimum_assay_pass_rate={"single_cell_rna_seq": 1.0},
+            maximum_runtime_seconds=None,
+            maximum_peak_memory_mb=None,
+            metric_floors=[
+                {"metric": "adjusted_rand_index", "minimum": 0.9, "comparator": "single_cell_clustering"},
+                {"metric": "normalized_mutual_information", "minimum": 0.9, "assay": "single_cell_rna_seq"},
+                {"metric": "purity", "minimum": 0.9},
+                {"metric": "coverage", "minimum": 1.0},
+            ],
+        ))
+        self.assertEqual(gate["summary"]["status"], "pass")
+
 
 if __name__ == "__main__":
     unittest.main()

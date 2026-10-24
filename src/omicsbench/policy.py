@@ -17,6 +17,7 @@ class MetricFloor(StrictModel):
     metric: Literal[
         "spearman_logfc", "top_k_jaccard", "sign_concordance", "coverage",
         "precision", "recall", "f1", "protein_recall", "residue_coverage",
+        "adjusted_rand_index", "normalized_mutual_information", "purity",
     ]
     minimum: float = Field(ge=0, le=1)
     assay: str | None = Field(default=None, min_length=1)
@@ -77,7 +78,7 @@ def _check(identifier: str, passed: bool, reason: str, details: dict | None = No
 def _metric(item: dict, name: str):
     details = item.get("details", {})
     if name == "coverage":
-        return details.get("genes", {}).get("coverage")
+        return details.get("metrics", {}).get("coverage", details.get("genes", {}).get("coverage"))
     return details.get("metrics", {}).get(name)
 
 
