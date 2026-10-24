@@ -1,8 +1,9 @@
 {
-  "schema_version": "2.0",
+  "schema_version": "3.0",
   "release": "4.1.0",
   "biological_objects": 12,
   "sequence_objects": 6,
+  "single_cell_objects": 1,
   "source_studies": 7,
   "objects": [
     {
@@ -406,6 +407,20 @@
       "files": 1,
       "records": 3,
       "letters": 82,
+      "rights": "GREEN",
+      "license": "Apache-2.0"
+    }
+  ],
+  "single_cell": [
+    {
+      "id": "singlecell-001",
+      "title": "Synthetic single-cell RNA-seq clustering benchmark",
+      "assay": "single_cell_rna_seq",
+      "format": "matrix_market",
+      "cells": 90,
+      "features": 60,
+      "nonzero": 3996,
+      "states": 3,
       "rights": "GREEN",
       "license": "Apache-2.0"
     }

@@ -110,6 +110,10 @@
             "fastq_r2",
             "sequence",
             "reads",
+            "matrix",
+            "barcodes",
+            "features",
+            "cell_metadata",
             "quantification",
             "tx2gene",
             "baseline",
@@ -396,6 +400,47 @@
       "title": "SequenceSpec",
       "type": "object"
     },
+    "SingleCellSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "format": {
+          "const": "matrix_market",
+          "description": "Sparse count-matrix container used by the object.",
+          "title": "Format",
+          "type": "string"
+        },
+        "orientation": {
+          "const": "features_by_cells",
+          "description": "Matrix orientation, matching the 10x feature-barcode convention.",
+          "title": "Orientation",
+          "type": "string"
+        },
+        "feature_columns": {
+          "description": "Number of tab-separated fields in features.tsv.",
+          "enum": [
+            2,
+            3
+          ],
+          "title": "Feature Columns",
+          "type": "integer"
+        },
+        "mitochondrial_prefix": {
+          "description": "Feature-name prefix used for the reported mitochondrial fraction.",
+          "maxLength": 32,
+          "minLength": 1,
+          "title": "Mitochondrial Prefix",
+          "type": "string"
+        }
+      },
+      "required": [
+        "format",
+        "orientation",
+        "feature_columns",
+        "mitochondrial_prefix"
+      ],
+      "title": "SingleCellSpec",
+      "type": "object"
+    },
     "Source": {
       "additionalProperties": false,
       "properties": {
@@ -491,14 +536,15 @@
       "description": "Version of the OpenOmicsBench dataset contract.",
       "enum": [
         "1.0",
-        "2.0"
+        "2.0",
+        "3.0"
       ],
       "title": "Schema Version",
       "type": "string"
     },
     "id": {
       "description": "Stable collection identifier used by the command line interface.",
-      "pattern": "^(rnaseq|fixture|sequence)-[0-9]{3}$",
+      "pattern": "^(rnaseq|fixture|sequence|singlecell)-[0-9]{3}$",
       "title": "Id",
       "type": "string"
     },
@@ -518,6 +564,7 @@
       "description": "Assay or sequence family represented by the object.",
       "enum": [
         "bulk_rna_seq",
+        "single_cell_rna_seq",
         "sequence_dna",
         "sequence_rna",
         "sequence_protein",
@@ -626,6 +673,18 @@
       ],
       "default": null,
       "description": "Sequence format and alphabet contract for version 2 sequence objects."
+    },
+    "single_cell": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SingleCellSpec"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Sparse matrix contract for version 3 single-cell objects."
     },
     "limitations": {
       "description": "Known constraints that affect interpretation or reuse.",

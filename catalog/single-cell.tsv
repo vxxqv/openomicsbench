@@ -1,0 +1,2 @@
+id	title	assay	format	cells	features	nonzero	states	rights	license
+singlecell-001	Synthetic single-cell RNA-seq clustering benchmark	single_cell_rna_seq	matrix_market	90	60	3996	3	GREEN	Apache-2.0
