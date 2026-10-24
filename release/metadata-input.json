@@ -1,5 +1,5 @@
 {
-  "software_version": "4.1.0",
+  "software_version": "5.0.0",
   "candidate_date": "2026-10-24",
   "authors": [
     {
@@ -12,65 +12,17 @@
   "repository_url": "https://github.com/vxxqv/openomicsbench",
   "concept_doi": "10.5281/zenodo.22551734",
   "previous_release": {
-    "version": "4.0.0",
-    "git_tag": "v4.0.0",
-    "record_doi": "10.5281/zenodo.23286967",
-    "record_url": "https://zenodo.org/records/23286967"
+    "version": "4.1.0",
+    "git_tag": "v4.1.0",
+    "record_doi": "10.5281/zenodo.23604106",
+    "record_url": "https://zenodo.org/records/23604106"
   },
   "code_license": "Apache-2.0",
   "metadata_license": "CC-BY-4.0",
-  "release_commit": "de90d66cdd1f32744fccba8ae0c4dcbccb54a362",
-  "version_doi": "10.5281/zenodo.23604106",
-  "external_user_trial": {
-    "status": "owner-authorized clean-room substitute",
-    "date": "2026-10-24",
-    "operating_system": "Windows 11",
-    "python": "3.12.14",
-    "commit": "9da0563987b39c14715976ec51d435d667d1d8e7",
-    "commands": [
-      "python -m pip install --no-deps openomicsbench-4.1.0-py3-none-any.whl",
-      "python -m pip install -r requirements-tested.txt",
-      "omicsbench --version",
-      "omicsbench list --assay sequence_protein",
-      "omicsbench validate sequence-006",
-      "omicsbench suite index results --result rnaseq-002=rna/deseq2.csv --result sequence-005=dna/final.vcf --result sequence-006=protein/identifications.tsv --column rnaseq-002:gene_id=Geneid --column rnaseq-002:log2_fold_change=log2FoldChange --column sequence-006:protein_id=Protein --column sequence-006:peptide=Sequence --column sequence-006:q_value=QValue",
-      "omicsbench suite evaluate results --id rnaseq-002 --id sequence-005 --id sequence-006 --json evaluation.json --html evaluation.html --evidence evidence.zip",
-      "omicsbench suite gate evaluation.json policy.json --json gate.json",
-      "omicsbench suite trend --run first=evaluation.json --run second=evaluation.json --json trend.json --html trend.html",
-      "omicsbench evidence verify evidence.zip",
-      "python -m twine check openomicsbench-4.1.0-py3-none-any.whl openomicsbench-4.1.0.tar.gz"
-    ],
-    "outcome": "pass",
-    "wheel_bytes": 10853187,
-    "sdist_bytes": 10715891,
-    "packaged_collection": true,
-    "limitation": "The release preparer ran the clean-room trial. No independent tester is claimed."
-  },
+  "release_commit": null,
+  "version_doi": null,
+  "external_user_trial": null,
   "scientific_environment_lock": "runtime/environment-lock.json",
   "container_digest": null,
-  "post_upload_verification": {
-    "status": "pass",
-    "verified_at": "2026-10-23T20:14:43Z",
-    "version_doi": "10.5281/zenodo.23604106",
-    "record_url": "https://zenodo.org/records/23604106",
-    "git_commit": "de90d66cdd1f32744fccba8ae0c4dcbccb54a362",
-    "git_tag": "v4.1.0",
-    "github_archive_url": "https://github.com/vxxqv/openomicsbench/archive/refs/tags/v4.1.0.zip",
-    "zenodo_archive_url": "https://zenodo.org/api/records/23604106/files/vxxqv/openomicsbench-v4.1.0.zip/content",
-    "github_archive_root": "openomicsbench-4.1.0",
-    "zenodo_archive_root": "vxxqv-openomicsbench-39c349c",
-    "github_archive_bytes": 11131492,
-    "zenodo_archive_bytes": 11138740,
-    "archived_files": 360,
-    "inventory_files_verified": 359,
-    "matching_files": 360,
-    "archive_content_match": true,
-    "missing_files": [],
-    "extra_files": [],
-    "changed_files": [],
-    "github_sha256": "bcc4b156ec2985a1961b878527ef49b86324f47c43d12aab6924b3210936092c",
-    "github_md5": "9f911a239a2e16fd2eda7f487f48064a",
-    "zenodo_sha256": "acdc122fdd937244cdc070961774f8333b6594cd614ff3185c555842b1f890fd",
-    "zenodo_md5": "fe25772c0e7b2b73ec97659e3c6ecd2b"
-  }
+  "post_upload_verification": null
 }
