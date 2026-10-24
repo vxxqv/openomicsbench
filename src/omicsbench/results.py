@@ -21,16 +21,19 @@ RESULT_SUFFIXES = {
     "differential_expression": (".csv", ".csv.gz", ".tsv", ".tsv.gz"),
     "exact_snv": (".vcf", ".vcf.gz"),
     "peptide_identification": (".tsv", ".tsv.gz", ".peptides.tsv", ".peptides.tsv.gz"),
+    "single_cell_clustering": (".tsv", ".tsv.gz", ".csv", ".csv.gz"),
 }
 DEFAULT_COLUMNS = {
     "differential_expression": {"gene_id": "gene_id", "log2_fold_change": "log2_fold_change"},
     "exact_snv": {},
     "peptide_identification": {"protein_id": "protein_id", "peptide": "peptide", "q_value": "q_value"},
+    "single_cell_clustering": {"cell_id": "cell_id", "label": "label"},
 }
 REQUIRED_COLUMNS = {
     "differential_expression": {"gene_id", "log2_fold_change"},
     "exact_snv": set(),
     "peptide_identification": {"protein_id", "peptide"},
+    "single_cell_clustering": {"cell_id", "label"},
 }
 
 
@@ -41,6 +44,8 @@ def comparator_for(model) -> str | None:
         return "exact_snv"
     if model.assay == "sequence_protein" and model.validation is not None and model.validation.baseline_version == "peptide-identification-v1":
         return "peptide_identification"
+    if model.assay == "single_cell_rna_seq" and model.validation is not None and model.validation.baseline_version == "single-cell-clustering-v1":
+        return "single_cell_clustering"
     return None
 
 

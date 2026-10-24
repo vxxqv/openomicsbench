@@ -8,7 +8,7 @@ from pathlib import Path
 from .suite import _summary
 
 
-TRACKED_METRICS = ("spearman_logfc", "top_k_jaccard", "sign_concordance", "precision", "recall", "f1", "protein_recall", "residue_coverage")
+TRACKED_METRICS = ("spearman_logfc", "top_k_jaccard", "sign_concordance", "precision", "recall", "f1", "protein_recall", "residue_coverage", "adjusted_rand_index", "normalized_mutual_information", "purity", "coverage")
 
 
 def _reject_constant(value: str):
@@ -58,7 +58,7 @@ def _measurements(item: dict) -> dict[str, float]:
     metrics = details.get("metrics", {})
     genes = details.get("genes", {})
     values = {name: metrics.get(name) for name in TRACKED_METRICS}
-    values["coverage"] = genes.get("coverage")
+    values["coverage"] = metrics.get("coverage", genes.get("coverage"))
     result = {}
     for name, value in values.items():
         if value is None:

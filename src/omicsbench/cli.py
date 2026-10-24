@@ -23,6 +23,9 @@ from .evidence import create_evidence_crate, verify_evidence_crate
 from .policy import evaluate_policy
 from .trends import parse_run, trend_reports
 from .results import create_result_manifest
+from .singlecell import compare_labels, summarize_matrix
+
+ASSAYS = ["bulk_rna_seq", "single_cell_rna_seq", "sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq"]
 
 def main():
     p = argparse.ArgumentParser(description="Find, verify and process compact omics benchmarks.",epilog="Example: omicsbench info rnaseq-002")
@@ -39,7 +42,7 @@ def main():
         if name == "get":
             command.add_argument("--size",choices=["nano","pocket","expected"],default="nano")
         if name == "list":
-            command.add_argument("--assay",choices=["bulk_rna_seq","sequence_dna","sequence_rna","sequence_protein","short_read_dna","whole_genome_dna_seq"])
+            command.add_argument("--assay", choices=ASSAYS)
         if name == "compare":
             command.add_argument("results",type=Path,help="CSV or TSV file with gene_id and log2_fold_change columns.")
             command.add_argument("--detail-limit",type=int,default=20,help="Maximum missing and unexpected gene examples to return.")
@@ -56,6 +59,18 @@ def main():
     peptide_compare.add_argument("id", help="Benchmark ID with a declared peptide truth set.")
     peptide_compare.add_argument("results", type=Path, help="TSV or TSV.GZ table with protein_id and peptide columns.")
     peptide_compare.add_argument("--detail-limit", type=int, default=20, help="Maximum false-positive and false-negative examples to return.")
+    cell = sub.add_parser("cell", help="Inspect a feature-barcode matrix or score single-cell cluster labels.")
+    cell_sub = cell.add_subparsers(dest="cell_command", required=True)
+    cell_qc = cell_sub.add_parser("qc", help="Summarize a 10x-style Matrix Market feature-barcode matrix.")
+    cell_qc.add_argument("matrix", type=Path)
+    cell_qc.add_argument("barcodes", type=Path)
+    cell_qc.add_argument("features", type=Path)
+    cell_qc.add_argument("--mitochondrial-prefix", default="MT-")
+    cell_qc.add_argument("--feature-columns", type=int, choices=[2, 3])
+    cell_compare = cell_sub.add_parser("compare", help="Score cell cluster labels against a bundled truth set.")
+    cell_compare.add_argument("id", help="Single-cell benchmark ID.")
+    cell_compare.add_argument("results", type=Path, help="TSV, CSV, or gzip-compressed table with cell_id and label columns.")
+    cell_compare.add_argument("--detail-limit", type=int, default=20)
     assay = sub.add_parser("assay", help="Inspect sequencing assay profiles and build local command plans.")
     assay_sub = assay.add_subparsers(dest="assay_command", required=True)
     assay_sub.add_parser("list", help="List supported assay profiles.")
@@ -69,7 +84,7 @@ def main():
     suite = sub.add_parser("suite", help="Run collection-wide checks and write CI reports.")
     suite_sub = suite.add_subparsers(dest="suite_command", required=True)
     suite_validate = suite_sub.add_parser("validate", help="Validate several bundled benchmarks in one run.")
-    suite_validate.add_argument("--assay", choices=["bulk_rna_seq", "sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq"])
+    suite_validate.add_argument("--assay", choices=ASSAYS)
     suite_compare = suite_sub.add_parser("compare", help="Compare a directory of differential-expression results.")
     suite_compare.add_argument("results", type=Path, help="Directory containing files named <dataset-id>.csv or .tsv, optionally gzip-compressed.")
     suite_compare.add_argument("--detail-limit", type=int, default=20, help="Maximum missing and unexpected gene examples per benchmark.")
@@ -110,7 +125,7 @@ def main():
     bundle_create = bundle_sub.add_parser("create", help="Create a deterministic ZIP containing selected benchmarks.")
     bundle_create.add_argument("output", type=Path)
     bundle_create.add_argument("--id", action="append", default=[], help="Benchmark ID to include. Repeat to select several.")
-    bundle_create.add_argument("--assay", choices=["bulk_rna_seq", "sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq"])
+    bundle_create.add_argument("--assay", choices=ASSAYS)
     bundle_create.add_argument("--force", action="store_true", help="Replace an existing bundle.")
     bundle_verify = bundle_sub.add_parser("verify", help="Verify a bundle inventory, hashes and dataset manifests.")
     bundle_verify.add_argument("archive", type=Path)
@@ -130,6 +145,12 @@ def main():
         elif args.command == "peptide":
             model, folder = lookup(args.root, args.id)
             out = compare_peptides(model, folder, args.results, args.detail_limit)
+        elif args.command == "cell":
+            if args.cell_command == "qc":
+                out = summarize_matrix(args.matrix, args.barcodes, args.features, args.mitochondrial_prefix, args.feature_columns)
+            else:
+                model, folder = lookup(args.root, args.id)
+                out = compare_labels(model, folder, args.results, args.detail_limit)
         elif args.command == "evidence":
             out = verify_evidence_crate(args.archive)
         elif args.command == "bundle":
@@ -199,6 +220,8 @@ def main():
         if args.command == "variant" and out["status"] == "fail":
             sys.exit(2)
         if args.command == "peptide" and out["status"] == "fail":
+            sys.exit(2)
+        if args.command == "cell" and args.cell_command == "compare" and out["status"] == "fail":
             sys.exit(2)
         if args.command == "suite" and out["summary"]["status"] == "fail":
             sys.exit(2)

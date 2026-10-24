@@ -79,6 +79,31 @@ class SingleCellTests(unittest.TestCase):
             for relative in ("manifest.json", "nano/matrix.mtx", "nano/barcodes.tsv", "nano/features.tsv", "expected/cell-labels.tsv", "expected/validation.json"):
                 self.assertEqual((rebuilt / relative).read_bytes(), (self.folder / relative).read_bytes(), relative)
 
+    def test_cli_qc_and_compare(self):
+        qc = subprocess.run(
+            [
+                sys.executable, "-m", "omicsbench", "cell", "qc",
+                str(self.folder / "nano/matrix.mtx"),
+                str(self.folder / "nano/barcodes.tsv"),
+                str(self.folder / "nano/features.tsv"),
+                "--feature-columns", "3",
+            ],
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(qc.returncode, 0, qc.stderr)
+        self.assertEqual(json.loads(qc.stdout)["cells"], 90)
+        compared = subprocess.run(
+            [
+                sys.executable, "-m", "omicsbench", "--root", str(ROOT), "cell", "compare",
+                "singlecell-001", str(self.folder / "expected/cell-labels.tsv"),
+            ],
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(compared.returncode, 0, compared.stderr)
+        self.assertEqual(json.loads(compared.stdout)["status"], "pass")
+
 
 if __name__ == "__main__":
     unittest.main()

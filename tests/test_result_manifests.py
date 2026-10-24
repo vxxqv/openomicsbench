@@ -28,6 +28,7 @@ class ResultManifestTests(unittest.TestCase):
         (self.results / "rna").mkdir(parents=True)
         (self.results / "dna").mkdir()
         (self.results / "protein").mkdir()
+        (self.results / "single-cell").mkdir()
 
     def tearDown(self):
         self.temp.cleanup()
@@ -53,6 +54,12 @@ class ResultManifestTests(unittest.TestCase):
             writer.writeheader()
             for row in reader:
                 writer.writerow({"Protein": row["protein_id"], "Sequence": row["peptide"], "QValue": "0.001"})
+        with (self.collection / "datasets/singlecell/singlecell-001/expected/cell-labels.tsv").open("r", encoding="utf-8", newline="") as source, (self.results / "single-cell/clusters.csv").open("w", encoding="utf-8", newline="") as target:
+            reader = csv.DictReader(source, delimiter="\t")
+            writer = csv.DictWriter(target, fieldnames=["Barcode", "Cluster"])
+            writer.writeheader()
+            for row in reader:
+                writer.writerow({"Barcode": row["cell_id"], "Cluster": row["label"]})
 
     def create_native_manifest(self):
         return create_result_manifest(
@@ -62,6 +69,7 @@ class ResultManifestTests(unittest.TestCase):
                 "rnaseq-002=rna/effects.csv",
                 "sequence-005=dna/calls.vcf",
                 "sequence-006=protein/identifications.tsv",
+                "singlecell-001=single-cell/clusters.csv",
             ],
             [
                 "rnaseq-002:gene_id=Geneid",
@@ -69,21 +77,24 @@ class ResultManifestTests(unittest.TestCase):
                 "sequence-006:protein_id=Protein",
                 "sequence-006:peptide=Sequence",
                 "sequence-006:q_value=QValue",
+                "singlecell-001:cell_id=Barcode",
+                "singlecell-001:label=Cluster",
             ],
         )
 
     def test_nested_native_outputs_are_hash_locked_and_scored(self):
         self.write_native_outputs()
         indexed = self.create_native_manifest()
-        self.assertEqual(indexed["summary"]["passed"], 3)
+        self.assertEqual(indexed["summary"]["passed"], 4)
         manifest = json.loads((self.results / "results.json").read_text(encoding="utf-8"))
-        self.assertEqual([item["benchmark_id"] for item in manifest["results"]], ["rnaseq-002", "sequence-005", "sequence-006"])
-        report = evaluate_suite(self.collection, self.results, ["rnaseq-002", "sequence-005", "sequence-006"])
+        self.assertEqual([item["benchmark_id"] for item in manifest["results"]], ["rnaseq-002", "sequence-005", "sequence-006", "singlecell-001"])
+        report = evaluate_suite(self.collection, self.results, ["rnaseq-002", "sequence-005", "sequence-006", "singlecell-001"])
         self.assertEqual(report["summary"]["status"], "pass")
         self.assertEqual(report["fingerprint_contract"], "openomicsbench-evaluation-v2")
-        self.assertEqual(report["result_manifest"]["entries"], 3)
+        self.assertEqual(report["result_manifest"]["entries"], 4)
         self.assertEqual(report["results"][0]["details"]["input_columns"]["gene_id"], "Geneid")
         self.assertEqual(report["results"][2]["details"]["input_summary"]["columns"]["q_value"], "QValue")
+        self.assertEqual(report["results"][3]["details"]["input_columns"]["cell_id"], "Barcode")
 
     def test_changed_result_fails_before_scoring(self):
         self.write_native_outputs()
