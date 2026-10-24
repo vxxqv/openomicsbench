@@ -26,7 +26,7 @@
     "date": "2026-10-24",
     "operating_system": "Windows 11",
     "python": "3.12.14",
-    "commit": "1c822757e106fcda131f830e2489cda593d5f4f4",
+    "commit": "1c82275fee3af91be8553dd81b3cbfc904dbc75f",
     "commands": [
       "python -m pip install -r requirements-tested.txt",
       "python -m pip install --no-deps openomicsbench-5.0.0-py3-none-any.whl",
