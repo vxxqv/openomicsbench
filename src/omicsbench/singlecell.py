@@ -160,8 +160,9 @@ def clustering_metrics(truth: list[str], predicted: list[str]) -> dict[str, floa
         ari = 1.0
     else:
         expected = true_sum * predicted_sum / pairs
-        denominator = (true_sum + predicted_sum) / 2 - expected
-        ari = (index - expected) / denominator if denominator else (1.0 if truth == predicted else 0.0)
+        maximum = (true_sum + predicted_sum) / 2
+        denominator = maximum - expected
+        ari = (index - expected) / denominator if denominator else (1.0 if index == maximum else 0.0)
     total = len(truth)
     mutual_information = 0.0
     for (true_label, predicted_label), count in table.items():

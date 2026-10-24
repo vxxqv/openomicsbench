@@ -53,6 +53,8 @@ class SingleCellTests(unittest.TestCase):
         self.assertEqual(metrics["adjusted_rand_index"], 1.0)
         self.assertEqual(metrics["normalized_mutual_information"], 1.0)
         self.assertEqual(metrics["purity"], 1.0)
+        trivial = clustering_metrics(["one", "one"], ["renamed", "renamed"])
+        self.assertEqual(trivial["adjusted_rand_index"], 1.0)
 
     def test_exact_labels_pass_and_partial_labels_fail(self):
         truth = self.folder / "expected/cell-labels.tsv"
