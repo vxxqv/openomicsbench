@@ -1,9 +1,9 @@
 {
-  "version": "5.0.0",
-  "created": "2026-10-24",
-  "scope": "Files in the reviewed version 5 release candidate; generated caches and staged source downloads are excluded.",
+  "version": "6.0.0",
+  "created": "2026-10-25",
+  "scope": "Files in the reviewed version 6 release candidate; generated caches and staged source downloads are excluded.",
   "self_excluded": "release/file-manifest.json",
-  "file_count": 369,
+  "file_count": 379,
   "files": [
     {
       "path": ".gitattributes",
@@ -22,13 +22,13 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "bytes": 5414,
-      "sha256": "567c15f875914caf1ebe4ad1757a0257d8916e18d2071f7732a9b794155e5af4"
+      "bytes": 5982,
+      "sha256": "e924af34a520f35f38239578b9a5d1650d5df715b566650c0bdb8b8cd2fa0b55"
     },
     {
       "path": ".github/workflows/pypi.yml",
-      "bytes": 6840,
-      "sha256": "9a6486beb3b99ccf56855ee8ae8c6a8e9dd34bd3a9b90ae7f9e801f5634e25dd"
+      "bytes": 7711,
+      "sha256": "f873f76a564ffa6341976b54142a5dd8e06b508b784295a8bac6a3eec95b40c8"
     },
     {
       "path": ".gitignore",
@@ -37,18 +37,18 @@
     },
     {
       "path": ".zenodo.json",
-      "bytes": 2955,
-      "sha256": "1ab4c84d1422193611786293129ed8932038b6f00a74bceec71bdb55ae22093c"
+      "bytes": 3114,
+      "sha256": "9bf573374b80d57a5e469dd61dffa2c37dfc49d7f80fdfc1530bf967f1b0468e"
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 13404,
-      "sha256": "6ced25e13aaa4ac207f8a10ae6addb5dc6102ee417f712cf11211b9806ff178c"
+      "bytes": 14814,
+      "sha256": "42145abd8146f3296df22afb90d3a75d60f0a2725051b3d204d621e102a1838b"
     },
     {
       "path": "CITATION.cff",
       "bytes": 511,
-      "sha256": "76938883685b9842aa02e31b1d6a5f4e6171b4603f5760cfdfb33c72d9f61615"
+      "sha256": "444e98761f568611fb63edc9f680a9a3e83dc6a1f92d9f166caed682fb632cb1"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -77,18 +77,23 @@
     },
     {
       "path": "README.md",
-      "bytes": 17878,
-      "sha256": "bf9efaddcafd26861483d521ab0c83139eaa78f85ff3fbdbeb86d725e49f6402"
+      "bytes": 19401,
+      "sha256": "03bb4d026bd2f2d2732b2e3f4da55fa50c11aaf14d9b9d911b6f7ae38d8f491c"
     },
     {
       "path": "catalog/collection.json",
-      "bytes": 13024,
-      "sha256": "bc8175fe64745d6f6aa94cd888297982d8d6590a2edf23cdd066a8ecab385a62"
+      "bytes": 13450,
+      "sha256": "3409a21925dffcc00881c649daeeacaf72a6cc70fc1143bebe7e92a1fd5647dc"
     },
     {
       "path": "catalog/collection.tsv",
       "bytes": 3665,
       "sha256": "bfa7fb55e3337b012ead8bb2bf60b95786992184424c152799e83db0020eb2f2"
+    },
+    {
+      "path": "catalog/intervals.tsv",
+      "bytes": 244,
+      "sha256": "6dd03c87bc85f92d04a2e13b8308f0d319ed439344d6606e09df3287a6ab8abd"
     },
     {
       "path": "catalog/sequences.tsv",
@@ -249,6 +254,31 @@
       "path": "curation/reference-sources.json",
       "bytes": 4511,
       "sha256": "f54cf0b81a99268690870c06ffe84e8f9e34120b6af53371d41d1b374be07112"
+    },
+    {
+      "path": "datasets/intervals/interval-001/expected/truth-peaks.narrowPeak",
+      "bytes": 670,
+      "sha256": "73561113b11f8af5265b6007fa8b05b167294ccb66dc3aa91fa1d66af9679fdd"
+    },
+    {
+      "path": "datasets/intervals/interval-001/expected/validation.json",
+      "bytes": 689,
+      "sha256": "dd519c7c710d5d0e11ed9837d18dfc6ca6e6095810431be16b64cad4370e0004"
+    },
+    {
+      "path": "datasets/intervals/interval-001/manifest.json",
+      "bytes": 3333,
+      "sha256": "abd95792c42a954d012b2567646815a8d88d07c3a2249b4dd6b1e0b9f0e62462"
+    },
+    {
+      "path": "datasets/intervals/interval-001/nano/chrom.sizes",
+      "bytes": 39,
+      "sha256": "9b6ae44dd4107c7dd877145315857ae2d8d9fa1b5440d771028921910ca7eef2"
+    },
+    {
+      "path": "datasets/intervals/interval-001/nano/coverage.bedgraph",
+      "bytes": 10679,
+      "sha256": "b3bd7c311e80dcad7f22a72dd6e8a4cba6df406c00196fcc0d5ea4a0bf6a5e23"
     },
     {
       "path": "datasets/rnaseq/fixture-001/LICENSE-DATA.md",
@@ -1192,8 +1222,13 @@
     },
     {
       "path": "docs/benchmark-suites.md",
-      "bytes": 11705,
-      "sha256": "e1255f5dec9de938e834f5094a4b4f52dbae9960bdd346024cab08fd7651f92d"
+      "bytes": 12407,
+      "sha256": "08af64b3ca7557d91e0687e606525a2269ebab3a8b47bc44e3b51cdd0f09e9c8"
+    },
+    {
+      "path": "docs/genomic-intervals.md",
+      "bytes": 3211,
+      "sha256": "7d7c725391b0217118a7352a75b1bffb33754cdc88400a199a63b8fdc0aa373d"
     },
     {
       "path": "docs/implementation-status.md",
@@ -1392,8 +1427,8 @@
     },
     {
       "path": "pyproject.toml",
-      "bytes": 2164,
-      "sha256": "adaf69d66e8a413361424954391f741295f0f2b141054b5a5793ccb252c1b612"
+      "bytes": 2308,
+      "sha256": "e5338bb8e4725e272df602e697c91143d0ca4cbd62c0b5fe1c7b0658a7d63054"
     },
     {
       "path": "release/acceptance-ledger.json",
@@ -1402,8 +1437,8 @@
     },
     {
       "path": "release/certification.json",
-      "bytes": 409,
-      "sha256": "c015ae458b367cc5d4b5080c8e2e0703ccd2b561166321d4419c4bdaef2e55fa"
+      "bytes": 444,
+      "sha256": "c7a5a21c61053c274cb8cbd56e2ee594639ecfccada198183dcd59ae45b07243"
     },
     {
       "path": "release/collection-audit.json",
@@ -1412,8 +1447,8 @@
     },
     {
       "path": "release/metadata-input.json",
-      "bytes": 2278,
-      "sha256": "6219fd08e78dc51d7cfa421eba192a0f46b7a8475f47c7603ee04e0ab6ccd5fa"
+      "bytes": 2017,
+      "sha256": "fb748d5e1d245de6a5248a92b402e065546a176648bff6d9f6a9e7b487aeeb70"
     },
     {
       "path": "requirements-tested.txt",
@@ -1432,8 +1467,8 @@
     },
     {
       "path": "schemas/dataset.schema.json",
-      "bytes": 19390,
-      "sha256": "95397b36ba1aa4727ce1f6ab3fd3f751cbb7e5e9315b043242ebe48312602bdb"
+      "bytes": 20725,
+      "sha256": "1639394894e8740d7d3bd7f1ef5d7d256dc2a8cb4efa3db5b3fd912cac4a96c4"
     },
     {
       "path": "schemas/result-manifest.schema.json",
@@ -1447,8 +1482,8 @@
     },
     {
       "path": "scripts/build_catalog.py",
-      "bytes": 13227,
-      "sha256": "ba1daf9249f4557d4dee23eecf8cfa1a8a9760422f902f37de639b485791acb5"
+      "bytes": 14669,
+      "sha256": "c8aff93f0dbc962ee36ab9b2e82784c175d4004eaf6769cc889214344d4c083d"
     },
     {
       "path": "scripts/build_reference_effects.py",
@@ -1457,8 +1492,8 @@
     },
     {
       "path": "scripts/certify_release.py",
-      "bytes": 19436,
-      "sha256": "821597d839c8cd33351da3f0f143e24b8af492be96b371e17ff79dad557ff594"
+      "bytes": 19791,
+      "sha256": "ba1d59c058f112225b13ad6838d06a773fa072aee425ce3c537df96a236c5897"
     },
     {
       "path": "scripts/check_repository.py",
@@ -1468,7 +1503,7 @@
     {
       "path": "scripts/package_snapshot.py",
       "bytes": 1800,
-      "sha256": "e361313d06eeaac45c89495406dfc93d84817f74681e94e389d6c9c98b480a7e"
+      "sha256": "eafc4040beed25b311ba33f6066c23a3f4cbf5558a7fa5244e0931f3b4a354bf"
     },
     {
       "path": "setup.py",
@@ -1478,7 +1513,7 @@
     {
       "path": "src/omicsbench/__init__.py",
       "bytes": 98,
-      "sha256": "38ebc3dc1c48b80703ab2d03b4ab0ae83b71b13444792739cdd5831562080281"
+      "sha256": "fe2f2dc3770a4672fe6483af8bbe4ff18ed58217b19f36865718b116f8a38610"
     },
     {
       "path": "src/omicsbench/__main__.py",
@@ -1502,8 +1537,8 @@
     },
     {
       "path": "src/omicsbench/cli.py",
-      "bytes": 17924,
-      "sha256": "da4f54423a2f49683a7d5de64b82a73b3fd5a2e0c053baf35e2aca3462f2485e"
+      "bytes": 19195,
+      "sha256": "40f29d8952991a1340fa031603091d5f3f29b70217ae66ce88dc30758b7fa42a"
     },
     {
       "path": "src/omicsbench/compare.py",
@@ -1517,13 +1552,13 @@
     },
     {
       "path": "src/omicsbench/evaluate.py",
-      "bytes": 12164,
-      "sha256": "840f07c71779650eb51935ccc76b838d64aa94fb37a77e1e7a5f3babddc04032"
+      "bytes": 12455,
+      "sha256": "f1579c52d8511cbc169c1fc0ae8b1464f099789796fee3fcd2953ec5a66c2b3f"
     },
     {
       "path": "src/omicsbench/evidence.py",
-      "bytes": 10848,
-      "sha256": "2330362f1631337a6d37cb176b66225a3d03b7612089a252467dcee5b2de4a2a"
+      "bytes": 10953,
+      "sha256": "1c6866b30d0a129b3bc1fc2995f0dbace88b0770ab010f9fac3530e828647372"
     },
     {
       "path": "src/omicsbench/expression_atlas.py",
@@ -1536,14 +1571,19 @@
       "sha256": "34c5a339e08747d6158f34ce600655b591ac02f2a45ae634eca784fd5c1aff22"
     },
     {
+      "path": "src/omicsbench/intervals.py",
+      "bytes": 9592,
+      "sha256": "db86a48d04155e132d0968df6c96a11bfe29f157c17526c28b729404ebf89390"
+    },
+    {
       "path": "src/omicsbench/matrix.py",
       "bytes": 3319,
       "sha256": "24fde954fefe246bcfab749c017d4d8ceb83d66e021f4442b77a87b0eacc51d1"
     },
     {
       "path": "src/omicsbench/models.py",
-      "bytes": 13683,
-      "sha256": "015531917ee14ddf132d71f79cd52c46344e51d225460a67ca8530bacd9d3ae1"
+      "bytes": 15022,
+      "sha256": "8f2191e2fe2b72e6484d2068692f452af1b4abc5cb441325a3bfbab98d0d9e3b"
     },
     {
       "path": "src/omicsbench/peptides.py",
@@ -1552,8 +1592,8 @@
     },
     {
       "path": "src/omicsbench/policy.py",
-      "bytes": 8211,
-      "sha256": "9808abbc16e704c97f73999e6e20dd29d0be87ca9f81693600ee9890830f76dd"
+      "bytes": 8327,
+      "sha256": "70e818c417fd82fad359149ed86cab3528ed30bea00d2122268a508a1fe5f41c"
     },
     {
       "path": "src/omicsbench/proteins.py",
@@ -1567,13 +1607,13 @@
     },
     {
       "path": "src/omicsbench/regression.py",
-      "bytes": 5037,
-      "sha256": "7306a1b11a7bbf26c0f44ee42980b0be657f1b5d42f1decd9671e19905d077b1"
+      "bytes": 5137,
+      "sha256": "6d65f930fed1d162a97928f0d4639796d34bbddc0085ca07732244f13af37660"
     },
     {
       "path": "src/omicsbench/results.py",
-      "bytes": 10947,
-      "sha256": "a43f6b4ac820331559195245917004ce6d1cfd2438bd087934020dd6f02c1e97"
+      "bytes": 11308,
+      "sha256": "0e4dadbee3b81b1774985d36a71e7a812b7849c88236942acef0afaa176f70d9"
     },
     {
       "path": "src/omicsbench/rnaseq.py",
@@ -1617,8 +1657,8 @@
     },
     {
       "path": "src/omicsbench/validate.py",
-      "bytes": 8599,
-      "sha256": "f18f9bc171fd73588a21902a8e27ca3a67e585fad197d2f5650f3750a8ecbfd3"
+      "bytes": 9878,
+      "sha256": "4d321c0a008ee66b2654080cb50cd13b4ee402497a3589bda476e5740cf6ac86"
     },
     {
       "path": "src/omicsbench/variants.py",
@@ -1642,13 +1682,18 @@
     },
     {
       "path": "tests/test_evaluate.py",
-      "bytes": 6265,
-      "sha256": "d348b41fb437468fb545ccfa4528fa557a6feacd7bb48e1c872a41050409cb12"
+      "bytes": 6660,
+      "sha256": "21ba83434c63ce810d2ad7d169fd618ce1482617e536b64436d719147a1e21ac"
     },
     {
       "path": "tests/test_evidence.py",
       "bytes": 3208,
       "sha256": "a86a615282f95e4acee9b2ee8dff43e723ea22dd900c3d7ea5ecc3718f6e824f"
+    },
+    {
+      "path": "tests/test_intervals.py",
+      "bytes": 3820,
+      "sha256": "49d601635f52f3ad5cd0d6f5b921e9317794df8d23f0dd3b952e52d5affb4bbc"
     },
     {
       "path": "tests/test_matrix.py",
@@ -1739,6 +1784,11 @@
       "path": "workflows/build_fixture.py",
       "bytes": 7893,
       "sha256": "fd64bbe2044e500613ebcc780c0bb13b05052a89c35349ee132a14b7d27c3429"
+    },
+    {
+      "path": "workflows/build_interval_fixture.py",
+      "bytes": 5984,
+      "sha256": "bb4e1d5e3f92f9c93f39afe674ff5ac55fb51b80a29fd5534ec2d533af5ca06f"
     },
     {
       "path": "workflows/build_sequence_fixtures.py",

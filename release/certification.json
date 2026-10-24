@@ -1,14 +1,18 @@
 {
-  "scope": "v5_collection",
-  "software_version": "5.0.0",
-  "decision": "GO",
+  "scope": "v6_collection",
+  "software_version": "6.0.0",
+  "decision": "NO-GO",
   "preflight": "PASS",
   "certified_biological_objects": 12,
   "certified_sequence_objects": 6,
   "certified_single_cell_objects": 1,
+  "certified_interval_objects": 1,
   "source_studies": 7,
   "redistributable_pockets": 12,
   "design_archetypes": 12,
   "blockers": [],
-  "deferred_publication_gates": []
+  "deferred_publication_gates": [
+    "version_doi",
+    "post_upload_verification"
+  ]
 }
