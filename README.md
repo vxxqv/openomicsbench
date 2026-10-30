@@ -1,8 +1,8 @@
 # OpenOmicsBench
 
-OpenOmicsBench is a compact benchmark collection and local toolkit for bioinformatics software testing, method checks and teaching. It contains 12 certified bulk RNA-seq objects, six deterministic DNA, RNA, protein and proteomics fixtures, a 10x-style single-cell RNA-seq benchmark, a genomic peak-calling benchmark, strict local tools, and a CI-ready evaluation system.
+OpenOmicsBench is a compact benchmark collection and local toolkit for bioinformatics software testing, method checks and teaching. It contains 12 certified bulk RNA-seq objects, six deterministic DNA, RNA, protein and proteomics fixtures, a 10x-style single-cell RNA-seq benchmark, a genomic peak-calling benchmark, strict local tools, and a CI-ready evaluation system. [Browse the collection](https://vxxqv.github.io/openomicsbench/) before installing.
 
-Version 6 adds a deterministic chromatin peak benchmark for ATAC-seq, ChIP-seq, CUT&RUN and CUT&Tag software. It validates BED and narrowPeak coordinates, reports interval QC, and scores called peaks with reciprocal-overlap and base-pair precision, recall and F1. The unified evaluator, result manifests, policy gates, regression reports, dashboards and evidence crates all understand the new assay.
+Version 7 adds a five-assay first-run example and a searchable public catalog. The example runs from the installed package and produces a hash-locked result manifest, JSON and HTML reports, and a verifiable evidence ZIP. It uses bundled reference answers, so its passing result shows how the workflow runs; it does not measure the performance of an external method.
 
 The package runs offline after installation. Sequence files stay on the local computer. The built-in tools cover inspection and lightweight preprocessing; they do not claim to replace aligners, variant callers, taxonomic classifiers or assay-specific statistical workflows.
 
@@ -13,7 +13,10 @@ OpenOmicsBench requires Python 3.11 or newer.
 ```sh
 python -m pip install openomicsbench
 omicsbench --version
+omicsbench demo my-first-run
 ```
+
+Open `my-first-run/report.html` for the example comparisons. The corresponding `report.json`, `reference-results/results.json` and `evidence.zip` are in the same output directory. The demo refuses to replace an existing directory.
 
 List and validate the bundled benchmarks:
 

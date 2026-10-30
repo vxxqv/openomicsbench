@@ -1,5 +1,11 @@
 # Changes
 
+## 7.0.0
+
+Version 7 makes the collection easier to evaluate before adopting it. `omicsbench demo OUTPUT_DIRECTORY` copies five bundled reference result sets, indexes their hashes, scores bulk RNA-seq effects, single-cell labels, genomic peaks, DNA variants and peptides, then writes JSON and HTML reports plus a verifiable evidence ZIP. The command works from the installed wheel without a checkout or network connection. Because it compares reference answers with their own truth sets, it is a workflow example rather than a claim about method accuracy.
+
+A public project site provides a searchable catalog of all 20 benchmark objects, direct links to the dataset manifests, a short installation path and links to the package, repository and archived releases. The catalog is built from the same checked collection data used by the repository and deployed from `main`.
+
 ## 6.0.0
 
 Version 6 adds a deterministic genomic peak-calling benchmark for ATAC-seq, ChIP-seq, CUT&RUN and CUT&Tag software. `interval-001` contains a compact bedGraph signal track, two declared synthetic chromosome sizes and 12 narrowPeak truth intervals spanning narrow, broad, close-doublet and chromosome-edge cases. The closed-form builder reproduces every byte.

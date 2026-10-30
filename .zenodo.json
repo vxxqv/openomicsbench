@@ -6,7 +6,7 @@
       "orcid": "0009-0005-1859-5107"
     }
   ],
-  "description": "Compact, traceable RNA, DNA, protein, single-cell and genomic interval benchmarks with strict local validation, peak-overlap scoring, hash-locked result manifests, policy gates, offline dashboards and verifiable evidence crates.",
+  "description": "Compact, traceable RNA, DNA, protein, single-cell and genomic interval benchmarks with offline scoring, hash-locked results, a five-assay first-run example, and verifiable reports. Browse the public collection catalog or install from PyPI.",
   "upload_type": "software",
   "access_right": "open",
   "license": "Apache-2.0",
@@ -125,6 +125,10 @@
     "trend report",
     "result manifest",
     "column mapping",
-    "pipeline interoperability"
+    "pipeline interoperability",
+    "benchmark catalog",
+    "offline bioinformatics",
+    "RNA-seq testing",
+    "five-assay evaluation"
   ]
 }
