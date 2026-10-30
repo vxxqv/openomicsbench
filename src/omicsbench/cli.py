@@ -25,6 +25,7 @@ from .trends import parse_run, trend_reports
 from .results import create_result_manifest
 from .singlecell import compare_labels, summarize_matrix
 from .intervals import compare_intervals, summarize_intervals
+from .demo import create_demo
 
 ASSAYS = ["bulk_rna_seq", "single_cell_rna_seq", "chromatin_accessibility", "sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq"]
 
@@ -48,6 +49,8 @@ def main():
             command.add_argument("results",type=Path,help="CSV or TSV file with gene_id and log2_fold_change columns.")
             command.add_argument("--detail-limit",type=int,default=20,help="Maximum missing and unexpected gene examples to return.")
     add_sequence_parser(sub)
+    demo = sub.add_parser("demo", help="Run a five-assay example using bundled reference answers.")
+    demo.add_argument("output", type=Path, help="New directory for example results, reports and evidence.")
     variant = sub.add_parser("variant", help="Compare VCF calls with a bundled small-variant truth set.")
     variant_sub = variant.add_subparsers(dest="variant_command", required=True)
     variant_compare = variant_sub.add_parser("compare", help="Score exact SNV alleles in a VCF or VCF.GZ file.")
@@ -146,7 +149,9 @@ def main():
         command.add_argument("--evidence", type=Path, help="Write a deterministic ZIP with the reports, submitted results and RO-Crate metadata.")
     args = p.parse_args()
     try:
-        if args.command == "seq":
+        if args.command == "demo":
+            out = create_demo(args.root, args.output)
+        elif args.command == "seq":
             out = run_sequence_command(args)
         elif args.command == "variant":
             model, folder = lookup(args.root, args.id)
