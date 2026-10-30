@@ -1,9 +1,9 @@
 {
-  "version": "6.0.0",
-  "created": "2026-10-25",
-  "scope": "Files in the reviewed version 6 release candidate; generated caches and staged source downloads are excluded.",
+  "version": "7.0.0",
+  "created": "2026-10-30",
+  "scope": "Files in the reviewed version 7 release candidate; generated caches and staged source downloads are excluded.",
   "self_excluded": "release/file-manifest.json",
-  "file_count": 379,
+  "file_count": 385,
   "files": [
     {
       "path": ".gitattributes",
@@ -26,9 +26,14 @@
       "sha256": "e924af34a520f35f38239578b9a5d1650d5df715b566650c0bdb8b8cd2fa0b55"
     },
     {
+      "path": ".github/workflows/pages.yml",
+      "bytes": 786,
+      "sha256": "e17a57ae28667a716130d4fc74bb8270404ecfb84f6103e4333e244127d7b5c2"
+    },
+    {
       "path": ".github/workflows/pypi.yml",
-      "bytes": 7711,
-      "sha256": "f873f76a564ffa6341976b54142a5dd8e06b508b784295a8bac6a3eec95b40c8"
+      "bytes": 7967,
+      "sha256": "1d96cea7f34c9eca4121b9dc8571937f2cc4cfc45a40967ca5047cf804fd42ff"
     },
     {
       "path": ".gitignore",
@@ -37,18 +42,18 @@
     },
     {
       "path": ".zenodo.json",
-      "bytes": 3114,
-      "sha256": "9bf573374b80d57a5e469dd61dffa2c37dfc49d7f80fdfc1530bf967f1b0468e"
+      "bytes": 3232,
+      "sha256": "56161d5cbbc437e4ed31879d3769e0edd6257f5f7f88614a515f27c53a5dc2e7"
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 14814,
-      "sha256": "42145abd8146f3296df22afb90d3a75d60f0a2725051b3d204d621e102a1838b"
+      "bytes": 15685,
+      "sha256": "0bc173223b9ec385e9f82566d9e6a15af031d390871a46d3b17d77e8ff3223d6"
     },
     {
       "path": "CITATION.cff",
       "bytes": 511,
-      "sha256": "444e98761f568611fb63edc9f680a9a3e83dc6a1f92d9f166caed682fb632cb1"
+      "sha256": "4b2be252e6062b4161a8a1af7c771324edef14a0021e05d16a282458f39ef87d"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -77,13 +82,13 @@
     },
     {
       "path": "README.md",
-      "bytes": 19401,
-      "sha256": "03bb4d026bd2f2d2732b2e3f4da55fa50c11aaf14d9b9d911b6f7ae38d8f491c"
+      "bytes": 19712,
+      "sha256": "6476a26ebff03a50ac7eab024cb0a5bdb4035915ce5c4db58fde1cb73d6b4704"
     },
     {
       "path": "catalog/collection.json",
       "bytes": 13450,
-      "sha256": "3409a21925dffcc00881c649daeeacaf72a6cc70fc1143bebe7e92a1fd5647dc"
+      "sha256": "22f0b2779a810af7bf32b1f0e6abe13de22fc5e58d75aa9c8a971c3eb07c5184"
     },
     {
       "path": "catalog/collection.tsv",
@@ -1427,8 +1432,8 @@
     },
     {
       "path": "pyproject.toml",
-      "bytes": 2308,
-      "sha256": "e5338bb8e4725e272df602e697c91143d0ca4cbd62c0b5fe1c7b0658a7d63054"
+      "bytes": 2429,
+      "sha256": "44a7140e1c34b2a74192bc3077300717bf39241bde592df97a7fa5d0ddc6a913"
     },
     {
       "path": "release/acceptance-ledger.json",
@@ -1438,7 +1443,7 @@
     {
       "path": "release/certification.json",
       "bytes": 444,
-      "sha256": "c7a5a21c61053c274cb8cbd56e2ee594639ecfccada198183dcd59ae45b07243"
+      "sha256": "5a936916e4c77653764e6824bd848cb7b76fb3286454fedb4955ccad21625cc4"
     },
     {
       "path": "release/collection-audit.json",
@@ -1447,8 +1452,8 @@
     },
     {
       "path": "release/metadata-input.json",
-      "bytes": 2017,
-      "sha256": "fb748d5e1d245de6a5248a92b402e065546a176648bff6d9f6a9e7b487aeeb70"
+      "bytes": 1886,
+      "sha256": "a5f5603585b52f9d06a7fc99ceae5b9562bd3f46da27d76c3dd9cfc7aabb20df"
     },
     {
       "path": "requirements-tested.txt",
@@ -1493,7 +1498,7 @@
     {
       "path": "scripts/certify_release.py",
       "bytes": 19791,
-      "sha256": "ba1d59c058f112225b13ad6838d06a773fa072aee425ce3c537df96a236c5897"
+      "sha256": "049088c6ccfa56e0d265a650dd7898b9389646fcac87c330ed05e7680f273b15"
     },
     {
       "path": "scripts/check_repository.py",
@@ -1503,7 +1508,7 @@
     {
       "path": "scripts/package_snapshot.py",
       "bytes": 1800,
-      "sha256": "eafc4040beed25b311ba33f6066c23a3f4cbf5558a7fa5244e0931f3b4a354bf"
+      "sha256": "daf61784a3373ea597d730c4fee9af2bac222390a800fe26f416d72749c2505e"
     },
     {
       "path": "setup.py",
@@ -1511,9 +1516,24 @@
       "sha256": "a453fbe6fcd8030efcc5cf59fa0ddeb51df238c5156141869601fed19d4c1080"
     },
     {
+      "path": "site/app.js",
+      "bytes": 3227,
+      "sha256": "930d6678d5dd81ebda5c69f47eb290cc7cecd6b355329b2159b352e937d14af2"
+    },
+    {
+      "path": "site/index.html",
+      "bytes": 7142,
+      "sha256": "3f991784b0ad10865e2332144bc5de2585a1f7c30e7328e7b85748d360d86eac"
+    },
+    {
+      "path": "site/styles.css",
+      "bytes": 6297,
+      "sha256": "b591b8d61efe9a0ca51a7c9c0e1a48539e657b05f3d84a01ade37cee3c880053"
+    },
+    {
       "path": "src/omicsbench/__init__.py",
       "bytes": 98,
-      "sha256": "fe2f2dc3770a4672fe6483af8bbe4ff18ed58217b19f36865718b116f8a38610"
+      "sha256": "c43e57208ced843d7a9e5f0c5eaf2b389c00672a6c4d26762747e98a1b5eb750"
     },
     {
       "path": "src/omicsbench/__main__.py",
@@ -1537,13 +1557,18 @@
     },
     {
       "path": "src/omicsbench/cli.py",
-      "bytes": 19195,
-      "sha256": "40f29d8952991a1340fa031603091d5f3f29b70217ae66ce88dc30758b7fa42a"
+      "bytes": 19524,
+      "sha256": "1a09cbe59268be0cd7ca5528b544b52c49328b43273151030e4df6c9b33d9c5d"
     },
     {
       "path": "src/omicsbench/compare.py",
       "bytes": 6275,
       "sha256": "9d9d228058e8a334ec1506bcf6590e3dce46c2dade55e00da656d14ce121d3f3"
+    },
+    {
+      "path": "src/omicsbench/demo.py",
+      "bytes": 3644,
+      "sha256": "0bc3d1b8967e94e63599823a6f346ab3eb2a120e28454bcebc2b8cf0f74d77d4"
     },
     {
       "path": "src/omicsbench/download.py",
@@ -1679,6 +1704,11 @@
       "path": "tests/test_core.py",
       "bytes": 24408,
       "sha256": "bf007ac322e02ae97ed7d89d7362503305a211de02a8490cd7d5c8a5027f8bb6"
+    },
+    {
+      "path": "tests/test_demo.py",
+      "bytes": 1170,
+      "sha256": "c4b1cdd84afde99ddce5493604a0f8588ad89005c2ac42a2fe809550e9fb4b33"
     },
     {
       "path": "tests/test_evaluate.py",
