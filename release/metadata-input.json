@@ -45,7 +45,31 @@
     "packaged_collection": true,
     "limitation": "The release preparer ran the clean-room trial. No independent tester is claimed."
   },
-  "release_commit": null,
-  "version_doi": null,
-  "post_upload_verification": null
+  "release_commit": "581061dc8415257f966d12a26e52a6f001266fcf",
+  "version_doi": "10.5281/zenodo.23813956",
+  "post_upload_verification": {
+    "status": "pass",
+    "verified_at": "2026-10-30T17:31:40Z",
+    "version_doi": "10.5281/zenodo.23813956",
+    "record_url": "https://zenodo.org/records/23813956",
+    "git_commit": "581061dc8415257f966d12a26e52a6f001266fcf",
+    "git_tag": "v7.0.0",
+    "github_archive_url": "https://github.com/vxxqv/openomicsbench/archive/refs/tags/v7.0.0.zip",
+    "zenodo_archive_url": "https://zenodo.org/api/records/23813956/files/vxxqv/openomicsbench-v7.0.0.zip/content",
+    "github_archive_root": "openomicsbench-7.0.0",
+    "zenodo_archive_root": "vxxqv-openomicsbench-c6bcc2a",
+    "github_archive_bytes": 11186979,
+    "zenodo_archive_bytes": 11194787,
+    "archived_files": 386,
+    "inventory_files_verified": 385,
+    "matching_files": 386,
+    "archive_content_match": true,
+    "missing_files": [],
+    "extra_files": [],
+    "changed_files": [],
+    "github_sha256": "8df5e04576b2b502de55c07c57feb78d2d7cca8942624d4d6d3c60a19fd61cd5",
+    "github_md5": "123be1c0e90ce5c8ec708096cf9f8be8",
+    "zenodo_sha256": "3aab040bdde3297a3633e81d99ccfdf90102b9a6ce4a5c263419fe1b4465e587",
+    "zenodo_md5": "f19ebc347e7d47f627675e151e7cdc9a"
+  }
 }
