@@ -1,5 +1,13 @@
 # Changes
 
+## 8.0.0
+
+Version 8 adds `sequence-007`, a deterministic paired-read assignment benchmark with three project-local mock reference codes, 36 uniquely assignable pairs, six shared-reference pairs and six absent-reference pairs. All 48 pairs have declared read-level truth. Rebuilding the fixture reproduces its FASTQ, FASTA, truth and manifest bytes.
+
+`omicsbench taxon compare` accepts canonical TSV and Kraken 2's five-column per-read format, including gzip-compressed files. It checks duplicate and missing IDs, scores per-code precision, recall and F1, and reports overall accuracy, coverage, macro F1, classified precision and recall, and unclassified recall. `omicsbench taxon classify` provides a deliberately narrow exact-match example for mock references. It does not claim biological taxonomic profiling performance.
+
+Read-level taxonomy now participates in result manifests, unified evaluation, policy gates, regression tracking, method matrices, CSV and HTML reports, and evidence crates. The first-run demo includes a sixth assay and marks its self-comparison scope in the JSON and HTML reports.
+
 ## 7.0.0
 
 Version 7 makes the collection easier to evaluate before adopting it. `omicsbench demo OUTPUT_DIRECTORY` copies five bundled reference result sets, indexes their hashes, scores bulk RNA-seq effects, single-cell labels, genomic peaks, DNA variants and peptides, then writes JSON and HTML reports plus a verifiable evidence ZIP. The command works from the installed wheel without a checkout or network connection. Because it compares reference answers with their own truth sets, it is a workflow example rather than a claim about method accuracy.

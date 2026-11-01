@@ -6,7 +6,7 @@
   <meta name="description" content="OpenOmicsBench is a free, offline collection of RNA-seq, DNA, protein, single-cell and genomic interval benchmarks for testing bioinformatics software.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="OpenOmicsBench | Benchmarks you can inspect">
-  <meta property="og:description" content="20 traceable benchmark objects across RNA, DNA, protein, single-cell and genomic intervals. Install from PyPI and run a five-assay example in one command.">
+  <meta property="og:description" content="21 traceable benchmark objects across RNA, DNA, protein, single-cell, genomic peaks and mock taxonomy. Install from PyPI and run a six-assay example in one command.">
   <meta property="og:url" content="https://vxxqv.github.io/openomicsbench/">
   <link rel="canonical" href="https://vxxqv.github.io/openomicsbench/">
   <link rel="stylesheet" href="styles.css">
@@ -28,16 +28,16 @@
 
   <main id="main">
     <section class="hero wrap" id="top" aria-labelledby="hero-title">
-      <div class="eyebrow"><span class="live-dot" aria-hidden="true"></span> Open source · works offline · version 7</div>
+      <div class="eyebrow"><span class="live-dot" aria-hidden="true"></span> Open source · works offline · version 8</div>
       <h1 id="hero-title">Benchmarks you can <em>inspect.</em></h1>
-      <p class="lead">Small, traceable datasets and strict scoring tools for testing bioinformatics software. Start with a five-assay example, then bring results from your own pipeline.</p>
+      <p class="lead">Small, traceable datasets and strict scoring tools for testing bioinformatics software. Start with a six-assay example, then bring results from your own pipeline.</p>
       <div class="hero-actions">
         <a class="button primary" href="#start">Try the example <span aria-hidden="true">↗</span></a>
         <a class="button secondary" href="#collection">Explore the collection <span aria-hidden="true">↓</span></a>
       </div>
       <div class="hero-facts" aria-label="Collection at a glance">
-        <div><strong>20</strong><span>benchmark objects</span></div>
-        <div><strong>5</strong><span>assay families in the demo</span></div>
+        <div><strong>21</strong><span>benchmark objects</span></div>
+        <div><strong>6</strong><span>assay families in the demo</span></div>
         <div><strong>1</strong><span>offline Python package</span></div>
       </div>
     </section>
@@ -50,7 +50,7 @@
         </div>
         <div class="prose">
           <p>OpenOmicsBench lets you validate bundled data, inspect its source and transformations, score your own outputs, and compare methods across runs. Result manifests lock input hashes; reports and evidence packages make a run easier to review or reproduce.</p>
-          <p>The 12 biological bulk RNA-seq objects come from seven Expression Atlas studies. The other fixtures are declared synthetic tests for sequences, variants, peptide identification, single-cell clustering and chromatin peaks. They are software test cases, not clinical reference materials.</p>
+          <p>The 12 biological bulk RNA-seq objects come from seven Expression Atlas studies. The other fixtures are declared synthetic tests for sequences, variants, peptide identification, single-cell clustering, chromatin peaks and read-level mock taxonomy. They are software test cases, not clinical reference materials.</p>
         </div>
       </div>
     </section>
@@ -67,6 +67,7 @@
           <button class="filter" type="button" data-family="sequences" aria-pressed="false">Sequences</button>
           <button class="filter" type="button" data-family="singlecell" aria-pressed="false">Single-cell</button>
           <button class="filter" type="button" data-family="intervals" aria-pressed="false">Genomic peaks</button>
+          <button class="filter" type="button" data-family="taxonomy" aria-pressed="false">Mock taxonomy</button>
         </div>
       </div>
       <p id="catalog-status" class="catalog-status" role="status">Loading collection…</p>
@@ -86,7 +87,7 @@
           <div class="terminal-top"><span>Terminal</span><span>Python 3.11+</span></div>
           <pre><code><span class="prompt">$</span> python -m pip install openomicsbench
 <span class="prompt">$</span> omicsbench demo my-first-run</code></pre>
-          <div class="terminal-bottom">Open <code>my-first-run/report.html</code> to inspect all five comparisons.</div>
+          <div class="terminal-bottom">Open <code>my-first-run/report.html</code> to inspect all six comparisons.</div>
         </div>
       </div>
     </section>

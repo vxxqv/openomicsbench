@@ -1,8 +1,8 @@
 {
   "schema_version": "4.0",
-  "release": "7.0.0",
+  "release": "8.0.0",
   "biological_objects": 12,
-  "sequence_objects": 6,
+  "sequence_objects": 7,
   "single_cell_objects": 1,
   "interval_objects": 1,
   "source_studies": 7,
@@ -408,6 +408,19 @@
       "files": 1,
       "records": 3,
       "letters": 82,
+      "rights": "GREEN",
+      "license": "Apache-2.0"
+    },
+    {
+      "id": "sequence-007",
+      "title": "Synthetic paired-read taxonomy assignment benchmark",
+      "assay": "shotgun_metagenomics",
+      "molecule": "dna",
+      "format": "fastq",
+      "paired": true,
+      "files": 2,
+      "records": 96,
+      "letters": 4800,
       "rights": "GREEN",
       "license": "Apache-2.0"
     }

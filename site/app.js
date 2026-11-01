@@ -6,7 +6,8 @@ const labels = {
   rnaseq: "Bulk RNA-seq",
   sequences: "Sequence",
   singlecell: "Single-cell",
-  intervals: "Genomic peaks"
+  intervals: "Genomic peaks",
+  taxonomy: "Mock taxonomy"
 };
 let records = [];
 let family = "all";
@@ -19,7 +20,7 @@ function showRecords() {
   for (const item of visible) {
     const card = document.createElement("a");
     card.className = "catalog-card";
-    card.href = `https://github.com/vxxqv/openomicsbench/tree/main/datasets/${item.family}/${encodeURIComponent(item.id)}`;
+    card.href = `https://github.com/vxxqv/openomicsbench/tree/main/datasets/${item.directory}/${encodeURIComponent(item.id)}`;
     const top = document.createElement("div");
     top.className = "card-top";
     const category = document.createElement("span");
@@ -72,7 +73,8 @@ fetch("collection.json")
     ];
     records = groups.flatMap(([name, items]) => items.map(item => ({
       ...item,
-      family: name,
+      family: item.assay === "shotgun_metagenomics" ? "taxonomy" : name,
+      directory: name,
       haystack: [item.id, item.title, item.organism, item.assay, item.archetype, item.source_accession]
         .filter(Boolean).join(" ").toLocaleLowerCase()
     })));

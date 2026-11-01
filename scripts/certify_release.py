@@ -345,7 +345,7 @@ def main() -> None:
         blockers.append("At least four certified design archetypes are required.")
     if len(sequence_validated) < 4:
         blockers.append("The release requires at least four validated sequence objects.")
-    expected_sequence_families = {"sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq"}
+    expected_sequence_families = {"sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq", "shotgun_metagenomics"}
     if not expected_sequence_families.issubset({model.assay for model in sequence_validated}):
         blockers.append("The DNA, RNA, protein, paired-read and DNA-seq sequence families are incomplete.")
     if not single_cell_validated:
@@ -378,7 +378,7 @@ def main() -> None:
 
     deferred = [field for field in PUBLICATION_FIELDS if not metadata.get(field)]
     report = {
-        "scope": "v7_collection",
+        "scope": "v8_collection",
         "software_version": metadata["software_version"],
         "decision": "GO" if not blockers and not deferred else "NO-GO",
         "preflight": "PASS" if not blockers else "FAIL",

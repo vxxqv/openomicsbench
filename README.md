@@ -1,8 +1,8 @@
 # OpenOmicsBench
 
-OpenOmicsBench is a compact benchmark collection and local toolkit for bioinformatics software testing, method checks and teaching. It contains 12 certified bulk RNA-seq objects, six deterministic DNA, RNA, protein and proteomics fixtures, a 10x-style single-cell RNA-seq benchmark, a genomic peak-calling benchmark, strict local tools, and a CI-ready evaluation system. [Browse the collection](https://vxxqv.github.io/openomicsbench/) before installing.
+OpenOmicsBench is a compact benchmark collection and local toolkit for bioinformatics software testing, method checks and teaching. It contains 12 certified bulk RNA-seq objects, seven deterministic sequence and classification fixtures, a 10x-style single-cell RNA-seq benchmark, a genomic peak-calling benchmark, strict local tools, and a CI-ready evaluation system. [Browse the collection](https://vxxqv.github.io/openomicsbench/) before installing.
 
-Version 7 adds a five-assay first-run example and a searchable public catalog. The example runs from the installed package and produces a hash-locked result manifest, JSON and HTML reports, and a verifiable evidence ZIP. It uses bundled reference answers, so its passing result shows how the workflow runs; it does not measure the performance of an external method.
+Version 8 adds a paired-read mock taxonomy benchmark. Its 48 synthetic read pairs cover three project-local reference labels, shared-reference ambiguity and absent-reference background. The comparator accepts canonical TSV or standard five-column Kraken 2 per-read output. It reports coverage, accuracy, macro F1, classified precision and recall, and unclassified recall. The first-run example now covers six assay families and labels its reference self-comparison inside the reports.
 
 The package runs offline after installation. Sequence files stay on the local computer. The built-in tools cover inspection and lightweight preprocessing; they do not claim to replace aligners, variant callers, taxonomic classifiers or assay-specific statistical workflows.
 
@@ -30,6 +30,8 @@ omicsbench validate singlecell-001
 omicsbench cell compare singlecell-001 clusters.tsv
 omicsbench validate interval-001
 omicsbench interval compare interval-001 calls.narrowPeak
+omicsbench validate sequence-007
+omicsbench taxon compare sequence-007 assignments.kraken
 ```
 
 The wheel contains the complete collection. A repository checkout and network connection are not required.
@@ -116,6 +118,19 @@ omicsbench interval compare interval-001 calls.narrowPeak
 
 Peak matches require at least 50% reciprocal overlap. The report separates interval-level precision, recall and F1 from base-pair precision, recall and F1, so extra calls and over-wide calls remain visible. Parsing follows the UCSC zero-based, half-open BED convention, checks chromosome bounds, and accepts BED3, BED6, narrowPeak and gzip-compressed files. The benchmark measures coordinate and overlap recovery. It does not assess alignment, blacklist filtering, replicate concordance or biological peak validity. See [the genomic interval guide](docs/genomic-intervals.md) for the exact contract.
 
+## Mock taxonomy assignment
+
+`sequence-007` contains three generated reference sequences and 48 paired reads. Twelve pairs deliberately have no unique reference assignment: six come from a shared segment and six from an absent background sequence. The reference headers and truth labels use project-local codes `1`, `2` and `3`; they are not NCBI taxonomic identifiers.
+
+Compare read-level assignments written as `read_id` and `taxon_id` columns, or pass Kraken 2's standard five-column per-read output directly:
+
+```sh
+omicsbench taxon compare sequence-007 assignments.tsv
+omicsbench taxon compare sequence-007 assignments.kraken
+```
+
+For a small exact-match teaching example, `omicsbench taxon classify reference.fasta reads_R1.fastq reads_R2.fastq calls.tsv` writes canonical assignments when reference IDs follow `mock_taxon_<code>`. It assigns `0` when neither mate identifies a unique reference. This narrow tool tests file handling and scoring; it is not a metagenomic classifier for biological samples.
+
 ## Benchmark suites
 
 Validate the complete installed collection and save reports that can be attached to a CI run:
@@ -145,7 +160,7 @@ Then run:
 omicsbench suite compare results --id rnaseq-002 --id rnaseq-003 --junit reports/comparison.xml
 ```
 
-For a mixed bulk RNA, single-cell, chromatin, DNA and protein run, add benchmark-named cluster, peak, VCF and peptide output alongside the expression tables:
+For a mixed bulk RNA, single-cell, chromatin, DNA, protein and mock-taxonomy run, add benchmark-named cluster, peak, VCF, peptide and read-assignment output alongside the expression tables:
 
 ```text
 results/
@@ -155,6 +170,7 @@ results/
   interval-001.narrowPeak
   sequence-005.vcf.gz
   sequence-006.peptides.tsv
+  sequence-007.taxonomy.tsv
 ```
 
 ```sh
@@ -164,6 +180,7 @@ omicsbench suite evaluate results \
   --id interval-001 \
   --id sequence-005 \
   --id sequence-006 \
+  --id sequence-007 \
   --json reports/evaluation.json \
   --html reports/evaluation.html \
   --evidence reports/evaluation-evidence.zip
@@ -178,6 +195,7 @@ omicsbench suite index results \
   --result interval-001=chromatin/peaks.narrowPeak \
   --result sequence-005=dna/final.vcf.gz \
   --result sequence-006=protein/identifications.tsv \
+  --result sequence-007=taxonomy/assignments.kraken \
   --column rnaseq-002:gene_id=Geneid \
   --column rnaseq-002:log2_fold_change=log2FoldChange \
   --column singlecell-001:cell_id=Barcode \
@@ -287,8 +305,9 @@ Profiles are available for whole-genome, exome, targeted-panel, bulk RNA-seq, si
 | `sequence-004` | paired DNA reads with mixed qualities and duplication | FASTQ | 4 pairs |
 | `sequence-005` | paired DNA-seq reads, reference and three known SNVs | FASTQ | 20 pairs |
 | `sequence-006` | protein FASTA and exact in-silico tryptic peptide truth | FASTA/TSV | 3 proteins |
+| `sequence-007` | paired mock-community reads and read-level taxonomy truth | FASTQ/TSV | 48 pairs |
 
-These six objects are project-authored synthetic fixtures. Each has an exact file inventory, checksums, format and molecule declarations, expected summary metrics and a deterministic rebuild workflow. `sequence-005` also verifies that every truth-set reference allele matches the bundled reference and that every alternate allele is supported by the paired reads. `sequence-006` verifies exact protein-peptide pairs from a declared tryptic digest. The objects test software behavior and do not represent a biological cohort or sequencing instrument.
+These seven objects are project-authored synthetic fixtures. Each has an exact file inventory, checksums, format and molecule declarations, expected summary metrics and a deterministic rebuild workflow. `sequence-005` verifies that every truth-set reference allele matches the bundled reference and that every alternate allele is supported by the paired reads. `sequence-006` verifies exact protein-peptide pairs from a declared tryptic digest. `sequence-007` checks read-level labels against exact mock-reference matches. The objects test software behavior and do not represent a biological cohort or sequencing instrument.
 
 The version 3 VCF comparator for `sequence-005` matches contig, one-based position, REF and ALT exactly. It reports precision, recall and F1 for A/C/G/T substitutions and verifies REF against the packaged synthetic reference. Genotypes, indels, complex representations and confident-region stratification are outside this fixture. Use a haplotype-aware benchmarking engine such as [hap.py](https://github.com/Illumina/hap.py) or vcfeval with an appropriate truth set and confident regions for real germline benchmarking; the [GA4GH benchmarking project](https://github.com/ga4gh/benchmarking-tools) documents that broader problem.
 
