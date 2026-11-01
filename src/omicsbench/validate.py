@@ -5,6 +5,7 @@ from .sequences import read_records, reverse_complement, summarize
 from .sequence_analysis import pair_report
 from .singlecell import summarize_matrix
 from .intervals import read_chrom_sizes, read_intervals, summarize_intervals
+from .taxonomy import exact_assignments, read_assignments
 
 
 def _sequence_summary(path, molecule):
@@ -84,8 +85,25 @@ def validate_sequence(model, folder, profile):
         pairing = pair_report(contained(folder, records[0]["path"]), contained(folder, records[1]["path"]))
         if pairing["status"] != "pass" or pairing["pairs"] != profile.get("pairs"):
             raise ValueError(f"{model.id}: paired-read validation differs from the expected profile")
-    truth = _variant_truth(model, folder, profile)
-    return {"id": model.id, "status": "pass", "kind": model.kind, "sequence": model.sequence.model_dump(mode="json"), "files": observed, "pairing": pairing, "variant_truth": truth}
+    truth = _variant_truth(model, folder, profile) if "variant_truth" in profile else None
+    taxonomy_truth = None
+    if model.assay == "shotgun_metagenomics":
+        reference = profile.get("reference")
+        read_truth = profile.get("read_truth")
+        declared = {item.path for item in model.files}
+        if reference not in declared or read_truth not in declared:
+            raise ValueError(f"{model.id}: taxonomy reference or truth is undeclared")
+        expected = read_assignments(contained(folder, read_truth))
+        observed_assignments = exact_assignments(
+            contained(folder, reference), contained(folder, records[0]["path"]), contained(folder, records[1]["path"])
+        )
+        if observed_assignments != expected or len(expected) != profile.get("pairs"):
+            raise ValueError(f"{model.id}: exact read assignments differ from declared truth")
+        counts = {str(code): sum(value == code for value in expected.values()) for code in sorted(set(expected.values()))}
+        if counts != profile.get("truth_counts") or profile.get("taxonomy_namespace") != "project-local mock codes, not NCBI taxids":
+            raise ValueError(f"{model.id}: taxonomy counts or namespace differ from expected profile")
+        taxonomy_truth = {"reference": reference, "truth": read_truth, "counts": counts}
+    return {"id": model.id, "status": "pass", "kind": model.kind, "sequence": model.sequence.model_dump(mode="json"), "files": observed, "pairing": pairing, "variant_truth": truth, "taxonomy_truth": taxonomy_truth}
 
 
 def validate_single_cell(model, folder, profile):

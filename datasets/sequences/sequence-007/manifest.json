@@ -1,0 +1,117 @@
+{
+  "schema_version": "2.0",
+  "id": "sequence-007",
+  "title": "Synthetic paired-read taxonomy assignment benchmark",
+  "release": "8.0.0",
+  "assay": "shotgun_metagenomics",
+  "kind": "synthetic_fixture",
+  "status": "validated",
+  "archetype": "three mock references, shared reads and absent-reference background pairs",
+  "organism": "Synthetic community model",
+  "taxon_id": null,
+  "source": {
+    "repository": "Project generator",
+    "accession": "sequence-007",
+    "url": "https://github.com/vxxqv/openomicsbench",
+    "citation": "OpenOmicsBench sequence-007, project-authored deterministic read-classification fixture.",
+    "retrieved": "2026-11-01",
+    "sha256": null
+  },
+  "rights": {
+    "status": "GREEN",
+    "license": "Apache-2.0",
+    "evidence": "All bases and reads are generated locally from a fixed seed without third-party sequence observations.",
+    "checked": "2026-11-01"
+  },
+  "reference": {
+    "genome": "mock_reference_v1",
+    "annotation": "not_applicable",
+    "namespace": "project-local mock taxon codes",
+    "compatibility": "verified"
+  },
+  "samples": [
+    {
+      "sample_id": "mock-community-1",
+      "condition": "three mock taxa with shared and background pairs",
+      "replicate": 1,
+      "batch": "not_applicable",
+      "strandedness": "unstranded"
+    }
+  ],
+  "derivation": {
+    "workflow": "workflows/build_taxonomy_fixture.py",
+    "commit": null,
+    "seed": 20261101,
+    "algorithm": "fixed-seed mock references and exact paired-read extraction",
+    "parameters": {
+      "reference_length": 650,
+      "read_length": 50,
+      "insert_length": 130,
+      "positive_pairs_per_taxon": 12,
+      "shared_pairs": 6,
+      "background_pairs": 6
+    },
+    "versions": {
+      "python": "3.12",
+      "openomicsbench_contract": "2.0"
+    }
+  },
+  "files": [
+    {
+      "path": "nano/reference.fasta",
+      "tier": "nano",
+      "role": "reference",
+      "media_type": "text/x-fasta",
+      "bytes": 1995,
+      "sha256": "f33dd1e0f1d14b687f3cef56a1360d00441e0d82cd7b715756318c59398a39a0"
+    },
+    {
+      "path": "nano/reads_R1.fastq",
+      "tier": "nano",
+      "role": "fastq_r1",
+      "media_type": "application/fastq",
+      "bytes": 5640,
+      "sha256": "b11318c57f26bdadd9777dec920fdd360c57fe9d62efa20c4db38526993bee59"
+    },
+    {
+      "path": "nano/reads_R2.fastq",
+      "tier": "nano",
+      "role": "fastq_r2",
+      "media_type": "application/fastq",
+      "bytes": 5640,
+      "sha256": "9f6fa1a800e3af82b80eccdaf63f78e3f6b0aa7212a224befcd3d9f84839ea39"
+    },
+    {
+      "path": "expected/read-taxonomy.tsv",
+      "tier": "expected",
+      "role": "effects",
+      "media_type": "text/tab-separated-values",
+      "bytes": 617,
+      "sha256": "0809fa4d8889785047ded06965028246220096614ff30d15da920c6e0f8372ab"
+    },
+    {
+      "path": "expected/validation.json",
+      "tier": "expected",
+      "role": "metrics",
+      "media_type": "application/json",
+      "bytes": 2028,
+      "sha256": "dd8a82695691959be348dc55f0f42691d2516a5a1843e77dcf6ed9af1b2345e9"
+    }
+  ],
+  "validation": {
+    "profile": "expected/validation.json",
+    "baseline_version": "paired-read-taxonomy-v1",
+    "metrics": []
+  },
+  "sequence": {
+    "format": "fastq",
+    "molecule": "dna",
+    "paired": true,
+    "quality_encoding": "phred33"
+  },
+  "limitations": [
+    "The three reference labels are project-local mock codes, not NCBI taxonomy identifiers or biological species.",
+    "Reads are error-free and short. The fixture tests result parsing, pair handling, exact assignment and unclassified cases, not real metagenomic profiling sensitivity.",
+    "Shared-reference and absent-reference pairs have an unclassified truth label of 0."
+  ]
+}

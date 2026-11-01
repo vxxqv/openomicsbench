@@ -605,7 +605,8 @@
         "sequence_rna",
         "sequence_protein",
         "short_read_dna",
-        "whole_genome_dna_seq"
+        "whole_genome_dna_seq",
+        "shotgun_metagenomics"
       ],
       "title": "Assay",
       "type": "string"

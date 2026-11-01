@@ -1,0 +1,90 @@
+{
+  "profile": "paired-read-taxonomy-v1",
+  "files": [
+    {
+      "path": "nano/reads_R1.fastq",
+      "expected": {
+        "format": "fastq",
+        "molecule": "dna",
+        "records": 48,
+        "letters": 2400,
+        "length": {
+          "minimum": 50,
+          "maximum": 50,
+          "mean": 50.0,
+          "median": 50.0,
+          "n50": 50,
+          "l50": 24
+        },
+        "composition": {
+          "A": 580,
+          "C": 604,
+          "G": 607,
+          "T": 609
+        },
+        "gc_fraction": 0.5045833333333334,
+        "ambiguity_fraction": 0.0,
+        "duplicate_sequences": 0,
+        "quality": {
+          "encoding": "phred33",
+          "minimum": 40,
+          "maximum": 40,
+          "mean": 40.0,
+          "q20_fraction": 1.0,
+          "q30_fraction": 1.0
+        }
+      }
+    },
+    {
+      "path": "nano/reads_R2.fastq",
+      "expected": {
+        "format": "fastq",
+        "molecule": "dna",
+        "records": 48,
+        "letters": 2400,
+        "length": {
+          "minimum": 50,
+          "maximum": 50,
+          "mean": 50.0,
+          "median": 50.0,
+          "n50": 50,
+          "l50": 24
+        },
+        "composition": {
+          "A": 587,
+          "C": 604,
+          "G": 594,
+          "T": 615
+        },
+        "gc_fraction": 0.49916666666666665,
+        "ambiguity_fraction": 0.0,
+        "duplicate_sequences": 0,
+        "quality": {
+          "encoding": "phred33",
+          "minimum": 40,
+          "maximum": 40,
+          "mean": 40.0,
+          "q20_fraction": 1.0,
+          "q30_fraction": 1.0
+        }
+      }
+    }
+  ],
+  "pairs": 48,
+  "reference": "nano/reference.fasta",
+  "read_truth": "expected/read-taxonomy.tsv",
+  "taxonomy_namespace": "project-local mock codes, not NCBI taxids",
+  "truth_counts": {
+    "0": 12,
+    "1": 12,
+    "2": 12,
+    "3": 12
+  },
+  "minimum_scores": {
+    "coverage": 1.0,
+    "macro_f1": 0.95,
+    "classified_precision": 0.95,
+    "classified_recall": 0.95,
+    "unclassified_recall": 1.0
+  }
+}

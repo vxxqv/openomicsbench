@@ -14,6 +14,7 @@ from omicsbench.models import Dataset
 from omicsbench.registry import lookup, registry
 from omicsbench.validate import validate
 from workflows.build_sequence_fixtures import build
+from workflows.build_taxonomy_fixture import build as build_taxonomy
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,7 +24,7 @@ class SequenceFixtureTests(unittest.TestCase):
     def test_registered_sequence_fixtures(self):
         records = registry(ROOT)
         identifiers = [identifier for identifier in records if identifier.startswith("sequence-")]
-        self.assertEqual(identifiers, ["sequence-001", "sequence-002", "sequence-003", "sequence-004", "sequence-005", "sequence-006"])
+        self.assertEqual(identifiers, ["sequence-001", "sequence-002", "sequence-003", "sequence-004", "sequence-005", "sequence-006", "sequence-007"])
         expected = {
             "sequence-001": ("sequence_dna", "dna", "fasta", False),
             "sequence-002": ("sequence_rna", "rna", "fasta", False),
@@ -31,13 +32,14 @@ class SequenceFixtureTests(unittest.TestCase):
             "sequence-004": ("short_read_dna", "dna", "fastq", True),
             "sequence-005": ("whole_genome_dna_seq", "dna", "fastq", True),
             "sequence-006": ("sequence_protein", "protein", "fasta", False),
+            "sequence-007": ("shotgun_metagenomics", "dna", "fastq", True),
         }
         for identifier in identifiers:
             model, _ = records[identifier]
             self.assertEqual((model.assay, model.sequence.molecule, model.sequence.format, model.sequence.paired), expected[identifier])
 
     def test_all_sequence_fixtures_validate(self):
-        for identifier in ["sequence-001", "sequence-002", "sequence-003", "sequence-004", "sequence-005", "sequence-006"]:
+        for identifier in ["sequence-001", "sequence-002", "sequence-003", "sequence-004", "sequence-005", "sequence-006", "sequence-007"]:
             model, folder = lookup(ROOT, identifier)
             with self.subTest(identifier=identifier):
                 self.assertEqual(validate(model, folder)["status"], "pass")
@@ -98,6 +100,7 @@ class SequenceFixtureTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             destination = Path(temporary)
             build(destination)
+            build_taxonomy(destination)
             for original in sorted((ROOT / "datasets/sequences").rglob("*")):
                 if not original.is_file():
                     continue
