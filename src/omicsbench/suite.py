@@ -147,7 +147,7 @@ def junit_report(report: dict) -> str:
 def csv_report(report: dict) -> str:
     fields = (
         "method", "benchmark", "assay", "comparator", "status", "reason", "baseline_status", "candidate_status",
-        "spearman_logfc", "top_k_jaccard", "sign_concordance", "coverage", "precision", "recall", "f1", "protein_recall", "residue_coverage",
+        "spearman_logfc", "top_k_jaccard", "sign_concordance", "coverage", "precision", "recall", "f1", "protein_recall", "residue_coverage", "accuracy", "macro_f1", "classified_precision", "classified_recall", "unclassified_recall",
         "true_positive", "false_positive", "false_negative",
         "delta_spearman_logfc", "delta_top_k_jaccard", "delta_sign_concordance", "delta_coverage",
         "delta_precision", "delta_recall", "delta_f1", "delta_protein_recall", "delta_residue_coverage",
@@ -173,12 +173,17 @@ def csv_report(report: dict) -> str:
             "spearman_logfc": metrics.get("spearman_logfc", ""),
             "top_k_jaccard": metrics.get("top_k_jaccard", ""),
             "sign_concordance": metrics.get("sign_concordance", ""),
-            "coverage": genes.get("coverage", ""),
+            "coverage": metrics.get("coverage", genes.get("coverage", "")),
             "precision": metrics.get("precision", ""),
             "recall": metrics.get("recall", ""),
             "f1": metrics.get("f1", ""),
             "protein_recall": metrics.get("protein_recall", ""),
             "residue_coverage": metrics.get("residue_coverage", ""),
+            "accuracy": metrics.get("accuracy", ""),
+            "macro_f1": metrics.get("macro_f1", ""),
+            "classified_precision": metrics.get("classified_precision", ""),
+            "classified_recall": metrics.get("classified_recall", ""),
+            "unclassified_recall": metrics.get("unclassified_recall", ""),
             "true_positive": counts.get("true_positive", ""),
             "false_positive": counts.get("false_positive", ""),
             "false_negative": counts.get("false_negative", ""),
@@ -204,6 +209,11 @@ METRIC_LABELS = {
     "f1": "F1",
     "protein_recall": "protein recall",
     "residue_coverage": "residue coverage",
+    "accuracy": "accuracy",
+    "macro_f1": "macro F1",
+    "classified_precision": "classified precision",
+    "classified_recall": "classified recall",
+    "unclassified_recall": "unclassified recall",
 }
 
 
@@ -339,6 +349,7 @@ def _trend(report: dict) -> str:
 
 def html_report(report: dict) -> str:
     summary = report["summary"]
+    example_scope = f'<p class="note">{html.escape(str(report["example_scope"]))}</p>' if report.get("example_scope") else ""
     rows = []
     for item in report["results"]:
         detail = _case_detail(item)
@@ -364,6 +375,7 @@ h1{font-size:2rem;margin:.2rem 0}h2{margin:2rem 0 .5rem}header,section{backgroun
 @media(prefers-color-scheme:dark){body{color:#eee;background:#151515}header,section{background:#1e1e1e;border-color:#444}.card{border-color:#555}th{background:#2b2b2b}th,td{border-color:#444}.note,.eyebrow{color:#bbb}.metric{border-color:#666}.pass,.cell-pass{color:#b9efc9;background:#173d26}.fail,.cell-fail{color:#ffc4c4;background:#4a1d1d}.skipped,.cell-skipped,.cell-missing{color:#ddd;background:#333}}
 </style></head><body>""" + (
         f"<header><div class=\"eyebrow\">OpenOmicsBench</div><h1>Benchmark report</h1><p>Operation <code>{html.escape(report['operation'])}</code></p>"
+        f"{example_scope}"
         f"<div class=\"cards\"><div class=\"card\"><span>Status</span><strong class=\"{html.escape(summary['status'])}\">{html.escape(summary['status'].upper())}</strong></div>"
         f"<div class=\"card\"><span>Passed</span><strong>{summary['passed']}</strong></div><div class=\"card\"><span>Failed</span><strong>{summary['failed']}</strong></div>"
         f"<div class=\"card\"><span>Total</span><strong>{summary['total']}</strong></div></div>{_status_chart(summary)}</header>"

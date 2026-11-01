@@ -13,10 +13,12 @@ class DemoTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             destination = Path(temporary) / "walkthrough"
             result = create_demo(default_root(), destination)
-            self.assertEqual(result["summary"]["passed"], 5)
+            self.assertEqual(result["summary"]["passed"], 6)
             self.assertEqual(result["summary"]["failed"], 0)
             report = json.loads((destination / "report.json").read_text(encoding="utf-8"))
-            self.assertEqual(len(report["results"]), 5)
+            self.assertEqual(len(report["results"]), 6)
+            self.assertIn("does not measure an external method", report["example_scope"])
+            self.assertIn("does not measure an external method", (destination / "report.html").read_text(encoding="utf-8"))
             self.assertTrue((destination / "report.html").is_file())
             self.assertEqual(verify_evidence_crate(destination / "evidence.zip")["status"], "pass")
             with self.assertRaisesRegex(ValueError, "already exists"):

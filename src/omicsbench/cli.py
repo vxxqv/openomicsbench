@@ -25,9 +25,10 @@ from .trends import parse_run, trend_reports
 from .results import create_result_manifest
 from .singlecell import compare_labels, summarize_matrix
 from .intervals import compare_intervals, summarize_intervals
+from .taxonomy import classify_exact, compare_taxonomy
 from .demo import create_demo
 
-ASSAYS = ["bulk_rna_seq", "single_cell_rna_seq", "chromatin_accessibility", "sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq"]
+ASSAYS = ["bulk_rna_seq", "single_cell_rna_seq", "chromatin_accessibility", "sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq", "shotgun_metagenomics"]
 
 def main():
     p = argparse.ArgumentParser(description="Find, verify and process compact omics benchmarks.",epilog="Example: omicsbench info rnaseq-002")
@@ -49,7 +50,7 @@ def main():
             command.add_argument("results",type=Path,help="CSV or TSV file with gene_id and log2_fold_change columns.")
             command.add_argument("--detail-limit",type=int,default=20,help="Maximum missing and unexpected gene examples to return.")
     add_sequence_parser(sub)
-    demo = sub.add_parser("demo", help="Run a five-assay example using bundled reference answers.")
+    demo = sub.add_parser("demo", help="Run a six-assay example using bundled reference answers.")
     demo.add_argument("output", type=Path, help="New directory for example results, reports and evidence.")
     variant = sub.add_parser("variant", help="Compare VCF calls with a bundled small-variant truth set.")
     variant_sub = variant.add_subparsers(dest="variant_command", required=True)
@@ -83,6 +84,18 @@ def main():
     interval_compare = interval_sub.add_parser("compare", help="Score peaks using reciprocal interval and base-pair overlap.")
     interval_compare.add_argument("id", help="Benchmark ID with declared genomic interval truth.")
     interval_compare.add_argument("results", type=Path, help="BED, BED.GZ, narrowPeak or narrowPeak.GZ call set.")
+    taxon = sub.add_parser("taxon", help="Classify against mock references or score read-level taxonomy assignments.")
+    taxon_sub = taxon.add_subparsers(dest="taxon_command", required=True)
+    taxon_classify = taxon_sub.add_parser("classify", help="Exact-match paired reads against project-local mock references.")
+    taxon_classify.add_argument("reference", type=Path, help="FASTA with mock_taxon_<code> sequence IDs.")
+    taxon_classify.add_argument("read1", type=Path, help="R1 FASTQ with /1 read IDs.")
+    taxon_classify.add_argument("read2", type=Path, help="R2 FASTQ with /2 read IDs.")
+    taxon_classify.add_argument("output", type=Path, help="New canonical assignment TSV.")
+    taxon_classify.add_argument("--force", action="store_true")
+    taxon_compare = taxon_sub.add_parser("compare", help="Score TSV or Kraken 2 per-read assignments against bundled truth.")
+    taxon_compare.add_argument("id", help="Benchmark ID with a read-level taxonomy truth set.")
+    taxon_compare.add_argument("results", type=Path, help="Assignment TSV or standard five-column Kraken output, optionally gzip-compressed.")
+    taxon_compare.add_argument("--detail-limit", type=int, default=20)
     assay = sub.add_parser("assay", help="Inspect sequencing assay profiles and build local command plans.")
     assay_sub = assay.add_subparsers(dest="assay_command", required=True)
     assay_sub.add_parser("list", help="List supported assay profiles.")
@@ -171,6 +184,12 @@ def main():
             else:
                 model, folder = lookup(args.root, args.id)
                 out = compare_intervals(model, folder, args.results)
+        elif args.command == "taxon":
+            if args.taxon_command == "classify":
+                out = classify_exact(args.reference, args.read1, args.read2, args.output, args.force)
+            else:
+                model, folder = lookup(args.root, args.id)
+                out = compare_taxonomy(model, folder, args.results, args.detail_limit)
         elif args.command == "evidence":
             out = verify_evidence_crate(args.archive)
         elif args.command == "bundle":
@@ -244,6 +263,8 @@ def main():
         if args.command == "cell" and args.cell_command == "compare" and out["status"] == "fail":
             sys.exit(2)
         if args.command == "interval" and args.interval_command == "compare" and out["status"] == "fail":
+            sys.exit(2)
+        if args.command == "taxon" and args.taxon_command == "compare" and out["status"] == "fail":
             sys.exit(2)
         if args.command == "suite" and out["summary"]["status"] == "fail":
             sys.exit(2)

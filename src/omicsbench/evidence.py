@@ -107,6 +107,8 @@ def _media_type(name: str) -> str:
         return "text/vcf"
     if lower.endswith((".bed", ".bed.gz", ".narrowpeak", ".narrowpeak.gz")):
         return "text/plain"
+    if lower.endswith((".kraken", ".kraken.gz")):
+        return "text/plain"
     if lower.endswith(".tsv") or lower.endswith(".tsv.gz"):
         return "text/tab-separated-values"
     return "application/octet-stream"

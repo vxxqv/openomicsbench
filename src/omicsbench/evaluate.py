@@ -21,12 +21,14 @@ from .suite import RESULT_SUFFIXES, _summary
 from .variants import compare_variants
 from .singlecell import compare_labels
 from .intervals import compare_intervals
+from .taxonomy import compare_taxonomy
 
 
 VCF_SUFFIXES = (".vcf", ".vcf.gz")
 PEPTIDE_SUFFIXES = (".peptides.tsv", ".peptides.tsv.gz")
 SINGLE_CELL_SUFFIXES = (".cells.tsv", ".cells.tsv.gz", ".cells.csv", ".cells.csv.gz")
 INTERVAL_SUFFIXES = (".peaks.bed", ".peaks.bed.gz", ".narrowPeak", ".narrowPeak.gz")
+TAXONOMY_SUFFIXES = (".taxonomy.tsv", ".taxonomy.tsv.gz", ".tsv", ".tsv.gz", ".kraken", ".kraken.gz")
 
 
 class MethodReceipt(StrictModel):
@@ -95,6 +97,7 @@ def _evaluator(model) -> tuple[str, tuple[str, ...]] | None:
         "peptide_identification": PEPTIDE_SUFFIXES,
         "single_cell_clustering": SINGLE_CELL_SUFFIXES,
         "genomic_intervals": INTERVAL_SUFFIXES,
+        "read_taxonomy": TAXONOMY_SUFFIXES,
     }
     return comparator, conventional[comparator]
 
@@ -173,6 +176,8 @@ def evaluate_suite(
                 details = compare_peptides(model, folder, path, detail_limit, columns)
             elif comparator == "genomic_intervals":
                 details = compare_intervals(model, folder, path)
+            elif comparator == "read_taxonomy":
+                details = compare_taxonomy(model, folder, path, detail_limit)
             else:
                 details = compare_labels(model, folder, path, detail_limit, columns)
             item = {

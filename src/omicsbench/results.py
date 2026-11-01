@@ -23,6 +23,7 @@ RESULT_SUFFIXES = {
     "peptide_identification": (".tsv", ".tsv.gz", ".peptides.tsv", ".peptides.tsv.gz"),
     "single_cell_clustering": (".tsv", ".tsv.gz", ".csv", ".csv.gz"),
     "genomic_intervals": (".bed", ".bed.gz", ".narrowpeak", ".narrowpeak.gz"),
+    "read_taxonomy": (".tsv", ".tsv.gz", ".kraken", ".kraken.gz"),
 }
 DEFAULT_COLUMNS = {
     "differential_expression": {"gene_id": "gene_id", "log2_fold_change": "log2_fold_change"},
@@ -30,6 +31,7 @@ DEFAULT_COLUMNS = {
     "peptide_identification": {"protein_id": "protein_id", "peptide": "peptide", "q_value": "q_value"},
     "single_cell_clustering": {"cell_id": "cell_id", "label": "label"},
     "genomic_intervals": {},
+    "read_taxonomy": {},
 }
 REQUIRED_COLUMNS = {
     "differential_expression": {"gene_id", "log2_fold_change"},
@@ -37,6 +39,7 @@ REQUIRED_COLUMNS = {
     "peptide_identification": {"protein_id", "peptide"},
     "single_cell_clustering": {"cell_id", "label"},
     "genomic_intervals": set(),
+    "read_taxonomy": set(),
 }
 
 
@@ -51,6 +54,8 @@ def comparator_for(model) -> str | None:
         return "single_cell_clustering"
     if model.assay == "chromatin_accessibility" and model.validation is not None and model.validation.baseline_version == "genomic-interval-comparison-v1":
         return "genomic_intervals"
+    if model.assay == "shotgun_metagenomics" and model.validation is not None and model.validation.baseline_version == "paired-read-taxonomy-v1":
+        return "read_taxonomy"
     return None
 
 
@@ -67,7 +72,7 @@ def effective_columns(comparator: str, overrides: dict[str, str] | None = None) 
     unknown = sorted(set(overrides) - allowed)
     if unknown:
         raise ValueError(f"{comparator}: unsupported column mappings: {', '.join(unknown)}")
-    if comparator in {"exact_snv", "genomic_intervals"} and overrides:
+    if comparator in {"exact_snv", "genomic_intervals", "read_taxonomy"} and overrides:
         raise ValueError(f"{comparator}: format columns cannot be remapped")
     columns = {**DEFAULT_COLUMNS[comparator], **overrides}
     required = REQUIRED_COLUMNS[comparator]

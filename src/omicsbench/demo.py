@@ -14,6 +14,7 @@ EXAMPLES = (
     ("singlecell-001", "singlecell/singlecell-001/expected/cell-labels.tsv", "singlecell-001.cells.tsv"),
     ("interval-001", "intervals/interval-001/expected/truth-peaks.narrowPeak", "interval-001.narrowPeak"),
     ("sequence-006", "sequences/sequence-006/expected/peptides.tsv", "sequence-006.peptides.tsv"),
+    ("sequence-007", "sequences/sequence-007/expected/read-taxonomy.tsv", "sequence-007.taxonomy.tsv"),
 )
 
 
@@ -58,6 +59,7 @@ def create_demo(root: Path, output: Path) -> dict:
         mappings.append("sequence-005=sequence-005.vcf")
         create_result_manifest(root, results, mappings, [])
         report = evaluate_suite(root, results, [item.split("=", 1)[0] for item in mappings])
+        report["example_scope"] = "Bundled reference answers scored against their own truth sets. This report does not measure an external method."
         if report["summary"]["status"] != "pass":
             raise ValueError("the bundled reference example did not pass evaluation")
         write_reports(report, json_path=output / "report.json", html_path=output / "report.html")

@@ -20,6 +20,7 @@ class MetricFloor(StrictModel):
         "adjusted_rand_index", "normalized_mutual_information", "purity",
         "interval_precision", "interval_recall", "interval_f1",
         "base_precision", "base_recall", "base_f1",
+        "accuracy", "macro_f1", "classified_precision", "classified_recall", "unclassified_recall",
     ]
     minimum: float = Field(ge=0, le=1)
     assay: str | None = Field(default=None, min_length=1)
