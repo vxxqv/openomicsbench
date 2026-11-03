@@ -27,6 +27,7 @@ from .singlecell import compare_labels, summarize_matrix
 from .intervals import compare_intervals, summarize_intervals
 from .taxonomy import classify_exact, compare_taxonomy
 from .demo import create_demo
+from .workspace import prepare_workspace, verify_workspace, grade_workspace
 
 ASSAYS = ["bulk_rna_seq", "single_cell_rna_seq", "chromatin_accessibility", "sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq", "shotgun_metagenomics"]
 
@@ -136,6 +137,14 @@ def main():
     suite_gate.add_argument("policy", type=Path, help="JSON gate policy with coverage, metric and resource requirements.")
     suite_trend = suite_sub.add_parser("trend", help="Combine fingerprinted evaluation reports into a run history.")
     suite_trend.add_argument("--run", action="append", required=True, help="Run label and evaluation report as NAME=PATH. Repeat in chronological order.")
+    suite_prepare = suite_sub.add_parser("prepare", help="Copy selected benchmark inputs into a checked workspace for your own results.")
+    suite_prepare.add_argument("output", type=Path, help="New workspace directory.")
+    suite_prepare.add_argument("--id", action="append", required=True, help="Validated benchmark to include. Repeat for several cases.")
+    suite_verify = suite_sub.add_parser("verify-workspace", help="Check every staged input against the bundled benchmark inventory.")
+    suite_verify.add_argument("workspace", type=Path)
+    suite_grade = suite_sub.add_parser("grade", help="Score the workspace results and write reports and evidence.")
+    suite_grade.add_argument("workspace", type=Path)
+    suite_grade.add_argument("--force", action="store_true", help="Replace an earlier grading report after results change.")
     for command in (suite_validate, suite_compare, suite_evaluate, suite_matrix, suite_evaluate_matrix):
         command.add_argument("--id", action="append", default=[], help="Benchmark ID to include. Repeat to select several; omit to run all eligible benchmarks.")
     for command in (suite_validate, suite_compare, suite_evaluate, suite_index, suite_matrix, suite_evaluate_matrix, suite_regress, suite_gate, suite_trend):
@@ -204,6 +213,12 @@ def main():
                 out = get_profile(args.profile)
             else:
                 out = build_plan(args.profile, args.input, args.output_directory, args.adapter)
+        elif args.command == "suite" and args.suite_command == "prepare":
+            out = prepare_workspace(args.root, args.output, args.id)
+        elif args.command == "suite" and args.suite_command == "verify-workspace":
+            out = verify_workspace(args.root, args.workspace)
+        elif args.command == "suite" and args.suite_command == "grade":
+            out = grade_workspace(args.root, args.workspace, args.force)
         elif args.command == "suite":
             if args.suite_command == "index":
                 out = create_result_manifest(args.root, args.results, args.result, args.column, args.force)

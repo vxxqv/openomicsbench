@@ -68,6 +68,12 @@ def _portable_report(report: dict) -> tuple[dict, dict[str, bytes]]:
 
     if portable.get("operation") == "evaluate":
         portable["results_directory"] = "inputs"
+        workspace = portable.get("workspace")
+        if workspace:
+            _add_source(files, "workspace.json", Path(workspace["path"]))
+            if _sha256(files["workspace.json"]) != workspace["manifest_sha256"]:
+                raise ValueError("workspace manifest changed after grading")
+            workspace["path"] = "workspace.json"
         manifest = portable.get("result_manifest")
         if manifest:
             _add_source(files, "results.json", Path(manifest["path"]))
@@ -238,6 +244,12 @@ def verify_evidence_crate(path: Path) -> dict:
         report = _read_json(archive, "report.json")
         if report.get("operation") not in {"evaluate", "evaluate_matrix"} or not isinstance(report.get("results"), list):
             raise ValueError(f"{path}: unsupported evaluation report")
+        workspace = report.get("workspace")
+        if workspace:
+            if workspace.get("path") != "workspace.json" or "workspace.json" not in names:
+                raise ValueError(f"{path}: workspace manifest is missing")
+            if _sha256(archive.read("workspace.json")) != workspace.get("manifest_sha256"):
+                raise ValueError(f"{path}: workspace manifest hash differs from the report")
         metadata = _read_json(archive, "ro-crate-metadata.json")
         if metadata.get("@context") != "https://w3id.org/ro/crate/1.3/context" or not isinstance(metadata.get("@graph"), list):
             raise ValueError(f"{path}: invalid RO-Crate 1.3 metadata")
