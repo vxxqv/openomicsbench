@@ -1,9 +1,9 @@
 {
-  "version": "8.0.0",
-  "created": "2026-11-01",
-  "scope": "Files in the reviewed version 8 release candidate; generated caches and staged source downloads are excluded.",
+  "version": "9.0.0",
+  "created": "2026-11-03",
+  "scope": "Files in the reviewed version 9 release candidate; generated caches and staged source downloads are excluded.",
   "self_excluded": "release/file-manifest.json",
-  "file_count": 394,
+  "file_count": 396,
   "files": [
     {
       "path": ".gitattributes",
@@ -22,8 +22,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "bytes": 6706,
-      "sha256": "0209d9183a698ca84ea6a5caf37ef78b453361740df9570670e6f528abfa84f2"
+      "bytes": 7261,
+      "sha256": "7edc3fb54bcbb99a20ffeda7c70242c1da70d25e62d0b2e96730b9d7ccb16d91"
     },
     {
       "path": ".github/workflows/pages.yml",
@@ -32,8 +32,8 @@
     },
     {
       "path": ".github/workflows/pypi.yml",
-      "bytes": 8607,
-      "sha256": "0c605686097a2f5f9adff1da5680ecfce4f13c97e0c7d610eebd2facb27fc45c"
+      "bytes": 9116,
+      "sha256": "ef14f917140f4d3d9f56da704bfebe107449ee86981323d387de7faea2bfadd6"
     },
     {
       "path": ".gitignore",
@@ -42,18 +42,18 @@
     },
     {
       "path": ".zenodo.json",
-      "bytes": 3531,
-      "sha256": "c0076a4442513431c2c823171145493a6d32fc15e4f16be84b64416dc8e1b7a2"
+      "bytes": 3762,
+      "sha256": "f851e46472840facff4b41ce8248a163d888f31022d401a54128525537fddbdc"
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 16793,
-      "sha256": "3523b454ca4ccaa1d7969a77cf82d9d774d01876128958a312a2b226174d1409"
+      "bytes": 17786,
+      "sha256": "36275d6e100d64e6b14afd68e4701c47837630a4ad7fb4d550d8f392e22c2edc"
     },
     {
       "path": "CITATION.cff",
       "bytes": 511,
-      "sha256": "173fa3a3a83ce96c2586aee68612e86c463e57b2e282fffe8eae7ffb687d9d50"
+      "sha256": "b9b30625a5b46e264b54f259be08ddfcab5d2e027ebbad540f3ef50d76d015c9"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -82,13 +82,13 @@
     },
     {
       "path": "README.md",
-      "bytes": 21243,
-      "sha256": "ce8b375e0fcf1850fae3a2e412bc9c920ddcd592ff535cc11e7217ec1e88e535"
+      "bytes": 22618,
+      "sha256": "47a81cb445ffc6f0b863d0aff6f629aa170d6dccf9b12a3c8d0eefebec2fdad7"
     },
     {
       "path": "catalog/collection.json",
       "bytes": 13789,
-      "sha256": "45d73e2873ae070a8b4c26344b6706fe5486cf1a1464ac9cd78ed6da37b079c5"
+      "sha256": "cfa76f692e4932c55d31a1b3bcbacdee0091eaed3afe340899445bd12e9c4072"
     },
     {
       "path": "catalog/collection.tsv",
@@ -1462,8 +1462,8 @@
     },
     {
       "path": "pyproject.toml",
-      "bytes": 2517,
-      "sha256": "de69faa2eb8994fc1cbfb15aa8996d409df7aa6b167b9a911c0cbb1685829351"
+      "bytes": 2578,
+      "sha256": "7dc0673e4575f4cfbe373d177ae8da341fa2439550e4d1f93dc245637a9c3674"
     },
     {
       "path": "release/acceptance-ledger.json",
@@ -1473,7 +1473,7 @@
     {
       "path": "release/certification.json",
       "bytes": 444,
-      "sha256": "972aa5762bea7852bb41d32fbac0a5830288a28af00c2cff757ca5cdbd6446a1"
+      "sha256": "9e4452bf1f37509d9adcccafd385c159006a410530888d310d8335416b5f9343"
     },
     {
       "path": "release/collection-audit.json",
@@ -1482,8 +1482,8 @@
     },
     {
       "path": "release/metadata-input.json",
-      "bytes": 2019,
-      "sha256": "e67279273fd8f6e031e344257607f66df35676b45a6bfb29fe62a89ca32cc6d0"
+      "bytes": 1835,
+      "sha256": "0253cda71d99f2c2804c625158d52682c3869d87e386914853270c03a57516e2"
     },
     {
       "path": "requirements-tested.txt",
@@ -1528,7 +1528,7 @@
     {
       "path": "scripts/certify_release.py",
       "bytes": 19815,
-      "sha256": "87bcd233be836fc62f2d0c6208daf3b3f88832734221436c69a83ef099b0f0dd"
+      "sha256": "1bfe06218805bd0087105dee5a53f6ca9fa00dc9c9194b6b73921a7c2194fb62"
     },
     {
       "path": "scripts/check_repository.py",
@@ -1538,7 +1538,7 @@
     {
       "path": "scripts/package_snapshot.py",
       "bytes": 1800,
-      "sha256": "972291cf97ca58143a43a0ab652ed1ce7197e0d3fe0f883ed73a988c66d2b62f"
+      "sha256": "fa186bcfaaee3a6bb2d3e714757049f21abacd9a6c25140ed655f262f7d78720"
     },
     {
       "path": "setup.py",
@@ -1552,8 +1552,8 @@
     },
     {
       "path": "site/index.html",
-      "bytes": 7290,
-      "sha256": "f587808f534aa4e712de22a0bef26f2a5633bb96c0179333da393367868ef0dd"
+      "bytes": 7431,
+      "sha256": "11668ef1e69289c690e274208690d55ed25d264a6b240f975eaa1047dd8ee5f0"
     },
     {
       "path": "site/styles.css",
@@ -1563,7 +1563,7 @@
     {
       "path": "src/omicsbench/__init__.py",
       "bytes": 98,
-      "sha256": "74b1ef52fa321e909ee5670b534e422bae47398edc9cfe56c705e8b6dfd6ccd5"
+      "sha256": "13a4d6a721d6ea1ceda82c2d39aec406cfc60dc92f2f5e52dd6be858c5272bef"
     },
     {
       "path": "src/omicsbench/__main__.py",
@@ -1587,8 +1587,8 @@
     },
     {
       "path": "src/omicsbench/cli.py",
-      "bytes": 21270,
-      "sha256": "9415c1f58f2b831dc4295689c8ea4a341f6801ba7bbe9d75b8eee05fb76122c0"
+      "bytes": 22621,
+      "sha256": "b86b3a6c47d7f5b8a5a0ac49dba8621ff0f9c4450b98da72a523a6332a5136ce"
     },
     {
       "path": "src/omicsbench/compare.py",
@@ -1612,8 +1612,8 @@
     },
     {
       "path": "src/omicsbench/evidence.py",
-      "bytes": 11031,
-      "sha256": "80190f7e393618d237c4b37c320701b7e5805ff25602dfe53153fdcc4e96473b"
+      "bytes": 11797,
+      "sha256": "5d63be3936b1b0dc9317aff9692ad495f6371a0980e299af38c4fc5febc97c62"
     },
     {
       "path": "src/omicsbench/expression_atlas.py",
@@ -1726,6 +1726,11 @@
       "sha256": "880c8508745b3bbde70da02e0d8c98807c3ec49001596c31bef2cb503815eebf"
     },
     {
+      "path": "src/omicsbench/workspace.py",
+      "bytes": 10718,
+      "sha256": "b24ffcc7e57effec26be8d54dcc28e669794455b6c385545e16f0f52f626d9c2"
+    },
+    {
       "path": "tests/test_assays.py",
       "bytes": 2912,
       "sha256": "a85690eed2f45b63331d0121851498b9be0592329ef5bced7bce8a3ae4fa55f5"
@@ -1824,6 +1829,11 @@
       "path": "tests/test_variants.py",
       "bytes": 3588,
       "sha256": "5ad58b7980b46cb3b3c0c273875dd8c6f9eb8ac6b802163def4d7d423307ea88"
+    },
+    {
+      "path": "tests/test_workspace.py",
+      "bytes": 4985,
+      "sha256": "096a12ed0b17b5a4b63c30dcb99290884d5f58477717d43a1a28affce4f6edf7"
     },
     {
       "path": "workflows/Snakefile",
