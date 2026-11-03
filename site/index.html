@@ -28,7 +28,7 @@
 
   <main id="main">
     <section class="hero wrap" id="top" aria-labelledby="hero-title">
-      <div class="eyebrow"><span class="live-dot" aria-hidden="true"></span> Open source · works offline · version 8</div>
+      <div class="eyebrow"><span class="live-dot" aria-hidden="true"></span> Open source · works offline · version 9</div>
       <h1 id="hero-title">Benchmarks you can <em>inspect.</em></h1>
       <p class="lead">Small, traceable datasets and strict scoring tools for testing bioinformatics software. Start with a six-assay example, then bring results from your own pipeline.</p>
       <div class="hero-actions">
@@ -49,7 +49,7 @@
           <h2 id="what-title">A test collection with an audit trail.</h2>
         </div>
         <div class="prose">
-          <p>OpenOmicsBench lets you validate bundled data, inspect its source and transformations, score your own outputs, and compare methods across runs. Result manifests lock input hashes; reports and evidence packages make a run easier to review or reproduce.</p>
+          <p>OpenOmicsBench lets you validate bundled data, inspect its source and transformations, score your own outputs, and compare methods across runs. A checked workspace copies selected inputs and records the result contract. Reports and evidence packages make a run easier to review or reproduce.</p>
           <p>The 12 biological bulk RNA-seq objects come from seven Expression Atlas studies. The other fixtures are declared synthetic tests for sequences, variants, peptide identification, single-cell clustering, chromatin peaks and read-level mock taxonomy. They are software test cases, not clinical reference materials.</p>
         </div>
       </div>
@@ -80,7 +80,7 @@
         <div>
           <p class="section-index">03 / Get started</p>
           <h2 id="start-title">From install to report in two commands.</h2>
-          <p class="prose">The demo scores bundled reference answers against their own truth sets. It shows how the evaluator works; it is not a measurement of your method. Replace the example result files with your own outputs when you are ready to test a pipeline.</p>
+          <p class="prose">The demo scores bundled reference answers against their own truth sets. It shows how the evaluator works; it is not a measurement of your method. To test your pipeline, run <code>omicsbench suite prepare my-run --id rnaseq-002</code>, place your output in the prepared results directory, then run <code>omicsbench suite grade my-run</code>.</p>
           <a class="text-link" href="https://github.com/vxxqv/openomicsbench#readme">Full usage guide <span aria-hidden="true">↗</span></a>
         </div>
         <div class="terminal" aria-label="Installation commands">

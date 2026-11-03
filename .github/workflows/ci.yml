@@ -28,6 +28,14 @@ jobs:
       - run: python scripts/check_repository.py
       - run: omicsbench taxon compare sequence-007 datasets/sequences/sequence-007/expected/read-taxonomy.tsv
       - run: omicsbench suite validate --junit build/benchmark-suite.xml --force
+      - name: Exercise prepared workspace
+        run: |
+          omicsbench suite prepare build/workspace --id rnaseq-002 --id sequence-007
+          omicsbench suite verify-workspace build/workspace
+          cp datasets/rnaseq/rnaseq-002/expected/reference-effects.tsv.gz build/workspace/results/rnaseq-002.tsv.gz
+          cp datasets/sequences/sequence-007/expected/read-taxonomy.tsv build/workspace/results/sequence-007.taxonomy.tsv
+          omicsbench suite grade build/workspace
+          omicsbench evidence verify build/workspace/evidence.zip
       - name: Exercise matrix, regression and bundle workflows
         run: |
           mkdir -p build/method-a build/method-b

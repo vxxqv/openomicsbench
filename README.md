@@ -2,7 +2,7 @@
 
 OpenOmicsBench is a compact benchmark collection and local toolkit for bioinformatics software testing, method checks and teaching. It contains 12 certified bulk RNA-seq objects, seven deterministic sequence and classification fixtures, a 10x-style single-cell RNA-seq benchmark, a genomic peak-calling benchmark, strict local tools, and a CI-ready evaluation system. [Browse the collection](https://vxxqv.github.io/openomicsbench/) before installing.
 
-Version 8 adds a paired-read mock taxonomy benchmark. Its 48 synthetic read pairs cover three project-local reference labels, shared-reference ambiguity and absent-reference background. The comparator accepts canonical TSV or standard five-column Kraken 2 per-read output. It reports coverage, accuracy, macro F1, classified precision and recall, and unclassified recall. The first-run example now covers six assay families and labels its reference self-comparison inside the reports.
+Version 9 adds a checked workspace for testing your own pipeline. It exports selected inputs without copying expected answers, records the expected result formats and sample context, checks that staged inputs have not changed, and scores the files you put in its results directory. The reports include failed cases and a verifiable evidence ZIP. The installed package still contains the truth sets, so the workspace is not a blinded challenge.
 
 The package runs offline after installation. Sequence files stay on the local computer. The built-in tools cover inspection and lightweight preprocessing; they do not claim to replace aligners, variant callers, taxonomic classifiers or assay-specific statistical workflows.
 
@@ -35,6 +35,25 @@ omicsbench taxon compare sequence-007 assignments.kraken
 ```
 
 The wheel contains the complete collection. A repository checkout and network connection are not required.
+
+## Test your own results
+
+Prepare a workspace for the benchmarks your pipeline supports:
+
+```sh
+omicsbench suite prepare my-run --id rnaseq-002 --id sequence-007
+omicsbench suite verify-workspace my-run
+```
+
+The command copies checked input files into `my-run/inputs/` and writes `my-run/workspace.json`. That JSON lists each case's input roles and hashes, sample design, source citation, rights, limitations, expected result columns and suggested result filename. It does not copy expected answers into the workspace.
+
+Run your pipeline against those inputs, then put its results at the suggested paths under `my-run/results/`. For example, the two cases above expect `rnaseq-002.tsv` and `sequence-007.taxonomy.tsv`. If your pipeline writes other filenames or column headers, use `omicsbench suite index my-run/results` with `--result` and `--column` mappings as described below. Then grade the run:
+
+```sh
+omicsbench suite grade my-run
+```
+
+The command checks the workspace inputs again, scores only its selected cases, and writes `report.json`, `report.html`, `report.csv`, `report.xml` and `evidence.zip` inside `my-run/`. Missing or incorrect results appear as failed cases. Reports are preserved by default; use `suite grade my-run --force` only when you intend to replace them after changing results. This workflow tests file handling and declared benchmark outcomes; each object's limitations still apply.
 
 ## Sequence tools
 

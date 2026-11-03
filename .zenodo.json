@@ -6,7 +6,7 @@
       "orcid": "0009-0005-1859-5107"
     }
   ],
-  "description": "Compact, traceable RNA, DNA, protein, single-cell, genomic interval and synthetic paired-read taxonomy benchmarks with offline scoring, hash-locked results, a six-assay first-run example and verifiable reports. The mock taxonomy fixture uses project-local codes and does not measure biological classification accuracy. Browse the public collection catalog or install from PyPI.",
+  "description": "Compact, traceable RNA, DNA, protein, single-cell, genomic interval and synthetic paired-read taxonomy benchmarks with offline scoring and verifiable reports. Version 9 adds a checked workspace for independently produced pipeline results: selected inputs, result contracts, integrity checks and multi-assay grading. The mock taxonomy fixture uses project-local codes and does not measure biological classification accuracy. Browse the public collection catalog or install from PyPI.",
   "upload_type": "software",
   "access_right": "open",
   "license": "Apache-2.0",
@@ -135,6 +135,11 @@
     "read-level taxonomy",
     "mock community",
     "Kraken 2 output",
-    "taxonomic assignment"
+    "taxonomic assignment",
+    "benchmark workspace",
+    "pipeline evaluation",
+    "result scoring",
+    "input integrity",
+    "multi-assay grading"
   ]
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "4.0",
-  "release": "8.0.0",
+  "release": "9.0.0",
   "biological_objects": 12,
   "sequence_objects": 7,
   "single_cell_objects": 1,

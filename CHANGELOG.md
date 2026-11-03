@@ -1,5 +1,11 @@
 # Changes
 
+## 9.0.0
+
+Version 9 adds a workspace for testing a pipeline's own outputs. `omicsbench suite prepare` copies only declared distributable inputs for selected benchmarks, checks every source file, and records the expected result filename, columns, sample design, citation, rights and limitations in `workspace.json`. The workspace does not copy expected answers. Those answers remain available in the installed collection, so this is a convenient test setup rather than a blinded challenge.
+
+`omicsbench suite verify-workspace` detects changed, missing or extra input files and checks each case against the installed benchmark manifest. After results are placed in the workspace, `omicsbench suite grade` scores exactly the selected cases and writes JSON, HTML, CSV and JUnit reports plus a verifiable evidence ZIP. It keeps failed cases visible and preserves earlier reports unless `--force` is supplied. Native result paths and headers can still be indexed with `suite index` before grading.
+
 ## 8.0.0
 
 Version 8 adds `sequence-007`, a deterministic paired-read assignment benchmark with three project-local mock reference codes, 36 uniquely assignable pairs, six shared-reference pairs and six absent-reference pairs. All 48 pairs have declared read-level truth. Rebuilding the fixture reproduces its FASTQ, FASTA, truth and manifest bytes.
