@@ -2,7 +2,7 @@
 
 OpenOmicsBench is a compact benchmark collection and local toolkit for bioinformatics software testing, method checks and teaching. It contains 12 certified bulk RNA-seq objects, seven deterministic sequence and classification fixtures, a 10x-style single-cell RNA-seq benchmark, a genomic peak-calling benchmark, strict local tools, and a CI-ready evaluation system. [Browse the collection](https://vxxqv.github.io/openomicsbench/) before installing.
 
-Version 9 adds a checked workspace for testing your own pipeline. It exports selected inputs without copying expected answers, records the expected result formats and sample context, checks that staged inputs have not changed, and scores the files you put in its results directory. The reports include failed cases and a verifiable evidence ZIP. The installed package still contains the truth sets, so the workspace is not a blinded challenge.
+Version 10 makes the workspace easier to use with a pipeline's own output names and headers. `suite discover` finds results for the selected cases, checks table headers, and can write a hash-locked result index. It stops on missing or ambiguous files and columns. The installed package still contains the truth sets, so the workspace is not a blinded challenge.
 
 The package runs offline after installation. Sequence files stay on the local computer. The built-in tools cover inspection and lightweight preprocessing; they do not claim to replace aligners, variant callers, taxonomic classifiers or assay-specific statistical workflows.
 
@@ -47,13 +47,27 @@ omicsbench suite verify-workspace my-run
 
 The command copies checked input files into `my-run/inputs/` and writes `my-run/workspace.json`. That JSON lists each case's input roles and hashes, sample design, source citation, rights, limitations, expected result columns and suggested result filename. It does not copy expected answers into the workspace.
 
-Run your pipeline against those inputs, then put its results at the suggested paths under `my-run/results/`. For example, the two cases above expect `rnaseq-002.tsv` and `sequence-007.taxonomy.tsv`. If your pipeline writes other filenames or column headers, use `omicsbench suite index my-run/results` with `--result` and `--column` mappings as described below. Then grade the run:
+Run your pipeline against those inputs, then put its results under `my-run/results/`. The suggested names are `rnaseq-002.tsv` and `sequence-007.taxonomy.tsv`. Check how files will be routed before writing the result index:
 
 ```sh
+omicsbench suite discover my-run
+omicsbench suite discover my-run --write
 omicsbench suite grade my-run
 ```
 
-The command checks the workspace inputs again, scores only its selected cases, and writes `report.json`, `report.html`, `report.csv`, `report.xml` and `evidence.zip` inside `my-run/`. Missing or incorrect results appear as failed cases. Reports are preserved by default; use `suite grade my-run --force` only when you intend to replace them after changing results. This workflow tests file handling and declared benchmark outcomes; each object's limitations still apply.
+Discovery accepts all six comparable assay families. It recognizes benchmark IDs in result filenames or parent directories and checks named columns in RNA effect, peptide and cell-cluster tables. If a pipeline uses unrelated filenames or headers, supply an exact path or column mapping:
+
+```sh
+omicsbench suite discover my-run \
+  --result rnaseq-002=analysis/effects.csv \
+  --column rnaseq-002:gene_id=Geneid \
+  --column rnaseq-002:log2_fold_change=log2FoldChange \
+  --write
+```
+
+The command refuses ambiguous matches and writes `my-run/results/results.json` only when every selected case has a supported file and required headers. `--force` with `--write` replaces an existing index after results change. Discovery checks routing, headers and hashes; it does not score results or establish that a file has the right biological meaning. `suite grade` performs the benchmark comparison. For results outside a prepared workspace, `suite index RESULTS_DIRECTORY` remains available for explicit mappings.
+
+Grading checks the workspace inputs again, scores only its selected cases, and writes `report.json`, `report.html`, `report.csv`, `report.xml` and `evidence.zip` inside `my-run/`. Missing or incorrect results appear as failed cases. Reports are preserved by default; use `suite grade my-run --force` only when you intend to replace them after changing results. This workflow tests file handling and declared benchmark outcomes; each object's limitations still apply.
 
 ## Sequence tools
 

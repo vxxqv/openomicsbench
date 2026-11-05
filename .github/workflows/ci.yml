@@ -34,6 +34,7 @@ jobs:
           omicsbench suite verify-workspace build/workspace
           cp datasets/rnaseq/rnaseq-002/expected/reference-effects.tsv.gz build/workspace/results/rnaseq-002.tsv.gz
           cp datasets/sequences/sequence-007/expected/read-taxonomy.tsv build/workspace/results/sequence-007.taxonomy.tsv
+          omicsbench suite discover build/workspace --write
           omicsbench suite grade build/workspace
           omicsbench evidence verify build/workspace/evidence.zip
       - name: Exercise matrix, regression and bundle workflows

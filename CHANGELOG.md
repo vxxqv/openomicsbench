@@ -1,5 +1,11 @@
 # Changes
 
+## 10.0.0
+
+`omicsbench suite discover WORKSPACE` checks a prepared workspace for pipeline result files before scoring. It finds supported result formats by benchmark ID in a filename or parent directory, checks required table headers, and reports missing or ambiguous files. Exact `--result` and `--column` mappings handle different pipeline layouts. With `--write`, it creates a hash-locked `results.json` only when every selected case is ready; an existing index is protected unless `--force` is given.
+
+Discovery works across the six comparable assay families, including gzip-compressed tables. It checks routing and table shape, then leaves scientific scoring to `suite grade`. The workspace and result index remain local and can be used from an installed wheel without a repository checkout.
+
 ## 9.0.0
 
 Version 9 adds a workspace for testing a pipeline's own outputs. `omicsbench suite prepare` copies only declared distributable inputs for selected benchmarks, checks every source file, and records the expected result filename, columns, sample design, citation, rights and limitations in `workspace.json`. The workspace does not copy expected answers. Those answers remain available in the installed collection, so this is a convenient test setup rather than a blinded challenge.

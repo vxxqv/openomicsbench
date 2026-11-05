@@ -49,6 +49,16 @@ Chromatin peak files use zero-based, half-open coordinates and are checked again
 
 ## Index pipeline outputs
 
+For a prepared workspace, `suite discover` checks the selected cases and can build the result index from files already in `WORKSPACE/results/`:
+
+```sh
+omicsbench suite discover WORKSPACE
+omicsbench suite discover WORKSPACE --write
+omicsbench suite grade WORKSPACE
+```
+
+It matches a benchmark ID at the start of a filename or as a parent directory name. The file suffix must fit that benchmark's comparator. RNA effect, peptide and cell-cluster tables also require unambiguous known header names. A missing file, two candidates or an unknown required header is reported for that case. `--result ID=RELATIVE_PATH` selects an exact file, and `--column ID:FIELD=HEADER` selects an exact header. The preview writes nothing. `--write` writes `results.json` only if every selected case is ready; use `--force` to replace an older index. Discovery checks file routing and headers, while `suite grade` performs the actual comparison and verifies the index hashes.
+
 Benchmark-named files are convenient for small tests, but production workflows often place outputs in nested directories and use tool-specific headers. A result manifest connects those existing files to benchmark IDs without copying or renaming them.
 
 ```sh
