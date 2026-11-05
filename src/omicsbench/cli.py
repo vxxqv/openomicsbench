@@ -28,6 +28,7 @@ from .intervals import compare_intervals, summarize_intervals
 from .taxonomy import classify_exact, compare_taxonomy
 from .demo import create_demo
 from .workspace import prepare_workspace, verify_workspace, grade_workspace
+from .discovery import discover_workspace_results
 
 ASSAYS = ["bulk_rna_seq", "single_cell_rna_seq", "chromatin_accessibility", "sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq", "shotgun_metagenomics"]
 
@@ -145,6 +146,12 @@ def main():
     suite_grade = suite_sub.add_parser("grade", help="Score the workspace results and write reports and evidence.")
     suite_grade.add_argument("workspace", type=Path)
     suite_grade.add_argument("--force", action="store_true", help="Replace an earlier grading report after results change.")
+    suite_discover = suite_sub.add_parser("discover", help="Find workspace results and check their column contracts before grading.")
+    suite_discover.add_argument("workspace", type=Path)
+    suite_discover.add_argument("--result", action="append", default=[], help="Use an explicit ID=RELATIVE_PATH for a result with a different name.")
+    suite_discover.add_argument("--column", action="append", default=[], help="Resolve a header as ID:FIELD=HEADER.")
+    suite_discover.add_argument("--write", action="store_true", help="Write a hash-locked results.json when every case is ready.")
+    suite_discover.add_argument("--force", action="store_true", help="Replace an existing results.json with --write.")
     for command in (suite_validate, suite_compare, suite_evaluate, suite_matrix, suite_evaluate_matrix):
         command.add_argument("--id", action="append", default=[], help="Benchmark ID to include. Repeat to select several; omit to run all eligible benchmarks.")
     for command in (suite_validate, suite_compare, suite_evaluate, suite_index, suite_matrix, suite_evaluate_matrix, suite_regress, suite_gate, suite_trend):
@@ -219,6 +226,8 @@ def main():
             out = verify_workspace(args.root, args.workspace)
         elif args.command == "suite" and args.suite_command == "grade":
             out = grade_workspace(args.root, args.workspace, args.force)
+        elif args.command == "suite" and args.suite_command == "discover":
+            out = discover_workspace_results(args.root, args.workspace, args.result, args.column, args.write, args.force)
         elif args.command == "suite":
             if args.suite_command == "index":
                 out = create_result_manifest(args.root, args.results, args.result, args.column, args.force)
