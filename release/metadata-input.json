@@ -1,6 +1,6 @@
 {
-  "software_version": "9.0.0",
-  "candidate_date": "2026-11-03",
+  "software_version": "10.0.0",
+  "candidate_date": "2026-11-06",
   "authors": [
     {
       "name": "Vivaan Patni",
@@ -12,64 +12,17 @@
   "repository_url": "https://github.com/vxxqv/openomicsbench",
   "concept_doi": "10.5281/zenodo.22551734",
   "previous_release": {
-    "version": "8.0.0",
-    "git_tag": "v8.0.0",
-    "record_doi": "10.5281/zenodo.23854226",
-    "record_url": "https://zenodo.org/records/23854226"
+    "version": "9.0.0",
+    "git_tag": "v9.0.0",
+    "record_doi": "10.5281/zenodo.23911121",
+    "record_url": "https://zenodo.org/records/23911121"
   },
   "code_license": "Apache-2.0",
   "metadata_license": "CC-BY-4.0",
   "scientific_environment_lock": "runtime/environment-lock.json",
   "container_digest": null,
-  "external_user_trial": {
-    "status": "owner-authorized clean-room substitute",
-    "date": "2026-11-03",
-    "operating_system": "Windows 11",
-    "python": "3.12.14",
-    "commit": "1139bff6aa62286a45f5f2cd35eb7499ddf26352",
-    "commands": [
-      "python -m venv TRIAL",
-      "TRIAL/python -m pip install -r requirements-tested.txt",
-      "TRIAL/python -m pip install --no-deps openomicsbench-9.0.0-py3-none-any.whl",
-      "omicsbench --version",
-      "omicsbench suite prepare WORKSPACE --id rnaseq-002 --id sequence-007",
-      "omicsbench suite verify-workspace WORKSPACE",
-      "copy packaged reference results to WORKSPACE/results",
-      "omicsbench suite grade WORKSPACE",
-      "omicsbench evidence verify WORKSPACE/evidence.zip",
-      "python -m twine check openomicsbench-9.0.0-py3-none-any.whl openomicsbench-9.0.0.tar.gz"
-    ],
-    "outcome": "pass",
-    "wheel_bytes": 10898753,
-    "sdist_bytes": 10758394,
-    "packaged_collection": true,
-    "limitation": "The release preparer ran the clean-room trial. No independent tester is claimed."
-  },
-  "release_commit": "3b835c69e157cce6d956444051d4020f90f91ffd",
-  "version_doi": "10.5281/zenodo.23911121",
-  "post_upload_verification": {
-    "status": "pass",
-    "verified_at": "2026-11-03T07:54:09Z",
-    "version_doi": "10.5281/zenodo.23911121",
-    "record_url": "https://zenodo.org/records/23911121",
-    "git_commit": "3b835c69e157cce6d956444051d4020f90f91ffd",
-    "git_tag": "v9.0.0",
-    "github_archive_url": "https://github.com/vxxqv/openomicsbench/archive/refs/tags/v9.0.0.zip",
-    "zenodo_archive_url": "https://zenodo.org/api/records/23911121/files/vxxqv/openomicsbench-v9.0.0.zip/content",
-    "github_archive_root": "openomicsbench-9.0.0",
-    "zenodo_archive_root": "vxxqv-openomicsbench-95b9569",
-    "github_archive_bytes": 11210029,
-    "zenodo_archive_bytes": 11218061,
-    "archived_files": 397,
-    "inventory_files_verified": 396,
-    "matching_files": 397,
-    "archive_content_match": true,
-    "missing_files": [],
-    "extra_files": [],
-    "changed_files": [],
-    "github_sha256": "847ad7e5b204bf0cd9577adda0e1a1add47db5d71c8236b772b2227013f5ef22",
-    "github_md5": "b2fc0791de4eb357d1d2938adaa63f43",
-    "zenodo_sha256": "b2f528724aa483896cf77e64a3764f8e139e4ad550d6a337e34f6d67c9df4127",
-    "zenodo_md5": "adf95e55b5bf38639008ef5657f2788d"
-  }
+  "external_user_trial": null,
+  "release_commit": null,
+  "version_doi": null,
+  "post_upload_verification": null
 }

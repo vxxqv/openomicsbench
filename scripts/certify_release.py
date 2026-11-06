@@ -378,7 +378,7 @@ def main() -> None:
 
     deferred = [field for field in PUBLICATION_FIELDS if not metadata.get(field)]
     report = {
-        "scope": "v9_collection",
+        "scope": f"v{metadata['software_version'].split('.')[0]}_collection",
         "software_version": metadata["software_version"],
         "decision": "GO" if not blockers and not deferred else "NO-GO",
         "preflight": "PASS" if not blockers else "FAIL",

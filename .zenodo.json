@@ -6,7 +6,7 @@
       "orcid": "0009-0005-1859-5107"
     }
   ],
-  "description": "Compact, traceable RNA, DNA, protein, single-cell, genomic interval and synthetic paired-read taxonomy benchmarks with offline scoring and verifiable reports. Version 9 adds a checked workspace for independently produced pipeline results: selected inputs, result contracts, integrity checks and multi-assay grading. The mock taxonomy fixture uses project-local codes and does not measure biological classification accuracy. Browse the public collection catalog or install from PyPI.",
+  "description": "Compact, traceable RNA, DNA, protein, single-cell, genomic interval and synthetic paired-read taxonomy benchmarks with offline scoring and verifiable reports. Version 10 adds result discovery for checked workspaces: it routes supported pipeline outputs, checks required headers, reports ambiguity and writes a hash-locked index before grading. The mock taxonomy fixture uses project-local codes and does not measure biological classification accuracy. Browse the public collection catalog or install from PyPI.",
   "upload_type": "software",
   "access_right": "open",
   "license": "Apache-2.0",
@@ -140,6 +140,7 @@
     "pipeline evaluation",
     "result scoring",
     "input integrity",
-    "multi-assay grading"
+    "multi-assay grading",
+    "result discovery"
   ]
 }
