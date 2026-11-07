@@ -51,6 +51,16 @@ class Benchmark:
     def validate(self) -> dict:
         return validate(self._model, self._folder)
 
+    def rnaseq(self, tier: str = "pocket"):
+        """Load aligned biological RNA counts and sample metadata."""
+        from .rnaseq_access import load_rnaseq
+        return load_rnaseq(self, tier)
+
+    def export_rnaseq(self, destination: str | Path, tier: str = "pocket") -> dict:
+        """Export aligned counts and metadata to a new analysis directory."""
+        from .rnaseq_access import export_rnaseq
+        return export_rnaseq(self, destination, tier)
+
 
 class Collection:
     """Access local benchmarks and score pipeline results without a CLI subprocess."""

@@ -29,6 +29,7 @@ from .taxonomy import classify_exact, compare_taxonomy
 from .demo import create_demo
 from .workspace import prepare_workspace, verify_workspace, grade_workspace
 from .discovery import discover_workspace_results
+from .client import Collection
 
 ASSAYS = ["bulk_rna_seq", "single_cell_rna_seq", "chromatin_accessibility", "sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq", "shotgun_metagenomics"]
 
@@ -52,6 +53,12 @@ def main():
             command.add_argument("results",type=Path,help="CSV or TSV file with gene_id and log2_fold_change columns.")
             command.add_argument("--detail-limit",type=int,default=20,help="Maximum missing and unexpected gene examples to return.")
     add_sequence_parser(sub)
+    rnaseq = sub.add_parser("rnaseq", help="Export aligned biological bulk RNA-seq counts and sample metadata.")
+    rnaseq_sub = rnaseq.add_subparsers(dest="rnaseq_command", required=True)
+    rnaseq_export = rnaseq_sub.add_parser("export", help="Write counts.tsv, samples.tsv and export.json to a new directory.")
+    rnaseq_export.add_argument("id", help="Validated biological bulk RNA-seq benchmark ID.")
+    rnaseq_export.add_argument("output", type=Path, help="New export directory; existing directories are preserved.")
+    rnaseq_export.add_argument("--tier", choices=["pocket", "full"], default="pocket")
     demo = sub.add_parser("demo", help="Run a six-assay example using bundled reference answers.")
     demo.add_argument("output", type=Path, help="New directory for example results, reports and evidence.")
     variant = sub.add_parser("variant", help="Compare VCF calls with a bundled small-variant truth set.")
@@ -180,6 +187,8 @@ def main():
     try:
         if args.command == "demo":
             out = create_demo(args.root, args.output)
+        elif args.command == "rnaseq":
+            out = Collection(args.root).get(args.id).export_rnaseq(args.output, args.tier)
         elif args.command == "seq":
             out = run_sequence_command(args)
         elif args.command == "variant":
