@@ -2,7 +2,7 @@
 
 OpenOmicsBench is a compact benchmark collection and local toolkit for bioinformatics software testing, method checks and teaching. It contains 12 certified bulk RNA-seq objects, seven deterministic sequence and classification fixtures, a 10x-style single-cell RNA-seq benchmark, a genomic peak-calling benchmark, strict local tools, and a CI-ready evaluation system. [Browse the collection](https://vxxqv.github.io/openomicsbench/) before installing.
 
-Version 10 makes the workspace easier to use with a pipeline's own output names and headers. `suite discover` finds results for the selected cases, checks table headers, and can write a hash-locked result index. It stops on missing or ambiguous files and columns. The installed package still contains the truth sets, so the workspace is not a blinded challenge.
+Version 10 makes the collection usable from both the CLI and Python. `suite discover` finds pipeline results for selected cases, checks table headers, and can write a hash-locked result index. The `Collection` API lets notebooks and other Python tools list benchmarks, retrieve verified files, prepare workspaces and score results without running a subprocess. The installed package still contains the truth sets, so the workspace is not a blinded challenge.
 
 The package runs offline after installation. Sequence files stay on the local computer. The built-in tools cover inspection and lightweight preprocessing; they do not claim to replace aligners, variant callers, taxonomic classifiers or assay-specific statistical workflows.
 
@@ -68,6 +68,23 @@ omicsbench suite discover my-run \
 The command refuses ambiguous matches and writes `my-run/results/results.json` only when every selected case has a supported file and required headers. `--force` with `--write` replaces an existing index after results change. Discovery checks routing, headers and hashes; it does not score results or establish that a file has the right biological meaning. `suite grade` performs the benchmark comparison. For results outside a prepared workspace, `suite index RESULTS_DIRECTORY` remains available for explicit mappings.
 
 Grading checks the workspace inputs again, scores only its selected cases, and writes `report.json`, `report.html`, `report.csv`, `report.xml` and `evidence.zip` inside `my-run/`. Missing or incorrect results appear as failed cases. Reports are preserved by default; use `suite grade my-run --force` only when you intend to replace them after changing results. This workflow tests file handling and declared benchmark outcomes; each object's limitations still apply.
+
+## Use from Python
+
+```python
+from omicsbench import Collection
+
+collection = Collection()
+for item in collection.list(assay="bulk_rna_seq", status="validated", kind="real"):
+    print(item["id"], item["title"])
+
+benchmark = collection.get("rnaseq-002")
+samples = benchmark.file(role="samples", tier="metadata")
+print(samples)
+print(benchmark.validate()["status"])
+```
+
+`file()` returns a declared path only after checking its size and SHA-256 digest. `Collection.prepare()`, `verify_workspace()`, `discover()`, `grade()` and `evaluate()` expose the same contracts as the CLI. The API uses the installed collection by default and works offline. Pass a collection path to `Collection(root=...)` only when using a separate checkout or local collection.
 
 ## Sequence tools
 

@@ -6,6 +6,8 @@
 
 Discovery works across the six comparable assay families, including gzip-compressed tables. It checks routing and table shape, then leaves scientific scoring to `suite grade`. The workspace and result index remain local and can be used from an installed wheel without a repository checkout.
 
+A public `Collection` Python API now covers catalog queries, benchmark metadata, checksum-verified file access, validation, workspace preparation, result discovery, grading and evaluation. This allows notebooks and Python pipelines to use the installed collection without invoking the CLI.
+
 ## 9.0.0
 
 Version 9 adds a workspace for testing a pipeline's own outputs. `omicsbench suite prepare` copies only declared distributable inputs for selected benchmarks, checks every source file, and records the expected result filename, columns, sample design, citation, rights and limitations in `workspace.json`. The workspace does not copy expected answers. Those answers remain available in the installed collection, so this is a convenient test setup rather than a blinded challenge.
