@@ -1,5 +1,11 @@
 # Changes
 
+## 11.0.0
+
+The 12 validated biological bulk RNA-seq objects can now be loaded directly from Python with `Collection().get(ID).rnaseq()`. The returned object contains a read-only feature-by-sample integer matrix, ordered gene and sample IDs, matching sample metadata, source attribution and limitations. Choose `"full"` to load the complete matrix for the selected samples instead of the default compact tier. The loader checks the declared file size and SHA-256 digest, then refuses a count matrix whose columns differ from the manifest sample order.
+
+`omicsbench rnaseq export ID DIRECTORY` writes `counts.tsv`, `samples.tsv` and `export.json` for use in R, Python or other analysis tools. The export includes source details and SHA-256 hashes for the two tables, preserves existing directories and leaves no partial output when a check fails. `--tier full` exports the full matrix. This is an access and interoperability feature; it does not add new biological validation or change the benchmark thresholds.
+
 ## 10.0.0
 
 `omicsbench suite discover WORKSPACE` checks a prepared workspace for pipeline result files before scoring. It finds supported result formats by benchmark ID in a filename or parent directory, checks required table headers, and reports missing or ambiguous files. Exact `--result` and `--column` mappings handle different pipeline layouts. With `--write`, it creates a hash-locked `results.json` only when every selected case is ready; an existing index is protected unless `--force` is given.
