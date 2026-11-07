@@ -48,9 +48,33 @@
     "packaged_collection": true,
     "limitation": "The release preparer ran the clean-room trial. No independent tester is claimed."
   },
-  "release_commit": null,
-  "version_doi": null,
-  "post_upload_verification": null,
+  "release_commit": "98ffb2a54a783179b4067644daaa3e2df0d0947d",
+  "version_doi": "10.5281/zenodo.24037235",
+  "post_upload_verification": {
+    "status": "pass",
+    "verified_at": "2026-11-07T14:16:49Z",
+    "git_commit": "98ffb2a54a783179b4067644daaa3e2df0d0947d",
+    "git_tag": "v10.0.0",
+    "version_doi": "10.5281/zenodo.24037235",
+    "record_url": "https://zenodo.org/records/24037235",
+    "github_archive_url": "https://github.com/vxxqv/openomicsbench/archive/refs/tags/v10.0.0.zip",
+    "zenodo_archive_url": "https://zenodo.org/api/records/24037235/files/vxxqv/openomicsbench-v10.0.0.zip/content",
+    "github_archive_root": "openomicsbench-10.0.0",
+    "zenodo_archive_root": "vxxqv-openomicsbench-c521573",
+    "github_archive_bytes": 11220233,
+    "zenodo_archive_bytes": 11227317,
+    "archived_files": 401,
+    "inventory_files_verified": 400,
+    "matching_files": 401,
+    "archive_content_match": true,
+    "missing_files": [],
+    "extra_files": [],
+    "changed_files": [],
+    "github_sha256": "6d3125942b34ba34f9dfaca42646ed0beaf2c9eca15bd9f52068dd3be1bc4067",
+    "github_md5": "fc2dfbc8ff6165e1bf075ef6c77002d1",
+    "zenodo_sha256": "abbff5663ccd640b1f197100b62b04826738d04c65bbcf5a62af188818371a61",
+    "zenodo_md5": "1a1fb89b4282ca84c51ce002a4ed2e64"
+  },
   "build_reproducibility": {
     "wheel_byte_match": true,
     "wheel_sha256": "0cac261eaff6a1461b03b2243b05509cf3ff5df917d9c7d8b90c9f0078d84b23",
@@ -58,5 +82,52 @@
     "sdist_file_count": 272,
     "sdist_byte_match": false,
     "sdist_difference": "Tar member timestamps differ; contained file sizes and SHA-256 hashes match."
+  },
+  "pypi_verification": {
+    "status": "pass",
+    "verified_at": "2026-11-07T14:16:49Z",
+    "version": "10.0.0",
+    "url": "https://pypi.org/project/openomicsbench/10.0.0/",
+    "publisher_run": "https://github.com/vxxqv/openomicsbench/actions/runs/42380583000",
+    "files": [
+      {
+        "filename": "openomicsbench-10.0.0-py3-none-any.whl",
+        "bytes": 10903569,
+        "sha256": "63acb883314f360e52f32fe67bcda8154a5881a4f067c7f97b00e538ef6daad6",
+        "local_members": 245,
+        "public_members": 245,
+        "matching_members": 242,
+        "missing": [],
+        "extra": [],
+        "changed": [
+          "omicsbench/_collection/datasets/rnaseq/rnaseq-001/manifest.json",
+          "openomicsbench-10.0.0.dist-info/METADATA",
+          "openomicsbench-10.0.0.dist-info/RECORD"
+        ],
+        "file_set_match": true,
+        "normalized_content_match": true,
+        "byte_difference_note": "One bundled manifest and wheel metadata use LF on PyPI versus CRLF in the Windows trial build; RECORD reflects those bytes. All other members match exactly."
+      },
+      {
+        "filename": "openomicsbench-10.0.0.tar.gz",
+        "bytes": 10761916,
+        "sha256": "151c01773771578910805c33ddb03874dffc6fd452e0274b2d49df3a1f2954a8",
+        "local_members": 272,
+        "public_members": 272,
+        "matching_members": 268,
+        "missing": [],
+        "extra": [],
+        "changed": [
+          "openomicsbench-10.0.0/PKG-INFO",
+          "openomicsbench-10.0.0/datasets/rnaseq/rnaseq-001/manifest.json",
+          "openomicsbench-10.0.0/setup.cfg",
+          "openomicsbench-10.0.0/src/openomicsbench.egg-info/PKG-INFO"
+        ],
+        "file_set_match": true,
+        "normalized_content_match": true,
+        "byte_difference_note": "Four generated text members use LF on PyPI versus CRLF in the Windows trial build. All other members match exactly."
+      }
+    ],
+    "attestation_limitation": "The default attested publish failed twice when Rekor returned HTTP 500. The successful trusted-publishing recovery omitted attestations, so PyPI displays a loss-of-provenance warning for this version."
   }
 }

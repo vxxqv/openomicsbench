@@ -18,7 +18,7 @@ MD5 = re.compile(r"^[0-9a-f]{32}$")
 COMMIT = re.compile(r"^[0-9a-f]{40}$")
 ORCID = re.compile(r"^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$")
 ZENODO_DOI = re.compile(r"^10\.5281/zenodo\.\d+$")
-PUBLICATION_FIELDS = ("version_doi", "external_user_trial", "post_upload_verification")
+PUBLICATION_FIELDS = ("version_doi", "external_user_trial", "post_upload_verification", "pypi_verification")
 INVENTORY_PATH = "release/file-manifest.json"
 
 
@@ -129,6 +129,23 @@ def check_publication_metadata(metadata: dict, blockers: list[str]) -> None:
         for field in ("zenodo_md5", "github_md5"):
             if not MD5.fullmatch(upload.get(field, "")):
                 blockers.append(f"The recorded {field} is invalid.")
+
+    pypi = metadata.get("pypi_verification")
+    if pypi:
+        version = metadata["software_version"]
+        if pypi.get("status") != "pass" or pypi.get("version") != version:
+            blockers.append("The PyPI verification does not match the release version.")
+        if pypi.get("url") != f"https://pypi.org/project/openomicsbench/{version}/":
+            blockers.append("The PyPI release URL is missing or incorrect.")
+        files = pypi.get("files", [])
+        expected = {f"openomicsbench-{version}-py3-none-any.whl", f"openomicsbench-{version}.tar.gz"}
+        if {item.get("filename") for item in files} != expected or len(files) != 2:
+            blockers.append("PyPI verification must name the wheel and source distribution.")
+        for item in files:
+            if not isinstance(item.get("bytes"), int) or item["bytes"] <= 0 or not SHA256.fullmatch(item.get("sha256", "")):
+                blockers.append("A PyPI file has an invalid size or SHA-256 digest.")
+            if item.get("file_set_match") is not True or item.get("normalized_content_match") is not True:
+                blockers.append("A published PyPI file has not been matched with the tested build.")
 
 
 def declared_path(model, folder: Path, relative: str, blockers: list[str]) -> Path | None:
