@@ -21,10 +21,40 @@
   "metadata_license": "CC-BY-4.0",
   "scientific_environment_lock": "runtime/environment-lock.json",
   "container_digest": null,
-  "external_user_trial": null,
+  "external_user_trial": {
+    "status": "owner-authorized clean-room substitute",
+    "date": "2026-11-08",
+    "operating_system": "Windows 11",
+    "python": "3.12.14",
+    "commit": "6e718482548308deb60d819adf78ea05263c98c8",
+    "commands": [
+      "python -m venv TRIAL",
+      "TRIAL/python -m pip install -r requirements-tested.txt",
+      "TRIAL/python -m pip install --no-deps openomicsbench-12.0.0-py3-none-any.whl",
+      "TRIAL/omicsbench rnaseq export rnaseq-002 FULL --tier full",
+      "TRIAL/omicsbench rnaseq export rnaseq-003 POCKET",
+      "TRIAL/omicsbench rnaseq check-counts rnaseq-002 FULL/counts.tsv --tier full",
+      "TRIAL/omicsbench rnaseq verify-export rnaseq-003 POCKET",
+      "TRIAL/omicsbench demo DEMO",
+      "TRIAL/omicsbench evidence verify DEMO/evidence.zip",
+      "python -m twine check openomicsbench-12.0.0-py3-none-any.whl openomicsbench-12.0.0.tar.gz"
+    ],
+    "outcome": "pass",
+    "wheel_bytes": 10907975,
+    "sdist_bytes": 10769529,
+    "packaged_collection": true,
+    "limitation": "The release preparer ran the clean-room trial. No independent tester is claimed."
+  },
   "release_commit": null,
   "version_doi": null,
   "post_upload_verification": null,
-  "build_reproducibility": null,
+  "build_reproducibility": {
+    "wheel_byte_match": true,
+    "wheel_sha256": "9672113bd9346d35e4d2fcadb8230a84e64c0c3de27a825731c415ab38bf903f",
+    "sdist_file_content_match": true,
+    "sdist_file_count": 275,
+    "sdist_byte_match": false,
+    "sdist_difference": "Tar member timestamps differ; contained file sizes and SHA-256 hashes match."
+  },
   "pypi_verification": null
 }
