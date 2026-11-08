@@ -45,9 +45,33 @@
     "packaged_collection": true,
     "limitation": "The release preparer ran the clean-room trial. No independent tester is claimed."
   },
-  "release_commit": null,
-  "version_doi": null,
-  "post_upload_verification": null,
+  "release_commit": "ba38a8c646148811b0c2c5ad4869ccf85ffd1533",
+  "version_doi": "10.5281/zenodo.24052072",
+  "post_upload_verification": {
+    "status": "pass",
+    "verified_at": "2026-11-08T10:38:31Z",
+    "git_commit": "ba38a8c646148811b0c2c5ad4869ccf85ffd1533",
+    "git_tag": "v12.0.0",
+    "version_doi": "10.5281/zenodo.24052072",
+    "record_url": "https://zenodo.org/records/24052072",
+    "github_archive_url": "https://codeload.github.com/vxxqv/openomicsbench/zip/refs/tags/v12.0.0",
+    "zenodo_archive_url": "https://zenodo.org/api/records/24052072/files/vxxqv/openomicsbench-v12.0.0.zip/content",
+    "github_archive_root": "openomicsbench-12.0.0",
+    "zenodo_archive_root": "vxxqv-openomicsbench-aa9eb53",
+    "github_archive_bytes": 11228689,
+    "zenodo_archive_bytes": 11235815,
+    "archived_files": 404,
+    "inventory_files_verified": 403,
+    "matching_files": 404,
+    "archive_content_match": true,
+    "missing_files": [],
+    "extra_files": [],
+    "changed_files": [],
+    "github_sha256": "02327b13543d1a0adf7b18bd21c7b667fb7edc4479b47ec5bf971ac984c99454",
+    "github_md5": "56c7180a625c14b091b596c5876f47c8",
+    "zenodo_sha256": "d03fc8135f4f4dd7201c706ebdacf14560e3cd971221a22ea1c73a7344ffafcc",
+    "zenodo_md5": "3b76e9767bdd05992ab94c9c1b64d883"
+  },
   "build_reproducibility": {
     "wheel_byte_match": true,
     "wheel_sha256": "9672113bd9346d35e4d2fcadb8230a84e64c0c3de27a825731c415ab38bf903f",
@@ -56,5 +80,51 @@
     "sdist_byte_match": false,
     "sdist_difference": "Tar member timestamps differ; contained file sizes and SHA-256 hashes match."
   },
-  "pypi_verification": null
+  "pypi_verification": {
+    "status": "pass",
+    "verified_at": "2026-11-08T10:40:04Z",
+    "version": "12.0.0",
+    "url": "https://pypi.org/project/openomicsbench/12.0.0/",
+    "publisher_run": "https://github.com/vxxqv/openomicsbench/actions/runs/42472155499",
+    "provenance": "PyPI reports full provenance for both files from the tagged GitHub commit.",
+    "files": [
+      {
+        "filename": "openomicsbench-12.0.0-py3-none-any.whl",
+        "bytes": 10907927,
+        "sha256": "4e23f1221abb6f8b24f1544aee1a8b4af7cbfe9bcf079f92733c3097d3b174e3",
+        "local_members": 246,
+        "public_members": 246,
+        "matching_members": 243,
+        "missing": [],
+        "extra": [],
+        "changed_members": [
+          "omicsbench/_collection/datasets/rnaseq/rnaseq-001/manifest.json",
+          "openomicsbench-12.0.0.dist-info/METADATA",
+          "openomicsbench-12.0.0.dist-info/RECORD"
+        ],
+        "file_set_match": true,
+        "normalized_content_match": true,
+        "difference": "The manifest and METADATA differ only in CRLF versus LF newlines. The derived RECORD differs accordingly and its public hashes and sizes verify for all 246 members."
+      },
+      {
+        "filename": "openomicsbench-12.0.0.tar.gz",
+        "bytes": 10767303,
+        "sha256": "994596b51ffb49278ebab4bde5261f9ee1ee7cd626a1838054c0b1f642d9639e",
+        "local_members": 275,
+        "public_members": 275,
+        "matching_members": 271,
+        "missing": [],
+        "extra": [],
+        "changed_members": [
+          "openomicsbench-12.0.0/PKG-INFO",
+          "openomicsbench-12.0.0/datasets/rnaseq/rnaseq-001/manifest.json",
+          "openomicsbench-12.0.0/setup.cfg",
+          "openomicsbench-12.0.0/src/openomicsbench.egg-info/PKG-INFO"
+        ],
+        "file_set_match": true,
+        "normalized_content_match": true,
+        "difference": "All four changed text members match after CRLF and LF normalization; the other 271 members match byte for byte."
+      }
+    ]
+  }
 }
