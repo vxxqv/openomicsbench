@@ -1,5 +1,11 @@
 # Changes
 
+## 12.0.0
+
+`omicsbench rnaseq check-counts ID FILE` checks a feature-by-sample integer matrix against a declared compact or full RNA-seq tier. It aligns rows and columns by gene and sample ID, so harmless ordering changes pass. The report shows missing and extra IDs, changed cells, affected genes and samples, bounded examples and sample totals computed over shared genes. Exact agreement is required for a pass; this is a data-transfer check, not a biological performance score.
+
+`omicsbench rnaseq verify-export ID DIRECTORY` checks the three-file export created in version 11. It verifies the declared file sizes and SHA-256 hashes, source details, dimensions, sample metadata and order, and exact count agreement. Both checks are also available from a `Benchmark` object in Python. They work from an installed wheel without a checkout or network connection. Existing benchmark data and thresholds are unchanged.
+
 ## 11.0.0
 
 The 12 validated biological bulk RNA-seq objects can now be loaded directly from Python with `Collection().get(ID).rnaseq()`. The returned object contains a read-only feature-by-sample integer matrix, ordered gene and sample IDs, matching sample metadata, source attribution and limitations. Choose `"full"` to load the complete matrix for the selected samples instead of the default compact tier. The loader checks the declared file size and SHA-256 digest, then refuses a count matrix whose columns differ from the manifest sample order.

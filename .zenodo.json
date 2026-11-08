@@ -6,7 +6,7 @@
       "orcid": "0009-0005-1859-5107"
     }
   ],
-  "description": "Compact, traceable RNA, DNA, protein, single-cell, genomic interval and synthetic paired-read taxonomy benchmarks with offline scoring and verifiable reports. Version 11 adds checked access to compact or full count matrices for 12 biological bulk RNA-seq objects, with sample-order validation and portable counts and metadata exports for analysis tools. The mock taxonomy fixture uses project-local codes and does not measure biological classification accuracy. Browse the public collection catalog or install from PyPI.",
+  "description": "Compact, traceable RNA, DNA, protein, single-cell, genomic interval and synthetic paired-read taxonomy benchmarks with offline scoring and verifiable reports. Version 12 adds an exact, ID-aligned count-matrix check and complete export verification for the 12 biological bulk RNA-seq objects. It reports missing or extra genes and samples, changed counts, and per-sample totals without treating exact transfer agreement as biological method performance. The mock taxonomy fixture uses project-local codes and does not measure biological classification accuracy. Browse the public collection catalog or install from PyPI.",
   "upload_type": "software",
   "access_right": "open",
   "license": "Apache-2.0",

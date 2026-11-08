@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "openomicsbench"
-version = "11.0.0"
-description = "Offline omics benchmarks with checked workspaces and aligned RNA-seq exports"
+version = "12.0.0"
+description = "Offline omics benchmarks with checked workspaces and auditable RNA-seq transfers"
 readme = {file = "README.md", content-type = "text/markdown"}
 license = "Apache-2.0"
 authors = [{name = "Vivaan Patni"}]

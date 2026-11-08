@@ -2,7 +2,7 @@
 
 OpenOmicsBench is a compact benchmark collection and local toolkit for bioinformatics software testing, method checks and teaching. It contains 12 certified bulk RNA-seq objects, seven deterministic sequence and classification fixtures, a 10x-style single-cell RNA-seq benchmark, a genomic peak-calling benchmark, strict local tools, and a CI-ready evaluation system. [Browse the collection](https://vxxqv.github.io/openomicsbench/) before installing.
 
-Version 11 adds aligned bulk RNA-seq data access for the 12 validated biological objects. The CLI can export counts, sample metadata and source details into a new directory. The Python API loads the same checked files as a feature-by-sample integer array with ordered sample records. The installed package still contains the truth sets, so the workspace is not a blinded challenge.
+Version 12 checks RNA-seq data transfers as well as exporting them. Compare an integer count matrix with a bundled compact or full reference after aligning gene and sample IDs, or verify an entire export including hashes, counts and sample metadata. The installed package still contains the truth sets, so the workspace is not a blinded challenge.
 
 The package runs offline after installation. Sequence files stay on the local computer. The built-in tools cover inspection and lightweight preprocessing; they do not claim to replace aligners, variant callers, taxonomic classifiers or assay-specific statistical workflows.
 
@@ -85,6 +85,7 @@ print(benchmark.validate()["status"])
 
 data = benchmark.rnaseq("pocket")
 print(data.counts.shape, data.samples)
+print(benchmark.compare_counts("my-rna-data/counts.tsv")["status"])
 ```
 
 `file()` returns a declared path only after checking its size and SHA-256 digest. `Collection.prepare()`, `verify_workspace()`, `discover()`, `grade()` and `evaluate()` expose the same contracts as the CLI. The API uses the installed collection by default and works offline. Pass a collection path to `Collection(root=...)` only when using a separate checkout or local collection.
@@ -97,6 +98,16 @@ omicsbench rnaseq export rnaseq-002 my-full-data --tier full
 ```
 
 Each new directory contains `counts.tsv` (genes in rows, samples in columns), `samples.tsv` (one row per sample in matching column order) and `export.json` with source attribution, limitations, dimensions and SHA-256 hashes. The compact `pocket` tier is the default; `full` uses the complete count matrix for the selected samples. Existing directories are preserved. The export checks the source file against its declared digest and refuses a mismatched sample order. These counts are for software tests and method development; consult each object's limitations before interpreting biological effects.
+
+Check a count table after another program has read and written it, or verify the complete export:
+
+```sh
+omicsbench rnaseq check-counts rnaseq-002 my-rna-data/counts.tsv
+omicsbench rnaseq verify-export rnaseq-002 my-rna-data
+omicsbench rnaseq check-counts rnaseq-002 my-full-data/counts.tsv --tier full
+```
+
+`check-counts` matches genes and samples by ID, so a row or column reorder is allowed. It reports missing and extra IDs, changed integer counts and per-sample totals over shared genes. It passes only when the two ID sets and every aligned count agree exactly. `verify-export` also checks `export.json` and the sample table. A mismatch exits with status 2; malformed input exits with status 1. These commands check data integrity and interchange, not differential-expression performance or biological validity.
 
 ## Sequence tools
 
