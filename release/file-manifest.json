@@ -22,8 +22,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "bytes": 7555,
-      "sha256": "15226ba80b694dca7e27f184aba0bb922936df16e910fa62458038946f79274b"
+      "bytes": 7551,
+      "sha256": "a3f93bfdce413e2112c0305b63c2d5ab6ac92ad78024b3a1cf04e7e8b0932c59"
     },
     {
       "path": ".github/workflows/pages.yml",
@@ -32,8 +32,8 @@
     },
     {
       "path": ".github/workflows/pypi.yml",
-      "bytes": 10096,
-      "sha256": "076b9891882f5459ced0b68b599db3926d338da675cfbe9242165ccfc8593f0e"
+      "bytes": 10095,
+      "sha256": "606da9ac0f27316b77ef24ec993debcd791e1f03a7ed8f700f4dfa955ba7fa98"
     },
     {
       "path": ".gitignore",
