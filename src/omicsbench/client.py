@@ -61,6 +61,16 @@ class Benchmark:
         from .rnaseq_access import export_rnaseq
         return export_rnaseq(self, destination, tier)
 
+    def compare_counts(self, path: str | Path, tier: str = "pocket", detail_limit: int = 20) -> dict:
+        """Check an integer count matrix against a bundled RNA-seq tier."""
+        from .rnaseq_access import compare_counts
+        return compare_counts(self, path, tier, detail_limit)
+
+    def verify_rnaseq_export(self, directory: str | Path) -> dict:
+        """Check an exported directory, including its counts and metadata."""
+        from .rnaseq_access import verify_export
+        return verify_export(self, directory)
+
 
 class Collection:
     """Access local benchmarks and score pipeline results without a CLI subprocess."""

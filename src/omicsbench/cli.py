@@ -53,12 +53,20 @@ def main():
             command.add_argument("results",type=Path,help="CSV or TSV file with gene_id and log2_fold_change columns.")
             command.add_argument("--detail-limit",type=int,default=20,help="Maximum missing and unexpected gene examples to return.")
     add_sequence_parser(sub)
-    rnaseq = sub.add_parser("rnaseq", help="Export aligned biological bulk RNA-seq counts and sample metadata.")
+    rnaseq = sub.add_parser("rnaseq", help="Export and check biological bulk RNA-seq counts and sample metadata.")
     rnaseq_sub = rnaseq.add_subparsers(dest="rnaseq_command", required=True)
     rnaseq_export = rnaseq_sub.add_parser("export", help="Write counts.tsv, samples.tsv and export.json to a new directory.")
     rnaseq_export.add_argument("id", help="Validated biological bulk RNA-seq benchmark ID.")
     rnaseq_export.add_argument("output", type=Path, help="New export directory; existing directories are preserved.")
     rnaseq_export.add_argument("--tier", choices=["pocket", "full"], default="pocket")
+    rnaseq_check = rnaseq_sub.add_parser("check-counts", help="Compare integer counts by gene and sample ID against a bundled tier.")
+    rnaseq_check.add_argument("id", help="Validated biological bulk RNA-seq benchmark ID.")
+    rnaseq_check.add_argument("counts", type=Path, help="Feature-by-sample TSV count matrix.")
+    rnaseq_check.add_argument("--tier", choices=["pocket", "full"], default="pocket")
+    rnaseq_check.add_argument("--detail-limit", type=int, default=20)
+    rnaseq_verify = rnaseq_sub.add_parser("verify-export", help="Check an exported directory's hashes, counts and sample metadata.")
+    rnaseq_verify.add_argument("id", help="Validated biological bulk RNA-seq benchmark ID.")
+    rnaseq_verify.add_argument("directory", type=Path, help="Directory created by rnaseq export.")
     demo = sub.add_parser("demo", help="Run a six-assay example using bundled reference answers.")
     demo.add_argument("output", type=Path, help="New directory for example results, reports and evidence.")
     variant = sub.add_parser("variant", help="Compare VCF calls with a bundled small-variant truth set.")
@@ -188,7 +196,13 @@ def main():
         if args.command == "demo":
             out = create_demo(args.root, args.output)
         elif args.command == "rnaseq":
-            out = Collection(args.root).get(args.id).export_rnaseq(args.output, args.tier)
+            benchmark = Collection(args.root).get(args.id)
+            if args.rnaseq_command == "export":
+                out = benchmark.export_rnaseq(args.output, args.tier)
+            elif args.rnaseq_command == "check-counts":
+                out = benchmark.compare_counts(args.counts, args.tier, args.detail_limit)
+            else:
+                out = benchmark.verify_rnaseq_export(args.directory)
         elif args.command == "seq":
             out = run_sequence_command(args)
         elif args.command == "variant":
@@ -300,6 +314,8 @@ def main():
         if args.command == "taxon" and args.taxon_command == "compare" and out["status"] == "fail":
             sys.exit(2)
         if args.command == "suite" and out["summary"]["status"] == "fail":
+            sys.exit(2)
+        if args.command == "rnaseq" and out.get("status") == "fail":
             sys.exit(2)
     except (ValueError,OSError,KeyError) as exc:
         if args.debug:
