@@ -1,6 +1,6 @@
 {
-  "software_version": "11.0.0",
-  "candidate_date": "2026-11-07",
+  "software_version": "12.0.0",
+  "candidate_date": "2026-11-08",
   "authors": [
     {
       "name": "Vivaan Patni",
@@ -12,117 +12,19 @@
   "repository_url": "https://github.com/vxxqv/openomicsbench",
   "concept_doi": "10.5281/zenodo.22551734",
   "previous_release": {
-    "version": "10.0.0",
-    "git_tag": "v10.0.0",
-    "record_doi": "10.5281/zenodo.24037235",
-    "record_url": "https://zenodo.org/records/24037235"
+    "version": "11.0.0",
+    "git_tag": "v11.0.0",
+    "record_doi": "10.5281/zenodo.24041358",
+    "record_url": "https://zenodo.org/records/24041358"
   },
   "code_license": "Apache-2.0",
   "metadata_license": "CC-BY-4.0",
   "scientific_environment_lock": "runtime/environment-lock.json",
   "container_digest": null,
-  "external_user_trial": {
-    "status": "owner-authorized clean-room substitute",
-    "date": "2026-11-07",
-    "operating_system": "Windows 11",
-    "python": "3.12.14",
-    "commit": "843ed18caf4affedca9509d9fb1f170e4c459755",
-    "commands": [
-      "python -m venv TRIAL",
-      "TRIAL/python -m pip install -r requirements-tested.txt",
-      "TRIAL/python -m pip install --no-deps openomicsbench-11.0.0-py3-none-any.whl",
-      "TRIAL/python -c from omicsbench import Collection; load rnaseq-002 pocket counts",
-      "TRIAL/omicsbench rnaseq export rnaseq-002 EXPORT --tier full",
-      "TRIAL/omicsbench demo DEMO",
-      "TRIAL/python -m omicsbench validate rnaseq-002",
-      "python -m twine check openomicsbench-11.0.0-py3-none-any.whl openomicsbench-11.0.0.tar.gz"
-    ],
-    "outcome": "pass",
-    "wheel_bytes": 10905743,
-    "sdist_bytes": 10766386,
-    "packaged_collection": true,
-    "limitation": "The release preparer ran the clean-room trial. No independent tester is claimed."
-  },
-  "release_commit": "067ec0010714ee558e52f5a94c5a2a8eee231f77",
-  "version_doi": "10.5281/zenodo.24041358",
-  "post_upload_verification": {
-    "status": "pass",
-    "verified_at": "2026-11-07T17:43:48Z",
-    "git_commit": "067ec0010714ee558e52f5a94c5a2a8eee231f77",
-    "git_tag": "v11.0.0",
-    "version_doi": "10.5281/zenodo.24041358",
-    "record_url": "https://zenodo.org/records/24041358",
-    "github_archive_url": "https://github.com/vxxqv/openomicsbench/archive/refs/tags/v11.0.0.zip",
-    "zenodo_archive_url": "https://zenodo.org/api/records/24041358/files/vxxqv/openomicsbench-v11.0.0.zip/content",
-    "github_archive_root": "openomicsbench-11.0.0",
-    "zenodo_archive_root": "vxxqv-openomicsbench-5ce787f",
-    "github_archive_bytes": 11224607,
-    "zenodo_archive_bytes": 11231719,
-    "archived_files": 403,
-    "inventory_files_verified": 402,
-    "matching_files": 403,
-    "archive_content_match": true,
-    "missing_files": [],
-    "extra_files": [],
-    "changed_files": [],
-    "github_sha256": "5ba808e36f0e886bdc852d1d355aba966779ac23c84a8aa964223963fedca640",
-    "github_md5": "173920d97a21518ff7777197699ea54c",
-    "zenodo_sha256": "ce56163f17298e7679f1ce3fb6c5f11c272271f4b12aeb5a7f520ada979ee075",
-    "zenodo_md5": "9a36056da42a8701d5e81d03b672b04b"
-  },
-  "build_reproducibility": {
-    "wheel_byte_match": true,
-    "wheel_sha256": "9f5c68e673f70d77b88145489a12b62f35a0cb31fb413c2164f1a39b8b85226d",
-    "sdist_file_content_match": true,
-    "sdist_file_count": 274,
-    "sdist_byte_match": false,
-    "sdist_difference": "Tar member timestamps differ; contained file sizes and SHA-256 hashes match."
-  },
-  "pypi_verification": {
-    "status": "pass",
-    "verified_at": "2026-11-07T17:45:47Z",
-    "version": "11.0.0",
-    "url": "https://pypi.org/project/openomicsbench/11.0.0/",
-    "publisher_run": "https://github.com/vxxqv/openomicsbench/actions/runs/42397619828",
-    "provenance": "PyPI reports full provenance for both files from the tagged GitHub commit.",
-    "files": [
-      {
-        "filename": "openomicsbench-11.0.0-py3-none-any.whl",
-        "bytes": 10905690,
-        "sha256": "b65c3db439f276167e2a1537595b34d8075b6162d3b8e29b610b8240cea75c80",
-        "local_members": 246,
-        "public_members": 246,
-        "matching_members": 243,
-        "missing": [],
-        "extra": [],
-        "changed_members": [
-          "omicsbench/_collection/datasets/rnaseq/rnaseq-001/manifest.json",
-          "openomicsbench-11.0.0.dist-info/METADATA",
-          "openomicsbench-11.0.0.dist-info/RECORD"
-        ],
-        "file_set_match": true,
-        "normalized_content_match": true,
-        "difference": "The manifest and METADATA differ only in CRLF versus LF newlines. The derived RECORD differs accordingly and its public hashes and sizes verify for all 246 members."
-      },
-      {
-        "filename": "openomicsbench-11.0.0.tar.gz",
-        "bytes": 10764367,
-        "sha256": "1d19e059c604bb1a37c130ea17949f67c9f239073e16c54a9e203de043b143a3",
-        "local_members": 274,
-        "public_members": 274,
-        "matching_members": 270,
-        "missing": [],
-        "extra": [],
-        "changed_members": [
-          "openomicsbench-11.0.0/PKG-INFO",
-          "openomicsbench-11.0.0/datasets/rnaseq/rnaseq-001/manifest.json",
-          "openomicsbench-11.0.0/setup.cfg",
-          "openomicsbench-11.0.0/src/openomicsbench.egg-info/PKG-INFO"
-        ],
-        "file_set_match": true,
-        "normalized_content_match": true,
-        "difference": "All four changed text members match after CRLF and LF normalization; the other 270 members match byte for byte."
-      }
-    ]
-  }
+  "external_user_trial": null,
+  "release_commit": null,
+  "version_doi": null,
+  "post_upload_verification": null,
+  "build_reproducibility": null,
+  "pypi_verification": null
 }
