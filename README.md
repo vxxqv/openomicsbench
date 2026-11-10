@@ -2,7 +2,7 @@
 
 OpenOmicsBench is a compact benchmark collection and local toolkit for bioinformatics software testing, method checks and teaching. It contains 12 certified bulk RNA-seq objects, seven deterministic sequence and classification fixtures, a 10x-style single-cell RNA-seq benchmark, a genomic peak-calling benchmark, strict local tools, and a CI-ready evaluation system. [Browse the collection](https://vxxqv.github.io/openomicsbench/) before installing.
 
-Version 12 checks RNA-seq data transfers as well as exporting them. Compare an integer count matrix with a bundled compact or full reference after aligning gene and sample IDs, or verify an entire export including hashes, counts and sample metadata. The installed package still contains the truth sets, so the workspace is not a blinded challenge.
+Version 13 adds RNA-seq input packs for one study or all 12 biological objects. Each pack keeps the count matrix, sample sheet and declared contrast together, with checksums and a design preflight. Native DESeq2, edgeR and limma style result tables can be converted or scored directly. The installed package still contains the reference results, so this is not a blinded challenge.
 
 The package runs offline after installation. Sequence files stay on the local computer. The built-in tools cover inspection and lightweight preprocessing; they do not claim to replace aligners, variant callers, taxonomic classifiers or assay-specific statistical workflows.
 
@@ -35,6 +35,29 @@ omicsbench taxon compare sequence-007 assignments.kraken
 ```
 
 The wheel contains the complete collection. A repository checkout and network connection are not required.
+
+## Start with one RNA-seq study
+
+Export a small, paired tumour and adjacent-tissue study as a checked input pack:
+
+```sh
+omicsbench rnaseq pack tumour-example --id rnaseq-005
+omicsbench rnaseq verify-pack tumour-example
+omicsbench rnaseq check-design tumour-example/rnaseq-005/counts.tsv tumour-example/rnaseq-005/samples.tsv tumour-example/rnaseq-005/contrasts.tsv --id rnaseq-005
+```
+
+The directory contains `counts.tsv`, `samples.tsv`, `contrasts.tsv` and `pack.json`. Sample IDs line up with count columns; the sample sheet retains condition, pair or batch, replicate and strandedness fields. The contrast states which condition is the target and which is the reference. `rnaseq-005` contains paired tumour and adjacent non-tumour tissue; adjacent tissue should not be described as healthy control tissue. No expected results are copied into the pack.
+
+The default pack contains all 12 biological RNA-seq objects. Use `--tier full` for their complete matrices, or leave the default compact tier for quick tests. `check-design` also accepts your own matrix, sample sheet and contrast file without a benchmark ID. It checks IDs, non-negative integer counts, replicate counts and whether fixed effects are identifiable. It does not run differential expression or prove that a design is scientifically appropriate.
+
+Score a native result table by naming its benchmark explicitly:
+
+```sh
+omicsbench rnaseq score-effects rnaseq-005 results/deseq2.csv
+omicsbench rnaseq normalize-effects rnaseq-005 results/edger.tsv results/rnaseq-005.tsv
+```
+
+The converter recognizes common `log2FoldChange` and `logFC` headers, including a first unnamed gene-ID column from an R CSV export. It drops missing effects with a count in the report, rejects duplicate genes and ambiguous headers, and keeps effect direction unchanged. Use `--reverse-sign` only when the submitted contrast is the reverse of the benchmark's declared target minus reference. Scoring compares with the archived full-source DESeq2 reference and its declared thresholds; it does not establish biological truth. See [RNA-seq packs and result tables](docs/rnaseq-packs.md) for file contracts and limitations.
 
 ## Test your own results
 

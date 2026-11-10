@@ -6,7 +6,7 @@
   <meta name="description" content="OpenOmicsBench is a free, offline collection of RNA-seq, DNA, protein, single-cell and genomic interval benchmarks for testing bioinformatics software.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="OpenOmicsBench | Benchmarks you can inspect">
-  <meta property="og:description" content="21 traceable benchmark objects across RNA, DNA, protein, single-cell, genomic peaks and mock taxonomy. Install from PyPI and run a six-assay example in one command.">
+  <meta property="og:description" content="21 traceable benchmark objects. Export checked RNA-seq inputs, test sample designs and score native results offline.">
   <meta property="og:url" content="https://vxxqv.github.io/openomicsbench/">
   <link rel="canonical" href="https://vxxqv.github.io/openomicsbench/">
   <link rel="stylesheet" href="styles.css">
@@ -28,7 +28,7 @@
 
   <main id="main">
     <section class="hero wrap" id="top" aria-labelledby="hero-title">
-      <div class="eyebrow"><span class="live-dot" aria-hidden="true"></span> Open source · works offline · version 12</div>
+      <div class="eyebrow"><span class="live-dot" aria-hidden="true"></span> Open source · works offline · version 13</div>
       <h1 id="hero-title">Benchmarks you can <em>inspect.</em></h1>
       <p class="lead">Small, traceable datasets and strict scoring tools for testing bioinformatics software. Start with a six-assay example, then bring results from your own pipeline.</p>
       <div class="hero-actions">
@@ -49,7 +49,7 @@
           <h2 id="what-title">A test collection with an audit trail.</h2>
         </div>
         <div class="prose">
-          <p>OpenOmicsBench lets you validate bundled data, inspect its source and transformations, score your own outputs, and compare methods across runs. A checked workspace copies selected inputs and records the result contract. Result discovery, a Python API and auditable RNA-seq transfers make it easier to use the collection with existing pipelines and notebooks. Reports and evidence packages make a run easier to review or reproduce.</p>
+          <p>OpenOmicsBench lets you validate bundled data, inspect its source and transformations, score your own outputs, and compare methods across runs. Export a checked RNA-seq input pack with aligned counts, sample metadata and a declared contrast, then check your own files before analysis. Native DESeq2, edgeR and limma result tables can be scored by naming the benchmark directly. Reports and evidence packages make a run easier to review or reproduce.</p>
           <p>The 12 biological bulk RNA-seq objects come from seven Expression Atlas studies. The other fixtures are declared synthetic tests for sequences, variants, peptide identification, single-cell clustering, chromatin peaks and read-level mock taxonomy. They are software test cases, not clinical reference materials.</p>
         </div>
       </div>
@@ -80,7 +80,7 @@
         <div>
           <p class="section-index">03 / Get started</p>
           <h2 id="start-title">From install to report in two commands.</h2>
-          <p class="prose">The demo scores bundled reference answers against their own truth sets. It shows how the evaluator works; it is not a measurement of your method. To test your pipeline, run <code>omicsbench suite prepare my-run --id rnaseq-002</code>, place your output in the prepared results directory, use <code>omicsbench suite discover my-run --write</code> to check and index it, then run <code>omicsbench suite grade my-run</code>.</p>
+          <p class="prose">The demo scores bundled reference answers against their own truth sets. It shows how the evaluator works; it is not a measurement of your method. For an RNA-seq test input, run <code>omicsbench rnaseq pack my-rna-test --id rnaseq-005</code>. Its count matrix, sample sheet and contrast are checked together; the example contains paired tumour and adjacent non-tumour samples.</p>
           <a class="text-link" href="https://github.com/vxxqv/openomicsbench#readme">Full usage guide <span aria-hidden="true">↗</span></a>
         </div>
         <div class="terminal" aria-label="Installation commands">

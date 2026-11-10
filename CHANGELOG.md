@@ -1,5 +1,13 @@
 # Changes
 
+## 13.0.0
+
+The 12 biological bulk RNA-seq objects can now be exported as one checked input pack or as selected studies. Each case contains an integer count matrix, a sample sheet retaining the recorded design fields, the declared target-versus-reference contrast, source and rights details, limitations and file hashes. Compact and full tiers are available. `rnaseq verify-pack` checks the export against the installed collection; expected results are not copied into the pack.
+
+`rnaseq check-design` checks a matrix, sample sheet and contrast file together, including unique IDs, count values, replicate counts, blocking variables, design rank and residual degrees of freedom. An optional benchmark ID also checks the archived sample annotations and contrast. It reports structure and identifiability, not whether a biological analysis is valid.
+
+`rnaseq normalize-effects` accepts common DESeq2, edgeR and limma CSV or TSV result tables, including an unnamed first gene-ID column and missing effects. Ambiguous headers, duplicate IDs and infinite effects fail. `rnaseq score-effects` compares a native result file directly with a named benchmark, without requiring a benchmark ID in its filename. Contrast direction is never guessed; users can explicitly request `--reverse-sign`. These comparisons retain the existing full-source DESeq2 reference and thresholds.
+
 ## 12.0.0
 
 `omicsbench rnaseq check-counts ID FILE` checks a feature-by-sample integer matrix against a declared compact or full RNA-seq tier. It aligns rows and columns by gene and sample ID, so harmless ordering changes pass. The report shows missing and extra IDs, changed cells, affected genes and samples, bounded examples and sample totals computed over shared genes. Exact agreement is required for a pass; this is a data-transfer check, not a biological performance score.
