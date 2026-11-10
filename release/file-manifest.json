@@ -1,9 +1,9 @@
 {
-  "version": "12.0.0",
-  "created": "2026-11-08",
-  "scope": "Files in the reviewed version 12 release candidate; generated caches and staged source downloads are excluded.",
+  "version": "13.0.0",
+  "created": "2026-11-10",
+  "scope": "Files in the reviewed version 13 release candidate; generated caches and staged source downloads are excluded.",
   "self_excluded": "release/file-manifest.json",
-  "file_count": 403,
+  "file_count": 408,
   "files": [
     {
       "path": ".gitattributes",
@@ -22,8 +22,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "bytes": 7551,
-      "sha256": "a3f93bfdce413e2112c0305b63c2d5ab6ac92ad78024b3a1cf04e7e8b0932c59"
+      "bytes": 8045,
+      "sha256": "1f38b68534342b16cfbba680f6f701ab0f970a3d45d10298f2a4720f89c01f60"
     },
     {
       "path": ".github/workflows/pages.yml",
@@ -32,8 +32,8 @@
     },
     {
       "path": ".github/workflows/pypi.yml",
-      "bytes": 10095,
-      "sha256": "606da9ac0f27316b77ef24ec993debcd791e1f03a7ed8f700f4dfa955ba7fa98"
+      "bytes": 10562,
+      "sha256": "ae5bdcb31b1eca091efd7942cfa89c777212a61a901a677aa094cf2d1ec79183"
     },
     {
       "path": ".gitignore",
@@ -42,18 +42,18 @@
     },
     {
       "path": ".zenodo.json",
-      "bytes": 3967,
-      "sha256": "ad60092911358c87c8541c194f2d67b9ce4801a1620138318d10c7e2aef6202c"
+      "bytes": 4226,
+      "sha256": "a5450736bc708a82afcaafec19919b78d133e3671a9fef32b680aea31474118a"
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 20804,
-      "sha256": "7aebb44381a5e5e19e1b864cdf01bc1c62845cc6b5427a6bb4326be8d8a55bb3"
+      "bytes": 22171,
+      "sha256": "4772cc0344551c43459842aeacd5ad30356caedf61f9ca1e0da986e8b57212b1"
     },
     {
       "path": "CITATION.cff",
       "bytes": 512,
-      "sha256": "b92ea19f51670af59c0b6796406e2236f5083584cb65cd0246858a0dbae95a44"
+      "sha256": "335491dda89f94c7d843a6c8b4bef505b0fbf912d3691774bd0774520a72c8ea"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -82,13 +82,13 @@
     },
     {
       "path": "README.md",
-      "bytes": 25963,
-      "sha256": "820b9803d04df5e1034541df805e9a441bcd0c267d1b48da00083f42fc6519b7"
+      "bytes": 28161,
+      "sha256": "3f8303cfdc072de3a20a75757769af057b8ceedf8da32a09422b64bc1a5b5f9e"
     },
     {
       "path": "catalog/collection.json",
       "bytes": 13790,
-      "sha256": "f3533e0d3e8fa03538e4ce95cf048bd89ecad75df0152970f4f06197f667f48f"
+      "sha256": "3f46672fc29caa3151461ed7ede60c7c07a89d260a8539ffe9e0a35919be813f"
     },
     {
       "path": "catalog/collection.tsv",
@@ -1286,6 +1286,11 @@
       "sha256": "ed2d1e3463de5c45ebaff9b7c09a44d213abd660dc28cfee4aae4ba82793915a"
     },
     {
+      "path": "docs/rnaseq-packs.md",
+      "bytes": 5617,
+      "sha256": "33ea49e620367364ff6597b985b40fd2a4c50997bcab2aa88ac495b4b97afe61"
+    },
+    {
       "path": "docs/sequence-tools.md",
       "bytes": 5377,
       "sha256": "1a3cb8251b951c6319b0a0004f1e588290d7b3edb6972122957c395beafcbce9"
@@ -1462,8 +1467,8 @@
     },
     {
       "path": "pyproject.toml",
-      "bytes": 2650,
-      "sha256": "babd51b042a0f653fb230face7f25395c6d8f0fff0b130bd47ffc20844900edb"
+      "bytes": 2775,
+      "sha256": "398a5eed1a7dfc7acd5afeaf6596b28073ed956b007903ba9e08addfd8f5b5d1"
     },
     {
       "path": "release/acceptance-ledger.json",
@@ -1473,7 +1478,7 @@
     {
       "path": "release/certification.json",
       "bytes": 471,
-      "sha256": "0f1a72ce5167b231a3c09cb2d4d2f556a2ee508583e38fce6fac481d1d7c264b"
+      "sha256": "582adc8ed3bd0476db9278e1924eaca797fddae08ebcb88f7fabfaf638722a3a"
     },
     {
       "path": "release/collection-audit.json",
@@ -1482,8 +1487,8 @@
     },
     {
       "path": "release/metadata-input.json",
-      "bytes": 2271,
-      "sha256": "0238d19f0e93d03ffb6ccb06720a94ffc5c6a12c49a3144b0d18944dd90d323c"
+      "bytes": 2395,
+      "sha256": "bcfafebc2cae73211dd8dd96cd5af9a66a221e1f6a721592ef5bae7fff4f840f"
     },
     {
       "path": "requirements-tested.txt",
@@ -1552,8 +1557,8 @@
     },
     {
       "path": "site/index.html",
-      "bytes": 7652,
-      "sha256": "78eff836257ccce6441b13f411c9502ccdf99156d072c8bc2aff0ff49193acf7"
+      "bytes": 7577,
+      "sha256": "498cde7bc1eb5b4ccf5b8af3de4686315292130ca7283f799e8738b039b454db"
     },
     {
       "path": "site/styles.css",
@@ -1563,7 +1568,7 @@
     {
       "path": "src/omicsbench/__init__.py",
       "bytes": 394,
-      "sha256": "3ad58c90724b692a2b7c705a9cd21706641c3ba357869a4065e203a6237ac4f1"
+      "sha256": "e361f87f857305496f089d51bc14755630d95bc586ac7ab2dccb0ca7fcaea743"
     },
     {
       "path": "src/omicsbench/__main__.py",
@@ -1587,13 +1592,13 @@
     },
     {
       "path": "src/omicsbench/cli.py",
-      "bytes": 25567,
-      "sha256": "75a8f7eab5ccfc08a013866c815785d2a6c541a35c51994816e34264b0d83673"
+      "bytes": 29230,
+      "sha256": "de21feac3f53c6555d1d0d15cd37766c250041199c81d60d27e13bafe262601f"
     },
     {
       "path": "src/omicsbench/client.py",
-      "bytes": 4798,
-      "sha256": "e402b8c5c75325928ceb8e109352df326fe001fd21f90e83342ef957228473dd"
+      "bytes": 6435,
+      "sha256": "60a3c475b2f42a26f91af9b0a9e44677717c4883fcf983e71a8b3a2eb7697463"
     },
     {
       "path": "src/omicsbench/compare.py",
@@ -1689,6 +1694,16 @@
       "path": "src/omicsbench/rnaseq_access.py",
       "bytes": 10418,
       "sha256": "d8820db984e32782749e1be64bd6d6b87d9b988ed23637d468c3b37a3d5ff14b"
+    },
+    {
+      "path": "src/omicsbench/rnaseq_design.py",
+      "bytes": 9913,
+      "sha256": "5833e1e3e44a31079c17e08cd012f2b07d67970af87448b4ad0090ae9836da23"
+    },
+    {
+      "path": "src/omicsbench/rnaseq_pack.py",
+      "bytes": 16579,
+      "sha256": "6f204a6ef90c50db69506aa8ba80ed389c3640df3d196a11937411aae5aae948"
     },
     {
       "path": "src/omicsbench/sequence_analysis.py",
@@ -1829,6 +1844,16 @@
       "path": "tests/test_rnaseq_checks.py",
       "bytes": 4683,
       "sha256": "83c8bd1dfb03345d7383b634cb47b6c33db6da4e9a8cc1f26161c905c588a05f"
+    },
+    {
+      "path": "tests/test_rnaseq_design.py",
+      "bytes": 3452,
+      "sha256": "2bbc8f9ce0434b43c95451e44a2672ea1ad2fd4b57a947e119d3dbf46b6f4dcc"
+    },
+    {
+      "path": "tests/test_rnaseq_pack.py",
+      "bytes": 7423,
+      "sha256": "641bed917547192fd9006f76f15b0ac196a9a878f7e072f425be188d3a85e21c"
     },
     {
       "path": "tests/test_sequence_fixtures.py",
