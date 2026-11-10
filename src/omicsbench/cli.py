@@ -30,6 +30,7 @@ from .demo import create_demo
 from .workspace import prepare_workspace, verify_workspace, grade_workspace
 from .discovery import discover_workspace_results
 from .client import Collection
+from .rnaseq_pack import normalize_effects
 
 ASSAYS = ["bulk_rna_seq", "single_cell_rna_seq", "chromatin_accessibility", "sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq", "shotgun_metagenomics"]
 
@@ -67,6 +68,31 @@ def main():
     rnaseq_verify = rnaseq_sub.add_parser("verify-export", help="Check an exported directory's hashes, counts and sample metadata.")
     rnaseq_verify.add_argument("id", help="Validated biological bulk RNA-seq benchmark ID.")
     rnaseq_verify.add_argument("directory", type=Path, help="Directory created by rnaseq export.")
+    rnaseq_pack = rnaseq_sub.add_parser("pack", help="Export checked count, sample and contrast files for one or more studies.")
+    rnaseq_pack.add_argument("output", type=Path, help="New pack directory.")
+    rnaseq_pack.add_argument("--id", action="append", help="Biological RNA-seq benchmark ID; repeat to select several. Default: all 12.")
+    rnaseq_pack.add_argument("--tier", choices=["pocket", "full"], default="pocket")
+    rnaseq_pack_verify = rnaseq_sub.add_parser("verify-pack", help="Recheck all pack files, IDs and contrasts.")
+    rnaseq_pack_verify.add_argument("directory", type=Path)
+    rnaseq_normalize = rnaseq_sub.add_parser("normalize-effects", help="Convert native differential-expression tables to benchmark columns.")
+    rnaseq_normalize.add_argument("id", help="Biological bulk RNA-seq benchmark ID.")
+    rnaseq_normalize.add_argument("source", type=Path, help="CSV or TSV table, optionally gzip-compressed.")
+    rnaseq_normalize.add_argument("output", type=Path, help="New canonical TSV result file.")
+    rnaseq_normalize.add_argument("--gene-column", help="Exact source header for gene IDs when auto-detection is ambiguous.")
+    rnaseq_normalize.add_argument("--effect-column", help="Exact source header for log2 effects when auto-detection is ambiguous.")
+    rnaseq_normalize.add_argument("--reverse-sign", action="store_true", help="Explicitly reverse the source effect direction.")
+    rnaseq_design = rnaseq_sub.add_parser("check-design", help="Check matrix, sample and contrast ID alignment and design rank.")
+    rnaseq_design.add_argument("counts", type=Path)
+    rnaseq_design.add_argument("samples", type=Path)
+    rnaseq_design.add_argument("contrasts", type=Path)
+    rnaseq_design.add_argument("--id", help="Also compare sample and contrast design with a biological benchmark.")
+    rnaseq_score = rnaseq_sub.add_parser("score-effects", help="Score a native DESeq2, edgeR or limma table without renaming it.")
+    rnaseq_score.add_argument("id", help="Biological bulk RNA-seq benchmark ID.")
+    rnaseq_score.add_argument("source", type=Path, help="CSV or TSV table, optionally gzip-compressed.")
+    rnaseq_score.add_argument("--gene-column")
+    rnaseq_score.add_argument("--effect-column")
+    rnaseq_score.add_argument("--reverse-sign", action="store_true")
+    rnaseq_score.add_argument("--detail-limit", type=int, default=20)
     demo = sub.add_parser("demo", help="Run a six-assay example using bundled reference answers.")
     demo.add_argument("output", type=Path, help="New directory for example results, reports and evidence.")
     variant = sub.add_parser("variant", help="Compare VCF calls with a bundled small-variant truth set.")
@@ -196,12 +222,29 @@ def main():
         if args.command == "demo":
             out = create_demo(args.root, args.output)
         elif args.command == "rnaseq":
-            benchmark = Collection(args.root).get(args.id)
-            if args.rnaseq_command == "export":
+            collection = Collection(args.root)
+            if args.rnaseq_command == "pack":
+                out = collection.pack_rnaseq(args.output, args.id, args.tier)
+            elif args.rnaseq_command == "verify-pack":
+                out = collection.verify_rnaseq_pack(args.directory)
+            elif args.rnaseq_command == "normalize-effects":
+                out = normalize_effects(collection.get(args.id), args.source, args.output,
+                                        gene_column=args.gene_column, effect_column=args.effect_column,
+                                        reverse_sign=args.reverse_sign)
+            elif args.rnaseq_command == "check-design":
+                out = collection.check_rnaseq_design(args.counts, args.samples, args.contrasts, args.id)
+            elif args.rnaseq_command == "score-effects":
+                out = collection.get(args.id).score_native_effects(
+                    args.source, gene_column=args.gene_column, effect_column=args.effect_column,
+                    reverse_sign=args.reverse_sign, detail_limit=args.detail_limit)
+            elif args.rnaseq_command == "export":
+                benchmark = collection.get(args.id)
                 out = benchmark.export_rnaseq(args.output, args.tier)
             elif args.rnaseq_command == "check-counts":
+                benchmark = collection.get(args.id)
                 out = benchmark.compare_counts(args.counts, args.tier, args.detail_limit)
             else:
+                benchmark = collection.get(args.id)
                 out = benchmark.verify_rnaseq_export(args.directory)
         elif args.command == "seq":
             out = run_sequence_command(args)
@@ -315,7 +358,7 @@ def main():
             sys.exit(2)
         if args.command == "suite" and out["summary"]["status"] == "fail":
             sys.exit(2)
-        if args.command == "rnaseq" and out.get("status") == "fail":
+        if args.command == "rnaseq" and (out.get("status") == "fail" or out.get("summary", {}).get("status") == "fail"):
             sys.exit(2)
     except (ValueError,OSError,KeyError) as exc:
         if args.debug:

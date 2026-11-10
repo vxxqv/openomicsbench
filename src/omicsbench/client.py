@@ -66,6 +66,15 @@ class Benchmark:
         from .rnaseq_access import compare_counts
         return compare_counts(self, path, tier, detail_limit)
 
+    def score_native_effects(self, path: str | Path, *, gene_column: str | None = None,
+                             effect_column: str | None = None, reverse_sign: bool = False,
+                             detail_limit: int = 20) -> dict:
+        """Compare a DESeq2, edgeR or limma style result table directly."""
+        from .rnaseq_pack import score_native_effects
+        return score_native_effects(self, path, gene_column=gene_column,
+                                    effect_column=effect_column, reverse_sign=reverse_sign,
+                                    detail_limit=detail_limit)
+
     def verify_rnaseq_export(self, directory: str | Path) -> dict:
         """Check an exported directory, including its counts and metadata."""
         from .rnaseq_access import verify_export
@@ -94,6 +103,24 @@ class Collection:
     def get(self, identifier: str) -> Benchmark:
         model, folder = lookup(self.root, identifier)
         return Benchmark(model, folder)
+
+    def pack_rnaseq(self, destination: str | Path, identifiers: list[str] | None = None,
+                   tier: str = "pocket") -> dict:
+        """Export checked counts, sample sheets and contrasts for selected studies."""
+        from .rnaseq_pack import create_rnaseq_pack
+        return create_rnaseq_pack(self, destination, identifiers, tier)
+
+    def verify_rnaseq_pack(self, directory: str | Path) -> dict:
+        """Check an exported RNA-seq pack against this collection."""
+        from .rnaseq_pack import verify_rnaseq_pack
+        return verify_rnaseq_pack(self, directory)
+
+    def check_rnaseq_design(self, counts: str | Path, samples: str | Path, contrasts: str | Path,
+                            identifier: str | None = None) -> dict:
+        """Check linked input files and optional benchmark design before analysis."""
+        from .rnaseq_design import check_rnaseq_design
+        benchmark = self.get(identifier) if identifier else None
+        return check_rnaseq_design(counts, samples, contrasts, benchmark)
 
     def prepare(self, destination: str | Path, identifiers: list[str]) -> dict:
         return prepare_workspace(self.root, Path(destination), identifiers)
