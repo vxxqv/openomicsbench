@@ -61,6 +61,9 @@ jobs:
           test -s /tmp/openomicsbench-rnaseq/samples.tsv
           /tmp/openomicsbench-smoke/bin/omicsbench rnaseq check-counts rnaseq-002 /tmp/openomicsbench-rnaseq/counts.tsv
           /tmp/openomicsbench-smoke/bin/omicsbench rnaseq verify-export rnaseq-002 /tmp/openomicsbench-rnaseq
+          /tmp/openomicsbench-smoke/bin/omicsbench rnaseq pack /tmp/openomicsbench-rna-pack --id rnaseq-002 --id rnaseq-005
+          /tmp/openomicsbench-smoke/bin/omicsbench rnaseq verify-pack /tmp/openomicsbench-rna-pack
+          /tmp/openomicsbench-smoke/bin/omicsbench rnaseq check-design /tmp/openomicsbench-rna-pack/rnaseq-005/counts.tsv /tmp/openomicsbench-rna-pack/rnaseq-005/samples.tsv /tmp/openomicsbench-rna-pack/rnaseq-005/contrasts.tsv --id rnaseq-005
           /tmp/openomicsbench-smoke/bin/omicsbench validate sequence-004
           /tmp/openomicsbench-smoke/bin/omicsbench demo /tmp/openomicsbench-first-run
           test -s /tmp/openomicsbench-first-run/report.html

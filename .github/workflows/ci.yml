@@ -27,6 +27,12 @@ jobs:
       - run: git diff --exit-code -- datasets/sequences datasets/singlecell datasets/intervals catalog figures/v1-fidelity.svg
       - run: python scripts/audit_collection.py
       - run: python scripts/check_repository.py
+      - name: Check RNA-seq input pack and native effects
+        run: |
+          omicsbench rnaseq pack build/rna-pack --id rnaseq-002 --id rnaseq-005
+          omicsbench rnaseq verify-pack build/rna-pack
+          omicsbench rnaseq check-design build/rna-pack/rnaseq-005/counts.tsv build/rna-pack/rnaseq-005/samples.tsv build/rna-pack/rnaseq-005/contrasts.tsv --id rnaseq-005
+          omicsbench rnaseq score-effects rnaseq-002 datasets/rnaseq/rnaseq-002/expected/reference-effects.tsv.gz
       - run: omicsbench taxon compare sequence-007 datasets/sequences/sequence-007/expected/read-taxonomy.tsv
       - run: omicsbench suite validate --junit build/benchmark-suite.xml --force
       - name: Exercise prepared workspace

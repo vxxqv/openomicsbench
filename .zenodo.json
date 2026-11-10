@@ -6,7 +6,7 @@
       "orcid": "0009-0005-1859-5107"
     }
   ],
-  "description": "Compact, traceable RNA, DNA, protein, single-cell, genomic interval and synthetic paired-read taxonomy benchmarks with offline scoring and verifiable reports. Version 12 adds an exact, ID-aligned count-matrix check and complete export verification for the 12 biological bulk RNA-seq objects. It reports missing or extra genes and samples, changed counts, and per-sample totals without treating exact transfer agreement as biological method performance. The mock taxonomy fixture uses project-local codes and does not measure biological classification accuracy. Browse the public collection catalog or install from PyPI.",
+  "description": "Compact, traceable RNA, DNA, protein, single-cell, genomic interval and synthetic paired-read taxonomy benchmarks with offline scoring and verifiable reports. Version 13 adds checked compact or full RNA-seq input packs containing aligned counts, sample metadata and declared contrasts for the 12 biological objects. It checks external count, sample and contrast files together and scores native DESeq2, edgeR and limma style results with explicit contrast direction. These tests assess data handling and agreement with the archived reference, not biological ground truth. The mock taxonomy fixture uses project-local codes and does not measure biological classification accuracy. Browse the collection catalog or install from PyPI.",
   "upload_type": "software",
   "access_right": "open",
   "license": "Apache-2.0",
@@ -143,6 +143,12 @@
     "multi-assay grading",
     "result discovery",
     "Python API",
-    "notebook workflows"
+    "notebook workflows",
+    "RNA-seq input pack",
+    "contrast validation",
+    "sample sheet checking",
+    "edgeR",
+    "limma",
+    "differential-expression results"
   ]
 }

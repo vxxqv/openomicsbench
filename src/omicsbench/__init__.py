@@ -1,5 +1,5 @@
 """Discovery, validation and local analysis of compact omics benchmarks."""
-__version__ = "12.0.0"
+__version__ = "13.0.0"
 
 __all__ = ["Benchmark", "Collection", "__version__"]
 

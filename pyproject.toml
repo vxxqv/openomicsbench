@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "openomicsbench"
-version = "12.0.0"
-description = "Offline omics benchmarks with checked workspaces and auditable RNA-seq transfers"
+version = "13.0.0"
+description = "Offline omics benchmarks with checked RNA-seq input packs and native result scoring"
 readme = {file = "README.md", content-type = "text/markdown"}
 license = "Apache-2.0"
 authors = [{name = "Vivaan Patni"}]
 maintainers = [{name = "Vivaan Patni"}]
-keywords = ["bioinformatics", "computational-biology", "genomics", "transcriptomics", "proteomics", "bulk-rna-seq", "single-cell-rna-seq", "scrna-seq", "atac-seq", "chip-seq", "cut-and-run", "cut-and-tag", "peak-calling", "genomic-intervals", "bed", "narrowpeak", "reciprocal-overlap", "matrix-market", "cell-clustering", "adjusted-rand-index", "normalized-mutual-information", "dna-seq", "fasta", "fastq", "vcf", "dna", "rna", "protein-sequence", "peptide-identification", "tryptic-digest", "amino-acid-analysis", "sequence-analysis", "quality-control", "kmer", "variant-truth", "variant-benchmarking", "multi-assay", "result-manifest", "column-mapping", "quality-gate", "run-fingerprint", "trend-report", "ro-crate", "benchmarking", "benchmark-data", "test-data", "data-validation", "data-provenance", "data-integrity", "reproducibility", "scientific-workflows", "research-software", "expression-atlas", "ensembl", "deseq2", "benchmark-catalog", "offline-bioinformatics", "rna-seq-testing", "shotgun-metagenomics", "taxonomic-classification", "kraken2", "read-classification", "benchmark-workspace", "pipeline-testing", "result-scoring", "result-discovery", "rna-seq-data-export", "sample-metadata"]
+keywords = ["bioinformatics", "computational-biology", "genomics", "transcriptomics", "proteomics", "bulk-rna-seq", "single-cell-rna-seq", "scrna-seq", "atac-seq", "chip-seq", "cut-and-run", "cut-and-tag", "peak-calling", "genomic-intervals", "bed", "narrowpeak", "reciprocal-overlap", "matrix-market", "cell-clustering", "adjusted-rand-index", "normalized-mutual-information", "dna-seq", "fasta", "fastq", "vcf", "dna", "rna", "protein-sequence", "peptide-identification", "tryptic-digest", "amino-acid-analysis", "sequence-analysis", "quality-control", "kmer", "variant-truth", "variant-benchmarking", "multi-assay", "result-manifest", "column-mapping", "quality-gate", "run-fingerprint", "trend-report", "ro-crate", "benchmarking", "benchmark-data", "test-data", "data-validation", "data-provenance", "data-integrity", "reproducibility", "scientific-workflows", "research-software", "expression-atlas", "ensembl", "deseq2", "benchmark-catalog", "offline-bioinformatics", "rna-seq-testing", "shotgun-metagenomics", "taxonomic-classification", "kraken2", "read-classification", "benchmark-workspace", "pipeline-testing", "result-scoring", "result-discovery", "rna-seq-data-export", "sample-metadata", "rnaseq-input-pack", "contrast-validation", "sample-sheet-checking", "edger", "limma", "differential-expression-results"]
 requires-python = ">=3.11"
 dependencies = ["pydantic>=2.13,<3", "numpy>=2.3,<3"]
 classifiers = [
