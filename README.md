@@ -12,7 +12,21 @@ Install the [Bioconda package](https://anaconda.org/bioconda/openomicsbench) wit
 
 OpenOmicsBench is a compact benchmark collection and local toolkit for bioinformatics software testing, method checks and teaching. It contains 12 certified bulk RNA-seq objects, seven deterministic sequence and classification fixtures, a 10x-style single-cell RNA-seq benchmark, a genomic peak-calling benchmark, strict local tools, and a CI-ready evaluation system. [Browse the collection](https://vxxqv.github.io/openomicsbench/) before installing.
 
-Version 13 adds RNA-seq input packs for one study or all 12 biological objects. Each pack keeps the count matrix, sample sheet and declared contrast together, with checksums and a design preflight. Native DESeq2, edgeR and limma style result tables can be converted or scored directly. The installed package still contains the reference results, so this is not a blinded challenge.
+## Try one RNA-seq study
+
+`rnaseq-005` is a paired prostate tumour and adjacent non-tumour study. After [installing the package](#install), export its compact input pack and check the design:
+
+```sh
+omicsbench rnaseq pack tumour-example --id rnaseq-005
+omicsbench rnaseq verify-pack tumour-example
+omicsbench rnaseq check-design tumour-example/rnaseq-005/counts.tsv tumour-example/rnaseq-005/samples.tsv tumour-example/rnaseq-005/contrasts.tsv --id rnaseq-005
+```
+
+The JSON report from this run returns `pass`: 8,000 genes, 28 samples in 14 pairs, matching sample IDs and no design issues. A pipeline maintainer can use the same check on their own count matrix, sample sheet and contrast before running differential expression. The check verifies input consistency and a full-rank fixed-effect design; it does not run the analysis.
+
+![RNA-seq input check for rnaseq-005: 8,000 genes, 28 samples in 14 pairs, aligned sample IDs and a passing design check](https://raw.githubusercontent.com/vxxqv/openomicsbench/main/figures/rnaseq-005-example.png)
+
+The pack contains `counts.tsv`, `samples.tsv`, `contrasts.tsv` and `pack.json`. Adjacent non-tumour tissue is not a healthy control, and the pack does not include expected results. Omit `--id` to export all 12 biological RNA-seq objects, or add `--tier full` to export complete matrices. See [RNA-seq input packs](docs/rnaseq-packs.md) for the full file contract.
 
 The package runs offline after installation. Sequence files stay on the local computer. The built-in tools cover inspection and lightweight preprocessing; they do not claim to replace aligners, variant callers, taxonomic classifiers or assay-specific statistical workflows.
 
@@ -46,21 +60,9 @@ omicsbench taxon compare sequence-007 assignments.kraken
 
 The wheel contains the complete collection. A repository checkout and network connection are not required.
 
-## Start with one RNA-seq study
+## Score your RNA-seq results
 
-Export a small, paired tumour and adjacent-tissue study as a checked input pack:
-
-```sh
-omicsbench rnaseq pack tumour-example --id rnaseq-005
-omicsbench rnaseq verify-pack tumour-example
-omicsbench rnaseq check-design tumour-example/rnaseq-005/counts.tsv tumour-example/rnaseq-005/samples.tsv tumour-example/rnaseq-005/contrasts.tsv --id rnaseq-005
-```
-
-The directory contains `counts.tsv`, `samples.tsv`, `contrasts.tsv` and `pack.json`. Sample IDs line up with count columns; the sample sheet retains condition, pair or batch, replicate and strandedness fields. The contrast states which condition is the target and which is the reference. `rnaseq-005` contains paired tumour and adjacent non-tumour tissue; adjacent tissue should not be described as healthy control tissue. No expected results are copied into the pack.
-
-The default pack contains all 12 biological RNA-seq objects. Use `--tier full` for their complete matrices, or leave the default compact tier for quick tests. `check-design` also accepts your own matrix, sample sheet and contrast file without a benchmark ID. It checks IDs, non-negative integer counts, replicate counts and whether fixed effects are identifiable. It does not run differential expression or prove that a design is scientifically appropriate.
-
-Score a native result table by naming its benchmark explicitly:
+Once your pipeline has produced a native differential-expression result table, score it against the named benchmark's archived reference:
 
 ```sh
 omicsbench rnaseq score-effects rnaseq-005 results/deseq2.csv
