@@ -35,7 +35,12 @@ from .rnaseq_pack import normalize_effects
 ASSAYS = ["bulk_rna_seq", "single_cell_rna_seq", "chromatin_accessibility", "sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq", "shotgun_metagenomics"]
 
 def main():
-    p = argparse.ArgumentParser(description="Find, verify and process compact omics benchmarks.",epilog="Example: omicsbench info rnaseq-002")
+    p = argparse.ArgumentParser(
+        description="Find, verify and process compact omics benchmarks.",
+        epilog=("Example: omicsbench info rnaseq-002\n"
+                "If useful, please star the repo: https://github.com/vxxqv/openomicsbench"),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
     p.add_argument("--root",type=Path,default=default_root(),help="Collection directory. Defaults to OMICSBENCH_ROOT, the current checkout or the installed collection.")
     p.add_argument("--cache",type=Path,default=Path(os.environ.get("OMICSBENCH_CACHE",".omicsbench-cache")),help="Local cache directory.")
     p.add_argument("--debug",action="store_true",help="Show a traceback when a command fails.")
