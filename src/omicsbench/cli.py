@@ -36,9 +36,9 @@ ASSAYS = ["bulk_rna_seq", "single_cell_rna_seq", "chromatin_accessibility", "seq
 
 def main():
     p = argparse.ArgumentParser(
-        description="Find, verify and process compact omics benchmarks.",
-        epilog=("Example: omicsbench info rnaseq-002\n"
-                "If useful, please star the repo: https://github.com/vxxqv/openomicsbench"),
+        description=("Find, verify and process compact omics benchmarks.\n\n"
+                     "If useful, please star the repo: https://github.com/vxxqv/openomicsbench"),
+        epilog="Example: omicsbench info rnaseq-002",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     p.add_argument("--root",type=Path,default=default_root(),help="Collection directory. Defaults to OMICSBENCH_ROOT, the current checkout or the installed collection.")
