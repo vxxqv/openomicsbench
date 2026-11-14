@@ -144,6 +144,11 @@ def write_catalog(rows: list[dict], sequences: list[dict], single_cell: list[dic
     (catalog / "collection.json").write_text(
         json.dumps(payload, indent=2) + "\n", encoding="utf-8", newline="\n"
     )
+    (ROOT / "site/collection.js").write_text(
+        "window.openomicsbenchCatalog = " + json.dumps(payload, separators=(",", ":")) + ";\n",
+        encoding="utf-8",
+        newline="\n",
+    )
     fields = (
         "id",
         "title",

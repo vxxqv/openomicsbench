@@ -26,7 +26,7 @@ jobs:
       - name: Assemble site
         run: |
           mkdir -p build/pages
-          cp site/index.html site/styles.css site/app.js build/pages/
+          cp site/index.html site/styles.css site/app.js site/collection.js build/pages/
           cp catalog/collection.json build/pages/collection.json
       - uses: actions/upload-pages-artifact@v4
         with:

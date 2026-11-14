@@ -59,31 +59,27 @@ for (const button of filters) {
   });
 }
 
-fetch("collection.json")
-  .then(response => {
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    return response.json();
-  })
-  .then(data => {
-    const groups = [
-      ["rnaseq", data.objects],
-      ["sequences", data.sequences],
-      ["singlecell", data.single_cell],
-      ["intervals", data.intervals]
-    ];
-    records = groups.flatMap(([name, items]) => items.map(item => ({
-      ...item,
-      family: item.assay === "shotgun_metagenomics" ? "taxonomy" : name,
-      directory: name,
-      haystack: [item.id, item.title, item.organism, item.assay, item.archetype, item.source_accession]
-        .filter(Boolean).join(" ").toLocaleLowerCase()
-    })));
-    showRecords();
-  })
-  .catch(() => {
-    status.textContent = "The catalog is unavailable right now. Browse all datasets on GitHub.";
-    const link = document.createElement("a");
-    link.href = "https://github.com/vxxqv/openomicsbench/tree/main/datasets";
-    link.textContent = "Browse datasets ↗";
-    catalog.replaceChildren(link);
-  });
+try {
+  const data = window.openomicsbenchCatalog;
+  const groups = [
+    ["rnaseq", data.objects],
+    ["sequences", data.sequences],
+    ["singlecell", data.single_cell],
+    ["intervals", data.intervals]
+  ];
+  if (groups.some(([, items]) => !Array.isArray(items))) throw new Error("Invalid catalog");
+  records = groups.flatMap(([name, items]) => items.map(item => ({
+    ...item,
+    family: item.assay === "shotgun_metagenomics" ? "taxonomy" : name,
+    directory: name,
+    haystack: [item.id, item.title, item.organism, item.assay, item.archetype, item.source_accession]
+      .filter(Boolean).join(" ").toLocaleLowerCase()
+  })));
+  showRecords();
+} catch {
+  status.textContent = "The catalog is unavailable right now. Browse all datasets on GitHub.";
+  const link = document.createElement("a");
+  link.href = "https://github.com/vxxqv/openomicsbench/tree/main/datasets";
+  link.textContent = "Browse datasets ↗";
+  catalog.replaceChildren(link);
+}
