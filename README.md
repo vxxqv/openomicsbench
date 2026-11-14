@@ -10,7 +10,7 @@
 
 Install the [Bioconda package](https://anaconda.org/bioconda/openomicsbench) with `conda install bioconda::openomicsbench`. It has reached about 1.7k downloads across its releases.
 
-If OpenOmicsBench helps your work, [star the repository](https://github.com/vxxqv/openomicsbench). Stars help other people find it.
+If OpenOmicsBench helps your work, please [star the repository](https://github.com/vxxqv/openomicsbench). Stars help other people discover the repository.
 
 OpenOmicsBench is a compact benchmark collection and local toolkit for bioinformatics software testing, method checks and teaching. It contains 12 certified bulk RNA-seq objects, seven deterministic sequence and classification fixtures, a 10x-style single-cell RNA-seq benchmark, a genomic peak-calling benchmark, strict local tools, and a CI-ready evaluation system. [Browse the collection](https://vxxqv.github.io/openomicsbench/) before installing.
 
