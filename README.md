@@ -1,5 +1,13 @@
 # OpenOmicsBench
 
+[![Install with Bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](https://bioconda.github.io/recipes/openomicsbench/README.html)
+[![Bioconda version](https://anaconda.org/bioconda/openomicsbench/badges/version.svg)](https://anaconda.org/bioconda/openomicsbench)
+[![Bioconda release date](https://anaconda.org/bioconda/openomicsbench/badges/latest_release_date.svg)](https://anaconda.org/bioconda/openomicsbench)
+[![Bioconda last updated](https://anaconda.org/bioconda/openomicsbench/badges/latest_release_relative_date.svg)](https://anaconda.org/bioconda/openomicsbench)
+[![Bioconda platforms](https://anaconda.org/bioconda/openomicsbench/badges/platforms.svg)](https://anaconda.org/bioconda/openomicsbench)
+[![Bioconda license](https://anaconda.org/bioconda/openomicsbench/badges/license.svg)](https://anaconda.org/bioconda/openomicsbench)
+[![Bioconda downloads](https://img.shields.io/conda/dn/bioconda/openomicsbench.svg?label=downloads&color=brightgreen)](https://anaconda.org/bioconda/openomicsbench)
+
 OpenOmicsBench is a compact benchmark collection and local toolkit for bioinformatics software testing, method checks and teaching. It contains 12 certified bulk RNA-seq objects, seven deterministic sequence and classification fixtures, a 10x-style single-cell RNA-seq benchmark, a genomic peak-calling benchmark, strict local tools, and a CI-ready evaluation system. [Browse the collection](https://vxxqv.github.io/openomicsbench/) before installing.
 
 Version 13 adds RNA-seq input packs for one study or all 12 biological objects. Each pack keeps the count matrix, sample sheet and declared contrast together, with checksums and a design preflight. Native DESeq2, edgeR and limma style result tables can be converted or scored directly. The installed package still contains the reference results, so this is not a blinded challenge.
