@@ -1,5 +1,9 @@
 # Changes
 
+## 13.0.1
+
+This patch release brings the post-v13 documentation and site updates into an installable release. The README and website now show the Bioconda package and badges, a worked RNA-seq example, and clearer links to the package and repository. The CLI help screen includes a brief request to star the repository. Community guidance now includes a code of conduct, security policy, and pull request template. The benchmark collection, reference results, and scoring behavior are unchanged from 13.0.0.
+
 ## 13.0.0
 
 The 12 biological bulk RNA-seq objects can now be exported as one checked input pack or as selected studies. Each case contains an integer count matrix, a sample sheet retaining the recorded design fields, the declared target-versus-reference contrast, source and rights details, limitations and file hashes. Compact and full tiers are available. `rnaseq verify-pack` checks the export against the installed collection; expected results are not copied into the pack.

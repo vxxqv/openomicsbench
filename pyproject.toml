@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "openomicsbench"
-version = "13.0.0"
+version = "13.0.1"
 description = "Offline omics benchmarks with checked RNA-seq input packs and native result scoring"
 readme = {file = "README.md", content-type = "text/markdown"}
 license = "Apache-2.0"

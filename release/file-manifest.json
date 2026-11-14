@@ -1,9 +1,9 @@
 {
-  "version": "13.0.0",
-  "created": "2026-11-10",
+  "version": "13.0.1",
+  "created": "2026-11-14",
   "scope": "Files in the reviewed version 13 release candidate; generated caches and staged source downloads are excluded.",
   "self_excluded": "release/file-manifest.json",
-  "file_count": 408,
+  "file_count": 413,
   "files": [
     {
       "path": ".gitattributes",
@@ -21,14 +21,19 @@
       "sha256": "7acf6d49f69415d21361b41471a9a6eafc6fc0f6a21c5f3e0c337bb460789e7f"
     },
     {
+      "path": ".github/pull_request_template.md",
+      "bytes": 498,
+      "sha256": "85718d46980e62d2bf8f05ca8f45cf2cc0058b415c2b4497dacc06df9168b6b3"
+    },
+    {
       "path": ".github/workflows/ci.yml",
-      "bytes": 8045,
-      "sha256": "1f38b68534342b16cfbba680f6f701ab0f970a3d45d10298f2a4720f89c01f60"
+      "bytes": 8064,
+      "sha256": "6d63565c90da0bb353a1e83e7271d8cf68be8d82866b1c74b1881b099df9aa4f"
     },
     {
       "path": ".github/workflows/pages.yml",
-      "bytes": 786,
-      "sha256": "e17a57ae28667a716130d4fc74bb8270404ecfb84f6103e4333e244127d7b5c2"
+      "bytes": 805,
+      "sha256": "e72f9cc36374de110c02e37b572d57bbf44a6f894a891c6d44853d5587baa44d"
     },
     {
       "path": ".github/workflows/pypi.yml",
@@ -47,13 +52,18 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 22171,
-      "sha256": "4772cc0344551c43459842aeacd5ad30356caedf61f9ca1e0da986e8b57212b1"
+      "bytes": 22679,
+      "sha256": "8f6989afbd2d435990f68d4fd3fb2ca522617682c1e065ee79cd047057a902a2"
     },
     {
       "path": "CITATION.cff",
       "bytes": 512,
-      "sha256": "335491dda89f94c7d843a6c8b4bef505b0fbf912d3691774bd0774520a72c8ea"
+      "sha256": "6a68f4d42cb194a2932a8459aaa1ae4ca80d0916aa07f8375d412589189e2390"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "bytes": 842,
+      "sha256": "97b4871ad71471cf85d33cbd24914e0b5ba66c534e5ed4068148d97b16d2482f"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -82,13 +92,18 @@
     },
     {
       "path": "README.md",
-      "bytes": 28161,
-      "sha256": "3f8303cfdc072de3a20a75757769af057b8ceedf8da32a09422b64bc1a5b5f9e"
+      "bytes": 29367,
+      "sha256": "9333cfe381d7d833f12b54aeb76cea3b17896cb2160a17e6ce1bd8486919cdcd"
+    },
+    {
+      "path": "SECURITY.md",
+      "bytes": 612,
+      "sha256": "1af878070017edf0a86cb34245108fea5dd27490b60561252516f22b1b91aa55"
     },
     {
       "path": "catalog/collection.json",
       "bytes": 13790,
-      "sha256": "3f46672fc29caa3151461ed7ede60c7c07a89d260a8539ffe9e0a35919be813f"
+      "sha256": "2650803f718435616474fde0fcecd3e4a5a8b3dee85d10cc4ede3eafe5079d75"
     },
     {
       "path": "catalog/collection.tsv",
@@ -1461,6 +1476,11 @@
       "sha256": "7a70b2c1b010e40d7851f6c5cae7a9e8d4ffd7bef6b14757d1dcd8dce77ca5a0"
     },
     {
+      "path": "figures/rnaseq-005-example.png",
+      "bytes": 65681,
+      "sha256": "d7a3c3c0e3e1a1e59417a3bfbacc41e96c0a9630fe846292da5e201602bf539d"
+    },
+    {
       "path": "figures/v1-fidelity.svg",
       "bytes": 17306,
       "sha256": "3bb651aa721c6de1faba44378c8fd6876b212540fa3b9cf49bb408b66ea115c2"
@@ -1468,7 +1488,7 @@
     {
       "path": "pyproject.toml",
       "bytes": 2775,
-      "sha256": "398a5eed1a7dfc7acd5afeaf6596b28073ed956b007903ba9e08addfd8f5b5d1"
+      "sha256": "fe318fbfc24172cb40fc66bd50042bc827d4e296dbe01b9f8dbd2e92e9784c53"
     },
     {
       "path": "release/acceptance-ledger.json",
@@ -1477,8 +1497,8 @@
     },
     {
       "path": "release/certification.json",
-      "bytes": 471,
-      "sha256": "582adc8ed3bd0476db9278e1924eaca797fddae08ebcb88f7fabfaf638722a3a"
+      "bytes": 498,
+      "sha256": "13755f8918aea9a6fa1dd960e11a1286648fc2a6d53dfd3d667616670829c0d3"
     },
     {
       "path": "release/collection-audit.json",
@@ -1487,8 +1507,8 @@
     },
     {
       "path": "release/metadata-input.json",
-      "bytes": 2395,
-      "sha256": "bcfafebc2cae73211dd8dd96cd5af9a66a221e1f6a721592ef5bae7fff4f840f"
+      "bytes": 857,
+      "sha256": "93ac929dd6dd31540fef5286d60371f6d012d5353bea1393826494ce7b895c2e"
     },
     {
       "path": "requirements-tested.txt",
@@ -1522,8 +1542,8 @@
     },
     {
       "path": "scripts/build_catalog.py",
-      "bytes": 14669,
-      "sha256": "c8aff93f0dbc962ee36ab9b2e82784c175d4004eaf6769cc889214344d4c083d"
+      "bytes": 14865,
+      "sha256": "2b24bd7366c16df4d69c33202556794619980420219317a77cca2cdd7e1390c3"
     },
     {
       "path": "scripts/build_reference_effects.py",
@@ -1552,23 +1572,28 @@
     },
     {
       "path": "site/app.js",
-      "bytes": 3335,
-      "sha256": "47e8b82f14aa6958ef9d45f5a1be8fbdadc2ac90f6be8c26f54fafca8d0c18e1"
+      "bytes": 3261,
+      "sha256": "ab18ab4bb270ab0e177dd93e59b3b4f8111b82b77997ddefa6cd73069b31477e"
+    },
+    {
+      "path": "site/collection.js",
+      "bytes": 10203,
+      "sha256": "e8164cf3ba0b3d40d65214196cefdcf2a09ccb9ab23614f0b50109849d426eb8"
     },
     {
       "path": "site/index.html",
-      "bytes": 7577,
-      "sha256": "498cde7bc1eb5b4ccf5b8af3de4686315292130ca7283f799e8738b039b454db"
+      "bytes": 9546,
+      "sha256": "654e62a6dd38447003910a4bdb2b9354dca26424251979bfd39d2485de01df3f"
     },
     {
       "path": "site/styles.css",
-      "bytes": 6297,
-      "sha256": "b591b8d61efe9a0ca51a7c9c0e1a48539e657b05f3d84a01ade37cee3c880053"
+      "bytes": 6779,
+      "sha256": "0d3b41ba401b6d11f370dbaf71e9da8a0fb15aa6dd3092fe5b6d9762805184f4"
     },
     {
       "path": "src/omicsbench/__init__.py",
       "bytes": 394,
-      "sha256": "e361f87f857305496f089d51bc14755630d95bc586ac7ab2dccb0ca7fcaea743"
+      "sha256": "319aaec44fe0103f39c7d3ac2c5e8009d188dd2cfd7d5d80d7450032dbca7c09"
     },
     {
       "path": "src/omicsbench/__main__.py",
@@ -1592,8 +1617,8 @@
     },
     {
       "path": "src/omicsbench/cli.py",
-      "bytes": 29230,
-      "sha256": "de21feac3f53c6555d1d0d15cd37766c250041199c81d60d27e13bafe262601f"
+      "bytes": 29418,
+      "sha256": "6c9f1579a98a5a25a9de16cdcdb532f411a5594c040003dd5eff96bb60be2316"
     },
     {
       "path": "src/omicsbench/client.py",
