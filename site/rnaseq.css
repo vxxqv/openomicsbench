@@ -1,0 +1,17 @@
+.prose pre {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 18px;
+  background: #111;
+  color: #f6f6f6;
+  font: 13px/1.7 Consolas, "Courier New", monospace;
+  white-space: pre;
+}
+
+.prose code {
+  overflow-wrap: anywhere;
+}
+
+.prose pre code {
+  overflow-wrap: normal;
+}

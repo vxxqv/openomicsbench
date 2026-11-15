@@ -1,0 +1,33 @@
+---
+title: "Check an RNA-seq input pack in R"
+output: html_document
+---
+
+Export a compact case with the OpenOmicsBench CLI before running this notebook:
+
+```sh
+omicsbench rnaseq pack rnaseq-v14-pack --id rnaseq-005
+omicsbench rnaseq qc rnaseq-v14-pack/rnaseq-005/counts.tsv --samples rnaseq-v14-pack/rnaseq-005/samples.tsv --contrasts rnaseq-v14-pack/rnaseq-005/contrasts.tsv --id rnaseq-005
+```
+
+The sample sheet and count matrix have matching IDs. The declared comparison is tumour tissue minus adjacent non-tumour tissue, with a paired blocking factor. Adjacent tissue is not a healthy control.
+
+```{r}
+case <- "rnaseq-v14-pack/rnaseq-005"
+counts <- read.delim(file.path(case, "counts.tsv"), check.names = FALSE)
+samples <- read.delim(file.path(case, "samples.tsv"), check.names = FALSE)
+contrasts <- read.delim(file.path(case, "contrasts.tsv"), check.names = FALSE)
+
+stopifnot(nrow(counts) == 8000L, nrow(samples) == 28L)
+stopifnot(identical(names(counts)[-1], samples$sample))
+stopifnot(!anyDuplicated(counts$gene_id), !anyDuplicated(samples$sample))
+
+matrix <- as.matrix(counts[-1])
+storage.mode(matrix) <- "integer"
+library_sizes <- colSums(matrix)
+detected_genes <- colSums(matrix > 0L)
+data.frame(sample = samples$sample, library_size = library_sizes,
+           detected_genes = detected_genes)
+```
+
+The `omicsbench rnaseq qc` JSON report also checks the design and handles missing mitochondrial identifiers explicitly. These count summaries are descriptive. An external statistical method such as DESeq2 should be run with its own documented input requirements; this notebook does not claim a differential-expression result.

@@ -75,6 +75,7 @@ try {
     haystack: [item.id, item.title, item.organism, item.assay, item.archetype, item.source_accession]
       .filter(Boolean).join(" ").toLocaleLowerCase()
   })));
+  if (records.length === 0) throw new Error("Empty catalog");
   showRecords();
 } catch {
   status.textContent = "The catalog is unavailable right now. Browse all datasets on GitHub.";

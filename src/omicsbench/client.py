@@ -75,6 +75,15 @@ class Benchmark:
                                     effect_column=effect_column, reverse_sign=reverse_sign,
                                     detail_limit=detail_limit)
 
+    def assess_de(self, path: str | Path, *, alpha: float = 0.05,
+                  gene_column: str | None = None, effect_column: str | None = None,
+                  adjusted_column: str | None = None, reverse_sign: bool = False) -> dict:
+        """Summarize significant calls and reference effect direction agreement."""
+        from .rnaseq_de import assess_de
+        return assess_de(self, path, alpha=alpha, gene_column=gene_column,
+                         effect_column=effect_column, adjusted_column=adjusted_column,
+                         reverse_sign=reverse_sign)
+
     def verify_rnaseq_export(self, directory: str | Path) -> dict:
         """Check an exported directory, including its counts and metadata."""
         from .rnaseq_access import verify_export
@@ -121,6 +130,14 @@ class Collection:
         from .rnaseq_design import check_rnaseq_design
         benchmark = self.get(identifier) if identifier else None
         return check_rnaseq_design(counts, samples, contrasts, benchmark)
+
+    def qc_rnaseq(self, counts: str | Path, samples: str | Path | None = None,
+                  contrasts: str | Path | None = None, identifier: str | None = None,
+                  mitochondrial_prefix: str = "MT-") -> dict:
+        """Report sample-level count QC and optionally check the study design."""
+        from .rnaseq_qc import summarize_counts
+        benchmark = self.get(identifier) if identifier else None
+        return summarize_counts(counts, samples, contrasts, benchmark, mitochondrial_prefix)
 
     def prepare(self, destination: str | Path, identifiers: list[str]) -> dict:
         return prepare_workspace(self.root, Path(destination), identifiers)

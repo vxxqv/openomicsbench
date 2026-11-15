@@ -31,6 +31,7 @@ from .workspace import prepare_workspace, verify_workspace, grade_workspace
 from .discovery import discover_workspace_results
 from .client import Collection
 from .rnaseq_pack import normalize_effects
+from .rnaseq_de import assess_de
 
 ASSAYS = ["bulk_rna_seq", "single_cell_rna_seq", "chromatin_accessibility", "sequence_dna", "sequence_rna", "sequence_protein", "short_read_dna", "whole_genome_dna_seq", "shotgun_metagenomics"]
 
@@ -91,6 +92,12 @@ def main():
     rnaseq_design.add_argument("samples", type=Path)
     rnaseq_design.add_argument("contrasts", type=Path)
     rnaseq_design.add_argument("--id", help="Also compare sample and contrast design with a biological benchmark.")
+    rnaseq_qc = rnaseq_sub.add_parser("qc", help="Summarize count-matrix quality and optionally check its design.")
+    rnaseq_qc.add_argument("counts", type=Path, help="Feature-by-sample integer count matrix (CSV/TSV or gzip).")
+    rnaseq_qc.add_argument("--samples", type=Path, help="Sample sheet; use with --contrasts.")
+    rnaseq_qc.add_argument("--contrasts", type=Path, help="Contrast table; use with --samples.")
+    rnaseq_qc.add_argument("--id", help="Also check the design against a bundled RNA-seq benchmark.")
+    rnaseq_qc.add_argument("--mitochondrial-prefix", default="MT-", help="Gene-ID prefix for mitochondrial counts; unmatched prefixes produce a null fraction.")
     rnaseq_score = rnaseq_sub.add_parser("score-effects", help="Score a native DESeq2, edgeR or limma table without renaming it.")
     rnaseq_score.add_argument("id", help="Biological bulk RNA-seq benchmark ID.")
     rnaseq_score.add_argument("source", type=Path, help="CSV or TSV table, optionally gzip-compressed.")
@@ -98,6 +105,14 @@ def main():
     rnaseq_score.add_argument("--effect-column")
     rnaseq_score.add_argument("--reverse-sign", action="store_true")
     rnaseq_score.add_argument("--detail-limit", type=int, default=20)
+    rnaseq_assess = rnaseq_sub.add_parser("assess-de", help="Summarize adjusted-p calls and reference effect directions.")
+    rnaseq_assess.add_argument("id", help="Biological bulk RNA-seq benchmark ID.")
+    rnaseq_assess.add_argument("source", type=Path, help="Native DESeq2, edgeR or limma CSV/TSV table, optionally gzip-compressed.")
+    rnaseq_assess.add_argument("--alpha", type=float, default=0.05, help="Adjusted-p threshold (default: 0.05).")
+    rnaseq_assess.add_argument("--gene-column")
+    rnaseq_assess.add_argument("--effect-column")
+    rnaseq_assess.add_argument("--adjusted-column")
+    rnaseq_assess.add_argument("--reverse-sign", action="store_true")
     demo = sub.add_parser("demo", help="Run a six-assay example using bundled reference answers.")
     demo.add_argument("output", type=Path, help="New directory for example results, reports and evidence.")
     variant = sub.add_parser("variant", help="Compare VCF calls with a bundled small-variant truth set.")
@@ -238,10 +253,17 @@ def main():
                                         reverse_sign=args.reverse_sign)
             elif args.rnaseq_command == "check-design":
                 out = collection.check_rnaseq_design(args.counts, args.samples, args.contrasts, args.id)
+            elif args.rnaseq_command == "qc":
+                out = collection.qc_rnaseq(args.counts, args.samples, args.contrasts,
+                                           args.id, args.mitochondrial_prefix)
             elif args.rnaseq_command == "score-effects":
                 out = collection.get(args.id).score_native_effects(
                     args.source, gene_column=args.gene_column, effect_column=args.effect_column,
                     reverse_sign=args.reverse_sign, detail_limit=args.detail_limit)
+            elif args.rnaseq_command == "assess-de":
+                out = assess_de(collection.get(args.id), args.source, alpha=args.alpha,
+                                gene_column=args.gene_column, effect_column=args.effect_column,
+                                adjusted_column=args.adjusted_column, reverse_sign=args.reverse_sign)
             elif args.rnaseq_command == "export":
                 benchmark = collection.get(args.id)
                 out = benchmark.export_rnaseq(args.output, args.tier)
