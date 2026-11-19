@@ -28,6 +28,10 @@ jobs:
           mkdir -p build/pages
           cp site/index.html site/rnaseq.html site/styles.css site/rnaseq.css site/app.js site/collection.js build/pages/
           cp catalog/collection.json build/pages/collection.json
+      - name: Add optional website analytics
+        env:
+          CLOUDFLARE_WEB_ANALYTICS_TOKEN: ${{ vars.CLOUDFLARE_WEB_ANALYTICS_TOKEN }}
+        run: python scripts/insert_site_analytics.py build/pages
       - uses: actions/upload-pages-artifact@v4
         with:
           path: build/pages
