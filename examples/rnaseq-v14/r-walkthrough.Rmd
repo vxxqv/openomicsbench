@@ -31,3 +31,33 @@ data.frame(sample = samples$sample, library_size = library_sizes,
 ```
 
 The `omicsbench rnaseq qc` JSON report also checks the design and handles missing mitochondrial identifiers explicitly. These count summaries are descriptive. An external statistical method such as DESeq2 should be run with its own documented input requirements; this notebook does not claim a differential-expression result.
+
+When that method produces a native result table, place it at `results.csv` (or change the path below). The OpenOmicsBench command checks adjusted-p-value calls and compares effect directions and ranks with the archived reference. Keep the declared target-minus-reference contrast direction.
+
+```{r}
+result_path <- "results.csv"
+if (file.exists(result_path)) {
+  command <- Sys.which("omicsbench")
+  prefix <- character()
+  if (!nzchar(command)) {
+    command <- Sys.which("python")
+    prefix <- c("-m", "omicsbench")
+  }
+  if (!nzchar(command)) stop("Install openomicsbench and put its CLI or Python on PATH")
+  arguments <- c(prefix, "rnaseq", "assess-de", "rnaseq-005",
+                 shQuote(normalizePath(result_path)), "--alpha", "0.05")
+  truth_path <- "labels.tsv"  # Optional independent gene_id,is_de labels.
+  if (file.exists(truth_path)) {
+    arguments <- c(arguments, "--truth", shQuote(normalizePath(truth_path)))
+  }
+  report <- system2(command, arguments, stdout = TRUE, stderr = TRUE)
+  if (!is.null(attr(report, "status")) && attr(report, "status") != 0L) {
+    stop(paste(report, collapse = "\n"))
+  }
+  cat(paste(report, collapse = "\n"))
+} else {
+  message("Add your native result table at results.csv to run the result check.")
+}
+```
+
+Direction and rank agreement refer to one archived DESeq2 analysis. Precision, recall and F1 appear only when `labels.tsv` supplies independent labels for a fully tested gene set. Neither comparison estimates false-discovery calibration.

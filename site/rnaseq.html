@@ -41,7 +41,8 @@ omicsbench rnaseq qc rnaseq-example/rnaseq-005/counts.tsv --samples rnaseq-examp
       <div class="prose"><p>After DESeq2, edgeR or limma has produced a native CSV or TSV table, run:</p>
       <pre><code>omicsbench rnaseq assess-de rnaseq-005 results.csv --alpha 0.05
 omicsbench rnaseq score-effects rnaseq-005 results.csv</code></pre>
-      <p>The first command reports adjusted-p-value calls, missing values and effect-direction agreement with the archived DESeq2 reference. The second applies the existing effect-scoring thresholds. Agreement with one reference analysis is not an independent truth set or an estimate of false-discovery calibration.</p></div>
+      <p>The first command reports adjusted-p-value calls, missing values, effect-direction agreement and gene-effect rank agreement with the archived DESeq2 reference. The second applies the existing effect-scoring thresholds. Both commands expect effects for the declared target-minus-reference contrast; use <code>--reverse-sign</code> only if your result uses the opposite direction.</p>
+      <p>If you have an independently established table of <code>gene_id,is_de</code> labels, add <code>--truth labels.tsv</code> to <code>assess-de</code> for precision, recall and F1 within that labelled gene set. The command requires every labelled gene to have an adjusted p-value. Agreement with one reference analysis is not an independent truth set or an estimate of false-discovery calibration.</p></div>
     </section>
     <section class="band" aria-labelledby="cases-title"><div class="wrap two-column">
       <div><p class="section-index">03 / More designs</p><h2 id="cases-title">Choose a useful contrast.</h2></div>
