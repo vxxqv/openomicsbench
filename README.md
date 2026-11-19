@@ -64,14 +64,27 @@ The wheel contains the complete collection. A repository checkout and network co
 
 ## Score your RNA-seq results
 
+Version 14 development adds a count-quality report you can run before differential expression:
+
+```sh
+omicsbench rnaseq qc tumour-example/rnaseq-005/counts.tsv --samples tumour-example/rnaseq-005/samples.tsv --contrasts tumour-example/rnaseq-005/contrasts.tsv --id rnaseq-005
+```
+
+It summarizes library sizes, detected genes, zeros and the most abundant gene for each sample, then checks the declared design. It reports mitochondrial fractions only when feature IDs match the chosen prefix; the Ensembl IDs in this example do not. See [the RNA-seq guide](docs/rnaseq-packs.md) for interpretation.
+
+Try the [Python notebook](examples/rnaseq-v14/python-walkthrough.ipynb) or [R notebook](examples/rnaseq-v14/r-walkthrough.Rmd) for the same checked input pack.
+
 Once your pipeline has produced a native differential-expression result table, score it against the named benchmark's archived reference:
 
 ```sh
 omicsbench rnaseq score-effects rnaseq-005 results/deseq2.csv
+omicsbench rnaseq assess-de rnaseq-005 results/deseq2.csv --alpha 0.05
 omicsbench rnaseq normalize-effects rnaseq-005 results/edger.tsv results/rnaseq-005.tsv
 ```
 
 The converter recognizes common `log2FoldChange` and `logFC` headers, including a first unnamed gene-ID column from an R CSV export. It drops missing effects with a count in the report, rejects duplicate genes and ambiguous headers, and keeps effect direction unchanged. Use `--reverse-sign` only when the submitted contrast is the reverse of the benchmark's declared target minus reference. Scoring compares with the archived full-source DESeq2 reference and its declared thresholds; it does not establish biological truth. See [RNA-seq packs and result tables](docs/rnaseq-packs.md) for file contracts and limitations.
+
+`assess-de` adds a separate summary of adjusted-p-value calls, effect directions and gene-effect rank agreement for a native result table. Its significant-gene count depends on the submitted method and threshold. You can add `--truth labels.tsv` for precision, recall and F1 against an independent, fully tested labelled gene set. Agreement with the archived reference is not an independent truth test.
 
 ## Test your own results
 

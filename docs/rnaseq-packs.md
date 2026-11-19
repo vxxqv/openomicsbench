@@ -34,6 +34,16 @@ omicsbench rnaseq check-design counts.tsv samples.tsv contrasts.tsv --id rnaseq-
 
 The independent check reads CSV, TSV and their gzip-compressed forms. It requires unique gene and sample IDs, non-negative integer counts, nonempty libraries, matching matrix and sample-sheet ID sets, and a single contrast target and reference with at least two samples each. With blocking variables, it checks the fixed-effect design matrix for rank and residual degrees of freedom. A mismatch returns exit status 2 with a JSON report; a malformed file returns 1. A reordered sample sheet is reported but passes if the IDs still match. `--id` additionally checks the benchmark's sample annotations and reference contrast. Only two-level fixed-effect contrasts are currently checked; the command does not evaluate mixed models, interactions, gene annotation compatibility or biological validity.
 
+## Summarize count quality
+
+```sh
+omicsbench rnaseq qc quick-pack/rnaseq-005/counts.tsv \
+  --samples quick-pack/rnaseq-005/samples.tsv \
+  --contrasts quick-pack/rnaseq-005/contrasts.tsv --id rnaseq-005
+```
+
+The JSON report lists each sample's total counts, number of detected genes, fraction of zero counts and fraction contributed by its most abundant gene. A zero-count library fails the check. With `--samples` and `--contrasts`, it includes the design check above. The `--mitochondrial-prefix` option defaults to `MT-`; if no feature IDs match that prefix, mitochondrial fractions are `null`, not zero. In particular, Ensembl gene IDs do not identify mitochondrial genes by an `MT-` prefix. The command describes the supplied count table and applies no universal biological QC cutoffs. It cannot assess read quality, mapping, contamination or batch effects from counts alone.
+
 ## Use native differential-expression results
 
 ```sh
@@ -47,3 +57,13 @@ omicsbench rnaseq normalize-effects rnaseq-002 results/edger.tsv results/rnaseq-
 Use `--gene-column HEADER` or `--effect-column HEADER` when more than one recognized column exists. Empty or `NA` effects are omitted and counted; duplicate gene IDs, nonnumeric values and infinite effects are rejected. No sign is inferred from the filename or method. `--reverse-sign` is an explicit choice for a source result whose target and reference are opposite the benchmark's declared contrast.
 
 The score uses the object's full-source DESeq2 reference, reports shared and missing gene IDs, rank correlation, top-gene overlap and sign agreement, then applies its existing thresholds. It tests agreement with that particular reference. Method differences and biological uncertainty are not resolved by a passing score. A published [SEQanswers discussion of RNA-seq benchmarking](https://www.seqanswers.com/forum/bioinformatics/bioinformatics-aa/9192-testing-benchmarking-rnaseq-de-tools) gives context for this limitation.
+
+## Inspect differential-expression calls
+
+```sh
+omicsbench rnaseq assess-de rnaseq-005 results/deseq2.csv --alpha 0.05
+```
+
+`assess-de` recognizes common gene-ID, log2-effect and adjusted-p-value columns (`padj`, `FDR`, `adj.P.Val` and `qvalue`). Explicit `--gene-column`, `--effect-column` and `--adjusted-column` options resolve ambiguous headers. It counts tested rows, missing adjusted values, genes at or below the chosen adjusted-p threshold, positive and negative effects, effect-direction agreement on shared nonzero genes, and Spearman rank agreement on shared finite effects against the archived DESeq2 reference. Rank agreement is undefined for fewer than three shared effects or constant ranks and is reported as `null`. The sign can be reversed explicitly with `--reverse-sign` if the submitted contrast runs in the opposite direction. Missing adjusted values are reported and excluded from the tested denominator. A fraction of significant rows is descriptive; it is not an estimated false-discovery rate. Since the archived reference contains effects rather than an independent set of true positives, agreement alone cannot estimate sensitivity, specificity or FDR calibration.
+
+An independent labelled truth table may be supplied with `--truth truth.tsv` (or through `Benchmark.assess_de(..., truth=...)`). It must have exactly `gene_id,is_de` columns, with unique IDs and `0` or `1` labels, including both classes. Every labelled gene must appear in the result table with a finite adjusted p-value. Within that declared labelled universe, the report gives true/false positive and negative counts, precision, recall and F1. Genes outside the supplied truth table are not scored. These metrics depend on the validity and coverage of the user-supplied truth; they do not turn the archived DESeq2 reference into ground truth or establish FDR calibration.
