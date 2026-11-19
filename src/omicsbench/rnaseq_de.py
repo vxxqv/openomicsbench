@@ -10,6 +10,7 @@ from .compare import read_effects
 from .hashing import digest
 from .rnaseq_design import _table
 from .rnaseq_pack import EFFECT_HEADERS, GENE_HEADERS, _design
+from .rnaseq import correlation, ranked
 
 ADJUSTED_HEADERS = ("padj", "FDR", "adj.P.Val", "qvalue", "q_value", "adjusted_p_value")
 
@@ -37,9 +38,30 @@ def _number(raw: str, path: Path, line: int, label: str) -> float | None:
     return value
 
 
+def _truth(path: Path) -> dict[str, bool]:
+    stream, delimiter = _table(path)
+    with stream:
+        reader = csv.DictReader(stream, delimiter=delimiter)
+        if reader.fieldnames != ["gene_id", "is_de"]:
+            raise ValueError(f"{path}: truth columns must be gene_id,is_de")
+        labels = {}
+        for line, row in enumerate(reader, start=2):
+            if None in row or any(value is None for value in row.values()):
+                raise ValueError(f"{path}:{line}: inconsistent row width")
+            gene = row["gene_id"].strip()
+            label = row["is_de"].strip()
+            if not gene or gene in labels or label not in {"0", "1"}:
+                raise ValueError(f"{path}:{line}: expected unique gene_id and 0 or 1 label")
+            labels[gene] = label == "1"
+    if len(set(labels.values())) != 2:
+        raise ValueError(f"{path}: truth requires both positive and negative genes")
+    return labels
+
+
 def assess_de(benchmark, source: str | Path, *, alpha: float = 0.05,
               gene_column: str | None = None, effect_column: str | None = None,
-              adjusted_column: str | None = None, reverse_sign: bool = False) -> dict:
+              adjusted_column: str | None = None, reverse_sign: bool = False,
+              truth: str | Path | None = None) -> dict:
     """Report significance calls and effect agreement with the archived reference."""
     if not math.isfinite(alpha) or not 0 < alpha < 1:
         raise ValueError("alpha must be strictly between zero and one")
@@ -57,6 +79,7 @@ def assess_de(benchmark, source: str | Path, *, alpha: float = 0.05,
             raise ValueError("gene, effect and adjusted p-value columns must differ")
         seen = set()
         effects = {}
+        calls = {}
         tested = significant = missing_adjusted = missing_effect = 0
         significant_positive = significant_negative = 0
         for line, row in enumerate(reader, start=2):
@@ -78,6 +101,7 @@ def assess_de(benchmark, source: str | Path, *, alpha: float = 0.05,
                 missing_adjusted += 1
             else:
                 tested += 1
+                calls[gene] = adjusted <= alpha
                 if adjusted <= alpha:
                     significant += 1
                     if effect is not None:
@@ -89,6 +113,36 @@ def assess_de(benchmark, source: str | Path, *, alpha: float = 0.05,
     shared = set(effects) & set(reference)
     nonzero = [gene for gene in shared if effects[gene] != 0 and reference[gene] != 0]
     concordant = sum((effects[gene] > 0) == (reference[gene] > 0) for gene in nonzero)
+    ordered = sorted(shared)
+    try:
+        rank_agreement = correlation(
+            ranked([effects[gene] for gene in ordered]),
+            ranked([reference[gene] for gene in ordered]),
+        )
+    except ValueError:
+        rank_agreement = None
+    truth_report = None
+    if truth is not None:
+        truth = Path(truth)
+        labels = _truth(truth)
+        untested = sorted(set(labels) - set(calls))
+        if untested:
+            raise ValueError(f"{truth}: {len(untested)} truth genes are absent or have no adjusted p-value; first: {untested[0]}")
+        tp = sum(labels[gene] and calls[gene] for gene in labels)
+        fp = sum(not labels[gene] and calls[gene] for gene in labels)
+        fn = sum(labels[gene] and not calls[gene] for gene in labels)
+        tn = sum(not labels[gene] and not calls[gene] for gene in labels)
+        precision = tp / (tp + fp) if tp + fp else None
+        recall = tp / (tp + fn)
+        truth_report = {
+            "input": str(truth), "input_sha256": digest(truth),
+            "labelled_genes": len(labels), "positive_genes": tp + fn,
+            "negative_genes": fp + tn, "true_positive": tp,
+            "false_positive": fp, "false_negative": fn, "true_negative": tn,
+            "precision": precision, "recall": recall,
+            "f1": 2 * precision * recall / (precision + recall) if precision is not None and precision + recall else None,
+            "scope": "Scores adjusted-p calls only within the complete user-supplied labelled gene universe. Validity depends on the independent truth source and its declared assay design.",
+        }
     design = _design(benchmark)
     return {
         "operation": "assess_de", "benchmark_id": benchmark.id,
@@ -106,7 +160,9 @@ def assess_de(benchmark, source: str | Path, *, alpha: float = 0.05,
         "reference_effects": len(reference), "shared_finite_effects": len(shared),
         "shared_nonzero_effects": len(nonzero),
         "effect_direction_agreement": concordant / len(nonzero) if nonzero else None,
+        "effect_rank_spearman": rank_agreement,
+        "independent_truth": truth_report,
         "contrast": {"target": design["target"], "reference": design["reference"]},
         "sign_reversed": reverse_sign,
-        "scope": "Counts calls at the supplied adjusted-p threshold and compares effect direction with one archived DESeq2 analysis. No independent differential-expression truth set or false-discovery calibration is implied.",
+        "scope": "Counts calls at the supplied adjusted-p threshold and compares effect direction and rank with one archived DESeq2 analysis. Independent truth metrics appear only with a user-supplied labelled truth file; no false-discovery calibration is implied.",
     }

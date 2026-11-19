@@ -77,12 +77,13 @@ class Benchmark:
 
     def assess_de(self, path: str | Path, *, alpha: float = 0.05,
                   gene_column: str | None = None, effect_column: str | None = None,
-                  adjusted_column: str | None = None, reverse_sign: bool = False) -> dict:
-        """Summarize significant calls and reference effect direction agreement."""
+                  adjusted_column: str | None = None, reverse_sign: bool = False,
+                  truth: str | Path | None = None) -> dict:
+        """Summarize adjusted-p calls, reference agreement and optional independent truth."""
         from .rnaseq_de import assess_de
         return assess_de(self, path, alpha=alpha, gene_column=gene_column,
                          effect_column=effect_column, adjusted_column=adjusted_column,
-                         reverse_sign=reverse_sign)
+                         reverse_sign=reverse_sign, truth=truth)
 
     def verify_rnaseq_export(self, directory: str | Path) -> dict:
         """Check an exported directory, including its counts and metadata."""

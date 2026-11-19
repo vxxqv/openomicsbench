@@ -105,7 +105,7 @@ def main():
     rnaseq_score.add_argument("--effect-column")
     rnaseq_score.add_argument("--reverse-sign", action="store_true")
     rnaseq_score.add_argument("--detail-limit", type=int, default=20)
-    rnaseq_assess = rnaseq_sub.add_parser("assess-de", help="Summarize adjusted-p calls and reference effect directions.")
+    rnaseq_assess = rnaseq_sub.add_parser("assess-de", help="Summarize adjusted-p calls, reference agreement and optional independent truth.")
     rnaseq_assess.add_argument("id", help="Biological bulk RNA-seq benchmark ID.")
     rnaseq_assess.add_argument("source", type=Path, help="Native DESeq2, edgeR or limma CSV/TSV table, optionally gzip-compressed.")
     rnaseq_assess.add_argument("--alpha", type=float, default=0.05, help="Adjusted-p threshold (default: 0.05).")
@@ -113,6 +113,7 @@ def main():
     rnaseq_assess.add_argument("--effect-column")
     rnaseq_assess.add_argument("--adjusted-column")
     rnaseq_assess.add_argument("--reverse-sign", action="store_true")
+    rnaseq_assess.add_argument("--truth", type=Path, help="Independent CSV/TSV truth table with gene_id,is_de (0 or 1).")
     demo = sub.add_parser("demo", help="Run a six-assay example using bundled reference answers.")
     demo.add_argument("output", type=Path, help="New directory for example results, reports and evidence.")
     variant = sub.add_parser("variant", help="Compare VCF calls with a bundled small-variant truth set.")
@@ -263,7 +264,8 @@ def main():
             elif args.rnaseq_command == "assess-de":
                 out = assess_de(collection.get(args.id), args.source, alpha=args.alpha,
                                 gene_column=args.gene_column, effect_column=args.effect_column,
-                                adjusted_column=args.adjusted_column, reverse_sign=args.reverse_sign)
+                                adjusted_column=args.adjusted_column, reverse_sign=args.reverse_sign,
+                                truth=args.truth)
             elif args.rnaseq_command == "export":
                 benchmark = collection.get(args.id)
                 out = benchmark.export_rnaseq(args.output, args.tier)

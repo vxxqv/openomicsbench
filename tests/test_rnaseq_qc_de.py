@@ -43,11 +43,39 @@ class RNASeqAnalysisTests(unittest.TestCase):
             self.assertEqual(report["missing_adjusted_p_values"], 1)
             self.assertEqual(report["shared_finite_effects"], 2)
             self.assertEqual(report["effect_direction_agreement"], 0.5)
+            self.assertIsNone(report["effect_rank_spearman"])
+            self.assertIsNone(report["independent_truth"])
+            truth = Path(temporary) / "truth.csv"
+            truth.write_text(
+                "gene_id,is_de\n"
+                f"{first[0]},1\n{second[0]},0\n", encoding="utf-8")
+            scored = benchmark.assess_de(result, truth=truth)
+            self.assertEqual(scored["independent_truth"]["true_positive"], 1)
+            self.assertEqual(scored["independent_truth"]["true_negative"], 1)
+            self.assertEqual(scored["independent_truth"]["f1"], 1.0)
+            truth.write_text("gene_id,is_de\nUNLISTED,1\n" + f"{second[0]},0\n", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "absent or have no adjusted p-value"):
+                benchmark.assess_de(result, truth=truth)
             with self.assertRaisesRegex(ValueError, "between zero and one"):
                 benchmark.assess_de(result, alpha=1)
             result.write_text(result.read_text(encoding="utf-8").replace(",0.5", ",1.2"), encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "adjusted p-value must be"):
                 benchmark.assess_de(result)
+
+    def test_de_rank_agreement_on_three_genes(self):
+        import gzip
+        benchmark = self.collection.get("rnaseq-005")
+        with gzip.open(benchmark.file(role="effects", tier="expected"), "rt", encoding="utf-8") as stream:
+            next(stream)
+            rows = [next(stream).strip().split("\t") for _ in range(3)]
+        with tempfile.TemporaryDirectory() as temporary:
+            result = Path(temporary) / "results.tsv"
+            result.write_text(
+                "gene_id\tlog2FoldChange\tpadj\n" +
+                "".join(f"{gene}\t{effect}\t0.5\n" for gene, effect, *_ in rows),
+                encoding="utf-8",
+            )
+            self.assertAlmostEqual(benchmark.assess_de(result)["effect_rank_spearman"], 1.0)
 
 
 if __name__ == "__main__":

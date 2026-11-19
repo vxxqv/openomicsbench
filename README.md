@@ -84,7 +84,7 @@ omicsbench rnaseq normalize-effects rnaseq-005 results/edger.tsv results/rnaseq-
 
 The converter recognizes common `log2FoldChange` and `logFC` headers, including a first unnamed gene-ID column from an R CSV export. It drops missing effects with a count in the report, rejects duplicate genes and ambiguous headers, and keeps effect direction unchanged. Use `--reverse-sign` only when the submitted contrast is the reverse of the benchmark's declared target minus reference. Scoring compares with the archived full-source DESeq2 reference and its declared thresholds; it does not establish biological truth. See [RNA-seq packs and result tables](docs/rnaseq-packs.md) for file contracts and limitations.
 
-`assess-de` adds a separate summary of adjusted-p-value calls and effect directions for a native result table. Its significant-gene count depends on the submitted method and threshold. Agreement with the archived reference is not an independent truth test.
+`assess-de` adds a separate summary of adjusted-p-value calls, effect directions and gene-effect rank agreement for a native result table. Its significant-gene count depends on the submitted method and threshold. You can add `--truth labels.tsv` for precision, recall and F1 against an independent, fully tested labelled gene set. Agreement with the archived reference is not an independent truth test.
 
 ## Test your own results
 
