@@ -13,6 +13,17 @@ The v14 pool now prioritizes four non-infection studies with distinct experiment
 
 The earlier screen below remains as historical intake evidence. It is not the four-study release pool.
 
+The frozen diagnostic and DESeq2 runs selected the smallest passing pockets below. All four passed the predeclared four-metric DESeq2 comparison, and every selected gene ID matched the official Ensembl release recorded by Expression Atlas. These results establish count-matrix and reference compatibility, not biological ground truth. The source licence review found that Expression Atlas applies CC BY 4.0 to its website material; each object needs provider and study attribution in its card.
+
+| Study | Smallest passing pocket | DESeq2 result | Reference check |
+| --- | ---: | --- | --- |
+| E-MTAB-7925 | 8,000 genes | Pass | Ensembl 107, 8,000/8,000 IDs matched |
+| E-MTAB-9639 | 1,000 genes | Pass | Ensembl 95, 1,000/1,000 IDs matched |
+| E-MTAB-10374 | 2,000 genes | Pass | Ensembl Genomes 53, 2,000/2,000 IDs matched |
+| E-MTAB-3101 | 1,000 genes | Pass | Ensembl 95, 1,000/1,000 IDs matched |
+
+The exact candidate curves, source hashes, DESeq2 outputs and official reference checks are in `evidence/`. Count files remain in staging until the dataset cards, package checks and clean-environment trial are complete.
+
 Checked on 15 November 2026. These are **intake candidates**, not released benchmark objects. The Expression Atlas experiment pages identify four distinct biological designs; the official raw-count and experiment-design download endpoints responded successfully to a metadata request. No candidate has passed the full rights, annotation, contrast, DESeq2, pocket-fidelity or release checks yet.
 
 | Candidate | Why it broadens the collection | Design rows | Design SHA-256 | Source |

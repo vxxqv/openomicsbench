@@ -15,6 +15,7 @@
   "publication": "https://doi.org/10.1093/nar/gkaa1281",
   "assay": "bulk RNA-seq of total RNA",
   "organism": "Homo sapiens",
+  "taxon_id": 9606,
   "study_design": {
     "design_rows": 21,
     "analysed_runs": 21,
@@ -34,7 +35,13 @@
     "Expression Atlas raw gene counts",
     "experiment design"
   ],
-  "estimated_raw_count_bytes": null,
+  "atlas_processing": {
+    "reference": "Ensembl release 95",
+    "mapping": "HISAT2 2.1.0",
+    "quantification": "FeatureCounts 1.6.2",
+    "evidence_url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-9639"
+  },
+  "estimated_raw_count_bytes": 7379330,
   "verified_resources": [
     {
       "role": "experiment_design",
@@ -45,21 +52,46 @@
     {
       "role": "raw_counts",
       "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-9639/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
-      "bytes": null,
-      "sha256": null
+      "bytes": 7379330,
+      "sha256": "bf01063f0f79587f06dbc6a02255ae5db28a8532d6da3e62123f45433619cdb3"
     }
   ],
   "rights": {
-    "status": "AMBER",
-    "redistribution": "Pending record-specific review; keep raw and transformed data outside the release.",
+    "status": "GREEN",
+    "license": "Creative Commons Attribution 4.0 International",
+    "redistribution": "Expression Atlas processed count material may be redistributed with attribution under the site licence.",
+    "evidence_url": "https://www.ebi.ac.uk/gxa/licence.html",
+    "evidence_page_bytes": 15010,
+    "evidence_page_sha256": "0c35e7e1e590438decb4c44d7d42f1d69a2190eb97acb4bdca5a14cf71f26dd8",
+    "study_record_check": "The BioStudies record contained no separate licence or restriction field on 2026-11-27.",
+    "obligations": ["Credit Expression Atlas and EMBL-EBI.", "Retain the originating study accession and citation."],
     "checked": "2026-11-27"
   },
-  "review_status": "screened",
+  "reduction_diagnostic": {
+    "status": "diagnostic_pass_only",
+    "evidence": "evidence/e-mtab-9639-diagnostic.json",
+    "smallest_passing_features": 1000,
+    "interpretation": "Smallest size passing the predeclared OLS preservation thresholds. This does not replace DESeq2 or release review."
+  },
+  "deseq2_confirmation": {
+    "status": "pass",
+    "evidence": "evidence/e-mtab-9639-deseq2.json",
+    "report_sha256": "b6a78311304b551ddbc84650ddbed08eb53d75c480e93bd36b68321de24ccfaa",
+    "runtime": {"r": "4.6.1", "deseq2": "1.54.0", "python": "3.14.0", "numpy": "2.5.0"}
+  },
+  "reference_review": {
+    "status": "pass",
+    "provider": "Ensembl",
+    "release": "95",
+    "pocket_features_matched": 1000,
+    "unmatched_features": 0,
+    "evidence": "evidence/v14-reference-verification.json",
+    "evidence_sha256": "18ad63dd5a2c6bad7b5daf756a8ce0e70bbc6714ab097118fb5d6a8e589a8c84"
+  },
+  "review_status": "ready_for_packaging",
   "release_eligible": false,
   "remaining_work": [
-    "Verify publication and study-specific redistribution terms.",
-    "Verify count-file columns, exact sample alignment, library details and annotation release.",
-    "Run the predeclared reduction and independent reference method checks.",
+    "Complete the dataset card and attribution package.",
     "Prepare dataset card, attribution and a clean-environment trial before release."
   ]
 }

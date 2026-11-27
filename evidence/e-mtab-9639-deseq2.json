@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0",
+  "scope": "DESeq2 full-source and pocket fidelity",
+  "accession": "E-MTAB-9639",
+  "object_key": "E-MTAB-9639",
+  "status": "pass",
+  "design": {
+    "formula": "~ condition",
+    "factor_column": "Factor Value[RNA interference]",
+    "batch_column": null,
+    "subset": {
+      "Factor Value[cell type]": [
+        "neuronal stem cell"
+      ]
+    },
+    "contrast": "siRNA knockdown of FOXK1/2 versus scrambled siRNA",
+    "samples": 6,
+    "full_features": 58735,
+    "pocket_features": 1000,
+    "finite_shared_effects": 424
+  },
+  "thresholds": {
+    "spearman_logfc": 0.9,
+    "top_k_jaccard": 0.6,
+    "distance_correlation": 0.9,
+    "sign_concordance": 0.9
+  },
+  "metrics": {
+    "spearman_logfc": 0.9969421117090698,
+    "top_k_jaccard": 0.8867924528301887,
+    "distance_correlation": 0.9114360071460675,
+    "sign_concordance": 0.9973262032085561
+  },
+  "runtime": {
+    "r": "4.6.1",
+    "deseq2": "1.54.0",
+    "python": "3.14.0",
+    "numpy": "2.5.0"
+  },
+  "inputs": {
+    "diagnostic_report_sha256": "e54bee6037bfe702d2668c250865daa558a2b232251764d52640910efe651e49",
+    "config_sha256": "264cf59a53730954e58dbf1f6149a5b7f85d43ffee230626e68257b07868c27e",
+    "full_counts_sha256": "4695ab4f80e5eea637d9ac826529e370b9344bda54257bc4569e0eee75d6a0de",
+    "pocket_counts_sha256": "440d0c2c244af42cf55320f79b42a9a41a98d66d684c9bafb8eddf21c0ddca1b",
+    "samples_sha256": "c8a2b360533223c0f13ba1ddd7ce19ca7c07b9e9281713d7e2c38fc8cb58cde5"
+  },
+  "artifacts": {
+    "full": {
+      "contrast.log": {
+        "bytes": 51,
+        "sha256": "0dfa8c74e9b7f92bd7a3c26aa4bf4319bf3a0656c2ebdd5b9dc807ab0ffcb4dc"
+      },
+      "differential_expression.tsv": {
+        "bytes": 4581781,
+        "sha256": "f70b34208cf353e0c18bf28034ce679e53dd54c14cc8b3637c5484068f011566"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 3714738,
+        "sha256": "6f5d3ec7611748ce492eb8aba8c84f09c11776b240cb038d1c125df404def084"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "eab0d86229eba5c779ed4c99a910a1c0f7e3b635b7f807d371a6f17b2c5b3b78"
+      }
+    },
+    "pocket": {
+      "contrast.log": {
+        "bytes": 51,
+        "sha256": "0dfa8c74e9b7f92bd7a3c26aa4bf4319bf3a0656c2ebdd5b9dc807ab0ffcb4dc"
+      },
+      "differential_expression.tsv": {
+        "bytes": 71665,
+        "sha256": "675fee90ca60b523337de24dd53dd6bd47514cf22fa1e77c1dded3ee4709401e"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 59817,
+        "sha256": "d7007625df8e0094ca0e16439245e6509476c27414cd42f5d521ad53c62ddd5c"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "eab0d86229eba5c779ed4c99a910a1c0f7e3b635b7f807d371a6f17b2c5b3b78"
+      }
+    }
+  },
+  "workflow": {
+    "python_sha256": "428997912fcd54efea91dd28fb4fecf69ccd7bf11195fcb5dc6e4350a56f39fb",
+    "r_sha256": "b4244d58364e77f0b4771339d07110e6f89fe2fcf0727562a5fd47f0e3ce74f6"
+  }
+}

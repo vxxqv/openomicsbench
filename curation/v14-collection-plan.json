@@ -1,0 +1,38 @@
+{
+  "release": "14.0.0",
+  "checked": "2026-11-27",
+  "objects": [
+    {
+      "dataset_id": "rnaseq-014",
+      "object_key": "E-MTAB-7925",
+      "config": "workflows/e-mtab-7925-source.json",
+      "title": "Paired mesenchymal stem-cell strain response",
+      "archetype": "paired donor mechanical strain",
+      "citation": "RNA-seq of human mesenchymal stem cells from six donors with and without cyclic tensile strain. Expression Atlas E-MTAB-7925."
+    },
+    {
+      "dataset_id": "rnaseq-015",
+      "object_key": "E-MTAB-9639",
+      "config": "workflows/e-mtab-9639-source.json",
+      "title": "FOXK1/2 knockdown in neuronal stem cells",
+      "archetype": "cell-type-stratified RNA interference",
+      "citation": "Ji et al. The forkhead transcription factor FOXK2 premarks lineage-specific genes in human embryonic stem cells for activation during differentiation. Nucleic Acids Research. DOI 10.1093/nar/gkaa1281."
+    },
+    {
+      "dataset_id": "rnaseq-016",
+      "object_key": "E-MTAB-10374",
+      "config": "workflows/e-mtab-10374-source.json",
+      "title": "Mild drought response in Arabidopsis ICE163",
+      "archetype": "accession-stratified drought response",
+      "citation": "Chen et al. Distinct cellular strategies determine sensitivity to mild drought of Arabidopsis natural accessions. Expression Atlas E-MTAB-10374."
+    },
+    {
+      "dataset_id": "rnaseq-017",
+      "object_key": "E-MTAB-3101",
+      "config": "workflows/e-mtab-3101-source.json",
+      "title": "Myofibroblast differentiation versus control",
+      "archetype": "three-condition fibroblast study with a locked two-condition contrast",
+      "citation": "Mellone et al. Induction of fibroblast senescence generates a non-fibrogenic myofibroblast phenotype that differentially impacts on cancer prognosis. Expression Atlas E-MTAB-3101."
+    }
+  ]
+}

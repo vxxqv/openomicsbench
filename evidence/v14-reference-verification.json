@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.0",
+  "status": "pass",
+  "checked": "2026-11-27",
+  "verified_objects": [
+    "E-MTAB-10374",
+    "E-MTAB-3101",
+    "E-MTAB-7925",
+    "E-MTAB-9639"
+  ],
+  "excluded_sources": [],
+  "profiles": [
+    {
+      "id": "ensembl-95-human",
+      "provider": "Ensembl",
+      "release": "95",
+      "organism": "Homo sapiens",
+      "assembly": "GRCh38",
+      "fasta": {
+        "url": "https://ftp.ensembl.org/pub/release-95/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz",
+        "bytes": 881211416,
+        "official_bsd_sum": 2415,
+        "official_blocks_1024": 860559,
+        "checksums_evidence": {
+          "url": "https://ftp.ensembl.org/pub/release-95/fasta/homo_sapiens/dna/CHECKSUMS",
+          "bytes": 5010,
+          "sha256": "c6c29649a322c96d1f9f32d255606e022592342b68987d1701dbbe0e81678756",
+          "record": "02415 860559 Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz"
+        },
+        "downloaded": false
+      },
+      "gtf": {
+        "url": "https://ftp.ensembl.org/pub/release-95/gtf/homo_sapiens/Homo_sapiens.GRCh38.95.gtf.gz",
+        "bytes": 43668708,
+        "sha256": "b54faa39220ab12d62dfa9c6a529668fc56bc926bba64bb2faaa1003319b7341",
+        "official_bsd_sum": 50378,
+        "official_blocks_1024": 42646,
+        "checksums_evidence": {
+          "url": "https://ftp.ensembl.org/pub/release-95/gtf/homo_sapiens/CHECKSUMS",
+          "bytes": 221,
+          "sha256": "3320feee0e04e1085938d153dcee15853c1080b0c1aff0e1a6d97f5d8f43dea4",
+          "record": "50378 42646 Homo_sapiens.GRCh38.95.gtf.gz"
+        },
+        "gene_identifiers": 58735,
+        "gzip_test": "pass"
+      },
+      "pocket_checks": [
+        {
+          "object_key": "E-MTAB-9639",
+          "pocket_features": 1000,
+          "matched_features": 1000,
+          "unmatched_features": [],
+          "status": "pass"
+        },
+        {
+          "object_key": "E-MTAB-3101",
+          "pocket_features": 1000,
+          "matched_features": 1000,
+          "unmatched_features": [],
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "id": "ensembl-107-human",
+      "provider": "Ensembl",
+      "release": "107",
+      "organism": "Homo sapiens",
+      "assembly": "GRCh38",
+      "fasta": {
+        "url": "https://ftp.ensembl.org/pub/release-107/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz",
+        "bytes": 881211416,
+        "official_bsd_sum": 2415,
+        "official_blocks_1024": 860559,
+        "checksums_evidence": {
+          "url": "https://ftp.ensembl.org/pub/release-107/fasta/homo_sapiens/dna/CHECKSUMS",
+          "bytes": 5010,
+          "sha256": "ce636be091a62668531dc613dd479500109049afb44df82dc12dc0d9334b68d3",
+          "record": "02415 860559 Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz"
+        },
+        "downloaded": false
+      },
+      "gtf": {
+        "url": "https://ftp.ensembl.org/pub/release-107/gtf/homo_sapiens/Homo_sapiens.GRCh38.107.gtf.gz",
+        "bytes": 52555212,
+        "sha256": "9994f3bc8792c63803e3d91a1a8d2e613503fc59e278bcb156e55d0a7c3fb7b1",
+        "official_bsd_sum": 7867,
+        "official_blocks_1024": 51324,
+        "checksums_evidence": {
+          "url": "https://ftp.ensembl.org/pub/release-107/gtf/homo_sapiens/CHECKSUMS",
+          "bytes": 225,
+          "sha256": "a35c93bc7e93c4123cad6aa2275b817db29596da8787713d6108c71b0051551b",
+          "record": "07867 51324 Homo_sapiens.GRCh38.107.gtf.gz"
+        },
+        "gene_identifiers": 61860,
+        "gzip_test": "pass"
+      },
+      "pocket_checks": [
+        {
+          "object_key": "E-MTAB-7925",
+          "pocket_features": 8000,
+          "matched_features": 8000,
+          "unmatched_features": [],
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "id": "ensembl-genomes-53-arabidopsis",
+      "provider": "Ensembl Genomes",
+      "release": "53",
+      "organism": "Arabidopsis thaliana",
+      "assembly": "TAIR10",
+      "fasta": {
+        "url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-53/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz",
+        "bytes": 36462703,
+        "official_bsd_sum": 52039,
+        "official_blocks_1024": 35609,
+        "checksums_evidence": {
+          "url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-53/fasta/arabidopsis_thaliana/dna/CHECKSUMS",
+          "bytes": 1573,
+          "sha256": "faf9ff898440b441f551b548f43ac3fea02c7fc42a5f991dd5c08b2bf3352740",
+          "record": "52039 35609 Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz"
+        },
+        "downloaded": false
+      },
+      "gtf": {
+        "url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-53/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.53.gtf.gz",
+        "bytes": 10177951,
+        "sha256": "7376effdc7b663b5f9bea3619d8743cf7b16443b764158483e6e4d9f2271bf2d",
+        "official_bsd_sum": 19552,
+        "official_blocks_1024": 9940,
+        "checksums_evidence": {
+          "url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-53/gtf/arabidopsis_thaliana/CHECKSUMS",
+          "bytes": 69,
+          "sha256": "d8f1ba04e3aa04e66357e3fe2c123907490d818fdfd3bc2ba178be33b24bd29b",
+          "record": "19552  9940 Arabidopsis_thaliana.TAIR10.53.gtf.gz"
+        },
+        "gene_identifiers": 32833,
+        "gzip_test": "pass"
+      },
+      "pocket_checks": [
+        {
+          "object_key": "E-MTAB-10374",
+          "pocket_features": 2000,
+          "matched_features": 2000,
+          "unmatched_features": [],
+          "status": "pass"
+        }
+      ]
+    }
+  ],
+  "config_sha256": "224c079ede126061b5b29eb43e2b0a938d22b8247639629ba754599c63e38ff1",
+  "workflow_sha256": "f3db4c03a4b6325d94d70eec2d88ffd548fdca49efb8c8dafae896ca2de44e7e"
+}

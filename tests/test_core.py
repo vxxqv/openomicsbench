@@ -288,13 +288,17 @@ class CoreTests(unittest.TestCase):
             def geturl(self):return self.url
             def __enter__(self):return self
             def __exit__(self,*args):self.close()
+        user_agents=[]
         def opener(request,timeout):
+            user_agents.append(request.get_header('User-agent'))
             url=request.full_url if hasattr(request,'full_url') else request
             body=catalogue if '/json/' in url else counts if url.endswith('/counts') else design
             return Response(body,url)
         result=stage(accession,self.root/'atlas',opener=opener)
         self.assertEqual((result['genes'],result['samples']),(2,2))
         self.assertEqual({r['role'] for r in result['resources']},{'raw_counts','experiment_design'})
+        self.assertEqual(len(user_agents),3)
+        self.assertTrue(all(agent and agent.startswith('OpenOmicsBench/') for agent in user_agents))
 
     def test_atlas_stage_rejects_sample_mismatch(self):
         accession='E-MTAB-8572'

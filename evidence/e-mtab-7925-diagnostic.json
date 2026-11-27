@@ -1,0 +1,173 @@
+{
+  "accession": "E-MTAB-7925",
+  "object_key": "E-MTAB-7925",
+  "status": "diagnostic_only",
+  "source_features": 61860,
+  "source_samples": 24,
+  "analysed_samples": 24,
+  "selected_samples": 12,
+  "excluded_count_columns": [],
+  "deduplicated_count_columns": {},
+  "conditions": {
+    "none": 6,
+    "cyclic tensile strain": 6
+  },
+  "factor_column": "Factor Value[stimulus]",
+  "batch_column": "Sample Characteristic[individual]",
+  "subset": {
+    "Factor Value[time]": [
+      "24 hour"
+    ]
+  },
+  "batches": {
+    "7": 2,
+    "14": 2,
+    "34": 2,
+    "45": 2,
+    "54": 2,
+    "74": 2
+  },
+  "sample_order": [
+    "ERR3301313",
+    "ERR3301315",
+    "ERR3301317",
+    "ERR3301319",
+    "ERR3301321",
+    "ERR3301323",
+    "ERR3301325",
+    "ERR3301327",
+    "ERR3301329",
+    "ERR3301331",
+    "ERR3301333",
+    "ERR3301335"
+  ],
+  "contrast": "none - cyclic tensile strain",
+  "baseline": "Diagnostic donor-adjusted OLS on log2(median-ratio-normalized counts + 1); DESeq2 confirmation remains required.",
+  "normalization": "median_ratio",
+  "full_size_factors": [
+    0.7634923023937943,
+    0.5194126508179149,
+    0.58969895468509,
+    0.7535203936008507,
+    1.766073469428033,
+    0.5827585418877161,
+    1.096844066767068,
+    0.9035980196812093,
+    1.6615378868444146,
+    1.308645747154094,
+    1.065311593844922,
+    2.4017669808612587
+  ],
+  "candidate_curve": [
+    {
+      "features": 500,
+      "bytes": 22166,
+      "size_ratio": 0.0043270944515350195,
+      "metrics": {
+        "spearman_logfc": 0.9877201427770189,
+        "top_k_jaccard": 0.8867924528301887,
+        "distance_correlation": 0.6983984747826449,
+        "sign_concordance": 1.0
+      },
+      "pass": false
+    },
+    {
+      "features": 1000,
+      "bytes": 44312,
+      "size_ratio": 0.008650284640278796,
+      "metrics": {
+        "spearman_logfc": 0.9899490352930929,
+        "top_k_jaccard": 0.8867924528301887,
+        "distance_correlation": 0.7480509143922914,
+        "sign_concordance": 1.0
+      },
+      "pass": false
+    },
+    {
+      "features": 2000,
+      "bytes": 88020,
+      "size_ratio": 0.01718266054426204,
+      "metrics": {
+        "spearman_logfc": 0.9901595363854759,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.7770419784218517,
+        "sign_concordance": 1.0
+      },
+      "pass": false
+    },
+    {
+      "features": 4000,
+      "bytes": 174468,
+      "size_ratio": 0.03405844603313236,
+      "metrics": {
+        "spearman_logfc": 0.9968403880170305,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.8518429763225014,
+        "sign_concordance": 1.0
+      },
+      "pass": false
+    },
+    {
+      "features": 8000,
+      "bytes": 346631,
+      "size_ratio": 0.06766692577957391,
+      "metrics": {
+        "spearman_logfc": 0.9970699184080469,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.927290691133654,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 12000,
+      "bytes": 518222,
+      "size_ratio": 0.10116374361018592,
+      "metrics": {
+        "spearman_logfc": 0.9970223052416561,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.9605322606309435,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 20000,
+      "bytes": 862596,
+      "size_ratio": 0.16839007333376801,
+      "metrics": {
+        "spearman_logfc": 0.9969262207816882,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.990832263941042,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    }
+  ],
+  "smallest_passing_features": 8000,
+  "rights": "AMBER: study-specific redistribution and attribution review is pending.",
+  "reference": "PENDING: pin the Expression Atlas reference release and exact annotation hashes before release.",
+  "release_eligible": false,
+  "source_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-7925-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-7925/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 5122606,
+      "sha256": "7664bfc63333a7b997894d50a1343a4384dabc3067191616e0515de8ab82b09c"
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-7925-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-7925/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 9103,
+      "sha256": "bc8a148b78f7a798dd4c26030f052d17d70144ef1c385eefadb902fdac058f9f"
+    }
+  ],
+  "versions": {
+    "python": "3.14.0",
+    "numpy": "2.5.0"
+  },
+  "config_sha256": "00d7c99542a934624ea106d74d30ec236e57251cfbd2285c00fe8254dae18a84",
+  "workflow_sha256": "1e065fb87b06b029505797eefe97580cb1a2dde6b1c32724bbbe46299b7343e4"
+}

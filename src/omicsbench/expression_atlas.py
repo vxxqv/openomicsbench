@@ -13,6 +13,7 @@ import numpy as np
 
 ORIGIN = "https://www.ebi.ac.uk"
 ROOT = f"{ORIGIN}/gxa/"
+USER_AGENT = "OpenOmicsBench/14 (https://github.com/vxxqv/openomicsbench)"
 ACCESSION = re.compile(r"^E-[A-Z0-9]+-[0-9]+$")
 RESOURCE_TYPES = {
     "icon-raw-counts": "raw_counts",
@@ -72,7 +73,7 @@ def parse_catalogue(accession: str, payload: bytes) -> dict[str, AtlasResource]:
 def discover(accession: str, opener=urllib.request.urlopen) -> dict[str, AtlasResource]:
     accession = normalize_accession(accession)
     url = f"{ROOT}json/experiments/{accession}/resources/DATA"
-    with opener(urllib.request.Request(url, headers={"Accept": "application/json"}), timeout=60) as response:
+    with opener(urllib.request.Request(url, headers={"Accept": "application/json", "User-Agent": USER_AGENT}), timeout=60) as response:
         if response.geturl() != url:
             raise ValueError("Expression Atlas catalogue redirected unexpectedly")
         payload = response.read(1_000_001)
@@ -87,7 +88,8 @@ def _stage_one(resource: AtlasResource, target: Path, opener, max_bytes: int) ->
     total = 0
     checksum = hashlib.sha256()
     try:
-        with os.fdopen(fd, "wb") as output, opener(resource.url, timeout=120) as response:
+        request = urllib.request.Request(resource.url, headers={"User-Agent": USER_AGENT})
+        with os.fdopen(fd, "wb") as output, opener(request, timeout=120) as response:
             fd = None
             if response.geturl() != resource.url:
                 raise ValueError(f"{resource.role} redirected unexpectedly")
