@@ -1,0 +1,16 @@
+{
+  "dataset_id": "singlecell-003",
+  "source_stem": "sc_celseq2",
+  "source_commit": "7d00ffb0bd043467f365a9358d7312f294f13c9f",
+  "source_count_sha256": "a82aa89b8995aed412f4260c0adb343967e33a801af6f2e0aa647c1d897a5a21",
+  "source_metadata_sha256": "78429916bac394d92d8c972059a8f195c5479ce578da04f1eb3ba599585ef3d9",
+  "reference_gtf_sha256": "ba9cb13686c3a4429724dfd6f6e52df92d1cc59675a4590d4a854f64ce633f46",
+  "workflow_commit": "8b0210f1817946a43e4f033248e60a74346e346f",
+  "cell_selection": "All source cells",
+  "selected_cells": 274,
+  "selected_features": 28204,
+  "excluded_unmatched_feature_ids": [],
+  "label_origin": "The upstream cell_line_demuxlet metadata column; SNP-based reference labels, not direct cell-type truth.",
+  "source_nonzero_selected": 1954979,
+  "source_total_counts_selected": 10321416
+}

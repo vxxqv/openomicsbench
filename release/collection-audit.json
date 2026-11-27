@@ -1,5 +1,6 @@
 {
   "schema_version": "1.0",
+  "scope": "bulk_rna_seq; other real assays are checked by their own validators and release evidence",
   "status": "pass",
   "biological_objects": 16,
   "source_studies": 11,

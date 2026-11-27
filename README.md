@@ -12,7 +12,7 @@ Install the [Bioconda package](https://anaconda.org/bioconda/openomicsbench) wit
 
 If OpenOmicsBench helps your work, please [star the repository](https://github.com/vxxqv/openomicsbench). Stars help other people discover the repository.
 
-OpenOmicsBench is a compact benchmark collection and local toolkit for bioinformatics software testing, method checks and teaching. It contains 16 certified bulk RNA-seq objects, seven deterministic sequence and classification fixtures, a 10x-style single-cell RNA-seq fixture, a genomic peak-calling fixture, strict local tools, and a CI-ready evaluation system. [Browse the collection](https://vxxqv.github.io/openomicsbench/) before installing.
+OpenOmicsBench is a compact benchmark collection and local toolkit for bioinformatics software testing, method checks and teaching. The v15 collection contains 16 certified bulk RNA-seq objects, six sourced single-cell RNA-seq cases from one CellBench study, seven deterministic sequence and classification fixtures, a separate synthetic single-cell fixture, a genomic peak-calling fixture, strict local tools, and a CI-ready evaluation system. [Browse the collection](https://vxxqv.github.io/openomicsbench/) before installing.
 
 ## Try one RNA-seq study
 
@@ -88,7 +88,7 @@ The converter recognizes common `log2FoldChange` and `logFC` headers, including 
 
 ## Assess more assays
 
-The combined v15 development branch adds processed-result reports for single-cell clusters and annotations, small variants within supplied BED regions, chromatin peaks, and peptide identifications. It also offers an optional AnnData export adapter. These tools have distinct reference types and limits; read the [multi-assay input guide](docs/multi-assay-assessment.md) and [website walkthrough](https://vxxqv.github.io/openomicsbench/assess.html) before interpreting their numbers. The new commands are in development until a v15 package is published.
+The combined v15 development branch adds processed-result reports for single-cell clusters and annotations, small variants within supplied BED regions, chromatin peaks, and peptide identifications. It also offers an optional AnnData export adapter and six sourced single-cell cases. These tools have distinct reference types and limits; read the [multi-assay input guide](docs/multi-assay-assessment.md), [CellBench intake record](curation/v15-source-intake.md), and [website walkthrough](https://vxxqv.github.io/openomicsbench/assess.html) before interpreting their numbers. The new commands and cases are in development until a v15 package is published.
 
 ```sh
 omicsbench cell assess singlecell-001 clusters.tsv --annotation annotations.tsv --embedding embedding.tsv

@@ -1,5 +1,11 @@
 # Changes
 
+## 15.0.0
+
+Six sourced single-cell RNA-seq cases from the CellBench study expand the catalog to 31 objects. Three platforms and three technical plates are represented; all six cases come from one study and are not independent cohorts. Counts, cell labels, source hashes, reference-identifier checks, transformations and reuse notices are recorded for each case. A separate five-line source was audited but withheld because its feature naming did not meet this release's reference rule.
+
+Processed-result assessment commands now report partition and annotation agreement for single cells, region-limited exact small-variant matches, chromatin peak overlap and supplied QC values, and peptide-identification agreement. An optional AnnData export adapter supports explicitly selected fields. These reports compare results against declared references; they do not infer biological truth from raw reads. The website includes a multi-assay guide and updated searchable catalog.
+
 ## 14.0.0
 
 The RNA-seq CLI now offers `rnaseq qc` for descriptive sample-level count summaries plus optional linked design checking, and `rnaseq assess-de` for adjusted-p-value call counts and effect-direction agreement with the archived reference. Both are available through the Python API. A paired-study Python notebook and an R Markdown walkthrough show the input and its limitations. The project site has a dedicated RNA-seq guide and a bundled catalog for local viewing. Cloudflare Web Analytics is deployed on the public site.

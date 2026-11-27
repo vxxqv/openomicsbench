@@ -1,15 +1,21 @@
 {
-  "scope": "v14_collection",
-  "software_version": "14.0.0",
-  "decision": "GO",
+  "scope": "v15_collection",
+  "software_version": "15.0.0",
+  "decision": "NO-GO",
   "preflight": "PASS",
   "certified_biological_objects": 16,
   "certified_sequence_objects": 7,
-  "certified_single_cell_objects": 1,
+  "certified_single_cell_objects": 7,
+  "certified_real_single_cell_objects": 6,
   "certified_interval_objects": 1,
   "source_studies": 11,
   "redistributable_pockets": 16,
   "design_archetypes": 16,
   "blockers": [],
-  "deferred_publication_gates": []
+  "deferred_publication_gates": [
+    "version_doi",
+    "external_user_trial",
+    "post_upload_verification",
+    "pypi_verification"
+  ]
 }

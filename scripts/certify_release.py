@@ -330,6 +330,45 @@ def check_biological_object(model, folder: Path, blockers: list[str]) -> None:
         check_recorded_file(provenance.get(name, {}), f"{model.id} {name}", blockers)
 
 
+def check_real_single_cell(model, folder: Path, blockers: list[str], source_audit: dict,
+                           reference_audit: dict) -> None:
+    """Check the pinned source and annotation lineage of a derived cell case."""
+    provenance_path = folder / "provenance/source-and-transform.json"
+    license_path = folder / "provenance/source-license.txt"
+    if not provenance_path.is_file() or not license_path.is_file():
+        blockers.append(f"{model.id}: source provenance or license notice is missing.")
+        return
+    provenance = read_json(provenance_path)
+    stem = provenance.get("source_stem")
+    sources = {case["stem"]: case for case in source_audit.get("cases", [])}
+    references = {case["stem"]: case for case in reference_audit.get("cases", [])}
+    if stem not in sources or stem not in references:
+        blockers.append(f"{model.id}: source is absent from pinned intake audits.")
+        return
+    source = sources[stem]
+    reference = references[stem]
+    if provenance.get("source_commit") != source_audit.get("upstream_commit"):
+        blockers.append(f"{model.id}: source revision differs from intake audit.")
+    if provenance.get("source_count_sha256") != source["source_files"]["counts"]["sha256"] or model.source.sha256 != provenance.get("source_count_sha256"):
+        blockers.append(f"{model.id}: source count hash differs from intake audit.")
+    if provenance.get("source_metadata_sha256") != source["source_files"]["metadata"]["sha256"]:
+        blockers.append(f"{model.id}: source metadata hash differs from intake audit.")
+    if provenance.get("reference_gtf_sha256") != reference_audit.get("annotations", {}).get("ensembl88", {}).get("sha256"):
+        blockers.append(f"{model.id}: reference annotation hash differs from intake audit.")
+    if sorted(provenance.get("excluded_unmatched_feature_ids", [])) != sorted(reference.get("unmatched_examples", [])) or reference.get("annotation_unmatched", 999) > 25:
+        blockers.append(f"{model.id}: excluded feature IDs differ from reference audit.")
+    if provenance.get("selected_features") != reference.get("feature_count", 0) - reference.get("annotation_unmatched", 0):
+        blockers.append(f"{model.id}: selected feature count differs from reference audit.")
+    if provenance.get("workflow_commit") != model.derivation.commit or not COMMIT.fullmatch(model.derivation.commit or ""):
+        blockers.append(f"{model.id}: transformation revision is missing or inconsistent.")
+    elif digest(ROOT / model.derivation.workflow) != historical_digest(model.derivation.commit, model.derivation.workflow):
+        blockers.append(f"{model.id}: transformation workflow differs from pinned revision.")
+    if digest(license_path) != digest(ROOT / "workflows/cellbench-source-license.txt"):
+        blockers.append(f"{model.id}: upstream license notice differs from pinned copy.")
+    if model.rights.status != "GREEN" or model.rights.license != "MIT" or model.reference.compatibility != "verified":
+        blockers.append(f"{model.id}: rights or reference compatibility are not certified.")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Verify the collection and write its release decision.")
     parser.add_argument(
@@ -346,6 +385,7 @@ def main() -> None:
     validated = []
     sequence_validated = []
     single_cell_validated = []
+    real_single_cell_validated = []
     interval_validated = []
 
     if reference_evidence.get("status") != "pass":
@@ -358,19 +398,26 @@ def main() -> None:
     except ValueError as exc:
         records = {}
         blockers.append(str(exc))
+    major_version = int(metadata["software_version"].split(".")[0])
+    source_audit = read_json(ROOT / "curation/v15-cellbench-source-audit.json") if major_version >= 15 else {}
+    reference_audit = read_json(ROOT / "curation/v15-cellbench-reference-audit.json") if major_version >= 15 else {}
     for model, folder in records.values():
         try:
             result = validate(model, folder)
         except ValueError as exc:
             blockers.append(str(exc))
             continue
-        if model.kind == "real" and model.status == "validated" and result["status"] == "pass":
+        if model.kind == "real" and model.assay == "bulk_rna_seq" and model.status == "validated" and result["status"] == "pass":
             validated.append(model)
             check_biological_object(model, folder, blockers)
         if model.sequence is not None and model.status == "validated" and result["status"] == "pass":
             sequence_validated.append(model)
         if model.single_cell is not None and model.status == "validated" and result["status"] == "pass":
             single_cell_validated.append(model)
+            if model.kind == "real":
+                real_single_cell_validated.append(model)
+                if major_version >= 15:
+                    check_real_single_cell(model, folder, blockers, source_audit, reference_audit)
         if model.intervals is not None and model.status == "validated" and result["status"] == "pass":
             interval_validated.append(model)
 
@@ -392,6 +439,8 @@ def main() -> None:
         blockers.append("The DNA, RNA, protein, paired-read and DNA-seq sequence families are incomplete.")
     if not single_cell_validated:
         blockers.append("The release requires a validated single-cell object.")
+    if major_version >= 15 and len(real_single_cell_validated) < 6:
+        blockers.append(f"Version 15 requires six sourced single-cell cases; found {len(real_single_cell_validated)}.")
     if not interval_validated:
         blockers.append("The release requires a validated genomic interval object.")
     for model in validated:
@@ -427,6 +476,7 @@ def main() -> None:
         "certified_biological_objects": len(validated),
         "certified_sequence_objects": len(sequence_validated),
         "certified_single_cell_objects": len(single_cell_validated),
+        "certified_real_single_cell_objects": len(real_single_cell_validated),
         "certified_interval_objects": len(interval_validated),
         "source_studies": len({model.source.accession for model in validated}),
         "redistributable_pockets": len(pockets),

@@ -1,0 +1,16 @@
+{
+  "dataset_id": "singlecell-002",
+  "source_stem": "sc_10x",
+  "source_commit": "7d00ffb0bd043467f365a9358d7312f294f13c9f",
+  "source_count_sha256": "13e0b34091e5e81015852ee97575d12264603cabd2a48f53a4ac602f92edc7f4",
+  "source_metadata_sha256": "ac2789479cb757d38c92beb642420710b6fe31f9da4c136eb1aca87fc0beb3f3",
+  "reference_gtf_sha256": "ba9cb13686c3a4429724dfd6f6e52df92d1cc59675a4590d4a854f64ce633f46",
+  "workflow_commit": "8b0210f1817946a43e4f033248e60a74346e346f",
+  "cell_selection": "300 cells sampled without labels using Python Random(15), retained in source order",
+  "selected_cells": 300,
+  "selected_features": 16468,
+  "excluded_unmatched_feature_ids": [],
+  "label_origin": "The upstream cell_line_demuxlet metadata column; SNP-based reference labels, not direct cell-type truth.",
+  "source_nonzero_selected": 2709656,
+  "source_total_counts_selected": 34741539
+}

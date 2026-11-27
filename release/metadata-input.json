@@ -1,5 +1,5 @@
 {
-  "software_version": "14.0.0",
+  "software_version": "15.0.0",
   "candidate_date": "2026-11-27",
   "authors": [
     {
@@ -12,85 +12,19 @@
   "repository_url": "https://github.com/vxxqv/openomicsbench",
   "concept_doi": "10.5281/zenodo.22551734",
   "previous_release": {
-    "version": "13.0.1",
-    "git_tag": "v13.0.1",
-    "record_doi": "10.5281/zenodo.24225570",
-    "record_url": "https://zenodo.org/records/24225570"
+    "version": "14.0.0",
+    "git_tag": "v14.0.0",
+    "record_doi": "10.5281/zenodo.24597524",
+    "record_url": "https://zenodo.org/records/24597524"
   },
   "code_license": "Apache-2.0",
   "metadata_license": "CC-BY-4.0",
   "scientific_environment_lock": "runtime/environment-lock.json",
   "container_digest": null,
-  "external_user_trial": {
-    "status": "owner-authorized clean-room substitute",
-    "date": "2026-11-27",
-    "operating_system": "Windows-11-10.0.26300-SP0",
-    "python": "3.14.0",
-    "commit": "4c4cb63f597d5d3d342d8ca326e71bc8e9fe9b6e",
-    "commands": [
-      "python -m venv C:\\Users\\VIVAAN\\AppData\\Local\\Temp\\openomicsbench-v14-trial-final",
-      "TRIAL/python -m pip install -r requirements-tested.txt",
-      "TRIAL/python -m pip install --no-deps openomicsbench-14.0.0-py3-none-any.whl",
-      "python -m omicsbench list --assay bulk_rna_seq",
-      "python -m omicsbench info rnaseq-014",
-      "python -m omicsbench validate rnaseq-014",
-      "python -m omicsbench rnaseq pack C:\\Users\\VIVAAN\\AppData\\Local\\Temp\\openomicsbench-v14-trial-output-4c4cb63\\pack --id rnaseq-014 --id rnaseq-017",
-      "python -m omicsbench rnaseq verify-pack C:\\Users\\VIVAAN\\AppData\\Local\\Temp\\openomicsbench-v14-trial-output-4c4cb63\\pack",
-      "python -m omicsbench rnaseq check-design C:\\Users\\VIVAAN\\AppData\\Local\\Temp\\openomicsbench-v14-trial-output-4c4cb63\\pack\\rnaseq-014\\counts.tsv C:\\Users\\VIVAAN\\AppData\\Local\\Temp\\openomicsbench-v14-trial-output-4c4cb63\\pack\\rnaseq-014\\samples.tsv C:\\Users\\VIVAAN\\AppData\\Local\\Temp\\openomicsbench-v14-trial-output-4c4cb63\\pack\\rnaseq-014\\contrasts.tsv --id rnaseq-014",
-      "python -m omicsbench rnaseq qc C:\\Users\\VIVAAN\\AppData\\Local\\Temp\\openomicsbench-v14-trial-output-4c4cb63\\pack\\rnaseq-014\\counts.tsv --samples C:\\Users\\VIVAAN\\AppData\\Local\\Temp\\openomicsbench-v14-trial-output-4c4cb63\\pack\\rnaseq-014\\samples.tsv --contrasts C:\\Users\\VIVAAN\\AppData\\Local\\Temp\\openomicsbench-v14-trial-output-4c4cb63\\pack\\rnaseq-014\\contrasts.tsv --id rnaseq-014",
-      "python -m omicsbench rnaseq score-effects rnaseq-014 C:\\Users\\VIVAAN\\AppData\\Local\\Temp\\openomicsbench-v14-trial-final\\Lib\\site-packages\\omicsbench\\_collection\\datasets\\rnaseq\\rnaseq-014\\expected\\reference-effects.tsv.gz",
-      "python -m omicsbench rnaseq assess-de rnaseq-014 C:\\Users\\VIVAAN\\AppData\\Local\\Temp\\openomicsbench-v14-e-mtab-7925-deseq2\\full\\differential_expression.tsv",
-      "python -m omicsbench demo C:\\Users\\VIVAAN\\AppData\\Local\\Temp\\openomicsbench-v14-trial-output-4c4cb63\\demo",
-      "python -m omicsbench evidence verify C:\\Users\\VIVAAN\\AppData\\Local\\Temp\\openomicsbench-v14-trial-output-4c4cb63\\demo\\evidence.zip"
-    ],
-    "outcome": "pass",
-    "wheel_bytes": 14426659,
-    "packaged_collection": true,
-    "limitation": "The release preparer ran this fresh-environment trial from the candidate wheel; no independent tester is claimed. The user asked the preparer to complete work that did not require their involvement."
-  },
-  "release_commit": "3a712c01d7e1d579df20c1e5228724c7032dd01e",
-  "version_doi": "10.5281/zenodo.24597524",
-  "post_upload_verification": {
-    "status": "pass",
-    "version_doi": "10.5281/zenodo.24597524",
-    "record_url": "https://zenodo.org/records/24597524",
-    "verified_at": "2026-11-27T17:23:24Z",
-    "git_commit": "3a712c01d7e1d579df20c1e5228724c7032dd01e",
-    "git_tag": "v14.0.0",
-    "archive_content_match": true,
-    "comparison_scope": "All 494 extracted paths match byte-for-byte after removing each ZIP archive's top-level directory; ZIP container bytes differ.",
-    "archived_files": 494,
-    "inventory_files_verified": 493,
-    "missing_files": [],
-    "extra_files": [],
-    "changed_files": [],
-    "zenodo_sha256": "764f5874c4222254534db2f1439ea92ae016f20ed9964007678cb46ea6835b43",
-    "github_sha256": "fc5d882d06b895a4c940c54dc7af4b9b017006d2cb48890904dbea6f42625588",
-    "zenodo_md5": "83e202cd0731586fe6a1693aeb1492e4",
-    "github_md5": "098e9738647aebce3076a60868be36bc"
-  },
+  "external_user_trial": null,
+  "release_commit": null,
+  "version_doi": null,
+  "post_upload_verification": null,
   "build_reproducibility": null,
-  "pypi_verification": {
-    "status": "pass",
-    "version": "14.0.0",
-    "url": "https://pypi.org/project/openomicsbench/14.0.0/",
-    "files": [
-      {
-        "filename": "openomicsbench-14.0.0-py3-none-any.whl",
-        "bytes": 14262095,
-        "sha256": "852eeb4f1a9e7278a3329d20ec29e9599b4f2e206d668bec88e8edb93c67275a",
-        "file_set_match": true,
-        "normalized_content_match": true,
-        "comparison_scope": "All 290 package payload members match the clean-room tested wheel; generated dist-info metadata is excluded."
-      },
-      {
-        "filename": "openomicsbench-14.0.0.tar.gz",
-        "bytes": 14090714,
-        "sha256": "acb646c2636f9fa0dcaeb2b012f65459bceb0b8cb9db377d82fd6c48fa29d81c",
-        "file_set_match": true,
-        "normalized_content_match": true,
-        "comparison_scope": "All 322 source payload members match a fresh build of the tagged source; generated PKG-INFO, setup.cfg and egg-info metadata are excluded."
-      }
-    ]
-  }
+  "pypi_verification": null
 }

@@ -3,7 +3,7 @@
   "release": "14.0.0",
   "biological_objects": 16,
   "sequence_objects": 7,
-  "single_cell_objects": 1,
+  "single_cell_objects": 7,
   "interval_objects": 1,
   "source_studies": 11,
   "objects": [
@@ -545,6 +545,78 @@
       "states": 3,
       "rights": "GREEN",
       "license": "Apache-2.0"
+    },
+    {
+      "id": "singlecell-002",
+      "title": "Three-line 10x Chromium cell mixture",
+      "assay": "single_cell_rna_seq",
+      "format": "matrix_market",
+      "cells": 300,
+      "features": 16468,
+      "nonzero": 2709656,
+      "states": 3,
+      "rights": "GREEN",
+      "license": "MIT"
+    },
+    {
+      "id": "singlecell-003",
+      "title": "Three-line CEL-seq2 cell mixture",
+      "assay": "single_cell_rna_seq",
+      "format": "matrix_market",
+      "cells": 274,
+      "features": 28204,
+      "nonzero": 1954979,
+      "states": 3,
+      "rights": "GREEN",
+      "license": "MIT"
+    },
+    {
+      "id": "singlecell-004",
+      "title": "Three-line Drop-seq cell mixture",
+      "assay": "single_cell_rna_seq",
+      "format": "matrix_market",
+      "cells": 225,
+      "features": 15127,
+      "nonzero": 1290921,
+      "states": 3,
+      "rights": "GREEN",
+      "license": "MIT"
+    },
+    {
+      "id": "singlecell-005",
+      "title": "Five-line CEL-seq2 mixture, plate 1",
+      "assay": "single_cell_rna_seq",
+      "format": "matrix_market",
+      "cells": 297,
+      "features": 15546,
+      "nonzero": 1809784,
+      "states": 5,
+      "rights": "GREEN",
+      "license": "MIT"
+    },
+    {
+      "id": "singlecell-006",
+      "title": "Five-line CEL-seq2 mixture, plate 2",
+      "assay": "single_cell_rna_seq",
+      "format": "matrix_market",
+      "cells": 307,
+      "features": 14067,
+      "nonzero": 1736426,
+      "states": 5,
+      "rights": "GREEN",
+      "license": "MIT"
+    },
+    {
+      "id": "singlecell-007",
+      "title": "Five-line CEL-seq2 mixture, plate 3",
+      "assay": "single_cell_rna_seq",
+      "format": "matrix_market",
+      "cells": 305,
+      "features": 13418,
+      "nonzero": 1462622,
+      "states": 5,
+      "rights": "GREEN",
+      "license": "MIT"
     }
   ],
   "intervals": [

@@ -5,10 +5,10 @@ These commands read processed results and produce JSON reports. They do not down
 ## Single-cell labels and embeddings
 
 ```sh
-omicsbench cell assess singlecell-001 clusters.tsv --annotation annotations.tsv --embedding embedding.tsv --neighbors 10
+omicsbench cell assess singlecell-002 clusters.tsv --annotation annotations.tsv --embedding embedding.tsv --neighbors 10
 ```
 
-`clusters.tsv` and `annotations.tsv` need `cell_id` and `label` columns. Cluster names are arbitrary: adjusted Rand index and normalized mutual information measure partition agreement. Annotation names are compared exactly to the declared reference, and missing or extra cells are reported. `embedding.tsv` needs `cell_id` and at least two finite numeric coordinates. Its same-state and same-batch neighbor fractions are shown beside random-label baselines. Batch mixing and state preservation must be considered together; neither figure is a standalone quality score. The packaged `singlecell-001` is a deterministic demonstration, not an independently validated biological atlas.
+`clusters.tsv` and `annotations.tsv` need `cell_id` and `label` columns. Cluster names are arbitrary: adjusted Rand index and normalized mutual information measure partition agreement. Annotation names are compared exactly to the declared reference, and missing or extra cells are reported. `embedding.tsv` needs `cell_id` and at least two finite numeric coordinates. Its same-state and same-batch neighbor fractions are shown beside random-label baselines. Batch mixing and state preservation must be considered together; neither figure is a standalone quality score. Cases `singlecell-002` through `singlecell-007` contain sourced CellBench counts and labels across three platforms and three technical plates, all from one study; they are not six independent cohorts. Their source, transformations, reference-identifier exclusions and reuse notice are recorded in each case and in the [intake record](../curation/v15-source-intake.md). The separate `singlecell-001` is a deterministic synthetic demonstration.
 
 An optional AnnData adapter exports explicit TSVs:
 
