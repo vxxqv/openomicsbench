@@ -482,7 +482,7 @@ The input must contain unique `gene_id` and finite `log2_fold_change` columns. T
 
 The [JSON catalog](catalog/collection.json) contains every benchmark family. [catalog/collection.tsv](catalog/collection.tsv) lists the biological objects, [catalog/sequences.tsv](catalog/sequences.tsv) lists the sequence fixtures, [catalog/single-cell.tsv](catalog/single-cell.tsv) lists the single-cell objects, and [catalog/intervals.tsv](catalog/intervals.tsv) lists genomic interval benchmarks.
 
-Expression Atlas and BioStudies supplied the biological count matrices. Their bundled material is recorded as CC BY 4.0 with provider attribution. The sequence fixtures and software are project-authored and distributed under Apache-2.0. Project-written descriptive metadata is CC BY 4.0.
+Expression Atlas and BioStudies supplied the bulk RNA-seq count matrices. Their bundled material is recorded as CC BY 4.0 with provider attribution. The six sourced single-cell cases come from the [CellBench / sc_mixology study](curation/v15-source-intake.md), whose upstream repository declares an MIT license at the pinned commit; the source and transformations are recorded in the intake. The sequence fixtures and software are project-authored and distributed under Apache-2.0. Project-written descriptive metadata is CC BY 4.0.
 
 The objects are research and software-test material. They are not clinical references and do not replace the complete source studies.
 
