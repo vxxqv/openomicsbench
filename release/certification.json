@@ -1,7 +1,7 @@
 {
   "scope": "v15_collection",
   "software_version": "15.0.0",
-  "decision": "NO-GO",
+  "decision": "GO",
   "preflight": "PASS",
   "certified_biological_objects": 16,
   "certified_sequence_objects": 7,
@@ -12,9 +12,5 @@
   "redistributable_pockets": 16,
   "design_archetypes": 16,
   "blockers": [],
-  "deferred_publication_gates": [
-    "version_doi",
-    "post_upload_verification",
-    "pypi_verification"
-  ]
+  "deferred_publication_gates": []
 }
