@@ -108,8 +108,8 @@
       "tier": "metadata",
       "role": "documentation",
       "media_type": "text/markdown",
-      "bytes": 1693,
-      "sha256": "bce8dd9a7e4e07d8568de42b5256239ed8b3a319f6757c9c2f03f25241652fc0"
+      "bytes": 1797,
+      "sha256": "35a5fc3982dfefee92262bad5c2a255959398be66b3dd4d68047cbc4e322bd31"
     },
     {
       "path": "attribution.json",
@@ -128,6 +128,14 @@
       "sha256": "a6d6582bd5bd08dfa92797c68c004a5112f197d08dbfed91e5dc3996098153e6"
     },
     {
+      "path": "expected/reference-effects.tsv.gz",
+      "tier": "expected",
+      "role": "effects",
+      "media_type": "application/gzip",
+      "bytes": 361462,
+      "sha256": "36c97e199c99609bddfa4a4b108228d601e68f389dd261b16e027d263acefb53"
+    },
+    {
       "path": "expected/source-counts.tsv",
       "tier": "expected",
       "role": "baseline",
@@ -140,8 +148,8 @@
       "tier": "expected",
       "role": "metrics",
       "media_type": "application/json",
-      "bytes": 553,
-      "sha256": "e27412f64134233fe0ac6bb6a6a17b8ef0f2dde390d2ef61c14dc856802a8f7e"
+      "bytes": 613,
+      "sha256": "d4073602ac19e3e1cbe8af1879239d3f9d1cf236a503f1baae2ae5264c3790b3"
     },
     {
       "path": "pocket/counts.tsv",

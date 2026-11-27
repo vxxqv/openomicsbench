@@ -14,6 +14,7 @@
 
 - `pocket/counts.tsv` contains the selected integer counts.
 - `expected/source-counts.tsv` contains the full source matrix for the declared samples.
+- `expected/reference-effects.tsv.gz` contains finite full-source DESeq2 effects for result comparison.
 - `samples.json` fixes sample order, condition, replicate and blocking values.
 - `expected/validation.json` and `expected/deseq2.json` define the checks and results.
 - `reference.json`, `rights.json`, `attribution.json` and `provenance/transform.json` record origin and use.
