@@ -1,0 +1,65 @@
+{
+  "accession": "E-MTAB-10374",
+  "source_systems": [
+    {
+      "name": "Expression Atlas",
+      "url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-10374"
+    },
+    {
+      "name": "BioStudies",
+      "url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-10374"
+    }
+  ],
+  "checked": "2026-11-27",
+  "title": "RNA-seq of Arabidopsis natural accessions under mild drought",
+  "publication": null,
+  "assay": "bulk RNA-seq of coding RNA",
+  "organism": "Arabidopsis thaliana",
+  "study_design": {
+    "design_rows": 12,
+    "analysed_runs": 12,
+    "selected_runs": 6,
+    "factor_column": "Factor Value[environmental stress]",
+    "groups": {
+      "drought environment": 3,
+      "none": 3
+    },
+    "subset": {
+      "Factor Value[ecotype]": "ICE163"
+    },
+    "batch_column": null,
+    "task": "Within-accession drought versus control contrast"
+  },
+  "available_layers": [
+    "Expression Atlas raw gene counts",
+    "experiment design"
+  ],
+  "estimated_raw_count_bytes": null,
+  "verified_resources": [
+    {
+      "role": "experiment_design",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-10374/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 6298,
+      "sha256": "4fbb4a5eadf5aadb611463afd1900c9b7b0244f4247cf01500343577ca292f8e"
+    },
+    {
+      "role": "raw_counts",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-10374/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": null,
+      "sha256": null
+    }
+  ],
+  "rights": {
+    "status": "AMBER",
+    "redistribution": "Pending record-specific review; keep raw and transformed data outside the release.",
+    "checked": "2026-11-27"
+  },
+  "review_status": "screened",
+  "release_eligible": false,
+  "remaining_work": [
+    "Verify publication and study-specific redistribution terms.",
+    "Verify count-file columns, exact sample alignment, library details and annotation release.",
+    "Run the predeclared reduction and independent reference method checks.",
+    "Prepare dataset card, attribution and a clean-environment trial before release."
+  ]
+}

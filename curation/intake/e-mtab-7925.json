@@ -1,0 +1,65 @@
+{
+  "accession": "E-MTAB-7925",
+  "source_systems": [
+    {
+      "name": "Expression Atlas",
+      "url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-7925"
+    },
+    {
+      "name": "BioStudies",
+      "url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-7925"
+    }
+  ],
+  "checked": "2026-11-27",
+  "title": "RNA-seq of human mesenchymal stem cells from six donors with and without cyclic tensile strain",
+  "publication": null,
+  "assay": "bulk RNA-seq of coding RNA",
+  "organism": "Homo sapiens",
+  "study_design": {
+    "design_rows": 24,
+    "analysed_runs": 24,
+    "selected_runs": 12,
+    "factor_column": "Factor Value[stimulus]",
+    "groups": {
+      "cyclic tensile strain": 6,
+      "none": 6
+    },
+    "subset": {
+      "Factor Value[time]": "24 hour"
+    },
+    "batch_column": "Sample Characteristic[individual]",
+    "task": "Paired-donor contrast at 24 hours, adjusted for donor"
+  },
+  "available_layers": [
+    "Expression Atlas raw gene counts",
+    "experiment design"
+  ],
+  "estimated_raw_count_bytes": null,
+  "verified_resources": [
+    {
+      "role": "experiment_design",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-7925/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 9103,
+      "sha256": "bc8a148b78f7a798dd4c26030f052d17d70144ef1c385eefadb902fdac058f9f"
+    },
+    {
+      "role": "raw_counts",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-7925/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": null,
+      "sha256": null
+    }
+  ],
+  "rights": {
+    "status": "AMBER",
+    "redistribution": "Pending record-specific review; keep raw and transformed data outside the release.",
+    "checked": "2026-11-27"
+  },
+  "review_status": "screened",
+  "release_eligible": false,
+  "remaining_work": [
+    "Verify publication and study-specific redistribution terms.",
+    "Verify count-file columns, exact sample alignment, library details and annotation release.",
+    "Run the predeclared reduction and independent reference method checks.",
+    "Prepare dataset card, attribution and a clean-environment trial before release."
+  ]
+}

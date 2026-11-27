@@ -1,0 +1,65 @@
+{
+  "accession": "E-MTAB-9639",
+  "source_systems": [
+    {
+      "name": "Expression Atlas",
+      "url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-9639"
+    },
+    {
+      "name": "BioStudies",
+      "url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-9639"
+    }
+  ],
+  "checked": "2026-11-27",
+  "title": "RNA-seq of human embryonic and neuronal stem cells with FOXK1/2 and SIN3A knockdown",
+  "publication": "https://doi.org/10.1093/nar/gkaa1281",
+  "assay": "bulk RNA-seq of total RNA",
+  "organism": "Homo sapiens",
+  "study_design": {
+    "design_rows": 21,
+    "analysed_runs": 21,
+    "selected_runs": 6,
+    "factor_column": "Factor Value[RNA interference]",
+    "groups": {
+      "scrambled siRNA": 3,
+      "siRNA knockdown of FOXK1/2": 3
+    },
+    "subset": {
+      "Factor Value[cell type]": "neuronal stem cell"
+    },
+    "batch_column": null,
+    "task": "Neuronal stem-cell FOXK1/2 knockdown versus scrambled control"
+  },
+  "available_layers": [
+    "Expression Atlas raw gene counts",
+    "experiment design"
+  ],
+  "estimated_raw_count_bytes": null,
+  "verified_resources": [
+    {
+      "role": "experiment_design",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-9639/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 10184,
+      "sha256": "0aba876967f3e579dac73936897bcd20ecee2b542599e998575138e11a9d0a00"
+    },
+    {
+      "role": "raw_counts",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-9639/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": null,
+      "sha256": null
+    }
+  ],
+  "rights": {
+    "status": "AMBER",
+    "redistribution": "Pending record-specific review; keep raw and transformed data outside the release.",
+    "checked": "2026-11-27"
+  },
+  "review_status": "screened",
+  "release_eligible": false,
+  "remaining_work": [
+    "Verify publication and study-specific redistribution terms.",
+    "Verify count-file columns, exact sample alignment, library details and annotation release.",
+    "Run the predeclared reduction and independent reference method checks.",
+    "Prepare dataset card, attribution and a clean-environment trial before release."
+  ]
+}

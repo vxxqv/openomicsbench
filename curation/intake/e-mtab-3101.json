@@ -1,0 +1,63 @@
+{
+  "accession": "E-MTAB-3101",
+  "source_systems": [
+    {
+      "name": "Expression Atlas",
+      "url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-3101"
+    },
+    {
+      "name": "BioStudies",
+      "url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-3101"
+    }
+  ],
+  "checked": "2026-11-27",
+  "title": "RNA-seq of human foetal foreskin fibroblasts under differentiation and senescence conditions",
+  "publication": null,
+  "assay": "bulk RNA-seq of coding RNA",
+  "organism": "Homo sapiens",
+  "study_design": {
+    "design_rows": 9,
+    "analysed_runs": 9,
+    "selected_runs": 6,
+    "factor_column": "Factor Value[phenotype]",
+    "groups": {
+      "control": 3,
+      "TGF-beta-1 induced myofibroblast differentiation": 3
+    },
+    "subset": {},
+    "batch_column": null,
+    "task": "Fibroblast differentiation versus control contrast"
+  },
+  "available_layers": [
+    "Expression Atlas raw gene counts",
+    "experiment design"
+  ],
+  "estimated_raw_count_bytes": null,
+  "verified_resources": [
+    {
+      "role": "experiment_design",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-3101/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 2498,
+      "sha256": "f973dab0c38aa3a2a392a872616f43ed93437c26e338b3d2ef716e8c798abb92"
+    },
+    {
+      "role": "raw_counts",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-3101/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": null,
+      "sha256": null
+    }
+  ],
+  "rights": {
+    "status": "AMBER",
+    "redistribution": "Pending record-specific review; keep raw and transformed data outside the release.",
+    "checked": "2026-11-27"
+  },
+  "review_status": "screened",
+  "release_eligible": false,
+  "remaining_work": [
+    "Verify publication and study-specific redistribution terms.",
+    "Verify count-file columns, exact sample alignment, library details and annotation release.",
+    "Run the predeclared reduction and independent reference method checks.",
+    "Prepare dataset card, attribution and a clean-environment trial before release."
+  ]
+}

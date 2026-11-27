@@ -1,5 +1,18 @@
 # v14 RNA-seq source screening
 
+## Focused four-study pool (27 November 2026)
+
+The v14 pool now prioritizes four non-infection studies with distinct experimental designs. These are intake records, not released benchmark objects. The comparison, sample subset, candidate-size grid, seed and diagnostic thresholds are frozen in the linked source configurations before count-file processing. The official experiment designs were checked for analysed runs and group sizes. Raw-count alignment, study-specific redistribution rights, reference annotation, DESeq2 confirmation and independent use remain open.
+
+| Study | Locked comparison | Selected runs | Design SHA-256 | Intake and configuration |
+| --- | --- | ---: | --- | --- |
+| E-MTAB-7925 | Cyclic strain versus none at 24 hours, blocked by donor | 12 (6 + 6) | `bc8a148b78f7a798dd4c26030f052d17d70144ef1c385eefadb902fdac058f9f` | `curation/intake/e-mtab-7925.json`, `workflows/e-mtab-7925-source.json` |
+| E-MTAB-9639 | FOXK1/2 knockdown versus scrambled siRNA in neuronal stem cells | 6 (3 + 3) | `0aba876967f3e579dac73936897bcd20ecee2b542599e998575138e11a9d0a00` | `curation/intake/e-mtab-9639.json`, `workflows/e-mtab-9639-source.json` |
+| E-MTAB-10374 | Drought versus control within the ICE163 accession | 6 (3 + 3) | `4fbb4a5eadf5aadb611463afd1900c9b7b0244f4247cf01500343577ca292f8e` | `curation/intake/e-mtab-10374.json`, `workflows/e-mtab-10374-source.json` |
+| E-MTAB-3101 | Myofibroblast differentiation versus control | 6 (3 + 3) | `f973dab0c38aa3a2a392a872616f43ed93437c26e338b3d2ef716e8c798abb92` | `curation/intake/e-mtab-3101.json`, `workflows/e-mtab-3101-source.json` |
+
+The earlier screen below remains as historical intake evidence. It is not the four-study release pool.
+
 Checked on 15 November 2026. These are **intake candidates**, not released benchmark objects. The Expression Atlas experiment pages identify four distinct biological designs; the official raw-count and experiment-design download endpoints responded successfully to a metadata request. No candidate has passed the full rights, annotation, contrast, DESeq2, pocket-fidelity or release checks yet.
 
 | Candidate | Why it broadens the collection | Design rows | Design SHA-256 | Source |
