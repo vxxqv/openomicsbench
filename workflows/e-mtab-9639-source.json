@@ -6,7 +6,7 @@
     "siRNA knockdown of FOXK1/2"
   ],
   "subset": {
-    "Factor Value[cell type]": "neuronal stem cell"
+    "Factor Value[cell type]": ["neuronal stem cell"]
   },
   "seed": 20261127,
   "effect_anchors": 100,

@@ -7,7 +7,7 @@
   ],
   "batch_column": "Sample Characteristic[individual]",
   "subset": {
-    "Factor Value[time]": "24 hour"
+    "Factor Value[time]": ["24 hour"]
   },
   "seed": 20261127,
   "effect_anchors": 100,

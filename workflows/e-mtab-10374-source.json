@@ -6,7 +6,7 @@
     "drought environment"
   ],
   "subset": {
-    "Factor Value[ecotype]": "ICE163"
+    "Factor Value[ecotype]": ["ICE163"]
   },
   "seed": 20261127,
   "effect_anchors": 100,
