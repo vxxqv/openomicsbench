@@ -48,9 +48,49 @@
     "packaged_collection": true,
     "limitation": "The release preparer ran this fresh-environment trial from the candidate wheel; no independent tester is claimed. The user asked the preparer to complete work that did not require their involvement."
   },
-  "release_commit": null,
-  "version_doi": null,
-  "post_upload_verification": null,
+  "release_commit": "3a712c01d7e1d579df20c1e5228724c7032dd01e",
+  "version_doi": "10.5281/zenodo.24597524",
+  "post_upload_verification": {
+    "status": "pass",
+    "version_doi": "10.5281/zenodo.24597524",
+    "record_url": "https://zenodo.org/records/24597524",
+    "verified_at": "2026-11-27T17:23:24Z",
+    "git_commit": "3a712c01d7e1d579df20c1e5228724c7032dd01e",
+    "git_tag": "v14.0.0",
+    "archive_content_match": true,
+    "comparison_scope": "All 494 extracted paths match byte-for-byte after removing each ZIP archive's top-level directory; ZIP container bytes differ.",
+    "archived_files": 494,
+    "inventory_files_verified": 493,
+    "missing_files": [],
+    "extra_files": [],
+    "changed_files": [],
+    "zenodo_sha256": "764f5874c4222254534db2f1439ea92ae016f20ed9964007678cb46ea6835b43",
+    "github_sha256": "fc5d882d06b895a4c940c54dc7af4b9b017006d2cb48890904dbea6f42625588",
+    "zenodo_md5": "83e202cd0731586fe6a1693aeb1492e4",
+    "github_md5": "098e9738647aebce3076a60868be36bc"
+  },
   "build_reproducibility": null,
-  "pypi_verification": null
+  "pypi_verification": {
+    "status": "pass",
+    "version": "14.0.0",
+    "url": "https://pypi.org/project/openomicsbench/14.0.0/",
+    "files": [
+      {
+        "filename": "openomicsbench-14.0.0-py3-none-any.whl",
+        "bytes": 14262095,
+        "sha256": "852eeb4f1a9e7278a3329d20ec29e9599b4f2e206d668bec88e8edb93c67275a",
+        "file_set_match": true,
+        "normalized_content_match": true,
+        "comparison_scope": "All 290 package payload members match the clean-room tested wheel; generated dist-info metadata is excluded."
+      },
+      {
+        "filename": "openomicsbench-14.0.0.tar.gz",
+        "bytes": 14090714,
+        "sha256": "acb646c2636f9fa0dcaeb2b012f65459bceb0b8cb9db377d82fd6c48fa29d81c",
+        "file_set_match": true,
+        "normalized_content_match": true,
+        "comparison_scope": "All 322 source payload members match a fresh build of the tagged source; generated PKG-INFO, setup.cfg and egg-info metadata are excluded."
+      }
+    ]
+  }
 }
