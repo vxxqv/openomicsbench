@@ -18,7 +18,7 @@ class RNASeqAccessTests(unittest.TestCase):
 
     def test_all_biological_objects_have_aligned_tiers(self):
         records = self.collection.list(assay="bulk_rna_seq", status="validated", kind="real")
-        self.assertEqual(len(records), 12)
+        self.assertEqual(len(records), 16)
         for record in records:
             benchmark = self.collection.get(record["id"])
             for tier in ("pocket", "full"):

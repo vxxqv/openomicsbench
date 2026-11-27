@@ -1,0 +1,218 @@
+{
+  "schema_version": "1.0",
+  "id": "rnaseq-015",
+  "title": "FOXK1/2 knockdown in neuronal stem cells",
+  "release": "14.0.0",
+  "assay": "bulk_rna_seq",
+  "kind": "real",
+  "status": "validated",
+  "archetype": "cell-type-stratified RNA interference",
+  "organism": "Homo sapiens",
+  "taxon_id": 9606,
+  "source": {
+    "repository": "Expression Atlas and BioStudies",
+    "accession": "E-MTAB-9639",
+    "url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-9639",
+    "citation": "Ji et al. The forkhead transcription factor FOXK2 premarks lineage-specific genes in human embryonic stem cells for activation during differentiation. Nucleic Acids Research. DOI 10.1093/nar/gkaa1281.",
+    "retrieved": "2026-11-27",
+    "sha256": "bf01063f0f79587f06dbc6a02255ae5db28a8532d6da3e62123f45433619cdb3"
+  },
+  "rights": {
+    "status": "GREEN",
+    "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "evidence": "Expression Atlas applies CC BY 4.0 to copyrightable website material and requires provider citation; rights.json records the licence and attribution.",
+    "checked": "2026-11-27"
+  },
+  "reference": {
+    "genome": "Ensembl release 95 GRCh38; https://ftp.ensembl.org/pub/release-95/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz; official checksum 02415 860559 Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz",
+    "annotation": "https://ftp.ensembl.org/pub/release-95/gtf/homo_sapiens/Homo_sapiens.GRCh38.95.gtf.gz; SHA-256 b54faa39220ab12d62dfa9c6a529668fc56bc926bba64bb2faaa1003319b7341",
+    "namespace": "Ensembl gene identifiers",
+    "compatibility": "verified"
+  },
+  "samples": [
+    {
+      "sample_id": "ERR4659015",
+      "condition": "siRNA knockdown of FOXK1/2",
+      "replicate": 1,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR4659016",
+      "condition": "siRNA knockdown of FOXK1/2",
+      "replicate": 2,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR4659017",
+      "condition": "siRNA knockdown of FOXK1/2",
+      "replicate": 3,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR4659018",
+      "condition": "scrambled siRNA",
+      "replicate": 1,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR4659019",
+      "condition": "scrambled siRNA",
+      "replicate": 2,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR4659020",
+      "condition": "scrambled siRNA",
+      "replicate": 3,
+      "batch": "not_reported",
+      "strandedness": "unknown"
+    }
+  ],
+  "derivation": {
+    "workflow": "workflows/atlas_diagnostic.py",
+    "commit": "fd3697970fe986214db4b44e1e2d605519a9b7aa",
+    "seed": 20261127,
+    "algorithm": "contrast-anchored deterministic feature selection",
+    "parameters": {
+      "candidate_sizes": [
+        500,
+        1000,
+        2000,
+        4000,
+        8000,
+        12000,
+        20000
+      ],
+      "selected_features": 1000,
+      "top_k": 50,
+      "factor_column": "Factor Value[RNA interference]",
+      "batch_column": "none",
+      "condition_values": "[\"scrambled siRNA\", \"siRNA knockdown of FOXK1/2\"]",
+      "subset": "{\"Factor Value[cell type]\": [\"neuronal stem cell\"]}"
+    },
+    "versions": {
+      "python": "3.14.0",
+      "numpy": "2.5.0",
+      "r": "4.6.1",
+      "deseq2": "1.54.0"
+    }
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "tier": "metadata",
+      "role": "documentation",
+      "media_type": "text/markdown",
+      "bytes": 1696,
+      "sha256": "9ec23746cc8d46ffa64f2e5b2fd6b4f36769aae878d9d2e4cc48052512ad4f80"
+    },
+    {
+      "path": "attribution.json",
+      "tier": "metadata",
+      "role": "documentation",
+      "media_type": "application/json",
+      "bytes": 822,
+      "sha256": "093b625d5397e2ab95504f655078fbcfdb0379c443e0417389ba614cccd50be2"
+    },
+    {
+      "path": "expected/deseq2.json",
+      "tier": "expected",
+      "role": "provenance",
+      "media_type": "application/json",
+      "bytes": 2935,
+      "sha256": "b6a78311304b551ddbc84650ddbed08eb53d75c480e93bd36b68321de24ccfaa"
+    },
+    {
+      "path": "expected/source-counts.tsv",
+      "tier": "expected",
+      "role": "baseline",
+      "media_type": "text/tab-separated-values",
+      "bytes": 1806383,
+      "sha256": "4695ab4f80e5eea637d9ac826529e370b9344bda54257bc4569e0eee75d6a0de"
+    },
+    {
+      "path": "expected/validation.json",
+      "tier": "expected",
+      "role": "metrics",
+      "media_type": "application/json",
+      "bytes": 629,
+      "sha256": "477eead323d89fe91e693de2e44bb599c8a60e005a185d3384847bf4f00b7a63"
+    },
+    {
+      "path": "pocket/counts.tsv",
+      "tier": "pocket",
+      "role": "raw_counts",
+      "media_type": "text/tab-separated-values",
+      "bytes": 29572,
+      "sha256": "440d0c2c244af42cf55320f79b42a9a41a98d66d684c9bafb8eddf21c0ddca1b"
+    },
+    {
+      "path": "provenance/transform.json",
+      "tier": "metadata",
+      "role": "provenance",
+      "media_type": "application/json",
+      "bytes": 2526,
+      "sha256": "0af72bd0290eb44ca3d82c0c3123e9c5e492dd3dd441f925fea2012419122d25"
+    },
+    {
+      "path": "reference.json",
+      "tier": "metadata",
+      "role": "reference",
+      "media_type": "application/json",
+      "bytes": 1531,
+      "sha256": "6df5374ceccc76a73a706356aa547094d0604777cb6507ed2a036c91e6a8ad51"
+    },
+    {
+      "path": "rights.json",
+      "tier": "metadata",
+      "role": "license",
+      "media_type": "application/json",
+      "bytes": 352,
+      "sha256": "00d37a41e851ef2b384cefa33b32c02d64b580451bdb1b09d848896769aa3393"
+    },
+    {
+      "path": "samples.json",
+      "tier": "metadata",
+      "role": "samples",
+      "media_type": "application/json",
+      "bytes": 966,
+      "sha256": "e8e1f7caddabba20c45993fbb4ff898bd714ebd4d2145067bee50cba1989ff8e"
+    }
+  ],
+  "validation": {
+    "profile": "expected/validation.json",
+    "baseline_version": "deseq2-1.54.0-and-median-ratio-envelope-v1",
+    "metrics": [
+      {
+        "name": "spearman_logfc",
+        "minimum": 0.9,
+        "definition": "Average-tie rank correlation of median-ratio-normalized contrast effects on the shared selected feature universe; higher is better."
+      },
+      {
+        "name": "top_k_jaccard",
+        "minimum": 0.6,
+        "definition": "Jaccard overlap of the top 50 absolute contrast effects on the shared selected feature universe, with ties settled by gene ID; higher is better."
+      },
+      {
+        "name": "distance_correlation",
+        "minimum": 0.9,
+        "definition": "Pearson correlation of sample-pair distances on log2 median-ratio-normalized counts for the full and pocket matrices; higher is better."
+      },
+      {
+        "name": "sign_concordance",
+        "minimum": 0.9,
+        "definition": "Fraction of matching contrast-effect signs where the absolute full-source effect is at least 0.1; higher is better."
+      }
+    ]
+  },
+  "limitations": [
+    "The object starts from an archive count matrix and does not revalidate read alignment or quantification.",
+    "The pocket is intended for workflow testing and method validation, not as a substitute for the full study.",
+    "Strandedness is recorded as unknown because it is not required for count-matrix validation."
+  ]
+}

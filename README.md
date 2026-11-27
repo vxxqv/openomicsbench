@@ -28,7 +28,7 @@ The JSON report from this run returns `pass`: 8,000 genes, 28 samples in 14 pair
 
 ![RNA-seq input check for rnaseq-005: 8,000 genes, 28 samples in 14 pairs, aligned sample IDs and a passing design check](https://raw.githubusercontent.com/vxxqv/openomicsbench/main/figures/rnaseq-005-example.png)
 
-The pack contains `counts.tsv`, `samples.tsv`, `contrasts.tsv` and `pack.json`. Adjacent non-tumour tissue is not a healthy control, and the pack does not include expected results. Omit `--id` to export all 12 biological RNA-seq objects, or add `--tier full` to export complete matrices. See [RNA-seq input packs](docs/rnaseq-packs.md) for the full file contract.
+The pack contains `counts.tsv`, `samples.tsv`, `contrasts.tsv` and `pack.json`. Adjacent non-tumour tissue is not a healthy control, and the pack does not include expected results. Omit `--id` to export all 16 biological RNA-seq objects, or add `--tier full` to export complete matrices. See [RNA-seq input packs](docs/rnaseq-packs.md) for the full file contract.
 
 The package runs offline after installation. Sequence files stay on the local computer. The built-in tools cover inspection and lightweight preprocessing; they do not claim to replace aligners, variant callers, taxonomic classifiers or assay-specific statistical workflows.
 

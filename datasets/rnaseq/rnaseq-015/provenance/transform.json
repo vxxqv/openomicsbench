@@ -1,0 +1,72 @@
+{
+  "dataset_id": "rnaseq-015",
+  "object_key": "E-MTAB-9639",
+  "algorithm": "contrast-anchored deterministic feature selection",
+  "seed": 20261127,
+  "source_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-9639-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-9639/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 7379330,
+      "sha256": "bf01063f0f79587f06dbc6a02255ae5db28a8532d6da3e62123f45433619cdb3"
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-9639-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-9639/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 10184,
+      "sha256": "0aba876967f3e579dac73936897bcd20ecee2b542599e998575138e11a9d0a00"
+    }
+  ],
+  "selection": {
+    "config": "workflows/e-mtab-9639-source.json",
+    "config_sha256": "264cf59a53730954e58dbf1f6149a5b7f85d43ffee230626e68257b07868c27e",
+    "config_commit": "f21cb3703f054322df047814843df32396024ce1",
+    "workflow": "workflows/atlas_diagnostic.py",
+    "workflow_sha256": "1e065fb87b06b029505797eefe97580cb1a2dde6b1c32724bbbe46299b7343e4",
+    "workflow_commit": "fd3697970fe986214db4b44e1e2d605519a9b7aa",
+    "candidate_sizes": [
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      12000,
+      20000
+    ],
+    "selected_features": 1000,
+    "factor_column": "Factor Value[RNA interference]",
+    "batch_column": null,
+    "condition_values": [
+      "scrambled siRNA",
+      "siRNA knockdown of FOXK1/2"
+    ],
+    "subset": {
+      "Factor Value[cell type]": [
+        "neuronal stem cell"
+      ]
+    }
+  },
+  "assembly": {
+    "workflow": "workflows/build_collection.py",
+    "workflow_sha256": "a11e24c1a56dfe41a9cafe183b042e130903f42c543c7802decfe55b42b23cc4",
+    "workflow_commit": "8f5815cb5775433cac562bdda36458c78c8042b0"
+  },
+  "diagnostic": {
+    "path": "evidence/e-mtab-9639-diagnostic.json",
+    "sha256": "e54bee6037bfe702d2668c250865daa558a2b232251764d52640910efe651e49"
+  },
+  "deseq2": {
+    "path": "evidence/e-mtab-9639-deseq2.json",
+    "sha256": "b6a78311304b551ddbc84650ddbed08eb53d75c480e93bd36b68321de24ccfaa"
+  },
+  "reference": {
+    "path": "evidence/v14-reference-verification.json",
+    "sha256": "18ad63dd5a2c6bad7b5daf756a8ce0e70bbc6714ab097118fb5d6a8e589a8c84"
+  },
+  "intake": {
+    "path": "curation/intake/e-mtab-9639.json",
+    "sha256": "f3a69369b73e6fa4fb17d3a6fb70f8a07bf8590a4764161c6e5071528ccf1513"
+  }
+}

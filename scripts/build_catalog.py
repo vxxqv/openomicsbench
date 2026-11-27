@@ -192,7 +192,10 @@ def write_catalog(rows: list[dict], sequences: list[dict], single_cell: list[dic
         writer.writerows(intervals)
 
 
-def write_figure(rows: list[dict]) -> None:
+def write_figure(rows: list[dict], *, output: Path = ROOT / "figures/v1-fidelity.svg",
+                 title: str = "DESeq2 fidelity of the v1 biological collection",
+                 subtitle: str = "Twelve pocket objects compared with their full source matrices; dots show the recorded metric value.",
+                 note: str = "All metrics pass their predeclared minimum. Values come from each object’s DESeq2 1.50.2 evidence record.") -> None:
     width, height = 1200, 930
     panel_width, panel_height = 570, 370
     x_min, x_max = 0.55, 1.0
@@ -200,8 +203,8 @@ def write_figure(rows: list[dict]) -> None:
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
         '<rect width="100%" height="100%" fill="white"/>',
         '<style>text{fill:#111;font-family:Arial,sans-serif}.title{font-size:26px;font-weight:700}.subtitle{font-size:15px;fill:#444}.panel{font-size:17px;font-weight:700}.label{font-size:12px}.tick{font-size:11px;fill:#555}.value{font-size:10px;font-family:Consolas,monospace}.note{font-size:12px;fill:#444}</style>',
-        '<text x="52" y="42" class="title">DESeq2 fidelity of the v1 biological collection</text>',
-        '<text x="52" y="67" class="subtitle">Twelve pocket objects compared with their full source matrices; dots show the recorded metric value.</text>',
+        f'<text x="52" y="42" class="title">{html.escape(title)}</text>',
+        f'<text x="52" y="67" class="subtitle">{html.escape(subtitle)}</text>',
     ]
     for panel_index, (metric, label) in enumerate(METRICS):
         column, row_index = panel_index % 2, panel_index // 2
@@ -237,12 +240,11 @@ def write_figure(rows: list[dict]) -> None:
             parts.append(f'<text x="{x + offset:.1f}" y="{y - 6:.1f}" text-anchor="{anchor}" class="value">{value:.3f}</text>')
     parts.extend(
         [
-            '<text x="55" y="895" class="note">All metrics pass their predeclared minimum. Values come from each object’s DESeq2 1.50.2 evidence record.</text>',
+            f'<text x="55" y="895" class="note">{html.escape(note)}</text>',
             '<text x="55" y="915" class="note">Exact values and source accessions are in catalog/collection.tsv.</text>',
             "</svg>",
         ]
     )
-    output = ROOT / "figures/v1-fidelity.svg"
     output.parent.mkdir(exist_ok=True)
     output.write_text("\n".join(parts) + "\n", encoding="utf-8", newline="\n")
 
@@ -319,7 +321,15 @@ if __name__ == "__main__":
     single_cell = collect_single_cell()
     intervals = collect_intervals()
     write_catalog(collection, sequences, single_cell, intervals)
-    write_figure(collection)
+    write_figure([row for row in collection if row["id"] in {f"rnaseq-{number:03d}" for number in range(2, 14)}])
+    if len(collection) > 12:
+        write_figure(
+            collection,
+            output=ROOT / "figures/v14-fidelity.svg",
+            title="DESeq2 fidelity of the v14 biological collection",
+            subtitle=f"{len(collection)} pocket objects compared with their full source matrices; dots show the recorded metric value.",
+            note="All metrics pass their predeclared minimum. Each dataset card records its DESeq2 version.",
+        )
     if args.preview_png:
         print(f"Preview: {write_preview(collection)}")
-    print(f"Wrote {len(collection)} biological, {len(sequences)} sequence, {len(single_cell)} single-cell and {len(intervals)} interval catalog records plus the v1 fidelity figure.")
+    print(f"Wrote {len(collection)} biological, {len(sequences)} sequence, {len(single_cell)} single-cell and {len(intervals)} interval catalog records and fidelity figures.")

@@ -1,6 +1,6 @@
 # RNA-seq input packs and result tables
 
-The 12 biological bulk RNA-seq objects have two useful scales. The default `pocket` tier is a small feature subset selected for declared preservation measures. The `full` tier contains the complete count matrix for the selected samples. Both use the same sample IDs and study design. The full tier is larger; it is not a substitute for FASTQ-level alignment or quantification tests.
+The 16 biological bulk RNA-seq objects have two useful scales. The default `pocket` tier is a small feature subset selected for declared preservation measures. The `full` tier contains the complete count matrix for the selected samples. Both use the same sample IDs and study design. The full tier is larger; it is not a substitute for FASTQ-level alignment or quantification tests.
 
 ## Make an input pack
 
@@ -10,7 +10,7 @@ omicsbench rnaseq pack full-pack --id rnaseq-002 --tier full
 omicsbench rnaseq verify-pack quick-pack
 ```
 
-Omit `--id` to include all 12 biological objects. The command creates a new directory and refuses to replace an existing one. Each study directory contains:
+Omit `--id` to include all 16 biological objects. The command creates a new directory and refuses to replace an existing one. Each study directory contains:
 
 | File | Contents |
 | --- | --- |

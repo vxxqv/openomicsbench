@@ -1,0 +1,68 @@
+{
+  "dataset_id": "rnaseq-017",
+  "object_key": "E-MTAB-3101",
+  "algorithm": "contrast-anchored deterministic feature selection",
+  "seed": 20261127,
+  "source_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-3101-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-3101/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 2636153,
+      "sha256": "fa13a28680e35545b1068f0249cb557d8c0336276885fada010fe111caf49f60"
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-3101-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-3101/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 2498,
+      "sha256": "f973dab0c38aa3a2a392a872616f43ed93437c26e338b3d2ef716e8c798abb92"
+    }
+  ],
+  "selection": {
+    "config": "workflows/e-mtab-3101-source.json",
+    "config_sha256": "0bee50571bd68759cad448077c599f928e8a2b29a91d5d77e7f92e188e3ba5ed",
+    "config_commit": "ebb99d78401f5782222caf53ce001f020ae8b7d4",
+    "workflow": "workflows/atlas_diagnostic.py",
+    "workflow_sha256": "1e065fb87b06b029505797eefe97580cb1a2dde6b1c32724bbbe46299b7343e4",
+    "workflow_commit": "fd3697970fe986214db4b44e1e2d605519a9b7aa",
+    "candidate_sizes": [
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      12000,
+      20000
+    ],
+    "selected_features": 1000,
+    "factor_column": "Factor Value[phenotype]",
+    "batch_column": null,
+    "condition_values": [
+      "control",
+      "TGF-beta-1 induced myofibroblast differentiation"
+    ],
+    "subset": {}
+  },
+  "assembly": {
+    "workflow": "workflows/build_collection.py",
+    "workflow_sha256": "a11e24c1a56dfe41a9cafe183b042e130903f42c543c7802decfe55b42b23cc4",
+    "workflow_commit": "8f5815cb5775433cac562bdda36458c78c8042b0"
+  },
+  "diagnostic": {
+    "path": "evidence/e-mtab-3101-diagnostic.json",
+    "sha256": "031528390880e81831be02511a2f0b31bdbf9c457edd1a64535bfd7d5c59ca9a"
+  },
+  "deseq2": {
+    "path": "evidence/e-mtab-3101-deseq2.json",
+    "sha256": "a6d6582bd5bd08dfa92797c68c004a5112f197d08dbfed91e5dc3996098153e6"
+  },
+  "reference": {
+    "path": "evidence/v14-reference-verification.json",
+    "sha256": "18ad63dd5a2c6bad7b5daf756a8ce0e70bbc6714ab097118fb5d6a8e589a8c84"
+  },
+  "intake": {
+    "path": "curation/intake/e-mtab-3101.json",
+    "sha256": "3c9252db6b637ea1846a298137ecfb1c021458b2696e84ec71425c9ca1d6e769"
+  }
+}

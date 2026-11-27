@@ -1,0 +1,44 @@
+[
+  {
+    "sample_id": "ERR732908",
+    "condition": "TGF-beta-1 induced myofibroblast differentiation",
+    "replicate": 1,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR732906",
+    "condition": "control",
+    "replicate": 1,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR732907",
+    "condition": "TGF-beta-1 induced myofibroblast differentiation",
+    "replicate": 2,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR732901",
+    "condition": "control",
+    "replicate": 2,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR732902",
+    "condition": "TGF-beta-1 induced myofibroblast differentiation",
+    "replicate": 3,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR732904",
+    "condition": "control",
+    "replicate": 3,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "baseline_counts": "expected/source-counts.tsv",
+  "sample_ids": [
+    "ERR4659015",
+    "ERR4659016",
+    "ERR4659017",
+    "ERR4659018",
+    "ERR4659019",
+    "ERR4659020"
+  ],
+  "shapes": {
+    "pocket": [
+      1000,
+      6
+    ]
+  },
+  "top_k": 50,
+  "normalization": "median_ratio",
+  "contrast": {
+    "factor_column": "Factor Value[RNA interference]",
+    "condition_values": [
+      "scrambled siRNA",
+      "siRNA knockdown of FOXK1/2"
+    ],
+    "batch_column": null,
+    "subset": {
+      "Factor Value[cell type]": [
+        "neuronal stem cell"
+      ]
+    }
+  },
+  "deseq2_evidence": "expected/deseq2.json"
+}

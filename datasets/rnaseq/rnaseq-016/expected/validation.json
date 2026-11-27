@@ -1,0 +1,33 @@
+{
+  "baseline_counts": "expected/source-counts.tsv",
+  "sample_ids": [
+    "ERR5732369",
+    "ERR5732370",
+    "ERR5732373",
+    "ERR5732374",
+    "ERR5732377",
+    "ERR5732378"
+  ],
+  "shapes": {
+    "pocket": [
+      2000,
+      6
+    ]
+  },
+  "top_k": 50,
+  "normalization": "median_ratio",
+  "contrast": {
+    "factor_column": "Factor Value[environmental stress]",
+    "condition_values": [
+      "none",
+      "drought environment"
+    ],
+    "batch_column": null,
+    "subset": {
+      "Factor Value[ecotype]": [
+        "ICE163"
+      ]
+    }
+  },
+  "deseq2_evidence": "expected/deseq2.json"
+}

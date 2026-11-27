@@ -1,0 +1,260 @@
+{
+  "schema_version": "1.0",
+  "id": "rnaseq-014",
+  "title": "Paired mesenchymal stem-cell strain response",
+  "release": "14.0.0",
+  "assay": "bulk_rna_seq",
+  "kind": "real",
+  "status": "validated",
+  "archetype": "paired donor mechanical strain",
+  "organism": "Homo sapiens",
+  "taxon_id": 9606,
+  "source": {
+    "repository": "Expression Atlas and BioStudies",
+    "accession": "E-MTAB-7925",
+    "url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-7925",
+    "citation": "RNA-seq of human mesenchymal stem cells from six donors with and without cyclic tensile strain. Expression Atlas E-MTAB-7925.",
+    "retrieved": "2026-11-27",
+    "sha256": "7664bfc63333a7b997894d50a1343a4384dabc3067191616e0515de8ab82b09c"
+  },
+  "rights": {
+    "status": "GREEN",
+    "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "evidence": "Expression Atlas applies CC BY 4.0 to copyrightable website material and requires provider citation; rights.json records the licence and attribution.",
+    "checked": "2026-11-27"
+  },
+  "reference": {
+    "genome": "Ensembl release 107 GRCh38; https://ftp.ensembl.org/pub/release-107/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz; official checksum 02415 860559 Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz",
+    "annotation": "https://ftp.ensembl.org/pub/release-107/gtf/homo_sapiens/Homo_sapiens.GRCh38.107.gtf.gz; SHA-256 9994f3bc8792c63803e3d91a1a8d2e613503fc59e278bcb156e55d0a7c3fb7b1",
+    "namespace": "Ensembl gene identifiers",
+    "compatibility": "verified"
+  },
+  "samples": [
+    {
+      "sample_id": "ERR3301313",
+      "condition": "none",
+      "replicate": 1,
+      "batch": "7",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR3301315",
+      "condition": "cyclic tensile strain",
+      "replicate": 1,
+      "batch": "7",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR3301317",
+      "condition": "none",
+      "replicate": 2,
+      "batch": "14",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR3301319",
+      "condition": "cyclic tensile strain",
+      "replicate": 2,
+      "batch": "14",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR3301321",
+      "condition": "none",
+      "replicate": 3,
+      "batch": "34",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR3301323",
+      "condition": "cyclic tensile strain",
+      "replicate": 3,
+      "batch": "34",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR3301325",
+      "condition": "none",
+      "replicate": 4,
+      "batch": "45",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR3301327",
+      "condition": "cyclic tensile strain",
+      "replicate": 4,
+      "batch": "45",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR3301329",
+      "condition": "none",
+      "replicate": 5,
+      "batch": "54",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR3301331",
+      "condition": "cyclic tensile strain",
+      "replicate": 5,
+      "batch": "54",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR3301333",
+      "condition": "none",
+      "replicate": 6,
+      "batch": "74",
+      "strandedness": "unknown"
+    },
+    {
+      "sample_id": "ERR3301335",
+      "condition": "cyclic tensile strain",
+      "replicate": 6,
+      "batch": "74",
+      "strandedness": "unknown"
+    }
+  ],
+  "derivation": {
+    "workflow": "workflows/atlas_diagnostic.py",
+    "commit": "fd3697970fe986214db4b44e1e2d605519a9b7aa",
+    "seed": 20261127,
+    "algorithm": "contrast-anchored deterministic feature selection",
+    "parameters": {
+      "candidate_sizes": [
+        500,
+        1000,
+        2000,
+        4000,
+        8000,
+        12000,
+        20000
+      ],
+      "selected_features": 8000,
+      "top_k": 50,
+      "factor_column": "Factor Value[stimulus]",
+      "batch_column": "Sample Characteristic[individual]",
+      "condition_values": "[\"none\", \"cyclic tensile strain\"]",
+      "subset": "{\"Factor Value[time]\": [\"24 hour\"]}"
+    },
+    "versions": {
+      "python": "3.14.0",
+      "numpy": "2.5.0",
+      "r": "4.6.1",
+      "deseq2": "1.54.0"
+    }
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "tier": "metadata",
+      "role": "documentation",
+      "media_type": "text/markdown",
+      "bytes": 1612,
+      "sha256": "6c4f825959429a7f96d7f5c60f907171c4e3ee0a0842e869f489f2250a66f57a"
+    },
+    {
+      "path": "attribution.json",
+      "tier": "metadata",
+      "role": "documentation",
+      "media_type": "application/json",
+      "bytes": 747,
+      "sha256": "48ba94e20e13cf308f311494642a42a113131e6434af58be39d916e4cb4802a7"
+    },
+    {
+      "path": "expected/deseq2.json",
+      "tier": "expected",
+      "role": "provenance",
+      "media_type": "application/json",
+      "bytes": 2938,
+      "sha256": "5c8c317c06611f81bae956b751418ac72e20cc96b70412fa62e23c6d6789cdb0"
+    },
+    {
+      "path": "expected/source-counts.tsv",
+      "tier": "expected",
+      "role": "baseline",
+      "media_type": "text/tab-separated-values",
+      "bytes": 2879656,
+      "sha256": "005bcf4db39efcdcb9b014d9fff712917ec3db76a7f09362c2089e8bae90a950"
+    },
+    {
+      "path": "expected/validation.json",
+      "tier": "expected",
+      "role": "metrics",
+      "media_type": "application/json",
+      "bytes": 729,
+      "sha256": "8b8dafd60ecb197c2b6128ddecd8dd62566ab9b7bd1b2fdf22aa3d88d60c165b"
+    },
+    {
+      "path": "pocket/counts.tsv",
+      "tier": "pocket",
+      "role": "raw_counts",
+      "media_type": "text/tab-separated-values",
+      "bytes": 346631,
+      "sha256": "620b97f8845758b102059afbe907fa0bfa3619c537a4a0cacbdbd4591ef0e6a1"
+    },
+    {
+      "path": "provenance/transform.json",
+      "tier": "metadata",
+      "role": "provenance",
+      "media_type": "application/json",
+      "bytes": 2516,
+      "sha256": "4ecc7d3d726c073ff7e4367559ab84f83caa7bc82fa027b9eaf2d1a9515eda6a"
+    },
+    {
+      "path": "reference.json",
+      "tier": "metadata",
+      "role": "reference",
+      "media_type": "application/json",
+      "bytes": 1537,
+      "sha256": "ed6b6fb1de761824b207393b240e4e6fd8f36ae8891be5c38f7d81c615409540"
+    },
+    {
+      "path": "rights.json",
+      "tier": "metadata",
+      "role": "license",
+      "media_type": "application/json",
+      "bytes": 352,
+      "sha256": "00d37a41e851ef2b384cefa33b32c02d64b580451bdb1b09d848896769aa3393"
+    },
+    {
+      "path": "samples.json",
+      "tier": "metadata",
+      "role": "samples",
+      "media_type": "application/json",
+      "bytes": 1711,
+      "sha256": "480cd30d4ad257184e735347cb026831f2f52ee69a92b1cb2ea750ff9eea711d"
+    }
+  ],
+  "validation": {
+    "profile": "expected/validation.json",
+    "baseline_version": "deseq2-1.54.0-and-median-ratio-envelope-v1",
+    "metrics": [
+      {
+        "name": "spearman_logfc",
+        "minimum": 0.9,
+        "definition": "Average-tie rank correlation of median-ratio-normalized contrast effects on the shared selected feature universe; higher is better."
+      },
+      {
+        "name": "top_k_jaccard",
+        "minimum": 0.6,
+        "definition": "Jaccard overlap of the top 50 absolute contrast effects on the shared selected feature universe, with ties settled by gene ID; higher is better."
+      },
+      {
+        "name": "distance_correlation",
+        "minimum": 0.9,
+        "definition": "Pearson correlation of sample-pair distances on log2 median-ratio-normalized counts for the full and pocket matrices; higher is better."
+      },
+      {
+        "name": "sign_concordance",
+        "minimum": 0.9,
+        "definition": "Fraction of matching contrast-effect signs where the absolute full-source effect is at least 0.1; higher is better."
+      }
+    ]
+  },
+  "limitations": [
+    "The object starts from an archive count matrix and does not revalidate read alignment or quantification.",
+    "The pocket is intended for workflow testing and method validation, not as a substitute for the full study.",
+    "Strandedness is recorded as unknown because it is not required for count-matrix validation."
+  ]
+}

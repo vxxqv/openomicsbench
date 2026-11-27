@@ -76,6 +76,7 @@ try {
       .filter(Boolean).join(" ").toLocaleLowerCase()
   })));
   if (records.length === 0) throw new Error("Empty catalog");
+  document.querySelector("#benchmark-count").textContent = String(records.length);
   showRecords();
 } catch {
   status.textContent = "The catalog is unavailable right now. Browse all datasets on GitHub.";

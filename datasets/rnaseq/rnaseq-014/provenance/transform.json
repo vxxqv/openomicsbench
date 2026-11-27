@@ -1,0 +1,72 @@
+{
+  "dataset_id": "rnaseq-014",
+  "object_key": "E-MTAB-7925",
+  "algorithm": "contrast-anchored deterministic feature selection",
+  "seed": 20261127,
+  "source_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-7925-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-7925/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 5122606,
+      "sha256": "7664bfc63333a7b997894d50a1343a4384dabc3067191616e0515de8ab82b09c"
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-7925-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-7925/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 9103,
+      "sha256": "bc8a148b78f7a798dd4c26030f052d17d70144ef1c385eefadb902fdac058f9f"
+    }
+  ],
+  "selection": {
+    "config": "workflows/e-mtab-7925-source.json",
+    "config_sha256": "00d7c99542a934624ea106d74d30ec236e57251cfbd2285c00fe8254dae18a84",
+    "config_commit": "f21cb3703f054322df047814843df32396024ce1",
+    "workflow": "workflows/atlas_diagnostic.py",
+    "workflow_sha256": "1e065fb87b06b029505797eefe97580cb1a2dde6b1c32724bbbe46299b7343e4",
+    "workflow_commit": "fd3697970fe986214db4b44e1e2d605519a9b7aa",
+    "candidate_sizes": [
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      12000,
+      20000
+    ],
+    "selected_features": 8000,
+    "factor_column": "Factor Value[stimulus]",
+    "batch_column": "Sample Characteristic[individual]",
+    "condition_values": [
+      "none",
+      "cyclic tensile strain"
+    ],
+    "subset": {
+      "Factor Value[time]": [
+        "24 hour"
+      ]
+    }
+  },
+  "assembly": {
+    "workflow": "workflows/build_collection.py",
+    "workflow_sha256": "a11e24c1a56dfe41a9cafe183b042e130903f42c543c7802decfe55b42b23cc4",
+    "workflow_commit": "8f5815cb5775433cac562bdda36458c78c8042b0"
+  },
+  "diagnostic": {
+    "path": "evidence/e-mtab-7925-diagnostic.json",
+    "sha256": "be539d8248292bc9ad0f15cdd900f5bba081f9bc224798bd13c4464525757b47"
+  },
+  "deseq2": {
+    "path": "evidence/e-mtab-7925-deseq2.json",
+    "sha256": "5c8c317c06611f81bae956b751418ac72e20cc96b70412fa62e23c6d6789cdb0"
+  },
+  "reference": {
+    "path": "evidence/v14-reference-verification.json",
+    "sha256": "18ad63dd5a2c6bad7b5daf756a8ce0e70bbc6714ab097118fb5d6a8e589a8c84"
+  },
+  "intake": {
+    "path": "curation/intake/e-mtab-7925.json",
+    "sha256": "d53f332a0925b788c276f1d3d74c7192f98b3db5f0030863d6ae4cb313e7a635"
+  }
+}

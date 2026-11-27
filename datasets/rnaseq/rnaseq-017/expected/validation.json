@@ -1,0 +1,29 @@
+{
+  "baseline_counts": "expected/source-counts.tsv",
+  "sample_ids": [
+    "ERR732908",
+    "ERR732906",
+    "ERR732907",
+    "ERR732901",
+    "ERR732902",
+    "ERR732904"
+  ],
+  "shapes": {
+    "pocket": [
+      1000,
+      6
+    ]
+  },
+  "top_k": 50,
+  "normalization": "median_ratio",
+  "contrast": {
+    "factor_column": "Factor Value[phenotype]",
+    "condition_values": [
+      "control",
+      "TGF-beta-1 induced myofibroblast differentiation"
+    ],
+    "batch_column": null,
+    "subset": {}
+  },
+  "deseq2_evidence": "expected/deseq2.json"
+}

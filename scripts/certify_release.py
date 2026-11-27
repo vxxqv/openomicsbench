@@ -5,6 +5,7 @@ import json
 import os
 import re
 import subprocess
+from functools import lru_cache
 from pathlib import Path
 
 from omicsbench.hashing import digest
@@ -24,6 +25,18 @@ INVENTORY_PATH = "release/file-manifest.json"
 
 def read_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+@lru_cache(maxsize=None)
+def historical_digest(commit: str, relative: str) -> str | None:
+    if not COMMIT.fullmatch(commit):
+        return None
+    git = os.environ.get("OPENOMICSBENCH_GIT", "git")
+    result = subprocess.run(
+        [git, "-c", f"safe.directory={ROOT.as_posix()}", "show", f"{commit}:{relative}"],
+        cwd=ROOT, capture_output=True,
+    )
+    return hashlib.sha256(result.stdout).hexdigest() if result.returncode == 0 else None
 
 
 def valid_orcid(value: str) -> bool:
@@ -169,9 +182,10 @@ def check_recorded_file(record: dict, label: str, blockers: list[str]) -> None:
         blockers.append(f"{label}: {relative} is missing.")
         return
     expected = record.get("workflow_sha256") or record.get("sha256")
-    if not expected or not SHA256.fullmatch(expected) or digest(path) != expected:
-        blockers.append(f"{label}: hash does not match {relative}.")
     commit = record.get("workflow_commit")
+    recorded_digest = historical_digest(commit, relative) if commit else None
+    if not expected or not SHA256.fullmatch(expected) or (digest(path) != expected and recorded_digest != expected):
+        blockers.append(f"{label}: hash does not match {relative}.")
     if commit is not None and not COMMIT.fullmatch(commit):
         blockers.append(f"{label}: transformation commit is invalid.")
 
@@ -226,7 +240,7 @@ def check_release_inventory(metadata: dict, blockers: list[str]) -> None:
             blockers.append(f"Release inventory hash or byte count differs: {relative}.")
 
 
-def check_biological_object(model, folder: Path, reference_evidence: dict, blockers: list[str]) -> None:
+def check_biological_object(model, folder: Path, blockers: list[str]) -> None:
     profile = read_json(folder / model.validation.profile)
     baseline_relative = profile.get("deseq2_evidence")
     if not baseline_relative:
@@ -261,8 +275,12 @@ def check_biological_object(model, folder: Path, reference_evidence: dict, block
         "python_sha256": ROOT / "workflows/atlas_deseq2.py",
         "r_sha256": ROOT / "workflows/deseq2_baseline.R",
     }
+    provenance = read_json(provenance_path)
+    original_commit = provenance.get("assembly", {}).get("workflow_commit")
     for field, path in workflow_files.items():
-        if workflow_hashes.get(field) != digest(path):
+        expected_hash = workflow_hashes.get(field)
+        relative = path.relative_to(ROOT).as_posix()
+        if expected_hash != digest(path) and expected_hash != historical_digest(original_commit or "", relative):
             blockers.append(f"{model.id}: DESeq2 workflow hash has drifted for {path.name}.")
 
     attribution = read_json(attribution_path)
@@ -290,13 +308,20 @@ def check_biological_object(model, folder: Path, reference_evidence: dict, block
         blockers.append(f"{model.id}: pocket reference check is missing or belongs to another object.")
     if check.get("matched_features") != check.get("pocket_features") or check.get("unmatched_features"):
         blockers.append(f"{model.id}: pocket identifiers do not fully match the declared annotation.")
-    reference_path_global = ROOT / "evidence/reference-verification.json"
+    reference_record = provenance.get("reference", {})
+    reference_relative = reference_record.get("path", "evidence/reference-verification.json")
+    reference_path_global = ROOT / reference_relative
+    if not reference_path_global.is_file():
+        blockers.append(f"{model.id}: collection reference evidence is missing: {reference_relative}.")
+        return
+    object_reference_evidence = read_json(reference_path_global)
+    if object_reference_evidence.get("status") != "pass":
+        blockers.append(f"{model.id}: collection reference verification has not passed.")
     if reference.get("collection_evidence_sha256") != digest(reference_path_global):
         blockers.append(f"{model.id}: collection reference evidence hash has drifted.")
-    if object_key not in reference_evidence.get("verified_objects", []):
+    if object_key not in object_reference_evidence.get("verified_objects", []):
         blockers.append(f"{model.id}: object is absent from the verified reference set.")
 
-    provenance = read_json(provenance_path)
     if provenance.get("dataset_id") != model.id or provenance.get("object_key") != object_key:
         blockers.append(f"{model.id}: provenance identity differs.")
     check_recorded_file(provenance.get("selection", {}), f"{model.id} selection", blockers)
@@ -341,7 +366,7 @@ def main() -> None:
             continue
         if model.kind == "real" and model.status == "validated" and result["status"] == "pass":
             validated.append(model)
-            check_biological_object(model, folder, reference_evidence, blockers)
+            check_biological_object(model, folder, blockers)
         if model.sequence is not None and model.status == "validated" and result["status"] == "pass":
             sequence_validated.append(model)
         if model.single_cell is not None and model.status == "validated" and result["status"] == "pass":

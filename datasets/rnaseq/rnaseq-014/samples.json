@@ -1,0 +1,86 @@
+[
+  {
+    "sample_id": "ERR3301313",
+    "condition": "none",
+    "replicate": 1,
+    "batch": "7",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3301315",
+    "condition": "cyclic tensile strain",
+    "replicate": 1,
+    "batch": "7",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3301317",
+    "condition": "none",
+    "replicate": 2,
+    "batch": "14",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3301319",
+    "condition": "cyclic tensile strain",
+    "replicate": 2,
+    "batch": "14",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3301321",
+    "condition": "none",
+    "replicate": 3,
+    "batch": "34",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3301323",
+    "condition": "cyclic tensile strain",
+    "replicate": 3,
+    "batch": "34",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3301325",
+    "condition": "none",
+    "replicate": 4,
+    "batch": "45",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3301327",
+    "condition": "cyclic tensile strain",
+    "replicate": 4,
+    "batch": "45",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3301329",
+    "condition": "none",
+    "replicate": 5,
+    "batch": "54",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3301331",
+    "condition": "cyclic tensile strain",
+    "replicate": 5,
+    "batch": "54",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3301333",
+    "condition": "none",
+    "replicate": 6,
+    "batch": "74",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR3301335",
+    "condition": "cyclic tensile strain",
+    "replicate": 6,
+    "batch": "74",
+    "strandedness": "unknown"
+  }
+]

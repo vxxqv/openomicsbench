@@ -1,11 +1,11 @@
 {
   "schema_version": "4.0",
-  "release": "13.0.1",
-  "biological_objects": 12,
+  "release": "14.0.0",
+  "biological_objects": 16,
   "sequence_objects": 7,
   "single_cell_objects": 1,
   "interval_objects": 1,
-  "source_studies": 7,
+  "source_studies": 11,
   "objects": [
     {
       "id": "rnaseq-002",
@@ -322,6 +322,114 @@
         "spearman_logfc": 0.9998355672750909,
         "top_k_jaccard": 0.9607843137254902,
         "distance_correlation": 0.9223940212396747,
+        "sign_concordance": 1.0
+      },
+      "thresholds": {
+        "spearman_logfc": 0.9,
+        "top_k_jaccard": 0.6,
+        "distance_correlation": 0.9,
+        "sign_concordance": 0.9
+      }
+    },
+    {
+      "id": "rnaseq-014",
+      "title": "Paired mesenchymal stem-cell strain response",
+      "object_key": "E-MTAB-7925",
+      "source_accession": "E-MTAB-7925",
+      "organism": "Homo sapiens",
+      "taxon_id": 9606,
+      "archetype": "paired donor mechanical strain",
+      "samples": 12,
+      "pocket_features": 8000,
+      "contrast": "none versus cyclic tensile strain",
+      "reference": "Ensembl 107 GRCh38",
+      "rights": "GREEN",
+      "license": "CC-BY-4.0",
+      "metrics": {
+        "spearman_logfc": 0.9994969287561306,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.9267106971249162,
+        "sign_concordance": 0.9993053947673073
+      },
+      "thresholds": {
+        "spearman_logfc": 0.9,
+        "top_k_jaccard": 0.6,
+        "distance_correlation": 0.9,
+        "sign_concordance": 0.9
+      }
+    },
+    {
+      "id": "rnaseq-015",
+      "title": "FOXK1/2 knockdown in neuronal stem cells",
+      "object_key": "E-MTAB-9639",
+      "source_accession": "E-MTAB-9639",
+      "organism": "Homo sapiens",
+      "taxon_id": 9606,
+      "archetype": "cell-type-stratified RNA interference",
+      "samples": 6,
+      "pocket_features": 1000,
+      "contrast": "siRNA knockdown of FOXK1/2 versus scrambled siRNA",
+      "reference": "Ensembl 95 GRCh38",
+      "rights": "GREEN",
+      "license": "CC-BY-4.0",
+      "metrics": {
+        "spearman_logfc": 0.9969421117090698,
+        "top_k_jaccard": 0.8867924528301887,
+        "distance_correlation": 0.9114360071460675,
+        "sign_concordance": 0.9973262032085561
+      },
+      "thresholds": {
+        "spearman_logfc": 0.9,
+        "top_k_jaccard": 0.6,
+        "distance_correlation": 0.9,
+        "sign_concordance": 0.9
+      }
+    },
+    {
+      "id": "rnaseq-016",
+      "title": "Mild drought response in Arabidopsis ICE163",
+      "object_key": "E-MTAB-10374",
+      "source_accession": "E-MTAB-10374",
+      "organism": "Arabidopsis thaliana",
+      "taxon_id": 3702,
+      "archetype": "accession-stratified drought response",
+      "samples": 6,
+      "pocket_features": 2000,
+      "contrast": "none versus drought environment",
+      "reference": "Ensembl Genomes 53 TAIR10",
+      "rights": "GREEN",
+      "license": "CC-BY-4.0",
+      "metrics": {
+        "spearman_logfc": 0.9998619680579921,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.9526130241118034,
+        "sign_concordance": 1.0
+      },
+      "thresholds": {
+        "spearman_logfc": 0.9,
+        "top_k_jaccard": 0.6,
+        "distance_correlation": 0.9,
+        "sign_concordance": 0.9
+      }
+    },
+    {
+      "id": "rnaseq-017",
+      "title": "Myofibroblast differentiation versus control",
+      "object_key": "E-MTAB-3101",
+      "source_accession": "E-MTAB-3101",
+      "organism": "Homo sapiens",
+      "taxon_id": 9606,
+      "archetype": "three-condition fibroblast study with a locked two-condition contrast",
+      "samples": 6,
+      "pocket_features": 1000,
+      "contrast": "control versus TGF-beta-1 induced myofibroblast differentiation",
+      "reference": "Ensembl 95 GRCh38",
+      "rights": "GREEN",
+      "license": "CC-BY-4.0",
+      "metrics": {
+        "spearman_logfc": 0.9974735719592263,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.9056441163715356,
         "sign_concordance": 1.0
       },
       "thresholds": {

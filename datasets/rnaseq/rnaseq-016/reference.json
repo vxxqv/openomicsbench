@@ -1,0 +1,41 @@
+{
+  "provider": "Ensembl Genomes",
+  "release": "53",
+  "assembly": "TAIR10",
+  "genome": {
+    "url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-53/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz",
+    "bytes": 36462703,
+    "official_bsd_sum": 52039,
+    "official_blocks_1024": 35609,
+    "checksums_evidence": {
+      "url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-53/fasta/arabidopsis_thaliana/dna/CHECKSUMS",
+      "bytes": 1573,
+      "sha256": "faf9ff898440b441f551b548f43ac3fea02c7fc42a5f991dd5c08b2bf3352740",
+      "record": "52039 35609 Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz"
+    },
+    "downloaded": false
+  },
+  "annotation": {
+    "url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-53/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.53.gtf.gz",
+    "bytes": 10177951,
+    "sha256": "7376effdc7b663b5f9bea3619d8743cf7b16443b764158483e6e4d9f2271bf2d",
+    "official_bsd_sum": 19552,
+    "official_blocks_1024": 9940,
+    "checksums_evidence": {
+      "url": "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-53/gtf/arabidopsis_thaliana/CHECKSUMS",
+      "bytes": 69,
+      "sha256": "d8f1ba04e3aa04e66357e3fe2c123907490d818fdfd3bc2ba178be33b24bd29b",
+      "record": "19552  9940 Arabidopsis_thaliana.TAIR10.53.gtf.gz"
+    },
+    "gene_identifiers": 32833,
+    "gzip_test": "pass"
+  },
+  "pocket_check": {
+    "object_key": "E-MTAB-10374",
+    "pocket_features": 2000,
+    "matched_features": 2000,
+    "unmatched_features": [],
+    "status": "pass"
+  },
+  "collection_evidence_sha256": "18ad63dd5a2c6bad7b5daf756a8ce0e70bbc6714ab097118fb5d6a8e589a8c84"
+}

@@ -10,7 +10,7 @@ class ClientTests(unittest.TestCase):
     def test_collection_search_and_verified_file(self):
         collection = Collection()
         records = collection.list(assay="bulk_rna_seq", status="validated", kind="real")
-        self.assertEqual(len(records), 12)
+        self.assertEqual(len(records), 16)
         benchmark = collection.get("rnaseq-002")
         self.assertEqual(benchmark.assay, "bulk_rna_seq")
         self.assertEqual(benchmark.manifest["id"], "rnaseq-002")

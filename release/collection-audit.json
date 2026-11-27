@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
   "status": "pass",
-  "biological_objects": 12,
-  "source_studies": 7,
-  "unique_object_keys": 12,
-  "unique_titles": 12,
+  "biological_objects": 16,
+  "source_studies": 11,
+  "unique_object_keys": 16,
+  "unique_titles": 16,
   "shared_sample_sets": [
     {
       "left": "rnaseq-006",
@@ -80,6 +80,28 @@
     }
   ],
   "exact_file_reuse": [
+    {
+      "sha256": "00d37a41e851ef2b384cefa33b32c02d64b580451bdb1b09d848896769aa3393",
+      "files": [
+        {
+          "dataset_id": "rnaseq-014",
+          "path": "rights.json"
+        },
+        {
+          "dataset_id": "rnaseq-015",
+          "path": "rights.json"
+        },
+        {
+          "dataset_id": "rnaseq-016",
+          "path": "rights.json"
+        },
+        {
+          "dataset_id": "rnaseq-017",
+          "path": "rights.json"
+        }
+      ],
+      "classification": "shared provider licence record"
+    },
     {
       "sha256": "2fe15e571f4be01f3e0ee8230c97307f1ac3dbc878a0ac991d3ce70ee92b9396",
       "files": [
