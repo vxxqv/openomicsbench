@@ -17,14 +17,19 @@ from .regression import compare_reports
 from .bundle import create_bundle, verify_bundle
 from .validate import validate
 from .variants import compare_variants
+from .variant_benchmark import benchmark_variants
 from .peptides import compare_peptides
+from .peptide_assessment import assess_peptides
 from .evaluate import evaluate_matrix, evaluate_suite
 from .evidence import create_evidence_crate, verify_evidence_crate
 from .policy import evaluate_policy
 from .trends import parse_run, trend_reports
 from .results import create_result_manifest
 from .singlecell import compare_labels, summarize_matrix
+from .cell_assessment import assess_cells
+from .anndata_adapter import export_h5ad
 from .intervals import compare_intervals, summarize_intervals
+from .interval_assessment import assess_intervals
 from .taxonomy import classify_exact, compare_taxonomy
 from .demo import create_demo
 from .workspace import prepare_workspace, verify_workspace, grade_workspace
@@ -122,12 +127,23 @@ def main():
     variant_compare.add_argument("id", help="Benchmark ID with a declared variant truth set.")
     variant_compare.add_argument("results", type=Path, help="VCF or VCF.GZ call set.")
     variant_compare.add_argument("--detail-limit", type=int, default=20, help="Maximum false-positive and false-negative examples to return.")
+    variant_benchmark = variant_sub.add_parser("benchmark", help="Compare small VCF alleles within supplied benchmark BED regions.")
+    variant_benchmark.add_argument("truth", type=Path, help="Truth VCF or VCF.GZ.")
+    variant_benchmark.add_argument("calls", type=Path, help="Call VCF or VCF.GZ.")
+    variant_benchmark.add_argument("regions", type=Path, help="Benchmark regions as BED or BED.GZ.")
+    variant_benchmark.add_argument("--assembly", required=True, help="Declared call reference assembly.")
+    variant_benchmark.add_argument("--truth-assembly", required=True, help="Declared truth reference assembly.")
     peptide = sub.add_parser("peptide", help="Compare protein-peptide identifications with a bundled digest truth set.")
     peptide_sub = peptide.add_subparsers(dest="peptide_command", required=True)
     peptide_compare = peptide_sub.add_parser("compare", help="Score exact protein-peptide pairs from a TSV table.")
     peptide_compare.add_argument("id", help="Benchmark ID with a declared peptide truth set.")
     peptide_compare.add_argument("results", type=Path, help="TSV or TSV.GZ table with protein_id and peptide columns.")
     peptide_compare.add_argument("--detail-limit", type=int, default=20, help="Maximum false-positive and false-negative examples to return.")
+    peptide_assess = peptide_sub.add_parser("assess", help="Compare processed identifications across q thresholds; report quantity separately when supplied.")
+    peptide_assess.add_argument("truth", type=Path, help="Reference TSV or TSV.GZ protein-peptide table.")
+    peptide_assess.add_argument("calls", type=Path, help="Submitted TSV or TSV.GZ protein-peptide table.")
+    peptide_assess.add_argument("--mapping", type=Path, help="Optional source_id/reference_id accession map.")
+    peptide_assess.add_argument("--q", type=float, action="append", help="q-value threshold; repeat to compare several.")
     cell = sub.add_parser("cell", help="Inspect a feature-barcode matrix or score single-cell cluster labels.")
     cell_sub = cell.add_subparsers(dest="cell_command", required=True)
     cell_qc = cell_sub.add_parser("qc", help="Summarize a 10x-style Matrix Market feature-barcode matrix.")
@@ -140,6 +156,18 @@ def main():
     cell_compare.add_argument("id", help="Single-cell benchmark ID.")
     cell_compare.add_argument("results", type=Path, help="TSV, CSV, or gzip-compressed table with cell_id and label columns.")
     cell_compare.add_argument("--detail-limit", type=int, default=20)
+    cell_assess = cell_sub.add_parser("assess", help="Assess clustering, optional exact annotation and embedding neighborhoods separately.")
+    cell_assess.add_argument("id", help="Single-cell benchmark ID.")
+    cell_assess.add_argument("clusters", type=Path, help="Table with cell_id and arbitrary cluster label.")
+    cell_assess.add_argument("--annotation", type=Path, help="Optional table with cell_id and declared cell-type label.")
+    cell_assess.add_argument("--embedding", type=Path, help="Optional cell_id plus two or more numeric coordinates.")
+    cell_assess.add_argument("--neighbors", type=int, default=10, help="Embedding neighbors per cell (default: 10).")
+    cell_import = cell_sub.add_parser("export-h5ad", help="Export selected AnnData labels and embedding into auditable TSV files (optional anndata dependency).")
+    cell_import.add_argument("source", type=Path)
+    cell_import.add_argument("output", type=Path)
+    cell_import.add_argument("--label-column", required=True)
+    cell_import.add_argument("--batch-column")
+    cell_import.add_argument("--embedding-key")
     interval = sub.add_parser("interval", help="Inspect BED-family peaks or score them against bundled truth.")
     interval_sub = interval.add_subparsers(dest="interval_command", required=True)
     interval_qc = interval_sub.add_parser("qc", help="Validate and summarize a BED or narrowPeak file.")
@@ -148,6 +176,13 @@ def main():
     interval_compare = interval_sub.add_parser("compare", help="Score peaks using reciprocal interval and base-pair overlap.")
     interval_compare.add_argument("id", help="Benchmark ID with declared genomic interval truth.")
     interval_compare.add_argument("results", type=Path, help="BED, BED.GZ, narrowPeak or narrowPeak.GZ call set.")
+    interval_assess = interval_sub.add_parser("assess", help="Report peak width, optional replicate overlap, reference recovery and supplied QC/IDR.")
+    interval_assess.add_argument("peaks", type=Path)
+    interval_assess.add_argument("--replicate", type=Path)
+    interval_assess.add_argument("--reference", type=Path)
+    interval_assess.add_argument("--qc-json", type=Path)
+    interval_assess.add_argument("--idr-json", type=Path)
+    interval_assess.add_argument("--reciprocal-overlap", type=float, default=0.5)
     taxon = sub.add_parser("taxon", help="Classify against mock references or score read-level taxonomy assignments.")
     taxon_sub = taxon.add_subparsers(dest="taxon_command", required=True)
     taxon_classify = taxon_sub.add_parser("classify", help="Exact-match paired reads against project-local mock references.")
@@ -278,20 +313,39 @@ def main():
         elif args.command == "seq":
             out = run_sequence_command(args)
         elif args.command == "variant":
-            model, folder = lookup(args.root, args.id)
-            out = compare_variants(model, folder, args.results, args.detail_limit)
+            if args.variant_command == "benchmark":
+                out = benchmark_variants(args.truth, args.calls, args.regions,
+                                         assembly=args.assembly, truth_assembly=args.truth_assembly)
+            else:
+                model, folder = lookup(args.root, args.id)
+                out = compare_variants(model, folder, args.results, args.detail_limit)
         elif args.command == "peptide":
-            model, folder = lookup(args.root, args.id)
-            out = compare_peptides(model, folder, args.results, args.detail_limit)
+            if args.peptide_command == "assess":
+                out = assess_peptides(args.truth, args.calls, mapping_table=args.mapping,
+                                      q_values=tuple(args.q) if args.q else (0.001, 0.01, 0.05))
+            else:
+                model, folder = lookup(args.root, args.id)
+                out = compare_peptides(model, folder, args.results, args.detail_limit)
         elif args.command == "cell":
             if args.cell_command == "qc":
                 out = summarize_matrix(args.matrix, args.barcodes, args.features, args.mitochondrial_prefix, args.feature_columns)
+            elif args.cell_command == "export-h5ad":
+                out = export_h5ad(args.source, args.output, label_column=args.label_column,
+                                  batch_column=args.batch_column, embedding_key=args.embedding_key)
             else:
                 model, folder = lookup(args.root, args.id)
-                out = compare_labels(model, folder, args.results, args.detail_limit)
+                if args.cell_command == "assess":
+                    out = assess_cells(model, folder, args.clusters, annotation=args.annotation,
+                                       embedding=args.embedding, neighbors=args.neighbors)
+                else:
+                    out = compare_labels(model, folder, args.results, args.detail_limit)
         elif args.command == "interval":
             if args.interval_command == "qc":
                 out = summarize_intervals(args.peaks, args.chrom_sizes)
+            elif args.interval_command == "assess":
+                out = assess_intervals(args.peaks, replicate=args.replicate,
+                                       reference=args.reference, qc_json=args.qc_json,
+                                       idr_json=args.idr_json, reciprocal_overlap=args.reciprocal_overlap)
             else:
                 model, folder = lookup(args.root, args.id)
                 out = compare_intervals(model, folder, args.results)
@@ -379,7 +433,7 @@ def main():
             sys.exit(2)
         if args.command == "peptide" and out["status"] == "fail":
             sys.exit(2)
-        if args.command == "cell" and args.cell_command == "compare" and out["status"] == "fail":
+        if args.command == "cell" and args.cell_command in {"compare", "assess"} and out["status"] == "fail":
             sys.exit(2)
         if args.command == "interval" and args.interval_command == "compare" and out["status"] == "fail":
             sys.exit(2)
