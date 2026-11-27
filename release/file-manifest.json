@@ -92,8 +92,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 31721,
-      "sha256": "8d29dc508e8090efdb396f58b48a21d9420536e832f6020cf042cc69da575368"
+      "bytes": 31616,
+      "sha256": "107077ed0c531bf8e32677679eac0d2215e6771f97fd65902b40be2028dc2041"
     },
     {
       "path": "SECURITY.md",
@@ -1822,8 +1822,8 @@
     },
     {
       "path": "docs/multi-assay-assessment.md",
-      "bytes": 5456,
-      "sha256": "fd86a02b8653ded0bd1611f7adb59d28ec48829b569f18fda2a2738ce64c3aaa"
+      "bytes": 5436,
+      "sha256": "52be12454a1c0ac936118f79a1b88f940f0cb1458e5e4ab96b713e2c666d8734"
     },
     {
       "path": "docs/portable-bundles.md",
@@ -2097,8 +2097,8 @@
     },
     {
       "path": "release/certification.json",
-      "bytes": 542,
-      "sha256": "75810c1cbe7f237b803713a665e60443d9f681cc727310ff67eabdb8e9827eef"
+      "bytes": 515,
+      "sha256": "0ffb1f20c6d6273ea34612dfa335c242312194ab5021a128e04b626935c37427"
     },
     {
       "path": "release/collection-audit.json",
@@ -2107,8 +2107,8 @@
     },
     {
       "path": "release/metadata-input.json",
-      "bytes": 857,
-      "sha256": "d54c219c8dd9dd7b3728cb08a43901f87e60dcfaf88983068d454ac10853bd4c"
+      "bytes": 2251,
+      "sha256": "65ffdce1d2f840a4fa2056a4686c1f48b1bf1749ecaba0f1fd47226d93381ae8"
     },
     {
       "path": "requirements-tested.txt",

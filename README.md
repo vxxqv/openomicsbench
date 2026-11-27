@@ -88,7 +88,7 @@ The converter recognizes common `log2FoldChange` and `logFC` headers, including 
 
 ## Assess more assays
 
-The combined v15 development branch adds processed-result reports for single-cell clusters and annotations, small variants within supplied BED regions, chromatin peaks, and peptide identifications. It also offers an optional AnnData export adapter and six sourced single-cell cases. These tools have distinct reference types and limits; read the [multi-assay input guide](docs/multi-assay-assessment.md), [CellBench intake record](curation/v15-source-intake.md), and [website walkthrough](https://vxxqv.github.io/openomicsbench/assess.html) before interpreting their numbers. The new commands and cases are in development until a v15 package is published.
+Version 15 adds processed-result reports for single-cell clusters and annotations, small variants within supplied BED regions, chromatin peaks, and peptide identifications. It also offers an optional AnnData export adapter and six sourced single-cell cases. These tools have distinct reference types and limits; read the [multi-assay input guide](docs/multi-assay-assessment.md), [CellBench intake record](curation/v15-source-intake.md), and [website walkthrough](https://vxxqv.github.io/openomicsbench/assess.html) before interpreting their numbers.
 
 ```sh
 omicsbench cell assess singlecell-001 clusters.tsv --annotation annotations.tsv --embedding embedding.tsv

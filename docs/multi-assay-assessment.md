@@ -1,4 +1,4 @@
-# Multi-assay assessment (v15 development)
+# Multi-assay assessment (version 15)
 
 These commands read processed results and produce JSON reports. They do not download data or infer biological truth. Supply a versioned reference with documented origin, assembly or accession, and rights before interpreting a report as a benchmark.
 
@@ -53,4 +53,4 @@ Each table requires `protein_id` and `peptide`, with optional `q_value` and posi
 
 ## Case intake before release claims
 
-For each new biological case, record source accession and version, permitted redistribution, file hashes, sample/replicate design, reference and truth type, transformations, and known confounders. Small synthetic fixtures are useful for checking commands but are not counted as independently sourced biological benchmarks. All commands above are new development features until the combined v15 release passes the installed-package, dataset, documentation, site and publication checks.
+For each new biological case, record source accession and version, permitted redistribution, file hashes, sample/replicate design, reference and truth type, transformations, and known confounders. Small synthetic fixtures are useful for checking commands but are not counted as independently sourced biological benchmarks. Version 15 ships these processed-result commands with the stated boundaries; it does not certify their use as clinical or biological ground truth.
