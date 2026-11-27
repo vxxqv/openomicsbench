@@ -27,8 +27,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "bytes": 8064,
-      "sha256": "6d63565c90da0bb353a1e83e7271d8cf68be8d82866b1c74b1881b099df9aa4f"
+      "bytes": 8178,
+      "sha256": "7edbdfb4356af57e8217da31946503fafc6f0abe8003101875f019004a953fa4"
     },
     {
       "path": ".github/workflows/pages.yml",
@@ -1837,8 +1837,8 @@
     },
     {
       "path": "release/certification.json",
-      "bytes": 499,
-      "sha256": "b41d0ce055c47773b15fd5a35f7febf9963df82fb532470b0d6c16c8bfbe2b5a"
+      "bytes": 472,
+      "sha256": "8ecd56a75cbd36c9121319864ae7e210cdb1d09f8a3db323e2bd65a9aaa5ac5e"
     },
     {
       "path": "release/collection-audit.json",
@@ -1847,8 +1847,8 @@
     },
     {
       "path": "release/metadata-input.json",
-      "bytes": 857,
-      "sha256": "36372e82e9d32b375ede1525b12f69de7e4d4e1d501fbb6a8871559b33afc29f"
+      "bytes": 3602,
+      "sha256": "85425829bf4953bb0a9ac2cbc00ee074e11a09af8d0239dcbef261ecaedd5331"
     },
     {
       "path": "requirements-tested.txt",
