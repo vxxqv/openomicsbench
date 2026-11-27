@@ -103,7 +103,7 @@
     {
       "path": "catalog/collection.json",
       "bytes": 19176,
-      "sha256": "0245268b1eeb38a900ee3037996b09ec06f37f01f9ea775fa6fbc9e20b8f5eaf"
+      "sha256": "ab4b571177f8992be99c9aced6794f1e04ad69eff6490a16c68227bf61e817b4"
     },
     {
       "path": "catalog/collection.tsv",
@@ -2203,7 +2203,7 @@
     {
       "path": "site/collection.js",
       "bytes": 14153,
-      "sha256": "aeaacd076e32bc9db7ee1d687156852ca3e3ff3447d4f820c066d74f517e0baa"
+      "sha256": "749d04e422882b0bcc6a11445af544eaf5010c910bbfe8a26591c6abdd220e9e"
     },
     {
       "path": "site/index.html",
