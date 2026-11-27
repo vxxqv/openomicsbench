@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0",
+  "scope": "DESeq2 full-source and pocket fidelity",
+  "accession": "E-MTAB-10374",
+  "object_key": "E-MTAB-10374",
+  "status": "pass",
+  "design": {
+    "formula": "~ condition",
+    "factor_column": "Factor Value[environmental stress]",
+    "batch_column": null,
+    "subset": {
+      "Factor Value[ecotype]": [
+        "ICE163"
+      ]
+    },
+    "contrast": "none versus drought environment",
+    "samples": 6,
+    "full_features": 32833,
+    "pocket_features": 2000,
+    "finite_shared_effects": 1349
+  },
+  "thresholds": {
+    "spearman_logfc": 0.9,
+    "top_k_jaccard": 0.6,
+    "distance_correlation": 0.9,
+    "sign_concordance": 0.9
+  },
+  "metrics": {
+    "spearman_logfc": 0.9998619680579921,
+    "top_k_jaccard": 0.9607843137254902,
+    "distance_correlation": 0.9526130241118034,
+    "sign_concordance": 1.0
+  },
+  "runtime": {
+    "r": "4.6.1",
+    "deseq2": "1.54.0",
+    "python": "3.14.0",
+    "numpy": "2.5.0"
+  },
+  "inputs": {
+    "diagnostic_report_sha256": "fff3917ab4e1423113f6a5704b55b914a2c037fdedb6ae856eb5ff1e4494c249",
+    "config_sha256": "48023e9f275260fc166a1c1a03c901269953c57193975f450f4d7f099ba4e07b",
+    "full_counts_sha256": "93f2797e357b01733a38e5e3f1fea4ca93d2c853e7e5d6523b7872ab0605b66b",
+    "pocket_counts_sha256": "39eb5f1013c2eb062c7785fd44036432d0c6a70a82c81230c6a8ddc489e9b393",
+    "samples_sha256": "f4974e07c92ee7c6bb30c13ebb249513aecd3e2e8fad0224a665b68f97d9446b"
+  },
+  "artifacts": {
+    "full": {
+      "contrast.log": {
+        "bytes": 33,
+        "sha256": "a969c8f068459de8e258ff02dd6a313417a1f61abe162922f80ca84b09af9d09"
+      },
+      "differential_expression.tsv": {
+        "bytes": 3014279,
+        "sha256": "9920eaad270ebf0095d0c45b17f4a3b3158e7916f160683ad3cd4bba06aa7845"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 2646977,
+        "sha256": "513eb3b29b8e085380c89ec71fbb2eedfddba78c899e9f8bc5102b10fbd8b236"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "eab0d86229eba5c779ed4c99a910a1c0f7e3b635b7f807d371a6f17b2c5b3b78"
+      }
+    },
+    "pocket": {
+      "contrast.log": {
+        "bytes": 33,
+        "sha256": "a969c8f068459de8e258ff02dd6a313417a1f61abe162922f80ca84b09af9d09"
+      },
+      "differential_expression.tsv": {
+        "bytes": 175856,
+        "sha256": "260b1070278119e7efadbe9ed2fb228d6b4b9d3f44130ef216607b73652cfe2e"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 150300,
+        "sha256": "072c40fccf8e9bd9a833c2cefada8510f7b0f33629b2dc837611427b80efc449"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "eab0d86229eba5c779ed4c99a910a1c0f7e3b635b7f807d371a6f17b2c5b3b78"
+      }
+    }
+  },
+  "workflow": {
+    "python_sha256": "428997912fcd54efea91dd28fb4fecf69ccd7bf11195fcb5dc6e4350a56f39fb",
+    "r_sha256": "b4244d58364e77f0b4771339d07110e6f89fe2fcf0727562a5fd47f0e3ce74f6"
+  }
+}

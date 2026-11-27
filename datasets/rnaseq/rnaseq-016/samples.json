@@ -1,0 +1,44 @@
+[
+  {
+    "sample_id": "ERR5732369",
+    "condition": "drought environment",
+    "replicate": 1,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR5732370",
+    "condition": "none",
+    "replicate": 1,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR5732373",
+    "condition": "drought environment",
+    "replicate": 2,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR5732374",
+    "condition": "none",
+    "replicate": 2,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR5732377",
+    "condition": "drought environment",
+    "replicate": 3,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR5732378",
+    "condition": "none",
+    "replicate": 3,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  }
+]

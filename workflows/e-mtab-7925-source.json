@@ -1,0 +1,34 @@
+{
+  "accession": "E-MTAB-7925",
+  "factor_column": "Factor Value[stimulus]",
+  "condition_values": [
+    "none",
+    "cyclic tensile strain"
+  ],
+  "batch_column": "Sample Characteristic[individual]",
+  "subset": {
+    "Factor Value[time]": ["24 hour"]
+  },
+  "seed": 20261127,
+  "effect_anchors": 100,
+  "candidate_sizes": [
+    500,
+    1000,
+    2000,
+    4000,
+    8000,
+    12000,
+    20000
+  ],
+  "top_k": 50,
+  "minimum": {
+    "spearman_logfc": 0.9,
+    "top_k_jaccard": 0.6,
+    "distance_correlation": 0.9,
+    "sign_concordance": 0.9
+  },
+  "normalization": "median_ratio",
+  "baseline": "Diagnostic donor-adjusted OLS on log2(median-ratio-normalized counts + 1); DESeq2 confirmation remains required.",
+  "rights": "AMBER: study-specific redistribution and attribution review is pending.",
+  "reference": "PENDING: pin the Expression Atlas reference release and exact annotation hashes before release."
+}

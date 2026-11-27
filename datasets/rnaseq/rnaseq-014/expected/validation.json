@@ -1,0 +1,40 @@
+{
+  "baseline_counts": "expected/source-counts.tsv",
+  "sample_ids": [
+    "ERR3301313",
+    "ERR3301315",
+    "ERR3301317",
+    "ERR3301319",
+    "ERR3301321",
+    "ERR3301323",
+    "ERR3301325",
+    "ERR3301327",
+    "ERR3301329",
+    "ERR3301331",
+    "ERR3301333",
+    "ERR3301335"
+  ],
+  "shapes": {
+    "pocket": [
+      8000,
+      12
+    ]
+  },
+  "top_k": 50,
+  "normalization": "median_ratio",
+  "contrast": {
+    "factor_column": "Factor Value[stimulus]",
+    "condition_values": [
+      "none",
+      "cyclic tensile strain"
+    ],
+    "batch_column": "Sample Characteristic[individual]",
+    "subset": {
+      "Factor Value[time]": [
+        "24 hour"
+      ]
+    }
+  },
+  "deseq2_evidence": "expected/deseq2.json",
+  "reference_effects": "expected/reference-effects.tsv.gz"
+}

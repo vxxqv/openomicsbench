@@ -22,7 +22,7 @@ jobs:
       - run: python workflows/build_singlecell_fixture.py
       - run: python workflows/build_interval_fixture.py
       - run: python -m unittest discover -s tests -v
-      - run: python -c "from omicsbench import Collection; c = Collection(); assert len(c.list(assay='bulk_rna_seq', status='validated', kind='real')) == 12; assert c.get('rnaseq-002').file(role='samples', tier='metadata').is_file()"
+      - run: python -c "from omicsbench import Collection; c = Collection(); assert len(c.list(assay='bulk_rna_seq', status='validated', kind='real')) == 16; assert c.get('rnaseq-014').file(role='effects', tier='expected').is_file()"
       - run: python scripts/build_catalog.py
       - run: git diff --exit-code -- datasets/sequences datasets/singlecell datasets/intervals catalog figures/v1-fidelity.svg site/collection.js
       - run: python scripts/audit_collection.py
@@ -33,6 +33,7 @@ jobs:
           omicsbench rnaseq verify-pack build/rna-pack
           omicsbench rnaseq check-design build/rna-pack/rnaseq-005/counts.tsv build/rna-pack/rnaseq-005/samples.tsv build/rna-pack/rnaseq-005/contrasts.tsv --id rnaseq-005
           omicsbench rnaseq score-effects rnaseq-002 datasets/rnaseq/rnaseq-002/expected/reference-effects.tsv.gz
+          omicsbench rnaseq score-effects rnaseq-014 datasets/rnaseq/rnaseq-014/expected/reference-effects.tsv.gz
       - run: omicsbench taxon compare sequence-007 datasets/sequences/sequence-007/expected/read-taxonomy.tsv
       - run: omicsbench suite validate --junit build/benchmark-suite.xml --force
       - name: Exercise prepared workspace

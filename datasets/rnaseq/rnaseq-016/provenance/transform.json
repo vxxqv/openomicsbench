@@ -1,0 +1,72 @@
+{
+  "dataset_id": "rnaseq-016",
+  "object_key": "E-MTAB-10374",
+  "algorithm": "contrast-anchored deterministic feature selection",
+  "seed": 20261127,
+  "source_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-10374-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-10374/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 1840323,
+      "sha256": "135082e0bb2020e83571a77c1a66f05297e6c2c3f6798b3d1dc3e9a29b691781"
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-10374-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-10374/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 6298,
+      "sha256": "4fbb4a5eadf5aadb611463afd1900c9b7b0244f4247cf01500343577ca292f8e"
+    }
+  ],
+  "selection": {
+    "config": "workflows/e-mtab-10374-source.json",
+    "config_sha256": "48023e9f275260fc166a1c1a03c901269953c57193975f450f4d7f099ba4e07b",
+    "config_commit": "f21cb3703f054322df047814843df32396024ce1",
+    "workflow": "workflows/atlas_diagnostic.py",
+    "workflow_sha256": "1e065fb87b06b029505797eefe97580cb1a2dde6b1c32724bbbe46299b7343e4",
+    "workflow_commit": "fd3697970fe986214db4b44e1e2d605519a9b7aa",
+    "candidate_sizes": [
+      500,
+      1000,
+      2000,
+      4000,
+      8000,
+      12000,
+      20000
+    ],
+    "selected_features": 2000,
+    "factor_column": "Factor Value[environmental stress]",
+    "batch_column": null,
+    "condition_values": [
+      "none",
+      "drought environment"
+    ],
+    "subset": {
+      "Factor Value[ecotype]": [
+        "ICE163"
+      ]
+    }
+  },
+  "assembly": {
+    "workflow": "workflows/build_collection.py",
+    "workflow_sha256": "a11e24c1a56dfe41a9cafe183b042e130903f42c543c7802decfe55b42b23cc4",
+    "workflow_commit": "8f5815cb5775433cac562bdda36458c78c8042b0"
+  },
+  "diagnostic": {
+    "path": "evidence/e-mtab-10374-diagnostic.json",
+    "sha256": "fff3917ab4e1423113f6a5704b55b914a2c037fdedb6ae856eb5ff1e4494c249"
+  },
+  "deseq2": {
+    "path": "evidence/e-mtab-10374-deseq2.json",
+    "sha256": "f4efb8a6a07e8ba0b6b142a4242b989c46bb55d7064def48c14e7b4b421e33ac"
+  },
+  "reference": {
+    "path": "evidence/v14-reference-verification.json",
+    "sha256": "18ad63dd5a2c6bad7b5daf756a8ce0e70bbc6714ab097118fb5d6a8e589a8c84"
+  },
+  "intake": {
+    "path": "curation/intake/e-mtab-10374.json",
+    "sha256": "f4399f48f2a87037cd2ae5881aea0bd9148963ff9a44d25c285d9135b64f40d4"
+  }
+}

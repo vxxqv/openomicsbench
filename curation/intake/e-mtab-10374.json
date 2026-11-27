@@ -1,0 +1,97 @@
+{
+  "accession": "E-MTAB-10374",
+  "source_systems": [
+    {
+      "name": "Expression Atlas",
+      "url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-10374"
+    },
+    {
+      "name": "BioStudies",
+      "url": "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-10374"
+    }
+  ],
+  "checked": "2026-11-27",
+  "title": "RNA-seq of Arabidopsis natural accessions under mild drought",
+  "publication": null,
+  "assay": "bulk RNA-seq of coding RNA",
+  "organism": "Arabidopsis thaliana",
+  "taxon_id": 3702,
+  "study_design": {
+    "design_rows": 12,
+    "analysed_runs": 12,
+    "selected_runs": 6,
+    "factor_column": "Factor Value[environmental stress]",
+    "groups": {
+      "drought environment": 3,
+      "none": 3
+    },
+    "subset": {
+      "Factor Value[ecotype]": "ICE163"
+    },
+    "batch_column": null,
+    "task": "Within-accession drought versus control contrast"
+  },
+  "available_layers": [
+    "Expression Atlas raw gene counts",
+    "experiment design"
+  ],
+  "atlas_processing": {
+    "reference": "Ensembl Genomes release 53",
+    "mapping": "TopHat2 2.1.1",
+    "quantification": "HTSeq 0.11.0",
+    "evidence_url": "https://www.ebi.ac.uk/gxa/experiments/E-MTAB-10374"
+  },
+  "estimated_raw_count_bytes": 1840323,
+  "verified_resources": [
+    {
+      "role": "experiment_design",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-10374/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 6298,
+      "sha256": "4fbb4a5eadf5aadb611463afd1900c9b7b0244f4247cf01500343577ca292f8e"
+    },
+    {
+      "role": "raw_counts",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-10374/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 1840323,
+      "sha256": "135082e0bb2020e83571a77c1a66f05297e6c2c3f6798b3d1dc3e9a29b691781"
+    }
+  ],
+  "rights": {
+    "status": "GREEN",
+    "license": "Creative Commons Attribution 4.0 International",
+    "redistribution": "Expression Atlas processed count material may be redistributed with attribution under the site licence.",
+    "evidence_url": "https://www.ebi.ac.uk/gxa/licence.html",
+    "evidence_page_bytes": 15010,
+    "evidence_page_sha256": "0c35e7e1e590438decb4c44d7d42f1d69a2190eb97acb4bdca5a14cf71f26dd8",
+    "study_record_check": "The BioStudies record contained no separate licence or restriction field on 2026-11-27.",
+    "obligations": ["Credit Expression Atlas and EMBL-EBI.", "Retain the originating study accession and citation."],
+    "checked": "2026-11-27"
+  },
+  "reduction_diagnostic": {
+    "status": "diagnostic_pass_only",
+    "evidence": "evidence/e-mtab-10374-diagnostic.json",
+    "smallest_passing_features": 2000,
+    "interpretation": "Smallest size passing the predeclared OLS preservation thresholds. This does not replace DESeq2 or release review."
+  },
+  "deseq2_confirmation": {
+    "status": "pass",
+    "evidence": "evidence/e-mtab-10374-deseq2.json",
+    "report_sha256": "f4efb8a6a07e8ba0b6b142a4242b989c46bb55d7064def48c14e7b4b421e33ac",
+    "runtime": {"r": "4.6.1", "deseq2": "1.54.0", "python": "3.14.0", "numpy": "2.5.0"}
+  },
+  "reference_review": {
+    "status": "pass",
+    "provider": "Ensembl Genomes",
+    "release": "53",
+    "pocket_features_matched": 2000,
+    "unmatched_features": 0,
+    "evidence": "evidence/v14-reference-verification.json",
+    "evidence_sha256": "18ad63dd5a2c6bad7b5daf756a8ce0e70bbc6714ab097118fb5d6a8e589a8c84"
+  },
+  "review_status": "ready_for_packaging",
+  "release_eligible": false,
+  "remaining_work": [
+    "Complete the dataset card and attribution package.",
+    "Prepare dataset card, attribution and a clean-environment trial before release."
+  ]
+}

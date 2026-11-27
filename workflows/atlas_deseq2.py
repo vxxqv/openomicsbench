@@ -99,7 +99,19 @@ def artifacts(directory: Path) -> dict:
     return records
 
 
-def run(config_path: Path, diagnostic_dir: Path, output: Path, conda: Path, environment: Path) -> dict:
+def run(config_path: Path, diagnostic_dir: Path, output: Path, conda: Path | None, environment: Path | None, rscript: Path | None = None) -> dict:
+    if (rscript is None) == (conda is None or environment is None):
+        raise ValueError("Select either --rscript or both --conda and --environment")
+    runner = [str(rscript)] if rscript is not None else [str(conda), "run", "-p", str(environment), "Rscript"]
+    version_check = subprocess.run(
+        [*runner, "-e", "cat(as.character(getRversion()), '\\t', as.character(packageVersion('DESeq2')), sep='')"],
+        cwd=ROOT, capture_output=True, text=True,
+    )
+    if version_check.returncode:
+        raise RuntimeError(f"DESeq2 runtime check failed: {version_check.stderr.strip() or version_check.stdout.strip()}")
+    versions = version_check.stdout.strip().split("\t")
+    if len(versions) != 2:
+        raise ValueError("DESeq2 runtime did not report R and package versions")
     config = json.loads(config_path.read_text(encoding="utf-8"))
     diagnostic_path = diagnostic_dir / "diagnostic-report.json"
     diagnostic = json.loads(diagnostic_path.read_text(encoding="utf-8"))
@@ -120,7 +132,7 @@ def run(config_path: Path, diagnostic_dir: Path, output: Path, conda: Path, envi
     baseline = ROOT / "workflows/deseq2_baseline.R"
     for label, counts_path in (("full", input_dir / "full-counts.tsv"), ("pocket", pocket_input)):
         destination = output / label
-        command = [str(conda), "run", "-p", str(environment), "Rscript", str(baseline), str(counts_path), str(input_dir / "samples.tsv"), str(destination)]
+        command = [*runner, str(baseline), str(counts_path), str(input_dir / "samples.tsv"), str(destination)]
         completed = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
         if completed.returncode:
             raise RuntimeError(f"DESeq2 {label} baseline failed: {completed.stderr.strip() or completed.stdout.strip()}")
@@ -146,7 +158,7 @@ def run(config_path: Path, diagnostic_dir: Path, output: Path, conda: Path, envi
         },
         "thresholds": config["minimum"],
         "metrics": metrics,
-        "runtime": {"r": "4.5.3", "deseq2": "1.50.2", "python": platform.python_version(), "numpy": np.__version__},
+        "runtime": {"r": versions[0], "deseq2": versions[1], "python": platform.python_version(), "numpy": np.__version__},
         "inputs": {
             "diagnostic_report_sha256": digest(diagnostic_path),
             "config_sha256": digest(config_path),
@@ -178,7 +190,15 @@ if __name__ == "__main__":
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--diagnostic-dir", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--conda", type=Path, required=True)
-    parser.add_argument("--environment", type=Path, required=True)
+    parser.add_argument("--conda", type=Path)
+    parser.add_argument("--environment", type=Path)
+    parser.add_argument("--rscript", type=Path, help="Use an existing R installation with DESeq2 available.")
     args = parser.parse_args()
-    print(json.dumps(run(args.config.resolve(), args.diagnostic_dir.resolve(), args.output.resolve(), args.conda.resolve(), args.environment.resolve()), indent=2))
+    if (args.rscript is None) == (args.conda is None or args.environment is None):
+        parser.error("Select either --rscript or both --conda and --environment")
+    print(json.dumps(run(
+        args.config.resolve(), args.diagnostic_dir.resolve(), args.output.resolve(),
+        args.conda.resolve() if args.conda else None,
+        args.environment.resolve() if args.environment else None,
+        args.rscript.resolve() if args.rscript else None,
+    ), indent=2))

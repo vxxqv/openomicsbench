@@ -1,0 +1,33 @@
+{
+  "accession": "E-MTAB-10374",
+  "factor_column": "Factor Value[environmental stress]",
+  "condition_values": [
+    "none",
+    "drought environment"
+  ],
+  "subset": {
+    "Factor Value[ecotype]": ["ICE163"]
+  },
+  "seed": 20261127,
+  "effect_anchors": 100,
+  "candidate_sizes": [
+    500,
+    1000,
+    2000,
+    4000,
+    8000,
+    12000,
+    20000
+  ],
+  "top_k": 50,
+  "minimum": {
+    "spearman_logfc": 0.9,
+    "top_k_jaccard": 0.6,
+    "distance_correlation": 0.9,
+    "sign_concordance": 0.9
+  },
+  "normalization": "median_ratio",
+  "baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), ICE163 only; DESeq2 confirmation remains required.",
+  "rights": "AMBER: study-specific redistribution and attribution review is pending.",
+  "reference": "PENDING: pin the Expression Atlas reference release and exact annotation hashes before release."
+}

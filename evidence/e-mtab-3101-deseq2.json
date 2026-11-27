@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "scope": "DESeq2 full-source and pocket fidelity",
+  "accession": "E-MTAB-3101",
+  "object_key": "E-MTAB-3101",
+  "status": "pass",
+  "design": {
+    "formula": "~ condition",
+    "factor_column": "Factor Value[phenotype]",
+    "batch_column": null,
+    "subset": {},
+    "contrast": "control versus TGF-beta-1 induced myofibroblast differentiation",
+    "samples": 6,
+    "full_features": 58735,
+    "pocket_features": 1000,
+    "finite_shared_effects": 649
+  },
+  "thresholds": {
+    "spearman_logfc": 0.9,
+    "top_k_jaccard": 0.6,
+    "distance_correlation": 0.9,
+    "sign_concordance": 0.9
+  },
+  "metrics": {
+    "spearman_logfc": 0.9974735719592263,
+    "top_k_jaccard": 0.9607843137254902,
+    "distance_correlation": 0.9056441163715356,
+    "sign_concordance": 1.0
+  },
+  "runtime": {
+    "r": "4.6.1",
+    "deseq2": "1.54.0",
+    "python": "3.14.0",
+    "numpy": "2.5.0"
+  },
+  "inputs": {
+    "diagnostic_report_sha256": "031528390880e81831be02511a2f0b31bdbf9c457edd1a64535bfd7d5c59ca9a",
+    "config_sha256": "0bee50571bd68759cad448077c599f928e8a2b29a91d5d77e7f92e188e3ba5ed",
+    "full_counts_sha256": "4ef2438593ec56e1f23f7c971892d458d48d686e568080a814b2d33dced33a85",
+    "pocket_counts_sha256": "25a409217a623d271d50bdf02f94624b8aae7d6b2ffb4cae3f3512ad36b55093",
+    "samples_sha256": "c9fe1b431612083b9e2e287b5ff44e7510886cf3127bac10bf2908038ecb3d56"
+  },
+  "artifacts": {
+    "full": {
+      "contrast.log": {
+        "bytes": 65,
+        "sha256": "ebc963492e1516e9916dfadc16cfd1af9d51a56ecc86bda8fee93c2fd163e922"
+      },
+      "differential_expression.tsv": {
+        "bytes": 4694731,
+        "sha256": "e7c2f616fc3858e65ea0ea7550a8de1766ad4b5cb453e0c38bb7e63c84561d43"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 3966067,
+        "sha256": "712cd104559ad518192c45e14a7b8a1ac412463cbf1365a52887e35b5e873601"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "eab0d86229eba5c779ed4c99a910a1c0f7e3b635b7f807d371a6f17b2c5b3b78"
+      }
+    },
+    "pocket": {
+      "contrast.log": {
+        "bytes": 65,
+        "sha256": "ebc963492e1516e9916dfadc16cfd1af9d51a56ecc86bda8fee93c2fd163e922"
+      },
+      "differential_expression.tsv": {
+        "bytes": 86401,
+        "sha256": "b682bed7e6439fcdb154b6f79696d9774bb0cac689f174f6c99acd5fe23d52f3"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 61859,
+        "sha256": "00331b330bce4e375c2fd460cdd49bf43842ac9649b69c493cbdf305d1c854d7"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "eab0d86229eba5c779ed4c99a910a1c0f7e3b635b7f807d371a6f17b2c5b3b78"
+      }
+    }
+  },
+  "workflow": {
+    "python_sha256": "428997912fcd54efea91dd28fb4fecf69ccd7bf11195fcb5dc6e4350a56f39fb",
+    "r_sha256": "b4244d58364e77f0b4771339d07110e6f89fe2fcf0727562a5fd47f0e3ce74f6"
+  }
+}

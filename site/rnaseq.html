@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Test bulk RNA-seq count matrices, sample designs and differential-expression tables with OpenOmicsBench. Includes a real paired-study example, Python and R notebooks, and explicit reference limits.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Bulk RNA-seq benchmark guide | OpenOmicsBench">
+  <meta property="og:description" content="Export a checked RNA-seq input pack, inspect count quality, validate a paired design and summarize your differential-expression results.">
+  <meta property="og:url" content="https://vxxqv.github.io/openomicsbench/rnaseq.html">
+  <link rel="canonical" href="https://vxxqv.github.io/openomicsbench/rnaseq.html">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="rnaseq.css">
+  <title>Bulk RNA-seq benchmark guide | OpenOmicsBench</title>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header"><div class="wrap header-inner">
+    <a class="brand" href="index.html" aria-label="OpenOmicsBench home">OpenOmicsBench<span class="brand-mark">/</span></a>
+    <nav aria-label="Main navigation"><a href="index.html#collection">Collection</a><a href="index.html#start">Get started</a><a href="https://github.com/vxxqv/openomicsbench">GitHub ↗</a></nav>
+  </div></header>
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="guide-title">
+      <div class="eyebrow">Bulk RNA-seq · count matrices · differential expression</div>
+      <h1 id="guide-title">Check your RNA-seq inputs before you compare results.</h1>
+      <p class="lead">OpenOmicsBench provides small, traceable count matrices from published studies. Export aligned counts, sample metadata and a declared contrast, inspect sample-level count quality, then assess the results your pipeline produces.</p>
+      <div class="hero-actions"><a class="button primary" href="#walkthrough">Run the example ↓</a><a class="button secondary" href="https://github.com/vxxqv/openomicsbench/blob/main/docs/rnaseq-packs.md">Read the file guide ↗</a></div>
+    </section>
+    <section class="band" id="walkthrough" aria-labelledby="walkthrough-title"><div class="wrap two-column">
+      <div><p class="section-index">01 / Walkthrough</p><h2 id="walkthrough-title">A paired study you can inspect.</h2></div>
+      <div class="prose">
+        <p><code>rnaseq-005</code> is a published prostate tumour versus adjacent non-tumour comparison. Its compact pack has 8,000 genes and 28 samples. The sample sheet records the paired blocking factor, and the contrast declares tumour minus adjacent tissue. Adjacent tissue is not a healthy control.</p>
+        <pre><code>python -m pip install openomicsbench
+omicsbench rnaseq pack rnaseq-example --id rnaseq-005
+omicsbench rnaseq qc rnaseq-example/rnaseq-005/counts.tsv --samples rnaseq-example/rnaseq-005/samples.tsv --contrasts rnaseq-example/rnaseq-005/contrasts.tsv --id rnaseq-005</code></pre>
+        <p>The report lists library size, detected genes, zero fraction and the largest-gene fraction for each sample. It checks sample IDs and design rank. A zero-count library fails. Counts alone cannot establish read quality or biological validity.</p>
+        <p><a class="text-link" href="https://github.com/vxxqv/openomicsbench/blob/main/examples/rnaseq-v14/python-walkthrough.ipynb">Python notebook ↗</a> · <a class="text-link" href="https://github.com/vxxqv/openomicsbench/blob/main/examples/rnaseq-v14/r-walkthrough.Rmd">R notebook ↗</a></p>
+      </div>
+    </div></section>
+    <section class="wrap section" aria-labelledby="de-title"><p class="section-index">02 / Result checks</p><h2 id="de-title">Inspect your differential-expression calls.</h2>
+      <div class="prose"><p>After DESeq2, edgeR or limma has produced a native CSV or TSV table, run:</p>
+      <pre><code>omicsbench rnaseq assess-de rnaseq-005 results.csv --alpha 0.05
+omicsbench rnaseq score-effects rnaseq-005 results.csv</code></pre>
+      <p>The first command reports adjusted-p-value calls, missing values, effect-direction agreement and gene-effect rank agreement with the archived DESeq2 reference. The second applies the existing effect-scoring thresholds. Both commands expect effects for the declared target-minus-reference contrast; use <code>--reverse-sign</code> only if your result uses the opposite direction.</p>
+      <p>If you have an independently established table of <code>gene_id,is_de</code> labels, add <code>--truth labels.tsv</code> to <code>assess-de</code> for precision, recall and F1 within that labelled gene set. The command requires every labelled gene to have an adjusted p-value. Agreement with one reference analysis is not an independent truth set or an estimate of false-discovery calibration.</p></div>
+    </section>
+    <section class="band" aria-labelledby="cases-title"><div class="wrap two-column">
+      <div><p class="section-index">03 / More designs</p><h2 id="cases-title">Choose a useful contrast.</h2></div>
+      <div class="prose"><p>Try <a href="https://github.com/vxxqv/openomicsbench/tree/main/datasets/rnaseq/rnaseq-014">paired donor strain response</a>, <a href="https://github.com/vxxqv/openomicsbench/tree/main/datasets/rnaseq/rnaseq-015">neuronal stem-cell knockdown</a>, or <a href="https://github.com/vxxqv/openomicsbench/tree/main/datasets/rnaseq/rnaseq-016">plant drought response</a>. Each dataset directory includes its manifest, source, rights and limitations. The full collection has 16 biological RNA-seq objects from 11 studies.</p></div>
+    </div></section>
+  </main>
+  <footer><div class="wrap footer-inner"><span>OpenOmicsBench · Vivaan Patni</span><span>Apache-2.0 code · dataset rights vary</span></div></footer>
+</body>
+</html>

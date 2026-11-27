@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0",
+  "scope": "DESeq2 full-source and pocket fidelity",
+  "accession": "E-MTAB-7925",
+  "object_key": "E-MTAB-7925",
+  "status": "pass",
+  "design": {
+    "formula": "~ batch + condition",
+    "factor_column": "Factor Value[stimulus]",
+    "batch_column": "Sample Characteristic[individual]",
+    "subset": {
+      "Factor Value[time]": [
+        "24 hour"
+      ]
+    },
+    "contrast": "none versus cyclic tensile strain",
+    "samples": 12,
+    "full_features": 61860,
+    "pocket_features": 8000,
+    "finite_shared_effects": 5171
+  },
+  "thresholds": {
+    "spearman_logfc": 0.9,
+    "top_k_jaccard": 0.6,
+    "distance_correlation": 0.9,
+    "sign_concordance": 0.9
+  },
+  "metrics": {
+    "spearman_logfc": 0.9994969287561306,
+    "top_k_jaccard": 0.9607843137254902,
+    "distance_correlation": 0.9267106971249162,
+    "sign_concordance": 0.9993053947673073
+  },
+  "runtime": {
+    "r": "4.6.1",
+    "deseq2": "1.54.0",
+    "python": "3.14.0",
+    "numpy": "2.5.0"
+  },
+  "inputs": {
+    "diagnostic_report_sha256": "be539d8248292bc9ad0f15cdd900f5bba081f9bc224798bd13c4464525757b47",
+    "config_sha256": "00d7c99542a934624ea106d74d30ec236e57251cfbd2285c00fe8254dae18a84",
+    "full_counts_sha256": "005bcf4db39efcdcb9b014d9fff712917ec3db76a7f09362c2089e8bae90a950",
+    "pocket_counts_sha256": "620b97f8845758b102059afbe907fa0bfa3619c537a4a0cacbdbd4591ef0e6a1",
+    "samples_sha256": "65219a00a69d4bedc0775284101820b277e82f264afaaf7546d12696ef066bb3"
+  },
+  "artifacts": {
+    "full": {
+      "contrast.log": {
+        "bytes": 35,
+        "sha256": "1bf76c57c60f9b01fcf5f5018619acea402426e98da576764c189b391587619b"
+      },
+      "differential_expression.tsv": {
+        "bytes": 5290663,
+        "sha256": "1808c110d04303cc8e08d6dd7fcd7b505c5a81b49af573db2cab938f62907bce"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 6939017,
+        "sha256": "0d3882dd77885365af4a14471324d60027113d78141ec4835698d9f9bd0b4f58"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "eab0d86229eba5c779ed4c99a910a1c0f7e3b635b7f807d371a6f17b2c5b3b78"
+      }
+    },
+    "pocket": {
+      "contrast.log": {
+        "bytes": 35,
+        "sha256": "1bf76c57c60f9b01fcf5f5018619acea402426e98da576764c189b391587619b"
+      },
+      "differential_expression.tsv": {
+        "bytes": 740173,
+        "sha256": "b6738b1b5fcac5bdadb3659ead153250187728e2a64d125a8269036e1aab1066"
+      },
+      "normalized_counts.tsv": {
+        "bytes": 822000,
+        "sha256": "27efda7d967700a7ef5038e36d28c1a5b8c375e29c7ee8fad6ad0783ab40587b"
+      },
+      "session-info.log": {
+        "bytes": 1389,
+        "sha256": "eab0d86229eba5c779ed4c99a910a1c0f7e3b635b7f807d371a6f17b2c5b3b78"
+      }
+    }
+  },
+  "workflow": {
+    "python_sha256": "428997912fcd54efea91dd28fb4fecf69ccd7bf11195fcb5dc6e4350a56f39fb",
+    "r_sha256": "b4244d58364e77f0b4771339d07110e6f89fe2fcf0727562a5fd47f0e3ce74f6"
+  }
+}

@@ -1,5 +1,11 @@
 # Changes
 
+## 14.0.0
+
+The RNA-seq CLI now offers `rnaseq qc` for descriptive sample-level count summaries plus optional linked design checking, and `rnaseq assess-de` for adjusted-p-value call counts and effect-direction agreement with the archived reference. Both are available through the Python API. A paired-study Python notebook and an R Markdown walkthrough show the input and its limitations. The project site has a dedicated RNA-seq guide and a bundled catalog for local viewing. Cloudflare Web Analytics is deployed on the public site.
+
+Four new bulk RNA-seq objects (`rnaseq-014` through `rnaseq-017`) bring the biological collection to 16 objects from 11 Expression Atlas studies. Each has an archived study design, predeclared feature selection, compact and full count tiers, DESeq2 comparison, reference verification, rights record and manifest. The site catalog has 25 objects in total. These additions test software against declared reference analyses; they do not establish biological ground truth.
+
 ## 13.0.1
 
 This patch release brings the post-v13 documentation and site updates into an installable release. The README and website now show the Bioconda package and badges, a worked RNA-seq example, and clearer links to the package and repository. The CLI help screen includes a brief request to star the repository. Community guidance now includes a code of conduct, security policy, and pull request template. The benchmark collection, reference results, and scoring behavior are unchanged from 13.0.0.

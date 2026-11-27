@@ -1,0 +1,152 @@
+{
+  "accession": "E-MTAB-3101",
+  "object_key": "E-MTAB-3101",
+  "status": "diagnostic_only",
+  "source_features": 58735,
+  "source_samples": 9,
+  "analysed_samples": 9,
+  "selected_samples": 6,
+  "excluded_count_columns": [],
+  "deduplicated_count_columns": {},
+  "conditions": {
+    "TGF-beta-1 induced myofibroblast differentiation": 3,
+    "control": 3
+  },
+  "factor_column": "Factor Value[phenotype]",
+  "batch_column": null,
+  "subset": {},
+  "batches": {
+    "not_reported": 6
+  },
+  "sample_order": [
+    "ERR732908",
+    "ERR732906",
+    "ERR732907",
+    "ERR732901",
+    "ERR732902",
+    "ERR732904"
+  ],
+  "contrast": "control - TGF-beta-1 induced myofibroblast differentiation",
+  "baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), control versus differentiation; DESeq2 confirmation remains required.",
+  "normalization": "median_ratio",
+  "full_size_factors": [
+    0.993010477031651,
+    0.9970282254414398,
+    1.1063876794328558,
+    1.0343076290832824,
+    0.9908811907502613,
+    0.8907586997252906
+  ],
+  "candidate_curve": [
+    {
+      "features": 500,
+      "bytes": 14963,
+      "size_ratio": 0.005676074188410157,
+      "metrics": {
+        "spearman_logfc": 0.9995991981969402,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.7472227682311461,
+        "sign_concordance": 1.0
+      },
+      "pass": false
+    },
+    {
+      "features": 1000,
+      "bytes": 29634,
+      "size_ratio": 0.011241380906191712,
+      "metrics": {
+        "spearman_logfc": 0.9933228240265037,
+        "top_k_jaccard": 0.8867924528301887,
+        "distance_correlation": 0.9055593705886771,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 2000,
+      "bytes": 58679,
+      "size_ratio": 0.02225933016786203,
+      "metrics": {
+        "spearman_logfc": 0.9983994676047735,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.9785788199966271,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 4000,
+      "bytes": 116929,
+      "size_ratio": 0.044355923195656705,
+      "metrics": {
+        "spearman_logfc": 0.9853957829796939,
+        "top_k_jaccard": 0.9230769230769231,
+        "distance_correlation": 0.9901181199386294,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 8000,
+      "bytes": 233371,
+      "size_ratio": 0.08852710749338145,
+      "metrics": {
+        "spearman_logfc": 0.9880184104392717,
+        "top_k_jaccard": 0.9230769230769231,
+        "distance_correlation": 0.9857259237532893,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 12000,
+      "bytes": 350205,
+      "size_ratio": 0.13284699332701858,
+      "metrics": {
+        "spearman_logfc": 0.9914157994836985,
+        "top_k_jaccard": 0.9230769230769231,
+        "distance_correlation": 0.9868362827180608,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 20000,
+      "bytes": 584693,
+      "size_ratio": 0.22179782432961972,
+      "metrics": {
+        "spearman_logfc": 0.9942902932182822,
+        "top_k_jaccard": 0.9607843137254902,
+        "distance_correlation": 0.989040694324618,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    }
+  ],
+  "smallest_passing_features": 1000,
+  "rights": "AMBER: study-specific redistribution and attribution review is pending.",
+  "reference": "PENDING: pin the Expression Atlas reference release and exact annotation hashes before release.",
+  "release_eligible": false,
+  "source_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-3101-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-3101/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 2636153,
+      "sha256": "fa13a28680e35545b1068f0249cb557d8c0336276885fada010fe111caf49f60"
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-3101-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-3101/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 2498,
+      "sha256": "f973dab0c38aa3a2a392a872616f43ed93437c26e338b3d2ef716e8c798abb92"
+    }
+  ],
+  "versions": {
+    "python": "3.14.0",
+    "numpy": "2.5.0"
+  },
+  "config_sha256": "0bee50571bd68759cad448077c599f928e8a2b29a91d5d77e7f92e188e3ba5ed",
+  "workflow_sha256": "1e065fb87b06b029505797eefe97580cb1a2dde6b1c32724bbbe46299b7343e4"
+}

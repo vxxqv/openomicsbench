@@ -1,4 +1,5 @@
 """Build the certified biological count-matrix collection from staged Atlas runs."""
+import argparse
 import csv
 import json
 import os
@@ -106,7 +107,7 @@ def write_card(
         f"omicsbench get {entry['dataset_id']} --size pocket",
         "```",
         "",
-        f"{entry['dataset_id']} passed all four predeclared preservation minimums with DESeq2 1.50.2. "
+        f"{entry['dataset_id']} passed all four predeclared preservation minimums with DESeq2 {baseline['runtime']['deseq2']}. "
         f"All {pocket_features:,} pocket identifiers matched {profile['provider']} {profile['release']}.",
         "",
         "## Limits",
@@ -142,8 +143,7 @@ def selected_inputs(config: dict, diagnostic_dir: Path):
     return genes, samples, counts[:, [lookup[sample] for sample in samples]], design
 
 
-def reference_profiles() -> tuple[dict, str]:
-    path = ROOT / "evidence/reference-verification.json"
+def reference_profiles(path: Path) -> tuple[dict, str]:
     evidence = json.loads(path.read_text(encoding="utf-8"))
     if evidence["status"] != "pass":
         raise ValueError("Reference verification has not passed")
@@ -156,7 +156,8 @@ def reference_profiles() -> tuple[dict, str]:
     return profiles, digest(path)
 
 
-def build(entry: dict, release: str, checked: str, references: dict, reference_hash: str) -> Path:
+def build(entry: dict, release: str, checked: str, references: dict, reference_hash: str,
+          reference_path: Path, diagnostic_root: Path) -> Path:
     dataset_id = entry["dataset_id"]
     object_key = entry["object_key"]
     slug = object_key.lower()
@@ -170,7 +171,7 @@ def build(entry: dict, release: str, checked: str, references: dict, reference_h
     try:
         config_path = ROOT / entry["config"]
         config = json.loads(config_path.read_text(encoding="utf-8"))
-        diagnostic_dir = ROOT / f"staging/{slug}-diagnostic"
+        diagnostic_dir = diagnostic_root / f"{slug}-diagnostic"
         diagnostic_path = ROOT / f"evidence/{slug}-diagnostic.json"
         diagnostic = json.loads(diagnostic_path.read_text(encoding="utf-8"))
         baseline_path = ROOT / f"evidence/{slug}-deseq2.json"
@@ -289,7 +290,7 @@ def build(entry: dict, release: str, checked: str, references: dict, reference_h
             },
             "diagnostic": {"path": f"evidence/{slug}-diagnostic.json", "sha256": digest(diagnostic_path)},
             "deseq2": {"path": f"evidence/{slug}-deseq2.json", "sha256": digest(baseline_path)},
-            "reference": {"path": "evidence/reference-verification.json", "sha256": reference_hash},
+            "reference": {"path": str(reference_path.relative_to(ROOT)).replace("\\", "/"), "sha256": reference_hash},
             "intake": {"path": f"curation/intake/{slug}.json", "sha256": digest(intake_path)},
         }
         write_json(partial / "provenance/transform.json", provenance)
@@ -351,12 +352,12 @@ def build(entry: dict, release: str, checked: str, references: dict, reference_h
                     "condition_values": json.dumps(config.get("condition_values")),
                     "subset": json.dumps(config.get("subset", {}), sort_keys=True),
                 },
-                "versions": {"python": diagnostic["versions"]["python"], "numpy": diagnostic["versions"]["numpy"], "r": "4.5.3", "deseq2": "1.50.2"},
+                "versions": {"python": diagnostic["versions"]["python"], "numpy": diagnostic["versions"]["numpy"], "r": baseline["runtime"]["r"], "deseq2": baseline["runtime"]["deseq2"]},
             },
             "files": files,
             "validation": {
                 "profile": "expected/validation.json",
-                "baseline_version": "deseq2-1.50.2-and-median-ratio-envelope-v1",
+                "baseline_version": f"deseq2-{baseline['runtime']['deseq2']}-and-median-ratio-envelope-v1",
                 "metrics": METRICS,
             },
             "limitations": [
@@ -376,7 +377,14 @@ def build(entry: dict, release: str, checked: str, references: dict, reference_h
 
 
 if __name__ == "__main__":
-    plan = json.loads((ROOT / "curation/collection-plan.json").read_text(encoding="utf-8"))
-    references, reference_hash = reference_profiles()
-    built = [str(build(entry, plan["release"], plan["checked"], references, reference_hash).relative_to(ROOT)) for entry in plan["objects"]]
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--plan", type=Path, default=ROOT / "curation/collection-plan.json")
+    parser.add_argument("--reference-evidence", type=Path, default=ROOT / "evidence/reference-verification.json")
+    parser.add_argument("--diagnostic-root", type=Path, default=ROOT / "staging")
+    args = parser.parse_args()
+    reference_path = args.reference_evidence.resolve()
+    plan = json.loads(args.plan.resolve().read_text(encoding="utf-8"))
+    references, reference_hash = reference_profiles(reference_path)
+    built = [str(build(entry, plan["release"], plan["checked"], references, reference_hash,
+                       reference_path, args.diagnostic_root.resolve()).relative_to(ROOT)) for entry in plan["objects"]]
     print(json.dumps({"built": built}, indent=2))

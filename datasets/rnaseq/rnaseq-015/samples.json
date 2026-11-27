@@ -1,0 +1,44 @@
+[
+  {
+    "sample_id": "ERR4659015",
+    "condition": "siRNA knockdown of FOXK1/2",
+    "replicate": 1,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR4659016",
+    "condition": "siRNA knockdown of FOXK1/2",
+    "replicate": 2,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR4659017",
+    "condition": "siRNA knockdown of FOXK1/2",
+    "replicate": 3,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR4659018",
+    "condition": "scrambled siRNA",
+    "replicate": 1,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR4659019",
+    "condition": "scrambled siRNA",
+    "replicate": 2,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  },
+  {
+    "sample_id": "ERR4659020",
+    "condition": "scrambled siRNA",
+    "replicate": 3,
+    "batch": "not_reported",
+    "strandedness": "unknown"
+  }
+]

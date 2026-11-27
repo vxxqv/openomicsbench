@@ -118,7 +118,7 @@ def pocket_genes(path: Path) -> list[str]:
     return genes
 
 
-def run(config_path: Path, staging: Path) -> dict:
+def run(config_path: Path, staging: Path, diagnostic_root: Path = ROOT / "staging") -> dict:
     config = json.loads(config_path.read_text(encoding="utf-8"))
     profiles = []
     verified_accessions = []
@@ -140,10 +140,10 @@ def run(config_path: Path, staging: Path) -> dict:
         checks = []
         for object_key in profile["objects"]:
             slug = object_key.lower()
-            diagnostic_path = ROOT / f"staging/{slug}-diagnostic/diagnostic-report.json"
+            diagnostic_path = diagnostic_root / f"{slug}-diagnostic/diagnostic-report.json"
             diagnostic = json.loads(diagnostic_path.read_text(encoding="utf-8"))
             size = diagnostic["smallest_passing_features"]
-            genes = pocket_genes(ROOT / f"staging/{slug}-diagnostic/candidates/{size}/counts.tsv")
+            genes = pocket_genes(diagnostic_root / f"{slug}-diagnostic/candidates/{size}/counts.tsv")
             missing = sorted(set(genes) - annotation_genes)
             checks.append({
                 "object_key": object_key,
@@ -197,9 +197,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=ROOT / "curation/reference-sources.json")
     parser.add_argument("--staging", type=Path, required=True)
+    parser.add_argument("--diagnostic-root", type=Path, default=ROOT / "staging")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    report = run(args.config.resolve(), args.staging.resolve())
+    report = run(args.config.resolve(), args.staging.resolve(), args.diagnostic_root.resolve())
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(json.dumps(report, indent=2))

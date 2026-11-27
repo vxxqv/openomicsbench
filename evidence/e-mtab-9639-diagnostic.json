@@ -1,0 +1,178 @@
+{
+  "accession": "E-MTAB-9639",
+  "object_key": "E-MTAB-9639",
+  "status": "diagnostic_only",
+  "source_features": 58735,
+  "source_samples": 21,
+  "analysed_samples": 21,
+  "selected_samples": 6,
+  "excluded_count_columns": [],
+  "deduplicated_count_columns": {
+    "ERR4659000": 2,
+    "ERR4659001": 2,
+    "ERR4659002": 2,
+    "ERR4659003": 2,
+    "ERR4659004": 2,
+    "ERR4659005": 2,
+    "ERR4659006": 2,
+    "ERR4659007": 2,
+    "ERR4659008": 2,
+    "ERR4659009": 2,
+    "ERR4659010": 2,
+    "ERR4659011": 2,
+    "ERR4659012": 2,
+    "ERR4659013": 2,
+    "ERR4659014": 2,
+    "ERR4659015": 2,
+    "ERR4659016": 2,
+    "ERR4659017": 2,
+    "ERR4659018": 2,
+    "ERR4659019": 2,
+    "ERR4659020": 2
+  },
+  "conditions": {
+    "siRNA knockdown of FOXK1/2": 3,
+    "scrambled siRNA": 3
+  },
+  "factor_column": "Factor Value[RNA interference]",
+  "batch_column": null,
+  "subset": {
+    "Factor Value[cell type]": [
+      "neuronal stem cell"
+    ]
+  },
+  "batches": {
+    "not_reported": 6
+  },
+  "sample_order": [
+    "ERR4659015",
+    "ERR4659016",
+    "ERR4659017",
+    "ERR4659018",
+    "ERR4659019",
+    "ERR4659020"
+  ],
+  "contrast": "siRNA knockdown of FOXK1/2 - scrambled siRNA",
+  "baseline": "Diagnostic OLS on log2(median-ratio-normalized counts + 1), neuronal cells only; DESeq2 confirmation remains required.",
+  "normalization": "median_ratio",
+  "full_size_factors": [
+    0.9364483346609249,
+    0.9285798962634981,
+    1.106214220668778,
+    0.9235203399605937,
+    1.0548070289531302,
+    1.067181244845821
+  ],
+  "candidate_curve": [
+    {
+      "features": 500,
+      "bytes": 14817,
+      "size_ratio": 0.0020079058667927846,
+      "metrics": {
+        "spearman_logfc": 0.9843144944423896,
+        "top_k_jaccard": 0.8518518518518519,
+        "distance_correlation": 0.8653627707316899,
+        "sign_concordance": 1.0
+      },
+      "pass": false
+    },
+    {
+      "features": 1000,
+      "bytes": 29572,
+      "size_ratio": 0.0040074098868054416,
+      "metrics": {
+        "spearman_logfc": 0.9514975325382021,
+        "top_k_jaccard": 0.8867924528301887,
+        "distance_correlation": 0.9098498517883973,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 2000,
+      "bytes": 58665,
+      "size_ratio": 0.007949908731551509,
+      "metrics": {
+        "spearman_logfc": 0.9658643059157423,
+        "top_k_jaccard": 0.8867924528301887,
+        "distance_correlation": 0.9398289009171148,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 4000,
+      "bytes": 116735,
+      "size_ratio": 0.015819186836745342,
+      "metrics": {
+        "spearman_logfc": 0.9554797748768181,
+        "top_k_jaccard": 0.9230769230769231,
+        "distance_correlation": 0.9666711455510408,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 8000,
+      "bytes": 232698,
+      "size_ratio": 0.03153375712971232,
+      "metrics": {
+        "spearman_logfc": 0.9742299172994092,
+        "top_k_jaccard": 0.9230769230769231,
+        "distance_correlation": 0.9777296266902352,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 12000,
+      "bytes": 349021,
+      "size_ratio": 0.04729711233946713,
+      "metrics": {
+        "spearman_logfc": 0.9811240610301933,
+        "top_k_jaccard": 0.9230769230769231,
+        "distance_correlation": 0.981213250888854,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    },
+    {
+      "features": 20000,
+      "bytes": 582089,
+      "size_ratio": 0.07888100952254473,
+      "metrics": {
+        "spearman_logfc": 0.99177439608894,
+        "top_k_jaccard": 1.0,
+        "distance_correlation": 0.9887157633199924,
+        "sign_concordance": 1.0
+      },
+      "pass": true
+    }
+  ],
+  "smallest_passing_features": 1000,
+  "rights": "AMBER: study-specific redistribution and attribution review is pending.",
+  "reference": "PENDING: pin the Expression Atlas reference release and exact annotation hashes before release.",
+  "release_eligible": false,
+  "source_resources": [
+    {
+      "role": "raw_counts",
+      "path": "E-MTAB-9639-raw-counts.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-9639/resources/DifferentialSecondaryDataFiles.RnaSeq/raw-counts",
+      "bytes": 7379330,
+      "sha256": "bf01063f0f79587f06dbc6a02255ae5db28a8532d6da3e62123f45433619cdb3"
+    },
+    {
+      "role": "experiment_design",
+      "path": "E-MTAB-9639-experiment-design.tsv",
+      "url": "https://www.ebi.ac.uk/gxa/experiments-content/E-MTAB-9639/resources/ExperimentDesignFile.RnaSeq/experiment-design",
+      "bytes": 10184,
+      "sha256": "0aba876967f3e579dac73936897bcd20ecee2b542599e998575138e11a9d0a00"
+    }
+  ],
+  "versions": {
+    "python": "3.14.0",
+    "numpy": "2.5.0"
+  },
+  "config_sha256": "264cf59a53730954e58dbf1f6149a5b7f85d43ffee230626e68257b07868c27e",
+  "workflow_sha256": "1e065fb87b06b029505797eefe97580cb1a2dde6b1c32724bbbe46299b7343e4"
+}
