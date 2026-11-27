@@ -1,0 +1,160 @@
+{
+  "scope": "Identifier overlap check only; this does not prove the original processing pipeline used these exact GTF files.",
+  "annotations": {
+    "ensembl88": {
+      "sha256": "ba9cb13686c3a4429724dfd6f6e52df92d1cc59675a4590d4a854f64ce633f46",
+      "gene_ids": 58233,
+      "gene_names": 56505
+    },
+    "gencode26": {
+      "sha256": "e84157bb3ddfe6b1dd0b8816ec71b553074ed162ab0940ac48b80375f6cb18bd",
+      "gene_ids": 58174,
+      "gene_names": 56470
+    }
+  },
+  "cases": [
+    {
+      "stem": "sc_10x",
+      "source_sha256": "13e0b34091e5e81015852ee97575d12264603cabd2a48f53a4ac602f92edc7f4",
+      "feature_count": 16468,
+      "ERCC_controls_excluded": 0,
+      "annotation_matched": 16468,
+      "annotation_unmatched": 0,
+      "unmatched_examples": [],
+      "secondary_gencode26_matched": 16462,
+      "candidate_annotation": "Ensembl GRCh38 release 88 (GRCh38.p10)"
+    },
+    {
+      "stem": "sc_celseq2",
+      "source_sha256": "a82aa89b8995aed412f4260c0adb343967e33a801af6f2e0aa647c1d897a5a21",
+      "feature_count": 28204,
+      "ERCC_controls_excluded": 62,
+      "annotation_matched": 28142,
+      "annotation_unmatched": 0,
+      "unmatched_examples": [],
+      "secondary_gencode26_matched": 28130,
+      "candidate_annotation": "Ensembl GRCh38 release 88 (GRCh38.p10)"
+    },
+    {
+      "stem": "sc_dropseq",
+      "source_sha256": "98c0bb6a9fbf4b93967ef82cef9985d7691cf59a31dc5b0b3699f70ed1a0fd08",
+      "feature_count": 15127,
+      "ERCC_controls_excluded": 0,
+      "annotation_matched": 15127,
+      "annotation_unmatched": 0,
+      "unmatched_examples": [],
+      "secondary_gencode26_matched": 15125,
+      "candidate_annotation": "Ensembl GRCh38 release 88 (GRCh38.p10)"
+    },
+    {
+      "stem": "sc_10x_5cl",
+      "source_sha256": "ad90bfcfc45230c348ef5e274445f23a0073114bab6cb58e6ef478b402d18221",
+      "feature_count": 11786,
+      "ERCC_controls_excluded": 0,
+      "annotation_matched": 11013,
+      "annotation_unmatched": 773,
+      "unmatched_examples": [
+        "ABRAXAS1",
+        "ABRAXAS2",
+        "AC000089.1",
+        "AC002056.1",
+        "AC002075.2",
+        "AC002116.2",
+        "AC002384.1",
+        "AC002467.1",
+        "AC004130.1",
+        "AC004148.2",
+        "AC004453.1",
+        "AC004552.1",
+        "AC004816.1",
+        "AC004817.3",
+        "AC004846.1",
+        "AC004870.2",
+        "AC004890.1",
+        "AC004982.2",
+        "AC005000.1",
+        "AC005076.1",
+        "AC005154.1",
+        "AC005229.1",
+        "AC005229.4",
+        "AC005261.1",
+        "AC005332.7"
+      ],
+      "secondary_gencode26_matched": 11006,
+      "candidate_annotation": "Ensembl GRCh38 release 88 (GRCh38.p10)"
+    },
+    {
+      "stem": "sc_celseq2_5cl_p1",
+      "source_sha256": "577324d2fd427685144420536489202c68ae98cb22f5825c40c8cf41c5fe0a07",
+      "feature_count": 15564,
+      "ERCC_controls_excluded": 34,
+      "annotation_matched": 15512,
+      "annotation_unmatched": 18,
+      "unmatched_examples": [
+        "ENSG00000284618",
+        "ENSG00000284670",
+        "ENSG00000284691",
+        "ENSG00000284722",
+        "ENSG00000284753",
+        "ENSG00000284783",
+        "ENSG00000284906",
+        "ENSG00000285042",
+        "ENSG00000285053",
+        "ENSG00000285108",
+        "ENSG00000285219",
+        "ENSG00000285230",
+        "ENSG00000285278",
+        "ENSG00000285294",
+        "ENSG00000285331",
+        "ENSG00000285410",
+        "ENSG00000285437",
+        "ENSG00000285467"
+      ],
+      "secondary_gencode26_matched": 15500,
+      "candidate_annotation": "Ensembl GRCh38 release 88 (GRCh38.p10)"
+    },
+    {
+      "stem": "sc_celseq2_5cl_p2",
+      "source_sha256": "c6ef3df82d9fa44598ee15d8a07113c44a830ee3d2e3205c93590d594240bab5",
+      "feature_count": 14078,
+      "ERCC_controls_excluded": 29,
+      "annotation_matched": 14038,
+      "annotation_unmatched": 11,
+      "unmatched_examples": [
+        "ENSG00000284618",
+        "ENSG00000284670",
+        "ENSG00000284753",
+        "ENSG00000284783",
+        "ENSG00000285106",
+        "ENSG00000285230",
+        "ENSG00000285331",
+        "ENSG00000285399",
+        "ENSG00000285410",
+        "ENSG00000285437",
+        "ENSG00000285467"
+      ],
+      "secondary_gencode26_matched": 14029,
+      "candidate_annotation": "Ensembl GRCh38 release 88 (GRCh38.p10)"
+    },
+    {
+      "stem": "sc_celseq2_5cl_p3",
+      "source_sha256": "e535abac653a5a3ee44eff88345db2315693732f679156ab20ee924b21bced9a",
+      "feature_count": 13426,
+      "ERCC_controls_excluded": 28,
+      "annotation_matched": 13390,
+      "annotation_unmatched": 8,
+      "unmatched_examples": [
+        "ENSG00000284618",
+        "ENSG00000284670",
+        "ENSG00000284753",
+        "ENSG00000285230",
+        "ENSG00000285278",
+        "ENSG00000285331",
+        "ENSG00000285410",
+        "ENSG00000285437"
+      ],
+      "secondary_gencode26_matched": 13381,
+      "candidate_annotation": "Ensembl GRCh38 release 88 (GRCh38.p10)"
+    }
+  ]
+}

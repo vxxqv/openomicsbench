@@ -1,0 +1,32 @@
+{
+  "profile": "cellbench-cell-line-reference-v1",
+  "matrix": "pocket/matrix.mtx.gz",
+  "barcodes": "pocket/barcodes.tsv",
+  "features": "pocket/features.tsv",
+  "label_truth": "expected/cell-labels.tsv",
+  "expected_summary": {
+    "cells": 274,
+    "features": 28204,
+    "nonzero": 1954979,
+    "total_counts": 10321416,
+    "counts_per_cell": {
+      "minimum": 7469,
+      "median": 34839.0,
+      "maximum": 157352
+    },
+    "features_per_cell": {
+      "minimum": 2838,
+      "median": 7402.0,
+      "maximum": 12947
+    },
+    "mitochondrial_fraction": 0.07955962631483897,
+    "zero_count_cells": 0
+  },
+  "clustering_comparison": {
+    "minimum_adjusted_rand_index": -1.0,
+    "minimum_normalized_mutual_information": 0.0,
+    "minimum_purity": 0.0,
+    "minimum_coverage": 1.0
+  },
+  "threshold_rationale": "Report label recovery without an arbitrary performance floor; require complete cell coverage."
+}

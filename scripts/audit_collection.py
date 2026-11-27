@@ -53,7 +53,7 @@ def main() -> None:
     records = [
         (model, folder)
         for model, folder in registry(ROOT).values()
-        if model.kind == "real" and model.status == "validated"
+        if model.kind == "real" and model.status == "validated" and model.assay == "bulk_rna_seq"
     ]
     blockers = []
     ids = [model.id for model, _ in records]
@@ -156,6 +156,7 @@ def main() -> None:
 
     report = {
         "schema_version": "1.0",
+        "scope": "bulk_rna_seq; other real assays are checked by their own validators and release evidence",
         "status": "pass" if not blockers else "fail",
         "biological_objects": len(records),
         "source_studies": len({model.source.accession for model, _ in records}),

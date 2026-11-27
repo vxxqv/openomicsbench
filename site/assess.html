@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="OpenOmicsBench processed-result assessment for single-cell labels, small variants, chromatin peaks and peptides. Learn the inputs, outputs and limits of each check.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Assess processed omics results | OpenOmicsBench">
+  <meta property="og:url" content="https://vxxqv.github.io/openomicsbench/assess.html">
+  <link rel="canonical" href="https://vxxqv.github.io/openomicsbench/assess.html">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="rnaseq.css">
+  <title>Assess processed omics results | OpenOmicsBench</title>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header"><div class="wrap header-inner">
+    <a class="brand" href="index.html">OpenOmicsBench<span class="brand-mark">/</span></a>
+    <nav aria-label="Main navigation"><a href="index.html#collection">Collection</a><a href="rnaseq.html">RNA-seq</a><a href="index.html#start">Get started</a><a href="https://github.com/vxxqv/openomicsbench">GitHub ↗</a></nav>
+  </div></header>
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="title">
+      <div class="eyebrow">Single-cell · variants · chromatin · proteomics</div>
+      <h1 id="title">Check processed results with a declared reference.</h1>
+      <p class="lead">Four compact commands help you inspect different kinds of pipeline output. Each report states what it compares, what it excludes, and when a specialist tool is still needed.</p>
+      <div class="hero-actions"><a class="button primary" href="#singlecell">Explore commands ↓</a><a class="button secondary" href="https://github.com/vxxqv/openomicsbench/blob/main/docs/multi-assay-assessment.md">Full input guide ↗</a></div>
+    </section>
+    <section class="band" id="singlecell"><div class="wrap two-column">
+      <div><p class="section-index">01 / Single-cell</p><h2>Separate cluster structure from cell names.</h2></div>
+      <div class="prose"><p>Compare cell clusters with a declared reference, then inspect exact annotation labels and embedding neighborhoods. The report shows biological-state preservation and batch mixing side by side.</p><pre><code>omicsbench cell assess singlecell-002 clusters.tsv --annotation labels.tsv --embedding coordinates.tsv</code></pre><p>Need H5AD input? <code>cell export-h5ad</code> can export chosen AnnData fields with an optional dependency. Six sourced CellBench cases cover three platforms and three technical plates from one study. The separate <code>singlecell-001</code> case is synthetic. These labels support comparisons within the declared cases; they do not establish general cell-type accuracy.</p></div>
+    </div></section>
+    <section class="wrap section" id="variants"><p class="section-index">02 / Small variants</p><h2>Count only calls inside evaluable regions.</h2>
+      <div class="prose"><pre><code>omicsbench variant benchmark truth.vcf.gz calls.vcf.gz regions.bed.gz --assembly GRCh38 --truth-assembly GRCh38</code></pre><p>The report separates SNVs, indels, and excluded calls. It uses exact allele representations. For a germline performance claim, compare the matching GIAB truth VCF, BED and reference with a representation-aware tool such as <a href="https://github.com/Illumina/hap.py">hap.py</a>.</p></div>
+    </section>
+    <section class="band" id="peaks"><div class="wrap two-column">
+      <div><p class="section-index">03 / Chromatin</p><h2>Inspect peak sets and replicate agreement.</h2></div>
+      <div class="prose"><pre><code>omicsbench interval assess peaks.narrowPeak --replicate second.narrowPeak --reference reference.narrowPeak</code></pre><p>Peak widths, reciprocal overlap and summit distance are reported separately. FRiP, TSS enrichment and IDR summaries can be imported from existing analyses; this tool does not calculate them from reads or replace an ENCODE pipeline.</p></div>
+    </div></section>
+    <section class="wrap section" id="peptides"><p class="section-index">04 / Proteomics</p><h2>Keep identification and quantity distinct.</h2>
+      <div class="prose"><pre><code>omicsbench peptide assess reference.tsv identifications.tsv --q 0.001 --q 0.01 --q 0.05</code></pre><p>The report compares protein-peptide pairs across q-value thresholds and reports quantitative error only when both tables provide positive quantities. It does not reprocess spectra or resolve protein inference.</p><p>Every scientific case needs documented source files, rights, identifiers and limitations. <a href="https://github.com/vxxqv/openomicsbench/blob/main/docs/multi-assay-assessment.md">Read the full format and interpretation guide ↗</a></p></div>
+    </section>
+  </main>
+  <footer><div class="wrap footer-inner"><span>OpenOmicsBench · Vivaan Patni</span><span>Apache-2.0 code · dataset rights vary</span></div></footer>
+</body>
+</html>

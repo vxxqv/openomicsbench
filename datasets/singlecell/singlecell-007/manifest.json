@@ -1,0 +1,134 @@
+{
+  "schema_version": "3.0",
+  "id": "singlecell-007",
+  "title": "Five-line CEL-seq2 mixture, plate 3",
+  "release": "15.0.0",
+  "assay": "single_cell_rna_seq",
+  "kind": "real",
+  "status": "validated",
+  "archetype": "Known cell-line mixture measured by sc celseq2 5cl p3",
+  "organism": "Homo sapiens",
+  "taxon_id": 9606,
+  "source": {
+    "repository": "CellBench / GEO",
+    "accession": "GSM3618024",
+    "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM3618024",
+    "citation": "Tian L et al. Benchmarking single cell RNA-sequencing analysis pipelines using mixture control experiments. Nature Methods 2019. doi:10.1038/s41592-019-0425-8.",
+    "retrieved": "2026-11-27",
+    "sha256": "e535abac653a5a3ee44eff88345db2315693732f679156ab20ee924b21bced9a"
+  },
+  "rights": {
+    "status": "GREEN",
+    "license": "MIT",
+    "evidence": "Count and metadata CSVs are in LuyiTian/sc_mixology at commit 7d00ffb0bd043467f365a9358d7312f294f13c9f; the repository LICENSE grants redistribution with notice, copied into this case. Original source authors generated the data; derived pocket is attributed and source hashes are pinned.",
+    "checked": "2026-11-27"
+  },
+  "reference": {
+    "genome": "GRCh38.p10",
+    "annotation": "Ensembl GRCh38 release 88 (feature-ID compatibility check)",
+    "namespace": "Ensembl gene IDs plus ERCC controls",
+    "compatibility": "verified"
+  },
+  "samples": [
+    {
+      "sample_id": "sc_celseq2_5cl_p3",
+      "condition": "cell-line mixture",
+      "replicate": 1,
+      "batch": "sc_celseq2_5cl_p3",
+      "strandedness": "unknown"
+    }
+  ],
+  "derivation": {
+    "workflow": "workflows/build_cellbench_cases.py",
+    "commit": "8b0210f1817946a43e4f033248e60a74346e346f",
+    "seed": 0,
+    "algorithm": "source-count-preserving subset and Matrix Market conversion",
+    "parameters": {
+      "cells": 305,
+      "features": 13418,
+      "excluded_features": 8
+    },
+    "versions": {
+      "python": "3.12",
+      "openomicsbench_contract": "3.0",
+      "ensembl_gtf": "88"
+    }
+  },
+  "files": [
+    {
+      "path": "pocket/matrix.mtx.gz",
+      "tier": "pocket",
+      "role": "matrix",
+      "media_type": "application/gzip",
+      "bytes": 4084829,
+      "sha256": "9f5fc55561cf55e4851ab89f75ca090c906a0fd7cde80b7dc4ff6a85d64a7f99"
+    },
+    {
+      "path": "pocket/barcodes.tsv",
+      "tier": "pocket",
+      "role": "barcodes",
+      "media_type": "text/tab-separated-values",
+      "bytes": 2027,
+      "sha256": "792600ac5eae5d6b642be573952f85d91688d4c8fae0816f9316ac0d99323942"
+    },
+    {
+      "path": "pocket/features.tsv",
+      "tier": "pocket",
+      "role": "features",
+      "media_type": "text/tab-separated-values",
+      "bytes": 523646,
+      "sha256": "74077180bb37d109c4cb1bdc7094cc8ab1b76bf1be1bc95829be06ae8ac23793"
+    },
+    {
+      "path": "expected/cell-labels.tsv",
+      "tier": "expected",
+      "role": "cell_metadata",
+      "media_type": "text/tab-separated-values",
+      "bytes": 3714,
+      "sha256": "2182d4c6d2b7798219a1a7e92b71aa4501fef902ace1e03cd83c58ef52504f7d"
+    },
+    {
+      "path": "expected/validation.json",
+      "tier": "expected",
+      "role": "metrics",
+      "media_type": "application/json",
+      "bytes": 914,
+      "sha256": "254c9046ee3630df656e0cb29a66faac378699f6e7ae27443e6a501e369edd14"
+    },
+    {
+      "path": "provenance/source-and-transform.json",
+      "tier": "metadata",
+      "role": "provenance",
+      "media_type": "application/json",
+      "bytes": 1014,
+      "sha256": "d11c4ed4d261e8a935b0431d464a7c2fbc022333f11de72cfbde73b1a2e5f505"
+    },
+    {
+      "path": "provenance/source-license.txt",
+      "tier": "metadata",
+      "role": "license",
+      "media_type": "text/plain",
+      "bytes": 1066,
+      "sha256": "1dc34a077f2939e12a76392be9002e74a11ed3419e71bc2bf7a84d6e4f3df81b"
+    }
+  ],
+  "validation": {
+    "profile": "expected/validation.json",
+    "baseline_version": "cellbench-cell-line-reference-v1",
+    "metrics": []
+  },
+  "sequence": null,
+  "single_cell": {
+    "format": "matrix_market",
+    "orientation": "features_by_cells",
+    "feature_columns": 3,
+    "mitochondrial_prefix": "MT-"
+  },
+  "intervals": null,
+  "limitations": [
+    "Cell-line labels come from upstream demuxlet metadata, not direct cell-type measurements.",
+    "All six cases are from one source study; CEL-seq2 five-line plates are technical repeats, not independent cohorts.",
+    "The pocket preserves selected cell counts and all features matching the declared Ensembl annotation; excluded unmatched IDs are recorded in provenance.",
+    "Gene-ID overlap confirms feature compatibility with Ensembl 88 but does not prove the original aligner used this exact downloaded GTF file."
+  ]
+}

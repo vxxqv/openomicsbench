@@ -12,7 +12,7 @@ Install the [Bioconda package](https://anaconda.org/bioconda/openomicsbench) wit
 
 If OpenOmicsBench helps your work, please [star the repository](https://github.com/vxxqv/openomicsbench). Stars help other people discover the repository.
 
-OpenOmicsBench is a compact benchmark collection and local toolkit for bioinformatics software testing, method checks and teaching. It contains 12 certified bulk RNA-seq objects, seven deterministic sequence and classification fixtures, a 10x-style single-cell RNA-seq benchmark, a genomic peak-calling benchmark, strict local tools, and a CI-ready evaluation system. [Browse the collection](https://vxxqv.github.io/openomicsbench/) before installing.
+OpenOmicsBench is a compact benchmark collection and local toolkit for bioinformatics software testing, method checks and teaching. The v15 collection contains 16 certified bulk RNA-seq objects, six sourced single-cell RNA-seq cases from one CellBench study, seven deterministic sequence and classification fixtures, a separate synthetic single-cell fixture, a genomic peak-calling fixture, strict local tools, and a CI-ready evaluation system. [Browse the collection](https://vxxqv.github.io/openomicsbench/) before installing.
 
 ## Try one RNA-seq study
 
@@ -64,7 +64,7 @@ The wheel contains the complete collection. A repository checkout and network co
 
 ## Score your RNA-seq results
 
-Version 14 development adds a count-quality report you can run before differential expression:
+Version 14 adds a count-quality report you can run before differential expression:
 
 ```sh
 omicsbench rnaseq qc tumour-example/rnaseq-005/counts.tsv --samples tumour-example/rnaseq-005/samples.tsv --contrasts tumour-example/rnaseq-005/contrasts.tsv --id rnaseq-005
@@ -85,6 +85,17 @@ omicsbench rnaseq normalize-effects rnaseq-005 results/edger.tsv results/rnaseq-
 The converter recognizes common `log2FoldChange` and `logFC` headers, including a first unnamed gene-ID column from an R CSV export. It drops missing effects with a count in the report, rejects duplicate genes and ambiguous headers, and keeps effect direction unchanged. Use `--reverse-sign` only when the submitted contrast is the reverse of the benchmark's declared target minus reference. Scoring compares with the archived full-source DESeq2 reference and its declared thresholds; it does not establish biological truth. See [RNA-seq packs and result tables](docs/rnaseq-packs.md) for file contracts and limitations.
 
 `assess-de` adds a separate summary of adjusted-p-value calls, effect directions and gene-effect rank agreement for a native result table. Its significant-gene count depends on the submitted method and threshold. You can add `--truth labels.tsv` for precision, recall and F1 against an independent, fully tested labelled gene set. Agreement with the archived reference is not an independent truth test.
+
+## Assess more assays
+
+Version 15 adds processed-result reports for single-cell clusters and annotations, small variants within supplied BED regions, chromatin peaks, and peptide identifications. It also offers an optional AnnData export adapter and six sourced single-cell cases. These tools have distinct reference types and limits; read the [multi-assay input guide](docs/multi-assay-assessment.md), [CellBench intake record](curation/v15-source-intake.md), and [website walkthrough](https://vxxqv.github.io/openomicsbench/assess.html) before interpreting their numbers.
+
+```sh
+omicsbench cell assess singlecell-001 clusters.tsv --annotation annotations.tsv --embedding embedding.tsv
+omicsbench variant benchmark truth.vcf.gz calls.vcf.gz regions.bed.gz --assembly GRCh38 --truth-assembly GRCh38
+omicsbench interval assess peaks.narrowPeak --replicate replicate.narrowPeak
+omicsbench peptide assess reference.tsv identifications.tsv --q 0.01
+```
 
 ## Test your own results
 

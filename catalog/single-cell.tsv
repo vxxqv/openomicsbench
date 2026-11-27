@@ -1,2 +1,8 @@
 id	title	assay	format	cells	features	nonzero	states	rights	license
 singlecell-001	Synthetic single-cell RNA-seq clustering benchmark	single_cell_rna_seq	matrix_market	90	60	3996	3	GREEN	Apache-2.0
+singlecell-002	Three-line 10x Chromium cell mixture	single_cell_rna_seq	matrix_market	300	16468	2709656	3	GREEN	MIT
+singlecell-003	Three-line CEL-seq2 cell mixture	single_cell_rna_seq	matrix_market	274	28204	1954979	3	GREEN	MIT
+singlecell-004	Three-line Drop-seq cell mixture	single_cell_rna_seq	matrix_market	225	15127	1290921	3	GREEN	MIT
+singlecell-005	Five-line CEL-seq2 mixture, plate 1	single_cell_rna_seq	matrix_market	297	15546	1809784	5	GREEN	MIT
+singlecell-006	Five-line CEL-seq2 mixture, plate 2	single_cell_rna_seq	matrix_market	307	14067	1736426	5	GREEN	MIT
+singlecell-007	Five-line CEL-seq2 mixture, plate 3	single_cell_rna_seq	matrix_market	305	13418	1462622	5	GREEN	MIT

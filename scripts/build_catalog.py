@@ -25,7 +25,7 @@ def read_json(path: Path):
 def collect() -> list[dict]:
     rows = []
     for model, folder in registry(ROOT).values():
-        if model.kind != "real" or model.status != "validated":
+        if model.kind != "real" or model.status != "validated" or model.assay != "bulk_rna_seq":
             continue
         validation = read_json(folder / model.validation.profile)
         evidence = read_json(folder / validation["deseq2_evidence"])

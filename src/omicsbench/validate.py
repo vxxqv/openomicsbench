@@ -3,7 +3,7 @@ from .hashing import digest, contained
 from .rnaseq import read_counts, diagnostic, preservation
 from .sequences import read_records, reverse_complement, summarize
 from .sequence_analysis import pair_report
-from .singlecell import summarize_matrix
+from .singlecell import read_labels, read_lines, summarize_matrix
 from .intervals import read_chrom_sizes, read_intervals, summarize_intervals
 from .taxonomy import exact_assignments, read_assignments
 
@@ -121,6 +121,10 @@ def validate_single_cell(model, folder, profile):
         model.single_cell.mitochondrial_prefix,
         model.single_cell.feature_columns,
     )
+    barcodes = read_lines(contained(folder, profile["barcodes"]))
+    labels = read_labels(contained(folder, profile["label_truth"]))
+    if set(labels) != set(barcodes):
+        raise ValueError(f"{model.id}: cell-line reference labels differ from matrix cell IDs")
     if observed != profile["expected_summary"]:
         raise ValueError(f"{model.id}: single-cell matrix summary differs from the expected profile")
     return {

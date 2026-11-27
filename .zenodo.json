@@ -6,7 +6,7 @@
       "orcid": "0009-0005-1859-5107"
     }
   ],
-  "description": "OpenOmicsBench provides traceable offline benchmarks for RNA-seq, DNA and protein sequences, single-cell labels, genomic intervals and synthetic read-level taxonomy. Version 14 includes 16 biological bulk RNA-seq objects from 11 Expression Atlas studies, checked compact and full input packs, sample and contrast validation, descriptive RNA-seq QC, and agreement checks against declared DESeq2 reference analyses. It also includes a six-assay demo, verifiable reports and a searchable catalog of 25 objects. Reference agreement does not establish biological ground truth; synthetic fixtures test software behavior only.",
+  "description": "OpenOmicsBench provides traceable offline benchmarks and processed-result assessments for RNA-seq, single-cell labels, DNA and protein sequences, genomic intervals and synthetic read-level taxonomy. Version 15 adds six sourced single-cell cases from one CellBench study, alongside the existing 16 bulk RNA-seq objects and synthetic fixtures. It adds reports for clusters and annotations, region-limited small variants, chromatin peaks and peptide identifications, plus optional AnnData export. The searchable catalog contains 31 objects. Source labels and declared references support bounded comparisons; they do not establish general biological ground truth.",
   "upload_type": "software",
   "access_right": "open",
   "license": "Apache-2.0",

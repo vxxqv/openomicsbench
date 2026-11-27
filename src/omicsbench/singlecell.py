@@ -209,5 +209,9 @@ def compare_labels(model, folder: Path, results: Path, detail_limit: int = 20, c
         "missing_examples": missing[:detail_limit],
         "unexpected_examples": unexpected[:detail_limit],
         "reasons": reasons,
-        "scope": "label-invariant recovery of synthetic cell states; this does not validate biological cell-type annotation",
+        "scope": (
+            "Label-invariant recovery of the source's declared cell-line assignments; demuxlet labels are a reference, not direct cell-type truth."
+            if model.kind == "real" else
+            "Label-invariant recovery of synthetic cell states; this does not validate biological cell-type annotation"
+        ),
     }
