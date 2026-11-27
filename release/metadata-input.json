@@ -45,9 +45,49 @@
     "packaged_collection": true,
     "limitation": "The release preparer ran this fresh-environment trial from the candidate wheel; no independent tester is claimed. The candidate commit identifies the reviewed source and data before this trial record was added."
   },
-  "release_commit": null,
-  "version_doi": null,
-  "post_upload_verification": null,
+  "release_commit": "e3cbdddbc6b6b3c0c2e87aa921abd588e318b0e8",
+  "version_doi": "10.5281/zenodo.24600352",
+  "post_upload_verification": {
+    "status": "pass",
+    "version_doi": "10.5281/zenodo.24600352",
+    "record_url": "https://zenodo.org/records/24600352",
+    "verified_at": "2026-11-27T18:36:59Z",
+    "git_commit": "e3cbdddbc6b6b3c0c2e87aa921abd588e318b0e8",
+    "git_tag": "v15.0.0",
+    "archive_content_match": true,
+    "comparison_scope": "All 561 extracted paths match byte-for-byte after removing each ZIP archive's top-level directory; ZIP container bytes differ.",
+    "archived_files": 561,
+    "inventory_files_verified": 560,
+    "missing_files": [],
+    "extra_files": [],
+    "changed_files": [],
+    "zenodo_sha256": "9493fff015a46a2ad4651726852bf043170ef3a8abfd576de167f073de58d43d",
+    "github_sha256": "1f11da651149bb49daae739f308b23634901b8dfede5417bf76ed96060407fb6",
+    "zenodo_md5": "01e1b54fdeda315fc86effc7e9cc6ed7",
+    "github_md5": "056c66eb973006396435ddfe19740e84"
+  },
   "build_reproducibility": null,
-  "pypi_verification": null
+  "pypi_verification": {
+    "status": "pass",
+    "version": "15.0.0",
+    "url": "https://pypi.org/project/openomicsbench/15.0.0/",
+    "files": [
+      {
+        "filename": "openomicsbench-15.0.0-py3-none-any.whl",
+        "bytes": 46595990,
+        "sha256": "54d3c341858d83e5883af169d9a1ce59e7b00152b1db9e422e4f7b33458d8d70",
+        "file_set_match": true,
+        "normalized_content_match": true,
+        "comparison_scope": "All 343 package payload members match the clean-room tested wheel; generated dist-info metadata is excluded."
+      },
+      {
+        "filename": "openomicsbench-15.0.0.tar.gz",
+        "bytes": 46418044,
+        "sha256": "2cbe5e22425bbeaea4ae04f53f31a254594a25d7233d215dbf72e9cf184bdf10",
+        "file_set_match": true,
+        "normalized_content_match": true,
+        "comparison_scope": "All 380 source payload members match the tagged source; eight generated package-metadata members are excluded."
+      }
+    ]
+  }
 }
