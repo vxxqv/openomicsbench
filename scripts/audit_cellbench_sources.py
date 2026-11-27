@@ -18,7 +18,10 @@ from pathlib import Path
 
 
 UPSTREAM_COMMIT = "7d00ffb0bd043467f365a9358d7312f294f13c9f"
-STEMS = ("sc_10x", "sc_celseq2", "sc_dropseq", "sc_10x_5cl")
+STEMS = (
+    "sc_10x", "sc_celseq2", "sc_dropseq", "sc_10x_5cl",
+    "sc_celseq2_5cl_p1", "sc_celseq2_5cl_p2", "sc_celseq2_5cl_p3",
+)
 GENE_ID = re.compile(r"^ENSG\d+(?:\.\d+)?$")
 
 

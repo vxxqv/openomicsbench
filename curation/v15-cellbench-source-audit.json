@@ -132,6 +132,108 @@
           "url": "https://raw.githubusercontent.com/LuyiTian/sc_mixology/7d00ffb0bd043467f365a9358d7312f294f13c9f/data/csv/sc_10x_5cl.metadata.csv.gz"
         }
       }
+    },
+    {
+      "stem": "sc_celseq2_5cl_p1",
+      "cells": 297,
+      "features": 15564,
+      "unique_feature_ids": 15564,
+      "duplicated_feature_ids": 0,
+      "feature_namespaces": {
+        "ERCC": 34,
+        "Ensembl": 15530
+      },
+      "nonzero_entries": 1810635,
+      "total_counts": 9783530,
+      "zero_count_genes": 0,
+      "cell_labels": {
+        "A549": 103,
+        "H1975": 50,
+        "H2228": 50,
+        "H838": 51,
+        "HCC827": 43
+      },
+      "matrix_metadata_cell_ids_match": true,
+      "source_files": {
+        "counts": {
+          "bytes": 1846196,
+          "sha256": "577324d2fd427685144420536489202c68ae98cb22f5825c40c8cf41c5fe0a07",
+          "url": "https://raw.githubusercontent.com/LuyiTian/sc_mixology/7d00ffb0bd043467f365a9358d7312f294f13c9f/data/csv/sc_celseq2_5cl_p1.count.csv.gz"
+        },
+        "metadata": {
+          "bytes": 17651,
+          "sha256": "a6f5b206f891113162d2c9af27860c187a04ccd8848f9bc29be97dfa95eeadc4",
+          "url": "https://raw.githubusercontent.com/LuyiTian/sc_mixology/7d00ffb0bd043467f365a9358d7312f294f13c9f/data/csv/sc_celseq2_5cl_p1.metadata.csv.gz"
+        }
+      }
+    },
+    {
+      "stem": "sc_celseq2_5cl_p2",
+      "cells": 307,
+      "features": 14078,
+      "unique_feature_ids": 14078,
+      "duplicated_feature_ids": 0,
+      "feature_namespaces": {
+        "ERCC": 29,
+        "Ensembl": 14049
+      },
+      "nonzero_entries": 1737067,
+      "total_counts": 7347615,
+      "zero_count_genes": 0,
+      "cell_labels": {
+        "A549": 107,
+        "H1975": 44,
+        "H2228": 44,
+        "H838": 71,
+        "HCC827": 41
+      },
+      "matrix_metadata_cell_ids_match": true,
+      "source_files": {
+        "counts": {
+          "bytes": 1655842,
+          "sha256": "c6ef3df82d9fa44598ee15d8a07113c44a830ee3d2e3205c93590d594240bab5",
+          "url": "https://raw.githubusercontent.com/LuyiTian/sc_mixology/7d00ffb0bd043467f365a9358d7312f294f13c9f/data/csv/sc_celseq2_5cl_p2.count.csv.gz"
+        },
+        "metadata": {
+          "bytes": 17861,
+          "sha256": "06d2f3b9fd646b4a3c1e6d1af7205c7eec1017bfab9a4c68853f9a3fc97be836",
+          "url": "https://raw.githubusercontent.com/LuyiTian/sc_mixology/7d00ffb0bd043467f365a9358d7312f294f13c9f/data/csv/sc_celseq2_5cl_p2.metadata.csv.gz"
+        }
+      }
+    },
+    {
+      "stem": "sc_celseq2_5cl_p3",
+      "cells": 305,
+      "features": 13426,
+      "unique_feature_ids": 13426,
+      "duplicated_feature_ids": 0,
+      "feature_namespaces": {
+        "ERCC": 28,
+        "Ensembl": 13398
+      },
+      "nonzero_entries": 1463083,
+      "total_counts": 5546889,
+      "zero_count_genes": 0,
+      "cell_labels": {
+        "A549": 118,
+        "H1975": 35,
+        "H2228": 41,
+        "H838": 75,
+        "HCC827": 36
+      },
+      "matrix_metadata_cell_ids_match": true,
+      "source_files": {
+        "counts": {
+          "bytes": 1449564,
+          "sha256": "e535abac653a5a3ee44eff88345db2315693732f679156ab20ee924b21bced9a",
+          "url": "https://raw.githubusercontent.com/LuyiTian/sc_mixology/7d00ffb0bd043467f365a9358d7312f294f13c9f/data/csv/sc_celseq2_5cl_p3.count.csv.gz"
+        },
+        "metadata": {
+          "bytes": 17656,
+          "sha256": "c373869c9d3bbca9dc7773a8b8ef65e6035c939d45b18cb410fede526770eadb",
+          "url": "https://raw.githubusercontent.com/LuyiTian/sc_mixology/7d00ffb0bd043467f365a9358d7312f294f13c9f/data/csv/sc_celseq2_5cl_p3.metadata.csv.gz"
+        }
+      }
     }
   ]
 }
